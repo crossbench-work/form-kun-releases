@@ -13,19 +13,24 @@ if (PHP_VERSION_ID < 80000) {
     exit;
 }
 
-// エラー表示は本番では抑制。ログのみ。
-ini_set('display_errors', '0');
-ini_set('log_errors', '1');
-error_reporting(E_ALL);
-
 // ベースディレクトリ
 define('APP_DIR', __DIR__);
 define('PUBLIC_DIR', dirname(__DIR__));
 define('UPLOADS_DIR', PUBLIC_DIR . DIRECTORY_SEPARATOR . 'uploads');
 
-// 設定読込
+// 設定読込（config.local.php で上書き可）
 $config = require APP_DIR . '/config.php';
 define('FORMKUN_CONFIG', $config);
+
+$debug = !empty($config['debug']);
+if ($debug) {
+    ini_set('display_errors', '1');
+    ini_set('html_errors', '1');
+} else {
+    ini_set('display_errors', '0');
+}
+ini_set('log_errors', '1');
+error_reporting(E_ALL);
 
 // タイムゾーン
 date_default_timezone_set($config['site']['timezone'] ?? 'Asia/Tokyo');
@@ -95,8 +100,8 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-// グローバル例外ハンドラ
-set_exception_handler(function (\Throwable $e) {
+// グローバル例外ハンドラ（debug 時はスタックトレースを表示）
+set_exception_handler(function (\Throwable $e) use ($debug) {
     error_log('[formkun] ' . $e->getMessage() . "\n" . $e->getTraceAsString());
     if (!headers_sent()) {
         http_response_code(500);
@@ -104,7 +109,14 @@ set_exception_handler(function (\Throwable $e) {
     }
     echo '<!doctype html><meta charset="utf-8"><title>500</title>';
     echo '<h1>500 Internal Server Error</h1>';
-    echo '<p>サーバ内部でエラーが発生しました。時間をおいて再度お試しください。</p>';
+    if ($debug) {
+        echo '<pre style="white-space:pre-wrap;word-break:break-all;background:#f8fafc;padding:12px;border-radius:6px;">';
+        echo htmlspecialchars($e->getMessage(), ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
+        echo "\n\n" . htmlspecialchars($e->getTraceAsString(), ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
+        echo '</pre>';
+    } else {
+        echo '<p>サーバ内部でエラーが発生しました。時間をおいて再度お試しください。</p>';
+    }
     exit;
 });
 

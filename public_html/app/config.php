@@ -6,7 +6,10 @@ if (!defined('FORMKUN_BOOT')) {
     exit;
 }
 
-return [
+$config = [
+    // true にすると画面に PHP エラーを表示し、未捕捉例外のスタックを表示（ローカル専用推奨）
+    'debug'      => false,
+
     // データベース接続情報
     'db' => [
         'host'     => 'localhost',
@@ -64,3 +67,15 @@ return [
         'login_lockout_seconds' => 600, // 10分
     ],
 ];
+
+// ローカル用上書き（Git に含めない）：このファイルを複製して編集
+// public_html/app/config.local.example.php を参照
+$localPath = __DIR__ . '/config.local.php';
+if (is_file($localPath)) {
+    $local = require $localPath;
+    if (is_array($local)) {
+        $config = array_replace_recursive($config, $local);
+    }
+}
+
+return $config;

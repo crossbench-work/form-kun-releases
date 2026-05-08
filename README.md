@@ -31,8 +31,11 @@ public_html/
 ├── admin/index.php         管理画面エントリ
 ├── uploads/                アップロード保存先（直アクセス禁止）
 ├── assets/{css,js}/        CSS / JS
+├── dev-router.php          ローカル用ルータ（PHP 組み込みサーバー）
 ├── app/                    アプリ本体（直アクセス禁止）
 │   ├── config.php          DB / メール / アップロード設定
+│   ├── config.local.php    任意：ローカル上書き（Git 対象外）
+│   ├── config.local.example.php  上記のテンプレート
 │   ├── bootstrap.php
 │   ├── core/               コアクラス群
 │   ├── controllers/
@@ -58,6 +61,62 @@ public_html/
    - ユーザー名・パスワードを入力して最初の admin アカウントを作成してください。
 7. ログイン後、左上「フォーム」から最初のフォームを作成し、状態を「公開中」にしてください。
 8. 公開URL `https://（あなたのドメイン）/f/（スラッグ）` を案内します。
+
+## ローカル開発とデバッグ（Cursor / VS Code）
+
+### ローカル設定ファイル
+
+共有の [`public_html/app/config.php`](public_html/app/config.php) はそのままにし、**マシン固有の値だけ** [`public_html/app/config.local.example.php`](public_html/app/config.local.example.php) をコピーして使います。
+
+```bash
+cp public_html/app/config.local.example.php public_html/app/config.local.php
+```
+
+`config.local.php` は `.gitignore` 済みです。少なくとも以下を環境に合わせてください。
+
+- `'debug' => true` … 画面に PHP エラー・未捕捉例外のスタックトレースを表示（本番では必ずオフ）
+- `db.*` … ローカル MySQL のホスト・ユーザー・パスワード・DB名
+- `site.base_url` … 開発サーバーの URL（例: `http://127.0.0.1:8080`）
+
+### PHP 組み込み Web サーバー（Apache なし）
+
+Apache の `mod_rewrite` は使われません。**ルーター** [`public_html/dev-router.php`](public_html/dev-router.php) がフロント／管理画面へ振り分けます。
+
+リポジトリのルートで:
+
+```bash
+./scripts/dev-server.sh
+```
+
+または同等のコマンド:
+
+```bash
+php -S 127.0.0.1:8080 -t public_html public_html/dev-router.php
+```
+
+- 公開トップ: `http://127.0.0.1:8080/`
+- 管理画面: `http://127.0.0.1:8080/admin/`
+
+Cursor の「タスクの実行」から **「form-kun: PHP dev server (8080)」** でも起動できます（`.vscode/tasks.json`）。
+
+### Xdebug でブレークポイント（ステップ実行）
+
+1. PHP に **Xdebug 3** をインストールし、`php.ini` に例えば次を追加します（パスは `php --ini` で確認）。
+
+   ```ini
+   zend_extension=xdebug.so
+   xdebug.mode=debug
+   xdebug.start_with_request=yes
+   xdebug.client_port=9003
+   ```
+
+2. 拡張機能 **PHP Debug**（`xdebug.php-debug`）を入れるとよいです（`.vscode/extensions.json` で推奨指定済み）。
+
+3. **開発サーバーを起動した状態で**、サイドバー「実行とデバッグ」から **「Xdebug: listen (form-kun)」** を開始します。
+
+4. ソースにブレークポイントを置き、ブラウザで該当ページを開くと停止します。
+
+ポートが競合する場合は `9003` と `launch.json` の `port` を揃えて変更してください。
 
 ## サブディレクトリ運用について
 
