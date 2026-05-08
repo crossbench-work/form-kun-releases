@@ -31,7 +31,9 @@ public_html/
 ├── admin/index.php         管理画面エントリ
 ├── uploads/                アップロード保存先（直アクセス禁止）
 ├── assets/{css,js}/        CSS / JS
-├── dev-router.php          ローカル用ルータ（PHP 組み込みサーバー）
+├── router.php              ルータ入口（PHP組み込みサーバー / nginx のフォールバック）
+├── dev-router.php          ルーティング処理本体
+├── nginx.local.example.conf  Local / nginx 向け設定の例（.htaccess 代替）
 ├── app/                    アプリ本体（直アクセス禁止）
 │   ├── config.php          DB / メール / アップロード設定
 │   ├── config.local.php    任意：ローカル上書き（Git 対象外）
@@ -80,7 +82,7 @@ cp public_html/app/config.local.example.php public_html/app/config.local.php
 
 ### PHP 組み込み Web サーバー（Apache なし）
 
-Apache の `mod_rewrite` は使われません。**ルーター** [`public_html/dev-router.php`](public_html/dev-router.php) がフロント／管理画面へ振り分けます。
+Apache の `mod_rewrite` は使われません。**ルーター** [`public_html/router.php`](public_html/router.php) がフロント／管理画面へ振り分けます（実装は [`public_html/dev-router.php`](public_html/dev-router.php)）。
 
 リポジトリのルートで:
 
@@ -91,13 +93,37 @@ Apache の `mod_rewrite` は使われません。**ルーター** [`public_html/
 または同等のコマンド:
 
 ```bash
-php -S 127.0.0.1:8080 -t public_html public_html/dev-router.php
+php -S 127.0.0.1:8080 -t public_html public_html/router.php
 ```
 
 - 公開トップ: `http://127.0.0.1:8080/`
 - 管理画面: `http://127.0.0.1:8080/admin/`
 
 Cursor の「タスクの実行」から **「form-kun: PHP dev server (8080)」** でも起動できます（`.vscode/tasks.json`）。
+
+### Local.app（Local by Flywheel）・nginx でエラーになるとき
+
+**Local.app のサイトルートは、`public_html` の中身がドキュメントルートになるようにしてください。**  
+リポジトリ全体をフォルダごとドロップすると、`public_html` が一段挟まり URL がずれたり、ルーティングが効かず **404 / 真っ白 / nginx のエラー** になりやすいです。
+
+| 環境 | ルーティング |
+| --- | --- |
+| **Apache（mod_rewrite + AllowOverride）** | [`public_html/.htaccess`](public_html/.htaccess) が `/` と `/admin/` を `index.php` / `admin/index.php` に渡す。**対応済み** |
+| **nginx（Local の既定など）** | `.htaccess` は読まれません。**追加設定が必要**です |
+
+nginx / Local では、サイト設定でドキュメントルートを `.../form-kun/public_html` にしたうえで、`try_files` のフォールバックを **`/router.php`** に向けます。コピー用の例を [`public_html/nginx.local.example.conf`](public_html/nginx.local.example.conf) に置きました。
+
+```nginx
+location / {
+    try_files $uri $uri/ /router.php?$is_args$args;
+}
+```
+
+あわせて [`public_html/app/config.local.example.php`](public_html/app/config.local.example.php) を `config.local.php` にコピーし、Local が表示している URL に合わせて **`site.base_url`** を設定してください（例: `http://form-kun.local` や `https://form-kun.local`）。
+
+データベースは Local の「Database」タブにホスト名・ユーザー・パスワード・DB名が出ます。それを `config.local.php` の `db` に転記し、[`public_html/sql/schema.sql`](public_html/sql/schema.sql) をその DB にインポートしてください。
+
+PHP は **8.0 以上** を選んでください（Local のサイト設定でバージョン変更できる場合があります）。
 
 ### Xdebug でブレークポイント（ステップ実行）
 
