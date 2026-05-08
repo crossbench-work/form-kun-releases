@@ -1,0 +1,7 @@
+.git
+.gitignore
+.env
+*.md
+.vscode
+.idea
+public_html/uploads/[0-9][0-9][0-9][0-9][0-9][0-9]

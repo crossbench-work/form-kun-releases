@@ -1,0 +1,45 @@
+# form-kun を Docker で動かす（Local Sites に置かなくてよい）
+#
+# 初回:
+#   cp public_html/app/config.docker.example.php public_html/app/config.local.php
+#   docker compose up -d --build
+#   ブラウザ: http://localhost:8080/admin/
+#
+services:
+  db:
+    image: mariadb:10.11
+    container_name: form-kun-db
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-rootsecret}
+      MYSQL_DATABASE: ${MYSQL_DATABASE:-formkun}
+      MYSQL_USER: ${MYSQL_USER:-formkun}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:-formkun}
+    ports:
+      - "${MYSQL_PORT:-33066}:3306"
+    volumes:
+      - formkun_mysql_data:/var/lib/mysql
+      - ./public_html/sql/schema.sql:/docker-entrypoint-initdb.d/01-schema.sql:ro
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 5s
+      timeout: 5s
+      retries: 30
+      start_period: 30s
+
+  web:
+    build:
+      context: .
+      dockerfile: docker/php-apache/Dockerfile
+    container_name: form-kun-web
+    restart: unless-stopped
+    ports:
+      - "${HOST_WEB_PORT:-8080}:80"
+    volumes:
+      - ./public_html:/var/www/html
+    depends_on:
+      db:
+        condition: service_healthy
+
+volumes:
+  formkun_mysql_data:

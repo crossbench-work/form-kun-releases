@@ -3,6 +3,9 @@
 *.swp
 .idea/
 
+# Docker Compose の環境変数（任意）
+.env
+
 # ローカル専用設定（DB パスワード等）
 public_html/app/config.local.php
 

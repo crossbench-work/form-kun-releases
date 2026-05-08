@@ -25,7 +25,11 @@ PHP（vanilla）+ MySQL 製のフォームビルダー型 Web アプリケーシ
 ## ディレクトリ構成
 
 ```
-public_html/
+（リポジトリルート）
+├── docker-compose.yml       Docker（Apache + MariaDB）
+├── .env.example             compose 用の環境変数サンプル（任意で .env にコピー）
+├── docker/php-apache/       Web コンテナの Dockerfile など
+├── public_html/
 ├── .htaccess               フロントコントローラ用
 ├── index.php               フロント側エントリ
 ├── admin/index.php         管理画面エントリ
@@ -38,6 +42,7 @@ public_html/
 │   ├── config.php          DB / メール / アップロード設定
 │   ├── config.local.php    任意：ローカル上書き（Git 対象外）
 │   ├── config.local.example.php  上記のテンプレート
+│   ├── config.docker.example.php Docker 用の設定例（config.local.php にコピー）
 │   ├── bootstrap.php
 │   ├── core/               コアクラス群
 │   ├── controllers/
@@ -100,6 +105,44 @@ php -S 127.0.0.1:8080 -t public_html public_html/router.php
 - 管理画面: `http://127.0.0.1:8080/admin/`
 
 Cursor の「タスクの実行」から **「form-kun: PHP dev server (8080)」** でも起動できます（`.vscode/tasks.json`）。
+
+### Docker で動かす（Local Sites にフォルダを移さない）
+
+Docker が使える環境なら、**プロジェクトをそのままの場所で** `docker compose` してブラウザから確認できます（Apache + `.htaccess` 相当で本番に近いルーティング）。
+
+**前提:** Docker（Docker Desktop 等）と Docker Compose v2。
+
+1. **ローカル設定を Docker 用にする**
+
+   ```bash
+   cp public_html/app/config.docker.example.php public_html/app/config.local.php
+   ```
+
+   - DB のホスト名はコンテナ間通信で **`db`**（サービス名）です。
+   - [`public_html/app/config.docker.example.php`](public_html/app/config.docker.example.php) の `db.password` / `site.base_url` は、次の compose の既定値（`formkun` / `http://localhost:8080`）に合わせてあります。
+
+2. **（任意）ポートを変える** … [`.env.example`](.env.example) を `.env` にコピーして `HOST_WEB_PORT` や `MYSQL_PASSWORD` を編集。パスワードや Web ポートを変えたら、**`config.local.php` の `db` / `site.base_url` も同じ値に直してください。**
+
+3. **起動**
+
+   ```bash
+   docker compose up -d --build
+   ```
+
+4. **ブラウザ**
+
+   - トップ: `http://localhost:8080/`（`.env` で `HOST_WEB_PORT` を変えた場合はそのポート）
+   - 管理: `http://localhost:8080/admin/` → 初回はセットアップで管理者作成
+
+初回起動時、MariaDB のデータボリュームが空なら [`public_html/sql/schema.sql`](public_html/sql/schema.sql) が自動で流れ込みます。ホストから GUI クライアントで DB を見る場合は、compose が **`localhost:33066`**（既定）を DB に公開しています（[`.env.example`](.env.example) の `MYSQL_PORT`）。
+
+**停止・DBごと消去（初期化したいとき）**
+
+```bash
+docker compose down -v
+```
+
+`-v` で名前付きボリュームも削除するため、**送信データも消えます**。
 
 ### Local.app（Local by Flywheel）・nginx でエラーになるとき
 
