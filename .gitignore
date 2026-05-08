@@ -1,0 +1,8 @@
+.DS_Store
+*.log
+*.swp
+.idea/
+.vscode/
+
+# アップロード保存先（yyyymm フォルダ内はコミットしない）
+public_html/uploads/[0-9][0-9][0-9][0-9][0-9][0-9]/

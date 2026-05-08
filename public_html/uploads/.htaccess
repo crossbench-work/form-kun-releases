@@ -1,0 +1,30 @@
+# uploads/ 以下のファイルが PHP/CGI として実行されないようにする
+Options -Indexes -ExecCGI
+
+<IfModule mod_php.c>
+    php_flag engine off
+</IfModule>
+
+<IfModule mod_php5.c>
+    php_flag engine off
+</IfModule>
+
+<IfModule mod_php7.c>
+    php_flag engine off
+</IfModule>
+
+<IfModule mod_php8.c>
+    php_flag engine off
+</IfModule>
+
+# ハンドラを除去
+RemoveHandler .php .phtml .php3 .php4 .php5 .php7 .php8 .pl .py .jsp .asp .htm .shtml .sh .cgi
+RemoveType .php .phtml .php3 .php4 .php5 .php7 .php8 .pl .py .jsp .asp .htm .shtml .sh .cgi
+
+# 直接ダウンロードを禁止（管理画面の認証付き download.php 経由のみ）
+Require all denied
+
+<IfModule !mod_authz_core.c>
+    Order deny,allow
+    Deny from all
+</IfModule>

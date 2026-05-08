@@ -1,0 +1,9 @@
+# 管理画面の追加保護
+# 必要に応じて IP 制限を有効化してください。
+#
+# <RequireAll>
+#     Require ip 203.0.113.10
+#     Require ip 198.51.100.0/24
+# </RequireAll>
+
+Options -Indexes
