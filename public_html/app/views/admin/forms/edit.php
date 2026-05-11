@@ -14,6 +14,7 @@ $regexPresetChoices = [
 ];
 $breadcrumbTitle = trim((string) ($form['title'] ?? '')) !== '' ? (string) $form['title'] : '（無題）';
 $slugPreviewValue = trim((string) ($form['slug'] ?? '')) !== '' ? (string) $form['slug'] : 'your-slug';
+$descriptionBlocks = $form['description_blocks'] ?? [['id' => 'description-0', 'html' => '', 'position' => 0, 'visible' => 1]];
 ?>
 
 <?php if (!empty($errors)): ?>
@@ -74,15 +75,40 @@ $slugPreviewValue = trim((string) ($form['slug'] ?? '')) !== '' ? (string) $form
     <section class="m-panel01">
         <h2 id="input-screen-title-preview">表示設定</h2>
         <div class="box is-field">
-            <div class="fb-basic-label-row">
-                <label class="label" for="description">説明文</label>
-                <label class="label is-choice fb-basic-display-toggle">
-                    <input type="checkbox" name="show_description" value="1" <?= !empty($form['show_description']) ? 'checked' : '' ?>>
-                    表示する
-                </label>
+            <div class="fb-description-toolbar">
+                <div>
+                    <label class="label" for="fb-description-insert-position">説明文を追加する位置</label>
+                    <select id="fb-description-insert-position" class="fb-description-insert-position"></select>
+                </div>
+                <div class="area is-actions">
+                    <button type="button" class="btn is-sm" id="fb-description-add">説明文を追加する</button>
+                </div>
             </div>
-            <textarea id="description" name="description" rows="6"><?= e($form['description']) ?></textarea>
-            <p class="text is-help">HTML を直接入力できます。一部のタグと属性だけが保存されます。</p>
+            <div id="fb-description-blocks" class="fb-description-blocks">
+                <?php foreach ($descriptionBlocks as $i => $block): ?>
+                    <div class="fb-description-block" data-index="<?= $i ?>">
+                        <input type="hidden" name="description_blocks[<?= $i ?>][id]" value="<?= e($block['id'] ?? ('description-' . $i)) ?>" data-name="id">
+                        <div class="fb-description-block-header">
+                            <strong class="fb-description-block-title">説明文 <?= $i + 1 ?></strong>
+                            <button type="button" class="btn is-sm is-danger fb-description-remove">削除</button>
+                        </div>
+                        <div class="fb-row fb-description-block-controls">
+                            <div>
+                                <label>挿入位置</label>
+                                <select name="description_blocks[<?= $i ?>][position]" class="fb-description-position" data-name="position" data-value="<?= e((string) ($block['position'] ?? 0)) ?>"></select>
+                            </div>
+                            <div class="fb-description-visible-wrap">
+                                <label class="label is-choice fb-basic-display-toggle">
+                                    <input type="checkbox" name="description_blocks[<?= $i ?>][visible]" value="1" data-name="visible" <?= !empty($block['visible']) ? 'checked' : '' ?>>
+                                    表示する
+                                </label>
+                            </div>
+                        </div>
+                        <textarea name="description_blocks[<?= $i ?>][html]" rows="6" data-name="html"><?= e((string) ($block['html'] ?? '')) ?></textarea>
+                        <p class="text is-help">HTML を直接入力できます。一部のタグと属性だけが保存されます。</p>
+                    </div>
+                <?php endforeach; ?>
+            </div>
         </div>
     </section>
     <section class="m-panel01" data-module="m-formBuilder01">
@@ -395,6 +421,30 @@ $slugPreviewValue = trim((string) ($form['slug'] ?? '')) !== '' ? (string) $form
         <a class="btn" href="<?= e(base_path('/admin/forms')) ?>">キャンセル</a>
     </div>
 </form>
+
+<template id="fb-description-template">
+    <div class="fb-description-block">
+        <input type="hidden" data-name="id" value="">
+        <div class="fb-description-block-header">
+            <strong class="fb-description-block-title">説明文 1</strong>
+            <button type="button" class="btn is-sm is-danger fb-description-remove">削除</button>
+        </div>
+        <div class="fb-row fb-description-block-controls">
+            <div>
+                <label>挿入位置</label>
+                <select class="fb-description-position" data-name="position" data-value="0"></select>
+            </div>
+            <div class="fb-description-visible-wrap">
+                <label class="label is-choice fb-basic-display-toggle">
+                    <input type="checkbox" data-name="visible" value="1" checked>
+                    表示する
+                </label>
+            </div>
+        </div>
+        <textarea rows="6" data-name="html"></textarea>
+        <p class="text is-help">HTML を直接入力できます。一部のタグと属性だけが保存されます。</p>
+    </div>
+</template>
 
 <template id="fb-template">
     <li class="fb-field is-collapsed">

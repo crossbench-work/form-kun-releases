@@ -63,11 +63,128 @@
 
     var template = document.getElementById('fb-template');
     var addBtn = document.getElementById('fb-add');
+    var descriptionList = document.getElementById('fb-description-blocks');
+    var descriptionTemplate = document.getElementById('fb-description-template');
+    var descriptionAddBtn = document.getElementById('fb-description-add');
+    var descriptionInsertPosition = document.getElementById('fb-description-insert-position');
 
     function extractDataName(name) {
         if (!name) return null;
         var m = name.match(/^fields\[\d+\]\[(.+)\]$/);
         return m ? m[1] : null;
+    }
+
+    function extractDescriptionDataName(name) {
+        if (!name) return null;
+        var m = name.match(/^description_blocks\[\d+\]\[(.+)\]$/);
+        return m ? m[1] : null;
+    }
+
+    function getDescriptionPositionOptions() {
+        var items = list.querySelectorAll('.fb-field');
+        var options = [{ value: '0', label: '先頭' }];
+        items.forEach(function (li, i) {
+            var labelInp = li.querySelector('.fb-input-label');
+            var label = labelInp && labelInp.value.trim() ? labelInp.value.trim() : '項目' + (i + 1);
+            options.push({
+                value: String(i + 1),
+                label: (i === items.length - 1) ? '末尾（' + label + 'の後）' : label + 'の後'
+            });
+        });
+        return options;
+    }
+
+    function applyDescriptionPositionOptions(select, preferredValue) {
+        if (!select) return;
+        var options = getDescriptionPositionOptions();
+        var nextValue = preferredValue;
+        if (nextValue === undefined || nextValue === null || nextValue === '') {
+            nextValue = select.value || select.getAttribute('data-value') || '0';
+        }
+        select.innerHTML = '';
+        options.forEach(function (option) {
+            var el = document.createElement('option');
+            el.value = option.value;
+            el.textContent = option.label;
+            select.appendChild(el);
+        });
+        var available = options.some(function (option) { return option.value === String(nextValue); });
+        select.value = available ? String(nextValue) : options[options.length - 1].value;
+        select.setAttribute('data-value', select.value);
+    }
+
+    function sortDescriptionBlocks() {
+        if (!descriptionList) return;
+        var blocks = Array.prototype.slice.call(descriptionList.querySelectorAll('.fb-description-block'));
+        blocks
+            .sort(function (a, b) {
+                var aSelect = a.querySelector('.fb-description-position');
+                var bSelect = b.querySelector('.fb-description-position');
+                var aPos = aSelect ? parseInt(aSelect.value || '0', 10) : 0;
+                var bPos = bSelect ? parseInt(bSelect.value || '0', 10) : 0;
+                return aPos - bPos;
+            })
+            .forEach(function (block) {
+                descriptionList.appendChild(block);
+            });
+    }
+
+    function reindexDescriptionBlocks() {
+        if (!descriptionList) return;
+        descriptionList.querySelectorAll('.fb-description-block').forEach(function (block, i) {
+            block.setAttribute('data-index', String(i));
+            block.querySelectorAll('input, textarea, select').forEach(function (el) {
+                var name = el.getAttribute('data-name') || extractDescriptionDataName(el.getAttribute('name'));
+                if (!name) return;
+                el.setAttribute('name', 'description_blocks[' + i + '][' + name + ']');
+            });
+            var title = block.querySelector('.fb-description-block-title');
+            if (title) title.textContent = '説明文 ' + (i + 1);
+        });
+    }
+
+    function refreshDescriptionPositionOptions() {
+        if (!descriptionList) return;
+        if (descriptionInsertPosition) {
+            applyDescriptionPositionOptions(descriptionInsertPosition);
+        }
+        descriptionList.querySelectorAll('.fb-description-position').forEach(function (select) {
+            applyDescriptionPositionOptions(select);
+        });
+    }
+
+    function bindDescriptionBlock(block) {
+        var remove = block.querySelector('.fb-description-remove');
+        var select = block.querySelector('.fb-description-position');
+        if (remove) {
+            remove.addEventListener('click', function () {
+                block.parentNode.removeChild(block);
+                reindexDescriptionBlocks();
+                refreshDescriptionPositionOptions();
+            });
+        }
+        if (select) {
+            select.addEventListener('change', function () {
+                select.setAttribute('data-value', select.value);
+                sortDescriptionBlocks();
+                reindexDescriptionBlocks();
+            });
+        }
+    }
+
+    function createDescriptionBlock(position) {
+        if (!descriptionTemplate) return null;
+        var block = descriptionTemplate.content.firstElementChild.cloneNode(true);
+        var idInput = block.querySelector('[data-name="id"]');
+        var select = block.querySelector('.fb-description-position');
+        if (idInput) {
+            idInput.value = generateUuidV4();
+        }
+        if (select) {
+            select.setAttribute('data-value', String(position || 0));
+        }
+        bindDescriptionBlock(block);
+        return block;
     }
 
     function syncRegexRowValue(row) {
@@ -230,6 +347,7 @@
             updateFieldSummary(li);
         });
         syncAllRegexRows();
+        refreshDescriptionPositionOptions();
     }
 
     function bindRegexRow(row, li) {
@@ -508,19 +626,50 @@
 
         var labInp = li.querySelector('.fb-input-label');
         if (labInp) {
-            labInp.addEventListener('input', function () { updateFieldSummary(li); });
-            labInp.addEventListener('change', function () { updateFieldSummary(li); });
+            labInp.addEventListener('input', function () {
+                updateFieldSummary(li);
+                refreshDescriptionPositionOptions();
+            });
+            labInp.addEventListener('change', function () {
+                updateFieldSummary(li);
+                refreshDescriptionPositionOptions();
+            });
         }
         updateFieldSummary(li);
     }
 
     list.querySelectorAll('.fb-field').forEach(bind);
 
+    if (descriptionList) {
+        descriptionList.querySelectorAll('.fb-description-block').forEach(bindDescriptionBlock);
+    }
+
     var mainForm = list.closest('form');
     if (mainForm) {
         mainForm.addEventListener('submit', function () {
             syncAllRegexRows();
             list.querySelectorAll('[data-choice-editor]').forEach(syncChoiceEditor);
+            sortDescriptionBlocks();
+            reindexDescriptionBlocks();
+        });
+    }
+
+    if (descriptionAddBtn && descriptionList && descriptionTemplate) {
+        descriptionAddBtn.addEventListener('click', function () {
+            var position = descriptionInsertPosition ? descriptionInsertPosition.value : '0';
+            var block = createDescriptionBlock(position);
+            if (!block) return;
+            descriptionList.appendChild(block);
+            refreshDescriptionPositionOptions();
+            var select = block.querySelector('.fb-description-position');
+            if (select) {
+                select.value = String(position);
+                select.setAttribute('data-value', select.value);
+            }
+            sortDescriptionBlocks();
+            reindexDescriptionBlocks();
+            var textarea = block.querySelector('textarea');
+            if (textarea) textarea.focus();
         });
     }
 
@@ -541,6 +690,7 @@
     }
 
     reindex();
+    reindexDescriptionBlocks();
 
     var titleInput = document.getElementById('title');
     var breadcrumbCurrent = document.getElementById('breadcrumb-current');

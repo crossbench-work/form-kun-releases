@@ -28,7 +28,7 @@ class FormController
     {
         (new View())->render('admin/forms/edit', [
             'title' => 'フォーム新規作成',
-            'form'  => self::defaultForm(),
+            'form'  => self::prepareFormForEdit(self::defaultForm()),
             'fields'=> [],
             'errors'=> [],
             'isNew' => true,
@@ -63,6 +63,7 @@ class FormController
     {
         $form = Form::find($id);
         if (!$form) { $this->notFound(); return; }
+        $form = self::prepareFormForEdit($form);
         $fields = FormField::forForm($id);
 
         // 編集ビュー用に options をテキストに変換
@@ -161,9 +162,9 @@ class FormController
         $form = [
             'slug'                 => trim((string) ($_POST['slug'] ?? '')),
             'title'                => trim((string) ($_POST['title'] ?? '')),
-            'description'          => sanitize_rich_text_html((string) ($_POST['description'] ?? '')),
+            'description'          => null,
             'show_title'           => !empty($_POST['show_title']) ? 1 : 0,
-            'show_description'     => !empty($_POST['show_description']) ? 1 : 0,
+            'show_description'     => 0,
             'thanks_message'       => trim((string) ($_POST['thanks_message'] ?? '')),
             'redirect_url'         => trim((string) ($_POST['redirect_url'] ?? '')),
             'admin_emails'         => trim((string) ($_POST['admin_emails'] ?? '')),
@@ -176,6 +177,34 @@ class FormController
             'captcha_enabled'      => !empty($_POST['captcha_enabled']) ? 1 : 0,
             'status'               => in_array($_POST['status'] ?? '', ['active','draft','archived'], true) ? $_POST['status'] : 'draft',
         ];
+
+        $descriptionBlocks = [];
+        $rawDescriptionBlocks = $_POST['description_blocks'] ?? [];
+        if (is_array($rawDescriptionBlocks)) {
+            foreach ($rawDescriptionBlocks as $i => $block) {
+                if (!is_array($block)) {
+                    continue;
+                }
+                $html = (string) ($block['html'] ?? '');
+                $visible = !empty($block['visible']) ? 1 : 0;
+                $position = isset($block['position']) && is_numeric($block['position']) ? max(0, (int) $block['position']) : 0;
+                $descriptionBlocks[] = [
+                    'id' => trim((string) ($block['id'] ?? '')) !== '' ? trim((string) $block['id']) : 'description-' . $i,
+                    'html' => $html,
+                    'position' => $position,
+                    'visible' => $visible,
+                ];
+            }
+        }
+        $form['description'] = encode_form_description_blocks($descriptionBlocks);
+        $form['show_description'] = 0;
+        foreach ($descriptionBlocks as $block) {
+            if (!empty($block['visible']) && sanitize_rich_text_html($block['html']) !== '') {
+                $form['show_description'] = 1;
+                break;
+            }
+        }
+        $form['description_blocks'] = self::normalizeDescriptionBlocks($descriptionBlocks, true);
 
         $fields = [];
         $raw = $_POST['fields'] ?? [];
@@ -358,6 +387,59 @@ class FormController
             'captcha_enabled' => 1,
             'status' => 'draft',
         ];
+    }
+
+    /**
+     * @param array<string, mixed> $form
+     * @return array<string, mixed>
+     */
+    private static function prepareFormForEdit(array $form): array
+    {
+        $form['description_blocks'] = self::normalizeDescriptionBlocks(
+            decode_form_description_blocks($form['description'] ?? '', !empty($form['show_description']))
+        );
+
+        return $form;
+    }
+
+    /**
+     * @param array<int, array<string, mixed>> $blocks
+     * @return array<int, array{id:string,html:string,position:int,visible:int}>
+     */
+    private static function normalizeDescriptionBlocks(array $blocks, bool $allowEmptyHtml = false): array
+    {
+        $out = [];
+        foreach ($blocks as $i => $block) {
+            if (!is_array($block)) {
+                continue;
+            }
+            $rawHtml = (string) ($block['html'] ?? '');
+            $html = $allowEmptyHtml ? $rawHtml : sanitize_rich_text_html($rawHtml);
+            if (!$allowEmptyHtml && $html === '') {
+                continue;
+            }
+            $id = trim((string) ($block['id'] ?? ''));
+            if ($id === '') {
+                $id = 'description-' . $i;
+            }
+            $out[] = [
+                'id' => $id,
+                'html' => $html,
+                'position' => isset($block['position']) && is_numeric($block['position']) ? max(0, (int) $block['position']) : 0,
+                'visible' => !empty($block['visible']) ? 1 : 0,
+            ];
+        }
+
+        if ($out === []) {
+            $out[] = [
+                'id' => 'description-0',
+                'html' => '',
+                'position' => 0,
+                'visible' => 1,
+            ];
+        }
+
+        return $out;
     }
 
     private static function defaultField(): array

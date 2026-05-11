@@ -710,6 +710,55 @@ form.is-inline {
     font-size: 13px;
     color: #64748b;
   }
+
+  .fb-description-toolbar {
+    display: flex;
+    align-items: flex-end;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 16px;
+
+    > div:first-child {
+      flex: 1 1 240px;
+    }
+  }
+
+  .fb-description-blocks {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .fb-description-block {
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 16px;
+    background: #f8fafc;
+  }
+
+  .fb-description-block-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 12px;
+    flex-wrap: wrap;
+  }
+
+  .fb-description-block-title {
+    color: #334155;
+  }
+
+  .fb-description-block-controls {
+    margin-bottom: 12px;
+  }
+
+  .fb-description-visible-wrap {
+    flex: 0 0 auto;
+    min-width: auto;
+    display: flex;
+    align-items: flex-end;
+  }
 }
 
 // --- バッジ ---

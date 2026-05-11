@@ -1,10 +1,9 @@
 <section class="p-formShow01">
+<?php $descriptionBlocks = decode_form_description_blocks($form['description'] ?? '', !empty($form['show_description'])); ?>
 <?php if (!empty($form['show_title'])): ?>
     <h1 class="title"><?= e($form['title']) ?></h1>
 <?php endif; ?>
-<?php if (!empty($form['show_description']) && !empty($form['description'])): ?>
-    <div class="block is-lead"><?= render_rich_text_html($form['description']) ?></div>
-<?php endif; ?>
+<?= render_form_description_blocks_at($descriptionBlocks, 0) ?>
 
 <?php if (!empty($errors)): ?>
     <div class="m-alert01 is-danger">
@@ -25,8 +24,9 @@
         </label>
     </div>
 
-    <?php foreach ($fields as $field): ?>
+    <?php foreach ($fields as $i => $field): ?>
         <?php include __DIR__ . '/_field.php'; ?>
+        <?= render_form_description_blocks_at($descriptionBlocks, $i + 1) ?>
     <?php endforeach; ?>
 
     <?php if (!empty($form['captcha_enabled']) && !empty($captchaQuestion)): ?>

@@ -9,8 +9,9 @@
     <?php foreach ($forms as $form): ?>
         <li class="card">
             <h2><a class="link" href="<?= e(base_path('/f/' . $form['slug'])) ?>"><?= e($form['title']) ?></a></h2>
-            <?php if (!empty($form['description'])): ?>
-                <div class="text is-muted"><?= render_rich_text_html($form['description']) ?></div>
+            <?php $descriptionPreview = first_form_description_block_html($form['description'] ?? '', !empty($form['show_description'])); ?>
+            <?php if ($descriptionPreview !== ''): ?>
+                <div class="text is-muted"><?= $descriptionPreview ?></div>
             <?php endif; ?>
         </li>
     <?php endforeach; ?>

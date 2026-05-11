@@ -250,6 +250,137 @@ if (!function_exists('render_rich_text_html')) {
     }
 }
 
+if (!function_exists('decode_form_description_blocks')) {
+    /**
+     * @return array<int, array{id:string,html:string,position:int,visible:int}>
+     */
+    function decode_form_description_blocks($stored, bool $legacyVisible = true): array
+    {
+        $stored = trim((string) $stored);
+        if ($stored === '') {
+            return [];
+        }
+
+        $decoded = json_decode($stored, true);
+        if (is_array($decoded) && ($decoded === [] || array_keys($decoded) === range(0, count($decoded) - 1))) {
+            $looksLikeBlocks = false;
+            foreach ($decoded as $item) {
+                if (is_array($item) && array_key_exists('html', $item)) {
+                    $looksLikeBlocks = true;
+                    break;
+                }
+            }
+            if ($looksLikeBlocks) {
+                $blocks = [];
+                foreach ($decoded as $i => $item) {
+                    if (!is_array($item)) {
+                        continue;
+                    }
+                    $html = sanitize_rich_text_html($item['html'] ?? '');
+                    if ($html === '') {
+                        continue;
+                    }
+                    $position = isset($item['position']) && is_numeric($item['position'])
+                        ? max(0, (int) $item['position'])
+                        : 0;
+                    $visible = !empty($item['visible']) ? 1 : 0;
+                    $id = trim((string) ($item['id'] ?? ''));
+                    if ($id === '') {
+                        $id = 'description-' . $i;
+                    }
+                    $blocks[] = [
+                        'id' => $id,
+                        'html' => $html,
+                        'position' => $position,
+                        'visible' => $visible,
+                    ];
+                }
+                return $blocks;
+            }
+        }
+
+        $html = sanitize_rich_text_html($stored);
+        if ($html === '') {
+            return [];
+        }
+
+        return [[
+            'id' => 'description-0',
+            'html' => $html,
+            'position' => 0,
+            'visible' => $legacyVisible ? 1 : 0,
+        ]];
+    }
+}
+
+if (!function_exists('encode_form_description_blocks')) {
+    /**
+     * @param array<int, array<string, mixed>> $blocks
+     */
+    function encode_form_description_blocks(array $blocks): ?string
+    {
+        $out = [];
+        foreach ($blocks as $i => $block) {
+            if (!is_array($block)) {
+                continue;
+            }
+            $html = sanitize_rich_text_html($block['html'] ?? '');
+            if ($html === '') {
+                continue;
+            }
+            $position = isset($block['position']) && is_numeric($block['position'])
+                ? max(0, (int) $block['position'])
+                : 0;
+            $id = trim((string) ($block['id'] ?? ''));
+            if ($id === '') {
+                $id = 'description-' . $i;
+            }
+            $out[] = [
+                'id' => $id,
+                'html' => $html,
+                'position' => $position,
+                'visible' => !empty($block['visible']) ? 1 : 0,
+            ];
+        }
+
+        if ($out === []) {
+            return null;
+        }
+
+        return json_encode($out, JSON_UNESCAPED_UNICODE);
+    }
+}
+
+if (!function_exists('render_form_description_blocks_at')) {
+    /**
+     * @param array<int, array{id:string,html:string,position:int,visible:int}> $blocks
+     */
+    function render_form_description_blocks_at(array $blocks, int $position): string
+    {
+        $html = '';
+        foreach ($blocks as $block) {
+            if ((int) ($block['position'] ?? 0) !== $position || empty($block['visible']) || empty($block['html'])) {
+                continue;
+            }
+            $html .= '<div class="block is-lead">' . render_rich_text_html($block['html']) . '</div>';
+        }
+        return $html;
+    }
+}
+
+if (!function_exists('first_form_description_block_html')) {
+    function first_form_description_block_html($stored, bool $legacyVisible = true): string
+    {
+        $blocks = decode_form_description_blocks($stored, $legacyVisible);
+        foreach ($blocks as $block) {
+            if (!empty($block['visible']) && !empty($block['html'])) {
+                return render_rich_text_html($block['html']);
+            }
+        }
+        return '';
+    }
+}
+
 if (!function_exists('address_errors_normalize')) {
     /**
      * 住所フィールドのエラーを表示用に整形（ネスト or 従来の文字列リスト）。

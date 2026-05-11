@@ -756,6 +756,47 @@ form.is-inline {
   font-size: 13px;
   color: #64748b;
 }
+.m-panel01 .fb-description-toolbar {
+  display: flex;
+  align-items: flex-end;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+.m-panel01 .fb-description-toolbar > div:first-child {
+  flex: 1 1 240px;
+}
+.m-panel01 .fb-description-blocks {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.m-panel01 .fb-description-block {
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 16px;
+  background: #f8fafc;
+}
+.m-panel01 .fb-description-block-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+}
+.m-panel01 .fb-description-block-title {
+  color: #334155;
+}
+.m-panel01 .fb-description-block-controls {
+  margin-bottom: 12px;
+}
+.m-panel01 .fb-description-visible-wrap {
+  flex: 0 0 auto;
+  min-width: auto;
+  display: flex;
+  align-items: flex-end;
+}
 
 .m-badge01 {
   display: inline-block;
