@@ -72,10 +72,8 @@ $regexPresetChoices = [
             $idx = $i;
             $fk = (string) ($f['field_key'] ?? '');
             $fkLocked = $fk !== '' && \Core\FieldKey::isUuidFormat($fk);
-            $regexRows = \Models\FormField::decodeRegexPatterns(isset($f['regex']) ? (string) $f['regex'] : null);
-            if (count($regexRows) === 0) {
-                $regexRows = [''];
-            }
+            $regexDecoded = \Models\FormField::decodeRegexPatterns(isset($f['regex']) ? (string) $f['regex'] : null);
+            $rp = $regexDecoded[0] ?? '';
             ?>
             <li class="fb-field is-collapsed" data-index="<?= $idx ?>">
                 <div class="fb-field-header">
@@ -133,36 +131,32 @@ $regexPresetChoices = [
                     <div class="fb-regex-wrap">
                         <label>入力チェック</label>
                         <div class="fb-regex-list">
-                            <?php foreach ($regexRows as $rxi => $rp): ?>
-                                <?php
-                                if ($rp === '') {
-                                    $selVal = '';
-                                    $customVal = '';
-                                } elseif ($rp !== '' && array_key_exists($rp, $regexPresetChoices) && $rp !== $FB_REGEX_CUSTOM) {
-                                    $selVal = $rp;
-                                    $customVal = '';
-                                } else {
-                                    $selVal = $FB_REGEX_CUSTOM;
-                                    $customVal = $rp;
-                                }
-                                $showCustom = ($selVal === $FB_REGEX_CUSTOM);
-                                $hiddenVal = $showCustom ? $customVal : $selVal;
-                                ?>
-                                <div class="fb-regex-row">
-                                    <select class="fb-regex-kind" aria-label="入力チェックの種類">
-                                        <?php foreach ($regexPresetChoices as $patVal => $patLabel): ?>
-                                            <option value="<?= e($patVal) ?>" <?= $selVal === $patVal ? 'selected' : '' ?>><?= e($patLabel) ?></option>
-                                        <?php endforeach; ?>
-                                    </select>
-                                    <div class="fb-regex-custom-wrap"<?= $showCustom ? '' : ' style="display:none"' ?>>
-                                        <input type="text" class="fb-regex-custom" value="<?= e($customVal) ?>" placeholder="正規表現" spellcheck="false" autocomplete="off">
-                                    </div>
-                                    <input type="hidden" class="fb-regex-value" value="<?= e($hiddenVal) ?>" spellcheck="false">
-                                    <button type="button" class="btn btn-sm fb-regex-remove" title="この行を削除">−</button>
+                            <?php
+                            if ($rp === '') {
+                                $selVal = '';
+                                $customVal = '';
+                            } elseif ($rp !== '' && array_key_exists($rp, $regexPresetChoices) && $rp !== $FB_REGEX_CUSTOM) {
+                                $selVal = $rp;
+                                $customVal = '';
+                            } else {
+                                $selVal = $FB_REGEX_CUSTOM;
+                                $customVal = $rp;
+                            }
+                            $showCustom = ($selVal === $FB_REGEX_CUSTOM);
+                            $hiddenVal = $showCustom ? $customVal : $selVal;
+                            ?>
+                            <div class="fb-regex-row">
+                                <select class="fb-regex-kind" aria-label="入力チェックの種類">
+                                    <?php foreach ($regexPresetChoices as $patVal => $patLabel): ?>
+                                        <option value="<?= e($patVal) ?>" <?= $selVal === $patVal ? 'selected' : '' ?>><?= e($patLabel) ?></option>
+                                    <?php endforeach; ?>
+                                </select>
+                                <div class="fb-regex-custom-wrap"<?= $showCustom ? '' : ' style="display:none"' ?>>
+                                    <input type="text" class="fb-regex-custom" value="<?= e($customVal) ?>" placeholder="正規表現" spellcheck="false" autocomplete="off">
                                 </div>
-                            <?php endforeach; ?>
+                                <input type="hidden" class="fb-regex-value" value="<?= e($hiddenVal) ?>" spellcheck="false">
+                            </div>
                         </div>
-                        <button type="button" class="btn btn-sm fb-regex-add">＋ 条件を追加</button>
                     </div>
                     <div>
                         <label>プレースホルダ（任意）</label>
@@ -257,21 +251,6 @@ $regexPresetChoices = [
     </div>
 </form>
 
-<template id="fb-regex-row-template">
-    <div class="fb-regex-row">
-        <select class="fb-regex-kind" aria-label="入力チェックの種類">
-            <?php foreach ($regexPresetChoices as $patVal => $patLabel): ?>
-                <option value="<?= e($patVal) ?>"><?= e($patLabel) ?></option>
-            <?php endforeach; ?>
-        </select>
-        <div class="fb-regex-custom-wrap" style="display:none">
-            <input type="text" class="fb-regex-custom" placeholder="正規表現" spellcheck="false" autocomplete="off">
-        </div>
-        <input type="hidden" class="fb-regex-value" value="">
-        <button type="button" class="btn btn-sm fb-regex-remove" title="この行を削除">−</button>
-    </div>
-</template>
-
 <template id="fb-template">
     <li class="fb-field is-collapsed">
         <div class="fb-field-header">
@@ -330,10 +309,8 @@ $regexPresetChoices = [
                             <input type="text" class="fb-regex-custom" placeholder="正規表現" spellcheck="false" autocomplete="off">
                         </div>
                         <input type="hidden" class="fb-regex-value" value="">
-                        <button type="button" class="btn btn-sm fb-regex-remove" title="この行を削除">−</button>
                     </div>
                 </div>
-                <button type="button" class="btn btn-sm fb-regex-add">＋ 条件を追加</button>
             </div>
             <div><label>プレースホルダ（任意）</label><input type="text" data-name="placeholder"></div>
         </div>

@@ -61,7 +61,6 @@
     if (!list) return;
 
     var template = document.getElementById('fb-template');
-    var regexRowTpl = document.getElementById('fb-regex-row-template');
     var addBtn = document.getElementById('fb-add');
 
     function extractDataName(name) {
@@ -161,9 +160,10 @@
                 if (!name) return;
                 el.setAttribute('name', 'fields[' + i + '][' + name + ']');
             });
-            li.querySelectorAll('.fb-regex-value').forEach(function (el, j) {
-                el.setAttribute('name', 'fields[' + i + '][regex_patterns][' + j + ']');
-            });
+            var rv = li.querySelector('.fb-regex-value');
+            if (rv) {
+                rv.setAttribute('name', 'fields[' + i + '][regex_pattern]');
+            }
             var numEl = li.querySelector('.fb-num');
             if (numEl) numEl.textContent = String(i + 1);
             updateFieldSummary(li);
@@ -188,40 +188,10 @@
     }
 
     function bindRegexBlock(li) {
-        li.querySelectorAll('.fb-regex-row').forEach(bindRegexRow);
-
-        var rlist = li.querySelector('.fb-regex-list');
-        var addRx = li.querySelector('.fb-regex-add');
-
-        if (addRx && rlist && regexRowTpl) {
-            addRx.addEventListener('click', function () {
-                var node = regexRowTpl.content.firstElementChild.cloneNode(true);
-                rlist.appendChild(node);
-                bindRegexRow(node);
-                reindex();
-            });
+        var row = li.querySelector('.fb-regex-row');
+        if (row) {
+            bindRegexRow(row);
         }
-
-        li.querySelectorAll('.fb-regex-remove').forEach(function (btn) {
-            btn.addEventListener('click', function () {
-                var rlistInner = li.querySelector('.fb-regex-list');
-                var row = btn.closest('.fb-regex-row');
-                if (!row || !rlistInner) return;
-                var rows = rlistInner.querySelectorAll('.fb-regex-row');
-                if (rows.length <= 1) {
-                    var sel = row.querySelector('.fb-regex-kind');
-                    var customInp = row.querySelector('.fb-regex-custom');
-                    var wrap = row.querySelector('.fb-regex-custom-wrap');
-                    if (sel) sel.selectedIndex = 0;
-                    if (customInp) customInp.value = '';
-                    if (wrap) wrap.style.display = 'none';
-                    syncRegexRowValue(row);
-                    return;
-                }
-                row.parentNode.removeChild(row);
-                reindex();
-            });
-        });
     }
 
     function bindFieldKeyLock(li) {

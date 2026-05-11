@@ -156,13 +156,9 @@ class FormController
                 }
 
                 $patterns = [];
-                if (!empty($f['regex_patterns']) && is_array($f['regex_patterns'])) {
-                    foreach ($f['regex_patterns'] as $p) {
-                        $p = trim((string) $p);
-                        if ($p !== '' && $p !== '__custom__') {
-                            $patterns[] = $p;
-                        }
-                    }
+                $singleRx = trim((string) ($f['regex_pattern'] ?? ''));
+                if ($singleRx !== '' && $singleRx !== '__custom__') {
+                    $patterns[] = $singleRx;
                 }
                 $regexStored = FormField::encodeRegexPatterns($patterns);
 
@@ -239,9 +235,10 @@ class FormController
             $regexPatterns = FormField::decodeRegexPatterns(
                 isset($f['regex']) && is_string($f['regex']) ? $f['regex'] : ''
             );
-            foreach ($regexPatterns as $ri => $pat) {
+            foreach ($regexPatterns as $pat) {
                 if ($pat !== '' && @preg_match($pat, '') === false) {
-                    $errors[] = "項目{$no}: 正規表現（" . ($ri + 1) . "行目）が不正です。";
+                    $errors[] = "項目{$no}: 正規表現が不正です。";
+                    break;
                 }
             }
         }
