@@ -35,9 +35,10 @@ $slugPreviewValue = trim((string) ($form['slug'] ?? '')) !== '' ? (string) $form
     <div class="p-formEditTabs01" data-module="m-formEditTabs01">
         <div class="tab" role="tablist" aria-label="フォーム設定のセクション">
             <button type="button" class="tab-item" role="tab" id="tab-btn-basic" aria-selected="true" aria-controls="tab-panel-basic">基本</button>
-            <button type="button" class="tab-item" role="tab" id="tab-btn-fields" aria-selected="false" aria-controls="tab-panel-fields" tabindex="-1">項目</button>
-            <button type="button" class="tab-item" role="tab" id="tab-btn-mail" aria-selected="false" aria-controls="tab-panel-mail" tabindex="-1">通知</button>
+            <button type="button" class="tab-item" role="tab" id="tab-btn-fields" aria-selected="false" aria-controls="tab-panel-fields" tabindex="-1">入力画面</button>
+            <button type="button" class="tab-item" role="tab" id="tab-btn-confirm" aria-selected="false" aria-controls="tab-panel-confirm" tabindex="-1">確認画面</button>
             <button type="button" class="tab-item" role="tab" id="tab-btn-thanks" aria-selected="false" aria-controls="tab-panel-thanks" tabindex="-1">完了画面</button>
+            <button type="button" class="tab-item" role="tab" id="tab-btn-mail" aria-selected="false" aria-controls="tab-panel-mail" tabindex="-1">通知</button>
         </div>
 
         <div id="tab-panel-basic" class="box is-tabPanel" role="tabpanel" aria-labelledby="tab-btn-basic">
@@ -66,6 +67,12 @@ $slugPreviewValue = trim((string) ($form['slug'] ?? '')) !== '' ? (string) $form
                 <option value="archived" <?= $form['status'] === 'archived' ? 'selected' : '' ?>>停止</option>
             </select>
         </div>
+    </section>
+        </div>
+
+        <div id="tab-panel-fields" class="box is-tabPanel" role="tabpanel" aria-labelledby="tab-btn-fields" hidden>
+    <section class="m-panel01">
+        <h2 id="input-screen-title-preview"><?= e($breadcrumbTitle) ?></h2>
         <div class="box is-field">
             <div class="fb-basic-label-row">
                 <label class="label" for="description">説明文</label>
@@ -76,16 +83,7 @@ $slugPreviewValue = trim((string) ($form['slug'] ?? '')) !== '' ? (string) $form
             </div>
             <textarea id="description" name="description" rows="3"><?= e($form['description']) ?></textarea>
         </div>
-        <div class="box is-field">
-            <label class="label">
-                <input type="checkbox" name="captcha_enabled" value="1" <?= !empty($form['captcha_enabled']) ? 'checked' : '' ?>>
-                スパム対策（簡易計算CAPTCHA）を有効にする
-            </label>
-        </div>
     </section>
-        </div>
-
-        <div id="tab-panel-fields" class="box is-tabPanel" role="tabpanel" aria-labelledby="tab-btn-fields" hidden>
     <section class="m-panel01" data-module="m-formBuilder01">
         <h2>項目設定</h2>
         <ul id="fb-fields" class="fb-fields">
@@ -308,6 +306,36 @@ $slugPreviewValue = trim((string) ($form['slug'] ?? '')) !== '' ? (string) $form
             <button type="button" id="fb-add" class="btn">＋ 項目を追加</button>
         </div>
     </section>
+    <section class="m-panel01">
+        <h2>スパム対策</h2>
+        <div class="box is-field">
+            <label class="label">
+                <input type="checkbox" name="captcha_enabled" value="1" <?= !empty($form['captcha_enabled']) ? 'checked' : '' ?>>
+                スパム対策（簡易計算CAPTCHA）を有効にする
+            </label>
+        </div>
+    </section>
+        </div>
+
+        <div id="tab-panel-confirm" class="box is-tabPanel" role="tabpanel" aria-labelledby="tab-btn-confirm" hidden>
+    <section class="m-panel01">
+        <h2>入力内容のご確認</h2>
+        <p class="text is-help">入力画面で入力された内容を確認してから送信する画面です。</p>
+    </section>
+        </div>
+
+        <div id="tab-panel-thanks" class="box is-tabPanel" role="tabpanel" aria-labelledby="tab-btn-thanks" hidden>
+    <section class="m-panel01">
+        <h2>送信完了画面</h2>
+        <div class="box is-field">
+            <label class="label">サンクスメッセージ（リダイレクトURL未指定時に表示）</label>
+            <textarea name="thanks_message" rows="3"><?= e($form['thanks_message']) ?></textarea>
+        </div>
+        <div class="box is-field">
+            <label class="label">リダイレクトURL（任意）</label>
+            <input type="text" name="redirect_url" value="<?= e($form['redirect_url']) ?>" placeholder="https://example.com/thanks">
+        </div>
+    </section>
         </div>
 
         <div id="tab-panel-mail" class="box is-tabPanel" role="tabpanel" aria-labelledby="tab-btn-mail" hidden>
@@ -347,20 +375,6 @@ $slugPreviewValue = trim((string) ($form['slug'] ?? '')) !== '' ? (string) $form
         <div class="box is-field">
             <label class="label">本文テンプレート</label>
             <textarea name="reply_template" rows="6"><?= e($form['reply_template']) ?></textarea>
-        </div>
-    </section>
-        </div>
-
-        <div id="tab-panel-thanks" class="box is-tabPanel" role="tabpanel" aria-labelledby="tab-btn-thanks" hidden>
-    <section class="m-panel01">
-        <h2>送信完了画面</h2>
-        <div class="box is-field">
-            <label class="label">サンクスメッセージ（リダイレクトURL未指定時に表示）</label>
-            <textarea name="thanks_message" rows="3"><?= e($form['thanks_message']) ?></textarea>
-        </div>
-        <div class="box is-field">
-            <label class="label">リダイレクトURL（任意）</label>
-            <input type="text" name="redirect_url" value="<?= e($form['redirect_url']) ?>" placeholder="https://example.com/thanks">
         </div>
     </section>
         </div>
