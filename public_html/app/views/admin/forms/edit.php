@@ -1,5 +1,6 @@
 <?php
 $FB_REGEX_CUSTOM = '__custom__';
+$FB_REGEX_CHECKBOX_LIMIT = '__checkbox_limit__';
 $regexPresetChoices = [
     '' => 'なし',
     '/\A[^\s@]+@[^\s@]+\.[^\s@]+\z/u' => 'メールアドレス',
@@ -97,10 +98,14 @@ $slugPreviewValue = trim((string) ($form['slug'] ?? '')) !== '' ? (string) $form
             $rp = $regexDecoded[0] ?? '';
             $isTextPair = (($f['type'] ?? '') === 'text_pair');
             $summaryRequired = !empty($f['required']) ? '必須' : '任意';
-            if (empty($f['required']) || in_array($f['type'], ['radio', 'select'], true) || $rp === '') {
+            if (empty($f['required']) || in_array($f['type'], ['radio', 'select'], true)) {
                 $summaryRegex = 'なし';
+            } elseif ($f['type'] === 'checkbox' && !empty($f['checkbox_limit_enabled'])) {
+                $summaryRegex = '選択数';
             } elseif ($f['type'] === 'checkbox') {
                 $summaryRegex = array_key_exists($rp, $regexPresetChoices) ? 'なし' : 'カスタム';
+            } elseif ($rp === '') {
+                $summaryRegex = 'なし';
             } elseif (array_key_exists($rp, $regexPresetChoices)) {
                 $summaryRegex = $regexPresetChoices[$rp];
             } else {
@@ -179,7 +184,10 @@ $slugPreviewValue = trim((string) ($form['slug'] ?? '')) !== '' ? (string) $form
                                 <div class="fb-regex-wrap" <?= (empty($f['required']) || in_array($f['type'], ['radio', 'select'], true)) ? 'style="display:none"' : '' ?>>
                                     <div class="fb-regex-list">
                                         <?php
-                                        if ($f['type'] === 'checkbox') {
+                                        if ($f['type'] === 'checkbox' && !empty($f['checkbox_limit_enabled'])) {
+                                            $selVal = $FB_REGEX_CHECKBOX_LIMIT;
+                                            $customVal = '';
+                                        } elseif ($f['type'] === 'checkbox') {
                                             $selVal = $FB_REGEX_CUSTOM;
                                             $customVal = ($rp !== '' && !array_key_exists($rp, $regexPresetChoices)) ? $rp : '';
                                         } elseif ($rp === '') {
@@ -193,7 +201,7 @@ $slugPreviewValue = trim((string) ($form['slug'] ?? '')) !== '' ? (string) $form
                                             $customVal = $rp;
                                         }
                                         $showCustom = ($selVal === $FB_REGEX_CUSTOM);
-                                        $hiddenVal = $showCustom ? $customVal : $selVal;
+                                        $hiddenVal = $showCustom ? $customVal : ($selVal === $FB_REGEX_CHECKBOX_LIMIT ? '' : $selVal);
                                         ?>
                                         <div class="fb-regex-row">
                                             <select class="fb-regex-kind" aria-label="入力チェックの種類">
@@ -203,11 +211,25 @@ $slugPreviewValue = trim((string) ($form['slug'] ?? '')) !== '' ? (string) $form
                                                     <?php endif; ?>
                                                     <option value="<?= e($patVal) ?>" <?= $selVal === $patVal ? 'selected' : '' ?>><?= e($patLabel) ?></option>
                                                 <?php endforeach; ?>
+                                                <?php if ($f['type'] === 'checkbox'): ?>
+                                                    <option value="<?= e($FB_REGEX_CHECKBOX_LIMIT) ?>" <?= $selVal === $FB_REGEX_CHECKBOX_LIMIT ? 'selected' : '' ?>>選択数を設定する</option>
+                                                <?php endif; ?>
                                             </select>
                                             <div class="fb-regex-custom-wrap"<?= $showCustom ? '' : ' style="display:none"' ?>>
                                                 <input type="text" class="fb-regex-custom" value="<?= e($customVal) ?>" placeholder="正規表現" spellcheck="false" autocomplete="off">
                                             </div>
                                             <input type="hidden" class="fb-regex-value" value="<?= e($hiddenVal) ?>" spellcheck="false">
+                                        </div>
+                                    </div>
+                                    <input type="hidden" name="fields[<?= $idx ?>][checkbox_limit_enabled]" class="fb-checkbox-limit-enabled" value="<?= !empty($f['checkbox_limit_enabled']) ? '1' : '0' ?>">
+                                    <div class="fb-checkbox-limit-settings" <?= ($f['type'] === 'checkbox' && !empty($f['required']) && !empty($f['checkbox_limit_enabled'])) ? '' : 'style="display:none"' ?>>
+                                        <div>
+                                            <label>最小選択数</label>
+                                            <input type="number" min="1" name="fields[<?= $idx ?>][checkbox_min_selections]" value="<?= e($f['checkbox_min_selections'] ?? '') ?>">
+                                        </div>
+                                        <div>
+                                            <label>最大選択数</label>
+                                            <input type="number" min="1" name="fields[<?= $idx ?>][checkbox_max_selections]" value="<?= e($f['checkbox_max_selections'] ?? '') ?>">
                                         </div>
                                     </div>
                                 </div>
@@ -216,24 +238,6 @@ $slugPreviewValue = trim((string) ($form['slug'] ?? '')) !== '' ? (string) $form
                         <div class="fb-max-length-wrap" <?= in_array($f['type'], ['radio', 'checkbox', 'select'], true) ? 'style="display:none"' : '' ?>>
                             <label>最大文字数（任意）</label>
                             <input type="number" min="1" name="fields[<?= $idx ?>][max_length]" value="<?= e($f['max_length']) ?>">
-                        </div>
-                    </div>
-                    <div class="fb-row fb-checkbox-limit-wrap" <?= ($f['type'] === 'checkbox' && !empty($f['required'])) ? '' : 'style="display:none"' ?>>
-                        <div class="fb-checkbox-limit-toggle-wrap">
-                            <label class="label is-choice">
-                                <input type="checkbox" name="fields[<?= $idx ?>][checkbox_limit_enabled]" value="1" class="fb-checkbox-limit-toggle" <?= !empty($f['checkbox_limit_enabled']) ? 'checked' : '' ?>>
-                                <span>選択数を設定する</span>
-                            </label>
-                        </div>
-                        <div class="fb-checkbox-limit-settings" <?= !empty($f['checkbox_limit_enabled']) ? '' : 'style="display:none"' ?>>
-                            <div>
-                                <label>最小選択数</label>
-                                <input type="number" min="1" name="fields[<?= $idx ?>][checkbox_min_selections]" value="<?= e($f['checkbox_min_selections'] ?? '') ?>">
-                            </div>
-                            <div>
-                                <label>最大選択数</label>
-                                <input type="number" min="1" name="fields[<?= $idx ?>][checkbox_max_selections]" value="<?= e($f['checkbox_max_selections'] ?? '') ?>">
-                            </div>
                         </div>
                     </div>
                     <div class="box is-field fb-options" <?= in_array($f['type'], ['radio','checkbox','select'], true) ? '' : 'style="display:none"' ?>>
@@ -440,6 +444,7 @@ $slugPreviewValue = trim((string) ($form['slug'] ?? '')) !== '' ? (string) $form
                                         <?php foreach ($regexPresetChoices as $patVal => $patLabel): ?>
                                             <option value="<?= e($patVal) ?>"><?= e($patLabel) ?></option>
                                         <?php endforeach; ?>
+                                        <option value="<?= e($FB_REGEX_CHECKBOX_LIMIT) ?>">選択数を設定する</option>
                                     </select>
                                     <div class="fb-regex-custom-wrap" style="display:none">
                                         <input type="text" class="fb-regex-custom" placeholder="正規表現" spellcheck="false" autocomplete="off">
@@ -447,19 +452,15 @@ $slugPreviewValue = trim((string) ($form['slug'] ?? '')) !== '' ? (string) $form
                                     <input type="hidden" class="fb-regex-value" value="">
                                 </div>
                             </div>
+                            <input type="hidden" data-name="checkbox_limit_enabled" class="fb-checkbox-limit-enabled" value="0">
+                            <div class="fb-checkbox-limit-settings" style="display:none">
+                                <div><label>最小選択数</label><input type="number" min="1" data-name="checkbox_min_selections"></div>
+                                <div><label>最大選択数</label><input type="number" min="1" data-name="checkbox_max_selections"></div>
+                            </div>
                         </div>
                     </div>
                 </div>
                 <div class="fb-max-length-wrap"><label>最大文字数（任意）</label><input type="number" min="1" data-name="max_length"></div>
-            </div>
-            <div class="fb-row fb-checkbox-limit-wrap" style="display:none">
-                <div class="fb-checkbox-limit-toggle-wrap">
-                    <label class="label is-choice"><input type="checkbox" data-name="checkbox_limit_enabled" value="1" class="fb-checkbox-limit-toggle"><span>選択数を設定する</span></label>
-                </div>
-                <div class="fb-checkbox-limit-settings" style="display:none">
-                    <div><label>最小選択数</label><input type="number" min="1" data-name="checkbox_min_selections"></div>
-                    <div><label>最大選択数</label><input type="number" min="1" data-name="checkbox_max_selections"></div>
-                </div>
             </div>
             <div class="box is-field fb-options" style="display:none">
                 <label>選択肢（1行に1つ）</label>

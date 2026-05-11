@@ -35,6 +35,7 @@
     })();
 
     var FB_REGEX_CUSTOM = '__custom__';
+    var FB_REGEX_CHECKBOX_LIMIT = '__checkbox_limit__';
 
     function generateUuidV4() {
         var bytes = new Uint8Array(16);
@@ -74,13 +75,31 @@
         var hidden = row.querySelector('.fb-regex-value');
         var wrap = row.querySelector('.fb-regex-custom-wrap');
         var customInp = row.querySelector('.fb-regex-custom');
+        var li = row.closest('.fb-field');
+        var checkboxLimitEnabled = li ? li.querySelector('.fb-checkbox-limit-enabled') : null;
+        var checkboxLimitSettings = li ? li.querySelector('.fb-checkbox-limit-settings') : null;
+        var checkboxMinInput = li ? li.querySelector('[data-name="checkbox_min_selections"], [name$="[checkbox_min_selections]"]') : null;
+        var checkboxMaxInput = li ? li.querySelector('[data-name="checkbox_max_selections"], [name$="[checkbox_max_selections]"]') : null;
         if (!sel || !hidden) return;
-        if (sel.value === FB_REGEX_CUSTOM) {
+        if (sel.value === FB_REGEX_CHECKBOX_LIMIT) {
+            if (wrap) wrap.style.display = 'none';
+            hidden.value = '';
+            if (checkboxLimitEnabled) checkboxLimitEnabled.value = '1';
+            if (checkboxLimitSettings) checkboxLimitSettings.style.display = '';
+        } else if (sel.value === FB_REGEX_CUSTOM) {
             if (wrap) wrap.style.display = '';
             hidden.value = customInp ? customInp.value.trim() : '';
+            if (checkboxLimitEnabled) checkboxLimitEnabled.value = '0';
+            if (checkboxLimitSettings) checkboxLimitSettings.style.display = 'none';
+            if (checkboxMinInput) checkboxMinInput.value = '';
+            if (checkboxMaxInput) checkboxMaxInput.value = '';
         } else {
             if (wrap) wrap.style.display = 'none';
             hidden.value = sel.value;
+            if (checkboxLimitEnabled) checkboxLimitEnabled.value = '0';
+            if (checkboxLimitSettings) checkboxLimitSettings.style.display = 'none';
+            if (checkboxMinInput) checkboxMinInput.value = '';
+            if (checkboxMaxInput) checkboxMaxInput.value = '';
         }
     }
 
@@ -93,13 +112,17 @@
         Array.prototype.forEach.call(select.options, function (option) {
             var allow = true;
             if (typeValue === 'checkbox') {
-                allow = option.value === FB_REGEX_CUSTOM;
+                allow = option.value === FB_REGEX_CUSTOM || option.value === FB_REGEX_CHECKBOX_LIMIT;
             }
             option.hidden = !allow;
             option.disabled = !allow;
         });
         if (typeValue === 'checkbox') {
-            select.value = FB_REGEX_CUSTOM;
+            if (select.value !== FB_REGEX_CUSTOM && select.value !== FB_REGEX_CHECKBOX_LIMIT) {
+                select.value = FB_REGEX_CUSTOM;
+            }
+        } else if (select.value === FB_REGEX_CHECKBOX_LIMIT) {
+            select.value = '';
         }
     }
 
@@ -122,6 +145,8 @@
         requiredEl.textContent = isRequired ? '必須' : '任意';
         if (!isRequired || !regexKind || regexKind.value === '' || typeValue === 'radio' || typeValue === 'select') {
             regexEl.textContent = 'なし';
+        } else if (regexKind.value === FB_REGEX_CHECKBOX_LIMIT) {
+            regexEl.textContent = '選択数';
         } else if (regexKind.value === FB_REGEX_CUSTOM) {
             if (!regexCustom || !regexCustom.value.trim()) {
                 regexEl.textContent = 'なし';
@@ -365,8 +390,7 @@
         var regexKind = regexWrap ? regexWrap.querySelector('.fb-regex-kind') : null;
         var placeholderWrap = li.querySelector('.fb-placeholder-wrap');
         var placeholderInput = placeholderWrap ? placeholderWrap.querySelector('input') : null;
-        var checkboxLimitWrap = li.querySelector('.fb-checkbox-limit-wrap');
-        var checkboxLimitToggle = li.querySelector('.fb-checkbox-limit-toggle');
+        var checkboxLimitEnabled = li.querySelector('.fb-checkbox-limit-enabled');
         var checkboxLimitSettings = li.querySelector('.fb-checkbox-limit-settings');
         var checkboxMinInput = li.querySelector('[data-name="checkbox_min_selections"], [name$="[checkbox_min_selections]"]');
         var checkboxMaxInput = li.querySelector('[data-name="checkbox_max_selections"], [name$="[checkbox_max_selections]"]');
@@ -383,7 +407,7 @@
             }
         }
         function clearCheckboxLimitSettings() {
-            if (checkboxLimitToggle) checkboxLimitToggle.checked = false;
+            if (checkboxLimitEnabled) checkboxLimitEnabled.value = '0';
             if (checkboxLimitSettings) checkboxLimitSettings.style.display = 'none';
             if (checkboxMinInput) checkboxMinInput.value = '';
             if (checkboxMaxInput) checkboxMaxInput.value = '';
@@ -413,16 +437,11 @@
                 regexWrap.style.display = hideRegex ? 'none' : '';
                 if (hideRegex) {
                     clearRegexSettings();
+                    clearCheckboxLimitSettings();
                 }
             }
-            if (checkboxLimitWrap) {
-                var showCheckboxLimit = (v === 'checkbox' && requiredToggle && requiredToggle.checked);
-                checkboxLimitWrap.style.display = showCheckboxLimit ? '' : 'none';
-                if (!showCheckboxLimit) {
-                    clearCheckboxLimitSettings();
-                } else if (checkboxLimitSettings) {
-                    checkboxLimitSettings.style.display = (checkboxLimitToggle && checkboxLimitToggle.checked) ? '' : 'none';
-                }
+            if (v !== 'checkbox') {
+                clearCheckboxLimitSettings();
             }
             if (textPairSettings) {
                 textPairSettings.style.display = (v === 'text_pair') ? '' : 'none';
@@ -448,17 +467,6 @@
             requiredToggle.addEventListener('change', function () {
                 syncTypeSpecificUi();
                 updateFieldSummary(li);
-            });
-        }
-        if (checkboxLimitToggle) {
-            checkboxLimitToggle.addEventListener('change', function () {
-                if (checkboxLimitSettings) {
-                    checkboxLimitSettings.style.display = checkboxLimitToggle.checked ? '' : 'none';
-                }
-                if (!checkboxLimitToggle.checked) {
-                    if (checkboxMinInput) checkboxMinInput.value = '';
-                    if (checkboxMaxInput) checkboxMaxInput.value = '';
-                }
             });
         }
         var up = li.querySelector('.fb-up');
