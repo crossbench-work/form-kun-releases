@@ -14,6 +14,9 @@ $opts  = \Core\Validator::decodeOptions($field['options_json'] ?? null);
 $pairLabels = ($type === 'text_pair')
     ? \Models\FormField::decodeTextPairLabels($field['options_json'] ?? null)
     : ['left_label' => '', 'right_label' => ''];
+$pairPlaceholders = ($type === 'text_pair')
+    ? \Models\FormField::decodeTextPairPlaceholders($field['placeholder'] ?? null)
+    : ['left_placeholder' => '', 'right_placeholder' => ''];
 $ph    = $field['placeholder'] ?? '';
 
 $labelFor = $type === 'address'
@@ -269,6 +272,7 @@ $prefOptions = japanese_prefectures();
                         name="<?= e($key) ?>[left]"
                         value="<?= e($pairLeft) ?>"
                         <?= $field['max_length'] ? 'maxlength="' . (int) $field['max_length'] . '"' : '' ?>
+                        placeholder="<?= e($pairPlaceholders['left_placeholder']) ?>"
                         aria-label="<?= e($pairLabels['left_label'] !== '' ? $pairLabels['left_label'] : '入力欄1') ?>"
                         <?= $req ? 'required' : '' ?>
                         >
@@ -286,6 +290,7 @@ $prefOptions = japanese_prefectures();
                         name="<?= e($key) ?>[right]"
                         value="<?= e($pairRight) ?>"
                         <?= $field['max_length'] ? 'maxlength="' . (int) $field['max_length'] . '"' : '' ?>
+                        placeholder="<?= e($pairPlaceholders['right_placeholder']) ?>"
                         aria-label="<?= e($pairLabels['right_label'] !== '' ? $pairLabels['right_label'] : '入力欄2') ?>"
                         <?= $req ? 'required' : '' ?>
                         >

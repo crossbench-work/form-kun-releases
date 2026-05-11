@@ -222,6 +222,7 @@
         var typeSelect = li.querySelector('.fb-type');
         var optionsBox = li.querySelector('.fb-options');
         var textPairSettings = li.querySelector('.fb-text-pair-settings');
+        var textPairPlaceholders = li.querySelector('.fb-text-pair-placeholders');
         var placeholderWrap = li.querySelector('.fb-placeholder-wrap');
         function syncTypeSpecificUi() {
             if (!typeSelect) return;
@@ -231,6 +232,9 @@
             }
             if (textPairSettings) {
                 textPairSettings.style.display = (v === 'text_pair') ? '' : 'none';
+            }
+            if (textPairPlaceholders) {
+                textPairPlaceholders.style.display = (v === 'text_pair') ? '' : 'none';
             }
             if (placeholderWrap) {
                 placeholderWrap.style.display = (v === 'text_pair') ? 'none' : '';

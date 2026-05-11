@@ -122,6 +122,13 @@ class FormField
                         (string) ($f['pair_label_right'] ?? '')
                     );
                 }
+                $placeholder = isset($f['placeholder']) && $f['placeholder'] !== '' ? (string) $f['placeholder'] : null;
+                if ($f['type'] === 'text_pair') {
+                    $placeholder = self::encodeTextPairPlaceholders(
+                        (string) ($f['pair_placeholder_left'] ?? ''),
+                        (string) ($f['pair_placeholder_right'] ?? '')
+                    );
+                }
                 Database::execute(
                     'INSERT INTO form_fields (
                         form_id, sort_order, field_key, label, type,
@@ -139,7 +146,7 @@ class FormField
                             ? (string) $f['regex']
                             : null,
                         isset($f['help_text']) && $f['help_text'] !== '' ? (string) $f['help_text'] : null,
-                        isset($f['placeholder']) && $f['placeholder'] !== '' ? (string) $f['placeholder'] : null,
+                        $placeholder,
                         $optionsJson,
                     ]
                 );
@@ -203,6 +210,49 @@ class FormField
             'right_label' => trim($rightLabel),
         ];
         if ($payload['left_label'] === '' && $payload['right_label'] === '') {
+            return null;
+        }
+
+        return json_encode($payload, JSON_UNESCAPED_UNICODE);
+    }
+
+    /**
+     * @return array{left_placeholder:string,right_placeholder:string}
+     */
+    public static function decodeTextPairPlaceholders($stored): array
+    {
+        if (!is_string($stored) || trim($stored) === '') {
+            return ['left_placeholder' => '', 'right_placeholder' => ''];
+        }
+
+        $decoded = json_decode($stored, true);
+        if (!is_array($decoded)) {
+            return [
+                'left_placeholder' => trim($stored),
+                'right_placeholder' => '',
+            ];
+        }
+
+        if (array_keys($decoded) === range(0, count($decoded) - 1)) {
+            return [
+                'left_placeholder' => isset($decoded[0]) ? trim((string) $decoded[0]) : '',
+                'right_placeholder' => isset($decoded[1]) ? trim((string) $decoded[1]) : '',
+            ];
+        }
+
+        return [
+            'left_placeholder' => trim((string) ($decoded['left_placeholder'] ?? '')),
+            'right_placeholder' => trim((string) ($decoded['right_placeholder'] ?? '')),
+        ];
+    }
+
+    public static function encodeTextPairPlaceholders(string $leftPlaceholder, string $rightPlaceholder): ?string
+    {
+        $payload = [
+            'left_placeholder' => trim($leftPlaceholder),
+            'right_placeholder' => trim($rightPlaceholder),
+        ];
+        if ($payload['left_placeholder'] === '' && $payload['right_placeholder'] === '') {
             return null;
         }
 

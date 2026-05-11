@@ -186,6 +186,16 @@ $regexPresetChoices = [
                         <input type="text" name="fields[<?= $idx ?>][pair_label_right]" value="<?= e($f['pair_label_right'] ?? '') ?>">
                     </div>
                 </div>
+                <div class="fb-row fb-text-pair-placeholders" <?= $isTextPair ? '' : 'style="display:none"' ?>>
+                    <div>
+                        <label>1つ目のプレースホルダ（任意）</label>
+                        <input type="text" name="fields[<?= $idx ?>][pair_placeholder_left]" value="<?= e($f['pair_placeholder_left'] ?? '') ?>">
+                    </div>
+                    <div>
+                        <label>2つ目のプレースホルダ（任意）</label>
+                        <input type="text" name="fields[<?= $idx ?>][pair_placeholder_right]" value="<?= e($f['pair_placeholder_right'] ?? '') ?>">
+                    </div>
+                </div>
                 <div class="box is-field">
                     <label class="label">ヘルプテキスト（任意）</label>
                     <input type="text" name="fields[<?= $idx ?>][help_text]" value="<?= e($f['help_text']) ?>">
@@ -340,6 +350,10 @@ $regexPresetChoices = [
         <div class="fb-row fb-text-pair-settings" style="display:none">
             <div><label>1つ目の入力欄の表示名</label><input type="text" data-name="pair_label_left"></div>
             <div><label>2つ目の入力欄の表示名</label><input type="text" data-name="pair_label_right"></div>
+        </div>
+        <div class="fb-row fb-text-pair-placeholders" style="display:none">
+            <div><label>1つ目のプレースホルダ（任意）</label><input type="text" data-name="pair_placeholder_left"></div>
+            <div><label>2つ目のプレースホルダ（任意）</label><input type="text" data-name="pair_placeholder_right"></div>
         </div>
         <div class="box is-field"><label class="label">ヘルプテキスト（任意）</label><input type="text" data-name="help_text"></div>
         <div class="box is-field fb-options" style="display:none">

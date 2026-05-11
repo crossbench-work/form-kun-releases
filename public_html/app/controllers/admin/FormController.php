@@ -69,8 +69,12 @@ class FormController
         $editFields = array_map(function ($f) {
             if (($f['type'] ?? '') === 'text_pair') {
                 $pairLabels = \Models\FormField::decodeTextPairLabels($f['options_json'] ?? null);
+                $pairPlaceholders = \Models\FormField::decodeTextPairPlaceholders($f['placeholder'] ?? null);
                 $f['pair_label_left'] = $pairLabels['left_label'];
                 $f['pair_label_right'] = $pairLabels['right_label'];
+                $f['pair_placeholder_left'] = $pairPlaceholders['left_placeholder'];
+                $f['pair_placeholder_right'] = $pairPlaceholders['right_placeholder'];
+                $f['placeholder'] = '';
                 $f['options'] = '';
             } else {
                 $opts = json_decode((string) ($f['options_json'] ?? ''), true);
@@ -79,6 +83,8 @@ class FormController
                     : '';
                 $f['pair_label_left'] = '';
                 $f['pair_label_right'] = '';
+                $f['pair_placeholder_left'] = '';
+                $f['pair_placeholder_right'] = '';
             }
             return $f;
         }, $fields);
@@ -186,6 +192,8 @@ class FormController
                     'placeholder'     => trim((string) ($f['placeholder'] ?? '')),
                     'pair_label_left' => trim((string) ($f['pair_label_left'] ?? '')),
                     'pair_label_right'=> trim((string) ($f['pair_label_right'] ?? '')),
+                    'pair_placeholder_left' => trim((string) ($f['pair_placeholder_left'] ?? '')),
+                    'pair_placeholder_right'=> trim((string) ($f['pair_placeholder_right'] ?? '')),
                     'options'         => (string) ($f['options'] ?? ''),
                 ];
             }
@@ -306,6 +314,8 @@ class FormController
             'placeholder' => '',
             'pair_label_left' => '',
             'pair_label_right' => '',
+            'pair_placeholder_left' => '',
+            'pair_placeholder_right' => '',
             'options' => '',
         ];
     }
