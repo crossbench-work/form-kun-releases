@@ -40,6 +40,8 @@ class SchemaPatch
 
             self::ensureFormFieldsTypeEnumAddress();
 
+            self::ensureFormsDisplayFlags();
+
             $hasTbl = Database::fetchOne(
                 'SELECT COUNT(*) AS c FROM information_schema.TABLES
                  WHERE TABLE_SCHEMA = ? AND TABLE_NAME = ?',
@@ -133,6 +135,44 @@ class SchemaPatch
             );
         } catch (\Throwable $e) {
             error_log('[formkun] SchemaPatch form_fields.type address: ' . $e->getMessage());
+        }
+    }
+
+    /**
+     * forms に公開フォーム側のタイトル・説明文表示フラグを追加。
+     */
+    public static function ensureFormsDisplayFlags(): void
+    {
+        try {
+            $dbRow = Database::fetchOne('SELECT DATABASE() AS n');
+            $schema = (string) ($dbRow['n'] ?? '');
+            if ($schema === '') {
+                return;
+            }
+
+            $hasShowTitle = Database::fetchOne(
+                'SELECT COUNT(*) AS c FROM information_schema.COLUMNS
+                 WHERE TABLE_SCHEMA = ? AND TABLE_NAME = ? AND COLUMN_NAME = ?',
+                [$schema, 'forms', 'show_title']
+            );
+            if ((int) ($hasShowTitle['c'] ?? 0) === 0) {
+                Database::execute(
+                    'ALTER TABLE forms ADD COLUMN show_title TINYINT(1) NOT NULL DEFAULT 1 AFTER description'
+                );
+            }
+
+            $hasShowDescription = Database::fetchOne(
+                'SELECT COUNT(*) AS c FROM information_schema.COLUMNS
+                 WHERE TABLE_SCHEMA = ? AND TABLE_NAME = ? AND COLUMN_NAME = ?',
+                [$schema, 'forms', 'show_description']
+            );
+            if ((int) ($hasShowDescription['c'] ?? 0) === 0) {
+                Database::execute(
+                    'ALTER TABLE forms ADD COLUMN show_description TINYINT(1) NOT NULL DEFAULT 1 AFTER show_title'
+                );
+            }
+        } catch (\Throwable $e) {
+            error_log('[formkun] SchemaPatch forms display flags: ' . $e->getMessage());
         }
     }
 }

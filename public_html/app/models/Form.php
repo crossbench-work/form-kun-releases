@@ -33,15 +33,17 @@ class Form
         $now = date('Y-m-d H:i:s');
         Database::execute(
             'INSERT INTO forms (
-                slug, title, description, thanks_message, redirect_url,
+                slug, title, description, show_title, show_description, thanks_message, redirect_url,
                 admin_emails, mail_subject_admin, mail_template_admin,
                 reply_enabled, reply_from_field_key, reply_subject, reply_template,
                 captcha_enabled, status, created_at, updated_at
-            ) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',
+            ) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',
             [
                 $data['slug'],
                 $data['title'],
                 $data['description'] ?? null,
+                !empty($data['show_title']) ? 1 : 0,
+                !empty($data['show_description']) ? 1 : 0,
                 $data['thanks_message'] ?? null,
                 $data['redirect_url'] ?? null,
                 $data['admin_emails'] ?? null,
@@ -65,7 +67,7 @@ class Form
         $now = date('Y-m-d H:i:s');
         Database::execute(
             'UPDATE forms SET
-                slug = ?, title = ?, description = ?, thanks_message = ?, redirect_url = ?,
+                slug = ?, title = ?, description = ?, show_title = ?, show_description = ?, thanks_message = ?, redirect_url = ?,
                 admin_emails = ?, mail_subject_admin = ?, mail_template_admin = ?,
                 reply_enabled = ?, reply_from_field_key = ?, reply_subject = ?, reply_template = ?,
                 captcha_enabled = ?, status = ?, updated_at = ?
@@ -74,6 +76,8 @@ class Form
                 $data['slug'],
                 $data['title'],
                 $data['description'] ?? null,
+                !empty($data['show_title']) ? 1 : 0,
+                !empty($data['show_description']) ? 1 : 0,
                 $data['thanks_message'] ?? null,
                 $data['redirect_url'] ?? null,
                 $data['admin_emails'] ?? null,

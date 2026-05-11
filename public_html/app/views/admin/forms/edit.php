@@ -38,6 +38,12 @@ $regexPresetChoices = [
             <input type="text" id="title" name="title" value="<?= e($form['title']) ?>" required>
         </div>
         <div class="box is-field">
+            <label class="label">
+                <input type="checkbox" name="show_title" value="1" <?= !empty($form['show_title']) ? 'checked' : '' ?>>
+                公開フォームでタイトルを表示する
+            </label>
+        </div>
+        <div class="box is-field">
             <label class="label" for="slug">スラッグ（URL用） <span class="is-required">必須</span></label>
             <input type="text" id="slug" name="slug" value="<?= e($form['slug']) ?>" required>
             <p class="text is-help">公開URL: <code><?= e(url('/f/')) ?></code><strong id="slug-preview"><?= e($form['slug']) ?: 'your-slug' ?></strong></p>
@@ -53,6 +59,12 @@ $regexPresetChoices = [
         <div class="box is-field">
             <label class="label" for="description">説明文</label>
             <textarea id="description" name="description" rows="3"><?= e($form['description']) ?></textarea>
+        </div>
+        <div class="box is-field">
+            <label class="label">
+                <input type="checkbox" name="show_description" value="1" <?= !empty($form['show_description']) ? 'checked' : '' ?>>
+                公開フォームで説明文を表示する
+            </label>
         </div>
         <div class="box is-field">
             <label class="label">

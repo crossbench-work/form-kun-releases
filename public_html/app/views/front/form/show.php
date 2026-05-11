@@ -1,6 +1,8 @@
 <section class="p-formShow01">
+<?php if (!empty($form['show_title'])): ?>
     <h1 class="title"><?= e($form['title']) ?></h1>
-<?php if (!empty($form['description'])): ?>
+<?php endif; ?>
+<?php if (!empty($form['show_description']) && !empty($form['description'])): ?>
     <div class="block is-lead"><?= nl2br(e($form['description'])) ?></div>
 <?php endif; ?>
 

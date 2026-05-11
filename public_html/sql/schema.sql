@@ -39,6 +39,8 @@ CREATE TABLE IF NOT EXISTS forms (
     slug                    VARCHAR(64) UNIQUE NOT NULL,
     title                   VARCHAR(200) NOT NULL,
     description             TEXT DEFAULT NULL,
+    show_title              TINYINT(1) NOT NULL DEFAULT 1,
+    show_description        TINYINT(1) NOT NULL DEFAULT 1,
     thanks_message          TEXT DEFAULT NULL,
     redirect_url            VARCHAR(500) DEFAULT NULL,
     admin_emails            VARCHAR(500) DEFAULT NULL,
