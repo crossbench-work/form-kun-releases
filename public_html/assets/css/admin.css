@@ -159,18 +159,50 @@ textarea { min-height: 100px; resize: vertical; }
 .fb-row > div { flex: 1; min-width: 180px; }
 .fb-actions { margin-top: 8px; display: flex; gap: 8px; }
 .fb-handle { font-size: 12px; color: #6b7280; margin-bottom: 8px; }
-.fb-field-key-auto-label { display: block; margin-bottom: 6px; font-weight: normal; }
+.fb-field-key-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.fb-field-key-input {
+    flex: 1;
+    min-width: 0;
+}
+.fb-field-key-input.is-locked {
+    background: #f3f4f6;
+    color: #374151;
+    cursor: default;
+}
+.btn.btn-icon {
+    flex-shrink: 0;
+    padding: 8px 10px;
+    line-height: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
 .fb-regex-wrap { flex: 2 1 320px; min-width: 280px; }
 .fb-regex-list { margin-bottom: 8px; }
 .fb-regex-row {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     gap: 8px;
     margin-bottom: 8px;
     flex-wrap: wrap;
 }
-.fb-regex-preset { max-width: 240px; flex: 0 1 auto; }
-.fb-regex-input { flex: 1 1 180px; min-width: 140px; }
+.fb-regex-kind {
+    flex: 1 1 200px;
+    max-width: 100%;
+    min-width: 140px;
+}
+.fb-regex-custom-wrap {
+    flex: 2 1 220px;
+    min-width: 140px;
+}
+.fb-regex-custom-wrap .fb-regex-custom {
+    width: 100%;
+    box-sizing: border-box;
+}
 
 /* Pagination */
 .pagination { display: flex; gap: 4px; margin-top: 16px; flex-wrap: wrap; }

@@ -1,6 +1,8 @@
 (function () {
     'use strict';
 
+    var FB_REGEX_CUSTOM = '__custom__';
+
     function generateUuidV4() {
         var bytes = new Uint8Array(16);
         if (typeof crypto !== 'undefined' && crypto.getRandomValues) {
@@ -22,10 +24,6 @@
         );
     }
 
-    function isUuid(s) {
-        return /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(String(s || ''));
-    }
-
     var list = document.getElementById('fb-fields');
     if (!list) return;
 
@@ -39,33 +37,59 @@
         return m ? m[1] : null;
     }
 
+    function syncRegexRowValue(row) {
+        var sel = row.querySelector('.fb-regex-kind');
+        var hidden = row.querySelector('.fb-regex-value');
+        var wrap = row.querySelector('.fb-regex-custom-wrap');
+        var customInp = row.querySelector('.fb-regex-custom');
+        if (!sel || !hidden) return;
+        if (sel.value === FB_REGEX_CUSTOM) {
+            if (wrap) wrap.style.display = '';
+            hidden.value = customInp ? customInp.value.trim() : '';
+        } else {
+            if (wrap) wrap.style.display = 'none';
+            hidden.value = sel.value;
+        }
+    }
+
+    function syncAllRegexRows() {
+        list.querySelectorAll('.fb-regex-row').forEach(syncRegexRowValue);
+    }
+
     function reindex() {
         var items = list.querySelectorAll('.fb-field');
         items.forEach(function (li, i) {
             li.querySelectorAll('input, textarea, select').forEach(function (el) {
-                if (el.classList.contains('fb-regex-input')) {
+                if (el.classList.contains('fb-regex-custom') ||
+                    el.classList.contains('fb-regex-kind') ||
+                    el.classList.contains('fb-regex-value')) {
                     return;
                 }
                 var name = el.getAttribute('data-name') || extractDataName(el.getAttribute('name'));
                 if (!name) return;
                 el.setAttribute('name', 'fields[' + i + '][' + name + ']');
             });
-            li.querySelectorAll('.fb-regex-input').forEach(function (el, j) {
+            li.querySelectorAll('.fb-regex-value').forEach(function (el, j) {
                 el.setAttribute('name', 'fields[' + i + '][regex_patterns][' + j + ']');
             });
         });
+        syncAllRegexRows();
     }
 
     function bindRegexRow(row) {
-        var preset = row.querySelector('.fb-regex-preset');
-        var input = row.querySelector('.fb-regex-input');
-        if (preset && input) {
-            preset.addEventListener('change', function () {
-                if (preset.value !== '') {
-                    input.value = preset.value;
-                }
+        var sel = row.querySelector('.fb-regex-kind');
+        var customInp = row.querySelector('.fb-regex-custom');
+        if (sel) {
+            sel.addEventListener('change', function () {
+                syncRegexRowValue(row);
             });
         }
+        if (customInp) {
+            customInp.addEventListener('input', function () {
+                syncRegexRowValue(row);
+            });
+        }
+        syncRegexRowValue(row);
     }
 
     function bindRegexBlock(li) {
@@ -90,10 +114,13 @@
                 if (!row || !rlistInner) return;
                 var rows = rlistInner.querySelectorAll('.fb-regex-row');
                 if (rows.length <= 1) {
-                    var inp = row.querySelector('.fb-regex-input');
-                    var pres = row.querySelector('.fb-regex-preset');
-                    if (inp) inp.value = '';
-                    if (pres) pres.selectedIndex = 0;
+                    var sel = row.querySelector('.fb-regex-kind');
+                    var customInp = row.querySelector('.fb-regex-custom');
+                    var wrap = row.querySelector('.fb-regex-custom-wrap');
+                    if (sel) sel.selectedIndex = 0;
+                    if (customInp) customInp.value = '';
+                    if (wrap) wrap.style.display = 'none';
+                    syncRegexRowValue(row);
                     return;
                 }
                 row.parentNode.removeChild(row);
@@ -102,29 +129,28 @@
         });
     }
 
-    function bindFieldKeyAuto(li) {
-        var cb = li.querySelector('.fb-field-key-auto');
+    function bindFieldKeyLock(li) {
+        var btn = li.querySelector('.fb-field-key-lock');
         var input = li.querySelector('.fb-field-key-input');
-        if (!cb || !input) return;
+        if (!btn || !input) return;
+        var icClosed = btn.querySelector('.fb-icon-lock-closed');
+        var icOpen = btn.querySelector('.fb-icon-lock-open');
 
-        function sync() {
-            if (cb.checked) {
-                input.readOnly = true;
-                if (!input.value || !isUuid(input.value)) {
-                    input.value = generateUuidV4();
-                }
-            } else {
-                input.readOnly = false;
-            }
+        function syncIcons() {
+            var locked = input.readOnly;
+            if (icClosed) icClosed.style.display = locked ? '' : 'none';
+            if (icOpen) icOpen.style.display = locked ? 'none' : '';
+            btn.setAttribute('aria-pressed', locked ? 'true' : 'false');
+            btn.setAttribute('aria-label', locked ? 'キーを編集' : 'キーをロック');
+            btn.setAttribute('title', locked ? '編集する' : 'ロックする');
+            input.classList.toggle('is-locked', locked);
         }
 
-        cb.addEventListener('change', function () {
-            if (cb.checked) {
-                input.value = generateUuidV4();
-            }
-            sync();
+        btn.addEventListener('click', function () {
+            input.readOnly = !input.readOnly;
+            syncIcons();
         });
-        sync();
+        syncIcons();
     }
 
     function bind(li) {
@@ -158,21 +184,27 @@
             }
         });
 
-        bindFieldKeyAuto(li);
+        bindFieldKeyLock(li);
         bindRegexBlock(li);
     }
 
     list.querySelectorAll('.fb-field').forEach(bind);
 
+    var mainForm = list.closest('form');
+    if (mainForm) {
+        mainForm.addEventListener('submit', function () {
+            syncAllRegexRows();
+        });
+    }
+
     if (addBtn && template) {
         addBtn.addEventListener('click', function () {
             var clone = template.content.firstElementChild.cloneNode(true);
             var fkInput = clone.querySelector('.fb-field-key-input');
-            var fkCb = clone.querySelector('.fb-field-key-auto');
-            if (fkInput && fkCb) {
-                fkCb.checked = true;
-                fkInput.readOnly = true;
+            if (fkInput) {
                 fkInput.value = generateUuidV4();
+                fkInput.readOnly = true;
+                fkInput.classList.add('is-locked');
             }
             list.appendChild(clone);
             bind(clone);

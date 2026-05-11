@@ -69,7 +69,6 @@ class FormController
         $editFields = array_map(function ($f) {
             $opts = json_decode((string) ($f['options_json'] ?? ''), true);
             $f['options'] = is_array($opts) ? implode("\n", $opts) : '';
-            $f['field_key_auto'] = FieldKey::isUuidFormat((string) ($f['field_key'] ?? '')) ? 1 : 0;
             return $f;
         }, $fields);
         if (empty($editFields)) {
@@ -151,19 +150,16 @@ class FormController
             foreach ($raw as $f) {
                 if (!is_array($f)) continue;
                 if (!empty($f['_remove'])) continue;
-                $auto = !empty($f['field_key_auto']);
                 $key = trim((string) ($f['field_key'] ?? ''));
-                if ($auto) {
-                    if ($key === '' || !FieldKey::isUuidFormat($key)) {
-                        $key = FieldKey::generateUuidV4();
-                    }
+                if ($key === '') {
+                    $key = FieldKey::generateUuidV4();
                 }
 
                 $patterns = [];
                 if (!empty($f['regex_patterns']) && is_array($f['regex_patterns'])) {
                     foreach ($f['regex_patterns'] as $p) {
                         $p = trim((string) $p);
-                        if ($p !== '') {
+                        if ($p !== '' && $p !== '__custom__') {
                             $patterns[] = $p;
                         }
                     }
@@ -172,7 +168,6 @@ class FormController
 
                 $fields[] = [
                     'field_key'       => $key,
-                    'field_key_auto'  => $auto ? 1 : 0,
                     'label'           => trim((string) ($f['label'] ?? '')),
                     'type'            => in_array($f['type'] ?? '', FormField::ALLOWED_TYPES(), true) ? $f['type'] : 'text',
                     'required'        => !empty($f['required']) ? 1 : 0,
@@ -285,7 +280,6 @@ class FormController
     {
         return [
             'field_key' => FieldKey::generateUuidV4(),
-            'field_key_auto' => 1,
             'label' => 'お名前',
             'type'  => 'text',
             'required' => 1,
