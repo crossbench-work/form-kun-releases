@@ -7,6 +7,21 @@
         var tabs = root.querySelectorAll('[role="tablist"] [role="tab"]');
         var panels = root.querySelectorAll('[role="tabpanel"]');
         if (!tabs.length || !panels.length) return;
+        var storageKey = 'formkun:active-tab:' + window.location.pathname;
+
+        function readStoredPanelId() {
+            try {
+                return window.sessionStorage.getItem(storageKey);
+            } catch (e) {
+                return null;
+            }
+        }
+
+        function writeStoredPanelId(panelId) {
+            try {
+                window.sessionStorage.setItem(storageKey, panelId);
+            } catch (e) {}
+        }
 
         function activate(panelId) {
             tabs.forEach(function (tab) {
@@ -18,6 +33,7 @@
             panels.forEach(function (p) {
                 p.hidden = p.id !== panelId;
             });
+            writeStoredPanelId(panelId);
             if (panelId === 'tab-panel-fields') {
                 window.setTimeout(function () {
                     if (typeof window.formkunInitFbSortable === 'function') {
@@ -32,6 +48,17 @@
                 activate(tab.getAttribute('aria-controls'));
             });
         });
+
+        var initialPanelId = readStoredPanelId();
+        if (!initialPanelId) {
+            var selectedTab = Array.prototype.find.call(tabs, function (tab) {
+                return tab.getAttribute('aria-selected') === 'true';
+            });
+            initialPanelId = selectedTab ? selectedTab.getAttribute('aria-controls') : panels[0].id;
+        }
+        if (initialPanelId) {
+            activate(initialPanelId);
+        }
     })();
 
     var FB_REGEX_CUSTOM = '__custom__';
