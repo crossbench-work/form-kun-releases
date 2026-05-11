@@ -865,6 +865,15 @@ form.is-inline {
 [data-module=m-formBuilder01] .fb-field-body {
   padding: 16px;
 }
+[data-module=m-formBuilder01] .fb-field-section + .fb-field-section {
+  margin-top: 20px;
+}
+[data-module=m-formBuilder01] .fb-field-section-title {
+  margin: 0 0 10px;
+  font-size: 13px;
+  font-weight: 700;
+  color: #334155;
+}
 [data-module=m-formBuilder01] .fb-field.is-collapsed .fb-field-body {
   display: none;
 }
@@ -872,6 +881,9 @@ form.is-inline {
   display: flex;
   gap: 12px;
   flex-wrap: wrap;
+}
+[data-module=m-formBuilder01] .fb-row label {
+  font-size: 12px;
 }
 [data-module=m-formBuilder01] .fb-row > div {
   flex: 1;

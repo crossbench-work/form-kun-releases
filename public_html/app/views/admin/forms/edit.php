@@ -126,127 +126,138 @@ $regexPresetChoices = [
                     </div>
                 </div>
                 <div class="fb-field-body">
-                <div class="fb-row">
-                    <div>
-                        <label>ラベル</label>
-                        <input type="text" name="fields[<?= $idx ?>][label]" class="fb-input-label" value="<?= e($f['label']) ?>">
-                    </div>
-                    <div class="fb-field-key-col">
-                        <label>フィールドキー</label>
-                        <div class="fb-field-key-row">
-                            <input type="text" name="fields[<?= $idx ?>][field_key]" value="<?= e($f['field_key']) ?>" class="fb-field-key-input<?= $fkLocked ? ' is-locked' : '' ?>" <?= $fkLocked ? 'readonly' : '' ?> spellcheck="false">
-                            <button type="button" class="btn is-icon fb-field-key-lock" aria-label="<?= $fkLocked ? 'キーを編集' : 'キーをロック' ?>" title="<?= $fkLocked ? '編集する' : 'ロックする' ?>" aria-pressed="<?= $fkLocked ? 'true' : 'false' ?>">
-                                <svg class="fb-icon-lock-closed" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" <?= $fkLocked ? '' : 'style="display:none"' ?> aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
-                                <svg class="fb-icon-lock-open" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" <?= $fkLocked ? 'style="display:none"' : '' ?> aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M8 11V7a4 4 0 118 0m-4 8v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2z"/></svg>
-                            </button>
+                <div class="fb-field-section">
+                    <h3 class="fb-field-section-title">基本設定</h3>
+                    <div class="fb-row">
+                        <div>
+                            <label>ラベル</label>
+                            <input type="text" name="fields[<?= $idx ?>][label]" class="fb-input-label" value="<?= e($f['label']) ?>">
                         </div>
-                    </div>
-                    <div>
-                        <label>型</label>
-                        <select name="fields[<?= $idx ?>][type]" class="fb-type">
-                        <?php foreach (\Models\FormField::TYPE_LABELS() as $tVal => $tLabel): ?>
-                            <option value="<?= e($tVal) ?>" <?= $f['type'] === $tVal ? 'selected' : '' ?>><?= e($tLabel) ?></option>
-                        <?php endforeach; ?>
-                        </select>
-                    </div>
-                    <div class="fb-validation-wrap">
-                        <label>必須</label>
-                        <div class="fb-validation-controls">
-                            <div class="fb-required-wrap">
-                                <label class="label is-choice">
-                                    <input type="checkbox" name="fields[<?= $idx ?>][required]" value="1" class="fb-required-toggle" <?= !empty($f['required']) ? 'checked' : '' ?>>
-                                    <span>必須にする</span>
-                                </label>
-                            </div>
-                            <div class="fb-regex-wrap" <?= empty($f['required']) ? 'style="display:none"' : '' ?>>
-                                <label>入力チェック</label>
-                                <div class="fb-regex-list">
-                                    <?php
-                                    if ($rp === '') {
-                                        $selVal = '';
-                                        $customVal = '';
-                                    } elseif ($rp !== '' && array_key_exists($rp, $regexPresetChoices) && $rp !== $FB_REGEX_CUSTOM) {
-                                        $selVal = $rp;
-                                        $customVal = '';
-                                    } else {
-                                        $selVal = $FB_REGEX_CUSTOM;
-                                        $customVal = $rp;
-                                    }
-                                    $showCustom = ($selVal === $FB_REGEX_CUSTOM);
-                                    $hiddenVal = $showCustom ? $customVal : $selVal;
-                                    ?>
-                                    <div class="fb-regex-row">
-                                        <select class="fb-regex-kind" aria-label="入力チェックの種類">
-                                            <?php foreach ($regexPresetChoices as $patVal => $patLabel): ?>
-                                                <option value="<?= e($patVal) ?>" <?= $selVal === $patVal ? 'selected' : '' ?>><?= e($patLabel) ?></option>
-                                            <?php endforeach; ?>
-                                        </select>
-                                        <div class="fb-regex-custom-wrap"<?= $showCustom ? '' : ' style="display:none"' ?>>
-                                            <input type="text" class="fb-regex-custom" value="<?= e($customVal) ?>" placeholder="正規表現" spellcheck="false" autocomplete="off">
-                                        </div>
-                                        <input type="hidden" class="fb-regex-value" value="<?= e($hiddenVal) ?>" spellcheck="false">
-                                    </div>
-                                </div>
+                        <div class="fb-field-key-col">
+                            <label>フィールドキー</label>
+                            <div class="fb-field-key-row">
+                                <input type="text" name="fields[<?= $idx ?>][field_key]" value="<?= e($f['field_key']) ?>" class="fb-field-key-input<?= $fkLocked ? ' is-locked' : '' ?>" <?= $fkLocked ? 'readonly' : '' ?> spellcheck="false">
+                                <button type="button" class="btn is-icon fb-field-key-lock" aria-label="<?= $fkLocked ? 'キーを編集' : 'キーをロック' ?>" title="<?= $fkLocked ? '編集する' : 'ロックする' ?>" aria-pressed="<?= $fkLocked ? 'true' : 'false' ?>">
+                                    <svg class="fb-icon-lock-closed" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" <?= $fkLocked ? '' : 'style="display:none"' ?> aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+                                    <svg class="fb-icon-lock-open" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" <?= $fkLocked ? 'style="display:none"' : '' ?> aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M8 11V7a4 4 0 118 0m-4 8v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2z"/></svg>
+                                </button>
                             </div>
                         </div>
-                    </div>
-                </div>
-                <div class="fb-row">
-                    <div class="fb-max-length-wrap" <?= in_array($f['type'], ['radio', 'checkbox', 'select'], true) ? 'style="display:none"' : '' ?>>
-                        <label>最大文字数（任意）</label>
-                        <input type="number" min="1" name="fields[<?= $idx ?>][max_length]" value="<?= e($f['max_length']) ?>">
-                    </div>
-                    <div class="fb-placeholder-wrap" <?= ($isTextPair || in_array($f['type'], ['radio', 'checkbox', 'select'], true)) ? 'style="display:none"' : '' ?>>
-                        <label>プレースホルダ（任意）</label>
-                        <input type="text" name="fields[<?= $idx ?>][placeholder]" value="<?= e($f['placeholder']) ?>">
-                    </div>
-                </div>
-                <div class="fb-row fb-text-pair-settings" <?= $isTextPair ? '' : 'style="display:none"' ?>>
-                    <div>
-                        <label>1つ目の入力欄の表示名</label>
-                        <input type="text" name="fields[<?= $idx ?>][pair_label_left]" value="<?= e($f['pair_label_left'] ?? '') ?>">
-                    </div>
-                    <div>
-                        <label>2つ目の入力欄の表示名</label>
-                        <input type="text" name="fields[<?= $idx ?>][pair_label_right]" value="<?= e($f['pair_label_right'] ?? '') ?>">
-                    </div>
-                </div>
-                <div class="fb-row fb-text-pair-placeholders" <?= $isTextPair ? '' : 'style="display:none"' ?>>
-                    <div>
-                        <label>1つ目のプレースホルダ（任意）</label>
-                        <input type="text" name="fields[<?= $idx ?>][pair_placeholder_left]" value="<?= e($f['pair_placeholder_left'] ?? '') ?>">
-                    </div>
-                    <div>
-                        <label>2つ目のプレースホルダ（任意）</label>
-                        <input type="text" name="fields[<?= $idx ?>][pair_placeholder_right]" value="<?= e($f['pair_placeholder_right'] ?? '') ?>">
-                    </div>
-                </div>
-                <div class="box is-field">
-                    <label class="label">ヘルプテキスト（任意）</label>
-                    <input type="text" name="fields[<?= $idx ?>][help_text]" value="<?= e($f['help_text']) ?>">
-                </div>
-                <div class="box is-field fb-options" <?= in_array($f['type'], ['radio','checkbox','select'], true) ? '' : 'style="display:none"' ?>>
-                    <label class="label">選択肢（1行に1つ）</label>
-                    <?php $choiceOptions = \Models\FormField::parseOptions($f['options'] ?? ''); ?>
-                    <div class="fb-choiceEditor" data-choice-editor>
-                        <div class="fb-choiceList">
-                            <?php foreach ($choiceOptions as $choiceOpt): ?>
-                                <div class="fb-row fb-choiceItem" data-choice-item>
-                                    <div>
-                                        <input type="text" class="fb-choice-input" value="<?= e($choiceOpt) ?>" placeholder="選択肢">
-                                    </div>
-                                    <div class="fb-actions">
-                                        <button type="button" class="btn is-sm fb-choice-up">↑</button>
-                                        <button type="button" class="btn is-sm fb-choice-down">↓</button>
-                                        <button type="button" class="btn is-sm is-danger fb-choice-remove">削除</button>
-                                    </div>
-                                </div>
+                        <div>
+                            <label>型</label>
+                            <select name="fields[<?= $idx ?>][type]" class="fb-type">
+                            <?php foreach (\Models\FormField::TYPE_LABELS() as $tVal => $tLabel): ?>
+                                <option value="<?= e($tVal) ?>" <?= $f['type'] === $tVal ? 'selected' : '' ?>><?= e($tLabel) ?></option>
                             <?php endforeach; ?>
+                            </select>
                         </div>
-                        <div class="area is-actions">
-                            <button type="button" class="btn is-sm fb-choice-add">＋ 選択肢を追加</button>
+                    </div>
+                </div>
+                <div class="fb-field-section">
+                    <h3 class="fb-field-section-title">入力設定</h3>
+                    <div class="fb-row">
+                        <div class="fb-validation-wrap">
+                            <label>必須</label>
+                            <div class="fb-validation-controls">
+                                <div class="fb-required-wrap">
+                                    <label class="label is-choice">
+                                        <input type="checkbox" name="fields[<?= $idx ?>][required]" value="1" class="fb-required-toggle" <?= !empty($f['required']) ? 'checked' : '' ?>>
+                                        <span>必須にする</span>
+                                    </label>
+                                </div>
+                                <div class="fb-regex-wrap" <?= empty($f['required']) ? 'style="display:none"' : '' ?>>
+                                    <label>入力チェック</label>
+                                    <div class="fb-regex-list">
+                                        <?php
+                                        if ($rp === '') {
+                                            $selVal = '';
+                                            $customVal = '';
+                                        } elseif ($rp !== '' && array_key_exists($rp, $regexPresetChoices) && $rp !== $FB_REGEX_CUSTOM) {
+                                            $selVal = $rp;
+                                            $customVal = '';
+                                        } else {
+                                            $selVal = $FB_REGEX_CUSTOM;
+                                            $customVal = $rp;
+                                        }
+                                        $showCustom = ($selVal === $FB_REGEX_CUSTOM);
+                                        $hiddenVal = $showCustom ? $customVal : $selVal;
+                                        ?>
+                                        <div class="fb-regex-row">
+                                            <select class="fb-regex-kind" aria-label="入力チェックの種類">
+                                                <?php foreach ($regexPresetChoices as $patVal => $patLabel): ?>
+                                                    <option value="<?= e($patVal) ?>" <?= $selVal === $patVal ? 'selected' : '' ?>><?= e($patLabel) ?></option>
+                                                <?php endforeach; ?>
+                                            </select>
+                                            <div class="fb-regex-custom-wrap"<?= $showCustom ? '' : ' style="display:none"' ?>>
+                                                <input type="text" class="fb-regex-custom" value="<?= e($customVal) ?>" placeholder="正規表現" spellcheck="false" autocomplete="off">
+                                            </div>
+                                            <input type="hidden" class="fb-regex-value" value="<?= e($hiddenVal) ?>" spellcheck="false">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <textarea name="fields[<?= $idx ?>][options]" class="fb-options-source" rows="4" hidden><?= e($f['options'] ?? '') ?></textarea>
+                        <div class="fb-max-length-wrap" <?= in_array($f['type'], ['radio', 'checkbox', 'select'], true) ? 'style="display:none"' : '' ?>>
+                            <label>最大文字数（任意）</label>
+                            <input type="number" min="1" name="fields[<?= $idx ?>][max_length]" value="<?= e($f['max_length']) ?>">
+                        </div>
+                    </div>
+                    <div class="box is-field fb-options" <?= in_array($f['type'], ['radio','checkbox','select'], true) ? '' : 'style="display:none"' ?>>
+                        <label class="label">選択肢（1行に1つ）</label>
+                        <?php $choiceOptions = \Models\FormField::parseOptions($f['options'] ?? ''); ?>
+                        <div class="fb-choiceEditor" data-choice-editor>
+                            <div class="fb-choiceList">
+                                <?php foreach ($choiceOptions as $choiceOpt): ?>
+                                    <div class="fb-row fb-choiceItem" data-choice-item>
+                                        <div>
+                                            <input type="text" class="fb-choice-input" value="<?= e($choiceOpt) ?>" placeholder="選択肢">
+                                        </div>
+                                        <div class="fb-actions">
+                                            <button type="button" class="btn is-sm fb-choice-up">↑</button>
+                                            <button type="button" class="btn is-sm fb-choice-down">↓</button>
+                                            <button type="button" class="btn is-sm is-danger fb-choice-remove">削除</button>
+                                        </div>
+                                    </div>
+                                <?php endforeach; ?>
+                            </div>
+                            <div class="area is-actions">
+                                <button type="button" class="btn is-sm fb-choice-add">＋ 選択肢を追加</button>
+                            </div>
+                            <textarea name="fields[<?= $idx ?>][options]" class="fb-options-source" rows="4" hidden><?= e($f['options'] ?? '') ?></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="fb-field-section">
+                    <h3 class="fb-field-section-title">表示設定</h3>
+                    <div class="fb-row">
+                        <div class="fb-placeholder-wrap" <?= ($isTextPair || in_array($f['type'], ['radio', 'checkbox', 'select'], true)) ? 'style="display:none"' : '' ?>>
+                            <label>プレースホルダ（任意）</label>
+                            <input type="text" name="fields[<?= $idx ?>][placeholder]" value="<?= e($f['placeholder']) ?>">
+                        </div>
+                    </div>
+                    <div class="fb-row fb-text-pair-settings" <?= $isTextPair ? '' : 'style="display:none"' ?>>
+                        <div>
+                            <label>1つ目の入力欄の表示名</label>
+                            <input type="text" name="fields[<?= $idx ?>][pair_label_left]" value="<?= e($f['pair_label_left'] ?? '') ?>">
+                        </div>
+                        <div>
+                            <label>2つ目の入力欄の表示名</label>
+                            <input type="text" name="fields[<?= $idx ?>][pair_label_right]" value="<?= e($f['pair_label_right'] ?? '') ?>">
+                        </div>
+                    </div>
+                    <div class="fb-row fb-text-pair-placeholders" <?= $isTextPair ? '' : 'style="display:none"' ?>>
+                        <div>
+                            <label>1つ目のプレースホルダ（任意）</label>
+                            <input type="text" name="fields[<?= $idx ?>][pair_placeholder_left]" value="<?= e($f['pair_placeholder_left'] ?? '') ?>">
+                        </div>
+                        <div>
+                            <label>2つ目のプレースホルダ（任意）</label>
+                            <input type="text" name="fields[<?= $idx ?>][pair_placeholder_right]" value="<?= e($f['pair_placeholder_right'] ?? '') ?>">
+                        </div>
+                    </div>
+                    <div class="box is-field">
+                        <label class="label">ヘルプテキスト（任意）</label>
+                        <input type="text" name="fields[<?= $idx ?>][help_text]" value="<?= e($f['help_text']) ?>">
                     </div>
                 </div>
                 <input type="hidden" name="fields[<?= $idx ?>][_remove]" value="0" class="fb-remove-flag">
@@ -355,73 +366,84 @@ $regexPresetChoices = [
             </div>
         </div>
         <div class="fb-field-body">
-        <div class="fb-row">
-            <div><label>ラベル</label><input type="text" data-name="label" class="fb-input-label"></div>
-            <div class="fb-field-key-col">
-                <label>フィールドキー</label>
-                <div class="fb-field-key-row">
-                    <input type="text" data-name="field_key" class="fb-field-key-input is-locked" readonly spellcheck="false">
-                    <button type="button" class="btn is-icon fb-field-key-lock" aria-label="キーを編集" title="編集する" aria-pressed="true">
-                        <svg class="fb-icon-lock-closed" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
-                        <svg class="fb-icon-lock-open" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:none" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M8 11V7a4 4 0 118 0m-4 8v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2z"/></svg>
-                    </button>
+        <div class="fb-field-section">
+            <h3 class="fb-field-section-title">基本設定</h3>
+            <div class="fb-row">
+                <div><label>ラベル</label><input type="text" data-name="label" class="fb-input-label"></div>
+                <div class="fb-field-key-col">
+                    <label>フィールドキー</label>
+                    <div class="fb-field-key-row">
+                        <input type="text" data-name="field_key" class="fb-field-key-input is-locked" readonly spellcheck="false">
+                        <button type="button" class="btn is-icon fb-field-key-lock" aria-label="キーを編集" title="編集する" aria-pressed="true">
+                            <svg class="fb-icon-lock-closed" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+                            <svg class="fb-icon-lock-open" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:none" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M8 11V7a4 4 0 118 0m-4 8v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2z"/></svg>
+                        </button>
+                    </div>
+                </div>
+                <div>
+                    <label>型</label>
+                    <select data-name="type" class="fb-type">
+                        <?php foreach (\Models\FormField::TYPE_LABELS() as $tVal => $tLabel): ?>
+                            <option value="<?= e($tVal) ?>"><?= e($tLabel) ?></option>
+                        <?php endforeach; ?>
+                    </select>
                 </div>
             </div>
-            <div>
-                <label>型</label>
-                <select data-name="type" class="fb-type">
-                    <?php foreach (\Models\FormField::TYPE_LABELS() as $tVal => $tLabel): ?>
-                        <option value="<?= e($tVal) ?>"><?= e($tLabel) ?></option>
-                    <?php endforeach; ?>
-                </select>
-            </div>
-            <div class="fb-validation-wrap">
-                <label>必須</label>
-                <div class="fb-validation-controls">
-                    <div class="fb-required-wrap">
-                        <label class="label is-choice"><input type="checkbox" data-name="required" value="1" class="fb-required-toggle"><span>必須にする</span></label>
-                    </div>
-                    <div class="fb-regex-wrap" style="display:none">
-                        <label>入力チェック</label>
-                        <div class="fb-regex-list">
-                            <div class="fb-regex-row">
-                                <select class="fb-regex-kind" aria-label="入力チェックの種類">
-                                    <?php foreach ($regexPresetChoices as $patVal => $patLabel): ?>
-                                        <option value="<?= e($patVal) ?>"><?= e($patLabel) ?></option>
-                                    <?php endforeach; ?>
-                                </select>
-                                <div class="fb-regex-custom-wrap" style="display:none">
-                                    <input type="text" class="fb-regex-custom" placeholder="正規表現" spellcheck="false" autocomplete="off">
+        </div>
+        <div class="fb-field-section">
+            <h3 class="fb-field-section-title">入力設定</h3>
+            <div class="fb-row">
+                <div class="fb-validation-wrap">
+                    <label>必須</label>
+                    <div class="fb-validation-controls">
+                        <div class="fb-required-wrap">
+                            <label class="label is-choice"><input type="checkbox" data-name="required" value="1" class="fb-required-toggle"><span>必須にする</span></label>
+                        </div>
+                        <div class="fb-regex-wrap" style="display:none">
+                            <label>入力チェック</label>
+                            <div class="fb-regex-list">
+                                <div class="fb-regex-row">
+                                    <select class="fb-regex-kind" aria-label="入力チェックの種類">
+                                        <?php foreach ($regexPresetChoices as $patVal => $patLabel): ?>
+                                            <option value="<?= e($patVal) ?>"><?= e($patLabel) ?></option>
+                                        <?php endforeach; ?>
+                                    </select>
+                                    <div class="fb-regex-custom-wrap" style="display:none">
+                                        <input type="text" class="fb-regex-custom" placeholder="正規表現" spellcheck="false" autocomplete="off">
+                                    </div>
+                                    <input type="hidden" class="fb-regex-value" value="">
                                 </div>
-                                <input type="hidden" class="fb-regex-value" value="">
                             </div>
                         </div>
                     </div>
                 </div>
+                <div class="fb-max-length-wrap"><label>最大文字数（任意）</label><input type="number" min="1" data-name="max_length"></div>
             </div>
-        </div>
-        <div class="fb-row">
-            <div class="fb-max-length-wrap"><label>最大文字数（任意）</label><input type="number" min="1" data-name="max_length"></div>
-            <div class="fb-placeholder-wrap"><label>プレースホルダ（任意）</label><input type="text" data-name="placeholder"></div>
-        </div>
-        <div class="fb-row fb-text-pair-settings" style="display:none">
-            <div><label>1つ目の入力欄の表示名</label><input type="text" data-name="pair_label_left"></div>
-            <div><label>2つ目の入力欄の表示名</label><input type="text" data-name="pair_label_right"></div>
-        </div>
-        <div class="fb-row fb-text-pair-placeholders" style="display:none">
-            <div><label>1つ目のプレースホルダ（任意）</label><input type="text" data-name="pair_placeholder_left"></div>
-            <div><label>2つ目のプレースホルダ（任意）</label><input type="text" data-name="pair_placeholder_right"></div>
-        </div>
-        <div class="box is-field"><label class="label">ヘルプテキスト（任意）</label><input type="text" data-name="help_text"></div>
-        <div class="box is-field fb-options" style="display:none">
-            <label>選択肢（1行に1つ）</label>
-            <div class="fb-choiceEditor" data-choice-editor>
-                <div class="fb-choiceList"></div>
-                <div class="area is-actions">
-                    <button type="button" class="btn is-sm fb-choice-add">＋ 選択肢を追加</button>
+            <div class="box is-field fb-options" style="display:none">
+                <label>選択肢（1行に1つ）</label>
+                <div class="fb-choiceEditor" data-choice-editor>
+                    <div class="fb-choiceList"></div>
+                    <div class="area is-actions">
+                        <button type="button" class="btn is-sm fb-choice-add">＋ 選択肢を追加</button>
+                    </div>
+                    <textarea data-name="options" class="fb-options-source" rows="4" hidden></textarea>
                 </div>
-                <textarea data-name="options" class="fb-options-source" rows="4" hidden></textarea>
             </div>
+        </div>
+        <div class="fb-field-section">
+            <h3 class="fb-field-section-title">表示設定</h3>
+            <div class="fb-row">
+                <div class="fb-placeholder-wrap"><label>プレースホルダ（任意）</label><input type="text" data-name="placeholder"></div>
+            </div>
+            <div class="fb-row fb-text-pair-settings" style="display:none">
+                <div><label>1つ目の入力欄の表示名</label><input type="text" data-name="pair_label_left"></div>
+                <div><label>2つ目の入力欄の表示名</label><input type="text" data-name="pair_label_right"></div>
+            </div>
+            <div class="fb-row fb-text-pair-placeholders" style="display:none">
+                <div><label>1つ目のプレースホルダ（任意）</label><input type="text" data-name="pair_placeholder_left"></div>
+                <div><label>2つ目のプレースホルダ（任意）</label><input type="text" data-name="pair_placeholder_right"></div>
+            </div>
+            <div class="box is-field"><label class="label">ヘルプテキスト（任意）</label><input type="text" data-name="help_text"></div>
         </div>
         <input type="hidden" data-name="_remove" value="0" class="fb-remove-flag">
         </div>

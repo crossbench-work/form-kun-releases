@@ -842,6 +842,17 @@ form.is-inline {
     padding: 16px;
   }
 
+  .fb-field-section + .fb-field-section {
+    margin-top: 20px;
+  }
+
+  .fb-field-section-title {
+    margin: 0 0 10px;
+    font-size: 13px;
+    font-weight: 700;
+    color: #334155;
+  }
+
   .fb-field.is-collapsed .fb-field-body {
     display: none;
   }
@@ -850,6 +861,10 @@ form.is-inline {
     display: flex;
     gap: 12px;
     flex-wrap: wrap;
+
+    label {
+      font-size: 12px;
+    }
 
     > div {
       flex: 1;
