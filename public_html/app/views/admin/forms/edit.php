@@ -256,8 +256,8 @@ $regexPresetChoices = [
                         </div>
                     </div>
                     <div class="box is-field">
-                        <label class="label">ヘルプテキスト（任意）</label>
-                        <input type="text" name="fields[<?= $idx ?>][help_text]" value="<?= e($f['help_text']) ?>">
+                        <label class="label">備考</label>
+                        <textarea name="fields[<?= $idx ?>][help_text]" rows="3"><?= e($f['help_text']) ?></textarea>
                     </div>
                 </div>
                 <input type="hidden" name="fields[<?= $idx ?>][_remove]" value="0" class="fb-remove-flag">
@@ -443,7 +443,7 @@ $regexPresetChoices = [
                 <div><label>1つ目のプレースホルダ（任意）</label><input type="text" data-name="pair_placeholder_left"></div>
                 <div><label>2つ目のプレースホルダ（任意）</label><input type="text" data-name="pair_placeholder_right"></div>
             </div>
-            <div class="box is-field"><label class="label">ヘルプテキスト（任意）</label><input type="text" data-name="help_text"></div>
+            <div class="box is-field"><label class="label">備考</label><textarea data-name="help_text" rows="3"></textarea></div>
         </div>
         <input type="hidden" data-name="_remove" value="0" class="fb-remove-flag">
         </div>
