@@ -175,12 +175,6 @@ class FormController
         // メール送信
         $this->sendMails($form, $fields, $pending['values'], $pending['file_metas'] ?? []);
 
-        // リダイレクト or サンクス
-        if (!empty($form['redirect_url'])) {
-            header('Location: ' . $form['redirect_url']);
-            exit;
-        }
-
         $this->view->render('front/form/thanks', [
             'title' => '送信完了',
             'form'  => $form,

@@ -414,10 +414,14 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
         <?php $renderDescriptionEditor('thanks_blocks', $thanksBlocks, 'simple'); ?>
     </section>
     <section class="m-panel01">
-        <h2>表示設定</h2>
+        <h2>ボタン設定</h2>
         <div class="box is-field">
-            <label class="label">リダイレクトURL（任意）</label>
-            <input type="text" name="redirect_url" value="<?= e($form['redirect_url']) ?>" placeholder="https://example.com/thanks">
+            <label class="label" for="thanks_button_text">ボタンテキスト</label>
+            <input type="text" id="thanks_button_text" name="thanks_button_text" value="<?= e($form['thanks_button_text'] ?? 'トップへ戻る') ?>">
+        </div>
+        <div class="box is-field">
+            <label class="label" for="thanks_button_url">ボタンURL</label>
+            <input type="text" id="thanks_button_url" name="thanks_button_url" value="<?= e($form['thanks_button_url'] ?? '/') ?>" placeholder="/ または https://example.com/">
         </div>
     </section>
         </div>

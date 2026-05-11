@@ -33,11 +33,11 @@ class Form
         $now = date('Y-m-d H:i:s');
         Database::execute(
             'INSERT INTO forms (
-                slug, title, description, show_title, show_description, confirm_button_text, submit_button_text, back_button_text, confirm_message, thanks_message, redirect_url,
+                slug, title, description, show_title, show_description, confirm_button_text, submit_button_text, back_button_text, confirm_message, thanks_message, thanks_button_text, thanks_button_url,
                 admin_emails, mail_subject_admin, mail_template_admin,
                 reply_enabled, reply_from_field_key, reply_subject, reply_template,
                 captcha_enabled, status, created_at, updated_at
-            ) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',
+            ) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',
             [
                 $data['slug'],
                 $data['title'],
@@ -49,7 +49,8 @@ class Form
                 $data['back_button_text'] ?? null,
                 $data['confirm_message'] ?? null,
                 $data['thanks_message'] ?? null,
-                $data['redirect_url'] ?? null,
+                $data['thanks_button_text'] ?? null,
+                $data['thanks_button_url'] ?? null,
                 $data['admin_emails'] ?? null,
                 $data['mail_subject_admin'] ?? null,
                 $data['mail_template_admin'] ?? null,
@@ -71,7 +72,7 @@ class Form
         $now = date('Y-m-d H:i:s');
         Database::execute(
             'UPDATE forms SET
-                slug = ?, title = ?, description = ?, show_title = ?, show_description = ?, confirm_button_text = ?, submit_button_text = ?, back_button_text = ?, confirm_message = ?, thanks_message = ?, redirect_url = ?,
+                slug = ?, title = ?, description = ?, show_title = ?, show_description = ?, confirm_button_text = ?, submit_button_text = ?, back_button_text = ?, confirm_message = ?, thanks_message = ?, thanks_button_text = ?, thanks_button_url = ?,
                 admin_emails = ?, mail_subject_admin = ?, mail_template_admin = ?,
                 reply_enabled = ?, reply_from_field_key = ?, reply_subject = ?, reply_template = ?,
                 captcha_enabled = ?, status = ?, updated_at = ?
@@ -87,7 +88,8 @@ class Form
                 $data['back_button_text'] ?? null,
                 $data['confirm_message'] ?? null,
                 $data['thanks_message'] ?? null,
-                $data['redirect_url'] ?? null,
+                $data['thanks_button_text'] ?? null,
+                $data['thanks_button_url'] ?? null,
                 $data['admin_emails'] ?? null,
                 $data['mail_subject_admin'] ?? null,
                 $data['mail_template_admin'] ?? null,

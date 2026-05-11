@@ -564,3 +564,43 @@ h2 {
 [data-module=c-confirmSummary01] .btn.is-primary:hover {
   background: #1e4e8c;
 }
+
+[data-module=c-thanksSummary01] .title {
+  margin-bottom: 12px;
+}
+[data-module=c-thanksSummary01] > .text {
+  margin-bottom: 16px;
+}
+[data-module=c-thanksSummary01] .area.is-actions {
+  margin-top: 24px;
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+[data-module=c-thanksSummary01] .area.is-actions.is-centered {
+  justify-content: center;
+}
+[data-module=c-thanksSummary01] .btn {
+  display: inline-block;
+  padding: 10px 20px;
+  border: 1px solid #cbd5e1;
+  background: #fff;
+  color: #111;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 15px;
+  font-family: inherit;
+  text-decoration: none;
+  line-height: 1.4;
+}
+[data-module=c-thanksSummary01] .btn:hover {
+  background: #f1f5f9;
+}
+[data-module=c-thanksSummary01] .btn.is-primary {
+  background: #2b6cb0;
+  border-color: #2b6cb0;
+  color: #fff;
+}
+[data-module=c-thanksSummary01] .btn.is-primary:hover {
+  background: #1e4e8c;
+}

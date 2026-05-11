@@ -6,7 +6,9 @@
         <?php break; ?>
     <?php endif; ?>
 <?php endforeach; ?>
-<section>
+<?php $thanksButtonText = trim((string) ($form['thanks_button_text'] ?? '')) !== '' ? (string) $form['thanks_button_text'] : 'トップへ戻る'; ?>
+<?php $thanksButtonUrl = trim((string) ($form['thanks_button_url'] ?? '')) !== '' ? (string) $form['thanks_button_url'] : '/'; ?>
+<section data-module="c-thanksSummary01">
     <h1 class="title">送信が完了しました</h1>
     <?= render_form_description_blocks_at($thanksBlocks, 0) ?>
 
@@ -15,6 +17,8 @@
     内容を確認のうえ、追ってご連絡いたします。</p>
 <?php endif; ?>
 
-<p><a class="link" href="<?= e(base_path('/')) ?>">トップへ戻る</a></p>
+<div class="area is-actions is-centered">
+    <a class="btn is-primary" href="<?= e(resolve_form_button_url($thanksButtonUrl)) ?>"><?= e($thanksButtonText) ?></a>
+</div>
 <?= render_form_description_blocks_at($thanksBlocks, 1) ?>
 </section>

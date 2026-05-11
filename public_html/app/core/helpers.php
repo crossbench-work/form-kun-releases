@@ -68,6 +68,41 @@ if (!function_exists('redirect')) {
     }
 }
 
+if (!function_exists('is_form_button_url')) {
+    /**
+     * 完了画面ボタンに指定できるURLか判定する。
+     */
+    function is_form_button_url(string $value): bool
+    {
+        $value = trim($value);
+        if ($value === '') {
+            return false;
+        }
+        if (strpos($value, '/') === 0) {
+            return strpos($value, '//') !== 0;
+        }
+        if (!filter_var($value, FILTER_VALIDATE_URL)) {
+            return false;
+        }
+        $scheme = strtolower((string) parse_url($value, PHP_URL_SCHEME));
+        return in_array($scheme, ['http', 'https'], true);
+    }
+}
+
+if (!function_exists('resolve_form_button_url')) {
+    /**
+     * 完了画面ボタン用のURLを公開URLへ解決する。
+     */
+    function resolve_form_button_url(string $value): string
+    {
+        $value = trim($value);
+        if (strpos($value, '/') === 0 && strpos($value, '//') !== 0) {
+            return base_path($value);
+        }
+        return $value;
+    }
+}
+
 if (!function_exists('flash')) {
     /**
      * フラッシュメッセージ取得 or 設定。

@@ -248,6 +248,28 @@ class SchemaPatch
                     'ALTER TABLE forms ADD COLUMN confirm_message TEXT DEFAULT NULL AFTER back_button_text'
                 );
             }
+
+            $hasThanksButtonText = Database::fetchOne(
+                'SELECT COUNT(*) AS c FROM information_schema.COLUMNS
+                 WHERE TABLE_SCHEMA = ? AND TABLE_NAME = ? AND COLUMN_NAME = ?',
+                [$schema, 'forms', 'thanks_button_text']
+            );
+            if ((int) ($hasThanksButtonText['c'] ?? 0) === 0) {
+                Database::execute(
+                    'ALTER TABLE forms ADD COLUMN thanks_button_text VARCHAR(200) DEFAULT NULL AFTER thanks_message'
+                );
+            }
+
+            $hasThanksButtonUrl = Database::fetchOne(
+                'SELECT COUNT(*) AS c FROM information_schema.COLUMNS
+                 WHERE TABLE_SCHEMA = ? AND TABLE_NAME = ? AND COLUMN_NAME = ?',
+                [$schema, 'forms', 'thanks_button_url']
+            );
+            if ((int) ($hasThanksButtonUrl['c'] ?? 0) === 0) {
+                Database::execute(
+                    'ALTER TABLE forms ADD COLUMN thanks_button_url VARCHAR(500) DEFAULT NULL AFTER thanks_button_text'
+                );
+            }
         } catch (\Throwable $e) {
             error_log('[formkun] SchemaPatch forms display flags: ' . $e->getMessage());
         }

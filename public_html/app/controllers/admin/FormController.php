@@ -213,7 +213,8 @@ class FormController
             'back_button_text'     => trim((string) ($_POST['back_button_text'] ?? '')),
             'confirm_message'      => null,
             'thanks_message'       => null,
-            'redirect_url'         => trim((string) ($_POST['redirect_url'] ?? '')),
+            'thanks_button_text'   => trim((string) ($_POST['thanks_button_text'] ?? '')),
+            'thanks_button_url'    => trim((string) ($_POST['thanks_button_url'] ?? '')),
             'admin_emails'         => trim((string) ($_POST['admin_emails'] ?? '')),
             'mail_subject_admin'   => trim((string) ($_POST['mail_subject_admin'] ?? '')),
             'mail_template_admin'  => (string) ($_POST['mail_template_admin'] ?? ''),
@@ -232,6 +233,12 @@ class FormController
         }
         if ($form['back_button_text'] === '') {
             $form['back_button_text'] = '入力に戻る';
+        }
+        if ($form['thanks_button_text'] === '') {
+            $form['thanks_button_text'] = 'トップへ戻る';
+        }
+        if ($form['thanks_button_url'] === '') {
+            $form['thanks_button_url'] = '/';
         }
 
         $descriptionBlocks = self::collectContentBlocks('description_blocks', 'description');
@@ -332,6 +339,12 @@ class FormController
         if (mb_strlen($form['back_button_text']) > 200) {
             $errors[] = '確認画面の戻るボタンテキストは200文字以内にしてください。';
         }
+        if (mb_strlen($form['thanks_button_text']) > 200) {
+            $errors[] = '完了画面のボタンテキストは200文字以内にしてください。';
+        }
+        if (mb_strlen($form['thanks_button_url']) > 500) {
+            $errors[] = '完了画面のボタンURLは500文字以内にしてください。';
+        }
         if ($form['admin_emails'] !== '') {
             foreach (preg_split('/[,;]+/', $form['admin_emails']) as $em) {
                 $em = trim($em);
@@ -341,8 +354,8 @@ class FormController
                 }
             }
         }
-        if ($form['redirect_url'] !== '' && !filter_var($form['redirect_url'], FILTER_VALIDATE_URL)) {
-            $errors[] = 'リダイレクトURLが正しくありません。';
+        if (!is_form_button_url($form['thanks_button_url'])) {
+            $errors[] = '完了画面のボタンURLは http:// / https:// で始まるURL、または / から始まるパスを指定してください。';
         }
 
         if (count($fields) === 0) {
@@ -428,7 +441,8 @@ class FormController
             'back_button_text' => '入力に戻る',
             'confirm_message' => '',
             'thanks_message' => '',
-            'redirect_url' => '',
+            'thanks_button_text' => 'トップへ戻る',
+            'thanks_button_url' => '/',
             'admin_emails' => '',
             'mail_subject_admin' => '',
             'mail_template_admin' => "フォーム「{{__form_title__}}」に新しい送信がありました。\n受信日時: {{__submitted_at__}}\nIP: {{__ip__}}\n\n{{__all__}}",
@@ -456,6 +470,12 @@ class FormController
         $form['back_button_text'] = trim((string) ($form['back_button_text'] ?? '')) !== ''
             ? (string) $form['back_button_text']
             : '入力に戻る';
+        $form['thanks_button_text'] = trim((string) ($form['thanks_button_text'] ?? '')) !== ''
+            ? (string) $form['thanks_button_text']
+            : 'トップへ戻る';
+        $form['thanks_button_url'] = trim((string) ($form['thanks_button_url'] ?? '')) !== ''
+            ? (string) $form['thanks_button_url']
+            : '/';
         $form['description_blocks'] = self::normalizeDescriptionBlocks(
             decode_form_description_blocks($form['description'] ?? '', !empty($form['show_description'])),
             false,
@@ -561,7 +581,6 @@ class FormController
         return array_merge($form, [
             'slug' => trim((string) ($form['slug'] ?? '')) !== '' ? (string) $form['slug'] : '__preview__',
             'captcha_enabled' => 0,
-            'redirect_url' => '',
         ]);
     }
 

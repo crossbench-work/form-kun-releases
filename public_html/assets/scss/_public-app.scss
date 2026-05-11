@@ -495,3 +495,53 @@ h2 {
     }
   }
 }
+
+// --- 完了画面 ---
+[data-module="c-thanksSummary01"] {
+  .title {
+    margin-bottom: 12px;
+  }
+
+  > .text {
+    margin-bottom: 16px;
+  }
+
+  .area.is-actions {
+    margin-top: 24px;
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+
+    &.is-centered {
+      justify-content: center;
+    }
+  }
+
+  .btn {
+    display: inline-block;
+    padding: 10px 20px;
+    border: 1px solid #cbd5e1;
+    background: #fff;
+    color: #111;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 15px;
+    font-family: inherit;
+    text-decoration: none;
+    line-height: 1.4;
+
+    &:hover {
+      background: #f1f5f9;
+    }
+
+    &.is-primary {
+      background: #2b6cb0;
+      border-color: #2b6cb0;
+      color: #fff;
+
+      &:hover {
+        background: #1e4e8c;
+      }
+    }
+  }
+}
