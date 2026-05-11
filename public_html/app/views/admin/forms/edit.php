@@ -319,14 +319,22 @@ $slugPreviewValue = trim((string) ($form['slug'] ?? '')) !== '' ? (string) $form
 
         <div id="tab-panel-confirm" class="box is-tabPanel" role="tabpanel" aria-labelledby="tab-btn-confirm" hidden>
     <section class="m-panel01">
-        <h2>入力内容のご確認</h2>
-        <p class="text is-help">入力画面で入力された内容を確認してから送信する画面です。</p>
+        <h2>確認画面</h2>
+    </section>
+    <section class="m-panel01">
+        <h2>表示設定</h2>
+        <div class="box is-field">
+            <p class="text is-help">入力画面で入力された内容を確認してから送信する画面です。</p>
+        </div>
     </section>
         </div>
 
         <div id="tab-panel-thanks" class="box is-tabPanel" role="tabpanel" aria-labelledby="tab-btn-thanks" hidden>
     <section class="m-panel01">
-        <h2>送信完了画面</h2>
+        <h2>完了画面</h2>
+    </section>
+    <section class="m-panel01">
+        <h2>表示設定</h2>
         <div class="box is-field">
             <label class="label">サンクスメッセージ（リダイレクトURL未指定時に表示）</label>
             <textarea name="thanks_message" rows="3"><?= e($form['thanks_message']) ?></textarea>
@@ -350,7 +358,7 @@ $slugPreviewValue = trim((string) ($form['slug'] ?? '')) !== '' ? (string) $form
             <input type="text" name="mail_subject_admin" value="<?= e($form['mail_subject_admin']) ?>" placeholder="[{{__form_title__}}] 新規送信">
         </div>
         <div class="box is-field">
-            <label class="label">本文テンプレート</label>
+            <label class="label">表示設定</label>
             <textarea name="mail_template_admin" rows="6"><?= e($form['mail_template_admin']) ?></textarea>
             <p class="text is-help">使用可能な変数: <code>{{field_key}}</code> / <code>{{__all__}}</code> / <code>{{__form_title__}}</code> / <code>{{__submitted_at__}}</code> / <code>{{__ip__}}</code></p>
         </div>
@@ -373,7 +381,7 @@ $slugPreviewValue = trim((string) ($form['slug'] ?? '')) !== '' ? (string) $form
             <input type="text" name="reply_subject" value="<?= e($form['reply_subject']) ?>">
         </div>
         <div class="box is-field">
-            <label class="label">本文テンプレート</label>
+            <label class="label">表示設定</label>
             <textarea name="reply_template" rows="6"><?= e($form['reply_template']) ?></textarea>
         </div>
     </section>
