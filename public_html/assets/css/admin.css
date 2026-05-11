@@ -784,6 +784,9 @@ form.is-inline {
 .m-panel01 .fb-description-block-title {
   color: #334155;
 }
+.m-panel01 .fb-description-remove {
+  flex-shrink: 0;
+}
 .m-panel01 .fb-description-block-controls {
   align-items: center;
   margin-bottom: 12px;

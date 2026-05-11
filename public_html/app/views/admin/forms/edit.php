@@ -26,7 +26,14 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                     <input type="hidden" name="<?= e($namePrefix) ?>[<?= $i ?>][id]" value="<?= e($block['id'] ?? ($namePrefix . '-' . $i)) ?>" data-name="id">
                     <div class="fb-description-block-header">
                         <strong class="fb-description-block-title">説明文</strong>
-                        <button type="button" class="btn is-sm is-danger fb-description-remove">削除</button>
+                        <button type="button" class="btn is-sm is-icon is-danger fb-description-remove" aria-label="削除" title="削除">
+                            <svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M3 6h18"/>
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M8 6V4h8v2"/>
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M19 6l-1 14H6L5 6"/>
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M10 11v6M14 11v6"/>
+                            </svg>
+                        </button>
                     </div>
                     <div class="fb-row fb-description-block-controls">
                         <div class="fb-description-position-wrap">
@@ -351,12 +358,6 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
         <h2 id="confirm-screen-title-preview">表示設定</h2>
         <?php $renderDescriptionEditor('confirm_blocks', $confirmBlocks, 'simple'); ?>
     </section>
-    <section class="m-panel01">
-        <h2>表示設定</h2>
-        <div class="box is-field">
-            <p class="text is-help">入力画面で入力された内容を確認してから送信する画面です。</p>
-        </div>
-    </section>
         </div>
 
         <div id="tab-panel-thanks" class="box is-tabPanel" role="tabpanel" aria-labelledby="tab-btn-thanks" hidden>
@@ -427,7 +428,14 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
         <input type="hidden" data-name="id" value="">
         <div class="fb-description-block-header">
             <strong class="fb-description-block-title">説明文</strong>
-            <button type="button" class="btn is-sm is-danger fb-description-remove">削除</button>
+            <button type="button" class="btn is-sm is-icon is-danger fb-description-remove" aria-label="削除" title="削除">
+                <svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M3 6h18"/>
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M8 6V4h8v2"/>
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M19 6l-1 14H6L5 6"/>
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M10 11v6M14 11v6"/>
+                </svg>
+            </button>
         </div>
         <div class="fb-row fb-description-block-controls">
             <div class="fb-description-position-wrap">

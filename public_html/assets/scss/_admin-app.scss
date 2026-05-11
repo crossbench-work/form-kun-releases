@@ -744,6 +744,10 @@ form.is-inline {
     color: #334155;
   }
 
+  .fb-description-remove {
+    flex-shrink: 0;
+  }
+
   .fb-description-block-controls {
     align-items: center;
     margin-bottom: 12px;
