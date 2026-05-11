@@ -75,23 +75,17 @@ $descriptionBlocks = $form['description_blocks'] ?? [['id' => 'description-0', '
     <section class="m-panel01">
         <h2 id="input-screen-title-preview">表示設定</h2>
         <div class="box is-field">
-            <div class="fb-description-toolbar">
-                <div class="area is-actions">
-                    <button type="button" class="btn is-sm" id="fb-description-add">説明文を追加する</button>
-                </div>
-            </div>
             <div id="fb-description-blocks" class="fb-description-blocks">
                 <?php foreach ($descriptionBlocks as $i => $block): ?>
                     <div class="fb-description-block" data-index="<?= $i ?>">
                         <input type="hidden" name="description_blocks[<?= $i ?>][id]" value="<?= e($block['id'] ?? ('description-' . $i)) ?>" data-name="id">
                         <div class="fb-description-block-header">
-                            <strong class="fb-description-block-title">説明文 <?= $i + 1 ?></strong>
+                            <strong class="fb-description-block-title">説明文</strong>
                             <button type="button" class="btn is-sm is-danger fb-description-remove">削除</button>
                         </div>
                         <div class="fb-row fb-description-block-controls">
-                            <div>
-                                <label>挿入位置</label>
-                                <select name="description_blocks[<?= $i ?>][position]" class="fb-description-position" data-name="position" data-value="<?= e((string) ($block['position'] ?? 0)) ?>"></select>
+                            <div class="fb-description-position-wrap">
+                                <select name="description_blocks[<?= $i ?>][position]" class="fb-description-position" data-name="position" data-value="<?= e((string) ($block['position'] ?? 0)) ?>" aria-label="説明文"></select>
                             </div>
                             <div class="fb-description-visible-wrap">
                                 <label class="label is-choice fb-basic-display-toggle">
@@ -104,6 +98,11 @@ $descriptionBlocks = $form['description_blocks'] ?? [['id' => 'description-0', '
                         <p class="text is-help">HTML を直接入力できます。一部のタグと属性だけが保存されます。</p>
                     </div>
                 <?php endforeach; ?>
+            </div>
+            <div class="fb-description-toolbar">
+                <div class="area is-actions">
+                    <button type="button" class="btn is-sm" id="fb-description-add">説明文を追加する</button>
+                </div>
             </div>
         </div>
     </section>
@@ -422,13 +421,12 @@ $descriptionBlocks = $form['description_blocks'] ?? [['id' => 'description-0', '
     <div class="fb-description-block">
         <input type="hidden" data-name="id" value="">
         <div class="fb-description-block-header">
-            <strong class="fb-description-block-title">説明文 1</strong>
+            <strong class="fb-description-block-title">説明文</strong>
             <button type="button" class="btn is-sm is-danger fb-description-remove">削除</button>
         </div>
         <div class="fb-row fb-description-block-controls">
-            <div>
-                <label>挿入位置</label>
-                <select class="fb-description-position" data-name="position" data-value="0"></select>
+            <div class="fb-description-position-wrap">
+                <select class="fb-description-position" data-name="position" data-value="0" aria-label="説明文"></select>
             </div>
             <div class="fb-description-visible-wrap">
                 <label class="label is-choice fb-basic-display-toggle">

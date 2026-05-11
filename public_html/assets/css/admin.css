@@ -759,6 +759,7 @@ form.is-inline {
 .m-panel01 .fb-description-toolbar {
   display: flex;
   justify-content: flex-end;
+  margin-top: 16px;
   margin-bottom: 16px;
 }
 .m-panel01 .fb-description-blocks {
@@ -784,13 +785,17 @@ form.is-inline {
   color: #334155;
 }
 .m-panel01 .fb-description-block-controls {
+  align-items: center;
   margin-bottom: 12px;
+}
+.m-panel01 .fb-description-position-wrap {
+  flex: 1 1 200px;
 }
 .m-panel01 .fb-description-visible-wrap {
   flex: 0 0 auto;
   min-width: auto;
   display: flex;
-  align-items: flex-end;
+  align-items: center;
 }
 
 .m-badge01 {

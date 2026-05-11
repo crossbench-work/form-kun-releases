@@ -714,6 +714,7 @@ form.is-inline {
   .fb-description-toolbar {
     display: flex;
     justify-content: flex-end;
+    margin-top: 16px;
     margin-bottom: 16px;
   }
 
@@ -744,14 +745,19 @@ form.is-inline {
   }
 
   .fb-description-block-controls {
+    align-items: center;
     margin-bottom: 12px;
+  }
+
+  .fb-description-position-wrap {
+    flex: 1 1 200px;
   }
 
   .fb-description-visible-wrap {
     flex: 0 0 auto;
     min-width: auto;
     display: flex;
-    align-items: flex-end;
+    align-items: center;
   }
 }
 

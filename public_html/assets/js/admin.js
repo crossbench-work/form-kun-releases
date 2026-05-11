@@ -132,8 +132,6 @@
                 if (!name) return;
                 el.setAttribute('name', 'description_blocks[' + i + '][' + name + ']');
             });
-            var title = block.querySelector('.fb-description-block-title');
-            if (title) title.textContent = '説明文 ' + (i + 1);
         });
     }
 
