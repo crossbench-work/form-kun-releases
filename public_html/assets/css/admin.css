@@ -197,9 +197,19 @@ textarea { min-height: 100px; resize: vertical; }
     margin-bottom: 12px;
     overflow: hidden;
 }
-.fb-field.fb-field--dragging {
-    opacity: 0.55;
-    box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+/* jQuery UI Sortable（フォームビルダー） */
+.fb-fields .fb-sortable-placeholder {
+    visibility: visible !important;
+    border: 2px dashed #93c5fd !important;
+    background: #eff6ff !important;
+    min-height: 56px !important;
+    margin-bottom: 12px;
+    border-radius: 6px;
+    box-sizing: border-box;
+}
+.fb-fields .ui-sortable-helper {
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.2);
+    border-radius: 6px;
 }
 .fb-field-header {
     display: flex;

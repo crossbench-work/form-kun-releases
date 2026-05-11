@@ -18,6 +18,13 @@
             panels.forEach(function (p) {
                 p.hidden = p.id !== panelId;
             });
+            if (panelId === 'tab-panel-fields') {
+                window.setTimeout(function () {
+                    if (typeof window.formkunInitFbSortable === 'function') {
+                        window.formkunInitFbSortable();
+                    }
+                }, 20);
+            }
         }
 
         tabs.forEach(function (tab) {
@@ -104,57 +111,42 @@
         });
     }
 
-    function getDragAfterElement(container, y) {
-        var els = [].slice.call(container.querySelectorAll('.fb-field:not(.fb-field--dragging)'));
-        return els.reduce(function (closest, child) {
-            var box = child.getBoundingClientRect();
-            var offset = y - box.top - box.height / 2;
-            if (offset < 0 && offset > closest.offset) {
-                return { offset: offset, element: child };
-            }
-            return closest;
-        }, { offset: Number.NEGATIVE_INFINITY, element: undefined }).element;
+    function refreshFbSortable() {
+        if (!list || list.dataset.fbSortable !== '1' || typeof jQuery === 'undefined') return;
+        try {
+            jQuery(list).sortable('refresh');
+        } catch (e1) {}
     }
 
-    var draggingField = null;
-
-    list.addEventListener('dragstart', function (e) {
-        var li = e.target.closest('.fb-field');
-        if (!li || !list.contains(li)) return;
-        if (!e.target.closest('.fb-drag-handle')) {
-            e.preventDefault();
+    function initFbSortable() {
+        if (!list || typeof jQuery === 'undefined' || !jQuery.fn.sortable) return;
+        if (list.dataset.fbSortable === '1') {
+            refreshFbSortable();
             return;
         }
-        draggingField = li;
-        li.classList.add('fb-field--dragging');
-        try {
-            e.dataTransfer.setData('text/plain', 'move');
-        } catch (err1) {}
-        e.dataTransfer.effectAllowed = 'move';
-    });
+        jQuery(list).sortable({
+            handle: '.fb-drag-handle',
+            axis: 'y',
+            items: '> li.fb-field',
+            placeholder: 'fb-sortable-placeholder',
+            tolerance: 'pointer',
+            cursor: 'grabbing',
+            opacity: 0.88,
+            scroll: true,
+            scrollSensitivity: 48,
+            scrollSpeed: 28,
+            forcePlaceholderSize: true,
+            delay: 0,
+            distance: 4,
+            zIndex: 9999,
+            update: function () {
+                reindex();
+            }
+        });
+        list.dataset.fbSortable = '1';
+    }
 
-    list.addEventListener('dragend', function (e) {
-        var li = e.target.closest('.fb-field');
-        if (li) li.classList.remove('fb-field--dragging');
-        draggingField = null;
-        reindex();
-    });
-
-    list.addEventListener('dragover', function (e) {
-        e.preventDefault();
-        e.dataTransfer.dropEffect = 'move';
-        if (!draggingField) return;
-        var afterElement = getDragAfterElement(list, e.clientY);
-        if (afterElement == null || afterElement === undefined) {
-            list.appendChild(draggingField);
-        } else {
-            list.insertBefore(draggingField, afterElement);
-        }
-    });
-
-    list.addEventListener('drop', function (e) {
-        e.preventDefault();
-    });
+    window.formkunInitFbSortable = initFbSortable;
 
     function reindex() {
         var items = list.querySelectorAll('.fb-field');
@@ -273,11 +265,19 @@
         var rm = li.querySelector('.fb-remove');
         if (up) up.addEventListener('click', function () {
             var prev = li.previousElementSibling;
-            if (prev) { list.insertBefore(li, prev); reindex(); }
+            if (prev) {
+                list.insertBefore(li, prev);
+                reindex();
+                refreshFbSortable();
+            }
         });
         if (dn) dn.addEventListener('click', function () {
             var next = li.nextElementSibling;
-            if (next) { list.insertBefore(next, li); reindex(); }
+            if (next) {
+                list.insertBefore(next, li);
+                reindex();
+                refreshFbSortable();
+            }
         });
         if (rm) rm.addEventListener('click', function () {
             if (list.querySelectorAll('.fb-field').length <= 1) {
@@ -287,6 +287,7 @@
             if (confirm('この項目を削除しますか？')) {
                 li.parentNode.removeChild(li);
                 reindex();
+                refreshFbSortable();
             }
         });
 
@@ -323,6 +324,7 @@
             list.appendChild(clone);
             bind(clone);
             reindex();
+            initFbSortable();
         });
     }
 

@@ -6,6 +6,9 @@
 <meta name="robots" content="noindex,nofollow">
 <title><?= e($title ?? '管理画面') ?> | <?= e(config('site.admin_name')) ?></title>
 <link rel="stylesheet" href="<?= e(base_path('/assets/css/admin.css')) ?>">
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.min.css">
+<script defer src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script defer src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
 <script defer src="<?= e(base_path('/assets/js/admin.js')) ?>"></script>
 </head>
 <body class="admin">
