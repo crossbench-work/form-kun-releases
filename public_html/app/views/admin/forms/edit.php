@@ -348,8 +348,9 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
         <?php endforeach; ?>
         </ul>
 
-        <div class="area is-actions">
+        <div class="area is-actions fb-add-actions">
             <button type="button" id="fb-add" class="btn">＋ 項目を追加</button>
+            <button type="button" id="fb-add-agreement" class="btn">＋ 規約に同意する</button>
         </div>
     </section>
     <section class="m-panel01">

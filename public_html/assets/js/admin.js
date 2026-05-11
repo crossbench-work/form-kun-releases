@@ -90,6 +90,7 @@
 
     var template = document.getElementById('fb-template');
     var addBtn = document.getElementById('fb-add');
+    var addAgreementBtn = document.getElementById('fb-add-agreement');
     var descriptionTemplate = document.getElementById('fb-description-template');
     var descriptionEditors = document.querySelectorAll('[data-description-editor]');
 
@@ -670,6 +671,51 @@
         updateFieldSummary(li);
     }
 
+    function applyFieldPreset(li, preset) {
+        if (!preset) return;
+        var labelInput = li.querySelector('[data-name="label"]');
+        var typeSelect = li.querySelector('[data-name="type"]');
+        var requiredToggle = li.querySelector('[data-name="required"]');
+        var optionsSource = li.querySelector('[data-name="options"]');
+        var choiceList = li.querySelector('.fb-choiceList');
+
+        if (labelInput && typeof preset.label === 'string') {
+            labelInput.value = preset.label;
+        }
+        if (typeSelect && typeof preset.type === 'string') {
+            typeSelect.value = preset.type;
+        }
+        if (requiredToggle) {
+            requiredToggle.checked = !!preset.required;
+        }
+        if (choiceList && Array.isArray(preset.options)) {
+            choiceList.innerHTML = '';
+            preset.options.forEach(function (option) {
+                choiceList.appendChild(createChoiceItem(option));
+            });
+        }
+        if (optionsSource && Array.isArray(preset.options)) {
+            optionsSource.value = preset.options.join('\n');
+        }
+    }
+
+    function appendField(preset) {
+        if (!template) return null;
+        var clone = template.content.firstElementChild.cloneNode(true);
+        var fkInput = clone.querySelector('.fb-field-key-input');
+        if (fkInput) {
+            fkInput.value = generateUuidV4();
+            fkInput.readOnly = true;
+            fkInput.classList.add('is-locked');
+        }
+        applyFieldPreset(clone, preset);
+        list.appendChild(clone);
+        bind(clone);
+        reindex();
+        initFbSortable();
+        return clone;
+    }
+
     list.querySelectorAll('.fb-field').forEach(bind);
     descriptionEditors.forEach(function (editor) {
         var descriptionList = getDescriptionList(editor);
@@ -714,17 +760,26 @@
 
     if (addBtn && template) {
         addBtn.addEventListener('click', function () {
-            var clone = template.content.firstElementChild.cloneNode(true);
-            var fkInput = clone.querySelector('.fb-field-key-input');
-            if (fkInput) {
-                fkInput.value = generateUuidV4();
-                fkInput.readOnly = true;
-                fkInput.classList.add('is-locked');
+            var clone = appendField();
+            var labelInput = clone ? clone.querySelector('.fb-input-label') : null;
+            if (labelInput) {
+                labelInput.focus();
             }
-            list.appendChild(clone);
-            bind(clone);
-            reindex();
-            initFbSortable();
+        });
+    }
+
+    if (addAgreementBtn && template) {
+        addAgreementBtn.addEventListener('click', function () {
+            var clone = appendField({
+                label: '規約への同意',
+                type: 'checkbox',
+                required: true,
+                options: ['規約に同意する']
+            });
+            var labelInput = clone ? clone.querySelector('.fb-input-label') : null;
+            if (labelInput) {
+                labelInput.focus();
+            }
         });
     }
 

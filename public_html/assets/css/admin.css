@@ -850,6 +850,10 @@ form.is-inline {
   margin: 0;
   padding: 0;
 }
+[data-module=m-formBuilder01] .fb-add-actions {
+  flex-direction: column;
+  align-items: flex-start;
+}
 [data-module=m-formBuilder01] .fb-field {
   background: #f9fafb;
   border: 1px solid #e2e8f0;
