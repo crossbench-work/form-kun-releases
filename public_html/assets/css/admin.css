@@ -829,6 +829,9 @@ form.is-inline {
   flex-wrap: wrap;
   flex-shrink: 0;
 }
+[data-module=m-formBuilder01] .fb-header-delete {
+  flex-shrink: 0;
+}
 [data-module=m-formBuilder01] .fb-field-summary-main {
   display: block;
   white-space: nowrap;
