@@ -115,26 +115,14 @@
 
     function bindAccordion(li) {
         var header = li.querySelector('.fb-field-header');
-        var toggle = li.querySelector('.fb-field-toggle');
-        if (!header || !toggle) return;
-        var icon = toggle.querySelector('.fb-field-toggle-icon');
-
-        function syncToggleIcon() {
-            var collapsed = li.classList.contains('is-collapsed');
-            toggle.setAttribute('aria-expanded', collapsed ? 'false' : 'true');
-            if (icon) {
-                icon.textContent = collapsed ? '+' : '-';
-            }
-        }
+        if (!header) return;
 
         header.addEventListener('click', function (e) {
             if (e.target.closest('.fb-header-actions') || e.target.closest('.fb-header-delete')) {
                 return;
             }
             li.classList.toggle('is-collapsed');
-            syncToggleIcon();
         });
-        syncToggleIcon();
     }
 
     function refreshFbSortable() {

@@ -124,9 +124,6 @@ $regexPresetChoices = [
                             </svg>
                         </button>
                     </div>
-                    <button type="button" class="fb-field-toggle" aria-expanded="false" title="詳細を開く／閉じる">
-                        <span class="fb-field-toggle-icon" aria-hidden="true">+</span>
-                    </button>
                 </div>
                 <div class="fb-field-body">
                 <div class="fb-row">
@@ -356,9 +353,6 @@ $regexPresetChoices = [
                     </svg>
                 </button>
             </div>
-            <button type="button" class="fb-field-toggle" aria-expanded="false" title="詳細を開く／閉じる">
-                <span class="fb-field-toggle-icon" aria-hidden="true">+</span>
-            </button>
         </div>
         <div class="fb-field-body">
         <div class="fb-row">
