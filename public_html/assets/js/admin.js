@@ -66,7 +66,6 @@
     var descriptionList = document.getElementById('fb-description-blocks');
     var descriptionTemplate = document.getElementById('fb-description-template');
     var descriptionAddBtn = document.getElementById('fb-description-add');
-    var descriptionInsertPosition = document.getElementById('fb-description-insert-position');
 
     function extractDataName(name) {
         if (!name) return null;
@@ -83,14 +82,9 @@
     function getDescriptionPositionOptions() {
         var items = list.querySelectorAll('.fb-field');
         var options = [{ value: '0', label: '先頭' }];
-        items.forEach(function (li, i) {
-            var labelInp = li.querySelector('.fb-input-label');
-            var label = labelInp && labelInp.value.trim() ? labelInp.value.trim() : '項目' + (i + 1);
-            options.push({
-                value: String(i + 1),
-                label: (i === items.length - 1) ? '末尾（' + label + 'の後）' : label + 'の後'
-            });
-        });
+        if (items.length > 0) {
+            options.push({ value: String(items.length), label: '末尾' });
+        }
         return options;
     }
 
@@ -145,9 +139,6 @@
 
     function refreshDescriptionPositionOptions() {
         if (!descriptionList) return;
-        if (descriptionInsertPosition) {
-            applyDescriptionPositionOptions(descriptionInsertPosition);
-        }
         descriptionList.querySelectorAll('.fb-description-position').forEach(function (select) {
             applyDescriptionPositionOptions(select);
         });
@@ -656,7 +647,7 @@
 
     if (descriptionAddBtn && descriptionList && descriptionTemplate) {
         descriptionAddBtn.addEventListener('click', function () {
-            var position = descriptionInsertPosition ? descriptionInsertPosition.value : '0';
+            var position = String(list.querySelectorAll('.fb-field').length);
             var block = createDescriptionBlock(position);
             if (!block) return;
             descriptionList.appendChild(block);

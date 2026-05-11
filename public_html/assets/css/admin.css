@@ -758,13 +758,8 @@ form.is-inline {
 }
 .m-panel01 .fb-description-toolbar {
   display: flex;
-  align-items: flex-end;
-  gap: 12px;
-  flex-wrap: wrap;
+  justify-content: flex-end;
   margin-bottom: 16px;
-}
-.m-panel01 .fb-description-toolbar > div:first-child {
-  flex: 1 1 240px;
 }
 .m-panel01 .fb-description-blocks {
   display: flex;

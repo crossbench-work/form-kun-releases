@@ -76,10 +76,6 @@ $descriptionBlocks = $form['description_blocks'] ?? [['id' => 'description-0', '
         <h2 id="input-screen-title-preview">表示設定</h2>
         <div class="box is-field">
             <div class="fb-description-toolbar">
-                <div>
-                    <label class="label" for="fb-description-insert-position">説明文を追加する位置</label>
-                    <select id="fb-description-insert-position" class="fb-description-insert-position"></select>
-                </div>
                 <div class="area is-actions">
                     <button type="button" class="btn is-sm" id="fb-description-add">説明文を追加する</button>
                 </div>
