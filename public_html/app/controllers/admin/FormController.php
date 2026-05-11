@@ -76,11 +76,25 @@ class FormController
                 $f['pair_placeholder_right'] = $pairPlaceholders['right_placeholder'];
                 $f['placeholder'] = '';
                 $f['options'] = '';
+                $f['checkbox_limit_enabled'] = 0;
+                $f['checkbox_min_selections'] = '';
+                $f['checkbox_max_selections'] = '';
             } else {
-                $opts = json_decode((string) ($f['options_json'] ?? ''), true);
-                $f['options'] = is_array($opts) && array_keys($opts) === range(0, count($opts) - 1)
-                    ? implode("\n", $opts)
-                    : '';
+                if (($f['type'] ?? '') === 'checkbox') {
+                    $checkboxSettings = \Models\FormField::decodeCheckboxSettings($f['options_json'] ?? null);
+                    $f['options'] = implode("\n", $checkboxSettings['options']);
+                    $f['checkbox_min_selections'] = $checkboxSettings['min_selections'];
+                    $f['checkbox_max_selections'] = $checkboxSettings['max_selections'];
+                    $f['checkbox_limit_enabled'] = ($checkboxSettings['min_selections'] !== '' || $checkboxSettings['max_selections'] !== '') ? 1 : 0;
+                } else {
+                    $opts = json_decode((string) ($f['options_json'] ?? ''), true);
+                    $f['options'] = is_array($opts) && array_keys($opts) === range(0, count($opts) - 1)
+                        ? implode("\n", $opts)
+                        : '';
+                    $f['checkbox_limit_enabled'] = 0;
+                    $f['checkbox_min_selections'] = '';
+                    $f['checkbox_max_selections'] = '';
+                }
                 $f['pair_label_left'] = '';
                 $f['pair_label_right'] = '';
                 $f['pair_placeholder_left'] = '';
@@ -175,17 +189,19 @@ class FormController
                 }
 
                 $required = !empty($f['required']) ? 1 : 0;
+                $type = in_array($f['type'] ?? '', FormField::ALLOWED_TYPES(), true) ? $f['type'] : 'text';
                 $patterns = [];
                 $singleRx = trim((string) ($f['regex_pattern'] ?? ''));
                 if ($singleRx !== '' && $singleRx !== '__custom__') {
                     $patterns[] = $singleRx;
                 }
                 $regexStored = FormField::encodeRegexPatterns($patterns);
-                if ($required !== 1) {
+                if ($required !== 1 || in_array($type, ['radio', 'select'], true)) {
+                    $regexStored = null;
+                } elseif ($type === 'checkbox' && $singleRx !== '' && $singleRx !== '__custom__') {
                     $regexStored = null;
                 }
 
-                $type = in_array($f['type'] ?? '', FormField::ALLOWED_TYPES(), true) ? $f['type'] : 'text';
                 $placeholder = trim((string) ($f['placeholder'] ?? ''));
                 if (in_array($type, ['radio', 'checkbox', 'select'], true)) {
                     $placeholder = '';
@@ -194,6 +210,13 @@ class FormController
                 if (in_array($type, ['radio', 'checkbox', 'select'], true)) {
                     $maxLength = '';
                 }
+                $checkboxLimitEnabled = ($type === 'checkbox' && $required === 1 && !empty($f['checkbox_limit_enabled'])) ? 1 : 0;
+                $checkboxMinSelections = ($checkboxLimitEnabled && isset($f['checkbox_min_selections']) && $f['checkbox_min_selections'] !== '')
+                    ? (int) $f['checkbox_min_selections']
+                    : '';
+                $checkboxMaxSelections = ($checkboxLimitEnabled && isset($f['checkbox_max_selections']) && $f['checkbox_max_selections'] !== '')
+                    ? (int) $f['checkbox_max_selections']
+                    : '';
 
                 $fields[] = [
                     'field_key'       => $key,
@@ -208,6 +231,9 @@ class FormController
                     'pair_label_right'=> trim((string) ($f['pair_label_right'] ?? '')),
                     'pair_placeholder_left' => trim((string) ($f['pair_placeholder_left'] ?? '')),
                     'pair_placeholder_right'=> trim((string) ($f['pair_placeholder_right'] ?? '')),
+                    'checkbox_limit_enabled' => $checkboxLimitEnabled,
+                    'checkbox_min_selections' => $checkboxMinSelections,
+                    'checkbox_max_selections' => $checkboxMaxSelections,
                     'options'         => (string) ($f['options'] ?? ''),
                 ];
             }
@@ -263,6 +289,25 @@ class FormController
                 $opts = FormField::parseOptions($f['options']);
                 if (count($opts) === 0) {
                     $errors[] = "項目{$no}: 選択肢を1行に1つずつ入力してください。";
+                }
+                if ($f['type'] === 'checkbox' && !empty($f['checkbox_limit_enabled'])) {
+                    $minSelections = $f['checkbox_min_selections'] !== '' ? (int) $f['checkbox_min_selections'] : 0;
+                    $maxSelections = $f['checkbox_max_selections'] !== '' ? (int) $f['checkbox_max_selections'] : 0;
+                    if ($f['checkbox_min_selections'] !== '' && $minSelections <= 0) {
+                        $errors[] = "項目{$no}: 最小選択数は1以上で入力してください。";
+                    }
+                    if ($f['checkbox_max_selections'] !== '' && $maxSelections <= 0) {
+                        $errors[] = "項目{$no}: 最大選択数は1以上で入力してください。";
+                    }
+                    if ($minSelections <= 0 && $maxSelections <= 0) {
+                        $errors[] = "項目{$no}: 選択数を設定する場合は最小または最大を入力してください。";
+                    }
+                    if ($minSelections > 0 && $maxSelections > 0 && $minSelections > $maxSelections) {
+                        $errors[] = "項目{$no}: 最小選択数は最大選択数以下にしてください。";
+                    }
+                    if ($minSelections > count($opts)) {
+                        $errors[] = "項目{$no}: 最小選択数は選択肢数以下にしてください。";
+                    }
                 }
             } elseif ($f['type'] === 'text_pair') {
                 if ($f['pair_label_left'] === '') {
@@ -330,6 +375,9 @@ class FormController
             'pair_label_right' => '',
             'pair_placeholder_left' => '',
             'pair_placeholder_right' => '',
+            'checkbox_limit_enabled' => 0,
+            'checkbox_min_selections' => '',
+            'checkbox_max_selections' => '',
             'options' => '',
         ];
     }

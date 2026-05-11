@@ -114,6 +114,9 @@ class Validator
             ? FormField::decodeRegexPatterns($regexStored)
             : [];
         $opts  = self::decodeOptions($field['options_json'] ?? null);
+        $checkboxSettings = $type === 'checkbox'
+            ? FormField::decodeCheckboxSettings($field['options_json'] ?? null)
+            : ['options' => [], 'min_selections' => '', 'max_selections' => ''];
 
         if ($type === 'address') {
             $this->validateAddressField($field, $value);
@@ -191,6 +194,19 @@ class Validator
                             $this->errors[$key][] = $label . 'の値が不正です。';
                             break;
                         }
+                    }
+                    $selectedCount = count($value);
+                    $minSelections = $checkboxSettings['min_selections'] !== ''
+                        ? (int) $checkboxSettings['min_selections']
+                        : 0;
+                    $maxSelections = $checkboxSettings['max_selections'] !== ''
+                        ? (int) $checkboxSettings['max_selections']
+                        : 0;
+                    if ($minSelections > 0 && $selectedCount < $minSelections) {
+                        $this->errors[$key][] = $label . 'は' . $minSelections . '個以上選択してください。';
+                    }
+                    if ($maxSelections > 0 && $selectedCount > $maxSelections) {
+                        $this->errors[$key][] = $label . 'は' . $maxSelections . '個以下で選択してください。';
                     }
                 }
                 break;
@@ -424,8 +440,14 @@ class Validator
             return [];
         }
         $arr = json_decode($json, true);
-        if (!is_array($arr) || array_keys($arr) !== range(0, count($arr) - 1)) {
+        if (!is_array($arr)) {
             return [];
+        }
+        if (array_keys($arr) !== range(0, count($arr) - 1)) {
+            $arr = $arr['options'] ?? [];
+            if (!is_array($arr) || array_keys($arr) !== range(0, count($arr) - 1)) {
+                return [];
+            }
         }
         return array_values(array_filter(array_map('strval', $arr), fn($v) => $v !== ''));
     }

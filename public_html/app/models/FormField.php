@@ -115,7 +115,15 @@ class FormField
                 $optionsJson = null;
                 if (in_array($f['type'], ['radio','checkbox','select'], true) && !empty($f['options'])) {
                     $opts = self::parseOptions($f['options']);
-                    $optionsJson = json_encode($opts, JSON_UNESCAPED_UNICODE);
+                    if ($f['type'] === 'checkbox') {
+                        $optionsJson = self::encodeCheckboxSettings(
+                            $opts,
+                            $f['checkbox_min_selections'] ?? '',
+                            $f['checkbox_max_selections'] ?? ''
+                        );
+                    } else {
+                        $optionsJson = json_encode($opts, JSON_UNESCAPED_UNICODE);
+                    }
                 } elseif ($f['type'] === 'text_pair') {
                     $optionsJson = self::encodeTextPairLabels(
                         (string) ($f['pair_label_left'] ?? ''),
@@ -181,6 +189,67 @@ class FormField
             }
         }
         return array_values(array_unique($out));
+    }
+
+    /**
+     * @return array{options:array<int,string>,min_selections:string,max_selections:string}
+     */
+    public static function decodeCheckboxSettings($json): array
+    {
+        if (!is_string($json) || trim($json) === '') {
+            return ['options' => [], 'min_selections' => '', 'max_selections' => ''];
+        }
+
+        $decoded = json_decode($json, true);
+        if (!is_array($decoded)) {
+            return ['options' => [], 'min_selections' => '', 'max_selections' => ''];
+        }
+
+        if (array_keys($decoded) === range(0, count($decoded) - 1)) {
+            return [
+                'options' => self::parseOptions($decoded),
+                'min_selections' => '',
+                'max_selections' => '',
+            ];
+        }
+
+        $options = self::parseOptions($decoded['options'] ?? []);
+        $min = isset($decoded['min_selections']) && (int) $decoded['min_selections'] > 0
+            ? (string) ((int) $decoded['min_selections'])
+            : '';
+        $max = isset($decoded['max_selections']) && (int) $decoded['max_selections'] > 0
+            ? (string) ((int) $decoded['max_selections'])
+            : '';
+
+        return [
+            'options' => $options,
+            'min_selections' => $min,
+            'max_selections' => $max,
+        ];
+    }
+
+    /**
+     * @param array<int, string> $options
+     */
+    public static function encodeCheckboxSettings(array $options, $minSelections = '', $maxSelections = ''): ?string
+    {
+        $cleanOptions = self::parseOptions($options);
+        if (count($cleanOptions) === 0) {
+            return null;
+        }
+
+        $min = (is_numeric($minSelections) && (int) $minSelections > 0) ? (int) $minSelections : null;
+        $max = (is_numeric($maxSelections) && (int) $maxSelections > 0) ? (int) $maxSelections : null;
+
+        if ($min === null && $max === null) {
+            return json_encode($cleanOptions, JSON_UNESCAPED_UNICODE);
+        }
+
+        return json_encode([
+            'options' => $cleanOptions,
+            'min_selections' => $min,
+            'max_selections' => $max,
+        ], JSON_UNESCAPED_UNICODE);
     }
 
     /**

@@ -959,6 +959,27 @@ form.is-inline {
     min-width: 220px;
   }
 
+  .fb-checkbox-limit-wrap {
+    align-items: flex-start;
+  }
+
+  .fb-checkbox-limit-toggle-wrap {
+    flex: 0 0 auto;
+    min-width: auto;
+  }
+
+  .fb-checkbox-limit-settings {
+    display: flex;
+    gap: 12px;
+    flex: 1 1 320px;
+    flex-wrap: wrap;
+
+    > div {
+      flex: 1;
+      min-width: 140px;
+    }
+  }
+
   .fb-field-key-input {
     flex: 1;
     min-width: 0;

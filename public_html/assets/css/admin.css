@@ -962,6 +962,23 @@ form.is-inline {
   flex: 1 1 220px;
   min-width: 220px;
 }
+[data-module=m-formBuilder01] .fb-checkbox-limit-wrap {
+  align-items: flex-start;
+}
+[data-module=m-formBuilder01] .fb-checkbox-limit-toggle-wrap {
+  flex: 0 0 auto;
+  min-width: auto;
+}
+[data-module=m-formBuilder01] .fb-checkbox-limit-settings {
+  display: flex;
+  gap: 12px;
+  flex: 1 1 320px;
+  flex-wrap: wrap;
+}
+[data-module=m-formBuilder01] .fb-checkbox-limit-settings > div {
+  flex: 1;
+  min-width: 140px;
+}
 [data-module=m-formBuilder01] .fb-field-key-input {
   flex: 1;
   min-width: 0;
