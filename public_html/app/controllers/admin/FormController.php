@@ -3,6 +3,7 @@ namespace Controllers\Admin;
 
 use Core\Auth;
 use Core\Csrf;
+use Core\FieldKey;
 use Core\View;
 use Models\Form;
 use Models\FormField;
@@ -68,6 +69,7 @@ class FormController
         $editFields = array_map(function ($f) {
             $opts = json_decode((string) ($f['options_json'] ?? ''), true);
             $f['options'] = is_array($opts) ? implode("\n", $opts) : '';
+            $f['field_key_auto'] = FieldKey::isUuidFormat((string) ($f['field_key'] ?? '')) ? 1 : 0;
             return $f;
         }, $fields);
         if (empty($editFields)) {
@@ -149,16 +151,36 @@ class FormController
             foreach ($raw as $f) {
                 if (!is_array($f)) continue;
                 if (!empty($f['_remove'])) continue;
+                $auto = !empty($f['field_key_auto']);
+                $key = trim((string) ($f['field_key'] ?? ''));
+                if ($auto) {
+                    if ($key === '' || !FieldKey::isUuidFormat($key)) {
+                        $key = FieldKey::generateUuidV4();
+                    }
+                }
+
+                $patterns = [];
+                if (!empty($f['regex_patterns']) && is_array($f['regex_patterns'])) {
+                    foreach ($f['regex_patterns'] as $p) {
+                        $p = trim((string) $p);
+                        if ($p !== '') {
+                            $patterns[] = $p;
+                        }
+                    }
+                }
+                $regexStored = FormField::encodeRegexPatterns($patterns);
+
                 $fields[] = [
-                    'field_key'   => trim((string) ($f['field_key'] ?? '')),
-                    'label'       => trim((string) ($f['label'] ?? '')),
-                    'type'        => in_array($f['type'] ?? '', FormField::ALLOWED_TYPES(), true) ? $f['type'] : 'text',
-                    'required'    => !empty($f['required']) ? 1 : 0,
-                    'max_length'  => isset($f['max_length']) && $f['max_length'] !== '' ? (int) $f['max_length'] : '',
-                    'regex'       => trim((string) ($f['regex'] ?? '')),
-                    'help_text'   => trim((string) ($f['help_text'] ?? '')),
-                    'placeholder' => trim((string) ($f['placeholder'] ?? '')),
-                    'options'     => (string) ($f['options'] ?? ''),
+                    'field_key'       => $key,
+                    'field_key_auto'  => $auto ? 1 : 0,
+                    'label'           => trim((string) ($f['label'] ?? '')),
+                    'type'            => in_array($f['type'] ?? '', FormField::ALLOWED_TYPES(), true) ? $f['type'] : 'text',
+                    'required'        => !empty($f['required']) ? 1 : 0,
+                    'max_length'      => isset($f['max_length']) && $f['max_length'] !== '' ? (int) $f['max_length'] : '',
+                    'regex'           => $regexStored,
+                    'help_text'       => trim((string) ($f['help_text'] ?? '')),
+                    'placeholder'     => trim((string) ($f['placeholder'] ?? '')),
+                    'options'         => (string) ($f['options'] ?? ''),
                 ];
             }
         }
@@ -206,8 +228,8 @@ class FormController
             if ($f['label'] === '') {
                 $errors[] = "項目{$no}: ラベルは必須です。";
             }
-            if (!preg_match('/\A[a-zA-Z][a-zA-Z0-9_]{0,63}\z/', $f['field_key'])) {
-                $errors[] = "項目{$no}: フィールドキーは英字で始まる英数字・アンダースコア（最大64文字）にしてください。";
+            if (!FieldKey::isValid($f['field_key'])) {
+                $errors[] = "項目{$no}: フィールドキーは UUID 形式、または英字で始まる英数字・アンダースコア（最大64文字）にしてください。";
             } elseif (in_array($f['field_key'], $usedKeys, true)) {
                 $errors[] = "項目{$no}: フィールドキー '{$f['field_key']}' が重複しています。";
             } else {
@@ -219,8 +241,13 @@ class FormController
                     $errors[] = "項目{$no}: 選択肢を1行に1つずつ入力してください。";
                 }
             }
-            if ($f['regex'] !== '' && @preg_match($f['regex'], '') === false) {
-                $errors[] = "項目{$no}: 正規表現が不正です。";
+            $regexPatterns = FormField::decodeRegexPatterns(
+                isset($f['regex']) && is_string($f['regex']) ? $f['regex'] : ''
+            );
+            foreach ($regexPatterns as $ri => $pat) {
+                if ($pat !== '' && @preg_match($pat, '') === false) {
+                    $errors[] = "項目{$no}: 正規表現（" . ($ri + 1) . "行目）が不正です。";
+                }
             }
         }
 
@@ -246,9 +273,9 @@ class FormController
             'mail_subject_admin' => '',
             'mail_template_admin' => "フォーム「{{__form_title__}}」に新しい送信がありました。\n受信日時: {{__submitted_at__}}\nIP: {{__ip__}}\n\n{{__all__}}",
             'reply_enabled' => 0,
-            'reply_from_field_key' => 'email',
+            'reply_from_field_key' => '',
             'reply_subject' => '送信ありがとうございました',
-            'reply_template' => "{{name}} 様\n\nお問い合わせいただきありがとうございました。\n以下の内容で受け付けました。\n\n{{__all__}}",
+            'reply_template' => "お問い合わせいただきありがとうございました。\n以下の内容で受け付けました。\n\n{{__all__}}",
             'captcha_enabled' => 1,
             'status' => 'draft',
         ];
@@ -257,12 +284,13 @@ class FormController
     private static function defaultField(): array
     {
         return [
-            'field_key' => 'name',
+            'field_key' => FieldKey::generateUuidV4(),
+            'field_key_auto' => 1,
             'label' => 'お名前',
             'type'  => 'text',
             'required' => 1,
             'max_length' => 100,
-            'regex' => '',
+            'regex' => null,
             'help_text' => '',
             'placeholder' => '',
             'options' => '',

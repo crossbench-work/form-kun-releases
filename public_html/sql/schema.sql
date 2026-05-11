@@ -67,7 +67,7 @@ CREATE TABLE IF NOT EXISTS form_fields (
     ) NOT NULL,
     required        TINYINT(1) NOT NULL DEFAULT 0,
     max_length      INT DEFAULT NULL,
-    regex           VARCHAR(255) DEFAULT NULL,
+    regex           TEXT DEFAULT NULL,
     help_text       VARCHAR(500) DEFAULT NULL,
     placeholder     VARCHAR(255) DEFAULT NULL,
     options_json    TEXT DEFAULT NULL,

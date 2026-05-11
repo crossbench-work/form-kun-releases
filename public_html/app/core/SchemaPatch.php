@@ -36,6 +36,8 @@ class SchemaPatch
 
             self::tryAlterUniqueEmail();
 
+            self::ensureFormFieldsRegexText();
+
             $hasTbl = Database::fetchOne(
                 'SELECT COUNT(*) AS c FROM information_schema.TABLES
                  WHERE TABLE_SCHEMA = ? AND TABLE_NAME = ?',
@@ -70,6 +72,34 @@ class SchemaPatch
                 return;
             }
             error_log('[formkun] SchemaPatch uk_users_email: ' . $m);
+        }
+    }
+
+    /**
+     * form_fields.regex を複数パターン（JSON）格納用に TEXT へ拡張。
+     */
+    public static function ensureFormFieldsRegexText(): void
+    {
+        try {
+            $dbRow = Database::fetchOne('SELECT DATABASE() AS n');
+            $schema = (string) ($dbRow['n'] ?? '');
+            if ($schema === '') {
+                return;
+            }
+            $col = Database::fetchOne(
+                'SELECT DATA_TYPE AS t FROM information_schema.COLUMNS
+                 WHERE TABLE_SCHEMA = ? AND TABLE_NAME = ? AND COLUMN_NAME = ?',
+                [$schema, 'form_fields', 'regex']
+            );
+            if (!$col) {
+                return;
+            }
+            $type = strtolower((string) ($col['t'] ?? ''));
+            if ($type === 'varchar') {
+                Database::execute('ALTER TABLE form_fields MODIFY regex TEXT DEFAULT NULL');
+            }
+        } catch (\Throwable $e) {
+            error_log('[formkun] SchemaPatch form_fields.regex: ' . $e->getMessage());
         }
     }
 }

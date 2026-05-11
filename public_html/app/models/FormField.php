@@ -5,6 +5,57 @@ use Core\Database;
 
 class FormField
 {
+    /**
+     * DB の regex 列（JSON 配列または従来の1本文字列）をパターン配列に。
+     *
+     * @return string[]
+     */
+    public static function decodeRegexPatterns(?string $stored): array
+    {
+        if ($stored === null) {
+            return [];
+        }
+        $stored = trim($stored);
+        if ($stored === '') {
+            return [];
+        }
+        $decoded = json_decode($stored, true);
+        if (is_array($decoded) && array_keys($decoded) === range(0, count($decoded) - 1)) {
+            $out = [];
+            foreach ($decoded as $p) {
+                if (!is_string($p)) {
+                    continue;
+                }
+                $p = trim($p);
+                if ($p !== '') {
+                    $out[] = $p;
+                }
+            }
+            return $out;
+        }
+
+        return [$stored];
+    }
+
+    /**
+     * @param string[] $patterns
+     */
+    public static function encodeRegexPatterns(array $patterns): ?string
+    {
+        $clean = [];
+        foreach ($patterns as $p) {
+            $p = trim((string) $p);
+            if ($p !== '') {
+                $clean[] = $p;
+            }
+        }
+        if (count($clean) === 0) {
+            return null;
+        }
+
+        return json_encode(array_values($clean), JSON_UNESCAPED_UNICODE);
+    }
+
     public static function ALLOWED_TYPES(): array
     {
         return ['text','textarea','email','tel','number','radio','checkbox','select','date','time','file'];
@@ -48,7 +99,9 @@ class FormField
                         $f['type'],
                         !empty($f['required']) ? 1 : 0,
                         isset($f['max_length']) && $f['max_length'] !== '' ? (int) $f['max_length'] : null,
-                        isset($f['regex']) && $f['regex'] !== '' ? (string) $f['regex'] : null,
+                        isset($f['regex']) && $f['regex'] !== null && $f['regex'] !== ''
+                            ? (string) $f['regex']
+                            : null,
                         isset($f['help_text']) && $f['help_text'] !== '' ? (string) $f['help_text'] : null,
                         isset($f['placeholder']) && $f['placeholder'] !== '' ? (string) $f['placeholder'] : null,
                         $optionsJson,

@@ -1,5 +1,16 @@
 <h1><?= $isNew ? 'フォーム新規作成' : 'フォーム編集' ?></h1>
 
+<?php
+$regexPresetChoices = [
+    '' => 'プリセットを選択…',
+    '/\A[0-9]+\z/u' => '半角数字のみ',
+    '/\A[a-zA-Z0-9]+\z/u' => '半角英数字のみ',
+    '/\A[ぁ-んー]+\z/u' => 'ひらがなのみ',
+    '/\A[ァ-ヶー　]+\z/u' => 'カタカナのみ（全角スペース可）',
+    '/\A[a-zA-Z]+\z/u' => '半角英字のみ',
+];
+?>
+
 <?php if (!empty($errors)): ?>
     <div class="alert alert-danger">
         <ul><?php foreach ($errors as $msg): ?><li><?= e($msg) ?></li><?php endforeach; ?></ul>
@@ -42,11 +53,18 @@
 
     <section class="panel">
         <h2>項目設定（フォームビルダー）</h2>
-        <p class="muted">必要な項目を追加し、ラベル・型・必須・選択肢などを設定してください。フィールドキーはメール本文や履歴で使われる識別子です（例: name, email）。</p>
+        <p class="muted">必要な項目を追加し、ラベル・型・必須・選択肢などを設定してください。フィールドキーはメール変数・送信履歴で使われる識別子です。既定では UUID が自動採番されます。任意で「自動生成」をオフにして英字始まりのキー（例: name）も指定できます。</p>
 
         <ul id="fb-fields" class="fb-fields">
         <?php foreach ($fields as $i => $f): ?>
-            <?php $idx = $i; ?>
+            <?php
+            $idx = $i;
+            $fkAuto = !empty($f['field_key_auto']);
+            $regexRows = \Models\FormField::decodeRegexPatterns(isset($f['regex']) ? (string) $f['regex'] : null);
+            if (count($regexRows) === 0) {
+                $regexRows = [''];
+            }
+            ?>
             <li class="fb-field" data-index="<?= $idx ?>">
                 <div class="fb-handle">項目 #<span class="fb-num"><?= $idx + 1 ?></span></div>
                 <div class="fb-row">
@@ -54,9 +72,14 @@
                         <label>ラベル</label>
                         <input type="text" name="fields[<?= $idx ?>][label]" value="<?= e($f['label']) ?>">
                     </div>
-                    <div>
+                    <div class="fb-field-key-col">
+                        <label class="choice fb-field-key-auto-label">
+                            <input type="checkbox" name="fields[<?= $idx ?>][field_key_auto]" value="1" class="fb-field-key-auto" <?= $fkAuto ? 'checked' : '' ?>>
+                            <span>フィールドキーを自動生成（UUID）</span>
+                        </label>
                         <label>フィールドキー</label>
-                        <input type="text" name="fields[<?= $idx ?>][field_key]" value="<?= e($f['field_key']) ?>">
+                        <input type="text" name="fields[<?= $idx ?>][field_key]" value="<?= e($f['field_key']) ?>" class="fb-field-key-input" <?= $fkAuto ? 'readonly' : '' ?> spellcheck="false">
+                        <p class="field-help muted">自動ONのときは読み取り専用。OFF にすると任意の識別子を入力できます。</p>
                     </div>
                     <div>
                         <label>型</label>
@@ -79,9 +102,28 @@
                         <label>最大文字数（任意）</label>
                         <input type="number" min="1" name="fields[<?= $idx ?>][max_length]" value="<?= e($f['max_length']) ?>">
                     </div>
-                    <div>
-                        <label>正規表現（任意）</label>
-                        <input type="text" name="fields[<?= $idx ?>][regex]" value="<?= e($f['regex']) ?>" placeholder="例: /^[0-9]+$/">
+                    <div class="fb-regex-wrap">
+                        <label>入力チェック（正規表現・複数可）</label>
+                        <div class="fb-regex-list">
+                            <?php foreach ($regexRows as $rxi => $rp): ?>
+                                <?php $rpIsCustom = ($rp !== '' && !array_key_exists($rp, $regexPresetChoices)); ?>
+                                <div class="fb-regex-row">
+                                    <select class="fb-regex-preset" title="プリセット（入力欄に反映）" aria-label="正規表現プリセット">
+                                        <?php foreach ($regexPresetChoices as $patVal => $patLabel): ?>
+                                            <?php
+                                            $presetSel = ($patVal !== '' && $rp === $patVal)
+                                                || ($patVal === '' && ($rp === '' || $rpIsCustom));
+                                            ?>
+                                            <option value="<?= e($patVal) ?>" <?= $presetSel ? 'selected' : '' ?>><?= e($patLabel) ?></option>
+                                        <?php endforeach; ?>
+                                    </select>
+                                    <input type="text" name="fields[<?= $idx ?>][regex_patterns][<?= (int) $rxi ?>]" value="<?= e($rp) ?>" class="fb-regex-input" placeholder="例: /\A[0-9]+\z/u（空の行は無視）" spellcheck="false">
+                                    <button type="button" class="btn btn-sm fb-regex-remove" title="この行を削除">−</button>
+                                </div>
+                            <?php endforeach; ?>
+                        </div>
+                        <button type="button" class="btn btn-sm fb-regex-add">＋ 条件を追加</button>
+                        <p class="field-help muted">複数あるときは<strong>すべて</strong>に一致する必要があります。プリセットは入力例です。そのまま編集して細かく調整できます。</p>
                     </div>
                     <div>
                         <label>プレースホルダ（任意）</label>
@@ -138,7 +180,7 @@
         </div>
         <div class="field">
             <label>送信先のフィールドキー（メール型項目）</label>
-            <input type="text" name="reply_from_field_key" value="<?= e($form['reply_from_field_key']) ?>" placeholder="email">
+            <input type="text" name="reply_from_field_key" value="<?= e($form['reply_from_field_key']) ?>" placeholder="メール項目のフィールドキー（UUID または任意のキー）">
         </div>
         <div class="field">
             <label>件名</label>
@@ -168,12 +210,32 @@
     </div>
 </form>
 
+<template id="fb-regex-row-template">
+    <div class="fb-regex-row">
+        <select class="fb-regex-preset" title="プリセット（入力欄に反映）" aria-label="正規表現プリセット">
+            <?php foreach ($regexPresetChoices as $patVal => $patLabel): ?>
+                <option value="<?= e($patVal) ?>"><?= e($patLabel) ?></option>
+            <?php endforeach; ?>
+        </select>
+        <input type="text" class="fb-regex-input" placeholder="例: /\A[0-9]+\z/u（空の行は無視）" spellcheck="false">
+        <button type="button" class="btn btn-sm fb-regex-remove" title="この行を削除">−</button>
+    </div>
+</template>
+
 <template id="fb-template">
     <li class="fb-field">
         <div class="fb-handle">項目 #<span class="fb-num"></span></div>
         <div class="fb-row">
             <div><label>ラベル</label><input type="text" data-name="label"></div>
-            <div><label>フィールドキー</label><input type="text" data-name="field_key"></div>
+            <div class="fb-field-key-col">
+                <label class="choice fb-field-key-auto-label">
+                    <input type="checkbox" value="1" class="fb-field-key-auto" data-name="field_key_auto" checked>
+                    <span>フィールドキーを自動生成（UUID）</span>
+                </label>
+                <label>フィールドキー</label>
+                <input type="text" data-name="field_key" class="fb-field-key-input" readonly spellcheck="false">
+                <p class="field-help muted">自動ONのときは読み取り専用。OFF にすると任意の識別子を入力できます。</p>
+            </div>
             <div>
                 <label>型</label>
                 <select data-name="type" class="fb-type">
@@ -189,7 +251,22 @@
         </div>
         <div class="fb-row">
             <div><label>最大文字数（任意）</label><input type="number" min="1" data-name="max_length"></div>
-            <div><label>正規表現（任意）</label><input type="text" data-name="regex"></div>
+            <div class="fb-regex-wrap">
+                <label>入力チェック（正規表現・複数可）</label>
+                <div class="fb-regex-list">
+                    <div class="fb-regex-row">
+                        <select class="fb-regex-preset" title="プリセット（入力欄に反映）" aria-label="正規表現プリセット">
+                            <?php foreach ($regexPresetChoices as $patVal => $patLabel): ?>
+                                <option value="<?= e($patVal) ?>"><?= e($patLabel) ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                        <input type="text" class="fb-regex-input" placeholder="例: /\A[0-9]+\z/u（空の行は無視）" spellcheck="false">
+                        <button type="button" class="btn btn-sm fb-regex-remove" title="この行を削除">−</button>
+                    </div>
+                </div>
+                <button type="button" class="btn btn-sm fb-regex-add">＋ 条件を追加</button>
+                <p class="field-help muted">複数あるときは<strong>すべて</strong>に一致する必要があります。プリセットは入力例です。そのまま編集して細かく調整できます。</p>
+            </div>
             <div><label>プレースホルダ（任意）</label><input type="text" data-name="placeholder"></div>
         </div>
         <div class="field"><label>ヘルプテキスト（任意）</label><input type="text" data-name="help_text"></div>

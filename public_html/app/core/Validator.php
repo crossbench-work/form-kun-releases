@@ -1,6 +1,8 @@
 <?php
 namespace Core;
 
+use Models\FormField;
+
 class Validator
 {
     /** @var array<string, string[]> */
@@ -66,7 +68,10 @@ class Validator
         $type  = $field['type'];
         $req   = (int) ($field['required'] ?? 0) === 1;
         $maxL  = isset($field['max_length']) ? (int) $field['max_length'] : 0;
-        $regex = $field['regex'] ?? '';
+        $regexStored = $field['regex'] ?? '';
+        $regexPatterns = is_string($regexStored)
+            ? FormField::decodeRegexPatterns($regexStored)
+            : [];
         $opts  = self::decodeOptions($field['options_json'] ?? null);
 
         $isEmpty = is_array($value) ? count($value) === 0 : ((string) $value === '');
@@ -82,9 +87,17 @@ class Validator
             if ($maxL > 0 && mb_strlen($value, 'UTF-8') > $maxL) {
                 $this->errors[$key][] = $label . 'は' . $maxL . '文字以内で入力してください。';
             }
-            if ($regex !== '' && @preg_match($regex, '') !== false) {
+            foreach ($regexPatterns as $regex) {
+                if ($regex === '') {
+                    continue;
+                }
+                if (@preg_match($regex, '') === false) {
+                    $this->errors[$key][] = $label . 'の検証設定が不正です。';
+                    break;
+                }
                 if (!preg_match($regex, $value)) {
                     $this->errors[$key][] = $label . 'の形式が正しくありません。';
+                    break;
                 }
             }
         }
