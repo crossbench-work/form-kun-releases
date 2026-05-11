@@ -11,31 +11,35 @@
 <script defer src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
 <script defer src="<?= e(base_path('/assets/js/admin.js')) ?>"></script>
 </head>
-<body class="admin">
-<header class="admin-header">
-    <div class="admin-brand">
-        <a href="<?= e(base_path('/admin/')) ?>"><?= e(config('site.admin_name')) ?></a>
-    </div>
-    <nav class="admin-nav">
-        <a href="<?= e(base_path('/admin/')) ?>">ダッシュボード</a>
-        <a href="<?= e(base_path('/admin/forms')) ?>">フォーム</a>
-        <?php if (\Core\Auth::role() === 'admin'): ?>
-            <a href="<?= e(base_path('/admin/users')) ?>">ユーザー</a>
-        <?php endif; ?>
-    </nav>
-    <div class="admin-user">
-        <?php if ($u = \Core\Auth::user()): ?>
-            <span class="user-name"><?= e($u['display_name'] ?? $u['username']) ?>（<?= e($u['role']) ?>）</span>
-            <a class="logout" href="<?= e(base_path('/admin/logout')) ?>">ログアウト</a>
-        <?php endif; ?>
+<body class="l-adminShell01">
+<header class="l-adminHeader01">
+    <div class="wrapper">
+        <div class="box is-brand">
+            <a href="<?= e(base_path('/admin/')) ?>"><?= e(config('site.admin_name')) ?></a>
+        </div>
+        <nav class="list is-adminNav">
+            <a href="<?= e(base_path('/admin/')) ?>">ダッシュボード</a>
+            <a href="<?= e(base_path('/admin/forms')) ?>">フォーム</a>
+            <?php if (\Core\Auth::role() === 'admin'): ?>
+                <a href="<?= e(base_path('/admin/users')) ?>">ユーザー</a>
+            <?php endif; ?>
+        </nav>
+        <div class="box is-userBar">
+            <?php if ($u = \Core\Auth::user()): ?>
+                <span class="name"><?= e($u['display_name'] ?? $u['username']) ?>（<?= e($u['role']) ?>）</span>
+                <a class="link is-logout" href="<?= e(base_path('/admin/logout')) ?>">ログアウト</a>
+            <?php endif; ?>
+        </div>
     </div>
 </header>
 
-<main class="admin-main">
-    <?php foreach ((flash() ?? []) as $f): ?>
-        <div class="alert alert-<?= e($f['type']) ?>"><?= e($f['message']) ?></div>
-    <?php endforeach; ?>
-    <?= $content ?? '' ?>
+<main class="l-adminBody01">
+    <div class="wrapper">
+        <?php foreach ((flash() ?? []) as $f): ?>
+            <div class="m-alert01 is-<?= e($f['type']) ?>"><?= e($f['message']) ?></div>
+        <?php endforeach; ?>
+        <?= $content ?? '' ?>
+    </div>
 </main>
 </body>
 </html>

@@ -7,7 +7,7 @@
     if (!btn) {
       return;
     }
-    var wrap = btn.closest ? btn.closest('.field-address') : null;
+    var wrap = btn.closest ? btn.closest('[data-form-address]') : null;
     if (!wrap) {
       return;
     }

@@ -81,14 +81,14 @@ if ($type === 'address' && $addrPostal !== '') {
 
 $prefOptions = japanese_prefectures();
 ?>
-<div class="field <?= ($type !== 'address' && !empty($err)) ? 'has-error' : '' ?>">
-    <label for="<?= e($labelFor) ?>" class="field-label">
+<div class="box is-field <?= ($type !== 'address' && !empty($err)) ? 'is-error' : '' ?>">
+    <label for="<?= e($labelFor) ?>" class="label">
         <?= e($label) ?>
-        <?php if ($req && $type !== 'address'): ?><span class="required">必須</span><?php endif; ?>
+        <?php if ($req && $type !== 'address'): ?><span class="is-required">必須</span><?php endif; ?>
     </label>
 
     <?php if (!empty($field['help_text'])): ?>
-        <p class="field-help"><?= nl2br(e($field['help_text'])) ?></p>
+        <p class="text is-help"><?= nl2br(e($field['help_text'])) ?></p>
     <?php endif; ?>
 
     <?php switch ($type):
@@ -119,13 +119,13 @@ $prefOptions = japanese_prefectures();
             <?php break; ?>
 
         <?php case 'address': ?>
-            <div class="field-address" id="f_<?= e($key) ?>">
+            <div class="box is-address" id="f_<?= e($key) ?>" data-form-address>
                 <?php foreach (($addrErrParts['_root'] ?? []) as $m): ?>
-                    <p class="field-error"><?= e($m) ?></p>
+                    <p class="text is-error"><?= e($m) ?></p>
                 <?php endforeach; ?>
-                <div class="field-address-row <?= !empty($addrErrParts['postal']) ? 'has-error' : '' ?>">
-                    <label class="field-sublabel" for="f_<?= e($key) ?>_postal3">郵便番号</label>
-                    <div class="field-address-inline field-address-postal">
+                <div class="box is-addressRow <?= !empty($addrErrParts['postal']) ? 'is-error' : '' ?>">
+                    <label class="label is-sublabel" for="f_<?= e($key) ?>_postal3">郵便番号</label>
+                    <div class="area is-inline is-postal">
                         <input
                             type="text"
                             class="input-postal-part1"
@@ -151,16 +151,16 @@ $prefOptions = japanese_prefectures();
                             placeholder="4567"
                             aria-label="郵便番号（下4桁）"
                             >
-                        <button type="button" class="btn btn-secondary btn-sm js-zip-lookup">住所検索</button>
+                        <button type="button" class="btn is-secondary is-sm js-zip-lookup">住所検索</button>
                     </div>
                     <?php foreach (($addrErrParts['postal'] ?? []) as $m): ?>
-                        <p class="field-error"><?= e($m) ?></p>
+                        <p class="text is-error"><?= e($m) ?></p>
                     <?php endforeach; ?>
                 </div>
-                <div class="field-address-row <?= !empty($addrErrParts['prefecture']) ? 'has-error' : '' ?>">
-                    <label class="field-sublabel <?= $req ? 'field-sublabel-with-required' : '' ?>" for="f_<?= e($key) ?>_prefecture">
+                <div class="box is-addressRow <?= !empty($addrErrParts['prefecture']) ? 'is-error' : '' ?>">
+                    <label class="label is-sublabel <?= $req ? 'is-requiredRow' : '' ?>" for="f_<?= e($key) ?>_prefecture">
                         都道府県
-                        <?php if ($req): ?><span class="required">必須</span><?php endif; ?>
+                        <?php if ($req): ?><span class="is-required">必須</span><?php endif; ?>
                     </label>
                     <select
                         class="input-prefecture"
@@ -174,13 +174,13 @@ $prefOptions = japanese_prefectures();
                         <?php endforeach; ?>
                     </select>
                     <?php foreach (($addrErrParts['prefecture'] ?? []) as $m): ?>
-                        <p class="field-error"><?= e($m) ?></p>
+                        <p class="text is-error"><?= e($m) ?></p>
                     <?php endforeach; ?>
                 </div>
-                <div class="field-address-row <?= !empty($addrErrParts['city']) ? 'has-error' : '' ?>">
-                    <label class="field-sublabel <?= $req ? 'field-sublabel-with-required' : '' ?>" for="f_<?= e($key) ?>_city">
+                <div class="box is-addressRow <?= !empty($addrErrParts['city']) ? 'is-error' : '' ?>">
+                    <label class="label is-sublabel <?= $req ? 'is-requiredRow' : '' ?>" for="f_<?= e($key) ?>_city">
                         市区町村
-                        <?php if ($req): ?><span class="required">必須</span><?php endif; ?>
+                        <?php if ($req): ?><span class="is-required">必須</span><?php endif; ?>
                     </label>
                     <input
                         type="text"
@@ -192,13 +192,13 @@ $prefOptions = japanese_prefectures();
                         placeholder="例: 千代田区千代田"
                         <?= $req ? 'required' : '' ?>>
                     <?php foreach (($addrErrParts['city'] ?? []) as $m): ?>
-                        <p class="field-error"><?= e($m) ?></p>
+                        <p class="text is-error"><?= e($m) ?></p>
                     <?php endforeach; ?>
                 </div>
-                <div class="field-address-row <?= !empty($addrErrParts['number']) || !empty($addrErrParts['combined']) ? 'has-error' : '' ?>">
-                    <label class="field-sublabel <?= $req ? 'field-sublabel-with-required' : '' ?>" for="f_<?= e($key) ?>_number">
+                <div class="box is-addressRow <?= !empty($addrErrParts['number']) || !empty($addrErrParts['combined']) ? 'is-error' : '' ?>">
+                    <label class="label is-sublabel <?= $req ? 'is-requiredRow' : '' ?>" for="f_<?= e($key) ?>_number">
                         番地
-                        <?php if ($req): ?><span class="required">必須</span><?php endif; ?>
+                        <?php if ($req): ?><span class="is-required">必須</span><?php endif; ?>
                     </label>
                     <input
                         type="text"
@@ -210,14 +210,14 @@ $prefOptions = japanese_prefectures();
                         placeholder="例: 1-2-3"
                         <?= $req ? 'required' : '' ?>>
                     <?php foreach (($addrErrParts['number'] ?? []) as $m): ?>
-                        <p class="field-error"><?= e($m) ?></p>
+                        <p class="text is-error"><?= e($m) ?></p>
                     <?php endforeach; ?>
                     <?php foreach (($addrErrParts['combined'] ?? []) as $m): ?>
-                        <p class="field-error"><?= e($m) ?></p>
+                        <p class="text is-error"><?= e($m) ?></p>
                     <?php endforeach; ?>
                 </div>
-                <div class="field-address-row">
-                    <label class="field-sublabel" for="f_<?= e($key) ?>_building">建物名・部屋番号</label>
+                <div class="box is-addressRow">
+                    <label class="label is-sublabel" for="f_<?= e($key) ?>_building">建物名・部屋番号</label>
                     <input
                         type="text"
                         class="input-building"
@@ -242,9 +242,9 @@ $prefOptions = japanese_prefectures();
             <?php break; ?>
 
         <?php case 'radio': ?>
-            <div class="choices">
+            <div class="list is-choices">
             <?php foreach ($opts as $i => $opt): ?>
-                <label class="choice">
+                <label class="label is-choice">
                     <input type="radio" name="<?= e($key) ?>" value="<?= e($opt) ?>"
                         <?= ((string) $value === $opt) ? 'checked' : '' ?>
                         <?= $req ? 'required' : '' ?>>
@@ -255,11 +255,11 @@ $prefOptions = japanese_prefectures();
             <?php break; ?>
 
         <?php case 'checkbox': ?>
-            <div class="choices">
+            <div class="list is-choices">
             <?php
                 $selected = is_array($value) ? $value : (is_string($value) ? explode("\n", $value) : []);
                 foreach ($opts as $opt): ?>
-                <label class="choice">
+                <label class="label is-choice">
                     <input type="checkbox" name="<?= e($key) ?>[]" value="<?= e($opt) ?>"
                         <?= in_array($opt, $selected, true) ? 'checked' : '' ?>>
                     <span><?= e($opt) ?></span>
@@ -270,13 +270,13 @@ $prefOptions = japanese_prefectures();
 
         <?php case 'file': ?>
             <input type="file" id="f_<?= e($key) ?>" name="<?= e($key) ?>" <?= $req ? 'required' : '' ?>>
-            <p class="field-help">最大 <?= e(\Core\Validator::formatBytes((int) config('upload.max_size'))) ?></p>
+            <p class="text is-help">最大 <?= e(\Core\Validator::formatBytes((int) config('upload.max_size'))) ?></p>
             <?php break; ?>
     <?php endswitch; ?>
 
     <?php if ($type !== 'address'): ?>
         <?php foreach ($err as $msg): ?>
-            <p class="field-error"><?= e($msg) ?></p>
+            <p class="text is-error"><?= e($msg) ?></p>
         <?php endforeach; ?>
     <?php endif; ?>
 </div>

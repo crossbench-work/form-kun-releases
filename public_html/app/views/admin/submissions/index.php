@@ -1,25 +1,25 @@
-<div class="toolbar">
-    <h1 style="margin:0;">送信履歴: <?= e($form['title']) ?></h1>
+<div class="m-toolbar01">
+    <h1 class="title" style="margin:0;">送信履歴: <?= e($form['title']) ?></h1>
     <div class="spacer"></div>
     <a class="btn" href="<?= e(base_path('/admin/forms/' . $form['id'] . '/edit')) ?>">フォーム編集へ</a>
     <a class="btn" href="<?= e(base_path('/admin/forms')) ?>">フォーム一覧へ</a>
 </div>
 
-<section class="panel">
-    <form method="get" action="<?= e(base_path('/admin/forms/' . $form['id'] . '/submissions')) ?>" class="toolbar">
+<section class="m-panel01">
+    <form method="get" action="<?= e(base_path('/admin/forms/' . $form['id'] . '/submissions')) ?>" class="m-toolbar01">
         <input type="text" name="q" value="<?= e($q) ?>" placeholder="キーワード検索（送信内容）" style="width:280px">
-        <label>期間 <input type="date" name="from" value="<?= e($from) ?>"></label>
-        <label>〜 <input type="date" name="to" value="<?= e($to) ?>"></label>
+        <label class="label">期間 <input type="date" name="from" value="<?= e($from) ?>"></label>
+        <label class="label">〜 <input type="date" name="to" value="<?= e($to) ?>"></label>
         <button class="btn" type="submit">検索</button>
         <?php if ($q !== '' || $from !== '' || $to !== ''): ?>
             <a class="btn" href="<?= e(base_path('/admin/forms/' . $form['id'] . '/submissions')) ?>">リセット</a>
         <?php endif; ?>
         <span class="spacer"></span>
-        <span class="muted"><?= number_format($total) ?>件</span>
+        <span class="text is-muted"><?= number_format($total) ?>件</span>
     </form>
 
     <?php if (empty($rows)): ?>
-        <p class="muted">該当する送信がありません。</p>
+        <p class="text is-muted">該当する送信がありません。</p>
     <?php else: ?>
         <table class="table">
             <thead>
@@ -48,11 +48,11 @@
                     <td><?= e($r['ip']) ?></td>
                     <td>
                         <a href="<?= e(base_path('/admin/submissions/' . $r['id'])) ?>">詳細</a> ｜
-                        <form class="inline-form" method="post"
+                        <form class="is-inline" method="post"
                               action="<?= e(base_path('/admin/submissions/' . $r['id'] . '/delete')) ?>"
                               onsubmit="return confirm('この送信を削除しますか？');">
                             <?= \Core\Csrf::field() ?>
-                            <button type="submit" class="btn btn-sm btn-danger">削除</button>
+                            <button type="submit" class="btn is-sm is-danger">削除</button>
                         </form>
                     </td>
                 </tr>

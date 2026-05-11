@@ -7,15 +7,17 @@
 <title><?= e($title ?? '管理画面') ?> | <?= e(config('site.admin_name')) ?></title>
 <link rel="stylesheet" href="<?= e(base_path('/assets/css/admin.css')) ?>">
 </head>
-<body class="admin-minimal">
-<main class="auth-container">
-    <h1 class="auth-title"><?= e(config('site.admin_name')) ?></h1>
+<body class="l-authMinimal01">
+<main class="l-authCard01">
+    <div class="wrapper">
+        <h1 class="title"><?= e(config('site.admin_name')) ?></h1>
 
-    <?php foreach ((flash() ?? []) as $f): ?>
-        <div class="alert alert-<?= e($f['type']) ?>"><?= e($f['message']) ?></div>
-    <?php endforeach; ?>
+        <?php foreach ((flash() ?? []) as $f): ?>
+            <div class="m-alert01 is-<?= e($f['type']) ?>"><?= e($f['message']) ?></div>
+        <?php endforeach; ?>
 
-    <?= $content ?? '' ?>
+        <?= $content ?? '' ?>
+    </div>
 </main>
 </body>
 </html>

@@ -1,0 +1,11 @@
+{
+  "name": "form-kun",
+  "private": true,
+  "scripts": {
+    "build:css": "sass public_html/assets/scss/public.scss:public_html/assets/css/public.css public_html/assets/scss/admin.scss:public_html/assets/css/admin.css --style=expanded --no-source-map",
+    "watch:css": "sass --watch public_html/assets/scss:public_html/assets/css --no-source-map"
+  },
+  "devDependencies": {
+    "sass": "^1.80.0"
+  }
+}

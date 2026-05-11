@@ -2,10 +2,10 @@
     'use strict';
 
     (function initFormEditTabs() {
-        var root = document.querySelector('.form-edit-tabs');
+        var root = document.querySelector('[data-module="m-formEditTabs01"]');
         if (!root) return;
-        var tabs = root.querySelectorAll('.tablist [role="tab"]');
-        var panels = root.querySelectorAll('.tab-panel');
+        var tabs = root.querySelectorAll('[role="tablist"] [role="tab"]');
+        var panels = root.querySelectorAll('[role="tabpanel"]');
         if (!tabs.length || !panels.length) return;
 
         function activate(panelId) {
