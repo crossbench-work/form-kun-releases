@@ -21,6 +21,11 @@
         <input type="text" id="display_name" name="display_name" value="<?= e($old['display_name'] ?? '') ?>">
     </div>
     <div class="field">
+        <label for="email">メールアドレス（任意・推奨）</label>
+        <input type="email" id="email" name="email" value="<?= e($old['email'] ?? '') ?>" autocomplete="email">
+        <p class="field-help">パスワードを忘れたときに再設定メールを送るために使用します。</p>
+    </div>
+    <div class="field">
         <label for="password">パスワード</label>
         <input type="password" id="password" name="password" required>
         <p class="field-help">8文字以上を推奨</p>

@@ -13,4 +13,7 @@
     <div class="actions">
         <button type="submit" class="btn btn-primary">ログイン</button>
     </div>
+    <p class="muted" style="margin-top:16px;text-align:center;">
+        <a href="<?= e(base_path('/admin/forgot-password')) ?>">パスワードをお忘れの場合</a>
+    </p>
 </form>

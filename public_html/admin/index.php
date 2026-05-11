@@ -14,6 +14,12 @@ $router->get('/login',  fn() => (new \Controllers\Admin\AuthController())->login
 $router->post('/login', fn() => (new \Controllers\Admin\AuthController())->login());
 $router->get('/logout', fn() => (new \Controllers\Admin\AuthController())->logout());
 
+// パスワード再設定（メール）
+$router->get('/forgot-password',  fn() => (new \Controllers\Admin\AuthController())->forgotForm());
+$router->post('/forgot-password', fn() => (new \Controllers\Admin\AuthController())->forgotSubmit());
+$router->get('/reset-password',   fn() => (new \Controllers\Admin\AuthController())->resetForm());
+$router->post('/reset-password',  fn() => (new \Controllers\Admin\AuthController())->resetSubmit());
+
 // 初期セットアップ（初回管理者作成）
 $router->get('/setup',  fn() => (new \Controllers\Admin\SetupController())->show());
 $router->post('/setup', fn() => (new \Controllers\Admin\SetupController())->create());

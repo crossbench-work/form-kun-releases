@@ -30,12 +30,16 @@ class SetupController
 
         $username = trim((string) ($_POST['username'] ?? ''));
         $display  = trim((string) ($_POST['display_name'] ?? ''));
+        $email    = trim((string) ($_POST['email'] ?? ''));
         $pass     = (string) ($_POST['password'] ?? '');
         $passConf = (string) ($_POST['password_confirm'] ?? '');
 
         $errors = [];
         if (!preg_match('/\A[a-zA-Z0-9_.\-]{3,64}\z/', $username)) {
             $errors[] = 'ユーザー名は半角英数字・記号(_.-)で3〜64文字で入力してください。';
+        }
+        if ($email !== '' && !filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            $errors[] = 'メールアドレスの形式が正しくありません。';
         }
         if (mb_strlen($pass) < 8) {
             $errors[] = 'パスワードは8文字以上で設定してください。';
@@ -51,12 +55,12 @@ class SetupController
             (new View())->render('admin/auth/setup', [
                 'title' => '初期セットアップ',
                 'errors' => $errors,
-                'old' => ['username' => $username, 'display_name' => $display],
+                'old' => ['username' => $username, 'display_name' => $display, 'email' => $email],
             ], 'admin_minimal');
             return;
         }
 
-        User::create($username, $pass, $display, 'admin');
+        User::create($username, $pass, $display, 'admin', $email !== '' ? $email : null);
         flash('success', '管理者を作成しました。ログインしてください。');
         redirect('/admin/login');
     }

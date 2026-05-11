@@ -39,6 +39,9 @@ $config = [
         // From に使うメールアドレス（管理者通知や自動返信の差出人）
         'from_email' => 'noreply@example.com',
         'from_name'  => 'フォーム管理システム',
+        // パスワード再設定メール（{{reset_url}} を置換）
+        'password_reset_subject' => '[フォーム管理] パスワード再設定のご案内',
+        'password_reset_body'    => "管理画面へログインするパスワードを再設定するには、次のURLにアクセスしてください（1時間以内）。\n\n{{reset_url}}\n\n心当たりがない場合はこのメールを無視してください。",
     ],
 
     // ファイルアップロード設定
@@ -71,6 +74,10 @@ $config = [
         // 管理画面ログインの連続失敗ロック（同IPからの試行）
         'login_max_attempts'    => 5,
         'login_lockout_seconds' => 600, // 10分
+        // パスワード再設定リンクの有効時間（秒）
+        'password_reset_ttl_seconds'       => 3600,
+        // 「パスワードを忘れた」送信（同一ブラウザセッションあたり・約1時間）
+        'password_reset_forgot_max_per_hour' => 5,
     ],
 ];
 

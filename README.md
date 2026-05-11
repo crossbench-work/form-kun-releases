@@ -13,6 +13,7 @@ PHP（vanilla）+ MySQL 製のフォームビルダー型 Web アプリケーシ
 - スパム対策（簡易計算CAPTCHA + ハニーポット）
 - 管理画面の複数ユーザー（admin / editor）管理
 - ブルートフォース対策（連続失敗ロック）
+- パスワード忘れ時の再設定（メールリンク・ユーザーにメールアドレスを登録した場合）
 
 ## 動作要件
 
@@ -50,6 +51,24 @@ PHP（vanilla）+ MySQL 製のフォームビルダー型 Web アプリケーシ
 │   └── views/
 └── sql/schema.sql          DB スキーマ
 ```
+
+## パスワード再設定（メール）
+
+1. **データベース**  
+   - 新規インストール: [`public_html/sql/schema.sql`](public_html/sql/schema.sql) に含まれます。  
+   - **既存の DB** には [`public_html/sql/migration_password_reset.sql`](public_html/sql/migration_password_reset.sql) を phpMyAdmin 等で **1 回**実行してください（`email` 列や `password_reset_tokens` テーブルを追加します）。既に列がある場合は該当行のエラーを無視して構いません。
+2. **メール送信**  
+   - [`public_html/app/config.php`](public_html/app/config.php) の `mail.from_email` が、サーバから送信できるアドレスになっていること。  
+   - 件名・本文は `mail.password_reset_subject` / `mail.password_reset_body` で変更できます（本文では `{{reset_url}}` を置換）。
+3. **ユーザーにメールを登録**  
+   - 初期セットアップまたは **ユーザー管理 → 編集** でメールアドレスを保存してください（未登録だと再設定メールは送れません）。
+4. **操作**  
+   - ログイン画面の「パスワードをお忘れの場合」から、ユーザー名または登録メールを入力します。
+
+### 全ユーザーを削除してログイン設定をやり直す
+
+phpMyAdmin 等で [`public_html/sql/clear_all_users.sql`](public_html/sql/clear_all_users.sql) を実行すると、**管理ユーザーとログイン試行ログが削除**され、次回 `/admin/` では**初期セットアップ**（新しい管理者の作成）に進めます。フォームや送信データは消えません。  
+**注意:** 上記マイグレーションをまだ当てていない DB では、先に `migration_password_reset.sql` を実行してから、必要なら `clear_all_users.sql` を実行してください。
 
 ## 初期セットアップ手順
 

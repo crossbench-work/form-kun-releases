@@ -26,6 +26,12 @@
         </div>
 
         <div class="field">
+            <label>メールアドレス（任意）</label>
+            <input type="email" name="email" value="<?= e($user['email'] ?? '') ?>" autocomplete="email">
+            <p class="field-help">「パスワードを忘れたとき」に再設定リンクを送るために使用します。</p>
+        </div>
+
+        <div class="field">
             <label>権限</label>
             <select name="role">
                 <option value="editor" <?= ($user['role'] ?? '') === 'editor' ? 'selected' : '' ?>>editor（フォーム/送信履歴の編集）</option>

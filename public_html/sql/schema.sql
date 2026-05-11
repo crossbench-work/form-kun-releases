@@ -13,10 +13,24 @@ CREATE TABLE IF NOT EXISTS users (
     username        VARCHAR(64) UNIQUE NOT NULL,
     password_hash   VARCHAR(255) NOT NULL,
     display_name    VARCHAR(100) DEFAULT NULL,
+    email           VARCHAR(255) DEFAULT NULL,
     role            ENUM('admin','editor') NOT NULL DEFAULT 'editor',
     last_login_at   DATETIME DEFAULT NULL,
     created_at      DATETIME NOT NULL,
-    updated_at      DATETIME NOT NULL
+    updated_at      DATETIME NOT NULL,
+    UNIQUE KEY uk_users_email (email)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- パスワード再設定トークン（メールリンク用）
+CREATE TABLE IF NOT EXISTS password_reset_tokens (
+    id              INT AUTO_INCREMENT PRIMARY KEY,
+    user_id         INT NOT NULL,
+    token_hash      CHAR(64) NOT NULL,
+    expires_at      DATETIME NOT NULL,
+    created_at      DATETIME NOT NULL,
+    UNIQUE KEY uk_token_hash (token_hash),
+    KEY idx_user_id (user_id),
+    CONSTRAINT fk_pwreset_user FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- フォーム本体

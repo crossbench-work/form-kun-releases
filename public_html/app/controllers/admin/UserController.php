@@ -26,7 +26,7 @@ class UserController
     {
         (new View())->render('admin/users/edit', [
             'title' => 'ユーザー新規作成',
-            'user'  => ['id' => null, 'username' => '', 'display_name' => '', 'role' => 'editor'],
+            'user'  => ['id' => null, 'username' => '', 'display_name' => '', 'email' => '', 'role' => 'editor'],
             'errors'=> [],
             'isNew' => true,
         ], 'admin');
@@ -38,24 +38,26 @@ class UserController
 
         $username    = trim((string) ($_POST['username'] ?? ''));
         $displayName = trim((string) ($_POST['display_name'] ?? ''));
+        $email       = trim((string) ($_POST['email'] ?? ''));
         $role        = in_array($_POST['role'] ?? '', ['admin', 'editor'], true) ? $_POST['role'] : 'editor';
         $password    = (string) ($_POST['password'] ?? '');
         $passwordConf= (string) ($_POST['password_confirm'] ?? '');
 
         $errors = $this->validate($username, $password, $passwordConf, null);
+        $errors = array_merge($errors, $this->validateEmailDuplicate($email, null));
         if ($displayName === '') $displayName = $username;
 
         if (!empty($errors)) {
             (new View())->render('admin/users/edit', [
                 'title' => 'ユーザー新規作成',
-                'user'  => ['id' => null, 'username' => $username, 'display_name' => $displayName, 'role' => $role],
+                'user'  => ['id' => null, 'username' => $username, 'display_name' => $displayName, 'email' => $email, 'role' => $role],
                 'errors'=> $errors,
                 'isNew' => true,
             ], 'admin');
             return;
         }
 
-        User::create($username, $password, $displayName, $role);
+        User::create($username, $password, $displayName, $role, $email !== '' ? $email : null);
         flash('success', 'ユーザーを作成しました。');
         redirect('/admin/users');
     }
@@ -79,11 +81,13 @@ class UserController
 
         Csrf::verify();
         $displayName = trim((string) ($_POST['display_name'] ?? ''));
+        $email       = trim((string) ($_POST['email'] ?? ''));
         $role        = in_array($_POST['role'] ?? '', ['admin', 'editor'], true) ? $_POST['role'] : 'editor';
         $password    = (string) ($_POST['password'] ?? '');
         $passwordConf= (string) ($_POST['password_confirm'] ?? '');
 
         $errors = $this->validate($user['username'], $password, $passwordConf, $id, false);
+        $errors = array_merge($errors, $this->validateEmailDuplicate($email, $id));
 
         // 自分自身を editor に降格しようとする場合、admin が他に居なければ拒否
         if ((int) Auth::id() === $id && $role !== 'admin') {
@@ -96,7 +100,7 @@ class UserController
         if (!empty($errors)) {
             (new View())->render('admin/users/edit', [
                 'title' => 'ユーザー編集',
-                'user'  => array_merge($user, ['display_name' => $displayName, 'role' => $role]),
+                'user'  => array_merge($user, ['display_name' => $displayName, 'email' => $email, 'role' => $role]),
                 'errors'=> $errors,
                 'isNew' => false,
             ], 'admin');
@@ -104,7 +108,7 @@ class UserController
         }
 
         if ($displayName === '') $displayName = $user['username'];
-        User::update($id, $displayName, $role, $password !== '' ? $password : null);
+        User::update($id, $displayName, $role, $password !== '' ? $password : null, $email !== '' ? $email : null);
         flash('success', 'ユーザーを更新しました。');
         redirect('/admin/users');
     }
@@ -151,6 +155,26 @@ class UserController
             }
         }
 
+        return $errors;
+    }
+
+    /**
+     * @return string[] エラーメッセージ
+     */
+    private function validateEmailDuplicate(string $email, ?int $excludeUserId): array
+    {
+        $errors = [];
+        if ($email === '') {
+            return $errors;
+        }
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            $errors[] = 'メールアドレスの形式が正しくありません。';
+            return $errors;
+        }
+        $other = User::findByEmail($email);
+        if ($other !== null && ($excludeUserId === null || (int) $other['id'] !== $excludeUserId)) {
+            $errors[] = 'そのメールアドレスは既に使われています。';
+        }
         return $errors;
     }
 

@@ -13,6 +13,7 @@
             <tr>
                 <th>ユーザー名</th>
                 <th>表示名</th>
+                <th>メール</th>
                 <th>権限</th>
                 <th>最終ログイン</th>
                 <th>操作</th>
@@ -23,6 +24,7 @@
             <tr>
                 <td><code><?= e($u['username']) ?></code></td>
                 <td><?= e($u['display_name'] ?? '') ?></td>
+                <td><?= e($u['email'] ?? '') !== '' ? e($u['email']) : '—' ?></td>
                 <td><span class="badge badge-<?= e($u['role']) ?>"><?= e($u['role']) ?></span></td>
                 <td><?= e($u['last_login_at'] ?? '-') ?></td>
                 <td>
