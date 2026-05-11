@@ -321,6 +321,7 @@
         var textPairSettings = li.querySelector('.fb-text-pair-settings');
         var textPairPlaceholders = li.querySelector('.fb-text-pair-placeholders');
         var placeholderWrap = li.querySelector('.fb-placeholder-wrap');
+        var placeholderInput = placeholderWrap ? placeholderWrap.querySelector('input') : null;
         function syncTypeSpecificUi() {
             if (!typeSelect) return;
             var v = typeSelect.value;
@@ -334,7 +335,11 @@
                 textPairPlaceholders.style.display = (v === 'text_pair') ? '' : 'none';
             }
             if (placeholderWrap) {
-                placeholderWrap.style.display = (v === 'text_pair') ? 'none' : '';
+                var hidePlaceholder = (v === 'text_pair' || v === 'radio' || v === 'checkbox');
+                placeholderWrap.style.display = hidePlaceholder ? 'none' : '';
+                if (hidePlaceholder && placeholderInput) {
+                    placeholderInput.value = '';
+                }
             }
         }
         if (typeSelect) {

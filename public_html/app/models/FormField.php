@@ -123,6 +123,9 @@ class FormField
                     );
                 }
                 $placeholder = isset($f['placeholder']) && $f['placeholder'] !== '' ? (string) $f['placeholder'] : null;
+                if (in_array($f['type'], ['radio', 'checkbox'], true)) {
+                    $placeholder = null;
+                }
                 if ($f['type'] === 'text_pair') {
                     $placeholder = self::encodeTextPairPlaceholders(
                         (string) ($f['pair_placeholder_left'] ?? ''),

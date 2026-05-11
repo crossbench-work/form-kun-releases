@@ -181,15 +181,21 @@ class FormController
                 }
                 $regexStored = FormField::encodeRegexPatterns($patterns);
 
+                $type = in_array($f['type'] ?? '', FormField::ALLOWED_TYPES(), true) ? $f['type'] : 'text';
+                $placeholder = trim((string) ($f['placeholder'] ?? ''));
+                if (in_array($type, ['radio', 'checkbox'], true)) {
+                    $placeholder = '';
+                }
+
                 $fields[] = [
                     'field_key'       => $key,
                     'label'           => trim((string) ($f['label'] ?? '')),
-                    'type'            => in_array($f['type'] ?? '', FormField::ALLOWED_TYPES(), true) ? $f['type'] : 'text',
+                    'type'            => $type,
                     'required'        => !empty($f['required']) ? 1 : 0,
                     'max_length'      => isset($f['max_length']) && $f['max_length'] !== '' ? (int) $f['max_length'] : '',
                     'regex'           => $regexStored,
                     'help_text'       => trim((string) ($f['help_text'] ?? '')),
-                    'placeholder'     => trim((string) ($f['placeholder'] ?? '')),
+                    'placeholder'     => $placeholder,
                     'pair_label_left' => trim((string) ($f['pair_label_left'] ?? '')),
                     'pair_label_right'=> trim((string) ($f['pair_label_right'] ?? '')),
                     'pair_placeholder_left' => trim((string) ($f['pair_placeholder_left'] ?? '')),
