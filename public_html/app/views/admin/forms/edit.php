@@ -114,8 +114,8 @@ $regexPresetChoices = [
                         </span>
                     </div>
                     <div class="fb-header-actions">
-                        <button type="button" class="btn is-sm fb-up">↑ 上へ</button>
-                        <button type="button" class="btn is-sm fb-down">↓ 下へ</button>
+                        <button type="button" class="btn is-sm fb-up" aria-label="上へ移動" title="上へ移動">↑</button>
+                        <button type="button" class="btn is-sm fb-down" aria-label="下へ移動" title="下へ移動">↓</button>
                         <button type="button" class="btn is-sm is-danger fb-remove">削除</button>
                     </div>
                 </div>
@@ -337,8 +337,8 @@ $regexPresetChoices = [
                 </span>
             </div>
             <div class="fb-header-actions">
-                <button type="button" class="btn is-sm fb-up">↑ 上へ</button>
-                <button type="button" class="btn is-sm fb-down">↓ 下へ</button>
+                <button type="button" class="btn is-sm fb-up" aria-label="上へ移動" title="上へ移動">↑</button>
+                <button type="button" class="btn is-sm fb-down" aria-label="下へ移動" title="下へ移動">↓</button>
                 <button type="button" class="btn is-sm is-danger fb-remove">削除</button>
             </div>
         </div>
