@@ -684,6 +684,20 @@ class FormController
             $agreement = self::defaultAgreementField();
         }
 
+        $agreement['field_key'] = 'agreement_consent';
+        $agreement['type'] = 'checkbox';
+        $agreement['required'] = 1;
+        $agreement['regex'] = null;
+        $agreement['max_length'] = '';
+        $agreement['placeholder'] = '';
+        $agreement['pair_label_left'] = '';
+        $agreement['pair_label_right'] = '';
+        $agreement['pair_placeholder_left'] = '';
+        $agreement['pair_placeholder_right'] = '';
+        $agreement['checkbox_limit_enabled'] = 0;
+        $agreement['checkbox_min_selections'] = '';
+        $agreement['checkbox_max_selections'] = '';
+        $agreement['options'] = '規約に同意する';
         $agreement['_is_agreement_field'] = 1;
         $rest[] = $agreement;
 
