@@ -850,6 +850,9 @@ form.is-inline {
   margin: 0;
   padding: 0;
 }
+[data-module=m-formBuilder01] .fb-static-field {
+  margin-top: 12px;
+}
 [data-module=m-formBuilder01] .fb-field {
   background: #f9fafb;
   border: 1px solid #e2e8f0;

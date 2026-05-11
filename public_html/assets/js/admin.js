@@ -88,10 +88,15 @@
     var list = document.getElementById('fb-fields');
     if (!list) return;
 
+    var builderRoot = list.closest('[data-module="m-formBuilder01"]');
     var template = document.getElementById('fb-template');
     var addBtn = document.getElementById('fb-add');
     var descriptionTemplate = document.getElementById('fb-description-template');
     var descriptionEditors = document.querySelectorAll('[data-description-editor]');
+
+    function getFieldItems() {
+        return builderRoot ? builderRoot.querySelectorAll('[data-field-item="1"]') : list.querySelectorAll('.fb-field');
+    }
 
     function extractDataName(name) {
         if (!name) return null;
@@ -109,7 +114,7 @@
         var mode = editor.getAttribute('data-position-mode') || 'simple';
         var options = [{ value: '0', label: '先頭' }];
         if (mode === 'input') {
-            options.push({ value: String(list.querySelectorAll('.fb-field').length + 1), label: '末尾' });
+            options.push({ value: String(getFieldItems().length + 1), label: '末尾' });
         } else {
             options.push({ value: '1', label: '末尾' });
         }
@@ -253,7 +258,9 @@
     }
 
     function syncAllRegexRows() {
-        list.querySelectorAll('.fb-regex-row').forEach(syncRegexRowValue);
+        getFieldItems().forEach(function (field) {
+            field.querySelectorAll('.fb-regex-row').forEach(syncRegexRowValue);
+        });
     }
 
     function syncRegexOptionsForType(select, typeValue) {
@@ -358,7 +365,7 @@
     window.formkunInitFbSortable = initFbSortable;
 
     function reindex() {
-        var items = list.querySelectorAll('.fb-field');
+        var items = getFieldItems();
         items.forEach(function (li, i) {
             li.querySelectorAll('input, textarea, select').forEach(function (el) {
                 if (el.classList.contains('fb-regex-custom') ||
@@ -708,19 +715,14 @@
             fkInput.classList.add('is-locked');
         }
         applyFieldPreset(clone, preset);
-        var agreementField = list.querySelector('.fb-field[data-is-agreement-field="1"]');
-        if (agreementField) {
-            list.insertBefore(clone, agreementField);
-        } else {
-            list.appendChild(clone);
-        }
+        list.appendChild(clone);
         bind(clone);
         reindex();
         initFbSortable();
         return clone;
     }
 
-    list.querySelectorAll('.fb-field').forEach(bind);
+    getFieldItems().forEach(bind);
     descriptionEditors.forEach(function (editor) {
         var descriptionList = getDescriptionList(editor);
         var addButton = editor.querySelector('.fb-description-add');
