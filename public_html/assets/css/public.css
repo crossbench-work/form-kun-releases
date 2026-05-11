@@ -263,8 +263,6 @@ h2 {
   margin-bottom: 12px;
 }
 .p-formShow01 .block.is-lead {
-  border: 1px solid #e3e6ea;
-  border-radius: 8px;
   margin-bottom: 16px;
 }
 
@@ -331,6 +329,19 @@ h2 {
   font-family: inherit;
   background: #fff;
   color: #111;
+}
+[data-module=c-publicForm01] input[type=text]::placeholder,
+[data-module=c-publicForm01] input[type=email]::placeholder,
+[data-module=c-publicForm01] input[type=tel]::placeholder,
+[data-module=c-publicForm01] input[type=number]::placeholder,
+[data-module=c-publicForm01] input[type=date]::placeholder,
+[data-module=c-publicForm01] input[type=time]::placeholder,
+[data-module=c-publicForm01] input[type=password]::placeholder,
+[data-module=c-publicForm01] input[type=file]::placeholder,
+[data-module=c-publicForm01] textarea::placeholder,
+[data-module=c-publicForm01] select::placeholder {
+  color: #94a3b8;
+  opacity: 1;
 }
 [data-module=c-publicForm01] textarea {
   resize: vertical;
