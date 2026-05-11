@@ -537,6 +537,9 @@ h2 {
   gap: 12px;
   flex-wrap: wrap;
 }
+[data-module=c-confirmSummary01] .area.is-actions.is-centered {
+  justify-content: center;
+}
 [data-module=c-confirmSummary01] .btn {
   display: inline-block;
   padding: 10px 20px;

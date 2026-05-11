@@ -209,6 +209,7 @@ class FormController
             'show_title'           => !empty($_POST['show_title']) ? 1 : 0,
             'show_description'     => 0,
             'confirm_button_text'  => trim((string) ($_POST['confirm_button_text'] ?? '')),
+            'submit_button_text'   => trim((string) ($_POST['submit_button_text'] ?? '')),
             'confirm_message'      => null,
             'thanks_message'       => null,
             'redirect_url'         => trim((string) ($_POST['redirect_url'] ?? '')),
@@ -224,6 +225,9 @@ class FormController
         ];
         if ($form['confirm_button_text'] === '') {
             $form['confirm_button_text'] = '入力内容を確認する';
+        }
+        if ($form['submit_button_text'] === '') {
+            $form['submit_button_text'] = '送信する';
         }
 
         $descriptionBlocks = self::collectContentBlocks('description_blocks', 'description');
@@ -318,6 +322,9 @@ class FormController
         if (mb_strlen($form['confirm_button_text']) > 200) {
             $errors[] = 'ボタンテキストは200文字以内にしてください。';
         }
+        if (mb_strlen($form['submit_button_text']) > 200) {
+            $errors[] = '確認画面のボタンテキストは200文字以内にしてください。';
+        }
         if ($form['admin_emails'] !== '') {
             foreach (preg_split('/[,;]+/', $form['admin_emails']) as $em) {
                 $em = trim($em);
@@ -410,6 +417,7 @@ class FormController
             'show_title' => 1,
             'show_description' => 1,
             'confirm_button_text' => '入力内容を確認する',
+            'submit_button_text' => '送信する',
             'confirm_message' => '',
             'thanks_message' => '',
             'redirect_url' => '',
@@ -434,6 +442,9 @@ class FormController
         $form['confirm_button_text'] = trim((string) ($form['confirm_button_text'] ?? '')) !== ''
             ? (string) $form['confirm_button_text']
             : '入力内容を確認する';
+        $form['submit_button_text'] = trim((string) ($form['submit_button_text'] ?? '')) !== ''
+            ? (string) $form['submit_button_text']
+            : '送信する';
         $form['description_blocks'] = self::normalizeDescriptionBlocks(
             decode_form_description_blocks($form['description'] ?? '', !empty($form['show_description'])),
             false,

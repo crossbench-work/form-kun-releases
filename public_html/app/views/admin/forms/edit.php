@@ -385,6 +385,13 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
         </div>
         <?php $renderDescriptionEditor('confirm_blocks', $confirmBlocks, 'simple'); ?>
     </section>
+    <section class="m-panel01">
+        <h2>ボタン設定</h2>
+        <div class="box is-field">
+            <label class="label" for="submit_button_text">ボタンテキスト</label>
+            <input type="text" id="submit_button_text" name="submit_button_text" value="<?= e($form['submit_button_text'] ?? '送信する') ?>">
+        </div>
+    </section>
         </div>
 
         <div id="tab-panel-thanks" class="box is-tabPanel" role="tabpanel" aria-labelledby="tab-btn-thanks" hidden>

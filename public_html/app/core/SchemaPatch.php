@@ -216,6 +216,17 @@ class SchemaPatch
                 );
             }
 
+            $hasSubmitButtonText = Database::fetchOne(
+                'SELECT COUNT(*) AS c FROM information_schema.COLUMNS
+                 WHERE TABLE_SCHEMA = ? AND TABLE_NAME = ? AND COLUMN_NAME = ?',
+                [$schema, 'forms', 'submit_button_text']
+            );
+            if ((int) ($hasSubmitButtonText['c'] ?? 0) === 0) {
+                Database::execute(
+                    'ALTER TABLE forms ADD COLUMN submit_button_text VARCHAR(200) DEFAULT NULL AFTER confirm_button_text'
+                );
+            }
+
             $hasConfirmMessage = Database::fetchOne(
                 'SELECT COUNT(*) AS c FROM information_schema.COLUMNS
                  WHERE TABLE_SCHEMA = ? AND TABLE_NAME = ? AND COLUMN_NAME = ?',
@@ -223,7 +234,7 @@ class SchemaPatch
             );
             if ((int) ($hasConfirmMessage['c'] ?? 0) === 0) {
                 Database::execute(
-                    'ALTER TABLE forms ADD COLUMN confirm_message TEXT DEFAULT NULL AFTER confirm_button_text'
+                    'ALTER TABLE forms ADD COLUMN confirm_message TEXT DEFAULT NULL AFTER submit_button_text'
                 );
             }
         } catch (\Throwable $e) {
