@@ -114,8 +114,9 @@
     }
 
     function bindAccordion(li) {
+        var header = li.querySelector('.fb-field-header');
         var toggle = li.querySelector('.fb-field-toggle');
-        if (!toggle) return;
+        if (!header || !toggle) return;
         var icon = toggle.querySelector('.fb-field-toggle-icon');
 
         function syncToggleIcon() {
@@ -126,9 +127,10 @@
             }
         }
 
-        toggle.addEventListener('click', function (e) {
-            e.preventDefault();
-            e.stopPropagation();
+        header.addEventListener('click', function (e) {
+            if (e.target.closest('.fb-header-actions') || e.target.closest('.fb-header-delete')) {
+                return;
+            }
             li.classList.toggle('is-collapsed');
             syncToggleIcon();
         });

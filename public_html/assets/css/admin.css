@@ -776,6 +776,7 @@ form.is-inline {
   gap: 6px;
   padding: 10px 12px;
   background: #fff;
+  cursor: pointer;
 }
 [data-module=m-formBuilder01] .fb-drag-handle {
   flex-shrink: 0;
