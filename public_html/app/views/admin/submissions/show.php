@@ -48,6 +48,9 @@
                 <?php if ($f['type'] === 'address'): ?>
                     <?php $addrText = format_address_value_display($val); ?>
                     <?= $addrText !== '' ? nl2br(e($addrText)) : '<span class="text is-muted">（未入力）</span>' ?>
+                <?php elseif ($f['type'] === 'text_pair'): ?>
+                    <?php $pairText = format_text_pair_value_display($val, \Models\FormField::decodeTextPairLabels($f['options_json'] ?? null)); ?>
+                    <?= $pairText !== '' ? nl2br(e($pairText)) : '<span class="text is-muted">（未入力）</span>' ?>
                 <?php else: ?>
                     <?= $val !== '' ? nl2br(e((string) $val)) : '<span class="text is-muted">（未入力）</span>' ?>
                 <?php endif; ?>

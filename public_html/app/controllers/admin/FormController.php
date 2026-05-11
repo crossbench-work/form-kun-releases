@@ -29,7 +29,7 @@ class FormController
         (new View())->render('admin/forms/edit', [
             'title' => 'フォーム新規作成',
             'form'  => self::defaultForm(),
-            'fields'=> [self::defaultField()],
+            'fields'=> [],
             'errors'=> [],
             'isNew' => true,
         ], 'admin');
@@ -67,8 +67,19 @@ class FormController
 
         // 編集ビュー用に options をテキストに変換
         $editFields = array_map(function ($f) {
-            $opts = json_decode((string) ($f['options_json'] ?? ''), true);
-            $f['options'] = is_array($opts) ? implode("\n", $opts) : '';
+            if (($f['type'] ?? '') === 'text_pair') {
+                $pairLabels = \Models\FormField::decodeTextPairLabels($f['options_json'] ?? null);
+                $f['pair_label_left'] = $pairLabels['left_label'];
+                $f['pair_label_right'] = $pairLabels['right_label'];
+                $f['options'] = '';
+            } else {
+                $opts = json_decode((string) ($f['options_json'] ?? ''), true);
+                $f['options'] = is_array($opts) && array_keys($opts) === range(0, count($opts) - 1)
+                    ? implode("\n", $opts)
+                    : '';
+                $f['pair_label_left'] = '';
+                $f['pair_label_right'] = '';
+            }
             return $f;
         }, $fields);
         if (empty($editFields)) {
@@ -173,14 +184,12 @@ class FormController
                     'regex'           => $regexStored,
                     'help_text'       => trim((string) ($f['help_text'] ?? '')),
                     'placeholder'     => trim((string) ($f['placeholder'] ?? '')),
+                    'pair_label_left' => trim((string) ($f['pair_label_left'] ?? '')),
+                    'pair_label_right'=> trim((string) ($f['pair_label_right'] ?? '')),
                     'options'         => (string) ($f['options'] ?? ''),
                 ];
             }
         }
-        if (empty($fields)) {
-            $fields = [self::defaultField()];
-        }
-
         return ['form' => $form, 'fields' => $fields];
     }
 
@@ -232,6 +241,13 @@ class FormController
                 $opts = FormField::parseOptions($f['options']);
                 if (count($opts) === 0) {
                     $errors[] = "項目{$no}: 選択肢を1行に1つずつ入力してください。";
+                }
+            } elseif ($f['type'] === 'text_pair') {
+                if ($f['pair_label_left'] === '') {
+                    $errors[] = "項目{$no}: 1つ目の入力欄の表示名を入力してください。";
+                }
+                if ($f['pair_label_right'] === '') {
+                    $errors[] = "項目{$no}: 2つ目の入力欄の表示名を入力してください。";
                 }
             }
             $regexPatterns = FormField::decodeRegexPatterns(
@@ -288,6 +304,8 @@ class FormController
             'regex' => null,
             'help_text' => '',
             'placeholder' => '',
+            'pair_label_left' => '',
+            'pair_label_right' => '',
             'options' => '',
         ];
     }

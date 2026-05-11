@@ -64,7 +64,7 @@ CREATE TABLE IF NOT EXISTS form_fields (
     field_key       VARCHAR(64) NOT NULL,
     label           VARCHAR(200) NOT NULL,
     type            ENUM(
-        'text','textarea','email','tel','number','address',
+        'text','textarea','email','tel','number','address','text_pair',
         'radio','checkbox','select','date','time','file'
     ) NOT NULL,
     required        TINYINT(1) NOT NULL DEFAULT 0,

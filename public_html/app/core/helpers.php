@@ -159,6 +159,43 @@ if (!function_exists('address_errors_any')) {
     }
 }
 
+if (!function_exists('text_pair_errors_normalize')) {
+    /**
+     * @param mixed $err
+     * @return array{_root:string[],left:string[],right:string[]}
+     */
+    function text_pair_errors_normalize($err): array
+    {
+        $defaults = [
+            '_root' => [],
+            'left' => [],
+            'right' => [],
+        ];
+        if (!is_array($err) || $err === []) {
+            return $defaults;
+        }
+        $looksNested = isset($err['left']) || isset($err['right']) || isset($err['_root']);
+        if (!$looksNested) {
+            foreach ($err as $m) {
+                if (is_string($m)) {
+                    $defaults['_root'][] = $m;
+                }
+            }
+            return $defaults;
+        }
+        foreach (['_root', 'left', 'right'] as $k) {
+            if (!empty($err[$k]) && is_array($err[$k])) {
+                foreach ($err[$k] as $m) {
+                    if (is_string($m)) {
+                        $defaults[$k][] = $m;
+                    }
+                }
+            }
+        }
+        return $defaults;
+    }
+}
+
 if (!function_exists('japanese_prefectures')) {
     /**
      * @return string[] 都道府県名（47）
@@ -298,6 +335,49 @@ if (!function_exists('format_address_value_display')) {
             return format_address_array_for_display($decoded);
         }
         return $s;
+    }
+}
+
+if (!function_exists('format_text_pair_value_display')) {
+    /**
+     * @param array|string $value
+     * @param array{left_label?:string,right_label?:string}|null $labels
+     */
+    function format_text_pair_value_display($value, ?array $labels = null): string
+    {
+        $labels = $labels ?? [];
+        $leftLabel = trim((string) ($labels['left_label'] ?? ''));
+        $rightLabel = trim((string) ($labels['right_label'] ?? ''));
+        $left = '';
+        $right = '';
+
+        if (is_array($value)) {
+            $left = trim((string) ($value['left'] ?? ''));
+            $right = trim((string) ($value['right'] ?? ''));
+        } else {
+            $s = trim((string) $value);
+            if ($s === '') {
+                return '';
+            }
+            $decoded = json_decode($s, true);
+            if (is_array($decoded) && (isset($decoded['left']) || isset($decoded['right']))) {
+                $left = trim((string) ($decoded['left'] ?? ''));
+                $right = trim((string) ($decoded['right'] ?? ''));
+            } else {
+                $parts = preg_split('/\r\n|\r|\n/', $s) ?: [];
+                $left = trim((string) ($parts[0] ?? ''));
+                $right = trim((string) ($parts[1] ?? ''));
+            }
+        }
+
+        $lines = [];
+        if ($left !== '') {
+            $lines[] = ($leftLabel !== '' ? $leftLabel . ': ' : '') . $left;
+        }
+        if ($right !== '') {
+            $lines[] = ($rightLabel !== '' ? $rightLabel . ': ' : '') . $right;
+        }
+        return implode("\n", $lines);
     }
 }
 

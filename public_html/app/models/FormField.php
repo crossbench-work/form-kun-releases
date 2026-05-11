@@ -65,6 +65,7 @@ class FormField
     {
         return [
             'text' => '1行テキスト',
+            'text_pair' => '1行テキスト（2入力）',
             'textarea' => '複数行テキスト',
             'address' => '住所',
             'email' => 'メールアドレス',
@@ -115,6 +116,11 @@ class FormField
                 if (in_array($f['type'], ['radio','checkbox','select'], true) && !empty($f['options'])) {
                     $opts = self::parseOptions($f['options']);
                     $optionsJson = json_encode($opts, JSON_UNESCAPED_UNICODE);
+                } elseif ($f['type'] === 'text_pair') {
+                    $optionsJson = self::encodeTextPairLabels(
+                        (string) ($f['pair_label_left'] ?? ''),
+                        (string) ($f['pair_label_right'] ?? '')
+                    );
                 }
                 Database::execute(
                     'INSERT INTO form_fields (
@@ -161,5 +167,45 @@ class FormField
             }
         }
         return array_values(array_unique($out));
+    }
+
+    /**
+     * @return array{left_label:string,right_label:string}
+     */
+    public static function decodeTextPairLabels($json): array
+    {
+        if (!is_string($json) || trim($json) === '') {
+            return ['left_label' => '', 'right_label' => ''];
+        }
+
+        $decoded = json_decode($json, true);
+        if (!is_array($decoded)) {
+            return ['left_label' => '', 'right_label' => ''];
+        }
+
+        if (array_keys($decoded) === range(0, count($decoded) - 1)) {
+            return [
+                'left_label' => isset($decoded[0]) ? trim((string) $decoded[0]) : '',
+                'right_label' => isset($decoded[1]) ? trim((string) $decoded[1]) : '',
+            ];
+        }
+
+        return [
+            'left_label' => trim((string) ($decoded['left_label'] ?? '')),
+            'right_label' => trim((string) ($decoded['right_label'] ?? '')),
+        ];
+    }
+
+    public static function encodeTextPairLabels(string $leftLabel, string $rightLabel): ?string
+    {
+        $payload = [
+            'left_label' => trim($leftLabel),
+            'right_label' => trim($rightLabel),
+        ];
+        if ($payload['left_label'] === '' && $payload['right_label'] === '') {
+            return null;
+        }
+
+        return json_encode($payload, JSON_UNESCAPED_UNICODE);
     }
 }

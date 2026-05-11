@@ -40,6 +40,8 @@ class SchemaPatch
 
             self::ensureFormFieldsTypeEnumAddress();
 
+            self::ensureFormFieldsTypeEnumTextPair();
+
             self::ensureFormsDisplayFlags();
 
             $hasTbl = Database::fetchOne(
@@ -135,6 +137,37 @@ class SchemaPatch
             );
         } catch (\Throwable $e) {
             error_log('[formkun] SchemaPatch form_fields.type address: ' . $e->getMessage());
+        }
+    }
+
+    /**
+     * form_fields.type ENUM に text_pair（1行テキスト2入力）を追加。
+     */
+    public static function ensureFormFieldsTypeEnumTextPair(): void
+    {
+        try {
+            $dbRow = Database::fetchOne('SELECT DATABASE() AS n');
+            $schema = (string) ($dbRow['n'] ?? '');
+            if ($schema === '') {
+                return;
+            }
+            $col = Database::fetchOne(
+                'SELECT COLUMN_TYPE AS ct FROM information_schema.COLUMNS
+                 WHERE TABLE_SCHEMA = ? AND TABLE_NAME = ? AND COLUMN_NAME = ?',
+                [$schema, 'form_fields', 'type']
+            );
+            $ct = strtolower((string) ($col['ct'] ?? ''));
+            if ($ct === '' || strpos($ct, 'text_pair') !== false) {
+                return;
+            }
+            Database::execute(
+                "ALTER TABLE form_fields MODIFY COLUMN type ENUM(
+                    'text','textarea','email','tel','number','address','text_pair',
+                    'radio','checkbox','select','date','time','file'
+                ) NOT NULL"
+            );
+        } catch (\Throwable $e) {
+            error_log('[formkun] SchemaPatch form_fields.type text_pair: ' . $e->getMessage());
         }
     }
 

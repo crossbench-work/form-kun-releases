@@ -75,6 +75,15 @@ class Validator
                 'building'    => $building,
             ];
         }
+        if ($type === 'text_pair') {
+            if (!is_array($raw)) {
+                return ['left' => '', 'right' => ''];
+            }
+            return [
+                'left' => isset($raw['left']) ? trim((string) $raw['left']) : '',
+                'right' => isset($raw['right']) ? trim((string) $raw['right']) : '',
+            ];
+        }
         if (is_array($raw)) {
             $arr = [];
             foreach ($raw as $v) {
@@ -108,6 +117,10 @@ class Validator
 
         if ($type === 'address') {
             $this->validateAddressField($field, $value);
+            return;
+        }
+        if ($type === 'text_pair') {
+            $this->validateTextPairField($field, $value);
             return;
         }
 
@@ -181,6 +194,71 @@ class Validator
                     }
                 }
                 break;
+        }
+    }
+
+    /**
+     * @param mixed $value normalize 済みの連想配列を想定
+     */
+    private function validateTextPairField(array $field, $value): void
+    {
+        $key   = $field['field_key'];
+        $label = $field['label'];
+        $req   = (int) ($field['required'] ?? 0) === 1;
+        $maxL  = isset($field['max_length']) ? (int) $field['max_length'] : 0;
+        $regexStored = $field['regex'] ?? '';
+        $regexPatterns = is_string($regexStored)
+            ? FormField::decodeRegexPatterns($regexStored)
+            : [];
+        $pairLabels = FormField::decodeTextPairLabels($field['options_json'] ?? null);
+        $leftLabel = $pairLabels['left_label'] !== '' ? $pairLabels['left_label'] : '入力欄1';
+        $rightLabel = $pairLabels['right_label'] !== '' ? $pairLabels['right_label'] : '入力欄2';
+
+        if (!is_array($value)) {
+            $this->addTextPairPartError($key, '_root', $label . 'の入力形式が不正です。');
+            return;
+        }
+
+        $left = (string) ($value['left'] ?? '');
+        $right = (string) ($value['right'] ?? '');
+        $allEmpty = ($left === '' && $right === '');
+
+        if ($req && $allEmpty) {
+            $this->addTextPairPartError($key, 'left', $label . 'の' . $leftLabel . 'を入力してください。');
+            $this->addTextPairPartError($key, 'right', $label . 'の' . $rightLabel . 'を入力してください。');
+            return;
+        }
+        if (!$req && $allEmpty) {
+            return;
+        }
+        if ($req && $left === '') {
+            $this->addTextPairPartError($key, 'left', $label . 'の' . $leftLabel . 'を入力してください。');
+        }
+        if ($req && $right === '') {
+            $this->addTextPairPartError($key, 'right', $label . 'の' . $rightLabel . 'を入力してください。');
+        }
+
+        foreach (['left' => $leftLabel, 'right' => $rightLabel] as $part => $partLabel) {
+            $partValue = (string) ($value[$part] ?? '');
+            if ($partValue === '') {
+                continue;
+            }
+            if ($maxL > 0 && mb_strlen($partValue, 'UTF-8') > $maxL) {
+                $this->addTextPairPartError($key, $part, $label . 'の' . $partLabel . 'は' . $maxL . '文字以内で入力してください。');
+            }
+            foreach ($regexPatterns as $regex) {
+                if ($regex === '') {
+                    continue;
+                }
+                if (@preg_match($regex, '') === false) {
+                    $this->addTextPairPartError($key, $part, $label . 'の検証設定が不正です。');
+                    break 2;
+                }
+                if (!preg_match($regex, $partValue)) {
+                    $this->addTextPairPartError($key, $part, $label . 'の' . $partLabel . 'の形式が正しくありません。');
+                    break;
+                }
+            }
         }
     }
 
@@ -273,6 +351,20 @@ class Validator
         $this->errors[$key][$part][] = $message;
     }
 
+    /**
+     * @param string $part left|right|_root
+     */
+    private function addTextPairPartError(string $key, string $part, string $message): void
+    {
+        if (!isset($this->errors[$key])) {
+            $this->errors[$key] = [];
+        }
+        if (!isset($this->errors[$key][$part])) {
+            $this->errors[$key][$part] = [];
+        }
+        $this->errors[$key][$part][] = $message;
+    }
+
     private function isValidPostalDigits(string $postal): bool
     {
         $d = preg_replace('/\D/', '', $postal);
@@ -332,7 +424,10 @@ class Validator
             return [];
         }
         $arr = json_decode($json, true);
-        return is_array($arr) ? array_values(array_filter(array_map('strval', $arr), fn($v) => $v !== '')) : [];
+        if (!is_array($arr) || array_keys($arr) !== range(0, count($arr) - 1)) {
+            return [];
+        }
+        return array_values(array_filter(array_map('strval', $arr), fn($v) => $v !== ''));
     }
 
     public static function formatBytes(int $bytes): string

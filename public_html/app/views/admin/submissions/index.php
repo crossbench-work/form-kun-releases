@@ -41,7 +41,19 @@
                     <td><?= e($r['submitted_at']) ?></td>
                     <?php foreach ($previewKeys as $key):
                         $v = $previews[(int)$r['id']][$key] ?? '';
-                        $v = mb_substr((string)$v, 0, 40);
+                        $fieldDef = null;
+                        foreach ($fields as $f) {
+                            if ($f['field_key'] === $key) {
+                                $fieldDef = $f;
+                                break;
+                            }
+                        }
+                        if (($fieldDef['type'] ?? '') === 'address') {
+                            $v = format_address_value_display($v);
+                        } elseif (($fieldDef['type'] ?? '') === 'text_pair') {
+                            $v = format_text_pair_value_display($v, \Models\FormField::decodeTextPairLabels($fieldDef['options_json'] ?? null));
+                        }
+                        $v = mb_substr((string) $v, 0, 40);
                     ?>
                         <td><?= e($v) ?></td>
                     <?php endforeach; ?>

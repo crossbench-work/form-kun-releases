@@ -9,16 +9,24 @@ $req   = (int) $field['required'] === 1;
 $value = $values[$key] ?? '';
 $err   = $errors[$key] ?? [];
 $addrErrParts = ($type === 'address') ? address_errors_normalize($err) : [];
+$pairErrParts = ($type === 'text_pair') ? text_pair_errors_normalize($err) : [];
 $opts  = \Core\Validator::decodeOptions($field['options_json'] ?? null);
+$pairLabels = ($type === 'text_pair')
+    ? \Models\FormField::decodeTextPairLabels($field['options_json'] ?? null)
+    : ['left_label' => '', 'right_label' => ''];
 $ph    = $field['placeholder'] ?? '';
 
-$labelFor = $type === 'address' ? 'f_' . $key . '_postal3' : 'f_' . $key;
+$labelFor = $type === 'address'
+    ? 'f_' . $key . '_postal3'
+    : ($type === 'text_pair' ? 'f_' . $key . '_left' : 'f_' . $key);
 
 $addrPostal = '';
 $addrPref   = '';
 $addrCity   = '';
 $addrNumber = '';
 $addrBuilding = '';
+$pairLeft = '';
+$pairRight = '';
 if ($type === 'address') {
     if (is_array($value)) {
         if (isset($value['prefecture']) || isset($value['city']) || isset($value['street'])
@@ -63,6 +71,22 @@ if ($type === 'address') {
         }
     }
 }
+if ($type === 'text_pair') {
+    if (is_array($value)) {
+        $pairLeft = (string) ($value['left'] ?? '');
+        $pairRight = (string) ($value['right'] ?? '');
+    } elseif (is_string($value) && $value !== '') {
+        $dec = json_decode($value, true);
+        if (is_array($dec) && (isset($dec['left']) || isset($dec['right']))) {
+            $pairLeft = (string) ($dec['left'] ?? '');
+            $pairRight = (string) ($dec['right'] ?? '');
+        } else {
+            $parts = preg_split('/\r\n|\r|\n/', $value) ?: [];
+            $pairLeft = (string) ($parts[0] ?? '');
+            $pairRight = (string) ($parts[1] ?? '');
+        }
+    }
+}
 
 $postal3 = '';
 $postal4 = '';
@@ -81,7 +105,7 @@ if ($type === 'address' && $addrPostal !== '') {
 
 $prefOptions = japanese_prefectures();
 ?>
-<div class="box is-field <?= ($type !== 'address' && !empty($err)) ? 'is-error' : '' ?>">
+<div class="box is-field <?= ($type !== 'address' && $type !== 'text_pair' && !empty($err)) ? 'is-error' : '' ?>">
     <label for="<?= e($labelFor) ?>" class="label">
         <?= e($label) ?>
         <?php if ($req && $type !== 'address'): ?><span class="is-required">必須</span><?php endif; ?>
@@ -230,6 +254,48 @@ $prefOptions = japanese_prefectures();
             </div>
             <?php break; ?>
 
+        <?php case 'text_pair': ?>
+            <div class="box is-textPair" id="f_<?= e($key) ?>">
+                <?php foreach (($pairErrParts['_root'] ?? []) as $m): ?>
+                    <p class="text is-error"><?= e($m) ?></p>
+                <?php endforeach; ?>
+                <div class="box is-textPairCol <?= !empty($pairErrParts['left']) ? 'is-error' : '' ?>">
+                    <label class="label is-sublabel" for="f_<?= e($key) ?>_left">
+                        <?= e($pairLabels['left_label'] !== '' ? $pairLabels['left_label'] : '入力欄1') ?>
+                    </label>
+                    <input
+                        type="text"
+                        id="f_<?= e($key) ?>_left"
+                        name="<?= e($key) ?>[left]"
+                        value="<?= e($pairLeft) ?>"
+                        <?= $field['max_length'] ? 'maxlength="' . (int) $field['max_length'] . '"' : '' ?>
+                        aria-label="<?= e($pairLabels['left_label'] !== '' ? $pairLabels['left_label'] : '入力欄1') ?>"
+                        <?= $req ? 'required' : '' ?>
+                        >
+                    <?php foreach (($pairErrParts['left'] ?? []) as $m): ?>
+                        <p class="text is-error"><?= e($m) ?></p>
+                    <?php endforeach; ?>
+                </div>
+                <div class="box is-textPairCol <?= !empty($pairErrParts['right']) ? 'is-error' : '' ?>">
+                    <label class="label is-sublabel" for="f_<?= e($key) ?>_right">
+                        <?= e($pairLabels['right_label'] !== '' ? $pairLabels['right_label'] : '入力欄2') ?>
+                    </label>
+                    <input
+                        type="text"
+                        id="f_<?= e($key) ?>_right"
+                        name="<?= e($key) ?>[right]"
+                        value="<?= e($pairRight) ?>"
+                        <?= $field['max_length'] ? 'maxlength="' . (int) $field['max_length'] . '"' : '' ?>
+                        aria-label="<?= e($pairLabels['right_label'] !== '' ? $pairLabels['right_label'] : '入力欄2') ?>"
+                        <?= $req ? 'required' : '' ?>
+                        >
+                    <?php foreach (($pairErrParts['right'] ?? []) as $m): ?>
+                        <p class="text is-error"><?= e($m) ?></p>
+                    <?php endforeach; ?>
+                </div>
+            </div>
+            <?php break; ?>
+
         <?php case 'select': ?>
             <select id="f_<?= e($key) ?>" name="<?= e($key) ?>" <?= $req ? 'required' : '' ?>>
                 <option value="">選択してください</option>
@@ -274,7 +340,7 @@ $prefOptions = japanese_prefectures();
             <?php break; ?>
     <?php endswitch; ?>
 
-    <?php if ($type !== 'address'): ?>
+    <?php if ($type !== 'address' && $type !== 'text_pair'): ?>
         <?php foreach ($err as $msg): ?>
             <p class="text is-error"><?= e($msg) ?></p>
         <?php endforeach; ?>

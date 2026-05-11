@@ -221,12 +221,24 @@
     function bind(li) {
         var typeSelect = li.querySelector('.fb-type');
         var optionsBox = li.querySelector('.fb-options');
+        var textPairSettings = li.querySelector('.fb-text-pair-settings');
+        var placeholderWrap = li.querySelector('.fb-placeholder-wrap');
+        function syncTypeSpecificUi() {
+            if (!typeSelect) return;
+            var v = typeSelect.value;
+            if (optionsBox) {
+                optionsBox.style.display = (v === 'radio' || v === 'checkbox' || v === 'select') ? '' : 'none';
+            }
+            if (textPairSettings) {
+                textPairSettings.style.display = (v === 'text_pair') ? '' : 'none';
+            }
+            if (placeholderWrap) {
+                placeholderWrap.style.display = (v === 'text_pair') ? 'none' : '';
+            }
+        }
         if (typeSelect) {
             typeSelect.addEventListener('change', function () {
-                var v = typeSelect.value;
-                if (optionsBox) {
-                    optionsBox.style.display = (v === 'radio' || v === 'checkbox' || v === 'select') ? '' : 'none';
-                }
+                syncTypeSpecificUi();
                 updateFieldSummary(li);
             });
         }
@@ -264,6 +276,7 @@
         bindAccordion(li);
         bindFieldKeyLock(li);
         bindRegexBlock(li);
+        syncTypeSpecificUi();
 
         var labInp = li.querySelector('.fb-input-label');
         if (labInp) {

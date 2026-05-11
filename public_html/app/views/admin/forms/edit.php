@@ -86,6 +86,7 @@ $regexPresetChoices = [
             $fkLocked = $fk !== '' && \Core\FieldKey::isUuidFormat($fk);
             $regexDecoded = \Models\FormField::decodeRegexPatterns(isset($f['regex']) ? (string) $f['regex'] : null);
             $rp = $regexDecoded[0] ?? '';
+            $isTextPair = (($f['type'] ?? '') === 'text_pair');
             ?>
             <li class="fb-field is-collapsed" data-index="<?= $idx ?>">
                 <div class="fb-field-header">
@@ -170,9 +171,19 @@ $regexPresetChoices = [
                             </div>
                         </div>
                     </div>
-                    <div>
+                    <div class="fb-placeholder-wrap" <?= $isTextPair ? 'style="display:none"' : '' ?>>
                         <label>プレースホルダ（任意）</label>
                         <input type="text" name="fields[<?= $idx ?>][placeholder]" value="<?= e($f['placeholder']) ?>">
+                    </div>
+                </div>
+                <div class="fb-row fb-text-pair-settings" <?= $isTextPair ? '' : 'style="display:none"' ?>>
+                    <div>
+                        <label>1つ目の入力欄の表示名</label>
+                        <input type="text" name="fields[<?= $idx ?>][pair_label_left]" value="<?= e($f['pair_label_left'] ?? '') ?>">
+                    </div>
+                    <div>
+                        <label>2つ目の入力欄の表示名</label>
+                        <input type="text" name="fields[<?= $idx ?>][pair_label_right]" value="<?= e($f['pair_label_right'] ?? '') ?>">
                     </div>
                 </div>
                 <div class="box is-field">
@@ -324,7 +335,11 @@ $regexPresetChoices = [
                     </div>
                 </div>
             </div>
-            <div><label>プレースホルダ（任意）</label><input type="text" data-name="placeholder"></div>
+            <div class="fb-placeholder-wrap"><label>プレースホルダ（任意）</label><input type="text" data-name="placeholder"></div>
+        </div>
+        <div class="fb-row fb-text-pair-settings" style="display:none">
+            <div><label>1つ目の入力欄の表示名</label><input type="text" data-name="pair_label_left"></div>
+            <div><label>2つ目の入力欄の表示名</label><input type="text" data-name="pair_label_right"></div>
         </div>
         <div class="box is-field"><label class="label">ヘルプテキスト（任意）</label><input type="text" data-name="help_text"></div>
         <div class="box is-field fb-options" style="display:none">

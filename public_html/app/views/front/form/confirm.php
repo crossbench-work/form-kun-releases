@@ -7,7 +7,7 @@
 <?php foreach ($fields as $field):
     $key = $field['field_key'];
     $val = $values[$key] ?? '';
-    if ($field['type'] !== 'address' && is_array($val)) {
+    if (!in_array($field['type'], ['address', 'text_pair'], true) && is_array($val)) {
         $val = implode(', ', $val);
     }
 ?>
@@ -23,6 +23,9 @@
     <?php elseif ($field['type'] === 'address'): ?>
         <?php $addrText = format_address_value_display($val); ?>
         <?= $addrText !== '' ? nl2br(e($addrText)) : '<span class="text is-muted">（未入力）</span>' ?>
+    <?php elseif ($field['type'] === 'text_pair'): ?>
+        <?php $pairText = format_text_pair_value_display($val, \Models\FormField::decodeTextPairLabels($field['options_json'] ?? null)); ?>
+        <?= $pairText !== '' ? nl2br(e($pairText)) : '<span class="text is-muted">（未入力）</span>' ?>
     <?php else: ?>
         <?= $val !== '' ? nl2br(e((string) $val)) : '<span class="text is-muted">（未入力）</span>' ?>
     <?php endif; ?>

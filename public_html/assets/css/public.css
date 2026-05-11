@@ -418,6 +418,26 @@ h2 {
 [data-module=c-publicForm01] .box.is-address {
   margin-top: 4px;
 }
+[data-module=c-publicForm01] .box.is-textPair {
+  display: grid;
+  gap: 14px;
+  margin-top: 4px;
+}
+@media (min-width: 640px) {
+  [data-module=c-publicForm01] .box.is-textPair {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+[data-module=c-publicForm01] .box.is-textPairCol {
+  margin-bottom: 0;
+}
+[data-module=c-publicForm01] .box.is-textPairCol .text.is-error {
+  margin-top: 4px;
+  margin-bottom: 0;
+}
+[data-module=c-publicForm01] .box.is-textPairCol.is-error input {
+  border-color: #ef4444;
+}
 [data-module=c-publicForm01] .box.is-addressRow {
   margin-bottom: 14px;
 }

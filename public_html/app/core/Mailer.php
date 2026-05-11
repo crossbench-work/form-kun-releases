@@ -91,6 +91,12 @@ class Mailer
                 $allLines[] = $f['label'] . ":\n" . $valStr;
                 continue;
             }
+            if ($f['type'] === 'text_pair') {
+                $pairLabels = \Models\FormField::decodeTextPairLabels($f['options_json'] ?? null);
+                $valStr = \format_text_pair_value_display($val, $pairLabels);
+                $allLines[] = $f['label'] . ":\n" . $valStr;
+                continue;
+            }
             if (is_array($val)) {
                 $val = implode(', ', $val);
             }
@@ -108,6 +114,16 @@ class Mailer
         foreach ($values as $key => $val) {
             if (($typesByKey[$key] ?? '') === 'address') {
                 $val = \format_address_value_display($val);
+            } elseif (($typesByKey[$key] ?? '') === 'text_pair') {
+                $field = null;
+                foreach ($fields as $f) {
+                    if (($f['field_key'] ?? '') === $key) {
+                        $field = $f;
+                        break;
+                    }
+                }
+                $pairLabels = \Models\FormField::decodeTextPairLabels($field['options_json'] ?? null);
+                $val = \format_text_pair_value_display($val, $pairLabels);
             } elseif (is_array($val)) {
                 if (isset($val['name'])) {
                     $val = (string) $val['name'];

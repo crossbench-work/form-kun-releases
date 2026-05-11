@@ -19,7 +19,7 @@ class Submission
 
             foreach ($values as $key => $val) {
                 if (is_array($val)) {
-                    $val = self::isAddressValueShape($val)
+                    $val = self::isAddressValueShape($val) || self::isTextPairValueShape($val)
                         ? json_encode($val, JSON_UNESCAPED_UNICODE)
                         : implode("\n", array_map('strval', $val));
                 }
@@ -70,6 +70,19 @@ class Submission
             }
         }
         return true;
+    }
+
+    /**
+     * 2入力テキストの値かどうか。連想配列のまま保存して表示整形しやすくする。
+     */
+    private static function isTextPairValueShape(array $arr): bool
+    {
+        if ($arr === []) {
+            return false;
+        }
+        $keys = array_keys($arr);
+        sort($keys);
+        return $keys === ['left', 'right'];
     }
 
     public static function find(int $id): ?array
