@@ -135,5 +135,8 @@ set_exception_handler(function (\Throwable $e) use ($debug) {
 // DB 初期化（必要時に取得）
 \Core\Database::configure($config['db']);
 
+// 旧 DB に users.email 等が無い場合の自動補正（1 リクエストにつき 1 回）
+\Core\SchemaPatch::ensureLatest();
+
 // ヘルパ関数
 require APP_DIR . '/core/helpers.php';
