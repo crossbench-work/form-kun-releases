@@ -77,12 +77,12 @@ $regexPresetChoices = [
                 $regexRows = [''];
             }
             ?>
-            <li class="fb-field" data-index="<?= $idx ?>" draggable="true">
+            <li class="fb-field is-collapsed" data-index="<?= $idx ?>" draggable="true">
                 <div class="fb-field-header">
                     <span class="fb-drag-handle" title="ドラッグして並べ替え">
                         <svg width="14" height="18" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="currentColor"><circle cx="9" cy="6" r="2"/><circle cx="15" cy="6" r="2"/><circle cx="9" cy="12" r="2"/><circle cx="15" cy="12" r="2"/><circle cx="9" cy="18" r="2"/><circle cx="15" cy="18" r="2"/></svg>
                     </span>
-                    <button type="button" class="fb-field-toggle" aria-expanded="true" title="詳細を開く／閉じる">
+                    <button type="button" class="fb-field-toggle" aria-expanded="false" title="詳細を開く／閉じる">
                         <span class="fb-field-toggle-icon" aria-hidden="true">▼</span>
                     </button>
                     <div class="fb-field-summary">
@@ -273,12 +273,12 @@ $regexPresetChoices = [
 </template>
 
 <template id="fb-template">
-    <li class="fb-field" draggable="true">
+    <li class="fb-field is-collapsed" draggable="true">
         <div class="fb-field-header">
             <span class="fb-drag-handle" title="ドラッグして並べ替え">
                 <svg width="14" height="18" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="currentColor"><circle cx="9" cy="6" r="2"/><circle cx="15" cy="6" r="2"/><circle cx="9" cy="12" r="2"/><circle cx="15" cy="12" r="2"/><circle cx="9" cy="18" r="2"/><circle cx="15" cy="18" r="2"/></svg>
             </span>
-            <button type="button" class="fb-field-toggle" aria-expanded="true" title="詳細を開く／閉じる">
+            <button type="button" class="fb-field-toggle" aria-expanded="false" title="詳細を開く／閉じる">
                 <span class="fb-field-toggle-icon" aria-hidden="true">▼</span>
             </button>
             <div class="fb-field-summary">
