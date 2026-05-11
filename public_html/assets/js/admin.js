@@ -82,6 +82,80 @@
         list.querySelectorAll('.fb-regex-row').forEach(syncRegexRowValue);
     }
 
+    function updateFieldSummary(li) {
+        var labelInp = li.querySelector('.fb-input-label');
+        var typeSel = li.querySelector('.fb-type');
+        var labelEl = li.querySelector('.fb-summary-label');
+        var typeEl = li.querySelector('.fb-summary-type');
+        if (!labelEl || !typeEl) return;
+        var t = typeSel ? typeSel.value : '';
+        labelEl.textContent = (labelInp && labelInp.value.trim()) ? labelInp.value.trim() : '（無題）';
+        typeEl.textContent = t || '—';
+    }
+
+    function bindAccordion(li) {
+        var toggle = li.querySelector('.fb-field-toggle');
+        if (!toggle) return;
+        toggle.addEventListener('click', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            var collapsed = li.classList.toggle('is-collapsed');
+            toggle.setAttribute('aria-expanded', collapsed ? 'false' : 'true');
+        });
+    }
+
+    function getDragAfterElement(container, y) {
+        var els = [].slice.call(container.querySelectorAll('.fb-field:not(.fb-field--dragging)'));
+        return els.reduce(function (closest, child) {
+            var box = child.getBoundingClientRect();
+            var offset = y - box.top - box.height / 2;
+            if (offset < 0 && offset > closest.offset) {
+                return { offset: offset, element: child };
+            }
+            return closest;
+        }, { offset: Number.NEGATIVE_INFINITY, element: undefined }).element;
+    }
+
+    var draggingField = null;
+
+    list.addEventListener('dragstart', function (e) {
+        var li = e.target.closest('.fb-field');
+        if (!li || !list.contains(li)) return;
+        if (!e.target.closest('.fb-drag-handle')) {
+            e.preventDefault();
+            return;
+        }
+        draggingField = li;
+        li.classList.add('fb-field--dragging');
+        try {
+            e.dataTransfer.setData('text/plain', 'move');
+        } catch (err1) {}
+        e.dataTransfer.effectAllowed = 'move';
+    });
+
+    list.addEventListener('dragend', function (e) {
+        var li = e.target.closest('.fb-field');
+        if (li) li.classList.remove('fb-field--dragging');
+        draggingField = null;
+        reindex();
+    });
+
+    list.addEventListener('dragover', function (e) {
+        e.preventDefault();
+        e.dataTransfer.dropEffect = 'move';
+        if (!draggingField) return;
+        var afterElement = getDragAfterElement(list, e.clientY);
+        if (afterElement == null || afterElement === undefined) {
+            list.appendChild(draggingField);
+        } else {
+            list.insertBefore(draggingField, afterElement);
+        }
+    });
+
+    list.addEventListener('drop', function (e) {
+        e.preventDefault();
+    });
+
     function reindex() {
         var items = list.querySelectorAll('.fb-field');
         items.forEach(function (li, i) {
@@ -98,6 +172,9 @@
             li.querySelectorAll('.fb-regex-value').forEach(function (el, j) {
                 el.setAttribute('name', 'fields[' + i + '][regex_patterns][' + j + ']');
             });
+            var numEl = li.querySelector('.fb-num');
+            if (numEl) numEl.textContent = String(i + 1);
+            updateFieldSummary(li);
         });
         syncAllRegexRows();
     }
@@ -182,10 +259,13 @@
     function bind(li) {
         var typeSelect = li.querySelector('.fb-type');
         var optionsBox = li.querySelector('.fb-options');
-        if (typeSelect && optionsBox) {
+        if (typeSelect) {
             typeSelect.addEventListener('change', function () {
                 var v = typeSelect.value;
-                optionsBox.style.display = (v === 'radio' || v === 'checkbox' || v === 'select') ? '' : 'none';
+                if (optionsBox) {
+                    optionsBox.style.display = (v === 'radio' || v === 'checkbox' || v === 'select') ? '' : 'none';
+                }
+                updateFieldSummary(li);
             });
         }
         var up = li.querySelector('.fb-up');
@@ -210,8 +290,16 @@
             }
         });
 
+        bindAccordion(li);
         bindFieldKeyLock(li);
         bindRegexBlock(li);
+
+        var labInp = li.querySelector('.fb-input-label');
+        if (labInp) {
+            labInp.addEventListener('input', function () { updateFieldSummary(li); });
+            labInp.addEventListener('change', function () { updateFieldSummary(li); });
+        }
+        updateFieldSummary(li);
     }
 
     list.querySelectorAll('.fb-field').forEach(bind);

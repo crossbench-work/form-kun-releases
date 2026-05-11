@@ -77,12 +77,27 @@ $regexPresetChoices = [
                 $regexRows = [''];
             }
             ?>
-            <li class="fb-field" data-index="<?= $idx ?>">
-                <div class="fb-handle">項目 #<span class="fb-num"><?= $idx + 1 ?></span></div>
+            <li class="fb-field" data-index="<?= $idx ?>" draggable="true">
+                <div class="fb-field-header">
+                    <span class="fb-drag-handle" title="ドラッグして並べ替え">
+                        <svg width="14" height="18" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="currentColor"><circle cx="9" cy="6" r="2"/><circle cx="15" cy="6" r="2"/><circle cx="9" cy="12" r="2"/><circle cx="15" cy="12" r="2"/><circle cx="9" cy="18" r="2"/><circle cx="15" cy="18" r="2"/></svg>
+                    </span>
+                    <button type="button" class="fb-field-toggle" aria-expanded="true" title="詳細を開く／閉じる">
+                        <span class="fb-field-toggle-icon" aria-hidden="true">▼</span>
+                    </button>
+                    <div class="fb-field-summary">
+                        <span class="fb-field-summary-main">
+                            項目 <span class="fb-num"><?= $idx + 1 ?></span>
+                            · <strong class="fb-summary-label"><?= e($f['label']) ?></strong>
+                            · <code class="fb-summary-type"><?= e($f['type']) ?></code>
+                        </span>
+                    </div>
+                </div>
+                <div class="fb-field-body">
                 <div class="fb-row">
                     <div>
                         <label>ラベル</label>
-                        <input type="text" name="fields[<?= $idx ?>][label]" value="<?= e($f['label']) ?>">
+                        <input type="text" name="fields[<?= $idx ?>][label]" class="fb-input-label" value="<?= e($f['label']) ?>">
                     </div>
                     <div class="fb-field-key-col">
                         <label>フィールドキー</label>
@@ -167,6 +182,7 @@ $regexPresetChoices = [
                     <button type="button" class="btn btn-sm fb-up">↑ 上へ</button>
                     <button type="button" class="btn btn-sm fb-down">↓ 下へ</button>
                     <button type="button" class="btn btn-sm btn-danger fb-remove">削除</button>
+                </div>
                 </div>
             </li>
         <?php endforeach; ?>
@@ -257,10 +273,25 @@ $regexPresetChoices = [
 </template>
 
 <template id="fb-template">
-    <li class="fb-field">
-        <div class="fb-handle">項目 #<span class="fb-num"></span></div>
+    <li class="fb-field" draggable="true">
+        <div class="fb-field-header">
+            <span class="fb-drag-handle" title="ドラッグして並べ替え">
+                <svg width="14" height="18" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="currentColor"><circle cx="9" cy="6" r="2"/><circle cx="15" cy="6" r="2"/><circle cx="9" cy="12" r="2"/><circle cx="15" cy="12" r="2"/><circle cx="9" cy="18" r="2"/><circle cx="15" cy="18" r="2"/></svg>
+            </span>
+            <button type="button" class="fb-field-toggle" aria-expanded="true" title="詳細を開く／閉じる">
+                <span class="fb-field-toggle-icon" aria-hidden="true">▼</span>
+            </button>
+            <div class="fb-field-summary">
+                <span class="fb-field-summary-main">
+                    項目 <span class="fb-num">1</span>
+                    · <strong class="fb-summary-label"></strong>
+                    · <code class="fb-summary-type">text</code>
+                </span>
+            </div>
+        </div>
+        <div class="fb-field-body">
         <div class="fb-row">
-            <div><label>ラベル</label><input type="text" data-name="label"></div>
+            <div><label>ラベル</label><input type="text" data-name="label" class="fb-input-label"></div>
             <div class="fb-field-key-col">
                 <label>フィールドキー</label>
                 <div class="fb-field-key-row">
@@ -316,6 +347,7 @@ $regexPresetChoices = [
             <button type="button" class="btn btn-sm fb-up">↑ 上へ</button>
             <button type="button" class="btn btn-sm fb-down">↓ 下へ</button>
             <button type="button" class="btn btn-sm btn-danger fb-remove">削除</button>
+        </div>
         </div>
     </li>
 </template>

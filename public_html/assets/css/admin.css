@@ -193,13 +193,81 @@ textarea { min-height: 100px; resize: vertical; }
     background: #f9fafb;
     border: 1px solid #e2e8f0;
     border-radius: 6px;
-    padding: 16px;
+    padding: 0;
     margin-bottom: 12px;
+    overflow: hidden;
+}
+.fb-field.fb-field--dragging {
+    opacity: 0.55;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+}
+.fb-field-header {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 10px 12px;
+    background: #fff;
+    border-bottom: 1px solid #e5e7eb;
+}
+.fb-drag-handle {
+    flex-shrink: 0;
+    cursor: grab;
+    color: #94a3b8;
+    padding: 2px 4px;
+    line-height: 1;
+    border-radius: 4px;
+    user-select: none;
+}
+.fb-drag-handle:active { cursor: grabbing; }
+.fb-drag-handle:hover { color: #64748b; background: #f1f5f9; }
+.fb-field-toggle {
+    flex-shrink: 0;
+    appearance: none;
+    border: none;
+    background: transparent;
+    padding: 4px 6px;
+    cursor: pointer;
+    color: #64748b;
+    border-radius: 4px;
+    line-height: 1;
+}
+.fb-field-toggle:hover { background: #f1f5f9; color: #1f2937; }
+.fb-field-toggle-icon {
+    display: inline-block;
+    font-size: 10px;
+    transition: transform 0.15s ease;
+}
+.fb-field.is-collapsed .fb-field-toggle-icon {
+    transform: rotate(-90deg);
+}
+.fb-field-summary {
+    flex: 1;
+    min-width: 0;
+    font-size: 13px;
+    color: #475569;
+}
+.fb-field-summary-main {
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.fb-field-summary .fb-num { font-weight: 600; color: #334155; }
+.fb-field-summary .fb-summary-type {
+    font-size: 12px;
+    background: #f1f5f9;
+    padding: 1px 6px;
+    border-radius: 4px;
+}
+.fb-field-body {
+    padding: 16px;
+}
+.fb-field.is-collapsed .fb-field-body {
+    display: none;
 }
 .fb-row { display: flex; gap: 12px; flex-wrap: wrap; }
 .fb-row > div { flex: 1; min-width: 180px; }
 .fb-actions { margin-top: 8px; display: flex; gap: 8px; }
-.fb-handle { font-size: 12px; color: #6b7280; margin-bottom: 8px; }
 .fb-field-key-row {
     display: flex;
     align-items: center;
