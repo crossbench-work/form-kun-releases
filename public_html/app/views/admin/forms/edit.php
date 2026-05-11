@@ -142,7 +142,7 @@ $regexPresetChoices = [
                     </div>
                 </div>
                 <div class="fb-row">
-                    <div>
+                    <div class="fb-max-length-wrap" <?= in_array($f['type'], ['radio', 'checkbox', 'select'], true) ? 'style="display:none"' : '' ?>>
                         <label>最大文字数（任意）</label>
                         <input type="number" min="1" name="fields[<?= $idx ?>][max_length]" value="<?= e($f['max_length']) ?>">
                     </div>
@@ -353,7 +353,7 @@ $regexPresetChoices = [
             </div>
         </div>
         <div class="fb-row">
-            <div><label>最大文字数（任意）</label><input type="number" min="1" data-name="max_length"></div>
+            <div class="fb-max-length-wrap"><label>最大文字数（任意）</label><input type="number" min="1" data-name="max_length"></div>
             <div class="fb-regex-wrap">
                 <label>入力チェック</label>
                 <div class="fb-regex-list">

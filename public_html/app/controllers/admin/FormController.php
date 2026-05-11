@@ -186,13 +186,17 @@ class FormController
                 if (in_array($type, ['radio', 'checkbox', 'select'], true)) {
                     $placeholder = '';
                 }
+                $maxLength = isset($f['max_length']) && $f['max_length'] !== '' ? (int) $f['max_length'] : '';
+                if (in_array($type, ['radio', 'checkbox', 'select'], true)) {
+                    $maxLength = '';
+                }
 
                 $fields[] = [
                     'field_key'       => $key,
                     'label'           => trim((string) ($f['label'] ?? '')),
                     'type'            => $type,
                     'required'        => !empty($f['required']) ? 1 : 0,
-                    'max_length'      => isset($f['max_length']) && $f['max_length'] !== '' ? (int) $f['max_length'] : '',
+                    'max_length'      => $maxLength,
                     'regex'           => $regexStored,
                     'help_text'       => trim((string) ($f['help_text'] ?? '')),
                     'placeholder'     => $placeholder,

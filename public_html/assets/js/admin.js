@@ -320,13 +320,22 @@
         var optionsBox = li.querySelector('.fb-options');
         var textPairSettings = li.querySelector('.fb-text-pair-settings');
         var textPairPlaceholders = li.querySelector('.fb-text-pair-placeholders');
+        var maxLengthWrap = li.querySelector('.fb-max-length-wrap');
+        var maxLengthInput = maxLengthWrap ? maxLengthWrap.querySelector('input') : null;
         var placeholderWrap = li.querySelector('.fb-placeholder-wrap');
         var placeholderInput = placeholderWrap ? placeholderWrap.querySelector('input') : null;
         function syncTypeSpecificUi() {
             if (!typeSelect) return;
             var v = typeSelect.value;
+            var hideMaxLength = (v === 'radio' || v === 'checkbox' || v === 'select');
             if (optionsBox) {
                 optionsBox.style.display = (v === 'radio' || v === 'checkbox' || v === 'select') ? '' : 'none';
+            }
+            if (maxLengthWrap) {
+                maxLengthWrap.style.display = hideMaxLength ? 'none' : '';
+                if (hideMaxLength && maxLengthInput) {
+                    maxLengthInput.value = '';
+                }
             }
             if (textPairSettings) {
                 textPairSettings.style.display = (v === 'text_pair') ? '' : 'none';

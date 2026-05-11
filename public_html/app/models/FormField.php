@@ -132,6 +132,10 @@ class FormField
                         (string) ($f['pair_placeholder_right'] ?? '')
                     );
                 }
+                $maxLength = isset($f['max_length']) && $f['max_length'] !== '' ? (int) $f['max_length'] : null;
+                if (in_array($f['type'], ['radio', 'checkbox', 'select'], true)) {
+                    $maxLength = null;
+                }
                 Database::execute(
                     'INSERT INTO form_fields (
                         form_id, sort_order, field_key, label, type,
@@ -144,7 +148,7 @@ class FormField
                         $f['label'],
                         $f['type'],
                         !empty($f['required']) ? 1 : 0,
-                        isset($f['max_length']) && $f['max_length'] !== '' ? (int) $f['max_length'] : null,
+                        $maxLength,
                         isset($f['regex']) && $f['regex'] !== null && $f['regex'] !== ''
                             ? (string) $f['regex']
                             : null,
