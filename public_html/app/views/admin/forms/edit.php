@@ -104,7 +104,14 @@ $regexPresetChoices = [
                     <div class="fb-header-actions">
                         <button type="button" class="btn is-sm fb-up" aria-label="上へ移動" title="上へ移動">↑</button>
                         <button type="button" class="btn is-sm fb-down" aria-label="下へ移動" title="下へ移動">↓</button>
-                        <button type="button" class="btn is-sm is-danger fb-remove">削除</button>
+                        <button type="button" class="btn is-sm is-danger fb-remove" aria-label="削除" title="削除">
+                            <svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M3 6h18"/>
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M8 6V4h8v2"/>
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M19 6l-1 14H6L5 6"/>
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M10 11v6M14 11v6"/>
+                            </svg>
+                        </button>
                     </div>
                     <button type="button" class="fb-field-toggle" aria-expanded="false" title="詳細を開く／閉じる">
                         <span class="fb-field-toggle-icon" aria-hidden="true">▼</span>
@@ -327,7 +334,14 @@ $regexPresetChoices = [
             <div class="fb-header-actions">
                 <button type="button" class="btn is-sm fb-up" aria-label="上へ移動" title="上へ移動">↑</button>
                 <button type="button" class="btn is-sm fb-down" aria-label="下へ移動" title="下へ移動">↓</button>
-                <button type="button" class="btn is-sm is-danger fb-remove">削除</button>
+                <button type="button" class="btn is-sm is-danger fb-remove" aria-label="削除" title="削除">
+                    <svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M3 6h18"/>
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M8 6V4h8v2"/>
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M19 6l-1 14H6L5 6"/>
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M10 11v6M14 11v6"/>
+                    </svg>
+                </button>
             </div>
             <button type="button" class="fb-field-toggle" aria-expanded="false" title="詳細を開く／閉じる">
                 <span class="fb-field-toggle-icon" aria-hidden="true">▼</span>
