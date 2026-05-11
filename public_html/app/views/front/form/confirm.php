@@ -1,6 +1,8 @@
 <section class="p-formConfirm01" data-module="c-confirmSummary01">
     <div class="wrapper">
+        <?php $confirmBlocks = decode_form_description_blocks($form['confirm_message'] ?? '', true); ?>
         <h1 class="title">入力内容のご確認</h1>
+        <?= render_form_description_blocks_at($confirmBlocks, 0) ?>
         <p class="text">下記の内容で送信します。よろしければ「送信する」ボタンを押してください。</p>
 
 <dl class="list is-confirm">
@@ -40,5 +42,6 @@
         <button type="submit" class="btn is-primary">送信する</button>
     </div>
 </form>
+        <?= render_form_description_blocks_at($confirmBlocks, 1) ?>
     </div>
 </section>

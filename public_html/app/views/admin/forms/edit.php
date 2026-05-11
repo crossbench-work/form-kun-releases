@@ -15,6 +15,43 @@ $regexPresetChoices = [
 $breadcrumbTitle = trim((string) ($form['title'] ?? '')) !== '' ? (string) $form['title'] : '（無題）';
 $slugPreviewValue = trim((string) ($form['slug'] ?? '')) !== '' ? (string) $form['slug'] : 'your-slug';
 $descriptionBlocks = $form['description_blocks'] ?? [['id' => 'description-0', 'html' => '', 'position' => 0, 'visible' => 1]];
+$confirmBlocks = $form['confirm_blocks'] ?? [['id' => 'confirm-0', 'html' => '', 'position' => 0, 'visible' => 1]];
+$thanksBlocks = $form['thanks_blocks'] ?? [['id' => 'thanks-0', 'html' => '', 'position' => 0, 'visible' => 1]];
+$renderDescriptionEditor = static function (string $namePrefix, array $blocks, string $positionMode): void {
+    ?>
+    <div class="box is-field fb-description-editor" data-description-editor data-name-prefix="<?= e($namePrefix) ?>" data-position-mode="<?= e($positionMode) ?>">
+        <div class="fb-description-blocks">
+            <?php foreach ($blocks as $i => $block): ?>
+                <div class="fb-description-block" data-index="<?= $i ?>">
+                    <input type="hidden" name="<?= e($namePrefix) ?>[<?= $i ?>][id]" value="<?= e($block['id'] ?? ($namePrefix . '-' . $i)) ?>" data-name="id">
+                    <div class="fb-description-block-header">
+                        <strong class="fb-description-block-title">説明文</strong>
+                        <button type="button" class="btn is-sm is-danger fb-description-remove">削除</button>
+                    </div>
+                    <div class="fb-row fb-description-block-controls">
+                        <div class="fb-description-position-wrap">
+                            <select name="<?= e($namePrefix) ?>[<?= $i ?>][position]" class="fb-description-position" data-name="position" data-value="<?= e((string) ($block['position'] ?? 0)) ?>" aria-label="説明文"></select>
+                        </div>
+                        <div class="fb-description-visible-wrap">
+                            <label class="label is-choice fb-basic-display-toggle">
+                                <input type="checkbox" name="<?= e($namePrefix) ?>[<?= $i ?>][visible]" value="1" data-name="visible" <?= !empty($block['visible']) ? 'checked' : '' ?>>
+                                表示する
+                            </label>
+                        </div>
+                    </div>
+                    <textarea name="<?= e($namePrefix) ?>[<?= $i ?>][html]" rows="6" data-name="html"><?= e((string) ($block['html'] ?? '')) ?></textarea>
+                    <p class="text is-help">HTML を直接入力できます。一部のタグと属性だけが保存されます。</p>
+                </div>
+            <?php endforeach; ?>
+        </div>
+        <div class="fb-description-toolbar">
+            <div class="area is-actions">
+                <button type="button" class="btn is-sm fb-description-add">説明文を追加する</button>
+            </div>
+        </div>
+    </div>
+    <?php
+};
 ?>
 
 <?php if (!empty($errors)): ?>
@@ -74,37 +111,7 @@ $descriptionBlocks = $form['description_blocks'] ?? [['id' => 'description-0', '
         <div id="tab-panel-fields" class="box is-tabPanel" role="tabpanel" aria-labelledby="tab-btn-fields" hidden>
     <section class="m-panel01">
         <h2 id="input-screen-title-preview">表示設定</h2>
-        <div class="box is-field">
-            <div id="fb-description-blocks" class="fb-description-blocks">
-                <?php foreach ($descriptionBlocks as $i => $block): ?>
-                    <div class="fb-description-block" data-index="<?= $i ?>">
-                        <input type="hidden" name="description_blocks[<?= $i ?>][id]" value="<?= e($block['id'] ?? ('description-' . $i)) ?>" data-name="id">
-                        <div class="fb-description-block-header">
-                            <strong class="fb-description-block-title">説明文</strong>
-                            <button type="button" class="btn is-sm is-danger fb-description-remove">削除</button>
-                        </div>
-                        <div class="fb-row fb-description-block-controls">
-                            <div class="fb-description-position-wrap">
-                                <select name="description_blocks[<?= $i ?>][position]" class="fb-description-position" data-name="position" data-value="<?= e((string) ($block['position'] ?? 0)) ?>" aria-label="説明文"></select>
-                            </div>
-                            <div class="fb-description-visible-wrap">
-                                <label class="label is-choice fb-basic-display-toggle">
-                                    <input type="checkbox" name="description_blocks[<?= $i ?>][visible]" value="1" data-name="visible" <?= !empty($block['visible']) ? 'checked' : '' ?>>
-                                    表示する
-                                </label>
-                            </div>
-                        </div>
-                        <textarea name="description_blocks[<?= $i ?>][html]" rows="6" data-name="html"><?= e((string) ($block['html'] ?? '')) ?></textarea>
-                        <p class="text is-help">HTML を直接入力できます。一部のタグと属性だけが保存されます。</p>
-                    </div>
-                <?php endforeach; ?>
-            </div>
-            <div class="fb-description-toolbar">
-                <div class="area is-actions">
-                    <button type="button" class="btn is-sm" id="fb-description-add">説明文を追加する</button>
-                </div>
-            </div>
-        </div>
+        <?php $renderDescriptionEditor('description_blocks', $descriptionBlocks, 'input'); ?>
     </section>
     <section class="m-panel01" data-module="m-formBuilder01">
         <h2>項目設定</h2>
@@ -342,6 +349,7 @@ $descriptionBlocks = $form['description_blocks'] ?? [['id' => 'description-0', '
         <div id="tab-panel-confirm" class="box is-tabPanel" role="tabpanel" aria-labelledby="tab-btn-confirm" hidden>
     <section class="m-panel01">
         <h2 id="confirm-screen-title-preview">表示設定</h2>
+        <?php $renderDescriptionEditor('confirm_blocks', $confirmBlocks, 'simple'); ?>
     </section>
     <section class="m-panel01">
         <h2>表示設定</h2>
@@ -354,13 +362,10 @@ $descriptionBlocks = $form['description_blocks'] ?? [['id' => 'description-0', '
         <div id="tab-panel-thanks" class="box is-tabPanel" role="tabpanel" aria-labelledby="tab-btn-thanks" hidden>
     <section class="m-panel01">
         <h2 id="thanks-screen-title-preview">表示設定</h2>
+        <?php $renderDescriptionEditor('thanks_blocks', $thanksBlocks, 'simple'); ?>
     </section>
     <section class="m-panel01">
         <h2>表示設定</h2>
-        <div class="box is-field">
-            <label class="label">サンクスメッセージ（リダイレクトURL未指定時に表示）</label>
-            <textarea name="thanks_message" rows="3"><?= e($form['thanks_message']) ?></textarea>
-        </div>
         <div class="box is-field">
             <label class="label">リダイレクトURL（任意）</label>
             <input type="text" name="redirect_url" value="<?= e($form['redirect_url']) ?>" placeholder="https://example.com/thanks">

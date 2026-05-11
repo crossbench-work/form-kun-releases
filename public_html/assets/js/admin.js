@@ -63,9 +63,8 @@
 
     var template = document.getElementById('fb-template');
     var addBtn = document.getElementById('fb-add');
-    var descriptionList = document.getElementById('fb-description-blocks');
     var descriptionTemplate = document.getElementById('fb-description-template');
-    var descriptionAddBtn = document.getElementById('fb-description-add');
+    var descriptionEditors = document.querySelectorAll('[data-description-editor]');
 
     function extractDataName(name) {
         if (!name) return null;
@@ -73,22 +72,26 @@
         return m ? m[1] : null;
     }
 
-    function extractDescriptionDataName(name) {
+    function extractDescriptionDataName(name, prefix) {
         if (!name) return null;
-        var m = name.match(/^description_blocks\[\d+\]\[(.+)\]$/);
+        var m = name.match(new RegExp('^' + prefix.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '\\[\\d+\\]\\[(.+)\\]$'));
         return m ? m[1] : null;
     }
 
-    function getDescriptionPositionOptions() {
-        var items = list.querySelectorAll('.fb-field');
+    function getDescriptionPositionOptions(editor) {
+        var mode = editor.getAttribute('data-position-mode') || 'simple';
         var options = [{ value: '0', label: '先頭' }];
-        options.push({ value: String(items.length + 1), label: '末尾' });
+        if (mode === 'input') {
+            options.push({ value: String(list.querySelectorAll('.fb-field').length + 1), label: '末尾' });
+        } else {
+            options.push({ value: '1', label: '末尾' });
+        }
         return options;
     }
 
-    function applyDescriptionPositionOptions(select, preferredValue) {
+    function applyDescriptionPositionOptions(editor, select, preferredValue) {
         if (!select) return;
-        var options = getDescriptionPositionOptions();
+        var options = getDescriptionPositionOptions(editor);
         var nextValue = preferredValue;
         if (nextValue === undefined || nextValue === null || nextValue === '') {
             nextValue = select.value || select.getAttribute('data-value') || '0';
@@ -105,7 +108,12 @@
         select.setAttribute('data-value', select.value);
     }
 
-    function sortDescriptionBlocks() {
+    function getDescriptionList(editor) {
+        return editor ? editor.querySelector('.fb-description-blocks') : null;
+    }
+
+    function sortDescriptionBlocks(editor) {
+        var descriptionList = getDescriptionList(editor);
         if (!descriptionList) return;
         var blocks = Array.prototype.slice.call(descriptionList.querySelectorAll('.fb-description-block'));
         blocks
@@ -121,56 +129,66 @@
             });
     }
 
-    function reindexDescriptionBlocks() {
+    function reindexDescriptionBlocks(editor) {
+        var descriptionList = getDescriptionList(editor);
         if (!descriptionList) return;
+        var prefix = editor.getAttribute('data-name-prefix') || 'description_blocks';
         descriptionList.querySelectorAll('.fb-description-block').forEach(function (block, i) {
             block.setAttribute('data-index', String(i));
             block.querySelectorAll('input, textarea, select').forEach(function (el) {
-                var name = el.getAttribute('data-name') || extractDescriptionDataName(el.getAttribute('name'));
+                var name = el.getAttribute('data-name') || extractDescriptionDataName(el.getAttribute('name'), prefix);
                 if (!name) return;
-                el.setAttribute('name', 'description_blocks[' + i + '][' + name + ']');
+                el.setAttribute('name', prefix + '[' + i + '][' + name + ']');
             });
         });
     }
 
-    function refreshDescriptionPositionOptions() {
+    function refreshDescriptionPositionOptions(editor) {
+        var descriptionList = getDescriptionList(editor);
         if (!descriptionList) return;
         descriptionList.querySelectorAll('.fb-description-position').forEach(function (select) {
-            applyDescriptionPositionOptions(select);
+            applyDescriptionPositionOptions(editor, select);
         });
     }
 
-    function bindDescriptionBlock(block) {
+    function refreshAllDescriptionPositionOptions() {
+        descriptionEditors.forEach(function (editor) {
+            refreshDescriptionPositionOptions(editor);
+        });
+    }
+
+    function bindDescriptionBlock(editor, block) {
         var remove = block.querySelector('.fb-description-remove');
         var select = block.querySelector('.fb-description-position');
         if (remove) {
             remove.addEventListener('click', function () {
                 block.parentNode.removeChild(block);
-                reindexDescriptionBlocks();
-                refreshDescriptionPositionOptions();
+                reindexDescriptionBlocks(editor);
+                refreshDescriptionPositionOptions(editor);
             });
         }
         if (select) {
             select.addEventListener('change', function () {
                 select.setAttribute('data-value', select.value);
-                sortDescriptionBlocks();
-                reindexDescriptionBlocks();
+                sortDescriptionBlocks(editor);
+                reindexDescriptionBlocks(editor);
             });
         }
     }
 
-    function createDescriptionBlock(position) {
+    function createDescriptionBlock(editor, position) {
         if (!descriptionTemplate) return null;
         var block = descriptionTemplate.content.firstElementChild.cloneNode(true);
         var idInput = block.querySelector('[data-name="id"]');
         var select = block.querySelector('.fb-description-position');
+        var prefix = editor.getAttribute('data-name-prefix') || 'description_blocks';
         if (idInput) {
-            idInput.value = generateUuidV4();
+            idInput.value = prefix.replace(/_blocks$/, '') + '-' + generateUuidV4();
         }
         if (select) {
             select.setAttribute('data-value', String(position || 0));
         }
-        bindDescriptionBlock(block);
+        bindDescriptionBlock(editor, block);
         return block;
     }
 
@@ -334,7 +352,7 @@
             updateFieldSummary(li);
         });
         syncAllRegexRows();
-        refreshDescriptionPositionOptions();
+        refreshAllDescriptionPositionOptions();
     }
 
     function bindRegexRow(row, li) {
@@ -615,48 +633,55 @@
         if (labInp) {
             labInp.addEventListener('input', function () {
                 updateFieldSummary(li);
-                refreshDescriptionPositionOptions();
+                refreshAllDescriptionPositionOptions();
             });
             labInp.addEventListener('change', function () {
                 updateFieldSummary(li);
-                refreshDescriptionPositionOptions();
+                refreshAllDescriptionPositionOptions();
             });
         }
         updateFieldSummary(li);
     }
 
     list.querySelectorAll('.fb-field').forEach(bind);
-
-    if (descriptionList) {
-        descriptionList.querySelectorAll('.fb-description-block').forEach(bindDescriptionBlock);
-    }
+    descriptionEditors.forEach(function (editor) {
+        var descriptionList = getDescriptionList(editor);
+        var addButton = editor.querySelector('.fb-description-add');
+        if (descriptionList) {
+            descriptionList.querySelectorAll('.fb-description-block').forEach(function (block) {
+                bindDescriptionBlock(editor, block);
+            });
+        }
+        if (addButton && descriptionTemplate) {
+            addButton.addEventListener('click', function () {
+                var options = getDescriptionPositionOptions(editor);
+                var position = options[options.length - 1].value;
+                var block = createDescriptionBlock(editor, position);
+                if (!block || !descriptionList) return;
+                descriptionList.appendChild(block);
+                refreshDescriptionPositionOptions(editor);
+                var select = block.querySelector('.fb-description-position');
+                if (select) {
+                    select.value = String(position);
+                    select.setAttribute('data-value', select.value);
+                }
+                sortDescriptionBlocks(editor);
+                reindexDescriptionBlocks(editor);
+                var textarea = block.querySelector('textarea');
+                if (textarea) textarea.focus();
+            });
+        }
+    });
 
     var mainForm = list.closest('form');
     if (mainForm) {
         mainForm.addEventListener('submit', function () {
             syncAllRegexRows();
             list.querySelectorAll('[data-choice-editor]').forEach(syncChoiceEditor);
-            sortDescriptionBlocks();
-            reindexDescriptionBlocks();
-        });
-    }
-
-    if (descriptionAddBtn && descriptionList && descriptionTemplate) {
-        descriptionAddBtn.addEventListener('click', function () {
-            var position = String(list.querySelectorAll('.fb-field').length + 1);
-            var block = createDescriptionBlock(position);
-            if (!block) return;
-            descriptionList.appendChild(block);
-            refreshDescriptionPositionOptions();
-            var select = block.querySelector('.fb-description-position');
-            if (select) {
-                select.value = String(position);
-                select.setAttribute('data-value', select.value);
-            }
-            sortDescriptionBlocks();
-            reindexDescriptionBlocks();
-            var textarea = block.querySelector('textarea');
-            if (textarea) textarea.focus();
+            descriptionEditors.forEach(function (editor) {
+                sortDescriptionBlocks(editor);
+                reindexDescriptionBlocks(editor);
+            });
         });
     }
 
@@ -677,7 +702,10 @@
     }
 
     reindex();
-    reindexDescriptionBlocks();
+    descriptionEditors.forEach(function (editor) {
+        reindexDescriptionBlocks(editor);
+        refreshDescriptionPositionOptions(editor);
+    });
 
     var titleInput = document.getElementById('title');
     var breadcrumbCurrent = document.getElementById('breadcrumb-current');

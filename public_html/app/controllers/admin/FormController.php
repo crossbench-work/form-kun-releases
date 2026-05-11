@@ -165,7 +165,8 @@ class FormController
             'description'          => null,
             'show_title'           => !empty($_POST['show_title']) ? 1 : 0,
             'show_description'     => 0,
-            'thanks_message'       => trim((string) ($_POST['thanks_message'] ?? '')),
+            'confirm_message'      => null,
+            'thanks_message'       => null,
             'redirect_url'         => trim((string) ($_POST['redirect_url'] ?? '')),
             'admin_emails'         => trim((string) ($_POST['admin_emails'] ?? '')),
             'mail_subject_admin'   => trim((string) ($_POST['mail_subject_admin'] ?? '')),
@@ -178,33 +179,16 @@ class FormController
             'status'               => in_array($_POST['status'] ?? '', ['active','draft','archived'], true) ? $_POST['status'] : 'draft',
         ];
 
-        $descriptionBlocks = [];
-        $rawDescriptionBlocks = $_POST['description_blocks'] ?? [];
-        if (is_array($rawDescriptionBlocks)) {
-            foreach ($rawDescriptionBlocks as $i => $block) {
-                if (!is_array($block)) {
-                    continue;
-                }
-                $html = (string) ($block['html'] ?? '');
-                $visible = !empty($block['visible']) ? 1 : 0;
-                $position = isset($block['position']) && is_numeric($block['position']) ? max(0, (int) $block['position']) : 0;
-                $descriptionBlocks[] = [
-                    'id' => trim((string) ($block['id'] ?? '')) !== '' ? trim((string) $block['id']) : 'description-' . $i,
-                    'html' => $html,
-                    'position' => $position,
-                    'visible' => $visible,
-                ];
-            }
-        }
+        $descriptionBlocks = self::collectContentBlocks('description_blocks', 'description');
         $form['description'] = encode_form_description_blocks($descriptionBlocks);
-        $form['show_description'] = 0;
-        foreach ($descriptionBlocks as $block) {
-            if (!empty($block['visible']) && sanitize_rich_text_html($block['html']) !== '') {
-                $form['show_description'] = 1;
-                break;
-            }
-        }
-        $form['description_blocks'] = self::normalizeDescriptionBlocks($descriptionBlocks, true);
+        $form['show_description'] = self::hasVisibleContentBlocks($descriptionBlocks) ? 1 : 0;
+        $form['description_blocks'] = self::normalizeDescriptionBlocks($descriptionBlocks, true, 'description');
+        $confirmBlocks = self::collectContentBlocks('confirm_blocks', 'confirm');
+        $form['confirm_message'] = encode_form_description_blocks($confirmBlocks);
+        $form['confirm_blocks'] = self::normalizeDescriptionBlocks($confirmBlocks, true, 'confirm');
+        $thanksBlocks = self::collectContentBlocks('thanks_blocks', 'thanks');
+        $form['thanks_message'] = encode_form_description_blocks($thanksBlocks);
+        $form['thanks_blocks'] = self::normalizeDescriptionBlocks($thanksBlocks, true, 'thanks');
 
         $fields = [];
         $raw = $_POST['fields'] ?? [];
@@ -375,6 +359,7 @@ class FormController
             'description' => '',
             'show_title' => 1,
             'show_description' => 1,
+            'confirm_message' => '',
             'thanks_message' => '',
             'redirect_url' => '',
             'admin_emails' => '',
@@ -396,7 +381,19 @@ class FormController
     private static function prepareFormForEdit(array $form): array
     {
         $form['description_blocks'] = self::normalizeDescriptionBlocks(
-            decode_form_description_blocks($form['description'] ?? '', !empty($form['show_description']))
+            decode_form_description_blocks($form['description'] ?? '', !empty($form['show_description'])),
+            false,
+            'description'
+        );
+        $form['confirm_blocks'] = self::normalizeDescriptionBlocks(
+            decode_form_description_blocks($form['confirm_message'] ?? '', true),
+            false,
+            'confirm'
+        );
+        $form['thanks_blocks'] = self::normalizeDescriptionBlocks(
+            decode_form_description_blocks($form['thanks_message'] ?? '', true),
+            false,
+            'thanks'
         );
 
         return $form;
@@ -406,7 +403,7 @@ class FormController
      * @param array<int, array<string, mixed>> $blocks
      * @return array<int, array{id:string,html:string,position:int,visible:int}>
      */
-    private static function normalizeDescriptionBlocks(array $blocks, bool $allowEmptyHtml = false): array
+    private static function normalizeDescriptionBlocks(array $blocks, bool $allowEmptyHtml = false, string $idPrefix = 'description'): array
     {
         $out = [];
         foreach ($blocks as $i => $block) {
@@ -420,7 +417,7 @@ class FormController
             }
             $id = trim((string) ($block['id'] ?? ''));
             if ($id === '') {
-                $id = 'description-' . $i;
+                $id = $idPrefix . '-' . $i;
             }
             $out[] = [
                 'id' => $id,
@@ -432,7 +429,7 @@ class FormController
 
         if ($out === []) {
             $out[] = [
-                'id' => 'description-0',
+                'id' => $idPrefix . '-0',
                 'html' => '',
                 'position' => 0,
                 'visible' => 1,
@@ -440,6 +437,43 @@ class FormController
         }
 
         return $out;
+    }
+
+    /**
+     * @return array<int, array{id:string,html:string,position:int,visible:int}>
+     */
+    private static function collectContentBlocks(string $postKey, string $idPrefix): array
+    {
+        $blocks = [];
+        $rawBlocks = $_POST[$postKey] ?? [];
+        if (!is_array($rawBlocks)) {
+            return $blocks;
+        }
+
+        foreach ($rawBlocks as $i => $block) {
+            if (!is_array($block)) {
+                continue;
+            }
+            $blocks[] = [
+                'id' => trim((string) ($block['id'] ?? '')) !== '' ? trim((string) $block['id']) : $idPrefix . '-' . $i,
+                'html' => (string) ($block['html'] ?? ''),
+                'position' => isset($block['position']) && is_numeric($block['position']) ? max(0, (int) $block['position']) : 0,
+                'visible' => !empty($block['visible']) ? 1 : 0,
+            ];
+        }
+
+        return $blocks;
+    }
+
+    private static function hasVisibleContentBlocks(array $blocks): bool
+    {
+        foreach ($blocks as $block) {
+            if (!empty($block['visible']) && sanitize_rich_text_html($block['html'] ?? '') !== '') {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     private static function defaultField(): array

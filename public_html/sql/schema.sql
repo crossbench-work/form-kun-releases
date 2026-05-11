@@ -41,6 +41,7 @@ CREATE TABLE IF NOT EXISTS forms (
     description             TEXT DEFAULT NULL,
     show_title              TINYINT(1) NOT NULL DEFAULT 1,
     show_description        TINYINT(1) NOT NULL DEFAULT 1,
+    confirm_message         TEXT DEFAULT NULL,
     thanks_message          TEXT DEFAULT NULL,
     redirect_url            VARCHAR(500) DEFAULT NULL,
     admin_emails            VARCHAR(500) DEFAULT NULL,

@@ -204,6 +204,17 @@ class SchemaPatch
                     'ALTER TABLE forms ADD COLUMN show_description TINYINT(1) NOT NULL DEFAULT 1 AFTER show_title'
                 );
             }
+
+            $hasConfirmMessage = Database::fetchOne(
+                'SELECT COUNT(*) AS c FROM information_schema.COLUMNS
+                 WHERE TABLE_SCHEMA = ? AND TABLE_NAME = ? AND COLUMN_NAME = ?',
+                [$schema, 'forms', 'confirm_message']
+            );
+            if ((int) ($hasConfirmMessage['c'] ?? 0) === 0) {
+                Database::execute(
+                    'ALTER TABLE forms ADD COLUMN confirm_message TEXT DEFAULT NULL AFTER show_description'
+                );
+            }
         } catch (\Throwable $e) {
             error_log('[formkun] SchemaPatch forms display flags: ' . $e->getMessage());
         }
