@@ -335,7 +335,7 @@
                 textPairPlaceholders.style.display = (v === 'text_pair') ? '' : 'none';
             }
             if (placeholderWrap) {
-                var hidePlaceholder = (v === 'text_pair' || v === 'radio' || v === 'checkbox');
+                var hidePlaceholder = (v === 'text_pair' || v === 'radio' || v === 'checkbox' || v === 'select');
                 placeholderWrap.style.display = hidePlaceholder ? 'none' : '';
                 if (hidePlaceholder && placeholderInput) {
                     placeholderInput.value = '';

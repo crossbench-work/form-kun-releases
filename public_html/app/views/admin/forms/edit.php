@@ -176,7 +176,7 @@ $regexPresetChoices = [
                             </div>
                         </div>
                     </div>
-                    <div class="fb-placeholder-wrap" <?= ($isTextPair || in_array($f['type'], ['radio', 'checkbox'], true)) ? 'style="display:none"' : '' ?>>
+                    <div class="fb-placeholder-wrap" <?= ($isTextPair || in_array($f['type'], ['radio', 'checkbox', 'select'], true)) ? 'style="display:none"' : '' ?>>
                         <label>プレースホルダ（任意）</label>
                         <input type="text" name="fields[<?= $idx ?>][placeholder]" value="<?= e($f['placeholder']) ?>">
                     </div>

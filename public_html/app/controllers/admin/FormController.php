@@ -183,7 +183,7 @@ class FormController
 
                 $type = in_array($f['type'] ?? '', FormField::ALLOWED_TYPES(), true) ? $f['type'] : 'text';
                 $placeholder = trim((string) ($f['placeholder'] ?? ''));
-                if (in_array($type, ['radio', 'checkbox'], true)) {
+                if (in_array($type, ['radio', 'checkbox', 'select'], true)) {
                     $placeholder = '';
                 }
 

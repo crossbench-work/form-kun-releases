@@ -123,7 +123,7 @@ class FormField
                     );
                 }
                 $placeholder = isset($f['placeholder']) && $f['placeholder'] !== '' ? (string) $f['placeholder'] : null;
-                if (in_array($f['type'], ['radio', 'checkbox'], true)) {
+                if (in_array($f['type'], ['radio', 'checkbox', 'select'], true)) {
                     $placeholder = null;
                 }
                 if ($f['type'] === 'text_pair') {
