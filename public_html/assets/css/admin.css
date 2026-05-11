@@ -874,6 +874,9 @@ form.is-inline {
   font-weight: 700;
   color: #334155;
 }
+[data-module=m-formBuilder01] .fb-field-body .box.is-field > .label {
+  font-size: 12px;
+}
 [data-module=m-formBuilder01] .fb-field.is-collapsed .fb-field-body {
   display: none;
 }

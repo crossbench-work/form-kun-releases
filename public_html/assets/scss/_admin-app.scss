@@ -853,6 +853,10 @@ form.is-inline {
     color: #334155;
   }
 
+  .fb-field-body .box.is-field > .label {
+    font-size: 12px;
+  }
+
   .fb-field.is-collapsed .fb-field-body {
     display: none;
   }
