@@ -544,14 +544,10 @@
 
     var titleInput = document.getElementById('title');
     var breadcrumbCurrent = document.getElementById('breadcrumb-current');
-    var inputScreenTitlePreview = document.getElementById('input-screen-title-preview');
     if (titleInput && breadcrumbCurrent) {
         titleInput.addEventListener('input', function () {
             var nextTitle = titleInput.value.trim() || '（無題）';
             breadcrumbCurrent.textContent = nextTitle;
-            if (inputScreenTitlePreview) {
-                inputScreenTitlePreview.textContent = nextTitle;
-            }
         });
     }
 

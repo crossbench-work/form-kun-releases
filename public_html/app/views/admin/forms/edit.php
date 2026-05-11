@@ -72,7 +72,7 @@ $slugPreviewValue = trim((string) ($form['slug'] ?? '')) !== '' ? (string) $form
 
         <div id="tab-panel-fields" class="box is-tabPanel" role="tabpanel" aria-labelledby="tab-btn-fields" hidden>
     <section class="m-panel01">
-        <h2 id="input-screen-title-preview"><?= e($breadcrumbTitle) ?></h2>
+        <h2 id="input-screen-title-preview">表示設定</h2>
         <div class="box is-field">
             <div class="fb-basic-label-row">
                 <label class="label" for="description">説明文</label>
@@ -319,7 +319,7 @@ $slugPreviewValue = trim((string) ($form['slug'] ?? '')) !== '' ? (string) $form
 
         <div id="tab-panel-confirm" class="box is-tabPanel" role="tabpanel" aria-labelledby="tab-btn-confirm" hidden>
     <section class="m-panel01">
-        <h2>確認画面</h2>
+        <h2 id="confirm-screen-title-preview">表示設定</h2>
     </section>
     <section class="m-panel01">
         <h2>表示設定</h2>
@@ -331,7 +331,7 @@ $slugPreviewValue = trim((string) ($form['slug'] ?? '')) !== '' ? (string) $form
 
         <div id="tab-panel-thanks" class="box is-tabPanel" role="tabpanel" aria-labelledby="tab-btn-thanks" hidden>
     <section class="m-panel01">
-        <h2>完了画面</h2>
+        <h2 id="thanks-screen-title-preview">表示設定</h2>
     </section>
     <section class="m-panel01">
         <h2>表示設定</h2>
