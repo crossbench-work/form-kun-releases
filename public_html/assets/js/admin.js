@@ -475,11 +475,29 @@
 
     reindex();
 
+    var titleInput = document.getElementById('title');
+    var breadcrumbCurrent = document.getElementById('breadcrumb-current');
+    if (titleInput && breadcrumbCurrent) {
+        titleInput.addEventListener('input', function () {
+            breadcrumbCurrent.textContent = titleInput.value.trim() || '（無題）';
+        });
+    }
+
     var slugInput = document.getElementById('slug');
     var slugPreview = document.getElementById('slug-preview');
+    var slugLink = document.getElementById('slug-link');
     if (slugInput && slugPreview) {
         slugInput.addEventListener('input', function () {
-            slugPreview.textContent = slugInput.value || 'your-slug';
+            var slugValue = slugInput.value || 'your-slug';
+            slugPreview.textContent = slugValue;
+            if (slugLink) {
+                var base = slugLink.getAttribute('data-base-url');
+                if (!base) {
+                    base = slugLink.href.replace(/\/[^/]*$/, '/');
+                    slugLink.setAttribute('data-base-url', base);
+                }
+                slugLink.href = base + slugValue;
+            }
         });
     }
 })();

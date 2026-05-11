@@ -1,5 +1,3 @@
-<h1><?= $isNew ? 'フォーム新規作成' : 'フォーム編集' ?></h1>
-
 <?php
 $FB_REGEX_CUSTOM = '__custom__';
 $regexPresetChoices = [
@@ -11,6 +9,8 @@ $regexPresetChoices = [
     '/\A[a-zA-Z]+\z/u' => '半角英字のみ',
     $FB_REGEX_CUSTOM => 'カスタム（正規表現を入力）',
 ];
+$breadcrumbTitle = trim((string) ($form['title'] ?? '')) !== '' ? (string) $form['title'] : '（無題）';
+$slugPreviewValue = trim((string) ($form['slug'] ?? '')) !== '' ? (string) $form['slug'] : 'your-slug';
 ?>
 
 <?php if (!empty($errors)): ?>
@@ -18,6 +18,13 @@ $regexPresetChoices = [
         <ul><?php foreach ($errors as $msg): ?><li><?= e($msg) ?></li><?php endforeach; ?></ul>
     </div>
 <?php endif; ?>
+
+<nav class="m-breadcrumb01" aria-label="パンくず">
+    <ol>
+        <li><a href="<?= e(base_path('/admin/forms')) ?>">フォーム</a></li>
+        <li aria-current="page"><span id="breadcrumb-current"><?= e($breadcrumbTitle) ?></span></li>
+    </ol>
+</nav>
 
 <form method="post" action="<?= e($isNew ? base_path('/admin/forms') : base_path('/admin/forms/' . (int)$form['id'])) ?>" class="p-formEdit01">
     <?= \Core\Csrf::field() ?>
@@ -46,7 +53,7 @@ $regexPresetChoices = [
         <div class="box is-field">
             <label class="label" for="slug">スラッグ（URL用） <span class="is-required">必須</span></label>
             <input type="text" id="slug" name="slug" value="<?= e($form['slug']) ?>" required>
-            <p class="text is-help">公開URL: <code><?= e(url('/f/')) ?></code><strong id="slug-preview"><?= e($form['slug']) ?: 'your-slug' ?></strong></p>
+            <p class="text is-help"><a id="slug-link" href="<?= e(url('/f/' . $slugPreviewValue)) ?>" target="_blank" rel="noopener"><code><?= e(url('/f/')) ?></code><strong id="slug-preview"><?= e($slugPreviewValue) ?></strong></a></p>
         </div>
         <div class="box is-field">
             <label class="label" for="status">公開状態</label>

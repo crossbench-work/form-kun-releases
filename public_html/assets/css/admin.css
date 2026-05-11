@@ -438,6 +438,40 @@ body.l-adminShell01 a:hover {
   font-size: 13px;
 }
 
+.m-breadcrumb01 {
+  margin: 0 0 16px;
+}
+.m-breadcrumb01 ol {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  color: #64748b;
+  font-size: 13px;
+}
+.m-breadcrumb01 li {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.m-breadcrumb01 li:not(:last-child)::after {
+  content: "/";
+  color: #94a3b8;
+}
+.m-breadcrumb01 a {
+  color: #475569;
+}
+.m-breadcrumb01 a:hover {
+  color: #1f2937;
+}
+.m-breadcrumb01 [aria-current=page] {
+  color: #1f2937;
+  font-weight: 600;
+}
+
 form.is-inline {
   display: inline;
 }
@@ -869,10 +903,19 @@ form.is-inline {
   margin-top: 20px;
 }
 [data-module=m-formBuilder01] .fb-field-section-title {
+  display: flex;
+  align-items: center;
+  gap: 12px;
   margin: 0 0 10px;
   font-size: 13px;
   font-weight: 700;
   color: #334155;
+}
+[data-module=m-formBuilder01] .fb-field-section-title::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: #e2e8f0;
 }
 [data-module=m-formBuilder01] .fb-field-body .box.is-field > .label {
   font-size: 12px;
