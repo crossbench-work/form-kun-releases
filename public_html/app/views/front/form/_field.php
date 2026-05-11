@@ -18,6 +18,8 @@ $pairPlaceholders = ($type === 'text_pair')
     ? \Models\FormField::decodeTextPairPlaceholders($field['placeholder'] ?? null)
     : ['left_placeholder' => '', 'right_placeholder' => ''];
 $ph    = $field['placeholder'] ?? '';
+$isAgreementField = ((string) ($field['field_key'] ?? '')) === 'agreement_consent';
+$agreementDescriptionHtml = $isAgreementField ? render_rich_text_html($field['help_text'] ?? '') : '';
 
 $labelFor = $type === 'address'
     ? 'f_' . $key . '_postal3'
@@ -114,7 +116,9 @@ $prefOptions = japanese_prefectures();
         <?php if ($req && $type !== 'address'): ?><span class="is-required">必須</span><?php endif; ?>
     </label>
 
-    <?php if (!empty($field['help_text'])): ?>
+    <?php if ($agreementDescriptionHtml !== ''): ?>
+        <div class="text is-help"><?= $agreementDescriptionHtml ?></div>
+    <?php elseif (!empty($field['help_text'])): ?>
         <p class="text is-help"><?= nl2br(e($field['help_text'])) ?></p>
     <?php endif; ?>
 

@@ -233,8 +233,14 @@ if (empty($f['required']) || in_array($f['type'], ['radio', 'select'], true)) {
             </div>
         </div>
         <div class="box is-field">
-            <label class="label">備考</label>
-            <textarea name="fields[<?= $idx ?>][help_text]" rows="3"><?= e($f['help_text']) ?></textarea>
+            <?php if ($isAgreementField): ?>
+                <label class="label">説明文</label>
+                <textarea name="fields[<?= $idx ?>][help_text]" rows="6"><?= e($f['help_text']) ?></textarea>
+                <p class="text is-help">HTML を直接入力できます。説明文はチェックボックスの上に表示されます。</p>
+            <?php else: ?>
+                <label class="label">備考</label>
+                <textarea name="fields[<?= $idx ?>][help_text]" rows="3"><?= e($f['help_text']) ?></textarea>
+            <?php endif; ?>
         </div>
     </div>
     <input type="hidden" name="fields[<?= $idx ?>][_remove]" value="0" class="fb-remove-flag">

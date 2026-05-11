@@ -697,6 +697,7 @@ class FormController
         $agreement['checkbox_limit_enabled'] = 0;
         $agreement['checkbox_min_selections'] = '';
         $agreement['checkbox_max_selections'] = '';
+        $agreement['help_text'] = sanitize_rich_text_html((string) ($agreement['help_text'] ?? ''));
         $agreement['options'] = '規約に同意する';
         $agreement['_is_agreement_field'] = 1;
         $rest[] = $agreement;
