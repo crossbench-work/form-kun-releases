@@ -361,6 +361,13 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
             </label>
         </div>
     </section>
+    <section class="m-panel01">
+        <h2>ボタン設定</h2>
+        <div class="box is-field">
+            <label class="label" for="confirm_button_text">ボタンテキスト</label>
+            <input type="text" id="confirm_button_text" name="confirm_button_text" value="<?= e($form['confirm_button_text'] ?? '入力内容を確認する') ?>">
+        </div>
+    </section>
         </div>
 
         <div id="tab-panel-confirm" class="box is-tabPanel" role="tabpanel" aria-labelledby="tab-btn-confirm" hidden>

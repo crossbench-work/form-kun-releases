@@ -208,6 +208,7 @@ class FormController
             'description'          => null,
             'show_title'           => !empty($_POST['show_title']) ? 1 : 0,
             'show_description'     => 0,
+            'confirm_button_text'  => trim((string) ($_POST['confirm_button_text'] ?? '')),
             'confirm_message'      => null,
             'thanks_message'       => null,
             'redirect_url'         => trim((string) ($_POST['redirect_url'] ?? '')),
@@ -221,6 +222,9 @@ class FormController
             'captcha_enabled'      => !empty($_POST['captcha_enabled']) ? 1 : 0,
             'status'               => in_array($_POST['status'] ?? '', ['active','draft','archived'], true) ? $_POST['status'] : 'draft',
         ];
+        if ($form['confirm_button_text'] === '') {
+            $form['confirm_button_text'] = '入力内容を確認する';
+        }
 
         $descriptionBlocks = self::collectContentBlocks('description_blocks', 'description');
         $form['description'] = encode_form_description_blocks($descriptionBlocks);
@@ -310,6 +314,9 @@ class FormController
             $errors[] = 'スラッグは半角英数字・ハイフン・アンダースコアで64文字以内にしてください。';
         } elseif (!Form::isSlugAvailable($form['slug'], $excludeId)) {
             $errors[] = '同じスラッグが既に使われています。';
+        }
+        if (mb_strlen($form['confirm_button_text']) > 200) {
+            $errors[] = 'ボタンテキストは200文字以内にしてください。';
         }
         if ($form['admin_emails'] !== '') {
             foreach (preg_split('/[,;]+/', $form['admin_emails']) as $em) {
@@ -402,6 +409,7 @@ class FormController
             'description' => '',
             'show_title' => 1,
             'show_description' => 1,
+            'confirm_button_text' => '入力内容を確認する',
             'confirm_message' => '',
             'thanks_message' => '',
             'redirect_url' => '',
@@ -423,6 +431,9 @@ class FormController
      */
     private static function prepareFormForEdit(array $form): array
     {
+        $form['confirm_button_text'] = trim((string) ($form['confirm_button_text'] ?? '')) !== ''
+            ? (string) $form['confirm_button_text']
+            : '入力内容を確認する';
         $form['description_blocks'] = self::normalizeDescriptionBlocks(
             decode_form_description_blocks($form['description'] ?? '', !empty($form['show_description'])),
             false,

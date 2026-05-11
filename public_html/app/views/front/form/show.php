@@ -2,6 +2,7 @@
 <?php $descriptionBlocks = decode_form_description_blocks($form['description'] ?? '', !empty($form['show_description'])); ?>
 <?php $descriptionEndPosition = count($fields) + 1; ?>
 <?php $previewMode = !empty($previewMode); ?>
+<?php $confirmButtonText = trim((string) ($form['confirm_button_text'] ?? '')) !== '' ? (string) $form['confirm_button_text'] : '入力内容を確認する'; ?>
 <?php if (!empty($form['show_title'])): ?>
     <h1 class="title"><?= e($form['title']) ?></h1>
 <?php endif; ?>
@@ -46,11 +47,11 @@
         </div>
     <?php endif; ?>
 
-    <div class="area is-actions">
+    <div class="area is-actions is-centered">
         <?php if ($previewMode): ?>
             <button type="button" class="btn is-primary" disabled>プレビューでは送信できません</button>
         <?php else: ?>
-            <button type="submit" class="btn is-primary">入力内容を確認する</button>
+            <button type="submit" class="btn is-primary"><?= e($confirmButtonText) ?></button>
         <?php endif; ?>
     </div>
 </form>
