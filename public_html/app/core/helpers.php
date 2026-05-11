@@ -134,8 +134,9 @@ if (!function_exists('sanitize_rich_text_html')) {
 
         $previous = libxml_use_internal_errors(true);
         $dom = new \DOMDocument('1.0', 'UTF-8');
+        $wrappedHtml = '<div id="__rich_text_root__">' . $html . '</div>';
         $dom->loadHTML(
-            mb_convert_encoding('<div id="__rich_text_root__">' . $html . '</div>', 'HTML-ENTITIES', 'UTF-8'),
+            mb_encode_numericentity($wrappedHtml, [0x80, 0x10FFFF, 0, 0xFFFFFF], 'UTF-8'),
             LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD
         );
         libxml_clear_errors();
