@@ -272,6 +272,22 @@ PHP は **8.0 以上** を選んでください（Local のサイト設定でバ
 - 長時間放置するとセッションが切れます。再読み込みしてやり直してください。
 - 同一ブラウザの別タブで管理画面と公開フォームを行き来した直後にも稀に発生する場合があります。
 
+### 正しいユーザー名・パスワードでもログインできない（ダッシュボードに進まずログイン画面に戻る）
+
+よくある原因は **セッション Cookie がブラウザに保存されていない** ことです。
+
+- **`localhost` と `127.0.0.1` を混在させない**（Cookie はホストごとに別物です。ブックマーク・リンクをどちらかに統一）
+- **HTTP で開いているのに Cookie が Secure 扱い**になっていると、ブラウザは Cookie を送りません。Docker やプロキシで **`X-Forwarded-Proto: https` が付くと PHP が HTTPS とみなし Secure Cookie を付けがち**ですが、ブラウザは実際には HTTP で見ているため Cookie が無視されます。**現在のコードではこのヘッダは既定で信頼しません。** TLS 終端プロキシの「背後」で動かすときだけ `session.trust_forwarded_proto` を `true` にしてください。
+- それでも HTTP で試す場合は `config.local.php` に例えば次を追加できます。
+
+```php
+'session' => [
+    'cookie_secure' => false,
+],
+```
+
+- 逆に **本番で nginx / CDN の背後にあり、HTTPS なのに PHP だけ HTTP** で動いている場合は、`config.php` の `session.trust_forwarded_proto` を `true` にしてください。
+
 ## 既知の制限（次フェーズ向け）
 
 - CSV エクスポートは未実装

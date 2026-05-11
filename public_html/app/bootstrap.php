@@ -82,15 +82,27 @@ if (!headers_sent()) {
 // セッション開始
 $sessionConfig = $config['session'];
 if (session_status() === PHP_SESSION_NONE) {
-    $isHttps = (
-        (!empty($_SERVER['HTTPS']) && strtolower($_SERVER['HTTPS']) !== 'off')
-        || (($_SERVER['HTTP_X_FORWARDED_PROTO'] ?? '') === 'https')
-    );
+    // HTTPS 判定（セッション Cookie の Secure 用）
+    // X-Forwarded-Proto は既定では信頼しない（任意ヘッダで偽装可能。ローカル・Docker で誤って Secure になり
+    // HTTP では Cookie が送られず「ログインできない」症状になる）
+    $trustForwarded = !empty($sessionConfig['trust_forwarded_proto']);
+    $isHttps = (!empty($_SERVER['HTTPS']) && strtolower((string) $_SERVER['HTTPS']) !== 'off');
+    if ($trustForwarded && strtolower((string) ($_SERVER['HTTP_X_FORWARDED_PROTO'] ?? '')) === 'https') {
+        $isHttps = true;
+    }
+
+    $cs = $sessionConfig['cookie_secure'] ?? null;
+    if ($cs === null || $cs === '') {
+        $cookieSecure = $isHttps;
+    } else {
+        $cookieSecure = (bool) $cs;
+    }
+
     session_name($sessionConfig['name']);
     session_set_cookie_params([
         'lifetime' => 0,
         'path'     => '/',
-        'secure'   => $isHttps,
+        'secure'   => $cookieSecure,
         'httponly' => true,
         'samesite' => 'Lax',
     ]);

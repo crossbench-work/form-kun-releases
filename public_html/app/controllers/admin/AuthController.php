@@ -57,6 +57,10 @@ class AuthController
 
         $intended = $_SESSION['_intended'] ?? null;
         unset($_SESSION['_intended']);
+
+        // リダイレクト直前にセッションを確実に保存（環境によっては Cookie が欠けるのを防ぐ）
+        session_write_close();
+
         if ($intended && is_string($intended)) {
             header('Location: ' . $intended);
             exit;

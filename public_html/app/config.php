@@ -58,6 +58,12 @@ $config = [
     'session' => [
         'name'     => 'FORMKUNSESSID',
         'lifetime' => 60 * 60 * 4, // 4時間
+        // Cookie の Secure フラグ。null のとき実際の HTTPS 接続のみ true（推奨）
+        // true/false で固定も可（HTTP のローカルでは false が必要なことがあります）
+        'cookie_secure' => null,
+        // true のときだけ X-Forwarded-Proto: https を Secure 判定に使う（TLS 終端プロキシの背後用）
+        // 既定 false（ヘッダは偽装可能なため。ローカルで誤って Secure Cookie になりログインできなくなるのを防ぐ）
+        'trust_forwarded_proto' => false,
     ],
 
     // セキュリティ
