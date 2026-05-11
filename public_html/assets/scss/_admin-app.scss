@@ -718,6 +718,19 @@ form.is-inline {
     margin-bottom: 16px;
   }
 
+  .fb-panel-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 12px;
+    flex-wrap: wrap;
+
+    h2 {
+      margin-bottom: 0;
+    }
+  }
+
   .fb-description-blocks {
     display: flex;
     flex-direction: column;

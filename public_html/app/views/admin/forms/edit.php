@@ -117,7 +117,17 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
 
         <div id="tab-panel-fields" class="box is-tabPanel" role="tabpanel" aria-labelledby="tab-btn-fields" hidden>
     <section class="m-panel01">
-        <h2 id="input-screen-title-preview">表示設定</h2>
+        <div class="fb-panel-header">
+            <h2 id="input-screen-title-preview">表示設定</h2>
+            <button
+                type="submit"
+                class="btn is-sm"
+                formaction="<?= e(base_path('/admin/forms/preview-input')) ?>"
+                formmethod="post"
+                formtarget="_blank"
+                formnovalidate
+            >プレビュー</button>
+        </div>
         <?php $renderDescriptionEditor('description_blocks', $descriptionBlocks, 'input'); ?>
     </section>
     <section class="m-panel01" data-module="m-formBuilder01">

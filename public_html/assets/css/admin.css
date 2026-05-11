@@ -762,6 +762,17 @@ form.is-inline {
   margin-top: 16px;
   margin-bottom: 16px;
 }
+.m-panel01 .fb-panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+}
+.m-panel01 .fb-panel-header h2 {
+  margin-bottom: 0;
+}
 .m-panel01 .fb-description-blocks {
   display: flex;
   flex-direction: column;

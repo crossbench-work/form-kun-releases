@@ -143,6 +143,25 @@ class FormController
         redirect('/admin/forms/' . $id . '/edit');
     }
 
+    public function previewInput(): void
+    {
+        Csrf::verify();
+        $data = $this->collect();
+
+        (new View())->render('front/form/show', [
+            'title' => '入力画面プレビュー',
+            'form' => array_merge($data['form'], [
+                'slug' => trim((string) ($data['form']['slug'] ?? '')) !== '' ? (string) $data['form']['slug'] : '__preview__',
+                'captcha_enabled' => 0,
+            ]),
+            'fields' => self::preparePreviewFields($data['fields']),
+            'values' => [],
+            'errors' => [],
+            'captchaQuestion' => null,
+            'previewMode' => true,
+        ], 'public');
+    }
+
     public function destroy(int $id): void
     {
         $form = Form::find($id);
@@ -474,6 +493,62 @@ class FormController
         }
 
         return false;
+    }
+
+    /**
+     * @param array<int, array<string, mixed>> $fields
+     * @return array<int, array<string, mixed>>
+     */
+    private static function preparePreviewFields(array $fields): array
+    {
+        $previewFields = [];
+        foreach ($fields as $i => $field) {
+            $optionsJson = null;
+            if (in_array($field['type'], ['radio', 'checkbox', 'select'], true) && !empty($field['options'])) {
+                $options = FormField::parseOptions($field['options']);
+                if ($field['type'] === 'checkbox') {
+                    $optionsJson = FormField::encodeCheckboxSettings(
+                        $options,
+                        $field['checkbox_min_selections'] ?? '',
+                        $field['checkbox_max_selections'] ?? ''
+                    );
+                } else {
+                    $optionsJson = json_encode($options, JSON_UNESCAPED_UNICODE);
+                }
+            } elseif (($field['type'] ?? '') === 'text_pair') {
+                $optionsJson = FormField::encodeTextPairLabels(
+                    (string) ($field['pair_label_left'] ?? ''),
+                    (string) ($field['pair_label_right'] ?? '')
+                );
+            }
+
+            $placeholder = isset($field['placeholder']) && $field['placeholder'] !== '' ? (string) $field['placeholder'] : null;
+            if (in_array($field['type'], ['radio', 'checkbox', 'select'], true)) {
+                $placeholder = null;
+            } elseif (($field['type'] ?? '') === 'text_pair') {
+                $placeholder = FormField::encodeTextPairPlaceholders(
+                    (string) ($field['pair_placeholder_left'] ?? ''),
+                    (string) ($field['pair_placeholder_right'] ?? '')
+                );
+            }
+
+            $previewFields[] = [
+                'id' => $i + 1,
+                'form_id' => 0,
+                'sort_order' => $i + 1,
+                'field_key' => (string) ($field['field_key'] ?? ''),
+                'label' => (string) ($field['label'] ?? ''),
+                'type' => (string) ($field['type'] ?? 'text'),
+                'required' => !empty($field['required']) ? 1 : 0,
+                'max_length' => isset($field['max_length']) && $field['max_length'] !== '' ? (int) $field['max_length'] : null,
+                'regex' => isset($field['regex']) && $field['regex'] !== '' ? (string) $field['regex'] : null,
+                'help_text' => isset($field['help_text']) && $field['help_text'] !== '' ? (string) $field['help_text'] : null,
+                'placeholder' => $placeholder,
+                'options_json' => $optionsJson,
+            ];
+        }
+
+        return $previewFields;
     }
 
     private static function defaultField(): array

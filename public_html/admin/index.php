@@ -32,6 +32,7 @@ $router->get('',   fn() => (new \Controllers\Admin\DashboardController())->index
 $router->get('/forms',                  fn() => (new \Controllers\Admin\FormController())->index());
 $router->get('/forms/new',              fn() => (new \Controllers\Admin\FormController())->createForm());
 $router->post('/forms',                 fn() => (new \Controllers\Admin\FormController())->store());
+$router->post('/forms/preview-input',   fn() => (new \Controllers\Admin\FormController())->previewInput());
 $router->get('/forms/{id}/edit',        fn($p) => (new \Controllers\Admin\FormController())->edit((int)$p['id']));
 $router->post('/forms/{id}',            fn($p) => (new \Controllers\Admin\FormController())->update((int)$p['id']));
 $router->post('/forms/{id}/delete',     fn($p) => (new \Controllers\Admin\FormController())->destroy((int)$p['id']));
