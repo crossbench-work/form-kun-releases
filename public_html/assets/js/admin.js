@@ -194,6 +194,103 @@
         }
     }
 
+    function syncChoiceEditor(box) {
+        var source = box.querySelector('.fb-options-source');
+        if (!source) return;
+        var values = [];
+        box.querySelectorAll('.fb-choice-input').forEach(function (input) {
+            var value = input.value.trim();
+            if (value !== '') {
+                values.push(value);
+            }
+        });
+        source.value = values.join('\n');
+    }
+
+    function moveChoiceItem(item, direction) {
+        var sibling = direction === 'up' ? item.previousElementSibling : item.nextElementSibling;
+        if (!sibling) return;
+        var list = item.parentNode;
+        if (direction === 'up') {
+            list.insertBefore(item, sibling);
+        } else {
+            list.insertBefore(sibling, item);
+        }
+    }
+
+    function createChoiceItem(value) {
+        var row = document.createElement('div');
+        row.className = 'fb-row fb-choiceItem';
+        row.setAttribute('data-choice-item', '');
+        row.innerHTML =
+            '<div>' +
+                '<input type="text" class="fb-choice-input" placeholder="選択肢">' +
+            '</div>' +
+            '<div class="fb-actions">' +
+                '<button type="button" class="btn is-sm fb-choice-up">↑</button>' +
+                '<button type="button" class="btn is-sm fb-choice-down">↓</button>' +
+                '<button type="button" class="btn is-sm is-danger fb-choice-remove">削除</button>' +
+            '</div>';
+        var input = row.querySelector('.fb-choice-input');
+        if (input) {
+            input.value = value || '';
+        }
+        return row;
+    }
+
+    function bindChoiceItem(item, box) {
+        var input = item.querySelector('.fb-choice-input');
+        var up = item.querySelector('.fb-choice-up');
+        var down = item.querySelector('.fb-choice-down');
+        var remove = item.querySelector('.fb-choice-remove');
+        if (input) {
+            input.addEventListener('input', function () {
+                syncChoiceEditor(box);
+            });
+            input.addEventListener('change', function () {
+                syncChoiceEditor(box);
+            });
+        }
+        if (up) {
+            up.addEventListener('click', function () {
+                moveChoiceItem(item, 'up');
+                syncChoiceEditor(box);
+            });
+        }
+        if (down) {
+            down.addEventListener('click', function () {
+                moveChoiceItem(item, 'down');
+                syncChoiceEditor(box);
+            });
+        }
+        if (remove) {
+            remove.addEventListener('click', function () {
+                item.parentNode.removeChild(item);
+                syncChoiceEditor(box);
+            });
+        }
+    }
+
+    function bindChoiceEditor(li) {
+        li.querySelectorAll('[data-choice-editor]').forEach(function (box) {
+            var list = box.querySelector('.fb-choiceList');
+            var add = box.querySelector('.fb-choice-add');
+            if (!list || !add) return;
+            list.querySelectorAll('[data-choice-item]').forEach(function (item) {
+                bindChoiceItem(item, box);
+            });
+            add.addEventListener('click', function () {
+                var item = createChoiceItem('');
+                list.appendChild(item);
+                bindChoiceItem(item, box);
+                syncChoiceEditor(box);
+                var input = item.querySelector('.fb-choice-input');
+                if (input) input.focus();
+            });
+            syncChoiceEditor(box);
+        });
+    }
+
     function bindFieldKeyLock(li) {
         var btn = li.querySelector('.fb-field-key-lock');
         var input = li.querySelector('.fb-field-key-input');
@@ -280,6 +377,7 @@
         bindAccordion(li);
         bindFieldKeyLock(li);
         bindRegexBlock(li);
+        bindChoiceEditor(li);
         syncTypeSpecificUi();
 
         var labInp = li.querySelector('.fb-input-label');
@@ -296,6 +394,7 @@
     if (mainForm) {
         mainForm.addEventListener('submit', function () {
             syncAllRegexRows();
+            list.querySelectorAll('[data-choice-editor]').forEach(syncChoiceEditor);
         });
     }
 

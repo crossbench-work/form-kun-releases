@@ -202,7 +202,27 @@ $regexPresetChoices = [
                 </div>
                 <div class="box is-field fb-options" <?= in_array($f['type'], ['radio','checkbox','select'], true) ? '' : 'style="display:none"' ?>>
                     <label class="label">選択肢（1行に1つ）</label>
-                    <textarea name="fields[<?= $idx ?>][options]" rows="4"><?= e($f['options'] ?? '') ?></textarea>
+                    <?php $choiceOptions = \Models\FormField::parseOptions($f['options'] ?? ''); ?>
+                    <div class="fb-choiceEditor" data-choice-editor>
+                        <div class="fb-choiceList">
+                            <?php foreach ($choiceOptions as $choiceOpt): ?>
+                                <div class="fb-row fb-choiceItem" data-choice-item>
+                                    <div>
+                                        <input type="text" class="fb-choice-input" value="<?= e($choiceOpt) ?>" placeholder="選択肢">
+                                    </div>
+                                    <div class="fb-actions">
+                                        <button type="button" class="btn is-sm fb-choice-up">↑</button>
+                                        <button type="button" class="btn is-sm fb-choice-down">↓</button>
+                                        <button type="button" class="btn is-sm is-danger fb-choice-remove">削除</button>
+                                    </div>
+                                </div>
+                            <?php endforeach; ?>
+                        </div>
+                        <div class="area is-actions">
+                            <button type="button" class="btn is-sm fb-choice-add">＋ 選択肢を追加</button>
+                        </div>
+                        <textarea name="fields[<?= $idx ?>][options]" class="fb-options-source" rows="4" hidden><?= e($f['options'] ?? '') ?></textarea>
+                    </div>
                 </div>
                 <input type="hidden" name="fields[<?= $idx ?>][_remove]" value="0" class="fb-remove-flag">
                 <div class="fb-actions">
@@ -358,7 +378,13 @@ $regexPresetChoices = [
         <div class="box is-field"><label class="label">ヘルプテキスト（任意）</label><input type="text" data-name="help_text"></div>
         <div class="box is-field fb-options" style="display:none">
             <label>選択肢（1行に1つ）</label>
-            <textarea data-name="options" rows="4"></textarea>
+            <div class="fb-choiceEditor" data-choice-editor>
+                <div class="fb-choiceList"></div>
+                <div class="area is-actions">
+                    <button type="button" class="btn is-sm fb-choice-add">＋ 選択肢を追加</button>
+                </div>
+                <textarea data-name="options" class="fb-options-source" rows="4" hidden></textarea>
+            </div>
         </div>
         <input type="hidden" data-name="_remove" value="0" class="fb-remove-flag">
         <div class="fb-actions">
