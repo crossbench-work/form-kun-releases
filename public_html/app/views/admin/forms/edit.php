@@ -105,9 +105,6 @@ $regexPresetChoices = [
                         <button type="button" class="btn is-sm fb-up" aria-label="上へ移動" title="上へ移動">↑</button>
                         <button type="button" class="btn is-sm fb-down" aria-label="下へ移動" title="下へ移動">↓</button>
                     </div>
-                    <button type="button" class="fb-field-toggle" aria-expanded="false" title="詳細を開く／閉じる">
-                        <span class="fb-field-toggle-icon" aria-hidden="true">▼</span>
-                    </button>
                     <div class="fb-field-summary">
                         <span class="fb-field-summary-main">
                             項目 <span class="fb-num"><?= $idx + 1 ?></span>
@@ -127,6 +124,9 @@ $regexPresetChoices = [
                             </svg>
                         </button>
                     </div>
+                    <button type="button" class="fb-field-toggle" aria-expanded="false" title="詳細を開く／閉じる">
+                        <span class="fb-field-toggle-icon" aria-hidden="true">+</span>
+                    </button>
                 </div>
                 <div class="fb-field-body">
                 <div class="fb-row">
@@ -337,9 +337,6 @@ $regexPresetChoices = [
                 <button type="button" class="btn is-sm fb-up" aria-label="上へ移動" title="上へ移動">↑</button>
                 <button type="button" class="btn is-sm fb-down" aria-label="下へ移動" title="下へ移動">↓</button>
             </div>
-            <button type="button" class="fb-field-toggle" aria-expanded="false" title="詳細を開く／閉じる">
-                <span class="fb-field-toggle-icon" aria-hidden="true">▼</span>
-            </button>
             <div class="fb-field-summary">
                 <span class="fb-field-summary-main">
                     項目 <span class="fb-num">1</span>
@@ -359,6 +356,9 @@ $regexPresetChoices = [
                     </svg>
                 </button>
             </div>
+            <button type="button" class="fb-field-toggle" aria-expanded="false" title="詳細を開く／閉じる">
+                <span class="fb-field-toggle-icon" aria-hidden="true">+</span>
+            </button>
         </div>
         <div class="fb-field-body">
         <div class="fb-row">

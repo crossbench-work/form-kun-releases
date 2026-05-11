@@ -810,11 +810,10 @@ form.is-inline {
 }
 [data-module=m-formBuilder01] .fb-field-toggle-icon {
   display: inline-block;
-  font-size: 10px;
-  transition: transform 0.15s ease;
-}
-[data-module=m-formBuilder01] .fb-field.is-collapsed .fb-field-toggle-icon {
-  transform: rotate(-90deg);
+  font-size: 16px;
+  font-weight: 600;
+  min-width: 10px;
+  text-align: center;
 }
 [data-module=m-formBuilder01] .fb-field-summary {
   flex: 1;

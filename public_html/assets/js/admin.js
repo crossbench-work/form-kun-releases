@@ -116,12 +116,23 @@
     function bindAccordion(li) {
         var toggle = li.querySelector('.fb-field-toggle');
         if (!toggle) return;
+        var icon = toggle.querySelector('.fb-field-toggle-icon');
+
+        function syncToggleIcon() {
+            var collapsed = li.classList.contains('is-collapsed');
+            toggle.setAttribute('aria-expanded', collapsed ? 'false' : 'true');
+            if (icon) {
+                icon.textContent = collapsed ? '+' : '-';
+            }
+        }
+
         toggle.addEventListener('click', function (e) {
             e.preventDefault();
             e.stopPropagation();
-            var collapsed = li.classList.toggle('is-collapsed');
-            toggle.setAttribute('aria-expanded', collapsed ? 'false' : 'true');
+            li.classList.toggle('is-collapsed');
+            syncToggleIcon();
         });
+        syncToggleIcon();
     }
 
     function refreshFbSortable() {
