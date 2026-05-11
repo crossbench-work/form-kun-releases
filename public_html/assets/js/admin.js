@@ -82,9 +82,7 @@
     function getDescriptionPositionOptions() {
         var items = list.querySelectorAll('.fb-field');
         var options = [{ value: '0', label: '先頭' }];
-        if (items.length > 0) {
-            options.push({ value: String(items.length), label: '末尾' });
-        }
+        options.push({ value: String(items.length + 1), label: '末尾' });
         return options;
     }
 
@@ -645,7 +643,7 @@
 
     if (descriptionAddBtn && descriptionList && descriptionTemplate) {
         descriptionAddBtn.addEventListener('click', function () {
-            var position = String(list.querySelectorAll('.fb-field').length);
+            var position = String(list.querySelectorAll('.fb-field').length + 1);
             var block = createDescriptionBlock(position);
             if (!block) return;
             descriptionList.appendChild(block);

@@ -1,5 +1,6 @@
 <section class="p-formShow01">
 <?php $descriptionBlocks = decode_form_description_blocks($form['description'] ?? '', !empty($form['show_description'])); ?>
+<?php $descriptionEndPosition = count($fields) + 1; ?>
 <?php if (!empty($form['show_title'])): ?>
     <h1 class="title"><?= e($form['title']) ?></h1>
 <?php endif; ?>
@@ -46,4 +47,5 @@
         <button type="submit" class="btn is-primary">入力内容を確認する</button>
     </div>
 </form>
+<?= render_form_description_blocks_at($descriptionBlocks, $descriptionEndPosition) ?>
 </section>
