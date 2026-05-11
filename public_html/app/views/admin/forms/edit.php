@@ -31,10 +31,10 @@ $slugPreviewValue = trim((string) ($form['slug'] ?? '')) !== '' ? (string) $form
 
     <div class="p-formEditTabs01" data-module="m-formEditTabs01">
         <div class="tab" role="tablist" aria-label="フォーム設定のセクション">
-            <button type="button" class="tab-item" role="tab" id="tab-btn-basic" aria-selected="true" aria-controls="tab-panel-basic">基本設定</button>
-            <button type="button" class="tab-item" role="tab" id="tab-btn-fields" aria-selected="false" aria-controls="tab-panel-fields" tabindex="-1">項目設定</button>
-            <button type="button" class="tab-item" role="tab" id="tab-btn-mail" aria-selected="false" aria-controls="tab-panel-mail" tabindex="-1">通知メール</button>
-            <button type="button" class="tab-item" role="tab" id="tab-btn-thanks" aria-selected="false" aria-controls="tab-panel-thanks" tabindex="-1">送信完了画面</button>
+            <button type="button" class="tab-item" role="tab" id="tab-btn-basic" aria-selected="true" aria-controls="tab-panel-basic">基本</button>
+            <button type="button" class="tab-item" role="tab" id="tab-btn-fields" aria-selected="false" aria-controls="tab-panel-fields" tabindex="-1">項目</button>
+            <button type="button" class="tab-item" role="tab" id="tab-btn-mail" aria-selected="false" aria-controls="tab-panel-mail" tabindex="-1">通知</button>
+            <button type="button" class="tab-item" role="tab" id="tab-btn-thanks" aria-selected="false" aria-controls="tab-panel-thanks" tabindex="-1">完了画面</button>
         </div>
 
         <div id="tab-panel-basic" class="box is-tabPanel" role="tabpanel" aria-labelledby="tab-btn-basic">
@@ -84,7 +84,7 @@ $slugPreviewValue = trim((string) ($form['slug'] ?? '')) !== '' ? (string) $form
 
         <div id="tab-panel-fields" class="box is-tabPanel" role="tabpanel" aria-labelledby="tab-btn-fields" hidden>
     <section class="m-panel01" data-module="m-formBuilder01">
-        <h2>項目設定（フォームビルダー）</h2>
+        <h2>項目設定</h2>
         <ul id="fb-fields" class="fb-fields">
         <?php foreach ($fields as $i => $f): ?>
             <?php
@@ -114,7 +114,7 @@ $slugPreviewValue = trim((string) ($form['slug'] ?? '')) !== '' ? (string) $form
                     </div>
                     <div class="fb-field-summary">
                         <span class="fb-field-summary-main">
-                            項目 <span class="fb-num"><?= $idx + 1 ?></span>
+                            <span class="fb-num"><?= $idx + 1 ?></span>
                             · <strong class="fb-summary-label"><?= e($f['label']) ?></strong>
                             · <code class="fb-summary-type"><?= e(\Models\FormField::typeLabel($f['type'])) ?></code>
                             · <span class="fb-summary-badge fb-summary-required"><?= e($summaryRequired) ?></span>
@@ -354,7 +354,7 @@ $slugPreviewValue = trim((string) ($form['slug'] ?? '')) !== '' ? (string) $form
             </div>
             <div class="fb-field-summary">
                 <span class="fb-field-summary-main">
-                    項目 <span class="fb-num">1</span>
+                    <span class="fb-num">1</span>
                     · <strong class="fb-summary-label"></strong>
                     · <code class="fb-summary-type"><?= e(\Models\FormField::typeLabel('text')) ?></code>
                     · <span class="fb-summary-badge fb-summary-required">任意</span>
