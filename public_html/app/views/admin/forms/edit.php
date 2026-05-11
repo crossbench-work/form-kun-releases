@@ -81,19 +81,8 @@ $slugPreviewValue = trim((string) ($form['slug'] ?? '')) !== '' ? (string) $form
                     表示する
                 </label>
             </div>
-            <div class="fb-wysiwyg" data-wysiwyg>
-                <div class="fb-wysiwyg-toolbar" hidden>
-                    <button type="button" class="btn is-sm" data-wysiwyg-command="bold">太字</button>
-                    <button type="button" class="btn is-sm" data-wysiwyg-command="italic">斜体</button>
-                    <button type="button" class="btn is-sm" data-wysiwyg-command="underline">下線</button>
-                    <button type="button" class="btn is-sm" data-wysiwyg-command="insertUnorderedList">箇条書き</button>
-                    <button type="button" class="btn is-sm" data-wysiwyg-command="insertOrderedList">番号付き</button>
-                    <button type="button" class="btn is-sm" data-wysiwyg-command="createLink">リンク</button>
-                    <button type="button" class="btn is-sm" data-wysiwyg-command="removeFormat">書式解除</button>
-                </div>
-                <div class="fb-wysiwyg-editor" contenteditable="true" hidden><?= render_rich_text_html($form['description']) ?></div>
-                <textarea id="description" name="description" rows="6" class="fb-wysiwyg-source"><?= e($form['description']) ?></textarea>
-            </div>
+            <textarea id="description" name="description" rows="6"><?= e($form['description']) ?></textarea>
+            <p class="text is-help">HTML を直接入力できます。一部のタグと属性だけが保存されます。</p>
         </div>
     </section>
     <section class="m-panel01" data-module="m-formBuilder01">

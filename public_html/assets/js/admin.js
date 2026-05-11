@@ -58,45 +58,6 @@
         );
     }
 
-    function initWysiwygEditors() {
-        document.querySelectorAll('[data-wysiwyg]').forEach(function (root) {
-            var toolbar = root.querySelector('.fb-wysiwyg-toolbar');
-            var editor = root.querySelector('.fb-wysiwyg-editor');
-            var source = root.querySelector('.fb-wysiwyg-source');
-            if (!toolbar || !editor || !source) return;
-
-            function syncSource() {
-                source.value = editor.innerHTML.trim();
-            }
-
-            toolbar.hidden = false;
-            editor.hidden = false;
-            source.hidden = true;
-
-            toolbar.querySelectorAll('[data-wysiwyg-command]').forEach(function (button) {
-                button.addEventListener('click', function () {
-                    var command = button.getAttribute('data-wysiwyg-command');
-                    if (!command) return;
-                    editor.focus();
-                    if (command === 'createLink') {
-                        var url = window.prompt('リンク先URLを入力してください');
-                        if (!url) return;
-                        document.execCommand(command, false, url);
-                    } else {
-                        document.execCommand(command, false, null);
-                    }
-                    syncSource();
-                });
-            });
-
-            editor.addEventListener('input', syncSource);
-            editor.addEventListener('blur', syncSource);
-            syncSource();
-        });
-    }
-
-    initWysiwygEditors();
-
     var list = document.getElementById('fb-fields');
     if (!list) return;
 

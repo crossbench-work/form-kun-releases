@@ -710,39 +710,6 @@ form.is-inline {
     font-size: 13px;
     color: #64748b;
   }
-
-  .fb-wysiwyg {
-    border: 1px solid #cbd5e1;
-    border-radius: 6px;
-    background: #fff;
-    overflow: hidden;
-  }
-
-  .fb-wysiwyg-toolbar {
-    display: flex;
-    gap: 8px;
-    flex-wrap: wrap;
-    padding: 10px;
-    border-bottom: 1px solid #e2e8f0;
-    background: #f8fafc;
-  }
-
-  .fb-wysiwyg-editor {
-    min-height: 160px;
-    padding: 12px 14px;
-    outline: none;
-    line-height: 1.7;
-
-    p,
-    ul,
-    ol {
-      margin: 0 0 12px;
-    }
-
-    *:last-child {
-      margin-bottom: 0;
-    }
-  }
 }
 
 // --- バッジ ---
