@@ -174,12 +174,16 @@ class FormController
                     $key = FieldKey::generateUuidV4();
                 }
 
+                $required = !empty($f['required']) ? 1 : 0;
                 $patterns = [];
                 $singleRx = trim((string) ($f['regex_pattern'] ?? ''));
                 if ($singleRx !== '' && $singleRx !== '__custom__') {
                     $patterns[] = $singleRx;
                 }
                 $regexStored = FormField::encodeRegexPatterns($patterns);
+                if ($required !== 1) {
+                    $regexStored = null;
+                }
 
                 $type = in_array($f['type'] ?? '', FormField::ALLOWED_TYPES(), true) ? $f['type'] : 'text';
                 $placeholder = trim((string) ($f['placeholder'] ?? ''));
@@ -195,7 +199,7 @@ class FormController
                     'field_key'       => $key,
                     'label'           => trim((string) ($f['label'] ?? '')),
                     'type'            => $type,
-                    'required'        => !empty($f['required']) ? 1 : 0,
+                    'required'        => $required,
                     'max_length'      => $maxLength,
                     'regex'           => $regexStored,
                     'help_text'       => trim((string) ($f['help_text'] ?? '')),

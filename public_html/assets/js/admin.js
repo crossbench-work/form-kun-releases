@@ -317,13 +317,28 @@
 
     function bind(li) {
         var typeSelect = li.querySelector('.fb-type');
+        var requiredToggle = li.querySelector('.fb-required-toggle');
         var optionsBox = li.querySelector('.fb-options');
         var textPairSettings = li.querySelector('.fb-text-pair-settings');
         var textPairPlaceholders = li.querySelector('.fb-text-pair-placeholders');
         var maxLengthWrap = li.querySelector('.fb-max-length-wrap');
         var maxLengthInput = maxLengthWrap ? maxLengthWrap.querySelector('input') : null;
+        var regexWrap = li.querySelector('.fb-regex-wrap');
         var placeholderWrap = li.querySelector('.fb-placeholder-wrap');
         var placeholderInput = placeholderWrap ? placeholderWrap.querySelector('input') : null;
+        function clearRegexSettings() {
+            if (!regexWrap) return;
+            var regexKind = regexWrap.querySelector('.fb-regex-kind');
+            var regexCustom = regexWrap.querySelector('.fb-regex-custom');
+            var regexValue = regexWrap.querySelector('.fb-regex-value');
+            if (regexKind) regexKind.value = '';
+            if (regexCustom) regexCustom.value = '';
+            if (regexValue) regexValue.value = '';
+            var regexRow = regexWrap.querySelector('.fb-regex-row');
+            if (regexRow) {
+                syncRegexRowValue(regexRow);
+            }
+        }
         function syncTypeSpecificUi() {
             if (!typeSelect) return;
             var v = typeSelect.value;
@@ -335,6 +350,13 @@
                 maxLengthWrap.style.display = hideMaxLength ? 'none' : '';
                 if (hideMaxLength && maxLengthInput) {
                     maxLengthInput.value = '';
+                }
+            }
+            if (regexWrap) {
+                var hideRegex = !requiredToggle || !requiredToggle.checked;
+                regexWrap.style.display = hideRegex ? 'none' : '';
+                if (hideRegex) {
+                    clearRegexSettings();
                 }
             }
             if (textPairSettings) {
@@ -355,6 +377,11 @@
             typeSelect.addEventListener('change', function () {
                 syncTypeSpecificUi();
                 updateFieldSummary(li);
+            });
+        }
+        if (requiredToggle) {
+            requiredToggle.addEventListener('change', function () {
+                syncTypeSpecificUi();
             });
         }
         var up = li.querySelector('.fb-up');

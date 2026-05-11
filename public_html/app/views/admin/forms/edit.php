@@ -136,7 +136,7 @@ $regexPresetChoices = [
                     <div>
                         <label>必須</label>
                         <label class="label is-choice">
-                            <input type="checkbox" name="fields[<?= $idx ?>][required]" value="1" <?= !empty($f['required']) ? 'checked' : '' ?>>
+                            <input type="checkbox" name="fields[<?= $idx ?>][required]" value="1" class="fb-required-toggle" <?= !empty($f['required']) ? 'checked' : '' ?>>
                             <span>必須にする</span>
                         </label>
                     </div>
@@ -146,7 +146,7 @@ $regexPresetChoices = [
                         <label>最大文字数（任意）</label>
                         <input type="number" min="1" name="fields[<?= $idx ?>][max_length]" value="<?= e($f['max_length']) ?>">
                     </div>
-                    <div class="fb-regex-wrap">
+                    <div class="fb-regex-wrap" <?= empty($f['required']) ? 'style="display:none"' : '' ?>>
                         <label>入力チェック</label>
                         <div class="fb-regex-list">
                             <?php
@@ -349,12 +349,12 @@ $regexPresetChoices = [
             </div>
             <div>
                 <label>必須</label>
-                <label class="label is-choice"><input type="checkbox" data-name="required" value="1"><span>必須にする</span></label>
+                <label class="label is-choice"><input type="checkbox" data-name="required" value="1" class="fb-required-toggle"><span>必須にする</span></label>
             </div>
         </div>
         <div class="fb-row">
             <div class="fb-max-length-wrap"><label>最大文字数（任意）</label><input type="number" min="1" data-name="max_length"></div>
-            <div class="fb-regex-wrap">
+            <div class="fb-regex-wrap" style="display:none">
                 <label>入力チェック</label>
                 <div class="fb-regex-list">
                     <div class="fb-regex-row">
