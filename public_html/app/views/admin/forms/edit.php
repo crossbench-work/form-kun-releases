@@ -19,9 +19,18 @@ $regexPresetChoices = [
     </div>
 <?php endif; ?>
 
-<form method="post" action="<?= e($isNew ? base_path('/admin/forms') : base_path('/admin/forms/' . (int)$form['id'])) ?>">
+<form method="post" action="<?= e($isNew ? base_path('/admin/forms') : base_path('/admin/forms/' . (int)$form['id'])) ?>" class="form-edit-form">
     <?= \Core\Csrf::field() ?>
 
+    <div class="form-edit-tabs">
+        <div class="tablist" role="tablist" aria-label="フォーム設定のセクション">
+            <button type="button" class="tablist-tab" role="tab" id="tab-btn-basic" aria-selected="true" aria-controls="tab-panel-basic">基本設定</button>
+            <button type="button" class="tablist-tab" role="tab" id="tab-btn-fields" aria-selected="false" aria-controls="tab-panel-fields" tabindex="-1">項目設定</button>
+            <button type="button" class="tablist-tab" role="tab" id="tab-btn-mail" aria-selected="false" aria-controls="tab-panel-mail" tabindex="-1">通知メール</button>
+            <button type="button" class="tablist-tab" role="tab" id="tab-btn-thanks" aria-selected="false" aria-controls="tab-panel-thanks" tabindex="-1">送信完了画面</button>
+        </div>
+
+        <div id="tab-panel-basic" class="tab-panel" role="tabpanel" aria-labelledby="tab-btn-basic">
     <section class="panel">
         <h2>基本設定</h2>
         <div class="field">
@@ -52,7 +61,9 @@ $regexPresetChoices = [
             </label>
         </div>
     </section>
+        </div>
 
+        <div id="tab-panel-fields" class="tab-panel" role="tabpanel" aria-labelledby="tab-btn-fields" hidden>
     <section class="panel">
         <h2>項目設定（フォームビルダー）</h2>
         <ul id="fb-fields" class="fb-fields">
@@ -165,7 +176,9 @@ $regexPresetChoices = [
             <button type="button" id="fb-add" class="btn">＋ 項目を追加</button>
         </div>
     </section>
+        </div>
 
+        <div id="tab-panel-mail" class="tab-panel" role="tabpanel" aria-labelledby="tab-btn-mail" hidden>
     <section class="panel">
         <h2>管理者通知メール</h2>
         <div class="field">
@@ -204,7 +217,9 @@ $regexPresetChoices = [
             <textarea name="reply_template" rows="6"><?= e($form['reply_template']) ?></textarea>
         </div>
     </section>
+        </div>
 
+        <div id="tab-panel-thanks" class="tab-panel" role="tabpanel" aria-labelledby="tab-btn-thanks" hidden>
     <section class="panel">
         <h2>送信完了画面</h2>
         <div class="field">
@@ -216,6 +231,9 @@ $regexPresetChoices = [
             <input type="text" name="redirect_url" value="<?= e($form['redirect_url']) ?>" placeholder="https://example.com/thanks">
         </div>
     </section>
+        </div>
+
+    </div>
 
     <div class="actions">
         <button type="submit" class="btn btn-primary"><?= $isNew ? '作成する' : '保存する' ?></button>

@@ -1,6 +1,32 @@
 (function () {
     'use strict';
 
+    (function initFormEditTabs() {
+        var root = document.querySelector('.form-edit-tabs');
+        if (!root) return;
+        var tabs = root.querySelectorAll('.tablist [role="tab"]');
+        var panels = root.querySelectorAll('.tab-panel');
+        if (!tabs.length || !panels.length) return;
+
+        function activate(panelId) {
+            tabs.forEach(function (tab) {
+                var pid = tab.getAttribute('aria-controls');
+                var sel = pid === panelId;
+                tab.setAttribute('aria-selected', sel ? 'true' : 'false');
+                tab.tabIndex = sel ? 0 : -1;
+            });
+            panels.forEach(function (p) {
+                p.hidden = p.id !== panelId;
+            });
+        }
+
+        tabs.forEach(function (tab) {
+            tab.addEventListener('click', function () {
+                activate(tab.getAttribute('aria-controls'));
+            });
+        });
+    })();
+
     var FB_REGEX_CUSTOM = '__custom__';
 
     function generateUuidV4() {

@@ -60,6 +60,47 @@ h2 { font-size: 17px; margin: 0 0 12px; color: #374151; }
     margin-bottom: 16px;
 }
 
+/* Form edit: tabs */
+.form-edit-tabs {
+    margin-bottom: 8px;
+}
+.form-edit-tabs .tablist {
+    display: flex;
+    gap: 0;
+    flex-wrap: wrap;
+    border-bottom: 2px solid #e2e8f0;
+    margin-bottom: 20px;
+}
+.form-edit-tabs .tablist-tab {
+    appearance: none;
+    font: inherit;
+    font-size: 14px;
+    padding: 10px 16px;
+    margin: 0 0 -2px 0;
+    border: none;
+    border-bottom: 2px solid transparent;
+    background: transparent;
+    color: #64748b;
+    cursor: pointer;
+    border-radius: 6px 6px 0 0;
+}
+.form-edit-tabs .tablist-tab:hover {
+    color: #1f2937;
+    background: #f8fafc;
+}
+.form-edit-tabs .tablist-tab[aria-selected="true"] {
+    color: #2563eb;
+    font-weight: 600;
+    border-bottom-color: #2563eb;
+    background: #fff;
+}
+.form-edit-tabs .tab-panel[hidden] {
+    display: none !important;
+}
+.form-edit-form > .actions {
+    margin-top: 8px;
+}
+
 .alert {
     padding: 10px 14px;
     border-radius: 6px;
