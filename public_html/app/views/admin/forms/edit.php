@@ -388,8 +388,12 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
     <section class="m-panel01">
         <h2>ボタン設定</h2>
         <div class="box is-field">
-            <label class="label" for="submit_button_text">ボタンテキスト</label>
+            <label class="label" for="submit_button_text">送信ボタンテキスト</label>
             <input type="text" id="submit_button_text" name="submit_button_text" value="<?= e($form['submit_button_text'] ?? '送信する') ?>">
+        </div>
+        <div class="box is-field">
+            <label class="label" for="back_button_text">戻るボタンテキスト</label>
+            <input type="text" id="back_button_text" name="back_button_text" value="<?= e($form['back_button_text'] ?? '入力に戻る') ?>">
         </div>
     </section>
         </div>

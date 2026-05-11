@@ -3,6 +3,7 @@
         <?php $confirmBlocks = decode_form_description_blocks($form['confirm_message'] ?? '', true); ?>
         <?php $previewMode = !empty($previewMode); ?>
         <?php $submitButtonText = trim((string) ($form['submit_button_text'] ?? '')) !== '' ? (string) $form['submit_button_text'] : '送信する'; ?>
+        <?php $backButtonText = trim((string) ($form['back_button_text'] ?? '')) !== '' ? (string) $form['back_button_text'] : '入力に戻る'; ?>
         <h1 class="title">入力内容のご確認</h1>
         <?= render_form_description_blocks_at($confirmBlocks, 0) ?>
 
@@ -42,10 +43,10 @@
     <?php endif; ?>
     <div class="area is-actions is-centered">
         <?php if ($previewMode): ?>
-            <button type="button" class="btn" disabled>入力に戻る</button>
+            <button type="button" class="btn" disabled><?= e($backButtonText) ?></button>
             <button type="button" class="btn is-primary" disabled>プレビューでは送信できません</button>
         <?php else: ?>
-            <button type="submit" name="_back" value="1" class="btn">入力に戻る</button>
+            <button type="submit" name="_back" value="1" class="btn"><?= e($backButtonText) ?></button>
             <button type="submit" class="btn is-primary"><?= e($submitButtonText) ?></button>
         <?php endif; ?>
     </div>

@@ -43,6 +43,7 @@ CREATE TABLE IF NOT EXISTS forms (
     show_description        TINYINT(1) NOT NULL DEFAULT 1,
     confirm_button_text     VARCHAR(200) DEFAULT NULL,
     submit_button_text      VARCHAR(200) DEFAULT NULL,
+    back_button_text        VARCHAR(200) DEFAULT NULL,
     confirm_message         TEXT DEFAULT NULL,
     thanks_message          TEXT DEFAULT NULL,
     redirect_url            VARCHAR(500) DEFAULT NULL,

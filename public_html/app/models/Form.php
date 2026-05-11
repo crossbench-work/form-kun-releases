@@ -33,11 +33,11 @@ class Form
         $now = date('Y-m-d H:i:s');
         Database::execute(
             'INSERT INTO forms (
-                slug, title, description, show_title, show_description, confirm_button_text, submit_button_text, confirm_message, thanks_message, redirect_url,
+                slug, title, description, show_title, show_description, confirm_button_text, submit_button_text, back_button_text, confirm_message, thanks_message, redirect_url,
                 admin_emails, mail_subject_admin, mail_template_admin,
                 reply_enabled, reply_from_field_key, reply_subject, reply_template,
                 captcha_enabled, status, created_at, updated_at
-            ) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',
+            ) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',
             [
                 $data['slug'],
                 $data['title'],
@@ -46,6 +46,7 @@ class Form
                 !empty($data['show_description']) ? 1 : 0,
                 $data['confirm_button_text'] ?? null,
                 $data['submit_button_text'] ?? null,
+                $data['back_button_text'] ?? null,
                 $data['confirm_message'] ?? null,
                 $data['thanks_message'] ?? null,
                 $data['redirect_url'] ?? null,
@@ -70,7 +71,7 @@ class Form
         $now = date('Y-m-d H:i:s');
         Database::execute(
             'UPDATE forms SET
-                slug = ?, title = ?, description = ?, show_title = ?, show_description = ?, confirm_button_text = ?, submit_button_text = ?, confirm_message = ?, thanks_message = ?, redirect_url = ?,
+                slug = ?, title = ?, description = ?, show_title = ?, show_description = ?, confirm_button_text = ?, submit_button_text = ?, back_button_text = ?, confirm_message = ?, thanks_message = ?, redirect_url = ?,
                 admin_emails = ?, mail_subject_admin = ?, mail_template_admin = ?,
                 reply_enabled = ?, reply_from_field_key = ?, reply_subject = ?, reply_template = ?,
                 captcha_enabled = ?, status = ?, updated_at = ?
@@ -83,6 +84,7 @@ class Form
                 !empty($data['show_description']) ? 1 : 0,
                 $data['confirm_button_text'] ?? null,
                 $data['submit_button_text'] ?? null,
+                $data['back_button_text'] ?? null,
                 $data['confirm_message'] ?? null,
                 $data['thanks_message'] ?? null,
                 $data['redirect_url'] ?? null,
