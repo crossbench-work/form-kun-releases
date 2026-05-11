@@ -90,7 +90,6 @@
 
     var template = document.getElementById('fb-template');
     var addBtn = document.getElementById('fb-add');
-    var addAgreementBtn = document.getElementById('fb-add-agreement');
     var descriptionTemplate = document.getElementById('fb-description-template');
     var descriptionEditors = document.querySelectorAll('[data-description-editor]');
 
@@ -709,7 +708,12 @@
             fkInput.classList.add('is-locked');
         }
         applyFieldPreset(clone, preset);
-        list.appendChild(clone);
+        var agreementField = list.querySelector('.fb-field[data-is-agreement-field="1"]');
+        if (agreementField) {
+            list.insertBefore(clone, agreementField);
+        } else {
+            list.appendChild(clone);
+        }
         bind(clone);
         reindex();
         initFbSortable();
@@ -761,21 +765,6 @@
     if (addBtn && template) {
         addBtn.addEventListener('click', function () {
             var clone = appendField();
-            var labelInput = clone ? clone.querySelector('.fb-input-label') : null;
-            if (labelInput) {
-                labelInput.focus();
-            }
-        });
-    }
-
-    if (addAgreementBtn && template) {
-        addAgreementBtn.addEventListener('click', function () {
-            var clone = appendField({
-                label: '規約への同意',
-                type: 'checkbox',
-                required: true,
-                options: ['規約に同意する']
-            });
             var labelInput = clone ? clone.querySelector('.fb-input-label') : null;
             if (labelInput) {
                 labelInput.focus();

@@ -29,7 +29,7 @@ class FormController
         (new View())->render('admin/forms/edit', [
             'title' => 'フォーム新規作成',
             'form'  => self::prepareFormForEdit(self::defaultForm()),
-            'fields'=> [],
+            'fields'=> self::ensureAgreementFieldAtEnd([]),
             'errors'=> [],
             'isNew' => true,
         ], 'admin');
@@ -45,7 +45,7 @@ class FormController
             (new View())->render('admin/forms/edit', [
                 'title' => 'フォーム新規作成',
                 'form'  => $data['form'],
-                'fields'=> $data['fields'],
+                'fields'=> self::ensureAgreementFieldAtEnd($data['fields']),
                 'errors'=> $errors,
                 'isNew' => true,
             ], 'admin');
@@ -106,6 +106,7 @@ class FormController
         if (empty($editFields)) {
             $editFields = [self::defaultField()];
         }
+        $editFields = self::ensureAgreementFieldAtEnd($editFields);
 
         (new View())->render('admin/forms/edit', [
             'title' => 'フォーム編集',
@@ -129,7 +130,7 @@ class FormController
             (new View())->render('admin/forms/edit', [
                 'title' => 'フォーム編集',
                 'form'  => array_merge($form, $data['form']),
-                'fields'=> $data['fields'],
+                'fields'=> self::ensureAgreementFieldAtEnd($data['fields']),
                 'errors'=> $errors,
                 'isNew' => false,
             ], 'admin');
@@ -313,7 +314,7 @@ class FormController
                 ];
             }
         }
-        return ['form' => $form, 'fields' => $fields];
+        return ['form' => $form, 'fields' => self::ensureAgreementFieldAtEnd($fields)];
     }
 
     private function validate(array $data, ?int $excludeId): array
@@ -659,6 +660,88 @@ class FormController
             'checkbox_min_selections' => '',
             'checkbox_max_selections' => '',
             'options' => '',
+        ];
+    }
+
+    /**
+     * @param array<int, array<string, mixed>> $fields
+     * @return array<int, array<string, mixed>>
+     */
+    private static function ensureAgreementFieldAtEnd(array $fields): array
+    {
+        $agreement = null;
+        $rest = [];
+
+        foreach ($fields as $field) {
+            if ($agreement === null && self::isAgreementField($field)) {
+                $agreement = array_replace(self::defaultAgreementField(), $field);
+                continue;
+            }
+            $rest[] = $field;
+        }
+
+        if ($agreement === null) {
+            $agreement = self::defaultAgreementField();
+        }
+
+        $agreement['_is_agreement_field'] = 1;
+        $rest[] = $agreement;
+
+        return array_values($rest);
+    }
+
+    /**
+     * @param array<string, mixed> $field
+     */
+    private static function isAgreementField(array $field): bool
+    {
+        $fieldKey = trim((string) ($field['field_key'] ?? ''));
+        if ($fieldKey === 'agreement_consent') {
+            return true;
+        }
+
+        if (($field['type'] ?? '') !== 'checkbox') {
+            return false;
+        }
+
+        $label = trim((string) ($field['label'] ?? ''));
+        if ($label !== '規約への同意') {
+            return false;
+        }
+
+        $options = [];
+        if (array_key_exists('options', $field)) {
+            $options = \Models\FormField::parseOptions((string) ($field['options'] ?? ''));
+        } else {
+            $checkboxSettings = \Models\FormField::decodeCheckboxSettings($field['options_json'] ?? null);
+            $options = $checkboxSettings['options'];
+        }
+
+        return count($options) === 1 && (string) ($options[0] ?? '') === '規約に同意する';
+    }
+
+    /**
+     * @return array<string, mixed>
+     */
+    private static function defaultAgreementField(): array
+    {
+        return [
+            'field_key' => 'agreement_consent',
+            'label' => '規約への同意',
+            'type'  => 'checkbox',
+            'required' => 1,
+            'max_length' => '',
+            'regex' => null,
+            'help_text' => '',
+            'placeholder' => '',
+            'pair_label_left' => '',
+            'pair_label_right' => '',
+            'pair_placeholder_left' => '',
+            'pair_placeholder_right' => '',
+            'checkbox_limit_enabled' => 0,
+            'checkbox_min_selections' => '',
+            'checkbox_max_selections' => '',
+            'options' => '規約に同意する',
         ];
     }
 

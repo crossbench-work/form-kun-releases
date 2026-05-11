@@ -156,7 +156,8 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                 $summaryRegex = 'カスタム';
             }
             ?>
-            <li class="fb-field is-collapsed" data-index="<?= $idx ?>">
+            <?php $isAgreementField = !empty($f['_is_agreement_field']); ?>
+            <li class="fb-field is-collapsed" data-index="<?= $idx ?>"<?= $isAgreementField ? ' data-is-agreement-field="1"' : '' ?>>
                 <div class="fb-field-header">
                     <span class="fb-drag-handle" title="ドラッグして並べ替え">
                         <svg width="14" height="18" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="currentColor"><circle cx="9" cy="6" r="2"/><circle cx="15" cy="6" r="2"/><circle cx="9" cy="12" r="2"/><circle cx="15" cy="12" r="2"/><circle cx="9" cy="18" r="2"/><circle cx="15" cy="18" r="2"/></svg>
@@ -348,9 +349,8 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
         <?php endforeach; ?>
         </ul>
 
-        <div class="area is-actions fb-add-actions">
+        <div class="area is-actions">
             <button type="button" id="fb-add" class="btn">＋ 項目を追加</button>
-            <button type="button" id="fb-add-agreement" class="btn">＋ 規約に同意する</button>
         </div>
     </section>
     <section class="m-panel01">
