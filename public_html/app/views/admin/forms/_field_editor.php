@@ -32,11 +32,15 @@ if (empty($f['required']) || in_array($f['type'], ['radio', 'select'], true)) {
         <?php endif; ?>
         <div class="fb-field-summary">
             <span class="fb-field-summary-main">
-                <span class="fb-num"><?= $idx + 1 ?></span>
-                · <strong class="fb-summary-label"><?= e($f['label']) ?></strong>
-                · <code class="fb-summary-type"><?= e(\Models\FormField::typeLabel($f['type'])) ?></code>
-                · <span class="fb-summary-badge fb-summary-required"><?= e($summaryRequired) ?></span>
-                · <span class="fb-summary-badge fb-summary-regex">入力チェック: <span class="fb-summary-regex-text"><?= e($summaryRegex) ?></span></span>
+                <?php if ($isAgreementField): ?>
+                    <strong class="fb-summary-label"><?= e($f['label']) ?></strong>
+                <?php else: ?>
+                    <span class="fb-num"><?= $idx + 1 ?></span>
+                    · <strong class="fb-summary-label"><?= e($f['label']) ?></strong>
+                    · <code class="fb-summary-type"><?= e(\Models\FormField::typeLabel($f['type'])) ?></code>
+                    · <span class="fb-summary-badge fb-summary-required"><?= e($summaryRequired) ?></span>
+                    · <span class="fb-summary-badge fb-summary-regex">入力チェック: <span class="fb-summary-regex-text"><?= e($summaryRegex) ?></span></span>
+                <?php endif; ?>
             </span>
         </div>
         <?php if (!$isAgreementField): ?>

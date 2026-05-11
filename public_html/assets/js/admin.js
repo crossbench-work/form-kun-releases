@@ -292,8 +292,9 @@
         var typeEl = li.querySelector('.fb-summary-type');
         var requiredEl = li.querySelector('.fb-summary-required');
         var regexEl = li.querySelector('.fb-summary-regex-text');
-        if (!labelEl || !typeEl || !requiredEl || !regexEl) return;
+        if (!labelEl) return;
         labelEl.textContent = (labelInp && labelInp.value.trim()) ? labelInp.value.trim() : '（無題）';
+        if (!typeEl || !requiredEl || !regexEl) return;
         var opt = typeSel && typeSel.selectedOptions && typeSel.selectedOptions[0];
         var typeValue = typeSel ? typeSel.value : '';
         typeEl.textContent = opt ? opt.textContent.trim() : '—';
