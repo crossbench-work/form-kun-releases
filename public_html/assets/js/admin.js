@@ -91,12 +91,26 @@
     function updateFieldSummary(li) {
         var labelInp = li.querySelector('.fb-input-label');
         var typeSel = li.querySelector('.fb-type');
+        var requiredToggle = li.querySelector('.fb-required-toggle');
+        var regexKind = li.querySelector('.fb-regex-kind');
         var labelEl = li.querySelector('.fb-summary-label');
         var typeEl = li.querySelector('.fb-summary-type');
-        if (!labelEl || !typeEl) return;
+        var requiredEl = li.querySelector('.fb-summary-required');
+        var regexEl = li.querySelector('.fb-summary-regex-text');
+        if (!labelEl || !typeEl || !requiredEl || !regexEl) return;
         labelEl.textContent = (labelInp && labelInp.value.trim()) ? labelInp.value.trim() : '（無題）';
         var opt = typeSel && typeSel.selectedOptions && typeSel.selectedOptions[0];
         typeEl.textContent = opt ? opt.textContent.trim() : '—';
+        var isRequired = !!(requiredToggle && requiredToggle.checked);
+        requiredEl.textContent = isRequired ? '必須' : '任意';
+        if (!isRequired || !regexKind || regexKind.value === '') {
+            regexEl.textContent = 'なし';
+        } else if (regexKind.value === FB_REGEX_CUSTOM) {
+            regexEl.textContent = 'カスタム';
+        } else {
+            var regexOpt = regexKind.selectedOptions && regexKind.selectedOptions[0];
+            regexEl.textContent = regexOpt ? regexOpt.textContent.trim() : 'なし';
+        }
     }
 
     function bindAccordion(li) {
@@ -171,17 +185,19 @@
         syncAllRegexRows();
     }
 
-    function bindRegexRow(row) {
+    function bindRegexRow(row, li) {
         var sel = row.querySelector('.fb-regex-kind');
         var customInp = row.querySelector('.fb-regex-custom');
         if (sel) {
             sel.addEventListener('change', function () {
                 syncRegexRowValue(row);
+                if (li) updateFieldSummary(li);
             });
         }
         if (customInp) {
             customInp.addEventListener('input', function () {
                 syncRegexRowValue(row);
+                if (li) updateFieldSummary(li);
             });
         }
         syncRegexRowValue(row);
@@ -190,7 +206,7 @@
     function bindRegexBlock(li) {
         var row = li.querySelector('.fb-regex-row');
         if (row) {
-            bindRegexRow(row);
+            bindRegexRow(row, li);
         }
     }
 
@@ -382,6 +398,7 @@
         if (requiredToggle) {
             requiredToggle.addEventListener('change', function () {
                 syncTypeSpecificUi();
+                updateFieldSummary(li);
             });
         }
         var up = li.querySelector('.fb-up');

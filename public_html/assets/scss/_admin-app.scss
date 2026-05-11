@@ -818,6 +818,23 @@ form.is-inline {
     border-radius: 4px;
   }
 
+  .fb-field-summary .fb-summary-badge {
+    display: inline-block;
+    font-size: 12px;
+    padding: 1px 6px;
+    border-radius: 999px;
+  }
+
+  .fb-field-summary .fb-summary-required {
+    background: #eef2ff;
+    color: #4338ca;
+  }
+
+  .fb-field-summary .fb-summary-regex {
+    background: #f8fafc;
+    color: #475569;
+  }
+
   .fb-field-body {
     padding: 16px;
   }
@@ -847,6 +864,27 @@ form.is-inline {
     display: flex;
     align-items: center;
     gap: 8px;
+  }
+
+  .fb-validation-wrap {
+    min-width: 320px;
+  }
+
+  .fb-validation-controls {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .fb-required-wrap {
+    flex: 0 0 auto;
+    min-width: auto;
+  }
+
+  .fb-validation-controls .fb-regex-wrap {
+    flex: 1 1 220px;
+    min-width: 220px;
   }
 
   .fb-field-key-input {

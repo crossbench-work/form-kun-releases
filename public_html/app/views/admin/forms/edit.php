@@ -87,6 +87,14 @@ $regexPresetChoices = [
             $regexDecoded = \Models\FormField::decodeRegexPatterns(isset($f['regex']) ? (string) $f['regex'] : null);
             $rp = $regexDecoded[0] ?? '';
             $isTextPair = (($f['type'] ?? '') === 'text_pair');
+            $summaryRequired = !empty($f['required']) ? '必須' : '任意';
+            if (empty($f['required']) || $rp === '') {
+                $summaryRegex = 'なし';
+            } elseif (array_key_exists($rp, $regexPresetChoices)) {
+                $summaryRegex = $regexPresetChoices[$rp];
+            } else {
+                $summaryRegex = 'カスタム';
+            }
             ?>
             <li class="fb-field is-collapsed" data-index="<?= $idx ?>">
                 <div class="fb-field-header">
@@ -101,6 +109,8 @@ $regexPresetChoices = [
                             項目 <span class="fb-num"><?= $idx + 1 ?></span>
                             · <strong class="fb-summary-label"><?= e($f['label']) ?></strong>
                             · <code class="fb-summary-type"><?= e(\Models\FormField::typeLabel($f['type'])) ?></code>
+                            · <span class="fb-summary-badge fb-summary-required"><?= e($summaryRequired) ?></span>
+                            · <span class="fb-summary-badge fb-summary-regex">入力チェック: <span class="fb-summary-regex-text"><?= e($summaryRegex) ?></span></span>
                         </span>
                     </div>
                     <div class="fb-header-actions">
@@ -133,48 +143,52 @@ $regexPresetChoices = [
                         <?php endforeach; ?>
                         </select>
                     </div>
-                    <div>
+                    <div class="fb-validation-wrap">
                         <label>必須</label>
-                        <label class="label is-choice">
-                            <input type="checkbox" name="fields[<?= $idx ?>][required]" value="1" class="fb-required-toggle" <?= !empty($f['required']) ? 'checked' : '' ?>>
-                            <span>必須にする</span>
-                        </label>
+                        <div class="fb-validation-controls">
+                            <div class="fb-required-wrap">
+                                <label class="label is-choice">
+                                    <input type="checkbox" name="fields[<?= $idx ?>][required]" value="1" class="fb-required-toggle" <?= !empty($f['required']) ? 'checked' : '' ?>>
+                                    <span>必須にする</span>
+                                </label>
+                            </div>
+                            <div class="fb-regex-wrap" <?= empty($f['required']) ? 'style="display:none"' : '' ?>>
+                                <label>入力チェック</label>
+                                <div class="fb-regex-list">
+                                    <?php
+                                    if ($rp === '') {
+                                        $selVal = '';
+                                        $customVal = '';
+                                    } elseif ($rp !== '' && array_key_exists($rp, $regexPresetChoices) && $rp !== $FB_REGEX_CUSTOM) {
+                                        $selVal = $rp;
+                                        $customVal = '';
+                                    } else {
+                                        $selVal = $FB_REGEX_CUSTOM;
+                                        $customVal = $rp;
+                                    }
+                                    $showCustom = ($selVal === $FB_REGEX_CUSTOM);
+                                    $hiddenVal = $showCustom ? $customVal : $selVal;
+                                    ?>
+                                    <div class="fb-regex-row">
+                                        <select class="fb-regex-kind" aria-label="入力チェックの種類">
+                                            <?php foreach ($regexPresetChoices as $patVal => $patLabel): ?>
+                                                <option value="<?= e($patVal) ?>" <?= $selVal === $patVal ? 'selected' : '' ?>><?= e($patLabel) ?></option>
+                                            <?php endforeach; ?>
+                                        </select>
+                                        <div class="fb-regex-custom-wrap"<?= $showCustom ? '' : ' style="display:none"' ?>>
+                                            <input type="text" class="fb-regex-custom" value="<?= e($customVal) ?>" placeholder="正規表現" spellcheck="false" autocomplete="off">
+                                        </div>
+                                        <input type="hidden" class="fb-regex-value" value="<?= e($hiddenVal) ?>" spellcheck="false">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="fb-row">
                     <div class="fb-max-length-wrap" <?= in_array($f['type'], ['radio', 'checkbox', 'select'], true) ? 'style="display:none"' : '' ?>>
                         <label>最大文字数（任意）</label>
                         <input type="number" min="1" name="fields[<?= $idx ?>][max_length]" value="<?= e($f['max_length']) ?>">
-                    </div>
-                    <div class="fb-regex-wrap" <?= empty($f['required']) ? 'style="display:none"' : '' ?>>
-                        <label>入力チェック</label>
-                        <div class="fb-regex-list">
-                            <?php
-                            if ($rp === '') {
-                                $selVal = '';
-                                $customVal = '';
-                            } elseif ($rp !== '' && array_key_exists($rp, $regexPresetChoices) && $rp !== $FB_REGEX_CUSTOM) {
-                                $selVal = $rp;
-                                $customVal = '';
-                            } else {
-                                $selVal = $FB_REGEX_CUSTOM;
-                                $customVal = $rp;
-                            }
-                            $showCustom = ($selVal === $FB_REGEX_CUSTOM);
-                            $hiddenVal = $showCustom ? $customVal : $selVal;
-                            ?>
-                            <div class="fb-regex-row">
-                                <select class="fb-regex-kind" aria-label="入力チェックの種類">
-                                    <?php foreach ($regexPresetChoices as $patVal => $patLabel): ?>
-                                        <option value="<?= e($patVal) ?>" <?= $selVal === $patVal ? 'selected' : '' ?>><?= e($patLabel) ?></option>
-                                    <?php endforeach; ?>
-                                </select>
-                                <div class="fb-regex-custom-wrap"<?= $showCustom ? '' : ' style="display:none"' ?>>
-                                    <input type="text" class="fb-regex-custom" value="<?= e($customVal) ?>" placeholder="正規表現" spellcheck="false" autocomplete="off">
-                                </div>
-                                <input type="hidden" class="fb-regex-value" value="<?= e($hiddenVal) ?>" spellcheck="false">
-                            </div>
-                        </div>
                     </div>
                     <div class="fb-placeholder-wrap" <?= ($isTextPair || in_array($f['type'], ['radio', 'checkbox', 'select'], true)) ? 'style="display:none"' : '' ?>>
                         <label>プレースホルダ（任意）</label>
@@ -318,6 +332,8 @@ $regexPresetChoices = [
                     項目 <span class="fb-num">1</span>
                     · <strong class="fb-summary-label"></strong>
                     · <code class="fb-summary-type"><?= e(\Models\FormField::typeLabel('text')) ?></code>
+                    · <span class="fb-summary-badge fb-summary-required">任意</span>
+                    · <span class="fb-summary-badge fb-summary-regex">入力チェック: <span class="fb-summary-regex-text">なし</span></span>
                 </span>
             </div>
             <div class="fb-header-actions">
@@ -347,29 +363,33 @@ $regexPresetChoices = [
                     <?php endforeach; ?>
                 </select>
             </div>
-            <div>
+            <div class="fb-validation-wrap">
                 <label>必須</label>
-                <label class="label is-choice"><input type="checkbox" data-name="required" value="1" class="fb-required-toggle"><span>必須にする</span></label>
+                <div class="fb-validation-controls">
+                    <div class="fb-required-wrap">
+                        <label class="label is-choice"><input type="checkbox" data-name="required" value="1" class="fb-required-toggle"><span>必須にする</span></label>
+                    </div>
+                    <div class="fb-regex-wrap" style="display:none">
+                        <label>入力チェック</label>
+                        <div class="fb-regex-list">
+                            <div class="fb-regex-row">
+                                <select class="fb-regex-kind" aria-label="入力チェックの種類">
+                                    <?php foreach ($regexPresetChoices as $patVal => $patLabel): ?>
+                                        <option value="<?= e($patVal) ?>"><?= e($patLabel) ?></option>
+                                    <?php endforeach; ?>
+                                </select>
+                                <div class="fb-regex-custom-wrap" style="display:none">
+                                    <input type="text" class="fb-regex-custom" placeholder="正規表現" spellcheck="false" autocomplete="off">
+                                </div>
+                                <input type="hidden" class="fb-regex-value" value="">
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="fb-row">
             <div class="fb-max-length-wrap"><label>最大文字数（任意）</label><input type="number" min="1" data-name="max_length"></div>
-            <div class="fb-regex-wrap" style="display:none">
-                <label>入力チェック</label>
-                <div class="fb-regex-list">
-                    <div class="fb-regex-row">
-                        <select class="fb-regex-kind" aria-label="入力チェックの種類">
-                            <?php foreach ($regexPresetChoices as $patVal => $patLabel): ?>
-                                <option value="<?= e($patVal) ?>"><?= e($patLabel) ?></option>
-                            <?php endforeach; ?>
-                        </select>
-                        <div class="fb-regex-custom-wrap" style="display:none">
-                            <input type="text" class="fb-regex-custom" placeholder="正規表現" spellcheck="false" autocomplete="off">
-                        </div>
-                        <input type="hidden" class="fb-regex-value" value="">
-                    </div>
-                </div>
-            </div>
             <div class="fb-placeholder-wrap"><label>プレースホルダ（任意）</label><input type="text" data-name="placeholder"></div>
         </div>
         <div class="fb-row fb-text-pair-settings" style="display:none">

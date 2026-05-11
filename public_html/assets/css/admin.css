@@ -845,6 +845,20 @@ form.is-inline {
   padding: 1px 6px;
   border-radius: 4px;
 }
+[data-module=m-formBuilder01] .fb-field-summary .fb-summary-badge {
+  display: inline-block;
+  font-size: 12px;
+  padding: 1px 6px;
+  border-radius: 999px;
+}
+[data-module=m-formBuilder01] .fb-field-summary .fb-summary-required {
+  background: #eef2ff;
+  color: #4338ca;
+}
+[data-module=m-formBuilder01] .fb-field-summary .fb-summary-regex {
+  background: #f8fafc;
+  color: #475569;
+}
 [data-module=m-formBuilder01] .fb-field-body {
   padding: 16px;
 }
@@ -869,6 +883,23 @@ form.is-inline {
   display: flex;
   align-items: center;
   gap: 8px;
+}
+[data-module=m-formBuilder01] .fb-validation-wrap {
+  min-width: 320px;
+}
+[data-module=m-formBuilder01] .fb-validation-controls {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+[data-module=m-formBuilder01] .fb-required-wrap {
+  flex: 0 0 auto;
+  min-width: auto;
+}
+[data-module=m-formBuilder01] .fb-validation-controls .fb-regex-wrap {
+  flex: 1 1 220px;
+  min-width: 220px;
 }
 [data-module=m-formBuilder01] .fb-field-key-input {
   flex: 1;
