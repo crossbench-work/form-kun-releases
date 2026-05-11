@@ -791,6 +791,14 @@ form.is-inline {
     color: #475569;
   }
 
+  .fb-header-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+  }
+
   .fb-field-summary-main {
     display: block;
     white-space: nowrap;

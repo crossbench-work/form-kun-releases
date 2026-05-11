@@ -103,6 +103,11 @@ $regexPresetChoices = [
                             · <code class="fb-summary-type"><?= e(\Models\FormField::typeLabel($f['type'])) ?></code>
                         </span>
                     </div>
+                    <div class="fb-header-actions">
+                        <button type="button" class="btn is-sm fb-up">↑ 上へ</button>
+                        <button type="button" class="btn is-sm fb-down">↓ 下へ</button>
+                        <button type="button" class="btn is-sm is-danger fb-remove">削除</button>
+                    </div>
                 </div>
                 <div class="fb-field-body">
                 <div class="fb-row">
@@ -225,11 +230,6 @@ $regexPresetChoices = [
                     </div>
                 </div>
                 <input type="hidden" name="fields[<?= $idx ?>][_remove]" value="0" class="fb-remove-flag">
-                <div class="fb-actions">
-                    <button type="button" class="btn is-sm fb-up">↑ 上へ</button>
-                    <button type="button" class="btn is-sm fb-down">↓ 下へ</button>
-                    <button type="button" class="btn is-sm is-danger fb-remove">削除</button>
-                </div>
                 </div>
             </li>
         <?php endforeach; ?>
@@ -320,6 +320,11 @@ $regexPresetChoices = [
                     · <code class="fb-summary-type"><?= e(\Models\FormField::typeLabel('text')) ?></code>
                 </span>
             </div>
+            <div class="fb-header-actions">
+                <button type="button" class="btn is-sm fb-up">↑ 上へ</button>
+                <button type="button" class="btn is-sm fb-down">↓ 下へ</button>
+                <button type="button" class="btn is-sm is-danger fb-remove">削除</button>
+            </div>
         </div>
         <div class="fb-field-body">
         <div class="fb-row">
@@ -387,11 +392,6 @@ $regexPresetChoices = [
             </div>
         </div>
         <input type="hidden" data-name="_remove" value="0" class="fb-remove-flag">
-        <div class="fb-actions">
-            <button type="button" class="btn is-sm fb-up">↑ 上へ</button>
-            <button type="button" class="btn is-sm fb-down">↓ 下へ</button>
-            <button type="button" class="btn is-sm is-danger fb-remove">削除</button>
-        </div>
         </div>
     </li>
 </template>
