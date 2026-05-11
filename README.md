@@ -3,6 +3,17 @@
 PHP（vanilla）+ MySQL 製のフォームビルダー型 Web アプリケーションです。
 共有レンタルサーバー（FTPアップロードのみで運用するタイプ）でも動作するように設計しています。
 
+## ドキュメント・AI 作業
+
+| 種別 | パス |
+|------|------|
+| AI 共通指示（正） | [`AGENTS.md`](AGENTS.md) |
+| Claude 等の入口 | [`CLAUDE.md`](CLAUDE.md) |
+| 共有ルール・ADR・変更履歴・プロンプト雛形 | [`docs/ai/`](docs/ai/)（[`changelog/`](docs/ai/changelog/) に日付ファイルで追記） |
+| 仕様メモ置き場 | [`docs/specs/`](docs/specs/) |
+| GitHub Copilot | [`.github/copilot-instructions.md`](.github/copilot-instructions.md) |
+| HTML/CSS 規約（Cursor スキル） | [`.cursor/skills/html-markup/`](.cursor/skills/html-markup/) |
+
 ## 主な機能
 
 - 管理画面で複数フォームを GUI 作成（基本入力・選択・日時・ファイル・バリデーション）
@@ -27,6 +38,12 @@ PHP（vanilla）+ MySQL 製のフォームビルダー型 Web アプリケーシ
 
 ```
 （リポジトリルート）
+├── AGENTS.md                AI 共通指示
+├── CLAUDE.md                AI 入口（AGENTS 参照）
+├── docs/ai/                 共有ルール・ADR・changelog・prompts
+├── docs/specs/              仕様メモ
+├── .github/copilot-instructions.md
+├── .cursor/skills/          Cursor スキル（例: html-markup）
 ├── docker-compose.yml       Docker（Apache + MariaDB）
 ├── .env.example             compose 用の環境変数サンプル（任意で .env にコピー）
 ├── docker/php-apache/       Web コンテナの Dockerfile など
