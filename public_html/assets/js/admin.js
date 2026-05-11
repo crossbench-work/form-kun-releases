@@ -95,9 +95,9 @@
         var labelEl = li.querySelector('.fb-summary-label');
         var typeEl = li.querySelector('.fb-summary-type');
         if (!labelEl || !typeEl) return;
-        var t = typeSel ? typeSel.value : '';
         labelEl.textContent = (labelInp && labelInp.value.trim()) ? labelInp.value.trim() : '（無題）';
-        typeEl.textContent = t || '—';
+        var opt = typeSel && typeSel.selectedOptions && typeSel.selectedOptions[0];
+        typeEl.textContent = opt ? opt.textContent.trim() : '—';
     }
 
     function bindAccordion(li) {

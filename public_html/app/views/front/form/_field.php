@@ -38,11 +38,13 @@ $ph    = $field['placeholder'] ?? '';
                 <?= $req ? 'required' : '' ?>>
             <?php break; ?>
 
-        <?php case 'textarea': ?>
+        <?php case 'textarea':
+        case 'address': ?>
             <textarea
                 id="f_<?= e($key) ?>"
                 name="<?= e($key) ?>"
-                rows="6"
+                rows="<?= $type === 'address' ? 4 : 6 ?>"
+                <?= $type === 'address' ? 'autocomplete="street-address"' : '' ?>
                 <?= $field['max_length'] ? 'maxlength="' . (int) $field['max_length'] . '"' : '' ?>
                 placeholder="<?= e($ph) ?>"
                 <?= $req ? 'required' : '' ?>><?= e(is_array($value) ? '' : $value) ?></textarea>

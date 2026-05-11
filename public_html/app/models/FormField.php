@@ -56,9 +56,39 @@ class FormField
         return json_encode(array_values($clean), JSON_UNESCAPED_UNICODE);
     }
 
+    /**
+     * 入力タイプの内部値 => 管理画面・一覧向け日本語ラベル（表示順維持）。
+     *
+     * @return array<string, string>
+     */
+    public static function TYPE_LABELS(): array
+    {
+        return [
+            'text' => '1行テキスト',
+            'textarea' => '複数行テキスト',
+            'address' => '住所',
+            'email' => 'メールアドレス',
+            'tel' => '電話番号',
+            'number' => '数値',
+            'date' => '日付',
+            'time' => '時間（時:分）',
+            'radio' => 'ラジオボタン',
+            'checkbox' => 'チェックボックス',
+            'select' => 'プルダウン（選択）',
+            'file' => 'ファイル添付',
+        ];
+    }
+
     public static function ALLOWED_TYPES(): array
     {
-        return ['text','textarea','email','tel','number','radio','checkbox','select','date','time','file'];
+        return array_keys(self::TYPE_LABELS());
+    }
+
+    public static function typeLabel(string $type): string
+    {
+        $labels = self::TYPE_LABELS();
+
+        return $labels[$type] ?? $type;
     }
 
     public static function forForm(int $formId): array

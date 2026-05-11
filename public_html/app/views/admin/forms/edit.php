@@ -89,7 +89,7 @@ $regexPresetChoices = [
                         <span class="fb-field-summary-main">
                             項目 <span class="fb-num"><?= $idx + 1 ?></span>
                             · <strong class="fb-summary-label"><?= e($f['label']) ?></strong>
-                            · <code class="fb-summary-type"><?= e($f['type']) ?></code>
+                            · <code class="fb-summary-type"><?= e(\Models\FormField::typeLabel($f['type'])) ?></code>
                         </span>
                     </div>
                 </div>
@@ -112,8 +112,8 @@ $regexPresetChoices = [
                     <div>
                         <label>型</label>
                         <select name="fields[<?= $idx ?>][type]" class="fb-type">
-                        <?php foreach (\Models\FormField::ALLOWED_TYPES() as $t): ?>
-                            <option value="<?= e($t) ?>" <?= $f['type'] === $t ? 'selected' : '' ?>><?= e($t) ?></option>
+                        <?php foreach (\Models\FormField::TYPE_LABELS() as $tVal => $tLabel): ?>
+                            <option value="<?= e($tVal) ?>" <?= $f['type'] === $tVal ? 'selected' : '' ?>><?= e($tLabel) ?></option>
                         <?php endforeach; ?>
                         </select>
                     </div>
@@ -285,7 +285,7 @@ $regexPresetChoices = [
                 <span class="fb-field-summary-main">
                     項目 <span class="fb-num">1</span>
                     · <strong class="fb-summary-label"></strong>
-                    · <code class="fb-summary-type">text</code>
+                    · <code class="fb-summary-type"><?= e(\Models\FormField::typeLabel('text')) ?></code>
                 </span>
             </div>
         </div>
@@ -305,8 +305,8 @@ $regexPresetChoices = [
             <div>
                 <label>型</label>
                 <select data-name="type" class="fb-type">
-                    <?php foreach (\Models\FormField::ALLOWED_TYPES() as $t): ?>
-                        <option value="<?= e($t) ?>"><?= e($t) ?></option>
+                    <?php foreach (\Models\FormField::TYPE_LABELS() as $tVal => $tLabel): ?>
+                        <option value="<?= e($tVal) ?>"><?= e($tLabel) ?></option>
                     <?php endforeach; ?>
                 </select>
             </div>
