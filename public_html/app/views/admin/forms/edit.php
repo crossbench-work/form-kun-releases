@@ -44,14 +44,14 @@ $slugPreviewValue = trim((string) ($form['slug'] ?? '')) !== '' ? (string) $form
     <section class="m-panel01">
         <h2>基本設定</h2>
         <div class="box is-field">
-            <label class="label" for="title">タイトル <span class="is-required">必須</span></label>
+            <div class="fb-basic-label-row">
+                <label class="label" for="title">タイトル <span class="is-required">必須</span></label>
+                <label class="label is-choice fb-basic-display-toggle">
+                    <input type="checkbox" name="show_title" value="1" <?= !empty($form['show_title']) ? 'checked' : '' ?>>
+                    表示する
+                </label>
+            </div>
             <input type="text" id="title" name="title" value="<?= e($form['title']) ?>" required>
-        </div>
-        <div class="box is-field">
-            <label class="label">
-                <input type="checkbox" name="show_title" value="1" <?= !empty($form['show_title']) ? 'checked' : '' ?>>
-                公開フォームでタイトルを表示する
-            </label>
         </div>
         <div class="box is-field">
             <label class="label" for="slug">スラッグ（URL用） <span class="is-required">必須</span></label>
@@ -67,14 +67,14 @@ $slugPreviewValue = trim((string) ($form['slug'] ?? '')) !== '' ? (string) $form
             </select>
         </div>
         <div class="box is-field">
-            <label class="label" for="description">説明文</label>
+            <div class="fb-basic-label-row">
+                <label class="label" for="description">説明文</label>
+                <label class="label is-choice fb-basic-display-toggle">
+                    <input type="checkbox" name="show_description" value="1" <?= !empty($form['show_description']) ? 'checked' : '' ?>>
+                    表示する
+                </label>
+            </div>
             <textarea id="description" name="description" rows="3"><?= e($form['description']) ?></textarea>
-        </div>
-        <div class="box is-field">
-            <label class="label">
-                <input type="checkbox" name="show_description" value="1" <?= !empty($form['show_description']) ? 'checked' : '' ?>>
-                公開フォームで説明文を表示する
-            </label>
         </div>
         <div class="box is-field">
             <label class="label">

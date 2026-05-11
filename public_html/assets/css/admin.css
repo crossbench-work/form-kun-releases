@@ -744,6 +744,18 @@ form.is-inline {
   font-weight: 400;
   margin-bottom: 0;
 }
+.m-panel01 .fb-basic-label-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 6px;
+}
+.m-panel01 .fb-basic-display-toggle {
+  font-size: 13px;
+  color: #64748b;
+}
 
 .m-badge01 {
   display: inline-block;
