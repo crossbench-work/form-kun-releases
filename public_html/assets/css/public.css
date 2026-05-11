@@ -91,7 +91,11 @@ form { background: #fff; border: 1px solid #e3e6ea; border-radius: 8px; padding:
 }
 .has-error input,
 .has-error textarea,
-.has-error select { border-color: #ef4444; }
+.has-error select,
+.field-address-row.has-error input,
+.field-address-row.has-error select {
+    border-color: #ef4444;
+}
 
 input[type=text], input[type=email], input[type=tel], input[type=number],
 input[type=date], input[type=time], input[type=password], input[type=file],
@@ -147,6 +151,64 @@ textarea { resize: vertical; min-height: 120px; }
     color: #fff;
 }
 .btn-danger:hover { background: #b91c1c; }
+.btn-secondary {
+    background: #f1f5f9;
+    border-color: #cbd5e1;
+}
+.btn-secondary:hover { background: #e2e8f0; }
+.btn-sm {
+    padding: 8px 14px;
+    font-size: 14px;
+}
+
+.field-address { margin-top: 4px; }
+.field-address-row { margin-bottom: 14px; }
+.field-address-row:last-child { margin-bottom: 0; }
+.field-address-row > .field-error:first-of-type { margin-top: 6px; }
+.field-address-row .field-error { margin-top: 4px; margin-bottom: 0; }
+.field-sublabel {
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    color: #374151;
+    margin-bottom: 6px;
+}
+.field-sublabel.field-sublabel-with-required {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+.field-sublabel.field-sublabel-with-required .required {
+    margin-left: 0;
+    vertical-align: baseline;
+}
+.field-address-inline {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+}
+.field-address-postal .input-postal-part1 {
+    flex: 0 1 4.5em;
+    max-width: 5.5em;
+    width: auto;
+}
+.field-address-postal .input-postal-part2 {
+    flex: 0 1 5.5em;
+    max-width: 7em;
+    width: auto;
+}
+.postal-hyphen {
+    flex-shrink: 0;
+    font-weight: 600;
+    color: #64748b;
+    padding: 0 2px;
+    user-select: none;
+}
+.field-address-inline .btn-sm {
+    flex-shrink: 0;
+}
 
 dl.confirm-list { background: #fff; border: 1px solid #e3e6ea; border-radius: 8px; padding: 16px 24px; }
 dl.confirm-list dt { font-weight: 600; margin-top: 12px; color: #374151; }

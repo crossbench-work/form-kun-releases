@@ -45,7 +45,12 @@
             <?php else:
                 $val = $values[$key] ?? '';
             ?>
-                <?= $val !== '' ? nl2br(e((string) $val)) : '<span class="muted">（未入力）</span>' ?>
+                <?php if ($f['type'] === 'address'): ?>
+                    <?php $addrText = format_address_value_display($val); ?>
+                    <?= $addrText !== '' ? nl2br(e($addrText)) : '<span class="muted">（未入力）</span>' ?>
+                <?php else: ?>
+                    <?= $val !== '' ? nl2br(e((string) $val)) : '<span class="muted">（未入力）</span>' ?>
+                <?php endif; ?>
             <?php endif; ?>
             </td>
         </tr>

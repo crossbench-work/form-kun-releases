@@ -14,5 +14,6 @@ $router->get('/',                fn() => (new \Controllers\HomeController())->in
 $router->get('/f/{slug}',        fn($p) => (new \Controllers\FormController())->show($p['slug']));
 $router->post('/f/{slug}/confirm', fn($p) => (new \Controllers\FormController())->confirm($p['slug']));
 $router->post('/f/{slug}/submit',  fn($p) => (new \Controllers\FormController())->submit($p['slug']));
+$router->get('/api/postal/lookup', fn() => (new \Controllers\PostalController())->lookup());
 
 $router->dispatch();

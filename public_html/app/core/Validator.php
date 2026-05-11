@@ -5,7 +5,7 @@ use Models\FormField;
 
 class Validator
 {
-    /** @var array<string, string[]> */
+    /** @var array<string, array<string, mixed>> */
     private array $errors = [];
 
     /**
@@ -14,7 +14,7 @@ class Validator
      * @param array<int, array> $fields  form_fields の配列
      * @param array<string, mixed> $input
      * @param array<string, array> $files  $_FILES 形式（fieldKey => entry）
-     * @return array{values: array<string,mixed>, errors: array<string,string[]>}
+     * @return array{values: array<string,mixed>, errors: array<string, mixed>}
      */
     public function validate(array $fields, array $input, array $files = []): array
     {
@@ -43,6 +43,38 @@ class Validator
 
     private function normalize($raw, string $type)
     {
+        if ($type === 'address') {
+            if (!is_array($raw)) {
+                return ['postal' => '', 'prefecture' => '', 'city' => '', 'number' => '', 'building' => ''];
+            }
+            $p3 = isset($raw['postal3']) ? preg_replace('/\D/', '', (string) $raw['postal3']) : '';
+            $p4 = isset($raw['postal4']) ? preg_replace('/\D/', '', (string) $raw['postal4']) : '';
+            $legacy = isset($raw['postal']) ? preg_replace('/\D/', '', (string) $raw['postal']) : '';
+            $digits = ($p3 !== '' || $p4 !== '') ? ($p3 . $p4) : $legacy;
+            $postal = '';
+            if (strlen($digits) === 7) {
+                $postal = substr($digits, 0, 3) . '-' . substr($digits, 3);
+            } elseif ($digits !== '') {
+                $postal = $digits;
+            }
+            $pref = isset($raw['prefecture']) ? trim((string) $raw['prefecture']) : '';
+            $prefAllowed = array_flip(\japanese_prefectures());
+            if ($pref !== '' && !isset($prefAllowed[$pref])) {
+                $pref = '';
+            }
+            $number = isset($raw['number']) ? trim((string) $raw['number']) : '';
+            $building = isset($raw['building']) ? trim((string) $raw['building']) : '';
+            if ($number === '' && $building === '' && isset($raw['street'])) {
+                $number = trim((string) $raw['street']);
+            }
+            return [
+                'postal'      => $postal,
+                'prefecture'  => $pref,
+                'city'        => isset($raw['city']) ? trim((string) $raw['city']) : '',
+                'number'      => $number,
+                'building'    => $building,
+            ];
+        }
         if (is_array($raw)) {
             $arr = [];
             foreach ($raw as $v) {
@@ -73,6 +105,11 @@ class Validator
             ? FormField::decodeRegexPatterns($regexStored)
             : [];
         $opts  = self::decodeOptions($field['options_json'] ?? null);
+
+        if ($type === 'address') {
+            $this->validateAddressField($field, $value);
+            return;
+        }
 
         $isEmpty = is_array($value) ? count($value) === 0 : ((string) $value === '');
         if ($req && $isEmpty) {
@@ -145,6 +182,101 @@ class Validator
                 }
                 break;
         }
+    }
+
+    /**
+     * @param mixed $value normalize 済みの連想配列を想定
+     */
+    private function validateAddressField(array $field, $value): void
+    {
+        $key   = $field['field_key'];
+        $label = $field['label'];
+        $req   = (int) ($field['required'] ?? 0) === 1;
+        $maxL  = isset($field['max_length']) ? (int) $field['max_length'] : 0;
+        $regexStored = $field['regex'] ?? '';
+        $regexPatterns = is_string($regexStored)
+            ? FormField::decodeRegexPatterns($regexStored)
+            : [];
+
+        if (!is_array($value)) {
+            $this->addAddressPartError($key, '_root', $label . 'の入力形式が不正です。');
+            return;
+        }
+        $postal = (string) ($value['postal'] ?? '');
+        $pref   = (string) ($value['prefecture'] ?? '');
+        $city   = (string) ($value['city'] ?? '');
+        $number = (string) ($value['number'] ?? '');
+        $build  = (string) ($value['building'] ?? '');
+        $allEmpty = ($postal === '' && $pref === '' && $city === '' && $number === '' && $build === '');
+
+        if ($req && $allEmpty) {
+            $this->addAddressPartError($key, 'prefecture', $label . 'の都道府県を選択してください。');
+            $this->addAddressPartError($key, 'city', $label . 'の市区町村を入力してください。');
+            $this->addAddressPartError($key, 'number', $label . 'の番地を入力してください。');
+            return;
+        }
+        // 項目全体が任意でも、何か入力があれば都道府県・市区町村・番地は必須（郵便番号・建物は任意）
+        if (!$req && $allEmpty) {
+            return;
+        }
+
+        $prefs = array_flip(\japanese_prefectures());
+
+        if ($postal !== '' && !$this->isValidPostalDigits($postal)) {
+            $this->addAddressPartError($key, 'postal', $label . 'の郵便番号は7桁の数字で入力してください。');
+        }
+        if ($pref === '') {
+            $this->addAddressPartError($key, 'prefecture', $label . 'の都道府県を選択してください。');
+        } elseif (!isset($prefs[$pref])) {
+            $this->addAddressPartError($key, 'prefecture', $label . 'の都道府県が不正です。');
+        }
+        if ($city === '') {
+            $this->addAddressPartError($key, 'city', $label . 'の市区町村を入力してください。');
+        }
+        if ($number === '') {
+            $this->addAddressPartError($key, 'number', $label . 'の番地を入力してください。');
+        }
+
+        $combined = $pref . $city . $number . $build;
+        if ($maxL > 0 && mb_strlen($combined, 'UTF-8') > $maxL) {
+            $this->addAddressPartError($key, 'combined', $label . 'は合計' . $maxL . '文字以内で入力してください。');
+        }
+
+        foreach ($regexPatterns as $regex) {
+            if ($regex === '') {
+                continue;
+            }
+            if (@preg_match($regex, '') === false) {
+                $this->addAddressPartError($key, 'combined', $label . 'の検証設定が不正です。');
+                break;
+            }
+            if (!preg_match($regex, $combined)) {
+                $this->addAddressPartError($key, 'combined', $label . 'の形式が正しくありません。');
+                break;
+            }
+        }
+    }
+
+    /**
+     * 住所フィールドのエラーを入力欄ごとに分類して格納する。
+     *
+     * @param string $part postal|prefecture|city|number|combined|_root
+     */
+    private function addAddressPartError(string $key, string $part, string $message): void
+    {
+        if (!isset($this->errors[$key])) {
+            $this->errors[$key] = [];
+        }
+        if (!isset($this->errors[$key][$part])) {
+            $this->errors[$key][$part] = [];
+        }
+        $this->errors[$key][$part][] = $message;
+    }
+
+    private function isValidPostalDigits(string $postal): bool
+    {
+        $d = preg_replace('/\D/', '', $postal);
+        return strlen($d) === 7;
     }
 
     private function validateFile(array $field, $entry): void

@@ -5,7 +5,9 @@
 <?php foreach ($fields as $field):
     $key = $field['field_key'];
     $val = $values[$key] ?? '';
-    if (is_array($val)) $val = implode(', ', $val);
+    if ($field['type'] !== 'address' && is_array($val)) {
+        $val = implode(', ', $val);
+    }
 ?>
     <dt><?= e($field['label']) ?></dt>
     <dd>
@@ -16,6 +18,9 @@
         <?php else: ?>
             <span class="muted">（ファイルなし）</span>
         <?php endif; ?>
+    <?php elseif ($field['type'] === 'address'): ?>
+        <?php $addrText = format_address_value_display($val); ?>
+        <?= $addrText !== '' ? nl2br(e($addrText)) : '<span class="muted">（未入力）</span>' ?>
     <?php else: ?>
         <?= $val !== '' ? nl2br(e((string) $val)) : '<span class="muted">（未入力）</span>' ?>
     <?php endif; ?>

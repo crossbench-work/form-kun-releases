@@ -19,7 +19,9 @@ class Submission
 
             foreach ($values as $key => $val) {
                 if (is_array($val)) {
-                    $val = implode("\n", array_map('strval', $val));
+                    $val = self::isAddressValueShape($val)
+                        ? json_encode($val, JSON_UNESCAPED_UNICODE)
+                        : implode("\n", array_map('strval', $val));
                 }
                 if ($val === null) {
                     $val = '';
@@ -48,6 +50,26 @@ class Submission
 
             return $sid;
         });
+    }
+
+    /**
+     * 住所フィールド（postal / line1 / line2）かどうか。チェックボックスの添字配列と区別する。
+     */
+    private static function isAddressValueShape(array $arr): bool
+    {
+        if ($arr === []) {
+            return false;
+        }
+        $allowed = [
+            'postal', 'postal3', 'postal4',
+            'prefecture', 'city', 'number', 'building', 'street', 'line1', 'line2',
+        ];
+        foreach (array_keys($arr) as $k) {
+            if (!in_array((string) $k, $allowed, true)) {
+                return false;
+            }
+        }
+        return true;
     }
 
     public static function find(int $id): ?array

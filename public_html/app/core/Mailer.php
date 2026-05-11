@@ -73,12 +73,22 @@ class Mailer
      */
     public static function renderTemplate(string $template, array $fields, array $values, array $context = []): string
     {
+        $typesByKey = [];
+        foreach ($fields as $f) {
+            $typesByKey[$f['field_key']] = $f['type'];
+        }
+
         $allLines = [];
         foreach ($fields as $f) {
             $val = $values[$f['field_key']] ?? '';
             if ($f['type'] === 'file') {
                 $name = is_string($val) ? $val : (is_array($val) && !empty($val['name']) ? $val['name'] : '');
                 $allLines[] = $f['label'] . ': ' . ($name !== '' ? $name : '（ファイルなし）');
+                continue;
+            }
+            if ($f['type'] === 'address') {
+                $valStr = \format_address_value_display($val);
+                $allLines[] = $f['label'] . ":\n" . $valStr;
                 continue;
             }
             if (is_array($val)) {
@@ -96,7 +106,9 @@ class Mailer
         ];
 
         foreach ($values as $key => $val) {
-            if (is_array($val)) {
+            if (($typesByKey[$key] ?? '') === 'address') {
+                $val = \format_address_value_display($val);
+            } elseif (is_array($val)) {
                 if (isset($val['name'])) {
                     $val = (string) $val['name'];
                 } else {

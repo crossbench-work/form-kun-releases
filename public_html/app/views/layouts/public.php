@@ -27,5 +27,9 @@
         <small>&copy; <?= date('Y') ?> <?= e(config('site.admin_name', '')) ?></small>
     </div>
 </footer>
+<script>
+window.FORMKUN_BASE = <?= json_encode(base_path(''), JSON_HEX_TAG | JSON_HEX_AMP | JSON_UNESCAPED_UNICODE | JSON_HEX_APOS) ?>;
+</script>
+<script src="<?= e(base_path('/assets/js/public-form.js')) ?>" defer></script>
 </body>
 </html>
