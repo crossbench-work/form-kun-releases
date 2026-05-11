@@ -161,7 +161,7 @@ class FormController
         $form = [
             'slug'                 => trim((string) ($_POST['slug'] ?? '')),
             'title'                => trim((string) ($_POST['title'] ?? '')),
-            'description'          => trim((string) ($_POST['description'] ?? '')),
+            'description'          => sanitize_rich_text_html((string) ($_POST['description'] ?? '')),
             'show_title'           => !empty($_POST['show_title']) ? 1 : 0,
             'show_description'     => !empty($_POST['show_description']) ? 1 : 0,
             'thanks_message'       => trim((string) ($_POST['thanks_message'] ?? '')),

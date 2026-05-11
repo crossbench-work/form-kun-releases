@@ -756,6 +756,34 @@ form.is-inline {
   font-size: 13px;
   color: #64748b;
 }
+.m-panel01 .fb-wysiwyg {
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  background: #fff;
+  overflow: hidden;
+}
+.m-panel01 .fb-wysiwyg-toolbar {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  padding: 10px;
+  border-bottom: 1px solid #e2e8f0;
+  background: #f8fafc;
+}
+.m-panel01 .fb-wysiwyg-editor {
+  min-height: 160px;
+  padding: 12px 14px;
+  outline: none;
+  line-height: 1.7;
+}
+.m-panel01 .fb-wysiwyg-editor p,
+.m-panel01 .fb-wysiwyg-editor ul,
+.m-panel01 .fb-wysiwyg-editor ol {
+  margin: 0 0 12px;
+}
+.m-panel01 .fb-wysiwyg-editor *:last-child {
+  margin-bottom: 0;
+}
 
 .m-badge01 {
   display: inline-block;

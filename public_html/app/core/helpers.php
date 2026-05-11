@@ -102,6 +102,153 @@ if (!function_exists('client_ip')) {
     }
 }
 
+if (!function_exists('sanitize_rich_text_html')) {
+    /**
+     * 軽量 WYSIWYG 用の許可タグだけを残して HTML を整形する。
+     */
+    function sanitize_rich_text_html($html): string
+    {
+        $html = trim((string) $html);
+        if ($html === '') {
+            return '';
+        }
+        if (preg_match('/<\s*\/?[a-zA-Z][^>]*>/', $html) !== 1) {
+            return $html;
+        }
+
+        $allowedTags = [
+            'a' => ['href'],
+            'b' => [],
+            'br' => [],
+            'div' => [],
+            'em' => [],
+            'i' => [],
+            'li' => [],
+            'ol' => [],
+            'p' => [],
+            'strong' => [],
+            'u' => [],
+            'ul' => [],
+        ];
+        $dropTags = ['script', 'style', 'iframe', 'object', 'embed'];
+
+        $previous = libxml_use_internal_errors(true);
+        $dom = new \DOMDocument('1.0', 'UTF-8');
+        $dom->loadHTML(
+            mb_convert_encoding('<div id="__rich_text_root__">' . $html . '</div>', 'HTML-ENTITIES', 'UTF-8'),
+            LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD
+        );
+        libxml_clear_errors();
+        libxml_use_internal_errors($previous);
+
+        $xpath = new \DOMXPath($dom);
+        $root = $xpath->query('//*[@id="__rich_text_root__"]')->item(0);
+        if (!$root instanceof \DOMElement) {
+            return strip_tags($html);
+        }
+
+        $sanitizeUrl = static function (string $url): string {
+            $url = trim($url);
+            if ($url === '') {
+                return '';
+            }
+            if (preg_match('/^(https?:|mailto:|tel:|\/|#)/i', $url) === 1) {
+                return $url;
+            }
+            return '';
+        };
+
+        $sanitizeNode = static function (\DOMNode $node) use (&$sanitizeNode, $allowedTags, $dropTags, $sanitizeUrl): void {
+            if ($node instanceof \DOMText) {
+                return;
+            }
+
+            if (!($node instanceof \DOMElement)) {
+                if ($node->parentNode) {
+                    $node->parentNode->removeChild($node);
+                }
+                return;
+            }
+
+            $tagName = strtolower($node->tagName);
+            if (in_array($tagName, $dropTags, true)) {
+                if ($node->parentNode) {
+                    $node->parentNode->removeChild($node);
+                }
+                return;
+            }
+
+            if (!array_key_exists($tagName, $allowedTags)) {
+                if ($node->parentNode) {
+                    while ($node->firstChild) {
+                        $node->parentNode->insertBefore($node->firstChild, $node);
+                    }
+                    $node->parentNode->removeChild($node);
+                }
+                return;
+            }
+
+            $allowedAttrs = $allowedTags[$tagName];
+            if ($node->hasAttributes()) {
+                $removeAttrs = [];
+                foreach ($node->attributes as $attr) {
+                    $attrName = strtolower($attr->nodeName);
+                    if (!in_array($attrName, $allowedAttrs, true)) {
+                        $removeAttrs[] = $attrName;
+                    }
+                }
+                foreach ($removeAttrs as $attrName) {
+                    $node->removeAttribute($attrName);
+                }
+            }
+
+            if ($tagName === 'a' && $node->hasAttribute('href')) {
+                $safeHref = $sanitizeUrl((string) $node->getAttribute('href'));
+                if ($safeHref === '') {
+                    $node->removeAttribute('href');
+                } else {
+                    $node->setAttribute('href', $safeHref);
+                }
+            }
+
+            for ($child = $node->firstChild; $child !== null; $child = $next) {
+                $next = $child->nextSibling;
+                $sanitizeNode($child);
+            }
+        };
+
+        for ($child = $root->firstChild; $child !== null; $child = $next) {
+            $next = $child->nextSibling;
+            $sanitizeNode($child);
+        }
+
+        $out = '';
+        foreach ($root->childNodes as $child) {
+            $out .= $dom->saveHTML($child);
+        }
+
+        return trim($out);
+    }
+}
+
+if (!function_exists('render_rich_text_html')) {
+    /**
+     * 旧プレーンテキストと WYSIWYG 保存 HTML の両方を安全に表示する。
+     */
+    function render_rich_text_html($html): string
+    {
+        $html = trim((string) $html);
+        if ($html === '') {
+            return '';
+        }
+        if (preg_match('/<\s*\/?[a-zA-Z][^>]*>/', $html) !== 1) {
+            return nl2br(e($html));
+        }
+
+        return sanitize_rich_text_html($html);
+    }
+}
+
 if (!function_exists('address_errors_normalize')) {
     /**
      * 住所フィールドのエラーを表示用に整形（ネスト or 従来の文字列リスト）。

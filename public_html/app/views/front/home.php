@@ -10,7 +10,7 @@
         <li class="card">
             <h2><a class="link" href="<?= e(base_path('/f/' . $form['slug'])) ?>"><?= e($form['title']) ?></a></h2>
             <?php if (!empty($form['description'])): ?>
-                <p class="text is-muted"><?= nl2br(e($form['description'])) ?></p>
+                <div class="text is-muted"><?= render_rich_text_html($form['description']) ?></div>
             <?php endif; ?>
         </li>
     <?php endforeach; ?>

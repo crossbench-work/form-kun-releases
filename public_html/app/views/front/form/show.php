@@ -3,7 +3,7 @@
     <h1 class="title"><?= e($form['title']) ?></h1>
 <?php endif; ?>
 <?php if (!empty($form['show_description']) && !empty($form['description'])): ?>
-    <div class="block is-lead"><?= nl2br(e($form['description'])) ?></div>
+    <div class="block is-lead"><?= render_rich_text_html($form['description']) ?></div>
 <?php endif; ?>
 
 <?php if (!empty($errors)): ?>
