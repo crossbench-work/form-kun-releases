@@ -827,7 +827,7 @@ form.is-inline {
   align-items: center;
   gap: 8px;
   flex-wrap: wrap;
-  justify-content: flex-end;
+  flex-shrink: 0;
 }
 [data-module=m-formBuilder01] .fb-field-summary-main {
   display: block;

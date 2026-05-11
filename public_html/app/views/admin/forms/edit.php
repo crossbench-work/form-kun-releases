@@ -101,6 +101,11 @@ $regexPresetChoices = [
                     <span class="fb-drag-handle" title="ドラッグして並べ替え">
                         <svg width="14" height="18" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="currentColor"><circle cx="9" cy="6" r="2"/><circle cx="15" cy="6" r="2"/><circle cx="9" cy="12" r="2"/><circle cx="15" cy="12" r="2"/><circle cx="9" cy="18" r="2"/><circle cx="15" cy="18" r="2"/></svg>
                     </span>
+                    <div class="fb-header-actions">
+                        <button type="button" class="btn is-sm fb-up" aria-label="上へ移動" title="上へ移動">↑</button>
+                        <button type="button" class="btn is-sm fb-down" aria-label="下へ移動" title="下へ移動">↓</button>
+                        <button type="button" class="btn is-sm is-danger fb-remove">削除</button>
+                    </div>
                     <button type="button" class="fb-field-toggle" aria-expanded="false" title="詳細を開く／閉じる">
                         <span class="fb-field-toggle-icon" aria-hidden="true">▼</span>
                     </button>
@@ -112,11 +117,6 @@ $regexPresetChoices = [
                             · <span class="fb-summary-badge fb-summary-required"><?= e($summaryRequired) ?></span>
                             · <span class="fb-summary-badge fb-summary-regex">入力チェック: <span class="fb-summary-regex-text"><?= e($summaryRegex) ?></span></span>
                         </span>
-                    </div>
-                    <div class="fb-header-actions">
-                        <button type="button" class="btn is-sm fb-up" aria-label="上へ移動" title="上へ移動">↑</button>
-                        <button type="button" class="btn is-sm fb-down" aria-label="下へ移動" title="下へ移動">↓</button>
-                        <button type="button" class="btn is-sm is-danger fb-remove">削除</button>
                     </div>
                 </div>
                 <div class="fb-field-body">
@@ -324,6 +324,11 @@ $regexPresetChoices = [
             <span class="fb-drag-handle" title="ドラッグして並べ替え">
                 <svg width="14" height="18" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="currentColor"><circle cx="9" cy="6" r="2"/><circle cx="15" cy="6" r="2"/><circle cx="9" cy="12" r="2"/><circle cx="15" cy="12" r="2"/><circle cx="9" cy="18" r="2"/><circle cx="15" cy="18" r="2"/></svg>
             </span>
+            <div class="fb-header-actions">
+                <button type="button" class="btn is-sm fb-up" aria-label="上へ移動" title="上へ移動">↑</button>
+                <button type="button" class="btn is-sm fb-down" aria-label="下へ移動" title="下へ移動">↓</button>
+                <button type="button" class="btn is-sm is-danger fb-remove">削除</button>
+            </div>
             <button type="button" class="fb-field-toggle" aria-expanded="false" title="詳細を開く／閉じる">
                 <span class="fb-field-toggle-icon" aria-hidden="true">▼</span>
             </button>
@@ -335,11 +340,6 @@ $regexPresetChoices = [
                     · <span class="fb-summary-badge fb-summary-required">任意</span>
                     · <span class="fb-summary-badge fb-summary-regex">入力チェック: <span class="fb-summary-regex-text">なし</span></span>
                 </span>
-            </div>
-            <div class="fb-header-actions">
-                <button type="button" class="btn is-sm fb-up" aria-label="上へ移動" title="上へ移動">↑</button>
-                <button type="button" class="btn is-sm fb-down" aria-label="下へ移動" title="下へ移動">↓</button>
-                <button type="button" class="btn is-sm is-danger fb-remove">削除</button>
             </div>
         </div>
         <div class="fb-field-body">

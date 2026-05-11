@@ -796,7 +796,7 @@ form.is-inline {
     align-items: center;
     gap: 8px;
     flex-wrap: wrap;
-    justify-content: flex-end;
+    flex-shrink: 0;
   }
 
   .fb-field-summary-main {
