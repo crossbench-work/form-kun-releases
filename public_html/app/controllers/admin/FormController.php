@@ -150,14 +150,38 @@ class FormController
 
         (new View())->render('front/form/show', [
             'title' => '入力画面プレビュー',
-            'form' => array_merge($data['form'], [
-                'slug' => trim((string) ($data['form']['slug'] ?? '')) !== '' ? (string) $data['form']['slug'] : '__preview__',
-                'captcha_enabled' => 0,
-            ]),
+            'form' => self::buildPreviewForm($data['form']),
             'fields' => self::preparePreviewFields($data['fields']),
             'values' => [],
             'errors' => [],
             'captchaQuestion' => null,
+            'previewMode' => true,
+        ], 'public');
+    }
+
+    public function previewConfirm(): void
+    {
+        Csrf::verify();
+        $data = $this->collect();
+
+        (new View())->render('front/form/confirm', [
+            'title' => '確認画面プレビュー',
+            'form' => self::buildPreviewForm($data['form']),
+            'fields' => self::preparePreviewFields($data['fields']),
+            'values' => [],
+            'fileMetas' => [],
+            'previewMode' => true,
+        ], 'public');
+    }
+
+    public function previewThanks(): void
+    {
+        Csrf::verify();
+        $data = $this->collect();
+
+        (new View())->render('front/form/thanks', [
+            'title' => '完了画面プレビュー',
+            'form' => self::buildPreviewForm($data['form']),
             'previewMode' => true,
         ], 'public');
     }
@@ -493,6 +517,19 @@ class FormController
         }
 
         return false;
+    }
+
+    /**
+     * @param array<string, mixed> $form
+     * @return array<string, mixed>
+     */
+    private static function buildPreviewForm(array $form): array
+    {
+        return array_merge($form, [
+            'slug' => trim((string) ($form['slug'] ?? '')) !== '' ? (string) $form['slug'] : '__preview__',
+            'captcha_enabled' => 0,
+            'redirect_url' => '',
+        ]);
     }
 
     /**

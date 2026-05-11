@@ -1,6 +1,7 @@
 <section class="p-formConfirm01" data-module="c-confirmSummary01">
     <div class="wrapper">
         <?php $confirmBlocks = decode_form_description_blocks($form['confirm_message'] ?? '', true); ?>
+        <?php $previewMode = !empty($previewMode); ?>
         <h1 class="title">入力内容のご確認</h1>
         <?= render_form_description_blocks_at($confirmBlocks, 0) ?>
         <p class="text">下記の内容で送信します。よろしければ「送信する」ボタンを押してください。</p>
@@ -35,11 +36,18 @@
 <?php endforeach; ?>
 </dl>
 
-<form action="<?= e(base_path('/f/' . $form['slug'] . '/submit')) ?>" method="post">
-    <?= \Core\Csrf::field() ?>
+<form action="<?= e($previewMode ? '#' : base_path('/f/' . $form['slug'] . '/submit')) ?>" method="post">
+    <?php if (!$previewMode): ?>
+        <?= \Core\Csrf::field() ?>
+    <?php endif; ?>
     <div class="area is-actions">
-        <button type="submit" name="_back" value="1" class="btn">入力に戻る</button>
-        <button type="submit" class="btn is-primary">送信する</button>
+        <?php if ($previewMode): ?>
+            <button type="button" class="btn" disabled>入力に戻る</button>
+            <button type="button" class="btn is-primary" disabled>プレビューでは送信できません</button>
+        <?php else: ?>
+            <button type="submit" name="_back" value="1" class="btn">入力に戻る</button>
+            <button type="submit" class="btn is-primary">送信する</button>
+        <?php endif; ?>
     </div>
 </form>
         <?= render_form_description_blocks_at($confirmBlocks, 1) ?>
