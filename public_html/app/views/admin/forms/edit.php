@@ -35,7 +35,7 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                             </svg>
                         </button>
                     </div>
-                    <div class="fb-row fb-description-block-controls">
+                    <div class="fb-row fb-description-block-controls" style="display: flex;">
                         <div class="fb-description-position-wrap">
                             <select name="<?= e($namePrefix) ?>[<?= $i ?>][position]" class="fb-description-position" data-name="position" data-value="<?= e((string) ($block['position'] ?? 0)) ?>" aria-label="説明文"></select>
                         </div>
@@ -467,7 +467,7 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                 </svg>
             </button>
         </div>
-        <div class="fb-row fb-description-block-controls">
+        <div class="fb-row fb-description-block-controls" style="display: flex;">
             <div class="fb-description-position-wrap">
                 <select class="fb-description-position" data-name="position" data-value="0" aria-label="説明文"></select>
             </div>
