@@ -96,179 +96,201 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
         </div>
 
         <div id="tab-panel-basic" class="box is-tabPanel" role="tabpanel" aria-labelledby="tab-btn-basic">
-    <section class="c-panel01 componentWrapper">
-        <h2>基本設定</h2>
-        <div class="box is-field">
-            <div class="fb-basic-label-row">
-                <label class="label" for="title">タイトル <span class="is-required">必須</span></label>
-                <label class="label is-choice fb-basic-display-toggle">
-                    <input type="checkbox" name="show_title" value="1" <?= !empty($form['show_title']) ? 'checked' : '' ?>>
-                    表示する
-                </label>
+    <section class="c-panel01">
+        <div class="componentWrapper">
+            <h2>基本設定</h2>
+            <div class="box is-field">
+                <div class="fb-basic-label-row">
+                    <label class="label" for="title">タイトル <span class="is-required">必須</span></label>
+                    <label class="label is-choice fb-basic-display-toggle">
+                        <input type="checkbox" name="show_title" value="1" <?= !empty($form['show_title']) ? 'checked' : '' ?>>
+                        表示する
+                    </label>
+                </div>
+                <input type="text" id="title" name="title" value="<?= e($form['title']) ?>" required>
             </div>
-            <input type="text" id="title" name="title" value="<?= e($form['title']) ?>" required>
-        </div>
-        <div class="box is-field">
-            <label class="label" for="slug">スラッグ（URL用） <span class="is-required">必須</span></label>
-            <input type="text" id="slug" name="slug" value="<?= e($form['slug']) ?>" required>
-            <p class="text is-help"><a id="slug-link" href="<?= e(url('/f/' . $slugPreviewValue)) ?>" target="_blank" rel="noopener"><code><?= e(url('/f/')) ?></code><strong id="slug-preview"><?= e($slugPreviewValue) ?></strong></a></p>
-        </div>
-        <div class="box is-field">
-            <label class="label" for="status">公開状態</label>
-            <select id="status" name="status">
-                <option value="draft"    <?= $form['status'] === 'draft' ? 'selected' : '' ?>>下書き</option>
-                <option value="active"   <?= $form['status'] === 'active' ? 'selected' : '' ?>>公開中</option>
-                <option value="archived" <?= $form['status'] === 'archived' ? 'selected' : '' ?>>停止</option>
-            </select>
+            <div class="box is-field">
+                <label class="label" for="slug">スラッグ（URL用） <span class="is-required">必須</span></label>
+                <input type="text" id="slug" name="slug" value="<?= e($form['slug']) ?>" required>
+                <p class="text is-help"><a id="slug-link" href="<?= e(url('/f/' . $slugPreviewValue)) ?>" target="_blank" rel="noopener"><code><?= e(url('/f/')) ?></code><strong id="slug-preview"><?= e($slugPreviewValue) ?></strong></a></p>
+            </div>
+            <div class="box is-field">
+                <label class="label" for="status">公開状態</label>
+                <select id="status" name="status">
+                    <option value="draft"    <?= $form['status'] === 'draft' ? 'selected' : '' ?>>下書き</option>
+                    <option value="active"   <?= $form['status'] === 'active' ? 'selected' : '' ?>>公開中</option>
+                    <option value="archived" <?= $form['status'] === 'archived' ? 'selected' : '' ?>>停止</option>
+                </select>
+            </div>
         </div>
     </section>
         </div>
 
         <div id="tab-panel-fields" class="box is-tabPanel" role="tabpanel" aria-labelledby="tab-btn-fields" hidden>
-    <section class="c-panel01 componentWrapper">
-        <div class="fb-panel-header">
-            <h2 id="input-screen-title-preview">表示設定</h2>
-            <button
-                type="submit"
-                class="btn is-sm"
-                formaction="<?= e(base_path('/admin/forms/preview-input')) ?>"
-                formmethod="post"
-                formtarget="_blank"
-                formnovalidate
-            >プレビュー</button>
+    <section class="c-panel01">
+        <div class="componentWrapper">
+            <div class="fb-panel-header">
+                <h2 id="input-screen-title-preview">表示設定</h2>
+                <button
+                    type="submit"
+                    class="btn is-sm"
+                    formaction="<?= e(base_path('/admin/forms/preview-input')) ?>"
+                    formmethod="post"
+                    formtarget="_blank"
+                    formnovalidate
+                >プレビュー</button>
+            </div>
+            <?php $renderDescriptionEditor('description_blocks', $descriptionBlocks, 'input'); ?>
         </div>
-        <?php $renderDescriptionEditor('description_blocks', $descriptionBlocks, 'input'); ?>
     </section>
-    <section class="c-panel01 componentWrapper" data-module="m-formBuilder01">
-        <h2>項目設定</h2>
-        <ul id="fb-fields" class="fb-fields">
-        <?php foreach ($sortableFields as $i => $f): ?>
-            <?php $idx = $i; $isAgreementField = false; ?>
-            <?php include __DIR__ . '/_field_editor.php'; ?>
-        <?php endforeach; ?>
-        </ul>
-
-        <div class="area is-actions">
-            <button type="button" id="fb-add" class="btn">＋ 項目を追加</button>
-        </div>
-        <?php if ($agreementField !== null): ?>
-            <ul class="fb-fields fb-static-field">
-                <?php $idx = count($sortableFields); $f = $agreementField; $isAgreementField = true; ?>
+    <section class="c-panel01" data-module="m-formBuilder01">
+        <div class="componentWrapper">
+            <h2>項目設定</h2>
+            <ul id="fb-fields" class="fb-fields">
+            <?php foreach ($sortableFields as $i => $f): ?>
+                <?php $idx = $i; $isAgreementField = false; ?>
                 <?php include __DIR__ . '/_field_editor.php'; ?>
+            <?php endforeach; ?>
             </ul>
-        <?php endif; ?>
-    </section>
-    <section class="c-panel01 componentWrapper">
-        <h2>スパム対策</h2>
-        <div class="box is-field">
-            <label class="label">
-                <input type="checkbox" name="captcha_enabled" value="1" <?= !empty($form['captcha_enabled']) ? 'checked' : '' ?>>
-                スパム対策（簡易計算CAPTCHA）を有効にする
-            </label>
+
+            <div class="area is-actions">
+                <button type="button" id="fb-add" class="btn">＋ 項目を追加</button>
+            </div>
+            <?php if ($agreementField !== null): ?>
+                <ul class="fb-fields fb-static-field">
+                    <?php $idx = count($sortableFields); $f = $agreementField; $isAgreementField = true; ?>
+                    <?php include __DIR__ . '/_field_editor.php'; ?>
+                </ul>
+            <?php endif; ?>
         </div>
     </section>
-    <section class="c-panel01 componentWrapper">
-        <h2>ボタン設定</h2>
-        <div class="box is-field">
-            <label class="label" for="confirm_button_text">ボタンテキスト</label>
-            <input type="text" id="confirm_button_text" name="confirm_button_text" value="<?= e($form['confirm_button_text'] ?? '入力内容を確認する') ?>">
+    <section class="c-panel01">
+        <div class="componentWrapper">
+            <h2>スパム対策</h2>
+            <div class="box is-field">
+                <label class="label">
+                    <input type="checkbox" name="captcha_enabled" value="1" <?= !empty($form['captcha_enabled']) ? 'checked' : '' ?>>
+                    スパム対策（簡易計算CAPTCHA）を有効にする
+                </label>
+            </div>
+        </div>
+    </section>
+    <section class="c-panel01">
+        <div class="componentWrapper">
+            <h2>ボタン設定</h2>
+            <div class="box is-field">
+                <label class="label" for="confirm_button_text">ボタンテキスト</label>
+                <input type="text" id="confirm_button_text" name="confirm_button_text" value="<?= e($form['confirm_button_text'] ?? '入力内容を確認する') ?>">
+            </div>
         </div>
     </section>
         </div>
 
         <div id="tab-panel-confirm" class="box is-tabPanel" role="tabpanel" aria-labelledby="tab-btn-confirm" hidden>
-    <section class="c-panel01 componentWrapper">
-        <div class="fb-panel-header">
-            <h2 id="confirm-screen-title-preview">表示設定</h2>
-            <button
-                type="submit"
-                class="btn is-sm"
-                formaction="<?= e(base_path('/admin/forms/preview-confirm')) ?>"
-                formmethod="post"
-                formtarget="_blank"
-                formnovalidate
-            >プレビュー</button>
+    <section class="c-panel01">
+        <div class="componentWrapper">
+            <div class="fb-panel-header">
+                <h2 id="confirm-screen-title-preview">表示設定</h2>
+                <button
+                    type="submit"
+                    class="btn is-sm"
+                    formaction="<?= e(base_path('/admin/forms/preview-confirm')) ?>"
+                    formmethod="post"
+                    formtarget="_blank"
+                    formnovalidate
+                >プレビュー</button>
+            </div>
+            <?php $renderDescriptionEditor('confirm_blocks', $confirmBlocks, 'simple'); ?>
         </div>
-        <?php $renderDescriptionEditor('confirm_blocks', $confirmBlocks, 'simple'); ?>
     </section>
-    <section class="c-panel01 componentWrapper">
-        <h2>ボタン設定</h2>
-        <div class="box is-field">
-            <label class="label" for="submit_button_text">送信ボタンテキスト</label>
-            <input type="text" id="submit_button_text" name="submit_button_text" value="<?= e($form['submit_button_text'] ?? '送信する') ?>">
-        </div>
-        <div class="box is-field">
-            <label class="label" for="back_button_text">戻るボタンテキスト</label>
-            <input type="text" id="back_button_text" name="back_button_text" value="<?= e($form['back_button_text'] ?? '入力に戻る') ?>">
+    <section class="c-panel01">
+        <div class="componentWrapper">
+            <h2>ボタン設定</h2>
+            <div class="box is-field">
+                <label class="label" for="submit_button_text">送信ボタンテキスト</label>
+                <input type="text" id="submit_button_text" name="submit_button_text" value="<?= e($form['submit_button_text'] ?? '送信する') ?>">
+            </div>
+            <div class="box is-field">
+                <label class="label" for="back_button_text">戻るボタンテキスト</label>
+                <input type="text" id="back_button_text" name="back_button_text" value="<?= e($form['back_button_text'] ?? '入力に戻る') ?>">
+            </div>
         </div>
     </section>
         </div>
 
         <div id="tab-panel-thanks" class="box is-tabPanel" role="tabpanel" aria-labelledby="tab-btn-thanks" hidden>
-    <section class="c-panel01 componentWrapper">
-        <div class="fb-panel-header">
-            <h2 id="thanks-screen-title-preview">表示設定</h2>
-            <button
-                type="submit"
-                class="btn is-sm"
-                formaction="<?= e(base_path('/admin/forms/preview-thanks')) ?>"
-                formmethod="post"
-                formtarget="_blank"
-                formnovalidate
-            >プレビュー</button>
+    <section class="c-panel01">
+        <div class="componentWrapper">
+            <div class="fb-panel-header">
+                <h2 id="thanks-screen-title-preview">表示設定</h2>
+                <button
+                    type="submit"
+                    class="btn is-sm"
+                    formaction="<?= e(base_path('/admin/forms/preview-thanks')) ?>"
+                    formmethod="post"
+                    formtarget="_blank"
+                    formnovalidate
+                >プレビュー</button>
+            </div>
+            <?php $renderDescriptionEditor('thanks_blocks', $thanksBlocks, 'simple'); ?>
         </div>
-        <?php $renderDescriptionEditor('thanks_blocks', $thanksBlocks, 'simple'); ?>
     </section>
-    <section class="c-panel01 componentWrapper">
-        <h2>ボタン設定</h2>
-        <div class="box is-field">
-            <label class="label" for="thanks_button_text">ボタンテキスト</label>
-            <input type="text" id="thanks_button_text" name="thanks_button_text" value="<?= e($form['thanks_button_text'] ?? 'トップへ戻る') ?>">
-        </div>
-        <div class="box is-field">
-            <label class="label" for="thanks_button_url">ボタンURL</label>
-            <input type="text" id="thanks_button_url" name="thanks_button_url" value="<?= e($form['thanks_button_url'] ?? '/') ?>" placeholder="/ または https://example.com/">
+    <section class="c-panel01">
+        <div class="componentWrapper">
+            <h2>ボタン設定</h2>
+            <div class="box is-field">
+                <label class="label" for="thanks_button_text">ボタンテキスト</label>
+                <input type="text" id="thanks_button_text" name="thanks_button_text" value="<?= e($form['thanks_button_text'] ?? 'トップへ戻る') ?>">
+            </div>
+            <div class="box is-field">
+                <label class="label" for="thanks_button_url">ボタンURL</label>
+                <input type="text" id="thanks_button_url" name="thanks_button_url" value="<?= e($form['thanks_button_url'] ?? '/') ?>" placeholder="/ または https://example.com/">
+            </div>
         </div>
     </section>
         </div>
 
         <div id="tab-panel-mail" class="box is-tabPanel" role="tabpanel" aria-labelledby="tab-btn-mail" hidden>
-    <section class="c-panel01 componentWrapper">
-        <h2>管理者通知メール</h2>
-        <div class="box is-field">
-            <label class="label">送信先メールアドレス（カンマ区切りで複数可）</label>
-            <input type="text" name="admin_emails" value="<?= e($form['admin_emails']) ?>" placeholder="admin@example.com, sub@example.com">
-        </div>
-        <div class="box is-field">
-            <label class="label">件名</label>
-            <input type="text" name="mail_subject_admin" value="<?= e($form['mail_subject_admin']) ?>" placeholder="[{{__form_title__}}] 新規送信">
-        </div>
-        <div class="box is-field">
-            <label class="label">表示設定</label>
-            <textarea name="mail_template_admin" rows="6"><?= e($form['mail_template_admin']) ?></textarea>
-            <p class="text is-help">使用可能な変数: <code>{{field_key}}</code> / <code>{{__all__}}</code> / <code>{{__form_title__}}</code> / <code>{{__submitted_at__}}</code> / <code>{{__ip__}}</code></p>
+    <section class="c-panel01">
+        <div class="componentWrapper">
+            <h2>管理者通知メール</h2>
+            <div class="box is-field">
+                <label class="label">送信先メールアドレス（カンマ区切りで複数可）</label>
+                <input type="text" name="admin_emails" value="<?= e($form['admin_emails']) ?>" placeholder="admin@example.com, sub@example.com">
+            </div>
+            <div class="box is-field">
+                <label class="label">件名</label>
+                <input type="text" name="mail_subject_admin" value="<?= e($form['mail_subject_admin']) ?>" placeholder="[{{__form_title__}}] 新規送信">
+            </div>
+            <div class="box is-field">
+                <label class="label">表示設定</label>
+                <textarea name="mail_template_admin" rows="6"><?= e($form['mail_template_admin']) ?></textarea>
+                <p class="text is-help">使用可能な変数: <code>{{field_key}}</code> / <code>{{__all__}}</code> / <code>{{__form_title__}}</code> / <code>{{__submitted_at__}}</code> / <code>{{__ip__}}</code></p>
+            </div>
         </div>
     </section>
 
-    <section class="c-panel01 componentWrapper">
-        <h2>送信者への自動返信メール</h2>
-        <div class="box is-field">
-            <label class="label">
-                <input type="checkbox" name="reply_enabled" value="1" <?= !empty($form['reply_enabled']) ? 'checked' : '' ?>>
-                自動返信を有効にする
-            </label>
-        </div>
-        <div class="box is-field">
-            <label class="label">送信先のフィールドキー（メール型項目）</label>
-            <input type="text" name="reply_from_field_key" value="<?= e($form['reply_from_field_key']) ?>" placeholder="メール項目のフィールドキー（UUID または任意のキー）">
-        </div>
-        <div class="box is-field">
-            <label class="label">件名</label>
-            <input type="text" name="reply_subject" value="<?= e($form['reply_subject']) ?>">
-        </div>
-        <div class="box is-field">
-            <label class="label">表示設定</label>
-            <textarea name="reply_template" rows="6"><?= e($form['reply_template']) ?></textarea>
+    <section class="c-panel01">
+        <div class="componentWrapper">
+            <h2>送信者への自動返信メール</h2>
+            <div class="box is-field">
+                <label class="label">
+                    <input type="checkbox" name="reply_enabled" value="1" <?= !empty($form['reply_enabled']) ? 'checked' : '' ?>>
+                    自動返信を有効にする
+                </label>
+            </div>
+            <div class="box is-field">
+                <label class="label">送信先のフィールドキー（メール型項目）</label>
+                <input type="text" name="reply_from_field_key" value="<?= e($form['reply_from_field_key']) ?>" placeholder="メール項目のフィールドキー（UUID または任意のキー）">
+            </div>
+            <div class="box is-field">
+                <label class="label">件名</label>
+                <input type="text" name="reply_subject" value="<?= e($form['reply_subject']) ?>">
+            </div>
+            <div class="box is-field">
+                <label class="label">表示設定</label>
+                <textarea name="reply_template" rows="6"><?= e($form['reply_template']) ?></textarea>
+            </div>
         </div>
     </section>
         </div>

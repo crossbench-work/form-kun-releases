@@ -121,6 +121,7 @@ assets/
 ## `.wrapper` / `.inner`（l- / m- / c- 共通）
 
 - 任意で **`.wrapper`**。さらに必要なら **`.wrapper` > `.inner`**。
+- **`.componentWrapper` を使う場合は、ルート要素と同じ階層にクラスを併記せず、必ずルート要素の直下に 1 階層入れて置く**（例: `<section class="c-panel01"><div class="componentWrapper">...</div></section>`）。
 
 ### SCSS: 直下の `.wrapper` は子セレクタで縛る
 
