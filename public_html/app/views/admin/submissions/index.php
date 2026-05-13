@@ -5,7 +5,7 @@
     <a class="btn" href="<?= e(base_path('/admin/forms')) ?>">フォーム一覧へ</a>
 </div>
 
-<section class="m-panel01">
+<section class="c-panel01">
     <form method="get" action="<?= e(base_path('/admin/forms/' . $form['id'] . '/submissions')) ?>" class="m-toolbar01">
         <input type="text" name="q" value="<?= e($q) ?>" placeholder="キーワード検索（送信内容）" style="width:280px">
         <label class="label">期間 <input type="date" name="from" value="<?= e($from) ?>"></label>
