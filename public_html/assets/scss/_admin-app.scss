@@ -141,7 +141,7 @@ body.l-adminShell01 {
     }
   }
 
-  .is-required {
+  [data-module="m-required01"][data-type="required"] {
     display: inline-block;
     background: #ef4444;
     color: #fff;
@@ -682,7 +682,7 @@ form.is-inline {
     }
   }
 
-  .is-required {
+  [data-module="m-required01"][data-type="required"] {
     display: inline-block;
     background: #ef4444;
     color: #fff;

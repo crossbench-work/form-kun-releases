@@ -55,7 +55,7 @@
                             </div>
 
                             <div class="area is-field">
-                                <label class="label" data-module="m-boldTitle01">パスワード <?php if ($isNew): ?><span class="is-required">必須</span><?php endif; ?></label>
+                                <label class="label" data-module="m-boldTitle01">パスワード <?php if ($isNew): ?><span data-module="m-required01" data-type="required">必須</span><?php endif; ?></label>
                                 <div data-module="m-input01">
                                     <input type="password" name="password" autocomplete="new-password" <?= $isNew ? 'required' : '' ?>>
                                 </div>

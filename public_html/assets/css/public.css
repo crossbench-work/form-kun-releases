@@ -283,7 +283,7 @@ h2 {
   font-weight: 600;
   margin-bottom: 6px;
 }
-[data-module=c-publicForm01] .is-required {
+[data-module=c-publicForm01] [data-module=m-required01][data-type=required] {
   display: inline-block;
   background: #ef4444;
   color: #fff;
@@ -469,7 +469,7 @@ h2 {
   flex-wrap: wrap;
   gap: 8px;
 }
-[data-module=c-publicForm01] .label.is-sublabel.is-requiredRow .is-required {
+[data-module=c-publicForm01] .label.is-sublabel.is-requiredRow [data-module=m-required01][data-type=required] {
   margin-left: 0;
   vertical-align: baseline;
 }

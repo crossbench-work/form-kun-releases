@@ -113,7 +113,7 @@ $prefOptions = japanese_prefectures();
 <div class="box is-field <?= ($type !== 'address' && $type !== 'text_pair' && !empty($err)) ? 'is-error' : '' ?>">
     <label for="<?= e($labelFor) ?>" class="label">
         <?= e($label) ?>
-        <?php if ($req && $type !== 'address'): ?><span class="is-required">必須</span><?php endif; ?>
+        <?php if ($req && $type !== 'address'): ?><span data-module="m-required01" data-type="required">必須</span><?php endif; ?>
     </label>
 
     <?php if ($agreementDescriptionHtml !== ''): ?>
@@ -191,7 +191,7 @@ $prefOptions = japanese_prefectures();
                 <div class="box is-addressRow <?= !empty($addrErrParts['prefecture']) ? 'is-error' : '' ?>">
                     <label class="label is-sublabel <?= $req ? 'is-requiredRow' : '' ?>" for="f_<?= e($key) ?>_prefecture">
                         都道府県
-                        <?php if ($req): ?><span class="is-required">必須</span><?php endif; ?>
+                        <?php if ($req): ?><span data-module="m-required01" data-type="required">必須</span><?php endif; ?>
                     </label>
                     <select
                         class="input-prefecture"
@@ -211,7 +211,7 @@ $prefOptions = japanese_prefectures();
                 <div class="box is-addressRow <?= !empty($addrErrParts['city']) ? 'is-error' : '' ?>">
                     <label class="label is-sublabel <?= $req ? 'is-requiredRow' : '' ?>" for="f_<?= e($key) ?>_city">
                         市区町村
-                        <?php if ($req): ?><span class="is-required">必須</span><?php endif; ?>
+                        <?php if ($req): ?><span data-module="m-required01" data-type="required">必須</span><?php endif; ?>
                     </label>
                     <input
                         type="text"
@@ -229,7 +229,7 @@ $prefOptions = japanese_prefectures();
                 <div class="box is-addressRow <?= !empty($addrErrParts['number']) || !empty($addrErrParts['combined']) ? 'is-error' : '' ?>">
                     <label class="label is-sublabel <?= $req ? 'is-requiredRow' : '' ?>" for="f_<?= e($key) ?>_number">
                         番地
-                        <?php if ($req): ?><span class="is-required">必須</span><?php endif; ?>
+                        <?php if ($req): ?><span data-module="m-required01" data-type="required">必須</span><?php endif; ?>
                     </label>
                     <input
                         type="text"

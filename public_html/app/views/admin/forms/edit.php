@@ -126,7 +126,7 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                     <div class="wrapper">
                         <div class="block is-contents">
                             <div class="area is-title">
-                                <label class="label" data-module="m-boldTitle01" for="title">タイトル <span class="is-required">必須</span></label>
+                                <label class="label" data-module="m-boldTitle01" for="title">タイトル <span data-module="m-required01" data-type="required">必須</span></label>
                                 <label class="label is-choice fb-basic-display-toggle">
                                     <input type="checkbox" name="show_title" value="1" <?= !empty($form['show_title']) ? 'checked' : '' ?>>
                                     表示する
@@ -146,7 +146,7 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                     <div class="wrapper">
                         <div class="block is-contents">
                             <div class="area is-title">
-                                <label class="label" data-module="m-boldTitle01" for="slug">スラッグ（URL用） <span class="is-required">必須</span></label>
+                                <label class="label" data-module="m-boldTitle01" for="slug">スラッグ（URL用） <span data-module="m-required01" data-type="required">必須</span></label>
                             </div>
                             <div class="area is-field">
                                 <div data-module="m-input01">

@@ -38,7 +38,7 @@
         <div class="box is-field <?= !empty($errors['_captcha']) ? 'is-error' : '' ?>">
             <label for="captcha" class="label">
                 スパム対策：<?= e($captchaQuestion) ?> = ?
-                <span class="is-required">必須</span>
+                <span data-module="m-required01" data-type="required">必須</span>
             </label>
             <input type="text" id="captcha" name="captcha" inputmode="numeric" autocomplete="off" required>
             <?php foreach (($errors['_captcha'] ?? []) as $m): ?>

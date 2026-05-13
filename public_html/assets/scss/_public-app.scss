@@ -163,7 +163,7 @@ h2 {
     margin-bottom: 6px;
   }
 
-  .is-required {
+  [data-module="m-required01"][data-type="required"] {
     display: inline-block;
     background: #ef4444;
     color: #fff;
@@ -375,7 +375,7 @@ h2 {
     flex-wrap: wrap;
     gap: 8px;
 
-    .is-required {
+    [data-module="m-required01"][data-type="required"] {
       margin-left: 0;
       vertical-align: baseline;
     }

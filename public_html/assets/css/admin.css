@@ -267,7 +267,7 @@ body.l-adminShell01 a:hover {
   padding: 4px 10px;
   font-size: 13px;
 }
-.m-authForm01 .is-required {
+.m-authForm01 [data-module=m-required01][data-type=required] {
   display: inline-block;
   background: #ef4444;
   color: #fff;
@@ -730,7 +730,7 @@ form.is-inline {
   align-items: center;
   justify-content: center;
 }
-[data-module=c-formBlock01] > .wrapper > .block.is-contents .is-required {
+[data-module=c-formBlock01] > .wrapper > .block.is-contents [data-module=m-required01][data-type=required] {
   display: inline-block;
   background: #ef4444;
   color: #fff;
