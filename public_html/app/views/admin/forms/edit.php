@@ -205,16 +205,16 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                     <div class="wrapper">
                         <div class="block is-contents">
             <div class="block is-title">
-                <div class="fb-panel-header">
-                <h2 data-target="c-formEditTabs01__previewTitle" data-module="m-largeTitle01">表示設定</h2>
-                <button
-                    type="submit"
-                    class="btn is-sm"
-                    formaction="<?= e(base_path('/admin/forms/preview-input')) ?>"
-                    formmethod="post"
-                    formtarget="_blank"
-                    formnovalidate
-                >プレビュー</button>
+                <h2 data-module="m-largeTitle01">表示設定</h2>
+                <div data-module="m-btn01">
+                    <button
+                        type="submit"
+                        class="btn"
+                        formaction="<?= e(base_path('/admin/forms/preview-input')) ?>"
+                        formmethod="post"
+                        formtarget="_blank"
+                        formnovalidate
+                    >プレビュー</button>
                 </div>
             </div>
             <?php $renderDescriptionEditor('description_blocks', $descriptionBlocks, 'input'); ?>
@@ -327,16 +327,16 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                     <div class="wrapper">
                         <div class="block is-contents">
             <div class="block is-title">
-                <div class="fb-panel-header">
-                <h2 data-target="c-formEditTabs01__previewTitle" data-module="m-largeTitle01">表示設定</h2>
-                <button
-                    type="submit"
-                    class="btn is-sm"
-                    formaction="<?= e(base_path('/admin/forms/preview-confirm')) ?>"
-                    formmethod="post"
-                    formtarget="_blank"
-                    formnovalidate
-                >プレビュー</button>
+                <h2 data-module="m-largeTitle01">表示設定</h2>
+                <div data-module="m-btn01">
+                    <button
+                        type="submit"
+                        class="btn"
+                        formaction="<?= e(base_path('/admin/forms/preview-confirm')) ?>"
+                        formmethod="post"
+                        formtarget="_blank"
+                        formnovalidate
+                    >プレビュー</button>
                 </div>
             </div>
             <?php $renderDescriptionEditor('confirm_blocks', $confirmBlocks, 'simple'); ?>
@@ -403,16 +403,16 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                     <div class="wrapper">
                         <div class="block is-contents">
             <div class="block is-title">
-                <div class="fb-panel-header">
-                <h2 data-target="c-formEditTabs01__previewTitle" data-module="m-largeTitle01">表示設定</h2>
-                <button
-                    type="submit"
-                    class="btn is-sm"
-                    formaction="<?= e(base_path('/admin/forms/preview-thanks')) ?>"
-                    formmethod="post"
-                    formtarget="_blank"
-                    formnovalidate
-                >プレビュー</button>
+                <h2 data-module="m-largeTitle01">表示設定</h2>
+                <div data-module="m-btn01">
+                    <button
+                        type="submit"
+                        class="btn"
+                        formaction="<?= e(base_path('/admin/forms/preview-thanks')) ?>"
+                        formmethod="post"
+                        formtarget="_blank"
+                        formnovalidate
+                    >プレビュー</button>
                 </div>
             </div>
             <?php $renderDescriptionEditor('thanks_blocks', $thanksBlocks, 'simple'); ?>
