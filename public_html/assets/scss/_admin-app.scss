@@ -463,45 +463,46 @@ form.is-inline {
 }
 
 // --- タブ（フォーム編集）---
-[data-module="m-formEditTabs01"] {
+[data-module="c-formEditTabs01"] {
   margin-bottom: 8px;
 
-  .tab {
-    display: flex;
-    gap: 0;
-    flex-wrap: wrap;
-    border-bottom: 2px solid #e2e8f0;
-    margin-bottom: 20px;
-  }
-
-  .tab-item {
-    appearance: none;
-    font: inherit;
-    font-size: 14px;
-    padding: 10px 16px;
-    margin: 0 0 -2px;
-    border: none;
-    border-bottom: 2px solid transparent;
-    background: transparent;
-    color: #64748b;
-    cursor: pointer;
-    border-radius: 6px 6px 0 0;
-
-    &:hover {
-      color: #1f2937;
-      background: #f8fafc;
+  > .wrapper {
+    > .block.is-tabs {
+      display: flex;
+      gap: 0;
+      flex-wrap: wrap;
+      border-bottom: 2px solid #e2e8f0;
+      margin-bottom: 20px;
     }
 
-    &[aria-selected="true"] {
-      color: #2563eb;
-      font-weight: 600;
-      border-bottom-color: #2563eb;
-      background: #fff;
+    > .block.is-contents {
+      .box.is-tabPanel[hidden] {
+        display: none !important;
+      }
     }
   }
+}
 
-  .box.is-tabPanel[hidden] {
-    display: none !important;
+[data-module="m-formEditTab01"] {
+  font-size: 14px;
+  padding: 10px 16px;
+  margin: 0 0 -2px;
+  border-bottom: 2px solid transparent;
+  background: transparent;
+  color: #64748b;
+  cursor: pointer;
+  border-radius: 6px 6px 0 0;
+
+  &:hover {
+    color: #1f2937;
+    background: #f8fafc;
+  }
+
+  &[aria-selected="true"] {
+    color: #2563eb;
+    font-weight: 600;
+    border-bottom-color: #2563eb;
+    background: #fff;
   }
 }
 

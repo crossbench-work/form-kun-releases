@@ -2,9 +2,9 @@
     'use strict';
 
     (function initFormEditTabs() {
-        var root = document.querySelector('[data-module="m-formEditTabs01"]');
+        var root = document.querySelector('[data-module="c-formEditTabs01"]');
         if (!root) return;
-        var tabs = root.querySelectorAll('[role="tablist"] [role="tab"]');
+        var tabs = root.querySelectorAll('.block.is-tabs [role="tab"]');
         var panels = root.querySelectorAll('[role="tabpanel"]');
         if (!tabs.length || !panels.length) return;
         var storageKey = 'formkun:active-tab:' + window.location.pathname;
@@ -46,6 +46,12 @@
         tabs.forEach(function (tab) {
             tab.addEventListener('click', function () {
                 activate(tab.getAttribute('aria-controls'));
+            });
+            tab.addEventListener('keydown', function (event) {
+                if (event.key === 'Enter' || event.key === ' ') {
+                    event.preventDefault();
+                    activate(tab.getAttribute('aria-controls'));
+                }
             });
         });
 

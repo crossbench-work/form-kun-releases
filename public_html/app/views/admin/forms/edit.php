@@ -109,15 +109,17 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                 </div>
             <?php endif; ?>
 
-            <div class="p-formEditTabs01" data-module="m-formEditTabs01">
-        <div class="tab" role="tablist" aria-label="フォーム設定のセクション">
-            <button type="button" class="tab-item" role="tab" id="tab-btn-basic" aria-selected="true" aria-controls="tab-panel-basic">基本</button>
-            <button type="button" class="tab-item" role="tab" id="tab-btn-fields" aria-selected="false" aria-controls="tab-panel-fields" tabindex="-1">入力画面</button>
-            <button type="button" class="tab-item" role="tab" id="tab-btn-confirm" aria-selected="false" aria-controls="tab-panel-confirm" tabindex="-1">確認画面</button>
-            <button type="button" class="tab-item" role="tab" id="tab-btn-thanks" aria-selected="false" aria-controls="tab-panel-thanks" tabindex="-1">完了画面</button>
-            <button type="button" class="tab-item" role="tab" id="tab-btn-mail" aria-selected="false" aria-controls="tab-panel-mail" tabindex="-1">通知</button>
-        </div>
+            <div data-module="c-formEditTabs01">
+                <div class="wrapper">
+                    <div class="block is-tabs" role="tablist" aria-label="フォーム設定のセクション">
+                        <div data-module="m-formEditTab01" role="tab" id="tab-btn-basic" aria-selected="true" aria-controls="tab-panel-basic" tabindex="0">基本</div>
+                        <div data-module="m-formEditTab01" role="tab" id="tab-btn-fields" aria-selected="false" aria-controls="tab-panel-fields" tabindex="-1">入力画面</div>
+                        <div data-module="m-formEditTab01" role="tab" id="tab-btn-confirm" aria-selected="false" aria-controls="tab-panel-confirm" tabindex="-1">確認画面</div>
+                        <div data-module="m-formEditTab01" role="tab" id="tab-btn-thanks" aria-selected="false" aria-controls="tab-panel-thanks" tabindex="-1">完了画面</div>
+                        <div data-module="m-formEditTab01" role="tab" id="tab-btn-mail" aria-selected="false" aria-controls="tab-panel-mail" tabindex="-1">通知</div>
+                    </div>
 
+                    <div class="block is-contents">
         <div id="tab-panel-basic" class="box is-tabPanel" role="tabpanel" aria-labelledby="tab-btn-basic">
     <div data-module="c-panel01">
         <div class="wrapper">
@@ -598,10 +600,8 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
             </div>
         </div>
     </div>
-        </div>
-
-            </div>
-        </div>
+                    </div>
+                </div>
 
         <div class="block bottom">
             <div class="area is-actions">
