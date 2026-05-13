@@ -96,8 +96,8 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
         </div>
 
         <div id="tab-panel-basic" class="box is-tabPanel" role="tabpanel" aria-labelledby="tab-btn-basic">
-    <section class="c-panel01">
-        <div class="componentWrapper">
+    <section class="m-panel01">
+        <div class="wrapper">
             <h2>基本設定</h2>
             <div class="box is-field">
                 <div class="fb-basic-label-row">
@@ -127,8 +127,8 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
         </div>
 
         <div id="tab-panel-fields" class="box is-tabPanel" role="tabpanel" aria-labelledby="tab-btn-fields" hidden>
-    <section class="c-panel01">
-        <div class="componentWrapper">
+    <section class="m-panel01">
+        <div class="wrapper">
             <div class="fb-panel-header">
                 <h2 id="input-screen-title-preview">表示設定</h2>
                 <button
@@ -143,8 +143,8 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
             <?php $renderDescriptionEditor('description_blocks', $descriptionBlocks, 'input'); ?>
         </div>
     </section>
-    <section class="c-panel01" data-module="m-formBuilder01">
-        <div class="componentWrapper">
+    <section class="m-panel01" data-module="m-formBuilder01">
+        <div class="wrapper">
             <h2>項目設定</h2>
             <ul id="fb-fields" class="fb-fields">
             <?php foreach ($sortableFields as $i => $f): ?>
@@ -164,8 +164,8 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
             <?php endif; ?>
         </div>
     </section>
-    <section class="c-panel01">
-        <div class="componentWrapper">
+    <section class="m-panel01">
+        <div class="wrapper">
             <h2>スパム対策</h2>
             <div class="box is-field">
                 <label class="label">
@@ -175,8 +175,8 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
             </div>
         </div>
     </section>
-    <section class="c-panel01">
-        <div class="componentWrapper">
+    <section class="m-panel01">
+        <div class="wrapper">
             <h2>ボタン設定</h2>
             <div class="box is-field">
                 <label class="label" for="confirm_button_text">ボタンテキスト</label>
@@ -187,8 +187,8 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
         </div>
 
         <div id="tab-panel-confirm" class="box is-tabPanel" role="tabpanel" aria-labelledby="tab-btn-confirm" hidden>
-    <section class="c-panel01">
-        <div class="componentWrapper">
+    <section class="m-panel01">
+        <div class="wrapper">
             <div class="fb-panel-header">
                 <h2 id="confirm-screen-title-preview">表示設定</h2>
                 <button
@@ -203,8 +203,8 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
             <?php $renderDescriptionEditor('confirm_blocks', $confirmBlocks, 'simple'); ?>
         </div>
     </section>
-    <section class="c-panel01">
-        <div class="componentWrapper">
+    <section class="m-panel01">
+        <div class="wrapper">
             <h2>ボタン設定</h2>
             <div class="box is-field">
                 <label class="label" for="submit_button_text">送信ボタンテキスト</label>
@@ -219,8 +219,8 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
         </div>
 
         <div id="tab-panel-thanks" class="box is-tabPanel" role="tabpanel" aria-labelledby="tab-btn-thanks" hidden>
-    <section class="c-panel01">
-        <div class="componentWrapper">
+    <section class="m-panel01">
+        <div class="wrapper">
             <div class="fb-panel-header">
                 <h2 id="thanks-screen-title-preview">表示設定</h2>
                 <button
@@ -235,8 +235,8 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
             <?php $renderDescriptionEditor('thanks_blocks', $thanksBlocks, 'simple'); ?>
         </div>
     </section>
-    <section class="c-panel01">
-        <div class="componentWrapper">
+    <section class="m-panel01">
+        <div class="wrapper">
             <h2>ボタン設定</h2>
             <div class="box is-field">
                 <label class="label" for="thanks_button_text">ボタンテキスト</label>
@@ -251,8 +251,8 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
         </div>
 
         <div id="tab-panel-mail" class="box is-tabPanel" role="tabpanel" aria-labelledby="tab-btn-mail" hidden>
-    <section class="c-panel01">
-        <div class="componentWrapper">
+    <section class="m-panel01">
+        <div class="wrapper">
             <h2>管理者通知メール</h2>
             <div class="box is-field">
                 <label class="label">送信先メールアドレス（カンマ区切りで複数可）</label>
@@ -270,8 +270,8 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
         </div>
     </section>
 
-    <section class="c-panel01">
-        <div class="componentWrapper">
+    <section class="m-panel01">
+        <div class="wrapper">
             <h2>送信者への自動返信メール</h2>
             <div class="box is-field">
                 <label class="label">

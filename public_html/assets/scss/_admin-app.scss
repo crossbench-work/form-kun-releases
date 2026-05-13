@@ -261,12 +261,15 @@ body.l-adminShell01 {
 }
 
 // --- パネル・ツールバー ---
-.c-panel01 {
+.m-panel01 {
   background: #fff;
   border: 1px solid #e2e8f0;
   border-radius: 8px;
-  padding: 20px 24px;
   margin-bottom: 16px;
+
+  > .wrapper {
+    padding: 20px 24px;
+  }
 }
 
 .m-toolbar01 {
@@ -569,7 +572,7 @@ form.is-inline {
 }
 
 // --- 管理画面フォーム（パネル内）---
-.c-panel01 {
+.m-panel01 > .wrapper {
   .box.is-field {
     margin-bottom: 16px;
   }

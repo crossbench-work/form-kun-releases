@@ -121,7 +121,7 @@ assets/
 ## `.wrapper` / `.inner`（l- / m- / c- 共通）
 
 - 任意で **`.wrapper`**。さらに必要なら **`.wrapper` > `.inner`**。
-- **`.componentWrapper` を使う場合は、ルート要素と同じ階層にクラスを併記せず、必ずルート要素の直下に 1 階層入れて置く**（例: `<section class="c-panel01"><div class="componentWrapper">...</div></section>`）。
+- **管理画面パネルのような `m-*` モジュールは、`<section class="m-panel01"><div class="wrapper">...</div></section>` の形を正とし、`m-panel01 > .wrapper` を前提に組む**。
 
 ### SCSS: 直下の `.wrapper` は子セレクタで縛る
 
@@ -146,6 +146,7 @@ assets/
 
 - **l-**: **`.l-*` > `.wrapper`**。`.block` / `.area` / `.box` は **使わない**。
 - **m-**: **`.m-*` > `.wrapper`**。モジュール内に **`.block` / `.area` / `.box` は使わない**。
+- **管理画面のパネル系モジュールも同様に `.m-panel01 > .wrapper` を使い、`componentWrapper` のような別名ラッパーは増やさない**。
 
 ## `c-`（コンポーネント）
 

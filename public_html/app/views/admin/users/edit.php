@@ -9,8 +9,8 @@
 <form method="post" action="<?= e($isNew ? base_path('/admin/users') : base_path('/admin/users/' . (int)$user['id'])) ?>">
     <?= \Core\Csrf::field() ?>
 
-    <section class="c-panel01">
-        <div class="componentWrapper">
+    <section class="m-panel01">
+        <div class="wrapper">
             <div class="box is-field">
                 <label class="label">ユーザー名</label>
                 <?php if ($isNew): ?>

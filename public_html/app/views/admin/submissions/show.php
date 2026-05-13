@@ -10,8 +10,8 @@
     </form>
 </div>
 
-<section class="c-panel01">
-    <div class="componentWrapper">
+<section class="m-panel01">
+    <div class="wrapper">
         <table class="table is-kv">
             <tr><th>フォーム</th><td><?= e($form['title']) ?>（<code><?= e($form['slug']) ?></code>）</td></tr>
             <tr><th>受信日時</th><td><?= e($sub['submitted_at']) ?></td></tr>
@@ -21,8 +21,8 @@
     </div>
 </section>
 
-<section class="c-panel01">
-    <div class="componentWrapper">
+<section class="m-panel01">
+    <div class="wrapper">
         <h2>入力内容</h2>
         <table class="table is-kv">
         <?php foreach ($fields as $f):

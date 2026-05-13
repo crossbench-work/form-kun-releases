@@ -371,12 +371,14 @@ body.l-adminShell01 a:hover {
   color: #374151;
 }
 
-.c-panel01 {
+.m-panel01 {
   background: #fff;
   border: 1px solid #e2e8f0;
   border-radius: 8px;
-  padding: 20px 24px;
   margin-bottom: 16px;
+}
+.m-panel01 > .wrapper {
+  padding: 20px 24px;
 }
 
 .m-toolbar01 {
@@ -634,35 +636,35 @@ form.is-inline {
   word-break: break-word;
 }
 
-.c-panel01 .box.is-field {
+.m-panel01 > .wrapper .box.is-field {
   margin-bottom: 16px;
 }
-.c-panel01 .box.is-field label,
-.c-panel01 .label {
+.m-panel01 > .wrapper .box.is-field label,
+.m-panel01 > .wrapper .label {
   display: block;
   font-weight: 600;
   margin-bottom: 4px;
   color: #374151;
 }
-.c-panel01 .text.is-help {
+.m-panel01 > .wrapper .text.is-help {
   font-size: 13px;
   color: #6b7280;
   margin: 4px 0 0;
 }
-.c-panel01 .text.is-error {
+.m-panel01 > .wrapper .text.is-error {
   color: #b91c1c;
   font-size: 13px;
   margin: 4px 0 0;
 }
-.c-panel01 input[type=text],
-.c-panel01 input[type=email],
-.c-panel01 input[type=tel],
-.c-panel01 input[type=number],
-.c-panel01 input[type=password],
-.c-panel01 input[type=date],
-.c-panel01 input[type=time],
-.c-panel01 textarea,
-.c-panel01 select {
+.m-panel01 > .wrapper input[type=text],
+.m-panel01 > .wrapper input[type=email],
+.m-panel01 > .wrapper input[type=tel],
+.m-panel01 > .wrapper input[type=number],
+.m-panel01 > .wrapper input[type=password],
+.m-panel01 > .wrapper input[type=date],
+.m-panel01 > .wrapper input[type=time],
+.m-panel01 > .wrapper textarea,
+.m-panel01 > .wrapper select {
   width: 100%;
   padding: 8px 10px;
   border: 1px solid #cbd5e1;
@@ -672,17 +674,17 @@ form.is-inline {
   background: #fff;
   color: #111;
 }
-.c-panel01 textarea {
+.m-panel01 > .wrapper textarea {
   min-height: 100px;
   resize: vertical;
 }
-.c-panel01 .area.is-actions {
+.m-panel01 > .wrapper .area.is-actions {
   margin-top: 16px;
   display: flex;
   gap: 10px;
   flex-wrap: wrap;
 }
-.c-panel01 .btn {
+.m-panel01 > .wrapper .btn {
   display: inline-block;
   padding: 8px 16px;
   border: 1px solid #cbd5e1;
@@ -695,31 +697,31 @@ form.is-inline {
   text-decoration: none;
   line-height: 1.4;
 }
-.c-panel01 .btn:hover {
+.m-panel01 > .wrapper .btn:hover {
   background: #f1f5f9;
   text-decoration: none;
 }
-.c-panel01 .btn.is-primary {
+.m-panel01 > .wrapper .btn.is-primary {
   background: #2563eb;
   border-color: #2563eb;
   color: #fff;
 }
-.c-panel01 .btn.is-primary:hover {
+.m-panel01 > .wrapper .btn.is-primary:hover {
   background: #1d4ed8;
 }
-.c-panel01 .btn.is-danger {
+.m-panel01 > .wrapper .btn.is-danger {
   background: #dc2626;
   border-color: #dc2626;
   color: #fff;
 }
-.c-panel01 .btn.is-danger:hover {
+.m-panel01 > .wrapper .btn.is-danger:hover {
   background: #b91c1c;
 }
-.c-panel01 .btn.is-sm {
+.m-panel01 > .wrapper .btn.is-sm {
   padding: 4px 10px;
   font-size: 13px;
 }
-.c-panel01 .btn.is-icon {
+.m-panel01 > .wrapper .btn.is-icon {
   flex-shrink: 0;
   padding: 8px 10px;
   line-height: 1;
@@ -727,7 +729,7 @@ form.is-inline {
   align-items: center;
   justify-content: center;
 }
-.c-panel01 .is-required {
+.m-panel01 > .wrapper .is-required {
   display: inline-block;
   background: #ef4444;
   color: #fff;
@@ -737,14 +739,14 @@ form.is-inline {
   margin-left: 4px;
   font-weight: 400;
 }
-.c-panel01 .label.is-choice {
+.m-panel01 > .wrapper .label.is-choice {
   display: inline-flex;
   align-items: center;
   gap: 6px;
   font-weight: 400;
   margin-bottom: 0;
 }
-.c-panel01 .fb-basic-label-row {
+.m-panel01 > .wrapper .fb-basic-label-row {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -752,17 +754,17 @@ form.is-inline {
   flex-wrap: wrap;
   margin-bottom: 6px;
 }
-.c-panel01 .fb-basic-display-toggle {
+.m-panel01 > .wrapper .fb-basic-display-toggle {
   font-size: 13px;
   color: #64748b;
 }
-.c-panel01 .fb-description-toolbar {
+.m-panel01 > .wrapper .fb-description-toolbar {
   display: flex;
   justify-content: flex-end;
   margin-top: 16px;
   margin-bottom: 16px;
 }
-.c-panel01 .fb-panel-header {
+.m-panel01 > .wrapper .fb-panel-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -770,21 +772,21 @@ form.is-inline {
   margin-bottom: 12px;
   flex-wrap: wrap;
 }
-.c-panel01 .fb-panel-header h2 {
+.m-panel01 > .wrapper .fb-panel-header h2 {
   margin-bottom: 0;
 }
-.c-panel01 .fb-description-blocks {
+.m-panel01 > .wrapper .fb-description-blocks {
   display: flex;
   flex-direction: column;
   gap: 16px;
 }
-.c-panel01 .fb-description-block {
+.m-panel01 > .wrapper .fb-description-block {
   border: 1px solid #e2e8f0;
   border-radius: 8px;
   padding: 16px;
   background: #f8fafc;
 }
-.c-panel01 .fb-description-block-header {
+.m-panel01 > .wrapper .fb-description-block-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -792,20 +794,20 @@ form.is-inline {
   margin-bottom: 12px;
   flex-wrap: wrap;
 }
-.c-panel01 .fb-description-block-title {
+.m-panel01 > .wrapper .fb-description-block-title {
   color: #334155;
 }
-.c-panel01 .fb-description-remove {
+.m-panel01 > .wrapper .fb-description-remove {
   flex-shrink: 0;
 }
-.c-panel01 .fb-description-block-controls {
+.m-panel01 > .wrapper .fb-description-block-controls {
   align-items: center;
   margin-bottom: 12px;
 }
-.c-panel01 .fb-description-position-wrap {
+.m-panel01 > .wrapper .fb-description-position-wrap {
   flex: 1 1 200px;
 }
-.c-panel01 .fb-description-visible-wrap {
+.m-panel01 > .wrapper .fb-description-visible-wrap {
   flex: 0 0 auto;
   min-width: auto;
   display: flex;
