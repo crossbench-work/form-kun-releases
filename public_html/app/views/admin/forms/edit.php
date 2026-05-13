@@ -92,7 +92,7 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
     </div>
 <?php endif; ?>
 
-<nav class="m-breadcrumb01" aria-label="パンくず">
+<nav data-module="m-breadcrumb01" aria-label="パンくず">
     <ol>
         <li><a href="<?= e(base_path('/admin/forms')) ?>">フォーム</a></li>
         <li aria-current="page"><span id="breadcrumb-current"><?= e($breadcrumbTitle) ?></span></li>
