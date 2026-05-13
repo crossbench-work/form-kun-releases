@@ -727,47 +727,51 @@ form.is-inline {
   > .wrapper {
     > .block.is-contents {
       > .c-descriptionEditor01__editor {
-        display: flex;
-        flex-direction: column;
-        gap: 16px;
-
-        > .area.is-block {
-          border: 1px solid #e2e8f0;
-          border-radius: 8px;
-          padding: 16px;
-          background: #f8fafc;
-
-          > .box.is-header {
+        > .wrapper {
+          > .block.is-list {
             display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 12px;
-            margin-bottom: 12px;
-            flex-wrap: wrap;
+            flex-direction: column;
+            gap: 16px;
 
-            > .title.is-block {
-              color: #334155;
+            > .area.is-block {
+              border: 1px solid #e2e8f0;
+              border-radius: 8px;
+              padding: 16px;
+              background: #f8fafc;
+
+              > .box.is-header {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                gap: 12px;
+                margin-bottom: 12px;
+                flex-wrap: wrap;
+
+                > .title.is-block {
+                  color: #334155;
+                }
+
+                .fb-description-remove {
+                  flex-shrink: 0;
+                }
+              }
+
+              > .box.is-controls {
+                align-items: center;
+                margin-bottom: 12px;
+              }
+
+              .fb-description-position-wrap {
+                flex: 1 1 200px;
+              }
+
+              .fb-description-visible-wrap {
+                flex: 0 0 auto;
+                min-width: auto;
+                display: flex;
+                align-items: center;
+              }
             }
-
-            .fb-description-remove {
-              flex-shrink: 0;
-            }
-          }
-
-          > .box.is-controls {
-            align-items: center;
-            margin-bottom: 12px;
-          }
-
-          .fb-description-position-wrap {
-            flex: 1 1 200px;
-          }
-
-          .fb-description-visible-wrap {
-            flex: 0 0 auto;
-            min-width: auto;
-            display: flex;
-            align-items: center;
           }
         }
       }

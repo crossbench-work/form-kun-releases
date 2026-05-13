@@ -32,44 +32,48 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
         <div data-module="c-descriptionEditor01" data-description-editor data-name-prefix="<?= e($namePrefix) ?>" data-position-mode="<?= e($positionMode) ?>">
             <div class="wrapper">
                 <div class="block is-contents">
-                    <div class="c-descriptionEditor01__editor" data-description-list>
-                        <?php foreach ($blocks as $i => $block): ?>
-                            <div class="area is-block" data-description-block data-index="<?= $i ?>">
-                                <input type="hidden" name="<?= e($namePrefix) ?>[<?= $i ?>][id]" value="<?= e($block['id'] ?? ($namePrefix . '-' . $i)) ?>" data-name="id">
-                                <div class="box is-header">
-                                    <strong class="title is-block">説明文</strong>
-                                    <button type="button" class="btn is-sm is-icon is-danger fb-description-remove" aria-label="削除" title="削除">
-                                        <svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2">
-                                            <path stroke-linecap="round" stroke-linejoin="round" d="M3 6h18"/>
-                                            <path stroke-linecap="round" stroke-linejoin="round" d="M8 6V4h8v2"/>
-                                            <path stroke-linecap="round" stroke-linejoin="round" d="M19 6l-1 14H6L5 6"/>
-                                            <path stroke-linecap="round" stroke-linejoin="round" d="M10 11v6M14 11v6"/>
-                                        </svg>
-                                    </button>
-                                </div>
-                                <div class="box is-controls fb-row" style="display: flex;">
-                                    <div class="fb-description-position-wrap">
-                                        <div data-module="m-input01">
-                                            <select name="<?= e($namePrefix) ?>[<?= $i ?>][position]" class="fb-description-position" data-name="position" data-value="<?= e((string) ($block['position'] ?? 0)) ?>" aria-label="説明文"></select>
+                    <div class="c-descriptionEditor01__editor">
+                        <div class="wrapper">
+                            <div class="block is-list" data-description-list>
+                                <?php foreach ($blocks as $i => $block): ?>
+                                    <div class="area is-block" data-description-block data-index="<?= $i ?>">
+                                        <input type="hidden" name="<?= e($namePrefix) ?>[<?= $i ?>][id]" value="<?= e($block['id'] ?? ($namePrefix . '-' . $i)) ?>" data-name="id">
+                                        <div class="box is-header">
+                                            <strong class="title is-block">説明文</strong>
+                                            <button type="button" class="btn is-sm is-icon is-danger fb-description-remove" aria-label="削除" title="削除">
+                                                <svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" d="M3 6h18"/>
+                                                    <path stroke-linecap="round" stroke-linejoin="round" d="M8 6V4h8v2"/>
+                                                    <path stroke-linecap="round" stroke-linejoin="round" d="M19 6l-1 14H6L5 6"/>
+                                                    <path stroke-linecap="round" stroke-linejoin="round" d="M10 11v6M14 11v6"/>
+                                                </svg>
+                                            </button>
+                                        </div>
+                                        <div class="box is-controls fb-row" style="display: flex;">
+                                            <div class="fb-description-position-wrap">
+                                                <div data-module="m-input01">
+                                                    <select name="<?= e($namePrefix) ?>[<?= $i ?>][position]" class="fb-description-position" data-name="position" data-value="<?= e((string) ($block['position'] ?? 0)) ?>" aria-label="説明文"></select>
+                                                </div>
+                                            </div>
+                                            <div class="fb-description-visible-wrap">
+                                                <label class="label is-choice fb-basic-display-toggle">
+                                                    <input type="checkbox" name="<?= e($namePrefix) ?>[<?= $i ?>][visible]" value="1" data-name="visible" <?= !empty($block['visible']) ? 'checked' : '' ?>>
+                                                    表示する
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="box is-editor">
+                                            <div data-module="m-input01">
+                                                <textarea name="<?= e($namePrefix) ?>[<?= $i ?>][html]" rows="6" data-name="html"><?= e((string) ($block['html'] ?? '')) ?></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="box is-help">
+                                            <p class="text is-help">HTML を直接入力できます。一部のタグと属性だけが保存されます。</p>
                                         </div>
                                     </div>
-                                    <div class="fb-description-visible-wrap">
-                                        <label class="label is-choice fb-basic-display-toggle">
-                                            <input type="checkbox" name="<?= e($namePrefix) ?>[<?= $i ?>][visible]" value="1" data-name="visible" <?= !empty($block['visible']) ? 'checked' : '' ?>>
-                                            表示する
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="box is-editor">
-                                    <div data-module="m-input01">
-                                        <textarea name="<?= e($namePrefix) ?>[<?= $i ?>][html]" rows="6" data-name="html"><?= e((string) ($block['html'] ?? '')) ?></textarea>
-                                    </div>
-                                </div>
-                                <div class="box is-help">
-                                    <p class="text is-help">HTML を直接入力できます。一部のタグと属性だけが保存されます。</p>
-                                </div>
+                                <?php endforeach; ?>
                             </div>
-                        <?php endforeach; ?>
+                        </div>
                     </div>
                 </div>
                 <div class="block is-toolbar">
