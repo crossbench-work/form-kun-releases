@@ -11,7 +11,7 @@
 ## 決定
 
 - **`c-formEditor__item` の骨格**は次の階層を正とする。  
-  `.c-formEditor__item` > `.wrapper` > `.block.is-header` > `.c-formEditor__itemHeader`、および `.block.is-body` > `.c-formEditor__itemBody` > `.wrapper` > **セクション単位の** `.block.is-contents`（例: 基本設定・入力設定・表示設定が各 1 ブロック）> その直下に **`block is-title`（区切り見出し）と `block is-field`（本文。複数可）** を置く。区切り見出しだけの `block.is-contents` と本文だけの `block.is-contents` を隣接させない。
+  `.c-formEditor__item` > `.wrapper` > `.block.is-header` > `.c-formEditor__itemHeader`、および `.block.is-body` > `.c-formEditor__itemBody` > `.wrapper` > `.block.is-contents`（複数可）> 見出し・フィールド行。
 - **`c-formBlock01` のパネル本文**（`> .wrapper > .block.is-contents` 直下）で、見出し行と入力ブロックのラッパーは **`block is-title` / `block is-field`** とする（従来の `area is-title` / `area is-field` から移行）。説明文エディタ（`c-descriptionEditor01`）の外側ラッパーも同じく `block is-field` でよい。
 - **並べ替えリスト**（`data-target="m-formBuilder01__fields"`）および **規約同意などの静的 `c-formEditor`** 内の単一ラッパーは **`block is-contents`** とし、`.c-formEditor > .wrapper > .block.is-contents` 前提の SCSS と一致させる。
 - **`area`** はタブパネル（`c-formEditTabs01` の `area is-contents`）、説明文ブロック内の `area is-header` / `area is-controls` など、**別コンポーネント規約で既に固定されている箇所**に限り継続利用する。

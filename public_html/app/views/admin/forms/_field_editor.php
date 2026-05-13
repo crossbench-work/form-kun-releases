@@ -85,6 +85,8 @@ if (empty($f['required']) || in_array($f['type'], ['radio', 'select'], true)) {
                                         <div class="block is-title">
                                             <p data-module="m-borderTitle01">基本設定</p>
                                         </div>
+                            </div>
+                            <div class="block is-contents">
                                         <div class="block is-field">
                                             <div class="c-formEditor__field">
                                                 <div class="wrapper">
@@ -150,6 +152,8 @@ if (empty($f['required']) || in_array($f['type'], ['radio', 'select'], true)) {
                                             <div class="block is-title">
                                                 <p data-module="m-borderTitle01">入力設定</p>
                                             </div>
+                                </div>
+                                <div class="block is-contents">
                                             <div class="block is-field">
                                                 <div class="c-formEditor__field">
                                                     <div class="wrapper">
@@ -283,6 +287,8 @@ if (empty($f['required']) || in_array($f['type'], ['radio', 'select'], true)) {
                                         <div class="block is-title">
                                             <p data-module="m-borderTitle01">表示設定</p>
                                         </div>
+                            </div>
+                            <div class="block is-contents">
                                         <div class="block is-field">
                                             <div class="c-formEditor__field">
                                                 <div class="wrapper">
@@ -365,7 +371,6 @@ if (empty($f['required']) || in_array($f['type'], ['radio', 'select'], true)) {
                                                 </div>
                                             <?php endif; ?>
                                         </div>
-                            </div>
                             <input type="hidden" name="fields[<?= $idx ?>][_remove]" value="0" data-target="c-formEditor__removeFlag">
                     </div>
                 </div>
