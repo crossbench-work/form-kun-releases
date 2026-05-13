@@ -720,9 +720,9 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                                             </div>
                                             <div class="area is-field">
                                                 <div class="c-formEditor__row">
-                                                    <div><label class="label" data-module="m-boldTitle01">ラベル</label><div data-module="m-input01"><input type="text" data-name="label" data-target="c-formEditor__labelInput"></div></div>
+                                                    <div><label class="label" data-module="m-labelTitle01">ラベル</label><div data-module="m-input01"><input type="text" data-name="label" data-target="c-formEditor__labelInput"></div></div>
                                                     <div class="c-formEditor__fieldKeyColumn">
-                                                        <label class="label" data-module="m-boldTitle01">フィールドキー</label>
+                                                        <label class="label" data-module="m-labelTitle01">フィールドキー</label>
                                                         <div class="c-formEditor__fieldKey">
                                                             <div data-module="m-input01"><input type="text" data-name="field_key" data-target="c-formEditor__fieldKeyInput" class="is-locked" readonly spellcheck="false"></div>
                                                             <button type="button" class="btn is-icon" data-target="c-formEditor__fieldKeyLock" aria-label="キーを編集" title="編集する" aria-pressed="true">
@@ -732,7 +732,7 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                                                         </div>
                                                     </div>
                                                     <div>
-                                                        <label class="label" data-module="m-boldTitle01">型</label>
+                                                        <label class="label" data-module="m-labelTitle01">型</label>
                                                         <div data-module="m-input01">
                                                             <select data-name="type" data-target="c-formEditor__type">
                                                                 <?php foreach (\Models\FormField::TYPE_LABELS() as $tVal => $tLabel): ?>
@@ -755,7 +755,7 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                                             <div class="area is-field">
                                                 <div class="c-formEditor__row">
                                                     <div class="c-formEditor__validation">
-                                                        <label class="label" data-module="m-boldTitle01">必須</label>
+                                                        <label class="label" data-module="m-labelTitle01">必須</label>
                                                         <div class="c-formEditor__validationControls">
                                                             <div class="c-formEditor__required">
                                                                 <label class="label is-choice"><input type="checkbox" data-name="required" value="1" data-target="c-formEditor__required"><span>必須にする</span></label>
@@ -781,17 +781,17 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                                                                 </div>
                                                                 <input type="hidden" data-name="checkbox_limit_enabled" data-target="c-formEditor__checkboxLimitEnabled" value="0">
                                                                 <div class="c-formEditor__checkboxLimit" style="display:none">
-                                                                    <div><label class="label" data-module="m-boldTitle01">最小選択数</label><div data-module="m-input01"><input type="number" min="1" data-name="checkbox_min_selections"></div></div>
-                                                                    <div><label class="label" data-module="m-boldTitle01">最大選択数</label><div data-module="m-input01"><input type="number" min="1" data-name="checkbox_max_selections"></div></div>
+                                                                    <div><label class="label" data-module="m-labelTitle01">最小選択数</label><div data-module="m-input01"><input type="number" min="1" data-name="checkbox_min_selections"></div></div>
+                                                                    <div><label class="label" data-module="m-labelTitle01">最大選択数</label><div data-module="m-input01"><input type="number" min="1" data-name="checkbox_max_selections"></div></div>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div data-target="c-formEditor__maxLength"><label class="label" data-module="m-boldTitle01">最大文字数（任意）</label><div data-module="m-input01"><input type="number" min="1" data-name="max_length"></div></div>
+                                                    <div data-target="c-formEditor__maxLength"><label class="label" data-module="m-labelTitle01">最大文字数（任意）</label><div data-module="m-input01"><input type="number" min="1" data-name="max_length"></div></div>
                                                 </div>
                                             </div>
                                             <div class="area is-field" data-target="c-formEditor__options" style="display:none">
-                                                <label class="label" data-module="m-boldTitle01">選択肢（1行に1つ）</label>
+                                                <label class="label" data-module="m-labelTitle01">選択肢（1行に1つ）</label>
                                                 <div class="c-formEditor__choiceEditor" data-choice-editor>
                                                     <div class="c-formEditor__choiceList"></div>
                                                     <div class="area is-actions">
@@ -811,23 +811,23 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                                             </div>
                                             <div class="area is-field">
                                                 <div class="c-formEditor__row">
-                                                    <div data-target="c-formEditor__placeholder"><label class="label" data-module="m-boldTitle01">プレースホルダ（任意）</label><div data-module="m-input01"><input type="text" data-name="placeholder"></div></div>
+                                                    <div data-target="c-formEditor__placeholder"><label class="label" data-module="m-labelTitle01">プレースホルダ（任意）</label><div data-module="m-input01"><input type="text" data-name="placeholder"></div></div>
                                                 </div>
                                             </div>
                                             <div class="area is-field">
                                                 <div class="c-formEditor__row" data-target="c-formEditor__textPairSettings" style="display:none">
-                                                    <div><label class="label" data-module="m-boldTitle01">1つ目の入力欄の表示名</label><div data-module="m-input01"><input type="text" data-name="pair_label_left"></div></div>
-                                                    <div><label class="label" data-module="m-boldTitle01">2つ目の入力欄の表示名</label><div data-module="m-input01"><input type="text" data-name="pair_label_right"></div></div>
+                                                    <div><label class="label" data-module="m-labelTitle01">1つ目の入力欄の表示名</label><div data-module="m-input01"><input type="text" data-name="pair_label_left"></div></div>
+                                                    <div><label class="label" data-module="m-labelTitle01">2つ目の入力欄の表示名</label><div data-module="m-input01"><input type="text" data-name="pair_label_right"></div></div>
                                                 </div>
                                             </div>
                                             <div class="area is-field">
                                                 <div class="c-formEditor__row" data-target="c-formEditor__textPairPlaceholders" style="display:none">
-                                                    <div><label class="label" data-module="m-boldTitle01">1つ目のプレースホルダ（任意）</label><div data-module="m-input01"><input type="text" data-name="pair_placeholder_left"></div></div>
-                                                    <div><label class="label" data-module="m-boldTitle01">2つ目のプレースホルダ（任意）</label><div data-module="m-input01"><input type="text" data-name="pair_placeholder_right"></div></div>
+                                                    <div><label class="label" data-module="m-labelTitle01">1つ目のプレースホルダ（任意）</label><div data-module="m-input01"><input type="text" data-name="pair_placeholder_left"></div></div>
+                                                    <div><label class="label" data-module="m-labelTitle01">2つ目のプレースホルダ（任意）</label><div data-module="m-input01"><input type="text" data-name="pair_placeholder_right"></div></div>
                                                 </div>
                                             </div>
                                             <div class="area is-field">
-                                                <label class="label" data-module="m-boldTitle01">備考</label>
+                                                <label class="label" data-module="m-labelTitle01">備考</label>
                                                 <div data-module="m-input01"><textarea data-name="help_text" rows="3"></textarea></div>
                                             </div>
                                         </div>
