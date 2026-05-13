@@ -1131,15 +1131,14 @@ form.is-inline {
   }
 
   .c-formEditor__row {
-    display: flex;
-    gap: 12px;
-    flex-wrap: wrap;
+    > .wrapper {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
 
-    > div {
-      flex: 1;
-      min-width: 180px;
-
-      > .wrapper {
+      > .block.is-contents {
+        flex: 1;
+        min-width: 180px;
         display: flex;
         flex-direction: column;
         gap: 6px;
@@ -1181,16 +1180,16 @@ form.is-inline {
   }
 
   .c-formEditor__checkboxLimit {
-    display: flex;
-    gap: 12px;
     margin-top: 8px;
-    flex-wrap: wrap;
 
-    > div {
-      flex: 1;
-      min-width: 140px;
+    > .wrapper {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
 
-      > .wrapper {
+      > .block.is-contents {
+        flex: 1;
+        min-width: 140px;
         display: flex;
         flex-direction: column;
         gap: 6px;

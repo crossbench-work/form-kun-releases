@@ -1064,16 +1064,14 @@ form.is-inline {
 [data-module=m-formBuilder01] .c-formEditor__item.is-collapsed > .wrapper > .block.is-contents > .area.is-body {
   display: none;
 }
-[data-module=m-formBuilder01] .c-formEditor__row {
+[data-module=m-formBuilder01] .c-formEditor__row > .wrapper {
   display: flex;
   gap: 12px;
   flex-wrap: wrap;
 }
-[data-module=m-formBuilder01] .c-formEditor__row > div {
+[data-module=m-formBuilder01] .c-formEditor__row > .wrapper > .block.is-contents {
   flex: 1;
   min-width: 180px;
-}
-[data-module=m-formBuilder01] .c-formEditor__row > div > .wrapper {
   display: flex;
   flex-direction: column;
   gap: 6px;
@@ -1106,16 +1104,16 @@ form.is-inline {
   min-width: 220px;
 }
 [data-module=m-formBuilder01] .c-formEditor__checkboxLimit {
+  margin-top: 8px;
+}
+[data-module=m-formBuilder01] .c-formEditor__checkboxLimit > .wrapper {
   display: flex;
   gap: 12px;
-  margin-top: 8px;
   flex-wrap: wrap;
 }
-[data-module=m-formBuilder01] .c-formEditor__checkboxLimit > div {
+[data-module=m-formBuilder01] .c-formEditor__checkboxLimit > .wrapper > .block.is-contents {
   flex: 1;
   min-width: 140px;
-}
-[data-module=m-formBuilder01] .c-formEditor__checkboxLimit > div > .wrapper {
   display: flex;
   flex-direction: column;
   gap: 6px;
