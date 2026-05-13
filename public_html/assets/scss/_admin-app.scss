@@ -510,40 +510,52 @@ form.is-inline {
   > .wrapper {
     > .block.bottom {
       margin-top: 16px;
+    }
+  }
+}
 
-      > .area.is-actions {
+[data-module="c-btnSet01"] {
+  > .wrapper {
+    > .block.is-contents {
+      > .area.is-contents {
         display: flex;
         gap: 10px;
         flex-wrap: wrap;
+      }
+    }
+  }
+}
 
-        .btn {
-          display: inline-block;
-          padding: 8px 16px;
-          border: 1px solid #cbd5e1;
-          background: #fff;
-          color: #111;
-          border-radius: 6px;
-          cursor: pointer;
-          font-size: 14px;
-          font-family: inherit;
-          text-decoration: none;
-          line-height: 1.4;
+[data-module="m-btn01"] {
+  width: fit-content;
 
-          &:hover {
-            background: #f1f5f9;
-            text-decoration: none;
-          }
+  > .btn,
+  > button,
+  > a {
+    display: inline-block;
+    padding: 8px 16px;
+    border: 1px solid #cbd5e1;
+    background: #fff;
+    color: #111;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    font-family: inherit;
+    text-decoration: none;
+    line-height: 1.4;
 
-          &.is-primary {
-            background: #2563eb;
-            border-color: #2563eb;
-            color: #fff;
+    &:hover {
+      background: #f1f5f9;
+      text-decoration: none;
+    }
 
-            &:hover {
-              background: #1d4ed8;
-            }
-          }
-        }
+    &.is-primary {
+      background: #2563eb;
+      border-color: #2563eb;
+      color: #fff;
+
+      &:hover {
+        background: #1d4ed8;
       }
     }
   }

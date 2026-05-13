@@ -604,9 +604,19 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                 </div>
 
         <div class="block bottom">
-            <div class="area is-actions">
-                <button type="submit" class="btn is-primary"><?= $isNew ? '作成する' : '保存する' ?></button>
-                <a class="btn" href="<?= e(base_path('/admin/forms')) ?>">キャンセル</a>
+            <div data-module="c-btnSet01">
+                <div class="wrapper">
+                    <div class="block is-contents">
+                        <div class="area is-contents">
+                            <div data-module="m-btn01">
+                                <button type="submit" class="btn is-primary"><?= $isNew ? '作成する' : '保存する' ?></button>
+                            </div>
+                            <div data-module="m-btn01">
+                                <a class="btn" href="<?= e(base_path('/admin/forms')) ?>">キャンセル</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

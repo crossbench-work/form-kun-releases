@@ -579,12 +579,19 @@ form.is-inline {
 .p-formEdit01 > .wrapper > .block.bottom {
   margin-top: 16px;
 }
-.p-formEdit01 > .wrapper > .block.bottom > .area.is-actions {
+
+[data-module=c-btnSet01] > .wrapper > .block.is-contents > .area.is-contents {
   display: flex;
   gap: 10px;
   flex-wrap: wrap;
 }
-.p-formEdit01 > .wrapper > .block.bottom > .area.is-actions .btn {
+
+[data-module=m-btn01] {
+  width: fit-content;
+}
+[data-module=m-btn01] > .btn,
+[data-module=m-btn01] > button,
+[data-module=m-btn01] > a {
   display: inline-block;
   padding: 8px 16px;
   border: 1px solid #cbd5e1;
@@ -597,16 +604,22 @@ form.is-inline {
   text-decoration: none;
   line-height: 1.4;
 }
-.p-formEdit01 > .wrapper > .block.bottom > .area.is-actions .btn:hover {
+[data-module=m-btn01] > .btn:hover,
+[data-module=m-btn01] > button:hover,
+[data-module=m-btn01] > a:hover {
   background: #f1f5f9;
   text-decoration: none;
 }
-.p-formEdit01 > .wrapper > .block.bottom > .area.is-actions .btn.is-primary {
+[data-module=m-btn01] > .btn.is-primary,
+[data-module=m-btn01] > button.is-primary,
+[data-module=m-btn01] > a.is-primary {
   background: #2563eb;
   border-color: #2563eb;
   color: #fff;
 }
-.p-formEdit01 > .wrapper > .block.bottom > .area.is-actions .btn.is-primary:hover {
+[data-module=m-btn01] > .btn.is-primary:hover,
+[data-module=m-btn01] > button.is-primary:hover,
+[data-module=m-btn01] > a.is-primary:hover {
   background: #1d4ed8;
 }
 
