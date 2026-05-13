@@ -4,7 +4,7 @@
     <a class="btn is-primary" href="<?= e(base_path('/admin/forms/new')) ?>">＋ 新規作成</a>
 </div>
 
-<section class="c-panel01">
+<section class="c-panel01 componentWrapper">
 <?php if (empty($forms)): ?>
     <p class="text is-muted">まだフォームがありません。</p>
 <?php else: ?>

@@ -1,6 +1,6 @@
 <h1 class="title">ダッシュボード</h1>
 
-<section class="c-panel01">
+<section class="c-panel01 componentWrapper">
     <h2>フォーム別 受信件数</h2>
     <?php if (empty($byForm)): ?>
         <p class="text is-muted">まだフォームがありません。 <a href="<?= e(base_path('/admin/forms/new')) ?>">新規作成</a></p>
@@ -25,7 +25,7 @@
     <?php endif; ?>
 </section>
 
-<section class="c-panel01">
+<section class="c-panel01 componentWrapper">
     <h2>最近の送信</h2>
     <?php if (empty($recent)): ?>
         <p class="text is-muted">まだ送信はありません。</p>

@@ -4,7 +4,7 @@
     <a class="btn is-primary" href="<?= e(base_path('/admin/users/new')) ?>">＋ 新規作成</a>
 </div>
 
-<section class="c-panel01">
+<section class="c-panel01 componentWrapper">
 <?php if (empty($users)): ?>
     <p class="text is-muted">ユーザーがありません。</p>
 <?php else: ?>
