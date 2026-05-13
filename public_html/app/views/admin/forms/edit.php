@@ -677,25 +677,30 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                         <div class="wrapper">
                             <div class="block is-contents">
                                 <div class="area is-move">
-                                    <span class="c-formEditor__dragHandle" data-target="c-formEditor__dragHandle" title="ドラッグして並べ替え">
-                                        <svg width="14" height="18" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="currentColor"><circle cx="9" cy="6" r="2"/><circle cx="15" cy="6" r="2"/><circle cx="9" cy="12" r="2"/><circle cx="15" cy="12" r="2"/><circle cx="9" cy="18" r="2"/><circle cx="15" cy="18" r="2"/></svg>
-                                    </span>
-                                    <div class="c-formEditor__moveButtons">
-                                        <button type="button" class="btn is-sm" data-target="c-formEditor__moveUp" aria-label="上へ移動" title="上へ移動">↑</button>
-                                        <button type="button" class="btn is-sm" data-target="c-formEditor__moveDown" aria-label="下へ移動" title="下へ移動">↓</button>
+                                    <div class="box is-handle ui-sortable-handle" title="ドラッグして並べ替え">
+                                        <p data-module="m-dragHandle01" data-target="c-formEditor__dragHandle">
+                                            <svg width="14" height="18" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="currentColor"><circle cx="9" cy="6" r="2"/><circle cx="15" cy="6" r="2"/><circle cx="9" cy="12" r="2"/><circle cx="15" cy="12" r="2"/><circle cx="9" cy="18" r="2"/><circle cx="15" cy="18" r="2"/></svg>
+                                        </p>
+                                    </div>
+                                    <div class="box is-button">
+                                        <button type="button" data-module="m-arrowBtn01" data-type="down" data-target="c-formEditor__moveDown" aria-label="下へ移動" title="下へ移動">↓</button>
                                     </div>
                                 </div>
                                 <div class="area is-summary">
-                                    <p class="text">
-                                        <span data-target="c-formEditor__summaryIndex">1</span>
-                                        · <strong data-target="c-formEditor__summaryLabel"></strong>
-                                        · <code data-target="c-formEditor__summaryType"><?= e(\Models\FormField::typeLabel('text')) ?></code>
-                                        · <span class="badge is-required" data-target="c-formEditor__summaryRequired">任意</span>
-                                        · <span class="badge is-regex">入力チェック: <span data-target="c-formEditor__summaryRegex">なし</span></span>
-                                    </p>
+                                    <div class="c-formEditorSummary01">
+                                        <div class="wrapper">
+                                            <div class="block is-contents">
+                                                <p class="index" data-target="c-formEditor__summaryIndex">1</p>
+                                                <p class="label" data-target="c-formEditor__summaryLabel"></p>
+                                                <p class="type" data-target="c-formEditor__summaryType"><?= e(\Models\FormField::typeLabel('text')) ?></p>
+                                                <p class="required" data-target="c-formEditor__summaryRequired">任意</p>
+                                                <p class="regex">入力チェック: <span data-target="c-formEditor__summaryRegex">なし</span></p>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="area is-delete">
-                                    <button type="button" class="btn is-sm is-danger" data-target="c-formEditor__remove" aria-label="削除" title="削除">
+                                    <button type="button" data-module="m-deleteBtn01" data-target="c-formEditor__remove" aria-label="削除" title="削除">
                                         <svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2">
                                             <path stroke-linecap="round" stroke-linejoin="round" d="M3 6h18"/>
                                             <path stroke-linecap="round" stroke-linejoin="round" d="M8 6V4h8v2"/>

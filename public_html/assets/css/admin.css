@@ -932,8 +932,11 @@ form.is-inline {
   gap: 6px;
   padding: 10px 12px;
 }
-[data-module=m-formBuilder01] .c-formEditor__dragHandle {
+[data-module=m-formBuilder01] [data-module=m-dragHandle01] {
+  margin: 0;
   display: inline-flex;
+  align-items: center;
+  justify-content: center;
   flex-shrink: 0;
   cursor: grab;
   color: #94a3b8;
@@ -942,59 +945,107 @@ form.is-inline {
   border-radius: 4px;
   user-select: none;
 }
-[data-module=m-formBuilder01] .c-formEditor__dragHandle:active {
+[data-module=m-formBuilder01] [data-module=m-dragHandle01]:active {
   cursor: grabbing;
 }
-[data-module=m-formBuilder01] .c-formEditor__dragHandle:hover {
+[data-module=m-formBuilder01] [data-module=m-dragHandle01]:hover {
   color: #64748b;
   background: #f1f5f9;
 }
-[data-module=m-formBuilder01] .c-formEditor__moveButtons {
-  display: flex;
+[data-module=m-formBuilder01] [data-module=m-arrowBtn01] {
+  appearance: none;
+  border: 1px solid #cbd5e1;
+  background: #fff;
+  color: #334155;
+  border-radius: 6px;
+  min-width: 32px;
+  height: 32px;
+  padding: 0 10px;
+  display: inline-flex;
   align-items: center;
-  gap: 8px;
-  flex-wrap: wrap;
-  flex-shrink: 0;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 14px;
+  line-height: 1;
+}
+[data-module=m-formBuilder01] [data-module=m-arrowBtn01]:hover {
+  background: #f8fafc;
+  border-color: #94a3b8;
+}
+[data-module=m-formBuilder01] [data-module=m-deleteBtn01] {
+  appearance: none;
+  border: 1px solid #fecaca;
+  background: #fff5f5;
+  color: #dc2626;
+  border-radius: 6px;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+[data-module=m-formBuilder01] [data-module=m-deleteBtn01]:hover {
+  background: #fee2e2;
+  border-color: #fca5a5;
 }
 [data-module=m-formBuilder01] .c-formEditor__itemHeader > .wrapper > .block.is-contents > .area.is-move {
   display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
 }
 [data-module=m-formBuilder01] .c-formEditor__itemHeader > .wrapper > .block.is-contents > .area.is-summary {
   flex: 1;
   min-width: 0;
-  font-size: 13px;
-  color: #475569;
 }
-[data-module=m-formBuilder01] .c-formEditor__itemHeader > .wrapper > .block.is-contents > .area.is-summary > .text {
+[data-module=m-formBuilder01] .c-formEditor__itemHeader > .wrapper > .block.is-contents > .area.is-delete {
+  flex-shrink: 0;
+}
+[data-module=m-formBuilder01] .c-formEditorSummary01 {
+  min-width: 0;
+}
+[data-module=m-formBuilder01] .c-formEditorSummary01 > .wrapper > .block.is-contents {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  flex-wrap: wrap;
+}
+[data-module=m-formBuilder01] .c-formEditorSummary01 > .wrapper > .block.is-contents > p {
   margin: 0;
-  display: block;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  color: #475569;
+  font-size: 13px;
 }
-[data-module=m-formBuilder01] .c-formEditor__itemHeader > .wrapper > .block.is-contents > .area.is-summary [data-target=c-formEditor__summaryIndex] {
+[data-module=m-formBuilder01] .c-formEditorSummary01 > .wrapper > .block.is-contents > .index {
   font-weight: 600;
   color: #334155;
 }
-[data-module=m-formBuilder01] .c-formEditor__itemHeader > .wrapper > .block.is-contents > .area.is-summary [data-target=c-formEditor__summaryType] {
-  font-size: 12px;
-  background: #f1f5f9;
-  padding: 1px 6px;
-  border-radius: 4px;
+[data-module=m-formBuilder01] .c-formEditorSummary01 > .wrapper > .block.is-contents > .label {
+  color: #334155;
+  font-weight: 700;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
-[data-module=m-formBuilder01] .c-formEditor__itemHeader > .wrapper > .block.is-contents > .area.is-summary .badge {
-  display: inline-block;
+[data-module=m-formBuilder01] .c-formEditorSummary01 > .wrapper > .block.is-contents > .type,
+[data-module=m-formBuilder01] .c-formEditorSummary01 > .wrapper > .block.is-contents > .required,
+[data-module=m-formBuilder01] .c-formEditorSummary01 > .wrapper > .block.is-contents > .regex {
   font-size: 12px;
   padding: 1px 6px;
   border-radius: 999px;
 }
-[data-module=m-formBuilder01] .c-formEditor__itemHeader > .wrapper > .block.is-contents > .area.is-summary .badge.is-required {
+[data-module=m-formBuilder01] .c-formEditorSummary01 > .wrapper > .block.is-contents > .type {
+  background: #f1f5f9;
+}
+[data-module=m-formBuilder01] .c-formEditorSummary01 > .wrapper > .block.is-contents > .required {
   background: #eef2ff;
   color: #4338ca;
 }
-[data-module=m-formBuilder01] .c-formEditor__itemHeader > .wrapper > .block.is-contents > .area.is-summary .badge.is-regex {
+[data-module=m-formBuilder01] .c-formEditorSummary01 > .wrapper > .block.is-contents > .regex {
   background: #f8fafc;
-  color: #475569;
 }
 [data-module=m-formBuilder01] .c-formEditor__itemBody > .wrapper > .block.is-contents {
   padding: 16px;

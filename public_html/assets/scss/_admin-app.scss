@@ -956,8 +956,11 @@ form.is-inline {
     }
   }
 
-  .c-formEditor__dragHandle {
+  [data-module="m-dragHandle01"] {
+    margin: 0;
     display: inline-flex;
+    align-items: center;
+    justify-content: center;
     flex-shrink: 0;
     cursor: grab;
     color: #94a3b8;
@@ -976,58 +979,115 @@ form.is-inline {
     }
   }
 
-  .c-formEditor__moveButtons {
-    display: flex;
+  [data-module="m-arrowBtn01"] {
+    appearance: none;
+    border: 1px solid #cbd5e1;
+    background: #fff;
+    color: #334155;
+    border-radius: 6px;
+    min-width: 32px;
+    height: 32px;
+    padding: 0 10px;
+    display: inline-flex;
     align-items: center;
-    gap: 8px;
-    flex-wrap: wrap;
-    flex-shrink: 0;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 14px;
+    line-height: 1;
+
+    &:hover {
+      background: #f8fafc;
+      border-color: #94a3b8;
+    }
+  }
+
+  [data-module="m-deleteBtn01"] {
+    appearance: none;
+    border: 1px solid #fecaca;
+    background: #fff5f5;
+    color: #dc2626;
+    border-radius: 6px;
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+
+    &:hover {
+      background: #fee2e2;
+      border-color: #fca5a5;
+    }
   }
 
   .c-formEditor__itemHeader > .wrapper > .block.is-contents > .area.is-move {
     display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
   }
 
   .c-formEditor__itemHeader > .wrapper > .block.is-contents > .area.is-summary {
     flex: 1;
     min-width: 0;
-    font-size: 13px;
-    color: #475569;
+  }
 
-    > .text {
-      margin: 0;
-      display: block;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
+  .c-formEditor__itemHeader > .wrapper > .block.is-contents > .area.is-delete {
+    flex-shrink: 0;
+  }
 
-    [data-target="c-formEditor__summaryIndex"] {
-      font-weight: 600;
-      color: #334155;
-    }
+  .c-formEditorSummary01 {
+    min-width: 0;
 
-    [data-target="c-formEditor__summaryType"] {
-      font-size: 12px;
-      background: #f1f5f9;
-      padding: 1px 6px;
-      border-radius: 4px;
-    }
+    > .wrapper {
+      > .block.is-contents {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        min-width: 0;
+        flex-wrap: wrap;
 
-    .badge {
-      display: inline-block;
-      font-size: 12px;
-      padding: 1px 6px;
-      border-radius: 999px;
+        > p {
+          margin: 0;
+          color: #475569;
+          font-size: 13px;
+        }
 
-      &.is-required {
-        background: #eef2ff;
-        color: #4338ca;
-      }
+        > .index {
+          font-weight: 600;
+          color: #334155;
+        }
 
-      &.is-regex {
-        background: #f8fafc;
-        color: #475569;
+        > .label {
+          color: #334155;
+          font-weight: 700;
+          min-width: 0;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+        }
+
+        > .type,
+        > .required,
+        > .regex {
+          font-size: 12px;
+          padding: 1px 6px;
+          border-radius: 999px;
+        }
+
+        > .type {
+          background: #f1f5f9;
+        }
+
+        > .required {
+          background: #eef2ff;
+          color: #4338ca;
+        }
+
+        > .regex {
+          background: #f8fafc;
+        }
       }
     }
   }

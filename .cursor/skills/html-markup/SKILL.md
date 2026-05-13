@@ -125,7 +125,7 @@ assets/
 - **説明文エディタのようにコンポーネント専用ラッパー（例: `.c-descriptionEditor01__editor`）を置く場合も、その直下は `<div class="wrapper" data-...><div class="block is-contents">...</div></div>` の形にし、必要なメタ属性は `wrapper` に寄せつつ、ブロック内は `area` を優先して階層を増やしすぎない**。
 - **ラベル行と入力欄を 1 セットで扱うときは、`<div data-module="c-inputSet01"><div class="wrapper"><div class="block is-contents"><div class="area is-title">...</div><div class="area is-field">...</div></div></div></div>` のように component 化して、単発の行レイアウト用クラスを増やさない**。
 - **複数ボタンをまとめるときは、`<div data-module="c-btnSet01"><div class="wrapper"><div class="block is-contents"><div class="area is-contents"><div data-module="m-btn01">...</div></div></div></div></div>` のように button set と各ボタンを分けて組む**。
-- **フォーム編集画面の項目エディタのように繰り返しカードを並べるときは、`.c-formEditor > .wrapper > .block > .c-formEditor__item > .wrapper > .block.is-contents > .area.is-header/.area.is-body` を基本にし、`c-formEditor__itemHeader` / `c-formEditor__itemBody` / `c-formEditor__section` の内側もそれぞれ `> .wrapper > .block.is-contents` で揃える**。
+- **フォーム編集画面の項目エディタのように繰り返しカードを並べるときは、`.c-formEditor > .wrapper > .block > .c-formEditor__item > .wrapper > .block.is-contents > .area.is-header/.area.is-body` を基本にし、`c-formEditor__itemHeader` / `c-formEditor__itemBody` / `c-formEditor__section` の内側もそれぞれ `> .wrapper > .block.is-contents` で揃える。header 内は `area is-move` / `area is-summary` / `area is-delete` に分け、サマリー表示は `c-formEditorSummary01 > .wrapper > .block.is-contents` にまとめる**。
 
 ### SCSS: 直下の `.wrapper` は子セレクタで縛る
 
