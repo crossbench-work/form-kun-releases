@@ -726,7 +726,7 @@ form.is-inline {
 [data-module="c-descriptionEditor01"] {
   > .wrapper {
     > .block.is-contents {
-      > .area.is-blocks {
+      > .c-descriptionEditor01__editor {
         display: flex;
         flex-direction: column;
         gap: 16px;

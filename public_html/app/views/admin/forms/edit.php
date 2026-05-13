@@ -32,7 +32,7 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
         <div data-module="c-descriptionEditor01" data-description-editor data-name-prefix="<?= e($namePrefix) ?>" data-position-mode="<?= e($positionMode) ?>">
             <div class="wrapper">
                 <div class="block is-contents">
-                    <div class="area is-blocks" data-description-list>
+                    <div class="c-descriptionEditor01__editor" data-description-list>
                         <?php foreach ($blocks as $i => $block): ?>
                             <div class="area is-block" data-description-block data-index="<?= $i ?>">
                                 <input type="hidden" name="<?= e($namePrefix) ?>[<?= $i ?>][id]" value="<?= e($block['id'] ?? ($namePrefix . '-' . $i)) ?>" data-name="id">
