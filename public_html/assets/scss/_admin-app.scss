@@ -873,26 +873,36 @@ form.is-inline {
     color: #374151;
   }
 
-  .fb-fields {
-    list-style: none;
-    margin: 0;
-    padding: 0;
+  .c-formEditor {
+    &.is-static {
+      margin-top: 12px;
+    }
+
+    & > .wrapper {
+      > .block {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+    }
   }
 
-  .fb-static-field {
-    margin-top: 12px;
-  }
-
-  .fb-field {
+  .c-formEditor__item {
     background: #f9fafb;
     border: 1px solid #e2e8f0;
     border-radius: 6px;
-    padding: 0;
-    margin-bottom: 12px;
     overflow: hidden;
+
+    > .wrapper {
+      > .block.is-contents {
+        > .area.is-body {
+          border-top: 1px solid #e2e8f0;
+        }
+      }
+    }
   }
 
-  .fb-fields .fb-sortable-placeholder {
+  .c-formEditor > .wrapper > .block > .fb-sortable-placeholder {
     visibility: visible !important;
     border: 2px dashed #93c5fd !important;
     background: #eff6ff !important;
@@ -902,12 +912,12 @@ form.is-inline {
     box-sizing: border-box;
   }
 
-  .fb-fields .ui-sortable-helper {
+  .c-formEditor > .wrapper > .block > .ui-sortable-helper {
     box-shadow: 0 12px 32px rgba(0, 0, 0, 0.2);
     border-radius: 6px;
   }
 
-  .fb-field-header {
+  .c-formEditor__itemHeader {
     display: flex;
     align-items: center;
     gap: 6px;
@@ -1015,7 +1025,7 @@ form.is-inline {
     color: #475569;
   }
 
-  .fb-field-body {
+  .c-formEditor__itemBody {
     padding: 16px;
   }
 
@@ -1044,8 +1054,14 @@ form.is-inline {
     font-size: 12px;
   }
 
-  .fb-field.is-collapsed .fb-field-body {
-    display: none;
+  .c-formEditor__item.is-collapsed {
+    > .wrapper {
+      > .block.is-contents {
+        > .area.is-body {
+          display: none;
+        }
+      }
+    }
   }
 
   .fb-row {

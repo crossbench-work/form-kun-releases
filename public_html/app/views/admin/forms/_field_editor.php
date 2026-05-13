@@ -28,8 +28,11 @@ if (empty($f['required']) || in_array($f['type'], ['radio', 'select'], true)) {
     $summaryRegex = 'カスタム';
 }
 ?>
-<li class="fb-field is-collapsed" data-index="<?= $idx ?>" data-field-item="1"<?= $isAgreementField ? ' data-is-agreement-field="1"' : '' ?>>
-    <div class="fb-field-header">
+<div class="c-formEditor__item fb-field is-collapsed" data-index="<?= $idx ?>" data-field-item="1"<?= $isAgreementField ? ' data-is-agreement-field="1"' : '' ?>>
+    <div class="wrapper">
+        <div class="block is-contents">
+            <div class="area is-header">
+                <div class="c-formEditor__itemHeader fb-field-header">
         <?php if (!$isAgreementField): ?>
             <span class="fb-drag-handle" title="ドラッグして並べ替え">
                 <svg width="14" height="18" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="currentColor"><circle cx="9" cy="6" r="2"/><circle cx="15" cy="6" r="2"/><circle cx="9" cy="12" r="2"/><circle cx="15" cy="12" r="2"/><circle cx="9" cy="18" r="2"/><circle cx="15" cy="18" r="2"/></svg>
@@ -64,8 +67,10 @@ if (empty($f['required']) || in_array($f['type'], ['radio', 'select'], true)) {
                 </button>
             </div>
         <?php endif; ?>
-    </div>
-    <div class="fb-field-body">
+                </div>
+            </div>
+            <div class="area is-body">
+                <div class="c-formEditor__itemBody fb-field-body">
         <div class="fb-field-section">
         <h3 class="fb-field-section-title">基本設定</h3>
         <div class="fb-row">
@@ -276,5 +281,8 @@ if (empty($f['required']) || in_array($f['type'], ['radio', 'select'], true)) {
         </div>
     </div>
     <input type="hidden" name="fields[<?= $idx ?>][_remove]" value="0" class="fb-remove-flag">
+                </div>
+            </div>
+        </div>
     </div>
-</li>
+</div>

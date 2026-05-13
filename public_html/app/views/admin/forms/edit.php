@@ -234,21 +234,29 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                 <h2 data-module="m-largeTitle01">項目設定</h2>
             </div>
             <div class="area is-field">
-            <ul data-target="m-formBuilder01__fields" class="fb-fields">
+            <div class="c-formEditor">
+                <div class="wrapper">
+                    <div class="block" data-target="m-formBuilder01__fields">
             <?php foreach ($sortableFields as $i => $f): ?>
                 <?php $idx = $i; $isAgreementField = false; ?>
                 <?php include __DIR__ . '/_field_editor.php'; ?>
             <?php endforeach; ?>
-            </ul>
+                    </div>
+                </div>
+            </div>
 
             <div class="area is-actions">
                 <button type="button" data-target="m-formBuilder01__add" class="btn">＋ 項目を追加</button>
             </div>
             <?php if ($agreementField !== null): ?>
-                <ul class="fb-fields fb-static-field">
+                <div class="c-formEditor is-static">
+                    <div class="wrapper">
+                        <div class="block">
                     <?php $idx = count($sortableFields); $f = $agreementField; $isAgreementField = true; ?>
                     <?php include __DIR__ . '/_field_editor.php'; ?>
-                </ul>
+                        </div>
+                    </div>
+                </div>
             <?php endif; ?>
             </div>
                         </div>
@@ -661,8 +669,11 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
 </template>
 
 <template data-target="m-formBuilder01__fieldTemplate">
-    <li class="fb-field is-collapsed" data-field-item="1">
-        <div class="fb-field-header">
+    <div class="c-formEditor__item fb-field is-collapsed" data-field-item="1">
+        <div class="wrapper">
+            <div class="block is-contents">
+                <div class="area is-header">
+                    <div class="c-formEditor__itemHeader fb-field-header">
             <span class="fb-drag-handle" title="ドラッグして並べ替え">
                 <svg width="14" height="18" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="currentColor"><circle cx="9" cy="6" r="2"/><circle cx="15" cy="6" r="2"/><circle cx="9" cy="12" r="2"/><circle cx="15" cy="12" r="2"/><circle cx="9" cy="18" r="2"/><circle cx="15" cy="18" r="2"/></svg>
             </span>
@@ -689,8 +700,10 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                     </svg>
                 </button>
             </div>
-        </div>
-        <div class="fb-field-body">
+                    </div>
+                </div>
+                <div class="area is-body">
+                    <div class="c-formEditor__itemBody fb-field-body">
         <div class="fb-field-section">
             <h3 class="fb-field-section-title">基本設定</h3>
             <div class="fb-row">
@@ -782,6 +795,9 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
             <div class="area is-field"><label class="label" data-module="m-boldTitle01">備考</label><div data-module="m-input01"><textarea data-name="help_text" rows="3"></textarea></div></div>
         </div>
         <input type="hidden" data-name="_remove" value="0" class="fb-remove-flag">
+                    </div>
+                </div>
+            </div>
         </div>
-    </li>
+    </div>
 </template>

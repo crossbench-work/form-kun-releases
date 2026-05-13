@@ -868,23 +868,24 @@ form.is-inline {
   margin-bottom: 4px;
   color: #374151;
 }
-[data-module=m-formBuilder01] .fb-fields {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-[data-module=m-formBuilder01] .fb-static-field {
+[data-module=m-formBuilder01] .c-formEditor.is-static {
   margin-top: 12px;
 }
-[data-module=m-formBuilder01] .fb-field {
+[data-module=m-formBuilder01] .c-formEditor > .wrapper > .block {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+[data-module=m-formBuilder01] .c-formEditor__item {
   background: #f9fafb;
   border: 1px solid #e2e8f0;
   border-radius: 6px;
-  padding: 0;
-  margin-bottom: 12px;
   overflow: hidden;
 }
-[data-module=m-formBuilder01] .fb-fields .fb-sortable-placeholder {
+[data-module=m-formBuilder01] .c-formEditor__item > .wrapper > .block.is-contents > .area.is-body {
+  border-top: 1px solid #e2e8f0;
+}
+[data-module=m-formBuilder01] .c-formEditor > .wrapper > .block > .fb-sortable-placeholder {
   visibility: visible !important;
   border: 2px dashed #93c5fd !important;
   background: #eff6ff !important;
@@ -893,11 +894,11 @@ form.is-inline {
   border-radius: 6px;
   box-sizing: border-box;
 }
-[data-module=m-formBuilder01] .fb-fields .ui-sortable-helper {
+[data-module=m-formBuilder01] .c-formEditor > .wrapper > .block > .ui-sortable-helper {
   box-shadow: 0 12px 32px rgba(0, 0, 0, 0.2);
   border-radius: 6px;
 }
-[data-module=m-formBuilder01] .fb-field-header {
+[data-module=m-formBuilder01] .c-formEditor__itemHeader {
   display: flex;
   align-items: center;
   gap: 6px;
@@ -989,7 +990,7 @@ form.is-inline {
   background: #f8fafc;
   color: #475569;
 }
-[data-module=m-formBuilder01] .fb-field-body {
+[data-module=m-formBuilder01] .c-formEditor__itemBody {
   padding: 16px;
 }
 [data-module=m-formBuilder01] .fb-field-section + .fb-field-section {
@@ -1013,7 +1014,7 @@ form.is-inline {
 [data-module=m-formBuilder01] .fb-field-body .box.is-field > .label {
   font-size: 12px;
 }
-[data-module=m-formBuilder01] .fb-field.is-collapsed .fb-field-body {
+[data-module=m-formBuilder01] .c-formEditor__item.is-collapsed > .wrapper > .block.is-contents > .area.is-body {
   display: none;
 }
 [data-module=m-formBuilder01] .fb-row {

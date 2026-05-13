@@ -101,7 +101,7 @@
     var descriptionEditors = document.querySelectorAll('[data-description-editor]');
 
     function getFieldItems() {
-        return builderRoot ? builderRoot.querySelectorAll('[data-field-item="1"]') : list.querySelectorAll('.fb-field');
+        return builderRoot ? builderRoot.querySelectorAll('.c-formEditor__item[data-field-item="1"]') : list.querySelectorAll('.c-formEditor__item[data-field-item="1"]');
     }
 
     function extractDataName(name) {
@@ -235,7 +235,7 @@
         var hidden = row.querySelector('.fb-regex-value');
         var wrap = row.querySelector('.fb-regex-custom-wrap');
         var customInp = row.querySelector('.fb-regex-custom');
-        var li = row.closest('.fb-field');
+        var li = row.closest('.c-formEditor__item');
         var checkboxLimitEnabled = li ? li.querySelector('.fb-checkbox-limit-enabled') : null;
         var checkboxLimitSettings = li ? li.querySelector('.fb-checkbox-limit-settings') : null;
         var checkboxMinInput = li ? li.querySelector('[data-name="checkbox_min_selections"], [name$="[checkbox_min_selections]"]') : null;
@@ -323,7 +323,7 @@
     }
 
     function bindAccordion(li) {
-        var header = li.querySelector('.fb-field-header');
+        var header = li.querySelector('.c-formEditor__itemHeader');
         if (!header) return;
 
         header.addEventListener('click', function (e) {
@@ -350,7 +350,7 @@
         jQuery(list).sortable({
             handle: '.fb-drag-handle',
             axis: 'y',
-            items: '> li.fb-field',
+            items: '> .c-formEditor__item',
             placeholder: 'fb-sortable-placeholder',
             tolerance: 'pointer',
             cursor: 'grabbing',
@@ -653,7 +653,7 @@
             }
         });
         if (rm) rm.addEventListener('click', function () {
-            if (list.querySelectorAll('.fb-field').length <= 1) {
+            if (list.querySelectorAll('.c-formEditor__item').length <= 1) {
                 alert('項目は1つ以上必要です。');
                 return;
             }
