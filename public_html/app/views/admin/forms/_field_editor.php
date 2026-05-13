@@ -246,7 +246,7 @@ if (empty($f['required']) || in_array($f['type'], ['radio', 'select'], true)) {
                                                                 <div style="display: flex; gap: 12px;">
                                                                     <div style="flex: 1;">
                                                                         <div data-module="m-input01">
-                                                                            <input type="number" min="1" name="fields[<?= $idx ?>][min_length]" value="<?= e($f['min_length']) ?>" placeholder="最小">
+                                                                            <input type="number" min="1" name="fields[<?= $idx ?>][min_length]" value="<?= e($f['min_length'] ?? '') ?>" placeholder="最小">
                                                                         </div>
                                                                     </div>
                                                                     <div style="flex: 1;">
