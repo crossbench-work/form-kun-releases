@@ -666,6 +666,14 @@ form.is-inline {
     margin-bottom: 0;
   }
 
+  .block.is-title:has(> [data-module="m-btn01"]) {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
   .area.is-field label,
   .block.is-field label,
   .label {

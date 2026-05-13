@@ -710,6 +710,13 @@ form.is-inline {
 [data-module=c-formBlock01] > .wrapper > .block.is-contents .block.is-title .fb-panel-header {
   margin-bottom: 0;
 }
+[data-module=c-formBlock01] > .wrapper > .block.is-contents .block.is-title:has(> [data-module=m-btn01]) {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
 [data-module=c-formBlock01] > .wrapper > .block.is-contents .area.is-field label,
 [data-module=c-formBlock01] > .wrapper > .block.is-contents .block.is-field label,
 [data-module=c-formBlock01] > .wrapper > .block.is-contents .label {
