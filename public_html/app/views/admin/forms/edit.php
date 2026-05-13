@@ -92,7 +92,7 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
             <nav aria-label="パンくず">
                 <ol>
                     <li><a href="<?= e(base_path('/admin/forms')) ?>">フォーム</a></li>
-                    <li aria-current="page"><span id="breadcrumb-current"><?= e($breadcrumbTitle) ?></span></li>
+                    <li aria-current="page"><span data-target="p-formEdit01__breadcrumbCurrent"><?= e($breadcrumbTitle) ?></span></li>
                 </ol>
             </nav>
         </div>
@@ -163,7 +163,7 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                                 </div>
                             </div>
                             <div class="area is-help">
-                                <p class="text is-help"><a id="slug-link" href="<?= e(url('/f/' . $slugPreviewValue)) ?>" target="_blank" rel="noopener"><code><?= e(url('/f/')) ?></code><strong id="slug-preview"><?= e($slugPreviewValue) ?></strong></a></p>
+                                <p class="text is-help"><a data-target="p-formEdit01__slugLink" href="<?= e(url('/f/' . $slugPreviewValue)) ?>" target="_blank" rel="noopener"><code><?= e(url('/f/')) ?></code><strong data-target="p-formEdit01__slugPreview"><?= e($slugPreviewValue) ?></strong></a></p>
                             </div>
                         </div>
                     </div>
@@ -206,7 +206,7 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                         <div class="block is-contents">
             <div class="area is-title">
                 <div class="fb-panel-header">
-                <h2 id="input-screen-title-preview" data-module="m-largeTitle01">表示設定</h2>
+                <h2 data-target="c-formEditTabs01__previewTitle" data-module="m-largeTitle01">表示設定</h2>
                 <button
                     type="submit"
                     class="btn is-sm"
@@ -234,7 +234,7 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                 <h2 data-module="m-largeTitle01">項目設定</h2>
             </div>
             <div class="area is-field">
-            <ul id="fb-fields" class="fb-fields">
+            <ul data-target="m-formBuilder01__fields" class="fb-fields">
             <?php foreach ($sortableFields as $i => $f): ?>
                 <?php $idx = $i; $isAgreementField = false; ?>
                 <?php include __DIR__ . '/_field_editor.php'; ?>
@@ -242,7 +242,7 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
             </ul>
 
             <div class="area is-actions">
-                <button type="button" id="fb-add" class="btn">＋ 項目を追加</button>
+                <button type="button" data-target="m-formBuilder01__add" class="btn">＋ 項目を追加</button>
             </div>
             <?php if ($agreementField !== null): ?>
                 <ul class="fb-fields fb-static-field">
@@ -320,7 +320,7 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                         <div class="block is-contents">
             <div class="area is-title">
                 <div class="fb-panel-header">
-                <h2 id="confirm-screen-title-preview" data-module="m-largeTitle01">表示設定</h2>
+                <h2 data-target="c-formEditTabs01__previewTitle" data-module="m-largeTitle01">表示設定</h2>
                 <button
                     type="submit"
                     class="btn is-sm"
@@ -396,7 +396,7 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                         <div class="block is-contents">
             <div class="area is-title">
                 <div class="fb-panel-header">
-                <h2 id="thanks-screen-title-preview" data-module="m-largeTitle01">表示設定</h2>
+                <h2 data-target="c-formEditTabs01__previewTitle" data-module="m-largeTitle01">表示設定</h2>
                 <button
                     type="submit"
                     class="btn is-sm"
@@ -622,7 +622,7 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
     </div>
 </form>
 
-<template id="fb-description-template">
+<template data-target="m-formBuilder01__descriptionTemplate">
     <div class="block is-contents" data-description-block>
         <input type="hidden" data-name="id" value="">
         <div class="area is-header">
@@ -660,7 +660,7 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
     </div>
 </template>
 
-<template id="fb-template">
+<template data-target="m-formBuilder01__fieldTemplate">
     <li class="fb-field is-collapsed" data-field-item="1">
         <div class="fb-field-header">
             <span class="fb-drag-handle" title="ドラッグして並べ替え">

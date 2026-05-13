@@ -91,13 +91,13 @@
         );
     }
 
-    var list = document.getElementById('fb-fields');
+    var list = document.querySelector('[data-target="m-formBuilder01__fields"]');
     if (!list) return;
 
     var builderRoot = list.closest('[data-module="m-formBuilder01"]');
-    var template = document.getElementById('fb-template');
-    var addBtn = document.getElementById('fb-add');
-    var descriptionTemplate = document.getElementById('fb-description-template');
+    var template = document.querySelector('[data-target="m-formBuilder01__fieldTemplate"]');
+    var addBtn = document.querySelector('[data-target="m-formBuilder01__add"]');
+    var descriptionTemplate = document.querySelector('[data-target="m-formBuilder01__descriptionTemplate"]');
     var descriptionEditors = document.querySelectorAll('[data-description-editor]');
 
     function getFieldItems() {
@@ -788,7 +788,7 @@
     });
 
     var titleInput = document.getElementById('title');
-    var breadcrumbCurrent = document.getElementById('breadcrumb-current');
+    var breadcrumbCurrent = document.querySelector('[data-target="p-formEdit01__breadcrumbCurrent"]');
     if (titleInput && breadcrumbCurrent) {
         titleInput.addEventListener('input', function () {
             var nextTitle = titleInput.value.trim() || '（無題）';
@@ -797,8 +797,8 @@
     }
 
     var slugInput = document.getElementById('slug');
-    var slugPreview = document.getElementById('slug-preview');
-    var slugLink = document.getElementById('slug-link');
+    var slugPreview = document.querySelector('[data-target="p-formEdit01__slugPreview"]');
+    var slugLink = document.querySelector('[data-target="p-formEdit01__slugLink"]');
     if (slugInput && slugPreview) {
         slugInput.addEventListener('input', function () {
             var slugValue = slugInput.value || 'your-slug';
