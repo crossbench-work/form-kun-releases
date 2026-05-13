@@ -726,55 +726,55 @@ form.is-inline {
 [data-module="c-descriptionEditor01"] {
   > .wrapper {
     > .block.is-contents {
-      .fb-description-blocks {
+      > .area.is-blocks {
         display: flex;
         flex-direction: column;
         gap: 16px;
-      }
 
-      .fb-description-block {
-        border: 1px solid #e2e8f0;
-        border-radius: 8px;
-        padding: 16px;
-        background: #f8fafc;
-      }
+        > .area.is-block {
+          border: 1px solid #e2e8f0;
+          border-radius: 8px;
+          padding: 16px;
+          background: #f8fafc;
 
-      .fb-description-block-header {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 12px;
-        margin-bottom: 12px;
-        flex-wrap: wrap;
-      }
+          > .box.is-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            margin-bottom: 12px;
+            flex-wrap: wrap;
 
-      .fb-description-block-title {
-        color: #334155;
-      }
+            > .title.is-block {
+              color: #334155;
+            }
 
-      .fb-description-remove {
-        flex-shrink: 0;
-      }
+            .fb-description-remove {
+              flex-shrink: 0;
+            }
+          }
 
-      .fb-description-block-controls {
-        align-items: center;
-        margin-bottom: 12px;
-      }
+          > .box.is-controls {
+            align-items: center;
+            margin-bottom: 12px;
+          }
 
-      .fb-description-position-wrap {
-        flex: 1 1 200px;
-      }
+          .fb-description-position-wrap {
+            flex: 1 1 200px;
+          }
 
-      .fb-description-visible-wrap {
-        flex: 0 0 auto;
-        min-width: auto;
-        display: flex;
-        align-items: center;
+          .fb-description-visible-wrap {
+            flex: 0 0 auto;
+            min-width: auto;
+            display: flex;
+            align-items: center;
+          }
+        }
       }
     }
 
     > .block.is-toolbar {
-      .fb-description-toolbar {
+      > .area.is-actions {
         display: flex;
         justify-content: flex-end;
         margin-top: 16px;

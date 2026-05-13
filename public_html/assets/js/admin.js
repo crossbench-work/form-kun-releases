@@ -141,13 +141,13 @@
     }
 
     function getDescriptionList(editor) {
-        return editor ? editor.querySelector('.fb-description-blocks') : null;
+        return editor ? editor.querySelector('[data-description-list]') : null;
     }
 
     function sortDescriptionBlocks(editor) {
         var descriptionList = getDescriptionList(editor);
         if (!descriptionList) return;
-        var blocks = Array.prototype.slice.call(descriptionList.querySelectorAll('.fb-description-block'));
+        var blocks = Array.prototype.slice.call(descriptionList.querySelectorAll('[data-description-block]'));
         blocks
             .sort(function (a, b) {
                 var aSelect = a.querySelector('.fb-description-position');
@@ -165,7 +165,7 @@
         var descriptionList = getDescriptionList(editor);
         if (!descriptionList) return;
         var prefix = editor.getAttribute('data-name-prefix') || 'description_blocks';
-        descriptionList.querySelectorAll('.fb-description-block').forEach(function (block, i) {
+        descriptionList.querySelectorAll('[data-description-block]').forEach(function (block, i) {
             block.setAttribute('data-index', String(i));
             block.querySelectorAll('input, textarea, select').forEach(function (el) {
                 var name = el.getAttribute('data-name') || extractDescriptionDataName(el.getAttribute('name'), prefix);
@@ -728,7 +728,7 @@
         var descriptionList = getDescriptionList(editor);
         var addButton = editor.querySelector('.fb-description-add');
         if (descriptionList) {
-            descriptionList.querySelectorAll('.fb-description-block').forEach(function (block) {
+            descriptionList.querySelectorAll('[data-description-block]').forEach(function (block) {
                 bindDescriptionBlock(editor, block);
             });
         }

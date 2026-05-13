@@ -32,12 +32,12 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
         <div data-module="c-descriptionEditor01" data-description-editor data-name-prefix="<?= e($namePrefix) ?>" data-position-mode="<?= e($positionMode) ?>">
             <div class="wrapper">
                 <div class="block is-contents">
-                    <div class="fb-description-blocks">
+                    <div class="area is-blocks" data-description-list>
                         <?php foreach ($blocks as $i => $block): ?>
-                            <div class="fb-description-block" data-index="<?= $i ?>">
+                            <div class="area is-block" data-description-block data-index="<?= $i ?>">
                                 <input type="hidden" name="<?= e($namePrefix) ?>[<?= $i ?>][id]" value="<?= e($block['id'] ?? ($namePrefix . '-' . $i)) ?>" data-name="id">
-                                <div class="fb-description-block-header">
-                                    <strong class="fb-description-block-title">説明文</strong>
+                                <div class="box is-header">
+                                    <strong class="title is-block">説明文</strong>
                                     <button type="button" class="btn is-sm is-icon is-danger fb-description-remove" aria-label="削除" title="削除">
                                         <svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2">
                                             <path stroke-linecap="round" stroke-linejoin="round" d="M3 6h18"/>
@@ -47,7 +47,7 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                                         </svg>
                                     </button>
                                 </div>
-                                <div class="fb-row fb-description-block-controls" style="display: flex;">
+                                <div class="box is-controls fb-row" style="display: flex;">
                                     <div class="fb-description-position-wrap">
                                         <div data-module="m-input01">
                                             <select name="<?= e($namePrefix) ?>[<?= $i ?>][position]" class="fb-description-position" data-name="position" data-value="<?= e((string) ($block['position'] ?? 0)) ?>" aria-label="説明文"></select>
@@ -60,19 +60,21 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                                         </label>
                                     </div>
                                 </div>
-                                <div data-module="m-input01">
-                                    <textarea name="<?= e($namePrefix) ?>[<?= $i ?>][html]" rows="6" data-name="html"><?= e((string) ($block['html'] ?? '')) ?></textarea>
+                                <div class="box is-editor">
+                                    <div data-module="m-input01">
+                                        <textarea name="<?= e($namePrefix) ?>[<?= $i ?>][html]" rows="6" data-name="html"><?= e((string) ($block['html'] ?? '')) ?></textarea>
+                                    </div>
                                 </div>
-                                <p class="text is-help">HTML を直接入力できます。一部のタグと属性だけが保存されます。</p>
+                                <div class="box is-help">
+                                    <p class="text is-help">HTML を直接入力できます。一部のタグと属性だけが保存されます。</p>
+                                </div>
                             </div>
                         <?php endforeach; ?>
                     </div>
                 </div>
                 <div class="block is-toolbar">
-                    <div class="fb-description-toolbar">
-                        <div class="area is-actions">
-                            <button type="button" class="btn is-sm fb-description-add">説明文を追加する</button>
-                        </div>
+                    <div class="area is-actions">
+                        <button type="button" class="btn is-sm fb-description-add">説明文を追加する</button>
                     </div>
                 </div>
             </div>
@@ -456,10 +458,10 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
 </form>
 
 <template id="fb-description-template">
-    <div class="fb-description-block">
+    <div class="area is-block" data-description-block>
         <input type="hidden" data-name="id" value="">
-        <div class="fb-description-block-header">
-            <strong class="fb-description-block-title">説明文</strong>
+        <div class="box is-header">
+            <strong class="title is-block">説明文</strong>
             <button type="button" class="btn is-sm is-icon is-danger fb-description-remove" aria-label="削除" title="削除">
                 <svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M3 6h18"/>
@@ -469,7 +471,7 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                 </svg>
             </button>
         </div>
-        <div class="fb-row fb-description-block-controls" style="display: flex;">
+        <div class="box is-controls fb-row" style="display: flex;">
             <div class="fb-description-position-wrap">
                 <div data-module="m-input01">
                     <select class="fb-description-position" data-name="position" data-value="0" aria-label="説明文"></select>
@@ -482,10 +484,14 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                 </label>
             </div>
         </div>
-        <div data-module="m-input01">
-            <textarea rows="6" data-name="html"></textarea>
+        <div class="box is-editor">
+            <div data-module="m-input01">
+                <textarea rows="6" data-name="html"></textarea>
+            </div>
         </div>
-        <p class="text is-help">HTML を直接入力できます。一部のタグと属性だけが保存されます。</p>
+        <div class="box is-help">
+            <p class="text is-help">HTML を直接入力できます。一部のタグと属性だけが保存されます。</p>
+        </div>
     </div>
 </template>
 
