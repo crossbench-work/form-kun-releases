@@ -102,7 +102,7 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                 <div data-module="c-formBlock01">
                     <div class="wrapper">
                         <div class="block is-contents">
-            <h2>基本設定</h2>
+            <h2 data-module="m-largeTitle01">基本設定</h2>
             <div class="box is-field">
                 <div class="fb-basic-label-row">
                     <label class="label" for="title">タイトル <span class="is-required">必須</span></label>
@@ -142,7 +142,7 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                     <div class="wrapper">
                         <div class="block is-contents">
             <div class="fb-panel-header">
-                <h2 id="input-screen-title-preview">表示設定</h2>
+                <h2 id="input-screen-title-preview" data-module="m-largeTitle01">表示設定</h2>
                 <button
                     type="submit"
                     class="btn is-sm"
@@ -165,7 +165,7 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                 <div data-module="c-formBlock01">
                     <div class="wrapper">
                         <div class="block is-contents" data-module="m-formBuilder01">
-            <h2>項目設定</h2>
+            <h2 data-module="m-largeTitle01">項目設定</h2>
             <ul id="fb-fields" class="fb-fields">
             <?php foreach ($sortableFields as $i => $f): ?>
                 <?php $idx = $i; $isAgreementField = false; ?>
@@ -194,7 +194,7 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                 <div data-module="c-formBlock01">
                     <div class="wrapper">
                         <div class="block is-contents">
-            <h2>スパム対策</h2>
+            <h2 data-module="m-largeTitle01">スパム対策</h2>
             <div class="box is-field">
                 <label class="label">
                     <input type="checkbox" name="captcha_enabled" value="1" <?= !empty($form['captcha_enabled']) ? 'checked' : '' ?>>
@@ -213,7 +213,7 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                 <div data-module="c-formBlock01">
                     <div class="wrapper">
                         <div class="block is-contents">
-            <h2>ボタン設定</h2>
+            <h2 data-module="m-largeTitle01">ボタン設定</h2>
             <div class="box is-field">
                 <label class="label" for="confirm_button_text">ボタンテキスト</label>
                 <input type="text" id="confirm_button_text" name="confirm_button_text" value="<?= e($form['confirm_button_text'] ?? '入力内容を確認する') ?>">
@@ -234,7 +234,7 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                     <div class="wrapper">
                         <div class="block is-contents">
             <div class="fb-panel-header">
-                <h2 id="confirm-screen-title-preview">表示設定</h2>
+                <h2 id="confirm-screen-title-preview" data-module="m-largeTitle01">表示設定</h2>
                 <button
                     type="submit"
                     class="btn is-sm"
@@ -257,7 +257,7 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                 <div data-module="c-formBlock01">
                     <div class="wrapper">
                         <div class="block is-contents">
-            <h2>ボタン設定</h2>
+            <h2 data-module="m-largeTitle01">ボタン設定</h2>
             <div class="box is-field">
                 <label class="label" for="submit_button_text">送信ボタンテキスト</label>
                 <input type="text" id="submit_button_text" name="submit_button_text" value="<?= e($form['submit_button_text'] ?? '送信する') ?>">
@@ -282,7 +282,7 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                     <div class="wrapper">
                         <div class="block is-contents">
             <div class="fb-panel-header">
-                <h2 id="thanks-screen-title-preview">表示設定</h2>
+                <h2 id="thanks-screen-title-preview" data-module="m-largeTitle01">表示設定</h2>
                 <button
                     type="submit"
                     class="btn is-sm"
@@ -305,7 +305,7 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                 <div data-module="c-formBlock01">
                     <div class="wrapper">
                         <div class="block is-contents">
-            <h2>ボタン設定</h2>
+            <h2 data-module="m-largeTitle01">ボタン設定</h2>
             <div class="box is-field">
                 <label class="label" for="thanks_button_text">ボタンテキスト</label>
                 <input type="text" id="thanks_button_text" name="thanks_button_text" value="<?= e($form['thanks_button_text'] ?? 'トップへ戻る') ?>">
@@ -329,7 +329,7 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                 <div data-module="c-formBlock01">
                     <div class="wrapper">
                         <div class="block is-contents">
-            <h2>管理者通知メール</h2>
+            <h2 data-module="m-largeTitle01">管理者通知メール</h2>
             <div class="box is-field">
                 <label class="label">送信先メールアドレス（カンマ区切りで複数可）</label>
                 <input type="text" name="admin_emails" value="<?= e($form['admin_emails']) ?>" placeholder="admin@example.com, sub@example.com">
@@ -356,7 +356,7 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                 <div data-module="c-formBlock01">
                     <div class="wrapper">
                         <div class="block is-contents">
-            <h2>送信者への自動返信メール</h2>
+            <h2 data-module="m-largeTitle01">送信者への自動返信メール</h2>
             <div class="box is-field">
                 <label class="label">
                     <input type="checkbox" name="reply_enabled" value="1" <?= !empty($form['reply_enabled']) ? 'checked' : '' ?>>

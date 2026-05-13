@@ -6,7 +6,7 @@
                 <div data-module="c-formBlock01">
                     <div class="wrapper">
                         <div class="block is-contents">
-                            <h2>フォーム別 受信件数</h2>
+                            <h2 data-module="m-largeTitle01">フォーム別 受信件数</h2>
                             <?php if (empty($byForm)): ?>
                                 <p class="text is-muted">まだフォームがありません。 <a href="<?= e(base_path('/admin/forms/new')) ?>">新規作成</a></p>
                             <?php else: ?>
@@ -41,7 +41,7 @@
                 <div data-module="c-formBlock01">
                     <div class="wrapper">
                         <div class="block is-contents">
-                            <h2>最近の送信</h2>
+                            <h2 data-module="m-largeTitle01">最近の送信</h2>
                             <?php if (empty($recent)): ?>
                                 <p class="text is-muted">まだ送信はありません。</p>
                             <?php else: ?>

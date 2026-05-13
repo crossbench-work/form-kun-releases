@@ -35,7 +35,7 @@
             <div data-module="c-formBlock01">
                 <div class="wrapper">
                     <div class="block is-contents">
-                        <h2>入力内容</h2>
+                        <h2 data-module="m-largeTitle01">入力内容</h2>
                         <table class="table is-kv">
                         <?php foreach ($fields as $f):
                             $key = $f['field_key'];

@@ -365,7 +365,7 @@ body.l-adminShell01 a:hover {
   margin: 0 0 16px;
 }
 
-.l-adminShell01 h2 {
+[data-module=m-largeTitle01] {
   font-size: 17px;
   margin: 0 0 12px;
   color: #374151;
