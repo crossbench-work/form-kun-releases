@@ -739,7 +739,7 @@ form.is-inline {
               padding: 16px;
               background: #f8fafc;
 
-              > .box.is-header {
+              > .area.is-header {
                 display: flex;
                 align-items: center;
                 justify-content: space-between;
@@ -756,7 +756,7 @@ form.is-inline {
                 }
               }
 
-              > .box.is-controls {
+              > .area.is-controls {
                 align-items: center;
                 margin-bottom: 12px;
               }

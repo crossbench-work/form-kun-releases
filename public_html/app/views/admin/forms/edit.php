@@ -38,7 +38,7 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                                 <?php foreach ($blocks as $i => $block): ?>
                                     <div class="area is-block" data-description-block data-index="<?= $i ?>">
                                         <input type="hidden" name="<?= e($namePrefix) ?>[<?= $i ?>][id]" value="<?= e($block['id'] ?? ($namePrefix . '-' . $i)) ?>" data-name="id">
-                                        <div class="box is-header">
+                                        <div class="area is-header">
                                             <strong class="title is-block">説明文</strong>
                                             <button type="button" class="btn is-sm is-icon is-danger fb-description-remove" aria-label="削除" title="削除">
                                                 <svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2">
@@ -49,7 +49,7 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                                                 </svg>
                                             </button>
                                         </div>
-                                        <div class="box is-controls fb-row" style="display: flex;">
+                                        <div class="area is-controls fb-row" style="display: flex;">
                                             <div class="fb-description-position-wrap">
                                                 <div data-module="m-input01">
                                                     <select name="<?= e($namePrefix) ?>[<?= $i ?>][position]" class="fb-description-position" data-name="position" data-value="<?= e((string) ($block['position'] ?? 0)) ?>" aria-label="説明文"></select>
@@ -62,12 +62,12 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                                                 </label>
                                             </div>
                                         </div>
-                                        <div class="box is-editor">
+                                        <div class="area is-editor">
                                             <div data-module="m-input01">
                                                 <textarea name="<?= e($namePrefix) ?>[<?= $i ?>][html]" rows="6" data-name="html"><?= e((string) ($block['html'] ?? '')) ?></textarea>
                                             </div>
                                         </div>
-                                        <div class="box is-help">
+                                        <div class="area is-help">
                                             <p class="text is-help">HTML を直接入力できます。一部のタグと属性だけが保存されます。</p>
                                         </div>
                                     </div>
@@ -464,7 +464,7 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
 <template id="fb-description-template">
     <div class="area is-block" data-description-block>
         <input type="hidden" data-name="id" value="">
-        <div class="box is-header">
+        <div class="area is-header">
             <strong class="title is-block">説明文</strong>
             <button type="button" class="btn is-sm is-icon is-danger fb-description-remove" aria-label="削除" title="削除">
                 <svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2">
@@ -475,7 +475,7 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                 </svg>
             </button>
         </div>
-        <div class="box is-controls fb-row" style="display: flex;">
+        <div class="area is-controls fb-row" style="display: flex;">
             <div class="fb-description-position-wrap">
                 <div data-module="m-input01">
                     <select class="fb-description-position" data-name="position" data-value="0" aria-label="説明文"></select>
@@ -488,12 +488,12 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                 </label>
             </div>
         </div>
-        <div class="box is-editor">
+        <div class="area is-editor">
             <div data-module="m-input01">
                 <textarea rows="6" data-name="html"></textarea>
             </div>
         </div>
-        <div class="box is-help">
+        <div class="area is-help">
             <p class="text is-help">HTML を直接入力できます。一部のタグと属性だけが保存されます。</p>
         </div>
     </div>
