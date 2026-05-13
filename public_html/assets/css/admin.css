@@ -309,26 +309,28 @@ body.l-adminShell01 a:hover {
   width: auto;
 }
 
-.l-adminHeader01 {
+.c-adminHeader01 {
   background: #1f2937;
   color: #fff;
   height: 52px;
 }
-.l-adminHeader01 > .wrapper {
+.c-adminHeader01 > .wrapper {
+  max-width: none;
+  width: 100%;
+  box-sizing: border-box;
+}
+.c-adminHeader01 > .wrapper > .block.is-contents {
   display: flex;
   align-items: center;
   padding: 0 16px;
   height: 100%;
   gap: 24px;
-  max-width: none;
-  width: 100%;
-  box-sizing: border-box;
 }
-.l-adminHeader01 .box.is-brand a {
+.c-adminHeader01 .box.is-brand a {
   color: #fff;
   font-weight: 700;
 }
-.l-adminHeader01 .list.is-adminNav {
+.c-adminHeader01 .list.is-adminNav {
   display: flex;
   gap: 4px;
   flex: 1;
@@ -336,29 +338,29 @@ body.l-adminShell01 a:hover {
   margin: 0;
   padding: 0;
 }
-.l-adminHeader01 .list.is-adminNav a {
+.c-adminHeader01 .list.is-adminNav a {
   color: #cbd5e1;
   padding: 8px 12px;
   border-radius: 4px;
 }
-.l-adminHeader01 .list.is-adminNav a:hover {
+.c-adminHeader01 .list.is-adminNav a:hover {
   background: #374151;
   color: #fff;
   text-decoration: none;
 }
-.l-adminHeader01 .box.is-userBar {
+.c-adminHeader01 .box.is-userBar {
   display: flex;
   align-items: center;
   gap: 12px;
   font-size: 14px;
 }
-.l-adminHeader01 .box.is-userBar .name {
+.c-adminHeader01 .box.is-userBar .name {
   color: #cbd5e1;
 }
-.l-adminHeader01 .box.is-userBar .link.is-logout {
+.c-adminHeader01 .box.is-userBar .link.is-logout {
   color: #fca5a5;
 }
-.l-adminHeader01 .box.is-userBar .link.is-logout:hover {
+.c-adminHeader01 .box.is-userBar .link.is-logout:hover {
   text-decoration: underline;
 }
 
