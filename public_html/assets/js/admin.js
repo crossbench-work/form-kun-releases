@@ -599,8 +599,16 @@
                 }
             }
             if (regexWrap) {
-                var hideRegex = !requiredToggle || !requiredToggle.checked || v === 'radio' || v === 'select';
+                var hideRegex = v === 'radio' || v === 'select';
                 regexWrap.style.display = hideRegex ? 'none' : '';
+                var isRequiredChecked = requiredToggle && requiredToggle.checked;
+                if (regexKind) {
+                    regexKind.disabled = !isRequiredChecked || hideRegex;
+                }
+                var regexCustomInput = regexWrap ? regexWrap.querySelector('[data-target="c-formEditor__regexCustomInput"]') : null;
+                if (regexCustomInput) {
+                    regexCustomInput.disabled = !isRequiredChecked || hideRegex;
+                }
                 if (hideRegex) {
                     clearRegexSettings();
                     clearCheckboxLimitSettings();

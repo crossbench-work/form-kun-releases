@@ -162,10 +162,10 @@ if (empty($f['required']) || in_array($f['type'], ['radio', 'select'], true)) {
                                                                     <div data-module="m-requiredCheck01">
                                                                         <label class="label is-choice">
                                                                             <input type="checkbox" name="fields[<?= $idx ?>][required]" value="1" data-target="c-formEditor__required" <?= !empty($f['required']) ? 'checked' : '' ?> aria-label="必須">
-                                                                            <span>必須</span>
+                                                                            <span class="is-visuallyHidden">必須</span>
                                                                         </label>
                                                                     </div>
-                                                                    <div data-target="c-formEditor__regex" <?= (empty($f['required']) || in_array($f['type'], ['radio', 'select'], true)) ? 'style="display:none"' : '' ?>>
+                                                                    <div data-target="c-formEditor__regex" <?= in_array($f['type'], ['radio', 'select'], true) ? 'style="display:none"' : '' ?>>
                                                                         <div class="c-formEditor__regexList">
                                                                             <?php
                                                                             if ($f['type'] === 'checkbox' && !empty($f['checkbox_limit_enabled'])) {
@@ -189,7 +189,7 @@ if (empty($f['required']) || in_array($f['type'], ['radio', 'select'], true)) {
                                                                             ?>
                                                                             <div class="c-formEditor__regexRow">
                                                                                 <div data-module="m-input01">
-                                                                                    <select data-target="c-formEditor__regexKind" aria-label="入力チェックの種類">
+                                                                                    <select data-target="c-formEditor__regexKind" aria-label="入力チェックの種類" <?= empty($f['required']) ? 'disabled' : '' ?>>
                                                                                         <?php foreach ($regexPresetChoices as $patVal => $patLabel): ?>
                                                                                             <?php if ($f['type'] === 'checkbox' && $patVal !== $FB_REGEX_CUSTOM): ?>
                                                                                                 <?php continue; ?>
@@ -203,7 +203,7 @@ if (empty($f['required']) || in_array($f['type'], ['radio', 'select'], true)) {
                                                                                 </div>
                                                                                 <div class="c-formEditor__regexCustom"<?= $showCustom ? '' : ' style="display:none"' ?>>
                                                                                     <div data-module="m-input01">
-                                                                                        <input type="text" data-target="c-formEditor__regexCustomInput" value="<?= e($customVal) ?>" placeholder="正規表現" spellcheck="false" autocomplete="off">
+                                                                                        <input type="text" data-target="c-formEditor__regexCustomInput" value="<?= e($customVal) ?>" placeholder="正規表現" spellcheck="false" autocomplete="off" <?= empty($f['required']) ? 'disabled' : '' ?>>
                                                                                     </div>
                                                                                 </div>
                                                                                 <input type="hidden" data-target="c-formEditor__regexValue" value="<?= e($hiddenVal) ?>" spellcheck="false">
