@@ -39,7 +39,7 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                                         <input type="hidden" name="<?= e($namePrefix) ?>[<?= $i ?>][id]" value="<?= e($block['id'] ?? ($namePrefix . '-' . $i)) ?>" data-name="id">
                                         <div class="area is-header">
                                             <p data-module="m-boldTitle01">説明文</p>
-                                            <button type="button" class="btn is-sm is-icon is-danger fb-description-remove" aria-label="削除" title="削除">
+                                            <button type="button" data-module="m-deleteBtn01" data-target="fb-description-remove" aria-label="削除" title="削除">
                                                 <svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2">
                                                     <path stroke-linecap="round" stroke-linejoin="round" d="M3 6h18"/>
                                                     <path stroke-linecap="round" stroke-linejoin="round" d="M8 6V4h8v2"/>
@@ -635,7 +635,7 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
         <input type="hidden" data-name="id" value="">
         <div class="area is-header">
             <p data-module="m-boldTitle01">説明文</p>
-            <button type="button" class="btn is-sm is-icon is-danger fb-description-remove" aria-label="削除" title="削除">
+            <button type="button" data-module="m-deleteBtn01" data-target="fb-description-remove" aria-label="削除" title="削除">
                 <svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M3 6h18"/>
                     <path stroke-linecap="round" stroke-linejoin="round" d="M8 6V4h8v2"/>
