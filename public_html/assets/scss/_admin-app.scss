@@ -270,6 +270,13 @@ body.l-adminShell01 {
   color: #374151;
 }
 
+[data-module="m-boldTitle01"] {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 700;
+  color: #334155;
+}
+
 // --- パネル・ツールバー ---
 [data-module="c-panel01"] {
   background: #fff;
@@ -745,10 +752,6 @@ form.is-inline {
                 gap: 12px;
                 margin-bottom: 12px;
                 flex-wrap: wrap;
-
-                > .title.is-block {
-                  color: #334155;
-                }
 
                 .fb-description-remove {
                   flex-shrink: 0;

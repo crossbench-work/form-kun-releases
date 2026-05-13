@@ -38,7 +38,7 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                                     <div class="block is-contents" data-description-block data-index="<?= $i ?>">
                                         <input type="hidden" name="<?= e($namePrefix) ?>[<?= $i ?>][id]" value="<?= e($block['id'] ?? ($namePrefix . '-' . $i)) ?>" data-name="id">
                                         <div class="area is-header">
-                                            <strong class="title is-block">説明文</strong>
+                                            <p data-module="m-boldTitle01">説明文</p>
                                             <button type="button" class="btn is-sm is-icon is-danger fb-description-remove" aria-label="削除" title="削除">
                                                 <svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2">
                                                     <path stroke-linecap="round" stroke-linejoin="round" d="M3 6h18"/>
@@ -463,7 +463,7 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
     <div class="block is-contents" data-description-block>
         <input type="hidden" data-name="id" value="">
         <div class="area is-header">
-            <strong class="title is-block">説明文</strong>
+            <p data-module="m-boldTitle01">説明文</p>
             <button type="button" class="btn is-sm is-icon is-danger fb-description-remove" aria-label="削除" title="削除">
                 <svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M3 6h18"/>
