@@ -548,8 +548,9 @@
         var optionsBox = li.querySelector('[data-target="c-formEditor__options"]');
         var textPairSettings = li.querySelector('[data-target="c-formEditor__textPairSettings"]');
         var textPairPlaceholders = li.querySelector('[data-target="c-formEditor__textPairPlaceholders"]');
-        var maxLengthWrap = li.querySelector('[data-target="c-formEditor__maxLength"]');
-        var maxLengthInput = maxLengthWrap ? maxLengthWrap.querySelector('input') : null;
+        var maxLengthWrap = li.querySelector('[data-target="c-formEditor__minMaxLength"]');
+        var maxLengthInput = maxLengthWrap ? maxLengthWrap.querySelector('input[data-name="max_length"]') : null;
+        var minLengthInput = maxLengthWrap ? maxLengthWrap.querySelector('input[data-name="min_length"]') : null;
         var regexWrap = li.querySelector('[data-target="c-formEditor__regex"]');
         var regexKind = regexWrap ? regexWrap.querySelector('[data-target="c-formEditor__regexKind"]') : null;
         var placeholderWrap = li.querySelector('[data-target="c-formEditor__placeholder"]');
@@ -585,8 +586,9 @@
             }
             if (maxLengthWrap) {
                 maxLengthWrap.style.display = hideMaxLength ? 'none' : '';
-                if (hideMaxLength && maxLengthInput) {
-                    maxLengthInput.value = '';
+                if (hideMaxLength) {
+                    if (maxLengthInput) maxLengthInput.value = '';
+                    if (minLengthInput) minLengthInput.value = '';
                 }
             }
             if (regexKind) {
