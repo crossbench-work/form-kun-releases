@@ -92,12 +92,18 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
     </div>
 <?php endif; ?>
 
-<nav data-module="m-breadcrumb01" aria-label="パンくず">
-    <ol>
-        <li><a href="<?= e(base_path('/admin/forms')) ?>">フォーム</a></li>
-        <li aria-current="page"><span id="breadcrumb-current"><?= e($breadcrumbTitle) ?></span></li>
-    </ol>
-</nav>
+<div class="c-breadcrumb01">
+    <div class="wrapper">
+        <div class="block is-contents">
+            <nav aria-label="パンくず">
+                <ol>
+                    <li><a href="<?= e(base_path('/admin/forms')) ?>">フォーム</a></li>
+                    <li aria-current="page"><span id="breadcrumb-current"><?= e($breadcrumbTitle) ?></span></li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+</div>
 
 <form method="post" action="<?= e($isNew ? base_path('/admin/forms') : base_path('/admin/forms/' . (int)$form['id'])) ?>" class="p-formEdit01">
     <?= \Core\Csrf::field() ?>
