@@ -326,41 +326,38 @@ body.l-adminShell01 a:hover {
   height: 100%;
   gap: 24px;
 }
-.c-adminHeader01 .box.is-brand a {
+.c-adminHeader01 .area.is-logo a {
   color: #fff;
   font-weight: 700;
 }
-.c-adminHeader01 .list.is-adminNav {
+.c-adminHeader01 .area.is-nav {
   display: flex;
   gap: 4px;
   flex: 1;
-  list-style: none;
-  margin: 0;
-  padding: 0;
 }
-.c-adminHeader01 .list.is-adminNav a {
+.c-adminHeader01 .area.is-nav a {
   color: #cbd5e1;
   padding: 8px 12px;
   border-radius: 4px;
 }
-.c-adminHeader01 .list.is-adminNav a:hover {
+.c-adminHeader01 .area.is-nav a:hover {
   background: #374151;
   color: #fff;
   text-decoration: none;
 }
-.c-adminHeader01 .box.is-userBar {
+.c-adminHeader01 .area.is-user {
   display: flex;
   align-items: center;
   gap: 12px;
   font-size: 14px;
 }
-.c-adminHeader01 .box.is-userBar .name {
+.c-adminHeader01 .area.is-user .name {
   color: #cbd5e1;
 }
-.c-adminHeader01 .box.is-userBar .link.is-logout {
+.c-adminHeader01 .area.is-user .link.is-logout {
   color: #fca5a5;
 }
-.c-adminHeader01 .box.is-userBar .link.is-logout:hover {
+.c-adminHeader01 .area.is-user .link.is-logout:hover {
   text-decoration: underline;
 }
 

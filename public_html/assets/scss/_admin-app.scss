@@ -207,18 +207,17 @@ body.l-adminShell01 {
     }
   }
 
-  .box.is-brand a {
-    color: #fff;
-    font-weight: 700;
+  .area.is-logo {
+    a {
+      color: #fff;
+      font-weight: 700;
+    }
   }
 
-  .list.is-adminNav {
+  .area.is-nav {
     display: flex;
     gap: 4px;
     flex: 1;
-    list-style: none;
-    margin: 0;
-    padding: 0;
 
     a {
       color: #cbd5e1;
@@ -233,7 +232,7 @@ body.l-adminShell01 {
     }
   }
 
-  .box.is-userBar {
+  .area.is-user {
     display: flex;
     align-items: center;
     gap: 12px;

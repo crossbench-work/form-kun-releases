@@ -16,17 +16,17 @@
     <header class="c-adminHeader01">
         <div class="wrapper">
             <div class="block is-contents">
-                <div class="box is-brand">
+                <div class="area is-logo">
                     <a href="<?= e(base_path('/admin/')) ?>"><?= e(config('site.admin_name')) ?></a>
                 </div>
-                <nav class="list is-adminNav">
+                <nav class="area is-nav">
                     <a href="<?= e(base_path('/admin/')) ?>">ダッシュボード</a>
                     <a href="<?= e(base_path('/admin/forms')) ?>">フォーム</a>
                     <?php if (\Core\Auth::role() === 'admin'): ?>
                         <a href="<?= e(base_path('/admin/users')) ?>">ユーザー</a>
                     <?php endif; ?>
                 </nav>
-                <div class="box is-userBar">
+                <div class="area is-user">
                     <?php if ($u = \Core\Auth::user()): ?>
                         <span class="name"><?= e($u['display_name'] ?? $u['username']) ?>（<?= e($u['role']) ?>）</span>
                         <a class="link is-logout" href="<?= e(base_path('/admin/logout')) ?>">ログアウト</a>
