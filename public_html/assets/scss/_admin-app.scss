@@ -727,13 +727,12 @@ form.is-inline {
   > .wrapper {
     > .block.is-contents {
       > .c-descriptionEditor01__editor {
-        > .wrapper {
-          > .block.is-list {
+        > .wrapper[data-description-list] {
             display: flex;
             flex-direction: column;
             gap: 16px;
 
-            > .area.is-block {
+            > .block.is-contents {
               border: 1px solid #e2e8f0;
               border-radius: 8px;
               padding: 16px;
@@ -772,7 +771,6 @@ form.is-inline {
                 align-items: center;
               }
             }
-          }
         }
       }
     }

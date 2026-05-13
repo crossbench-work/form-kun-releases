@@ -33,10 +33,9 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
             <div class="wrapper">
                 <div class="block is-contents">
                     <div class="c-descriptionEditor01__editor">
-                        <div class="wrapper">
-                            <div class="block is-list" data-description-list>
+                        <div class="wrapper" data-description-list>
                                 <?php foreach ($blocks as $i => $block): ?>
-                                    <div class="area is-block" data-description-block data-index="<?= $i ?>">
+                                    <div class="block is-contents" data-description-block data-index="<?= $i ?>">
                                         <input type="hidden" name="<?= e($namePrefix) ?>[<?= $i ?>][id]" value="<?= e($block['id'] ?? ($namePrefix . '-' . $i)) ?>" data-name="id">
                                         <div class="area is-header">
                                             <strong class="title is-block">説明文</strong>
@@ -72,7 +71,6 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                                         </div>
                                     </div>
                                 <?php endforeach; ?>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -462,7 +460,7 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
 </form>
 
 <template id="fb-description-template">
-    <div class="area is-block" data-description-block>
+    <div class="block is-contents" data-description-block>
         <input type="hidden" data-name="id" value="">
         <div class="area is-header">
             <strong class="title is-block">説明文</strong>
