@@ -12,67 +12,71 @@
 
 <section class="m-panel01">
     <div class="wrapper">
-        <table class="table is-kv">
-            <tr><th>フォーム</th><td><?= e($form['title']) ?>（<code><?= e($form['slug']) ?></code>）</td></tr>
-            <tr><th>受信日時</th><td><?= e($sub['submitted_at']) ?></td></tr>
-            <tr><th>IPアドレス</th><td><?= e($sub['ip']) ?></td></tr>
-            <tr><th>User-Agent</th><td><?= e($sub['user_agent']) ?></td></tr>
-        </table>
+        <div class="block">
+            <table class="table is-kv">
+                <tr><th>フォーム</th><td><?= e($form['title']) ?>（<code><?= e($form['slug']) ?></code>）</td></tr>
+                <tr><th>受信日時</th><td><?= e($sub['submitted_at']) ?></td></tr>
+                <tr><th>IPアドレス</th><td><?= e($sub['ip']) ?></td></tr>
+                <tr><th>User-Agent</th><td><?= e($sub['user_agent']) ?></td></tr>
+            </table>
+        </div>
     </div>
 </section>
 
 <section class="m-panel01">
     <div class="wrapper">
-        <h2>入力内容</h2>
-        <table class="table is-kv">
-        <?php foreach ($fields as $f):
-            $key = $f['field_key'];
-        ?>
-            <tr>
-                <th><?= e($f['label']) ?><br><span class="text is-muted"><?= e($key) ?></span></th>
-                <td>
-                <?php if ($f['type'] === 'file'): ?>
-                    <?php $files = $filesByKey[$key] ?? []; ?>
-                    <?php if (empty($files)): ?>
-                        <span class="text is-muted">（ファイルなし）</span>
-                    <?php else: ?>
-                        <?php foreach ($files as $fl): ?>
-                            <div>
-                                <a href="<?= e(base_path('/admin/files/' . $fl['id'])) ?>">
-                                    <?= e($fl['original_name']) ?>
-                                </a>
-                                <span class="text is-muted">（<?= e(\Core\Validator::formatBytes((int) $fl['size'])) ?> / <?= e($fl['mime_type']) ?>）</span>
-                            </div>
-                        <?php endforeach; ?>
+        <div class="block">
+            <h2>入力内容</h2>
+            <table class="table is-kv">
+            <?php foreach ($fields as $f):
+                $key = $f['field_key'];
+            ?>
+                <tr>
+                    <th><?= e($f['label']) ?><br><span class="text is-muted"><?= e($key) ?></span></th>
+                    <td>
+                    <?php if ($f['type'] === 'file'): ?>
+                        <?php $files = $filesByKey[$key] ?? []; ?>
+                        <?php if (empty($files)): ?>
+                            <span class="text is-muted">（ファイルなし）</span>
+                        <?php else: ?>
+                            <?php foreach ($files as $fl): ?>
+                                <div>
+                                    <a href="<?= e(base_path('/admin/files/' . $fl['id'])) ?>">
+                                        <?= e($fl['original_name']) ?>
+                                    </a>
+                                    <span class="text is-muted">（<?= e(\Core\Validator::formatBytes((int) $fl['size'])) ?> / <?= e($fl['mime_type']) ?>）</span>
+                                </div>
+                            <?php endforeach; ?>
+                        <?php endif; ?>
+                    <?php else:
+                        $val = $values[$key] ?? '';
+                    ?>
+                        <?php if ($f['type'] === 'address'): ?>
+                            <?php $addrText = format_address_value_display($val); ?>
+                            <?= $addrText !== '' ? nl2br(e($addrText)) : '<span class="text is-muted">（未入力）</span>' ?>
+                        <?php elseif ($f['type'] === 'text_pair'): ?>
+                            <?php $pairText = format_text_pair_value_display($val, \Models\FormField::decodeTextPairLabels($f['options_json'] ?? null)); ?>
+                            <?= $pairText !== '' ? nl2br(e($pairText)) : '<span class="text is-muted">（未入力）</span>' ?>
+                        <?php else: ?>
+                            <?= $val !== '' ? nl2br(e((string) $val)) : '<span class="text is-muted">（未入力）</span>' ?>
+                        <?php endif; ?>
                     <?php endif; ?>
-                <?php else:
-                    $val = $values[$key] ?? '';
-                ?>
-                    <?php if ($f['type'] === 'address'): ?>
-                        <?php $addrText = format_address_value_display($val); ?>
-                        <?= $addrText !== '' ? nl2br(e($addrText)) : '<span class="text is-muted">（未入力）</span>' ?>
-                    <?php elseif ($f['type'] === 'text_pair'): ?>
-                        <?php $pairText = format_text_pair_value_display($val, \Models\FormField::decodeTextPairLabels($f['options_json'] ?? null)); ?>
-                        <?= $pairText !== '' ? nl2br(e($pairText)) : '<span class="text is-muted">（未入力）</span>' ?>
-                    <?php else: ?>
-                        <?= $val !== '' ? nl2br(e((string) $val)) : '<span class="text is-muted">（未入力）</span>' ?>
-                    <?php endif; ?>
-                <?php endif; ?>
-                </td>
-            </tr>
-        <?php endforeach; ?>
+                    </td>
+                </tr>
+            <?php endforeach; ?>
 
-        <?php
-            // フォーム項目に存在しないキー（過去に項目だった等）も表示
-            $fieldKeys = array_map(fn($f) => $f['field_key'], $fields);
-            foreach ($values as $k => $v):
-                if (in_array($k, $fieldKeys, true)) continue;
-        ?>
-            <tr>
-                <th>(削除済み項目)<br><span class="text is-muted"><?= e($k) ?></span></th>
-                <td><?= nl2br(e((string) $v)) ?></td>
-            </tr>
-        <?php endforeach; ?>
-        </table>
+            <?php
+                // フォーム項目に存在しないキー（過去に項目だった等）も表示
+                $fieldKeys = array_map(fn($f) => $f['field_key'], $fields);
+                foreach ($values as $k => $v):
+                    if (in_array($k, $fieldKeys, true)) continue;
+            ?>
+                <tr>
+                    <th>(削除済み項目)<br><span class="text is-muted"><?= e($k) ?></span></th>
+                    <td><?= nl2br(e((string) $v)) ?></td>
+                </tr>
+            <?php endforeach; ?>
+            </table>
+        </div>
     </div>
 </section>

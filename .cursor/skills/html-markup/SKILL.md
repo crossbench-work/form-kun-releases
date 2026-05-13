@@ -121,7 +121,7 @@ assets/
 ## `.wrapper` / `.inner`（l- / m- / c- 共通）
 
 - 任意で **`.wrapper`**。さらに必要なら **`.wrapper` > `.inner`**。
-- **管理画面パネルのような `m-*` モジュールは、`<section class="m-panel01"><div class="wrapper">...</div></section>` の形を正とし、`m-panel01 > .wrapper` を前提に組む**。
+- **管理画面パネルのような `m-*` モジュールは、`<section class="m-panel01"><div class="wrapper"><div class="block">...</div></div></section>` の形を正とし、`m-panel01 > .wrapper > .block` を前提に組む**。
 
 ### SCSS: 直下の `.wrapper` は子セレクタで縛る
 
@@ -145,8 +145,8 @@ assets/
 ## `l-` / `m-`
 
 - **l-**: **`.l-*` > `.wrapper`**。`.block` / `.area` / `.box` は **使わない**。
-- **m-**: **`.m-*` > `.wrapper`**。モジュール内に **`.block` / `.area` / `.box` は使わない**。
-- **管理画面のパネル系モジュールも同様に `.m-panel01 > .wrapper` を使い、`componentWrapper` のような別名ラッパーは増やさない**。
+- **m-**: **`.m-*` > `.wrapper`**。通常はモジュール内に **`.block` / `.area` / `.box` は使わない**。
+- **管理画面のパネル系モジュールは例外として `.m-panel01 > .wrapper > .block` を使い、`componentWrapper` のような別名ラッパーは増やさない**。
 
 ## `c-`（コンポーネント）
 
