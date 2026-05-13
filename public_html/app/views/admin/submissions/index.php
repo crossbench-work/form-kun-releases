@@ -16,11 +16,11 @@
                                     <div data-module="m-input01">
                                         <input type="text" name="q" value="<?= e($q) ?>" placeholder="キーワード検索（送信内容）" style="width:280px">
                                     </div>
-                                    <label class="label" for="submissions-from">期間</label>
+                                    <label class="label" data-module="m-boldTitle01" for="submissions-from">期間</label>
                                     <div data-module="m-input01">
                                         <input type="date" id="submissions-from" name="from" value="<?= e($from) ?>">
                                     </div>
-                                    <label class="label" for="submissions-to">〜</label>
+                                    <label class="label" data-module="m-boldTitle01" for="submissions-to">〜</label>
                                     <div data-module="m-input01">
                                         <input type="date" id="submissions-to" name="to" value="<?= e($to) ?>">
                                     </div>

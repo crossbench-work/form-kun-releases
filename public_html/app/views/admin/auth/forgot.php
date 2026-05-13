@@ -4,7 +4,7 @@
 <form method="post" action="<?= e(base_path('/admin/forgot-password')) ?>" class="m-authForm01">
     <?= \Core\Csrf::field() ?>
     <div class="box is-field">
-        <label class="label" for="identifier">ユーザー名またはメールアドレス</label>
+        <label class="label" data-module="m-boldTitle01" for="identifier">ユーザー名またはメールアドレス</label>
         <div data-module="m-input01">
             <input type="text" id="identifier" name="identifier" autocomplete="username" required>
         </div>

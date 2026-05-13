@@ -12,34 +12,34 @@
 <form method="post" action="<?= e(base_path('/admin/setup')) ?>" class="m-authForm01">
     <?= \Core\Csrf::field() ?>
     <div class="box is-field">
-        <label class="label" for="username">ユーザー名</label>
+        <label class="label" data-module="m-boldTitle01" for="username">ユーザー名</label>
         <div data-module="m-input01">
             <input type="text" id="username" name="username" value="<?= e($old['username'] ?? '') ?>" required>
         </div>
         <p class="text is-help">半角英数字・記号(_.-)で 3〜64 文字</p>
     </div>
     <div class="box is-field">
-        <label class="label" for="display_name">表示名（任意）</label>
+        <label class="label" data-module="m-boldTitle01" for="display_name">表示名（任意）</label>
         <div data-module="m-input01">
             <input type="text" id="display_name" name="display_name" value="<?= e($old['display_name'] ?? '') ?>">
         </div>
     </div>
     <div class="box is-field">
-        <label class="label" for="email">メールアドレス（任意・推奨）</label>
+        <label class="label" data-module="m-boldTitle01" for="email">メールアドレス（任意・推奨）</label>
         <div data-module="m-input01">
             <input type="email" id="email" name="email" value="<?= e($old['email'] ?? '') ?>" autocomplete="email">
         </div>
         <p class="text is-help">パスワードを忘れたときに再設定メールを送るために使用します。</p>
     </div>
     <div class="box is-field">
-        <label class="label" for="password">パスワード</label>
+        <label class="label" data-module="m-boldTitle01" for="password">パスワード</label>
         <div data-module="m-input01">
             <input type="password" id="password" name="password" required>
         </div>
         <p class="text is-help">8文字以上を推奨</p>
     </div>
     <div class="box is-field">
-        <label class="label" for="password_confirm">パスワード（確認）</label>
+        <label class="label" data-module="m-boldTitle01" for="password_confirm">パスワード（確認）</label>
         <div data-module="m-input01">
             <input type="password" id="password_confirm" name="password_confirm" required>
         </div>

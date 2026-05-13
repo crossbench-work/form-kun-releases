@@ -150,7 +150,7 @@ assets/
 - **m-**: **`.m-*` > `.wrapper`**。通常はモジュール内に **`.block` / `.area` / `.box` は使わない**。
 - **管理画面のパネル系コンポーネントは `data-module="c-panel01"` を外枠、`data-module="c-formBlock01"` を内側の実コンテンツに使う。`componentWrapper` のような別名ラッパーは増やさない**。
 - **管理画面の `input` / `select` / `textarea` は `<div data-module="m-input01">...</div>` の内側に置き、見た目は入力要素ごとの直指定ではなくこのモジュールに集約する**。
-- **太字の小見出しが必要なときは、要素クラスではなく `<p data-module="m-boldTitle01">...</p>` のようにモジュール化したタイトル要素を使う**。
+- **太字の小見出しや通常の入力ラベルは、`<p data-module="m-boldTitle01">...</p>` や `<label class="label" data-module="m-boldTitle01">...</label>` のように `m-boldTitle01` を使って作る**。
 
 ## `c-`（コンポーネント）
 

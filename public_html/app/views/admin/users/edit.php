@@ -16,7 +16,7 @@
                     <div class="wrapper">
                         <div class="block is-contents">
                             <div class="area is-field">
-                                <label class="label">ユーザー名</label>
+                                <label class="label" data-module="m-boldTitle01">ユーザー名</label>
                                 <?php if ($isNew): ?>
                                     <div data-module="m-input01">
                                         <input type="text" name="username" value="<?= e($user['username']) ?>" required>
@@ -30,14 +30,14 @@
                             </div>
 
                             <div class="area is-field">
-                                <label class="label">表示名</label>
+                                <label class="label" data-module="m-boldTitle01">表示名</label>
                                 <div data-module="m-input01">
                                     <input type="text" name="display_name" value="<?= e($user['display_name'] ?? '') ?>">
                                 </div>
                             </div>
 
                             <div class="area is-field">
-                                <label class="label">メールアドレス（任意）</label>
+                                <label class="label" data-module="m-boldTitle01">メールアドレス（任意）</label>
                                 <div data-module="m-input01">
                                     <input type="email" name="email" value="<?= e($user['email'] ?? '') ?>" autocomplete="email">
                                 </div>
@@ -45,7 +45,7 @@
                             </div>
 
                             <div class="area is-field">
-                                <label class="label">権限</label>
+                                <label class="label" data-module="m-boldTitle01">権限</label>
                                 <div data-module="m-input01">
                                     <select name="role">
                                         <option value="editor" <?= ($user['role'] ?? '') === 'editor' ? 'selected' : '' ?>>editor（フォーム/送信履歴の編集）</option>
@@ -55,7 +55,7 @@
                             </div>
 
                             <div class="area is-field">
-                                <label class="label">パスワード <?php if ($isNew): ?><span class="is-required">必須</span><?php endif; ?></label>
+                                <label class="label" data-module="m-boldTitle01">パスワード <?php if ($isNew): ?><span class="is-required">必須</span><?php endif; ?></label>
                                 <div data-module="m-input01">
                                     <input type="password" name="password" autocomplete="new-password" <?= $isNew ? 'required' : '' ?>>
                                 </div>
@@ -64,7 +64,7 @@
                                 <?php endif; ?>
                             </div>
                             <div class="area is-field">
-                                <label class="label">パスワード（確認）</label>
+                                <label class="label" data-module="m-boldTitle01">パスワード（確認）</label>
                                 <div data-module="m-input01">
                                     <input type="password" name="password_confirm" autocomplete="new-password">
                                 </div>

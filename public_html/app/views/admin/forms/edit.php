@@ -126,7 +126,7 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                     <div class="wrapper">
                         <div class="block is-contents">
                             <div class="area is-title">
-                                <label class="label" for="title">タイトル <span class="is-required">必須</span></label>
+                                <label class="label" data-module="m-boldTitle01" for="title">タイトル <span class="is-required">必須</span></label>
                                 <label class="label is-choice fb-basic-display-toggle">
                                     <input type="checkbox" name="show_title" value="1" <?= !empty($form['show_title']) ? 'checked' : '' ?>>
                                     表示する
@@ -146,7 +146,7 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                     <div class="wrapper">
                         <div class="block is-contents">
                             <div class="area is-title">
-                                <label class="label" for="slug">スラッグ（URL用） <span class="is-required">必須</span></label>
+                                <label class="label" data-module="m-boldTitle01" for="slug">スラッグ（URL用） <span class="is-required">必須</span></label>
                             </div>
                             <div class="area is-field">
                                 <div data-module="m-input01">
@@ -165,7 +165,7 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                     <div class="wrapper">
                         <div class="block is-contents">
                             <div class="area is-title">
-                                <label class="label" for="status">公開状態</label>
+                                <label class="label" data-module="m-boldTitle01" for="status">公開状態</label>
                             </div>
                             <div class="area is-field">
                                 <div data-module="m-input01">
@@ -258,7 +258,7 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                 <h2 data-module="m-largeTitle01">スパム対策</h2>
             </div>
             <div class="area is-field">
-                <label class="label">
+                <label class="label is-choice">
                     <input type="checkbox" name="captcha_enabled" value="1" <?= !empty($form['captcha_enabled']) ? 'checked' : '' ?>>
                     スパム対策（簡易計算CAPTCHA）を有効にする
                 </label>
@@ -279,7 +279,7 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                 <h2 data-module="m-largeTitle01">ボタン設定</h2>
             </div>
             <div class="area is-field">
-                <label class="label" for="confirm_button_text">ボタンテキスト</label>
+                <label class="label" data-module="m-boldTitle01" for="confirm_button_text">ボタンテキスト</label>
                 <div data-module="m-input01">
                     <input type="text" id="confirm_button_text" name="confirm_button_text" value="<?= e($form['confirm_button_text'] ?? '入力内容を確認する') ?>">
                 </div>
@@ -329,13 +329,13 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                 <h2 data-module="m-largeTitle01">ボタン設定</h2>
             </div>
             <div class="area is-field">
-                <label class="label" for="submit_button_text">送信ボタンテキスト</label>
+                <label class="label" data-module="m-boldTitle01" for="submit_button_text">送信ボタンテキスト</label>
                 <div data-module="m-input01">
                     <input type="text" id="submit_button_text" name="submit_button_text" value="<?= e($form['submit_button_text'] ?? '送信する') ?>">
                 </div>
             </div>
             <div class="area is-field">
-                <label class="label" for="back_button_text">戻るボタンテキスト</label>
+                <label class="label" data-module="m-boldTitle01" for="back_button_text">戻るボタンテキスト</label>
                 <div data-module="m-input01">
                     <input type="text" id="back_button_text" name="back_button_text" value="<?= e($form['back_button_text'] ?? '入力に戻る') ?>">
                 </div>
@@ -385,13 +385,13 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                 <h2 data-module="m-largeTitle01">ボタン設定</h2>
             </div>
             <div class="area is-field">
-                <label class="label" for="thanks_button_text">ボタンテキスト</label>
+                <label class="label" data-module="m-boldTitle01" for="thanks_button_text">ボタンテキスト</label>
                 <div data-module="m-input01">
                     <input type="text" id="thanks_button_text" name="thanks_button_text" value="<?= e($form['thanks_button_text'] ?? 'トップへ戻る') ?>">
                 </div>
             </div>
             <div class="area is-field">
-                <label class="label" for="thanks_button_url">ボタンURL</label>
+                <label class="label" data-module="m-boldTitle01" for="thanks_button_url">ボタンURL</label>
                 <div data-module="m-input01">
                     <input type="text" id="thanks_button_url" name="thanks_button_url" value="<?= e($form['thanks_button_url'] ?? '/') ?>" placeholder="/ または https://example.com/">
                 </div>
@@ -415,19 +415,19 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                 <h2 data-module="m-largeTitle01">管理者通知メール</h2>
             </div>
             <div class="area is-field">
-                <label class="label">送信先メールアドレス（カンマ区切りで複数可）</label>
+                <label class="label" data-module="m-boldTitle01">送信先メールアドレス（カンマ区切りで複数可）</label>
                 <div data-module="m-input01">
                     <input type="text" name="admin_emails" value="<?= e($form['admin_emails']) ?>" placeholder="admin@example.com, sub@example.com">
                 </div>
             </div>
             <div class="area is-field">
-                <label class="label">件名</label>
+                <label class="label" data-module="m-boldTitle01">件名</label>
                 <div data-module="m-input01">
                     <input type="text" name="mail_subject_admin" value="<?= e($form['mail_subject_admin']) ?>" placeholder="[{{__form_title__}}] 新規送信">
                 </div>
             </div>
             <div class="area is-field">
-                <label class="label">表示設定</label>
+                <label class="label" data-module="m-boldTitle01">表示設定</label>
                 <div data-module="m-input01">
                     <textarea name="mail_template_admin" rows="6"><?= e($form['mail_template_admin']) ?></textarea>
                 </div>
@@ -450,25 +450,25 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                 <h2 data-module="m-largeTitle01">送信者への自動返信メール</h2>
             </div>
             <div class="area is-field">
-                <label class="label">
+                <label class="label is-choice">
                     <input type="checkbox" name="reply_enabled" value="1" <?= !empty($form['reply_enabled']) ? 'checked' : '' ?>>
                     自動返信を有効にする
                 </label>
             </div>
             <div class="area is-field">
-                <label class="label">送信先のフィールドキー（メール型項目）</label>
+                <label class="label" data-module="m-boldTitle01">送信先のフィールドキー（メール型項目）</label>
                 <div data-module="m-input01">
                     <input type="text" name="reply_from_field_key" value="<?= e($form['reply_from_field_key']) ?>" placeholder="メール項目のフィールドキー（UUID または任意のキー）">
                 </div>
             </div>
             <div class="area is-field">
-                <label class="label">件名</label>
+                <label class="label" data-module="m-boldTitle01">件名</label>
                 <div data-module="m-input01">
                     <input type="text" name="reply_subject" value="<?= e($form['reply_subject']) ?>">
                 </div>
             </div>
             <div class="area is-field">
-                <label class="label">表示設定</label>
+                <label class="label" data-module="m-boldTitle01">表示設定</label>
                 <div data-module="m-input01">
                     <textarea name="reply_template" rows="6"><?= e($form['reply_template']) ?></textarea>
                 </div>
@@ -561,9 +561,9 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
         <div class="fb-field-section">
             <h3 class="fb-field-section-title">基本設定</h3>
             <div class="fb-row">
-                <div><label>ラベル</label><div data-module="m-input01"><input type="text" data-name="label" class="fb-input-label"></div></div>
+                <div><label class="label" data-module="m-boldTitle01">ラベル</label><div data-module="m-input01"><input type="text" data-name="label" class="fb-input-label"></div></div>
                 <div class="fb-field-key-col">
-                    <label>フィールドキー</label>
+                    <label class="label" data-module="m-boldTitle01">フィールドキー</label>
                     <div class="fb-field-key-row">
                         <div data-module="m-input01"><input type="text" data-name="field_key" class="fb-field-key-input is-locked" readonly spellcheck="false"></div>
                         <button type="button" class="btn is-icon fb-field-key-lock" aria-label="キーを編集" title="編集する" aria-pressed="true">
@@ -573,7 +573,7 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                     </div>
                 </div>
                 <div>
-                    <label>型</label>
+                    <label class="label" data-module="m-boldTitle01">型</label>
                     <div data-module="m-input01">
                         <select data-name="type" class="fb-type">
                             <?php foreach (\Models\FormField::TYPE_LABELS() as $tVal => $tLabel): ?>
@@ -588,7 +588,7 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
             <h3 class="fb-field-section-title">入力設定</h3>
             <div class="fb-row">
                 <div class="fb-validation-wrap">
-                    <label>必須</label>
+                    <label class="label" data-module="m-boldTitle01">必須</label>
                     <div class="fb-validation-controls">
                         <div class="fb-required-wrap">
                             <label class="label is-choice"><input type="checkbox" data-name="required" value="1" class="fb-required-toggle"><span>必須にする</span></label>
@@ -614,16 +614,16 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                             </div>
                             <input type="hidden" data-name="checkbox_limit_enabled" class="fb-checkbox-limit-enabled" value="0">
                             <div class="fb-checkbox-limit-settings" style="display:none">
-                                <div><label>最小選択数</label><div data-module="m-input01"><input type="number" min="1" data-name="checkbox_min_selections"></div></div>
-                                <div><label>最大選択数</label><div data-module="m-input01"><input type="number" min="1" data-name="checkbox_max_selections"></div></div>
+                                <div><label class="label" data-module="m-boldTitle01">最小選択数</label><div data-module="m-input01"><input type="number" min="1" data-name="checkbox_min_selections"></div></div>
+                                <div><label class="label" data-module="m-boldTitle01">最大選択数</label><div data-module="m-input01"><input type="number" min="1" data-name="checkbox_max_selections"></div></div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="fb-max-length-wrap"><label>最大文字数（任意）</label><div data-module="m-input01"><input type="number" min="1" data-name="max_length"></div></div>
+                <div class="fb-max-length-wrap"><label class="label" data-module="m-boldTitle01">最大文字数（任意）</label><div data-module="m-input01"><input type="number" min="1" data-name="max_length"></div></div>
             </div>
             <div class="area is-field fb-options" style="display:none">
-                <label>選択肢（1行に1つ）</label>
+                <label class="label" data-module="m-boldTitle01">選択肢（1行に1つ）</label>
                 <div class="fb-choiceEditor" data-choice-editor>
                     <div class="fb-choiceList"></div>
                     <div class="area is-actions">
@@ -636,17 +636,17 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
         <div class="fb-field-section">
             <h3 class="fb-field-section-title">表示設定</h3>
             <div class="fb-row">
-                <div class="fb-placeholder-wrap"><label>プレースホルダ（任意）</label><div data-module="m-input01"><input type="text" data-name="placeholder"></div></div>
+                <div class="fb-placeholder-wrap"><label class="label" data-module="m-boldTitle01">プレースホルダ（任意）</label><div data-module="m-input01"><input type="text" data-name="placeholder"></div></div>
             </div>
             <div class="fb-row fb-text-pair-settings" style="display:none">
-                <div><label>1つ目の入力欄の表示名</label><div data-module="m-input01"><input type="text" data-name="pair_label_left"></div></div>
-                <div><label>2つ目の入力欄の表示名</label><div data-module="m-input01"><input type="text" data-name="pair_label_right"></div></div>
+                <div><label class="label" data-module="m-boldTitle01">1つ目の入力欄の表示名</label><div data-module="m-input01"><input type="text" data-name="pair_label_left"></div></div>
+                <div><label class="label" data-module="m-boldTitle01">2つ目の入力欄の表示名</label><div data-module="m-input01"><input type="text" data-name="pair_label_right"></div></div>
             </div>
             <div class="fb-row fb-text-pair-placeholders" style="display:none">
-                <div><label>1つ目のプレースホルダ（任意）</label><div data-module="m-input01"><input type="text" data-name="pair_placeholder_left"></div></div>
-                <div><label>2つ目のプレースホルダ（任意）</label><div data-module="m-input01"><input type="text" data-name="pair_placeholder_right"></div></div>
+                <div><label class="label" data-module="m-boldTitle01">1つ目のプレースホルダ（任意）</label><div data-module="m-input01"><input type="text" data-name="pair_placeholder_left"></div></div>
+                <div><label class="label" data-module="m-boldTitle01">2つ目のプレースホルダ（任意）</label><div data-module="m-input01"><input type="text" data-name="pair_placeholder_right"></div></div>
             </div>
-            <div class="area is-field"><label class="label">備考</label><div data-module="m-input01"><textarea data-name="help_text" rows="3"></textarea></div></div>
+            <div class="area is-field"><label class="label" data-module="m-boldTitle01">備考</label><div data-module="m-input01"><textarea data-name="help_text" rows="3"></textarea></div></div>
         </div>
         <input type="hidden" data-name="_remove" value="0" class="fb-remove-flag">
         </div>

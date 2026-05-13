@@ -10,14 +10,14 @@
     <?= \Core\Csrf::field() ?>
     <input type="hidden" name="token" value="<?= e($token) ?>">
     <div class="box is-field">
-        <label class="label" for="password">新しいパスワード</label>
+        <label class="label" data-module="m-boldTitle01" for="password">新しいパスワード</label>
         <div data-module="m-input01">
             <input type="password" id="password" name="password" autocomplete="new-password" required minlength="8">
         </div>
         <p class="text is-help">8文字以上</p>
     </div>
     <div class="box is-field">
-        <label class="label" for="password_confirm">新しいパスワード（確認）</label>
+        <label class="label" data-module="m-boldTitle01" for="password_confirm">新しいパスワード（確認）</label>
         <div data-module="m-input01">
             <input type="password" id="password_confirm" name="password_confirm" autocomplete="new-password" required>
         </div>

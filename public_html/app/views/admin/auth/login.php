@@ -3,13 +3,13 @@
 <form method="post" action="<?= e(base_path('/admin/login')) ?>" class="m-authForm01">
     <?= \Core\Csrf::field() ?>
     <div class="box is-field">
-        <label class="label" for="username">ユーザー名</label>
+        <label class="label" data-module="m-boldTitle01" for="username">ユーザー名</label>
         <div data-module="m-input01">
             <input type="text" id="username" name="username" autocomplete="username" required>
         </div>
     </div>
     <div class="box is-field">
-        <label class="label" for="password">パスワード</label>
+        <label class="label" data-module="m-boldTitle01" for="password">パスワード</label>
         <div data-module="m-input01">
             <input type="password" id="password" name="password" autocomplete="current-password" required>
         </div>
