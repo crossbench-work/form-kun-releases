@@ -4,8 +4,8 @@
     (function initFormEditTabs() {
         var root = document.querySelector('[data-module="c-formEditTabs01"]');
         if (!root) return;
-        var tabs = root.querySelectorAll('.block.is-tabs [role="tab"]');
-        var panels = root.querySelectorAll('[role="tabpanel"]');
+        var tabs = root.querySelectorAll('[data-target="c-formEditTabs01__tab"][role="tab"]');
+        var panels = root.querySelectorAll('[data-target="c-formEditTabs01__contents"][role="tabpanel"]');
         if (!tabs.length || !panels.length) return;
         var storageKey = 'formkun:active-tab:' + window.location.pathname;
 
@@ -25,16 +25,16 @@
 
         function activate(panelId) {
             tabs.forEach(function (tab) {
-                var pid = tab.getAttribute('aria-controls');
+                var pid = tab.getAttribute('data-tab-panel');
                 var sel = pid === panelId;
                 tab.setAttribute('aria-selected', sel ? 'true' : 'false');
                 tab.tabIndex = sel ? 0 : -1;
             });
             panels.forEach(function (p) {
-                p.hidden = p.id !== panelId;
+                p.hidden = p.getAttribute('data-tab-panel') !== panelId;
             });
             writeStoredPanelId(panelId);
-            if (panelId === 'tab-panel-fields') {
+            if (panelId === 'fields') {
                 window.setTimeout(function () {
                     if (typeof window.formkunInitFbSortable === 'function') {
                         window.formkunInitFbSortable();
@@ -45,12 +45,12 @@
 
         tabs.forEach(function (tab) {
             tab.addEventListener('click', function () {
-                activate(tab.getAttribute('aria-controls'));
+                activate(tab.getAttribute('data-tab-panel'));
             });
             tab.addEventListener('keydown', function (event) {
                 if (event.key === 'Enter' || event.key === ' ') {
                     event.preventDefault();
-                    activate(tab.getAttribute('aria-controls'));
+                    activate(tab.getAttribute('data-tab-panel'));
                 }
             });
         });
@@ -60,7 +60,7 @@
             var selectedTab = Array.prototype.find.call(tabs, function (tab) {
                 return tab.getAttribute('aria-selected') === 'true';
             });
-            initialPanelId = selectedTab ? selectedTab.getAttribute('aria-controls') : panels[0].id;
+            initialPanelId = selectedTab ? selectedTab.getAttribute('data-tab-panel') : panels[0].getAttribute('data-tab-panel');
         }
         if (initialPanelId) {
             activate(initialPanelId);

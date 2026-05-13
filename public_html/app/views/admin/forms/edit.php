@@ -112,15 +112,15 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
             <div data-module="c-formEditTabs01">
                 <div class="wrapper">
                     <div class="block is-tabs" role="tablist" aria-label="フォーム設定のセクション">
-                        <div data-module="m-formEditTab01" role="tab" id="tab-btn-basic" aria-selected="true" aria-controls="tab-panel-basic" tabindex="0">基本</div>
-                        <div data-module="m-formEditTab01" role="tab" id="tab-btn-fields" aria-selected="false" aria-controls="tab-panel-fields" tabindex="-1">入力画面</div>
-                        <div data-module="m-formEditTab01" role="tab" id="tab-btn-confirm" aria-selected="false" aria-controls="tab-panel-confirm" tabindex="-1">確認画面</div>
-                        <div data-module="m-formEditTab01" role="tab" id="tab-btn-thanks" aria-selected="false" aria-controls="tab-panel-thanks" tabindex="-1">完了画面</div>
-                        <div data-module="m-formEditTab01" role="tab" id="tab-btn-mail" aria-selected="false" aria-controls="tab-panel-mail" tabindex="-1">通知</div>
+                        <div data-module="m-formEditTab01" data-target="c-formEditTabs01__tab" data-tab-panel="basic" role="tab" aria-selected="true" tabindex="0">基本</div>
+                        <div data-module="m-formEditTab01" data-target="c-formEditTabs01__tab" data-tab-panel="fields" role="tab" aria-selected="false" tabindex="-1">入力画面</div>
+                        <div data-module="m-formEditTab01" data-target="c-formEditTabs01__tab" data-tab-panel="confirm" role="tab" aria-selected="false" tabindex="-1">確認画面</div>
+                        <div data-module="m-formEditTab01" data-target="c-formEditTabs01__tab" data-tab-panel="thanks" role="tab" aria-selected="false" tabindex="-1">完了画面</div>
+                        <div data-module="m-formEditTab01" data-target="c-formEditTabs01__tab" data-tab-panel="mail" role="tab" aria-selected="false" tabindex="-1">通知</div>
                     </div>
 
                     <div class="block is-contents">
-        <div id="tab-panel-basic" class="area is-contents" role="tabpanel" aria-labelledby="tab-btn-basic">
+        <div data-target="c-formEditTabs01__contents" data-tab-panel="basic" class="area is-contents" role="tabpanel" aria-label="基本">
     <div data-module="c-panel01">
         <div class="wrapper">
             <div class="block is-contents">
@@ -197,7 +197,7 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
     </div>
         </div>
 
-        <div id="tab-panel-fields" class="area is-contents" role="tabpanel" aria-labelledby="tab-btn-fields" hidden>
+        <div data-target="c-formEditTabs01__contents" data-tab-panel="fields" class="area is-contents" role="tabpanel" aria-label="入力画面" hidden>
     <div data-module="c-panel01">
         <div class="wrapper">
             <div class="block is-contents">
@@ -311,7 +311,7 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
     </div>
         </div>
 
-        <div id="tab-panel-confirm" class="area is-contents" role="tabpanel" aria-labelledby="tab-btn-confirm" hidden>
+        <div data-target="c-formEditTabs01__contents" data-tab-panel="confirm" class="area is-contents" role="tabpanel" aria-label="確認画面" hidden>
     <div data-module="c-panel01">
         <div class="wrapper">
             <div class="block is-contents">
@@ -387,7 +387,7 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
     </div>
         </div>
 
-        <div id="tab-panel-thanks" class="area is-contents" role="tabpanel" aria-labelledby="tab-btn-thanks" hidden>
+        <div data-target="c-formEditTabs01__contents" data-tab-panel="thanks" class="area is-contents" role="tabpanel" aria-label="完了画面" hidden>
     <div data-module="c-panel01">
         <div class="wrapper">
             <div class="block is-contents">
@@ -463,7 +463,7 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
     </div>
         </div>
 
-        <div id="tab-panel-mail" class="area is-contents" role="tabpanel" aria-labelledby="tab-btn-mail" hidden>
+        <div data-target="c-formEditTabs01__contents" data-tab-panel="mail" class="area is-contents" role="tabpanel" aria-label="通知" hidden>
     <div data-module="c-panel01">
         <div class="wrapper">
             <div class="block is-contents">
