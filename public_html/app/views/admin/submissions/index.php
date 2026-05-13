@@ -7,7 +7,7 @@
 
 <div data-module="c-panel01">
     <div class="wrapper">
-        <div class="block">
+        <div class="block is-contents">
             <form method="get" action="<?= e(base_path('/admin/forms/' . $form['id'] . '/submissions')) ?>" class="m-toolbar01">
                 <input type="text" name="q" value="<?= e($q) ?>" placeholder="キーワード検索（送信内容）" style="width:280px">
                 <label class="label">期間 <input type="date" name="from" value="<?= e($from) ?>"></label>

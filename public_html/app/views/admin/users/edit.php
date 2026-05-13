@@ -11,7 +11,7 @@
 
     <div data-module="c-panel01">
         <div class="wrapper">
-            <div class="block">
+            <div class="block is-contents">
                 <div class="box is-field">
                     <label class="label">ユーザー名</label>
                     <?php if ($isNew): ?>

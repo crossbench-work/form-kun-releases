@@ -268,7 +268,7 @@ body.l-adminShell01 {
   margin-bottom: 16px;
 
   > .wrapper {
-    > .block {
+    > .block.is-contents {
       padding: 20px 24px;
     }
   }
@@ -574,7 +574,7 @@ form.is-inline {
 }
 
 // --- 管理画面フォーム（パネル内）---
-[data-module="c-panel01"] > .wrapper > .block {
+[data-module="c-panel01"] > .wrapper > .block.is-contents {
   .box.is-field {
     margin-bottom: 16px;
   }

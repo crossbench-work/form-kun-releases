@@ -12,7 +12,7 @@
 
 <div data-module="c-panel01">
     <div class="wrapper">
-        <div class="block">
+        <div class="block is-contents">
             <table class="table is-kv">
                 <tr><th>フォーム</th><td><?= e($form['title']) ?>（<code><?= e($form['slug']) ?></code>）</td></tr>
                 <tr><th>受信日時</th><td><?= e($sub['submitted_at']) ?></td></tr>
@@ -25,7 +25,7 @@
 
 <div data-module="c-panel01">
     <div class="wrapper">
-        <div class="block">
+        <div class="block is-contents">
             <h2>入力内容</h2>
             <table class="table is-kv">
             <?php foreach ($fields as $f):

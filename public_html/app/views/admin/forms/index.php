@@ -6,7 +6,7 @@
 
 <div data-module="c-panel01">
     <div class="wrapper">
-        <div class="block">
+        <div class="block is-contents">
         <?php if (empty($forms)): ?>
             <p class="text is-muted">まだフォームがありません。</p>
         <?php else: ?>
