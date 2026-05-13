@@ -984,6 +984,24 @@ form.is-inline {
   background: #f8fafc;
   border-color: #94a3b8;
 }
+[data-module=m-formBuilder01] [data-module=m-deleteBtn01] {
+  appearance: none;
+  border: 1px solid #fecaca;
+  background: #fff5f5;
+  color: #dc2626;
+  border-radius: 6px;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+[data-module=m-formBuilder01] [data-module=m-deleteBtn01]:hover {
+  background: #fee2e2;
+  border-color: #fca5a5;
+}
 [data-module=m-formBuilder01] .c-formEditor__itemHeader > .wrapper > .block.is-contents > .area.is-move {
   display: flex;
   align-items: center;
