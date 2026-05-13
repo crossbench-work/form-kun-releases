@@ -83,7 +83,7 @@ if (empty($f['required']) || in_array($f['type'], ['radio', 'select'], true)) {
                                 <div class="wrapper">
                                     <div class="block is-contents">
                                         <div class="area is-title">
-                                            <p data-module="m-boldTitle01">基本設定</p>
+                                            <p data-module="m-borderTitle01">基本設定</p>
                                         </div>
                                         <div class="area is-field">
                                             <div class="c-formEditor__row">
@@ -138,7 +138,7 @@ if (empty($f['required']) || in_array($f['type'], ['radio', 'select'], true)) {
                                     <div class="wrapper">
                                         <div class="block is-contents">
                                             <div class="area is-title">
-                                                <p data-module="m-boldTitle01">入力設定</p>
+                                                <p data-module="m-borderTitle01">入力設定</p>
                                             </div>
                                             <div class="area is-field">
                                                 <div class="c-formEditor__row">
@@ -255,7 +255,7 @@ if (empty($f['required']) || in_array($f['type'], ['radio', 'select'], true)) {
                                 <div class="wrapper">
                                     <div class="block is-contents">
                                         <div class="area is-title">
-                                            <p data-module="m-boldTitle01">表示設定</p>
+                                            <p data-module="m-borderTitle01">表示設定</p>
                                         </div>
                                         <div class="area is-field">
                                             <div class="c-formEditor__row">

@@ -287,6 +287,13 @@ body.l-adminShell01 {
   color: #334155;
 }
 
+[data-module="m-borderTitle01"] {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 700;
+  color: #334155;
+}
+
 // --- パネル・ツールバー ---
 [data-module="c-panel01"] {
   background: #fff;
@@ -1038,11 +1045,8 @@ form.is-inline {
             background: #e2e8f0;
           }
 
-          > [data-module="m-boldTitle01"] {
+          > [data-module="m-borderTitle01"] {
             margin: 0;
-            font-size: 13px;
-            font-weight: 700;
-            color: #334155;
           }
         }
       }

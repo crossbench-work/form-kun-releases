@@ -395,6 +395,13 @@ body.l-adminShell01 a:hover {
   color: #334155;
 }
 
+[data-module=m-borderTitle01] {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 700;
+  color: #334155;
+}
+
 [data-module=c-panel01] {
   background: #fff;
   border: 1px solid #e2e8f0;
@@ -994,11 +1001,8 @@ form.is-inline {
   height: 1px;
   background: #e2e8f0;
 }
-[data-module=m-formBuilder01] .c-formEditor__section > .wrapper > .block.is-contents > .area.is-title > [data-module=m-boldTitle01] {
+[data-module=m-formBuilder01] .c-formEditor__section > .wrapper > .block.is-contents > .area.is-title > [data-module=m-borderTitle01] {
   margin: 0;
-  font-size: 13px;
-  font-weight: 700;
-  color: #334155;
 }
 [data-module=m-formBuilder01] .c-formEditor__item.is-collapsed > .wrapper > .block.is-contents > .area.is-body {
   display: none;
