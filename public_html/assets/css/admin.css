@@ -371,13 +371,13 @@ body.l-adminShell01 a:hover {
   color: #374151;
 }
 
-.m-panel01 {
+[data-module=c-panel01] {
   background: #fff;
   border: 1px solid #e2e8f0;
   border-radius: 8px;
   margin-bottom: 16px;
 }
-.m-panel01 > .wrapper > .block {
+[data-module=c-panel01] > .wrapper > .block {
   padding: 20px 24px;
 }
 
@@ -636,35 +636,35 @@ form.is-inline {
   word-break: break-word;
 }
 
-.m-panel01 > .wrapper > .block .box.is-field {
+[data-module=c-panel01] > .wrapper > .block .box.is-field {
   margin-bottom: 16px;
 }
-.m-panel01 > .wrapper > .block .box.is-field label,
-.m-panel01 > .wrapper > .block .label {
+[data-module=c-panel01] > .wrapper > .block .box.is-field label,
+[data-module=c-panel01] > .wrapper > .block .label {
   display: block;
   font-weight: 600;
   margin-bottom: 4px;
   color: #374151;
 }
-.m-panel01 > .wrapper > .block .text.is-help {
+[data-module=c-panel01] > .wrapper > .block .text.is-help {
   font-size: 13px;
   color: #6b7280;
   margin: 4px 0 0;
 }
-.m-panel01 > .wrapper > .block .text.is-error {
+[data-module=c-panel01] > .wrapper > .block .text.is-error {
   color: #b91c1c;
   font-size: 13px;
   margin: 4px 0 0;
 }
-.m-panel01 > .wrapper > .block input[type=text],
-.m-panel01 > .wrapper > .block input[type=email],
-.m-panel01 > .wrapper > .block input[type=tel],
-.m-panel01 > .wrapper > .block input[type=number],
-.m-panel01 > .wrapper > .block input[type=password],
-.m-panel01 > .wrapper > .block input[type=date],
-.m-panel01 > .wrapper > .block input[type=time],
-.m-panel01 > .wrapper > .block textarea,
-.m-panel01 > .wrapper > .block select {
+[data-module=c-panel01] > .wrapper > .block input[type=text],
+[data-module=c-panel01] > .wrapper > .block input[type=email],
+[data-module=c-panel01] > .wrapper > .block input[type=tel],
+[data-module=c-panel01] > .wrapper > .block input[type=number],
+[data-module=c-panel01] > .wrapper > .block input[type=password],
+[data-module=c-panel01] > .wrapper > .block input[type=date],
+[data-module=c-panel01] > .wrapper > .block input[type=time],
+[data-module=c-panel01] > .wrapper > .block textarea,
+[data-module=c-panel01] > .wrapper > .block select {
   width: 100%;
   padding: 8px 10px;
   border: 1px solid #cbd5e1;
@@ -674,17 +674,17 @@ form.is-inline {
   background: #fff;
   color: #111;
 }
-.m-panel01 > .wrapper > .block textarea {
+[data-module=c-panel01] > .wrapper > .block textarea {
   min-height: 100px;
   resize: vertical;
 }
-.m-panel01 > .wrapper > .block .area.is-actions {
+[data-module=c-panel01] > .wrapper > .block .area.is-actions {
   margin-top: 16px;
   display: flex;
   gap: 10px;
   flex-wrap: wrap;
 }
-.m-panel01 > .wrapper > .block .btn {
+[data-module=c-panel01] > .wrapper > .block .btn {
   display: inline-block;
   padding: 8px 16px;
   border: 1px solid #cbd5e1;
@@ -697,31 +697,31 @@ form.is-inline {
   text-decoration: none;
   line-height: 1.4;
 }
-.m-panel01 > .wrapper > .block .btn:hover {
+[data-module=c-panel01] > .wrapper > .block .btn:hover {
   background: #f1f5f9;
   text-decoration: none;
 }
-.m-panel01 > .wrapper > .block .btn.is-primary {
+[data-module=c-panel01] > .wrapper > .block .btn.is-primary {
   background: #2563eb;
   border-color: #2563eb;
   color: #fff;
 }
-.m-panel01 > .wrapper > .block .btn.is-primary:hover {
+[data-module=c-panel01] > .wrapper > .block .btn.is-primary:hover {
   background: #1d4ed8;
 }
-.m-panel01 > .wrapper > .block .btn.is-danger {
+[data-module=c-panel01] > .wrapper > .block .btn.is-danger {
   background: #dc2626;
   border-color: #dc2626;
   color: #fff;
 }
-.m-panel01 > .wrapper > .block .btn.is-danger:hover {
+[data-module=c-panel01] > .wrapper > .block .btn.is-danger:hover {
   background: #b91c1c;
 }
-.m-panel01 > .wrapper > .block .btn.is-sm {
+[data-module=c-panel01] > .wrapper > .block .btn.is-sm {
   padding: 4px 10px;
   font-size: 13px;
 }
-.m-panel01 > .wrapper > .block .btn.is-icon {
+[data-module=c-panel01] > .wrapper > .block .btn.is-icon {
   flex-shrink: 0;
   padding: 8px 10px;
   line-height: 1;
@@ -729,7 +729,7 @@ form.is-inline {
   align-items: center;
   justify-content: center;
 }
-.m-panel01 > .wrapper > .block .is-required {
+[data-module=c-panel01] > .wrapper > .block .is-required {
   display: inline-block;
   background: #ef4444;
   color: #fff;
@@ -739,14 +739,14 @@ form.is-inline {
   margin-left: 4px;
   font-weight: 400;
 }
-.m-panel01 > .wrapper > .block .label.is-choice {
+[data-module=c-panel01] > .wrapper > .block .label.is-choice {
   display: inline-flex;
   align-items: center;
   gap: 6px;
   font-weight: 400;
   margin-bottom: 0;
 }
-.m-panel01 > .wrapper > .block .fb-basic-label-row {
+[data-module=c-panel01] > .wrapper > .block .fb-basic-label-row {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -754,17 +754,17 @@ form.is-inline {
   flex-wrap: wrap;
   margin-bottom: 6px;
 }
-.m-panel01 > .wrapper > .block .fb-basic-display-toggle {
+[data-module=c-panel01] > .wrapper > .block .fb-basic-display-toggle {
   font-size: 13px;
   color: #64748b;
 }
-.m-panel01 > .wrapper > .block .fb-description-toolbar {
+[data-module=c-panel01] > .wrapper > .block .fb-description-toolbar {
   display: flex;
   justify-content: flex-end;
   margin-top: 16px;
   margin-bottom: 16px;
 }
-.m-panel01 > .wrapper > .block .fb-panel-header {
+[data-module=c-panel01] > .wrapper > .block .fb-panel-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -772,21 +772,21 @@ form.is-inline {
   margin-bottom: 12px;
   flex-wrap: wrap;
 }
-.m-panel01 > .wrapper > .block .fb-panel-header h2 {
+[data-module=c-panel01] > .wrapper > .block .fb-panel-header h2 {
   margin-bottom: 0;
 }
-.m-panel01 > .wrapper > .block .fb-description-blocks {
+[data-module=c-panel01] > .wrapper > .block .fb-description-blocks {
   display: flex;
   flex-direction: column;
   gap: 16px;
 }
-.m-panel01 > .wrapper > .block .fb-description-block {
+[data-module=c-panel01] > .wrapper > .block .fb-description-block {
   border: 1px solid #e2e8f0;
   border-radius: 8px;
   padding: 16px;
   background: #f8fafc;
 }
-.m-panel01 > .wrapper > .block .fb-description-block-header {
+[data-module=c-panel01] > .wrapper > .block .fb-description-block-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -794,20 +794,20 @@ form.is-inline {
   margin-bottom: 12px;
   flex-wrap: wrap;
 }
-.m-panel01 > .wrapper > .block .fb-description-block-title {
+[data-module=c-panel01] > .wrapper > .block .fb-description-block-title {
   color: #334155;
 }
-.m-panel01 > .wrapper > .block .fb-description-remove {
+[data-module=c-panel01] > .wrapper > .block .fb-description-remove {
   flex-shrink: 0;
 }
-.m-panel01 > .wrapper > .block .fb-description-block-controls {
+[data-module=c-panel01] > .wrapper > .block .fb-description-block-controls {
   align-items: center;
   margin-bottom: 12px;
 }
-.m-panel01 > .wrapper > .block .fb-description-position-wrap {
+[data-module=c-panel01] > .wrapper > .block .fb-description-position-wrap {
   flex: 1 1 200px;
 }
-.m-panel01 > .wrapper > .block .fb-description-visible-wrap {
+[data-module=c-panel01] > .wrapper > .block .fb-description-visible-wrap {
   flex: 0 0 auto;
   min-width: auto;
   display: flex;

@@ -4,7 +4,7 @@
     <a class="btn is-primary" href="<?= e(base_path('/admin/forms/new')) ?>">＋ 新規作成</a>
 </div>
 
-<section class="m-panel01">
+<div data-module="c-panel01">
     <div class="wrapper">
         <div class="block">
         <?php if (empty($forms)): ?>
@@ -45,4 +45,4 @@
         <?php endif; ?>
         </div>
     </div>
-</section>
+</div>

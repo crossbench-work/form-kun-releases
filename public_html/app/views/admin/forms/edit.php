@@ -96,7 +96,7 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
         </div>
 
         <div id="tab-panel-basic" class="box is-tabPanel" role="tabpanel" aria-labelledby="tab-btn-basic">
-    <section class="m-panel01">
+    <div data-module="c-panel01">
         <div class="wrapper">
             <div class="block">
             <h2>基本設定</h2>
@@ -125,11 +125,11 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
             </div>
             </div>
         </div>
-    </section>
+    </div>
         </div>
 
         <div id="tab-panel-fields" class="box is-tabPanel" role="tabpanel" aria-labelledby="tab-btn-fields" hidden>
-    <section class="m-panel01">
+    <div data-module="c-panel01">
         <div class="wrapper">
             <div class="block">
             <div class="fb-panel-header">
@@ -146,10 +146,10 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
             <?php $renderDescriptionEditor('description_blocks', $descriptionBlocks, 'input'); ?>
             </div>
         </div>
-    </section>
-    <section class="m-panel01" data-module="m-formBuilder01">
+    </div>
+    <div data-module="c-panel01">
         <div class="wrapper">
-            <div class="block">
+            <div class="block" data-module="m-formBuilder01">
             <h2>項目設定</h2>
             <ul id="fb-fields" class="fb-fields">
             <?php foreach ($sortableFields as $i => $f): ?>
@@ -169,8 +169,8 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
             <?php endif; ?>
             </div>
         </div>
-    </section>
-    <section class="m-panel01">
+    </div>
+    <div data-module="c-panel01">
         <div class="wrapper">
             <div class="block">
             <h2>スパム対策</h2>
@@ -182,8 +182,8 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
             </div>
             </div>
         </div>
-    </section>
-    <section class="m-panel01">
+    </div>
+    <div data-module="c-panel01">
         <div class="wrapper">
             <div class="block">
             <h2>ボタン設定</h2>
@@ -193,11 +193,11 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
             </div>
             </div>
         </div>
-    </section>
+    </div>
         </div>
 
         <div id="tab-panel-confirm" class="box is-tabPanel" role="tabpanel" aria-labelledby="tab-btn-confirm" hidden>
-    <section class="m-panel01">
+    <div data-module="c-panel01">
         <div class="wrapper">
             <div class="block">
             <div class="fb-panel-header">
@@ -214,8 +214,8 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
             <?php $renderDescriptionEditor('confirm_blocks', $confirmBlocks, 'simple'); ?>
             </div>
         </div>
-    </section>
-    <section class="m-panel01">
+    </div>
+    <div data-module="c-panel01">
         <div class="wrapper">
             <div class="block">
             <h2>ボタン設定</h2>
@@ -229,11 +229,11 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
             </div>
             </div>
         </div>
-    </section>
+    </div>
         </div>
 
         <div id="tab-panel-thanks" class="box is-tabPanel" role="tabpanel" aria-labelledby="tab-btn-thanks" hidden>
-    <section class="m-panel01">
+    <div data-module="c-panel01">
         <div class="wrapper">
             <div class="block">
             <div class="fb-panel-header">
@@ -250,8 +250,8 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
             <?php $renderDescriptionEditor('thanks_blocks', $thanksBlocks, 'simple'); ?>
             </div>
         </div>
-    </section>
-    <section class="m-panel01">
+    </div>
+    <div data-module="c-panel01">
         <div class="wrapper">
             <div class="block">
             <h2>ボタン設定</h2>
@@ -265,11 +265,11 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
             </div>
             </div>
         </div>
-    </section>
+    </div>
         </div>
 
         <div id="tab-panel-mail" class="box is-tabPanel" role="tabpanel" aria-labelledby="tab-btn-mail" hidden>
-    <section class="m-panel01">
+    <div data-module="c-panel01">
         <div class="wrapper">
             <div class="block">
             <h2>管理者通知メール</h2>
@@ -288,9 +288,9 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
             </div>
             </div>
         </div>
-    </section>
+    </div>
 
-    <section class="m-panel01">
+    <div data-module="c-panel01">
         <div class="wrapper">
             <div class="block">
             <h2>送信者への自動返信メール</h2>
@@ -314,7 +314,7 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
             </div>
             </div>
         </div>
-    </section>
+    </div>
         </div>
 
     </div>

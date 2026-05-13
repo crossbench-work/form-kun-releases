@@ -5,7 +5,7 @@
     <a class="btn" href="<?= e(base_path('/admin/forms')) ?>">フォーム一覧へ</a>
 </div>
 
-<section class="m-panel01">
+<div data-module="c-panel01">
     <div class="wrapper">
         <div class="block">
             <form method="get" action="<?= e(base_path('/admin/forms/' . $form['id'] . '/submissions')) ?>" class="m-toolbar01">
@@ -110,4 +110,4 @@
             <?php endif; ?>
         </div>
     </div>
-</section>
+</div>

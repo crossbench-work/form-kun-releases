@@ -1,6 +1,6 @@
 <h1 class="title">ダッシュボード</h1>
 
-<section class="m-panel01">
+<div data-module="c-panel01">
     <div class="wrapper">
         <div class="block">
             <h2>フォーム別 受信件数</h2>
@@ -27,9 +27,9 @@
             <?php endif; ?>
         </div>
     </div>
-</section>
+</div>
 
-<section class="m-panel01">
+<div data-module="c-panel01">
     <div class="wrapper">
         <div class="block">
             <h2>最近の送信</h2>
@@ -52,4 +52,4 @@
             <?php endif; ?>
         </div>
     </div>
-</section>
+</div>

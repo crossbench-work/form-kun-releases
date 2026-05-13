@@ -9,7 +9,7 @@
 <form method="post" action="<?= e($isNew ? base_path('/admin/users') : base_path('/admin/users/' . (int)$user['id'])) ?>">
     <?= \Core\Csrf::field() ?>
 
-    <section class="m-panel01">
+    <div data-module="c-panel01">
         <div class="wrapper">
             <div class="block">
                 <div class="box is-field">
@@ -54,7 +54,7 @@
                 </div>
             </div>
         </div>
-    </section>
+    </div>
 
     <div class="area is-actions">
         <button type="submit" class="btn is-primary"><?= $isNew ? '作成する' : '保存する' ?></button>

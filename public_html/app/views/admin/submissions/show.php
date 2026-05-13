@@ -10,7 +10,7 @@
     </form>
 </div>
 
-<section class="m-panel01">
+<div data-module="c-panel01">
     <div class="wrapper">
         <div class="block">
             <table class="table is-kv">
@@ -21,9 +21,9 @@
             </table>
         </div>
     </div>
-</section>
+</div>
 
-<section class="m-panel01">
+<div data-module="c-panel01">
     <div class="wrapper">
         <div class="block">
             <h2>入力内容</h2>
@@ -79,4 +79,4 @@
             </table>
         </div>
     </div>
-</section>
+</div>
