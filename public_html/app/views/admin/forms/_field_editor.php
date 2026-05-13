@@ -71,7 +71,9 @@ if (empty($f['required']) || in_array($f['type'], ['radio', 'select'], true)) {
         <div class="fb-row">
             <div>
                 <label>ラベル</label>
-                <input data-module="m-inout01" type="text" name="fields[<?= $idx ?>][label]" class="fb-input-label" value="<?= e($f['label']) ?>">
+                <div data-module="m-input01">
+                    <input type="text" name="fields[<?= $idx ?>][label]" class="fb-input-label" value="<?= e($f['label']) ?>">
+                </div>
             </div>
             <?php if ($isAgreementField): ?>
                 <input type="hidden" name="fields[<?= $idx ?>][field_key]" value="<?= e($agreementDefaults['field_key']) ?>">
@@ -80,7 +82,9 @@ if (empty($f['required']) || in_array($f['type'], ['radio', 'select'], true)) {
                 <div class="fb-field-key-col">
                     <label>フィールドキー</label>
                     <div class="fb-field-key-row">
-                        <input data-module="m-inout01" type="text" name="fields[<?= $idx ?>][field_key]" value="<?= e($f['field_key']) ?>" class="fb-field-key-input<?= $fkLocked ? ' is-locked' : '' ?>" <?= $fkLocked ? 'readonly' : '' ?> spellcheck="false">
+                        <div data-module="m-input01">
+                            <input type="text" name="fields[<?= $idx ?>][field_key]" value="<?= e($f['field_key']) ?>" class="fb-field-key-input<?= $fkLocked ? ' is-locked' : '' ?>" <?= $fkLocked ? 'readonly' : '' ?> spellcheck="false">
+                        </div>
                         <button type="button" class="btn is-icon fb-field-key-lock" aria-label="<?= $fkLocked ? 'キーを編集' : 'キーをロック' ?>" title="<?= $fkLocked ? '編集する' : 'ロックする' ?>" aria-pressed="<?= $fkLocked ? 'true' : 'false' ?>">
                             <svg class="fb-icon-lock-closed" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" <?= $fkLocked ? '' : 'style="display:none"' ?> aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
                             <svg class="fb-icon-lock-open" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" <?= $fkLocked ? 'style="display:none"' : '' ?> aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M8 11V7a4 4 0 118 0m-4 8v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2z"/></svg>
@@ -89,11 +93,13 @@ if (empty($f['required']) || in_array($f['type'], ['radio', 'select'], true)) {
                 </div>
                 <div>
                     <label>型</label>
-                    <select data-module="m-inout01" name="fields[<?= $idx ?>][type]" class="fb-type">
-                    <?php foreach (\Models\FormField::TYPE_LABELS() as $tVal => $tLabel): ?>
-                        <option value="<?= e($tVal) ?>" <?= $f['type'] === $tVal ? 'selected' : '' ?>><?= e($tLabel) ?></option>
-                    <?php endforeach; ?>
-                    </select>
+                    <div data-module="m-input01">
+                        <select name="fields[<?= $idx ?>][type]" class="fb-type">
+                        <?php foreach (\Models\FormField::TYPE_LABELS() as $tVal => $tLabel): ?>
+                            <option value="<?= e($tVal) ?>" <?= $f['type'] === $tVal ? 'selected' : '' ?>><?= e($tLabel) ?></option>
+                        <?php endforeach; ?>
+                        </select>
+                    </div>
                 </div>
             <?php endif; ?>
         </div>
@@ -104,7 +110,7 @@ if (empty($f['required']) || in_array($f['type'], ['radio', 'select'], true)) {
         <input type="hidden" name="fields[<?= $idx ?>][checkbox_limit_enabled]" class="fb-checkbox-limit-enabled" value="0">
         <input type="hidden" name="fields[<?= $idx ?>][checkbox_min_selections]" value="">
         <input type="hidden" name="fields[<?= $idx ?>][checkbox_max_selections]" value="">
-        <textarea data-module="m-inout01" name="fields[<?= $idx ?>][options]" class="fb-options-source" hidden><?= e($agreementDefaults['options']) ?></textarea>
+        <textarea name="fields[<?= $idx ?>][options]" class="fb-options-source" hidden><?= e($agreementDefaults['options']) ?></textarea>
         <input type="hidden" name="fields[<?= $idx ?>][max_length]" value="">
     <?php else: ?>
         <div class="fb-field-section">
@@ -142,19 +148,23 @@ if (empty($f['required']) || in_array($f['type'], ['radio', 'select'], true)) {
                                 $hiddenVal = $showCustom ? $customVal : ($selVal === $FB_REGEX_CHECKBOX_LIMIT ? '' : $selVal);
                                 ?>
                                 <div class="fb-regex-row">
-                                    <select data-module="m-inout01" class="fb-regex-kind" aria-label="入力チェックの種類">
-                                        <?php foreach ($regexPresetChoices as $patVal => $patLabel): ?>
-                                            <?php if ($f['type'] === 'checkbox' && $patVal !== $FB_REGEX_CUSTOM): ?>
-                                                <?php continue; ?>
+                                    <div data-module="m-input01">
+                                        <select class="fb-regex-kind" aria-label="入力チェックの種類">
+                                            <?php foreach ($regexPresetChoices as $patVal => $patLabel): ?>
+                                                <?php if ($f['type'] === 'checkbox' && $patVal !== $FB_REGEX_CUSTOM): ?>
+                                                    <?php continue; ?>
+                                                <?php endif; ?>
+                                                <option value="<?= e($patVal) ?>" <?= $selVal === $patVal ? 'selected' : '' ?>><?= e($patLabel) ?></option>
+                                            <?php endforeach; ?>
+                                            <?php if ($f['type'] === 'checkbox'): ?>
+                                                <option value="<?= e($FB_REGEX_CHECKBOX_LIMIT) ?>" <?= $selVal === $FB_REGEX_CHECKBOX_LIMIT ? 'selected' : '' ?>>選択数を設定する</option>
                                             <?php endif; ?>
-                                            <option value="<?= e($patVal) ?>" <?= $selVal === $patVal ? 'selected' : '' ?>><?= e($patLabel) ?></option>
-                                        <?php endforeach; ?>
-                                        <?php if ($f['type'] === 'checkbox'): ?>
-                                            <option value="<?= e($FB_REGEX_CHECKBOX_LIMIT) ?>" <?= $selVal === $FB_REGEX_CHECKBOX_LIMIT ? 'selected' : '' ?>>選択数を設定する</option>
-                                        <?php endif; ?>
-                                    </select>
+                                        </select>
+                                    </div>
                                     <div class="fb-regex-custom-wrap"<?= $showCustom ? '' : ' style="display:none"' ?>>
-                                        <input data-module="m-inout01" type="text" class="fb-regex-custom" value="<?= e($customVal) ?>" placeholder="正規表現" spellcheck="false" autocomplete="off">
+                                        <div data-module="m-input01">
+                                            <input type="text" class="fb-regex-custom" value="<?= e($customVal) ?>" placeholder="正規表現" spellcheck="false" autocomplete="off">
+                                        </div>
                                     </div>
                                     <input type="hidden" class="fb-regex-value" value="<?= e($hiddenVal) ?>" spellcheck="false">
                                 </div>
@@ -163,11 +173,15 @@ if (empty($f['required']) || in_array($f['type'], ['radio', 'select'], true)) {
                             <div class="fb-checkbox-limit-settings" <?= ($f['type'] === 'checkbox' && !empty($f['required']) && !empty($f['checkbox_limit_enabled'])) ? '' : 'style="display:none"' ?>>
                                 <div>
                                     <label>最小選択数</label>
-                                    <input data-module="m-inout01" type="number" min="1" name="fields[<?= $idx ?>][checkbox_min_selections]" value="<?= e($f['checkbox_min_selections'] ?? '') ?>">
+                                    <div data-module="m-input01">
+                                        <input type="number" min="1" name="fields[<?= $idx ?>][checkbox_min_selections]" value="<?= e($f['checkbox_min_selections'] ?? '') ?>">
+                                    </div>
                                 </div>
                                 <div>
                                     <label>最大選択数</label>
-                                    <input data-module="m-inout01" type="number" min="1" name="fields[<?= $idx ?>][checkbox_max_selections]" value="<?= e($f['checkbox_max_selections'] ?? '') ?>">
+                                    <div data-module="m-input01">
+                                        <input type="number" min="1" name="fields[<?= $idx ?>][checkbox_max_selections]" value="<?= e($f['checkbox_max_selections'] ?? '') ?>">
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -175,7 +189,9 @@ if (empty($f['required']) || in_array($f['type'], ['radio', 'select'], true)) {
                 </div>
                 <div class="fb-max-length-wrap" <?= in_array($f['type'], ['radio', 'checkbox', 'select'], true) ? 'style="display:none"' : '' ?>>
                     <label>最大文字数（任意）</label>
-                    <input data-module="m-inout01" type="number" min="1" name="fields[<?= $idx ?>][max_length]" value="<?= e($f['max_length']) ?>">
+                    <div data-module="m-input01">
+                        <input type="number" min="1" name="fields[<?= $idx ?>][max_length]" value="<?= e($f['max_length']) ?>">
+                    </div>
                 </div>
             </div>
             <div class="area is-field fb-options" <?= in_array($f['type'], ['radio','checkbox','select'], true) ? '' : 'style="display:none"' ?>>
@@ -186,7 +202,9 @@ if (empty($f['required']) || in_array($f['type'], ['radio', 'select'], true)) {
                         <?php foreach ($choiceOptions as $choiceOpt): ?>
                             <div class="fb-row fb-choiceItem" data-choice-item>
                                 <div>
-                                    <input data-module="m-inout01" type="text" class="fb-choice-input" value="<?= e($choiceOpt) ?>" placeholder="選択肢">
+                                    <div data-module="m-input01">
+                                        <input type="text" class="fb-choice-input" value="<?= e($choiceOpt) ?>" placeholder="選択肢">
+                                    </div>
                                 </div>
                                 <div class="fb-actions">
                                     <button type="button" class="btn is-sm fb-choice-up">↑</button>
@@ -199,7 +217,7 @@ if (empty($f['required']) || in_array($f['type'], ['radio', 'select'], true)) {
                     <div class="area is-actions">
                         <button type="button" class="btn is-sm fb-choice-add">＋ 選択肢を追加</button>
                     </div>
-                    <textarea data-module="m-inout01" name="fields[<?= $idx ?>][options]" class="fb-options-source" rows="4" hidden><?= e($f['options'] ?? '') ?></textarea>
+                    <textarea name="fields[<?= $idx ?>][options]" class="fb-options-source" rows="4" hidden><?= e($f['options'] ?? '') ?></textarea>
                 </div>
             </div>
         </div>
@@ -209,37 +227,51 @@ if (empty($f['required']) || in_array($f['type'], ['radio', 'select'], true)) {
         <div class="fb-row">
             <div class="fb-placeholder-wrap" <?= ($isTextPair || in_array($f['type'], ['radio', 'checkbox', 'select'], true)) ? 'style="display:none"' : '' ?>>
                 <label>プレースホルダ（任意）</label>
-                <input data-module="m-inout01" type="text" name="fields[<?= $idx ?>][placeholder]" value="<?= e($f['placeholder']) ?>">
+                <div data-module="m-input01">
+                    <input type="text" name="fields[<?= $idx ?>][placeholder]" value="<?= e($f['placeholder']) ?>">
+                </div>
             </div>
         </div>
         <div class="fb-row fb-text-pair-settings" <?= $isTextPair ? '' : 'style="display:none"' ?>>
             <div>
                 <label>1つ目の入力欄の表示名</label>
-                <input data-module="m-inout01" type="text" name="fields[<?= $idx ?>][pair_label_left]" value="<?= e($f['pair_label_left'] ?? '') ?>">
+                <div data-module="m-input01">
+                    <input type="text" name="fields[<?= $idx ?>][pair_label_left]" value="<?= e($f['pair_label_left'] ?? '') ?>">
+                </div>
             </div>
             <div>
                 <label>2つ目の入力欄の表示名</label>
-                <input data-module="m-inout01" type="text" name="fields[<?= $idx ?>][pair_label_right]" value="<?= e($f['pair_label_right'] ?? '') ?>">
+                <div data-module="m-input01">
+                    <input type="text" name="fields[<?= $idx ?>][pair_label_right]" value="<?= e($f['pair_label_right'] ?? '') ?>">
+                </div>
             </div>
         </div>
         <div class="fb-row fb-text-pair-placeholders" <?= $isTextPair ? '' : 'style="display:none"' ?>>
             <div>
                 <label>1つ目のプレースホルダ（任意）</label>
-                <input data-module="m-inout01" type="text" name="fields[<?= $idx ?>][pair_placeholder_left]" value="<?= e($f['pair_placeholder_left'] ?? '') ?>">
+                <div data-module="m-input01">
+                    <input type="text" name="fields[<?= $idx ?>][pair_placeholder_left]" value="<?= e($f['pair_placeholder_left'] ?? '') ?>">
+                </div>
             </div>
             <div>
                 <label>2つ目のプレースホルダ（任意）</label>
-                <input data-module="m-inout01" type="text" name="fields[<?= $idx ?>][pair_placeholder_right]" value="<?= e($f['pair_placeholder_right'] ?? '') ?>">
+                <div data-module="m-input01">
+                    <input type="text" name="fields[<?= $idx ?>][pair_placeholder_right]" value="<?= e($f['pair_placeholder_right'] ?? '') ?>">
+                </div>
             </div>
         </div>
         <div class="area is-field">
             <?php if ($isAgreementField): ?>
                 <label class="label">説明文</label>
-                <textarea data-module="m-inout01" name="fields[<?= $idx ?>][help_text]" rows="6"><?= e($f['help_text']) ?></textarea>
+                <div data-module="m-input01">
+                    <textarea name="fields[<?= $idx ?>][help_text]" rows="6"><?= e($f['help_text']) ?></textarea>
+                </div>
                 <p class="text is-help">HTML を直接入力できます。説明文はチェックボックスの上に表示されます。</p>
             <?php else: ?>
                 <label class="label">備考</label>
-                <textarea data-module="m-inout01" name="fields[<?= $idx ?>][help_text]" rows="3"><?= e($f['help_text']) ?></textarea>
+                <div data-module="m-input01">
+                    <textarea name="fields[<?= $idx ?>][help_text]" rows="3"><?= e($f['help_text']) ?></textarea>
+                </div>
             <?php endif; ?>
         </div>
     </div>

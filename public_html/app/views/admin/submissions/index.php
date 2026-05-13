@@ -13,9 +13,17 @@
                         <div class="block is-contents">
                             <div class="area is-field">
                                 <form method="get" action="<?= e(base_path('/admin/forms/' . $form['id'] . '/submissions')) ?>" class="m-toolbar01">
-                                    <input data-module="m-inout01" type="text" name="q" value="<?= e($q) ?>" placeholder="キーワード検索（送信内容）" style="width:280px">
-                                    <label class="label">期間 <input data-module="m-inout01" type="date" name="from" value="<?= e($from) ?>"></label>
-                                    <label class="label">〜 <input data-module="m-inout01" type="date" name="to" value="<?= e($to) ?>"></label>
+                                    <div data-module="m-input01">
+                                        <input type="text" name="q" value="<?= e($q) ?>" placeholder="キーワード検索（送信内容）" style="width:280px">
+                                    </div>
+                                    <label class="label" for="submissions-from">期間</label>
+                                    <div data-module="m-input01">
+                                        <input type="date" id="submissions-from" name="from" value="<?= e($from) ?>">
+                                    </div>
+                                    <label class="label" for="submissions-to">〜</label>
+                                    <div data-module="m-input01">
+                                        <input type="date" id="submissions-to" name="to" value="<?= e($to) ?>">
+                                    </div>
                                     <button class="btn" type="submit">検索</button>
                                     <?php if ($q !== '' || $from !== '' || $to !== ''): ?>
                                         <a class="btn" href="<?= e(base_path('/admin/forms/' . $form['id'] . '/submissions')) ?>">リセット</a>

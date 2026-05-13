@@ -11,12 +11,16 @@
     <input type="hidden" name="token" value="<?= e($token) ?>">
     <div class="box is-field">
         <label class="label" for="password">新しいパスワード</label>
-        <input data-module="m-inout01" type="password" id="password" name="password" autocomplete="new-password" required minlength="8">
+        <div data-module="m-input01">
+            <input type="password" id="password" name="password" autocomplete="new-password" required minlength="8">
+        </div>
         <p class="text is-help">8文字以上</p>
     </div>
     <div class="box is-field">
         <label class="label" for="password_confirm">新しいパスワード（確認）</label>
-        <input data-module="m-inout01" type="password" id="password_confirm" name="password_confirm" autocomplete="new-password" required>
+        <div data-module="m-input01">
+            <input type="password" id="password_confirm" name="password_confirm" autocomplete="new-password" required>
+        </div>
     </div>
     <div class="area is-actions">
         <button type="submit" class="btn is-primary">設定する</button>

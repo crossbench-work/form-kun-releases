@@ -18,42 +18,56 @@
                             <div class="area is-field">
                                 <label class="label">ユーザー名</label>
                                 <?php if ($isNew): ?>
-                                    <input data-module="m-inout01" type="text" name="username" value="<?= e($user['username']) ?>" required>
+                                    <div data-module="m-input01">
+                                        <input type="text" name="username" value="<?= e($user['username']) ?>" required>
+                                    </div>
                                     <p class="text is-help">半角英数字・記号(_.-)で 3〜64 文字。後から変更できません。</p>
                                 <?php else: ?>
-                                    <input data-module="m-inout01" type="text" value="<?= e($user['username']) ?>" disabled>
+                                    <div data-module="m-input01">
+                                        <input type="text" value="<?= e($user['username']) ?>" disabled>
+                                    </div>
                                 <?php endif; ?>
                             </div>
 
                             <div class="area is-field">
                                 <label class="label">表示名</label>
-                                <input data-module="m-inout01" type="text" name="display_name" value="<?= e($user['display_name'] ?? '') ?>">
+                                <div data-module="m-input01">
+                                    <input type="text" name="display_name" value="<?= e($user['display_name'] ?? '') ?>">
+                                </div>
                             </div>
 
                             <div class="area is-field">
                                 <label class="label">メールアドレス（任意）</label>
-                                <input data-module="m-inout01" type="email" name="email" value="<?= e($user['email'] ?? '') ?>" autocomplete="email">
+                                <div data-module="m-input01">
+                                    <input type="email" name="email" value="<?= e($user['email'] ?? '') ?>" autocomplete="email">
+                                </div>
                                 <p class="text is-help">「パスワードを忘れたとき」に再設定リンクを送るために使用します。</p>
                             </div>
 
                             <div class="area is-field">
                                 <label class="label">権限</label>
-                                <select data-module="m-inout01" name="role">
-                                    <option value="editor" <?= ($user['role'] ?? '') === 'editor' ? 'selected' : '' ?>>editor（フォーム/送信履歴の編集）</option>
-                                    <option value="admin"  <?= ($user['role'] ?? '') === 'admin'  ? 'selected' : '' ?>>admin（ユーザー管理含む全権限）</option>
-                                </select>
+                                <div data-module="m-input01">
+                                    <select name="role">
+                                        <option value="editor" <?= ($user['role'] ?? '') === 'editor' ? 'selected' : '' ?>>editor（フォーム/送信履歴の編集）</option>
+                                        <option value="admin"  <?= ($user['role'] ?? '') === 'admin'  ? 'selected' : '' ?>>admin（ユーザー管理含む全権限）</option>
+                                    </select>
+                                </div>
                             </div>
 
                             <div class="area is-field">
                                 <label class="label">パスワード <?php if ($isNew): ?><span class="is-required">必須</span><?php endif; ?></label>
-                                <input data-module="m-inout01" type="password" name="password" autocomplete="new-password" <?= $isNew ? 'required' : '' ?>>
+                                <div data-module="m-input01">
+                                    <input type="password" name="password" autocomplete="new-password" <?= $isNew ? 'required' : '' ?>>
+                                </div>
                                 <?php if (!$isNew): ?>
                                     <p class="text is-help">変更しない場合は空のままにしてください。</p>
                                 <?php endif; ?>
                             </div>
                             <div class="area is-field">
                                 <label class="label">パスワード（確認）</label>
-                                <input data-module="m-inout01" type="password" name="password_confirm" autocomplete="new-password">
+                                <div data-module="m-input01">
+                                    <input type="password" name="password_confirm" autocomplete="new-password">
+                                </div>
                             </div>
                         </div>
                     </div>

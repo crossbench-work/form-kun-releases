@@ -278,7 +278,13 @@ body.l-adminShell01 a:hover {
   font-weight: 400;
 }
 
-[data-module=m-inout01] {
+[data-module=m-input01] {
+  display: block;
+  width: 100%;
+}
+[data-module=m-input01] > input,
+[data-module=m-input01] > select,
+[data-module=m-input01] > textarea {
   width: 100%;
   padding: 8px 10px;
   border: 1px solid #cbd5e1;
@@ -288,10 +294,19 @@ body.l-adminShell01 a:hover {
   background: #fff;
   color: #111;
 }
-
-textarea[data-module=m-inout01] {
+[data-module=m-input01] > textarea {
   min-height: 100px;
   resize: vertical;
+}
+
+.m-toolbar01 [data-module=m-input01] {
+  display: inline-block;
+  width: auto;
+}
+.m-toolbar01 [data-module=m-input01] > input,
+.m-toolbar01 [data-module=m-input01] > select,
+.m-toolbar01 [data-module=m-input01] > textarea {
+  width: auto;
 }
 
 .l-adminHeader01 {

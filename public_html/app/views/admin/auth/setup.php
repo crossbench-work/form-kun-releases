@@ -13,26 +13,36 @@
     <?= \Core\Csrf::field() ?>
     <div class="box is-field">
         <label class="label" for="username">ユーザー名</label>
-        <input data-module="m-inout01" type="text" id="username" name="username" value="<?= e($old['username'] ?? '') ?>" required>
+        <div data-module="m-input01">
+            <input type="text" id="username" name="username" value="<?= e($old['username'] ?? '') ?>" required>
+        </div>
         <p class="text is-help">半角英数字・記号(_.-)で 3〜64 文字</p>
     </div>
     <div class="box is-field">
         <label class="label" for="display_name">表示名（任意）</label>
-        <input data-module="m-inout01" type="text" id="display_name" name="display_name" value="<?= e($old['display_name'] ?? '') ?>">
+        <div data-module="m-input01">
+            <input type="text" id="display_name" name="display_name" value="<?= e($old['display_name'] ?? '') ?>">
+        </div>
     </div>
     <div class="box is-field">
         <label class="label" for="email">メールアドレス（任意・推奨）</label>
-        <input data-module="m-inout01" type="email" id="email" name="email" value="<?= e($old['email'] ?? '') ?>" autocomplete="email">
+        <div data-module="m-input01">
+            <input type="email" id="email" name="email" value="<?= e($old['email'] ?? '') ?>" autocomplete="email">
+        </div>
         <p class="text is-help">パスワードを忘れたときに再設定メールを送るために使用します。</p>
     </div>
     <div class="box is-field">
         <label class="label" for="password">パスワード</label>
-        <input data-module="m-inout01" type="password" id="password" name="password" required>
+        <div data-module="m-input01">
+            <input type="password" id="password" name="password" required>
+        </div>
         <p class="text is-help">8文字以上を推奨</p>
     </div>
     <div class="box is-field">
         <label class="label" for="password_confirm">パスワード（確認）</label>
-        <input data-module="m-inout01" type="password" id="password_confirm" name="password_confirm" required>
+        <div data-module="m-input01">
+            <input type="password" id="password_confirm" name="password_confirm" required>
+        </div>
     </div>
     <div class="area is-actions">
         <button type="submit" class="btn is-primary">管理者を作成する</button>

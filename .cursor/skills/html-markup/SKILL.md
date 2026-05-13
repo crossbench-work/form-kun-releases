@@ -147,7 +147,7 @@ assets/
 - **l-**: **`.l-*` > `.wrapper`**。`.block` / `.area` / `.box` は **使わない**。
 - **m-**: **`.m-*` > `.wrapper`**。通常はモジュール内に **`.block` / `.area` / `.box` は使わない**。
 - **管理画面のパネル系コンポーネントは `data-module="c-panel01"` を外枠、`data-module="c-formBlock01"` を内側の実コンテンツに使う。`componentWrapper` のような別名ラッパーは増やさない**。
-- **管理画面の `input` / `select` / `textarea` は `data-module="m-inout01"` を付け、見た目は入力要素ごとの直指定ではなくこのモジュールに集約する**。
+- **管理画面の `input` / `select` / `textarea` は `<div data-module="m-input01">...</div>` の内側に置き、見た目は入力要素ごとの直指定ではなくこのモジュールに集約する**。
 
 ## `c-`（コンポーネント）
 
