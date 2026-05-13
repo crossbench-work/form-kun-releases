@@ -159,10 +159,10 @@ if (empty($f['required']) || in_array($f['type'], ['radio', 'select'], true)) {
                                                             </div>
                                                             <div class="block is-field">
                                                                 <div class="c-formEditor__validationControls">
-                                                                    <div class="c-formEditor__required">
+                                                                    <div data-module="m-requiredCheck01">
                                                                         <label class="label is-choice">
                                                                             <input type="checkbox" name="fields[<?= $idx ?>][required]" value="1" data-target="c-formEditor__required" <?= !empty($f['required']) ? 'checked' : '' ?>>
-                                                                            <span>必須にする</span>
+                                                                            <span>バリデーション</span>
                                                                         </label>
                                                                     </div>
                                                                     <div data-target="c-formEditor__regex" <?= (empty($f['required']) || in_array($f['type'], ['radio', 'select'], true)) ? 'style="display:none"' : '' ?>>

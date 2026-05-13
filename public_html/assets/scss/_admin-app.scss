@@ -312,6 +312,51 @@ body.l-adminShell01 {
   }
 }
 
+[data-module="m-deleteBtn01"] {
+  appearance: none;
+  border: 1px solid #fecaca;
+  background: #fff5f5;
+  color: #dc2626;
+  border-radius: 6px;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+
+  &:hover {
+    background: #fee2e2;
+    border-color: #fca5a5;
+  }
+}
+
+[data-module="m-requiredCheck01"] {
+  label {
+    display: block;
+    padding: 8px 12px;
+    font-size: 11px;
+    background: #efefef;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    cursor: pointer;
+    margin: 0;
+
+    input {
+      cursor: pointer;
+    }
+
+    span {
+      margin-left: 6px;
+    }
+
+    &:has(input:checked) {
+      background: #fee2e2;
+    }
+  }
+}
+
 // --- パネル・ツールバー ---
 [data-module="c-panel01"] {
   background: #fff;
@@ -1009,26 +1054,6 @@ form.is-inline {
     &:hover {
       background: #f8fafc;
       border-color: #94a3b8;
-    }
-  }
-
-  [data-module="m-deleteBtn01"] {
-    appearance: none;
-    border: 1px solid #fecaca;
-    background: #fff5f5;
-    color: #dc2626;
-    border-radius: 6px;
-    width: 32px;
-    height: 32px;
-    padding: 0;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-
-    &:hover {
-      background: #fee2e2;
-      border-color: #fca5a5;
     }
   }
 
