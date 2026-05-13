@@ -683,6 +683,9 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                                         </p>
                                     </div>
                                     <div class="box is-button">
+                                        <button type="button" data-module="m-arrowBtn01" data-type="up" data-target="c-formEditor__moveUp" aria-label="上へ移動" title="上へ移動">↑</button>
+                                    </div>
+                                    <div class="box is-button">
                                         <button type="button" data-module="m-arrowBtn01" data-type="down" data-target="c-formEditor__moveDown" aria-label="下へ移動" title="下へ移動">↓</button>
                                     </div>
                                 </div>
