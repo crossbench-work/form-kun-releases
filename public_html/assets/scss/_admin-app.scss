@@ -959,6 +959,10 @@ form.is-inline {
     flex-shrink: 0;
   }
 
+  .c-formEditor__itemHeader > .wrapper > .block.is-contents > .area.is-move {
+    display: flex;
+  }
+
   .c-formEditor__itemHeader > .wrapper > .block.is-contents > .area.is-summary {
     flex: 1;
     min-width: 0;
