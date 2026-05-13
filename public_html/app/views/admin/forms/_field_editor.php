@@ -90,12 +90,12 @@ if (empty($f['required']) || in_array($f['type'], ['radio', 'select'], true)) {
                                                 <div>
                                                     <label class="label" data-module="m-boldTitle01">ラベル</label>
                                                     <div data-module="m-input01">
-                                                        <input type="text" name="fields[<?= $idx ?>][label]" class="fb-input-label" value="<?= e($f['label']) ?>">
+                                                        <input type="text" name="fields[<?= $idx ?>][label]" data-target="c-formEditor__labelInput" value="<?= e($f['label']) ?>">
                                                     </div>
                                                 </div>
                                                 <?php if ($isAgreementField): ?>
                                                     <input type="hidden" name="fields[<?= $idx ?>][field_key]" value="<?= e($agreementDefaults['field_key']) ?>">
-                                                    <input type="hidden" name="fields[<?= $idx ?>][type]" value="<?= e($agreementDefaults['type']) ?>" class="fb-type">
+                                                    <input type="hidden" name="fields[<?= $idx ?>][type]" value="<?= e($agreementDefaults['type']) ?>" data-target="c-formEditor__type">
                                                 <?php else: ?>
                                                     <div class="c-formEditor__fieldKeyColumn">
                                                         <label class="label" data-module="m-boldTitle01">フィールドキー</label>
@@ -112,7 +112,7 @@ if (empty($f['required']) || in_array($f['type'], ['radio', 'select'], true)) {
                                                     <div>
                                                         <label class="label" data-module="m-boldTitle01">型</label>
                                                         <div data-module="m-input01">
-                                                            <select name="fields[<?= $idx ?>][type]" class="fb-type">
+                                                            <select name="fields[<?= $idx ?>][type]" data-target="c-formEditor__type">
                                                             <?php foreach (\Models\FormField::TYPE_LABELS() as $tVal => $tLabel): ?>
                                                                 <option value="<?= e($tVal) ?>" <?= $f['type'] === $tVal ? 'selected' : '' ?>><?= e($tLabel) ?></option>
                                                             <?php endforeach; ?>
@@ -126,12 +126,12 @@ if (empty($f['required']) || in_array($f['type'], ['radio', 'select'], true)) {
                                 </div>
                             </div>
                             <?php if ($isAgreementField): ?>
-                                <input type="hidden" name="fields[<?= $idx ?>][required]" value="1" class="fb-required-toggle">
-                                <input type="hidden" name="fields[<?= $idx ?>][regex_pattern]" value="" class="fb-regex-value" spellcheck="false">
-                                <input type="hidden" name="fields[<?= $idx ?>][checkbox_limit_enabled]" class="fb-checkbox-limit-enabled" value="0">
+                                <input type="hidden" name="fields[<?= $idx ?>][required]" value="1" data-target="c-formEditor__required">
+                                <input type="hidden" name="fields[<?= $idx ?>][regex_pattern]" value="" data-target="c-formEditor__regexValue" spellcheck="false">
+                                <input type="hidden" name="fields[<?= $idx ?>][checkbox_limit_enabled]" data-target="c-formEditor__checkboxLimitEnabled" value="0">
                                 <input type="hidden" name="fields[<?= $idx ?>][checkbox_min_selections]" value="">
                                 <input type="hidden" name="fields[<?= $idx ?>][checkbox_max_selections]" value="">
-                                <textarea name="fields[<?= $idx ?>][options]" class="fb-options-source" hidden><?= e($agreementDefaults['options']) ?></textarea>
+                                <textarea name="fields[<?= $idx ?>][options]" data-target="c-formEditor__optionsSource" hidden><?= e($agreementDefaults['options']) ?></textarea>
                                 <input type="hidden" name="fields[<?= $idx ?>][max_length]" value="">
                             <?php else: ?>
                                 <div class="c-formEditor__section">
@@ -147,7 +147,7 @@ if (empty($f['required']) || in_array($f['type'], ['radio', 'select'], true)) {
                                                         <div class="c-formEditor__validationControls">
                                                             <div class="c-formEditor__required">
                                                                 <label class="label is-choice">
-                                                                    <input type="checkbox" name="fields[<?= $idx ?>][required]" value="1" class="fb-required-toggle" <?= !empty($f['required']) ? 'checked' : '' ?>>
+                                                                    <input type="checkbox" name="fields[<?= $idx ?>][required]" value="1" data-target="c-formEditor__required" <?= !empty($f['required']) ? 'checked' : '' ?>>
                                                                     <span>必須にする</span>
                                                                 </label>
                                                             </div>
@@ -175,7 +175,7 @@ if (empty($f['required']) || in_array($f['type'], ['radio', 'select'], true)) {
                                                                     ?>
                                                                     <div class="c-formEditor__regexRow">
                                                                         <div data-module="m-input01">
-                                                                            <select class="fb-regex-kind" aria-label="入力チェックの種類">
+                                                                            <select data-target="c-formEditor__regexKind" aria-label="入力チェックの種類">
                                                                                 <?php foreach ($regexPresetChoices as $patVal => $patLabel): ?>
                                                                                     <?php if ($f['type'] === 'checkbox' && $patVal !== $FB_REGEX_CUSTOM): ?>
                                                                                         <?php continue; ?>
@@ -189,13 +189,13 @@ if (empty($f['required']) || in_array($f['type'], ['radio', 'select'], true)) {
                                                                         </div>
                                                                         <div class="c-formEditor__regexCustom"<?= $showCustom ? '' : ' style="display:none"' ?>>
                                                                             <div data-module="m-input01">
-                                                                                <input type="text" class="fb-regex-custom" value="<?= e($customVal) ?>" placeholder="正規表現" spellcheck="false" autocomplete="off">
+                                                                                <input type="text" data-target="c-formEditor__regexCustomInput" value="<?= e($customVal) ?>" placeholder="正規表現" spellcheck="false" autocomplete="off">
                                                                             </div>
                                                                         </div>
-                                                                        <input type="hidden" class="fb-regex-value" value="<?= e($hiddenVal) ?>" spellcheck="false">
+                                                                        <input type="hidden" data-target="c-formEditor__regexValue" value="<?= e($hiddenVal) ?>" spellcheck="false">
                                                                     </div>
                                                                 </div>
-                                                                <input type="hidden" name="fields[<?= $idx ?>][checkbox_limit_enabled]" class="fb-checkbox-limit-enabled" value="<?= !empty($f['checkbox_limit_enabled']) ? '1' : '0' ?>">
+                                                                <input type="hidden" name="fields[<?= $idx ?>][checkbox_limit_enabled]" data-target="c-formEditor__checkboxLimitEnabled" value="<?= !empty($f['checkbox_limit_enabled']) ? '1' : '0' ?>">
                                                                 <div class="c-formEditor__checkboxLimit" <?= ($f['type'] === 'checkbox' && !empty($f['required']) && !empty($f['checkbox_limit_enabled'])) ? '' : 'style="display:none"' ?>>
                                                                     <div>
                                                                         <label class="label" data-module="m-boldTitle01">最小選択数</label>
@@ -230,7 +230,7 @@ if (empty($f['required']) || in_array($f['type'], ['radio', 'select'], true)) {
                                                             <div class="c-formEditor__row c-formEditor__choiceItem" data-choice-item>
                                                                 <div>
                                                                     <div data-module="m-input01">
-                                                                        <input type="text" class="fb-choice-input" value="<?= e($choiceOpt) ?>" placeholder="選択肢">
+                                                                        <input type="text" data-target="c-formEditor__choiceInput" value="<?= e($choiceOpt) ?>" placeholder="選択肢">
                                                                     </div>
                                                                 </div>
                                                                 <div class="c-formEditor__actions">
@@ -244,7 +244,7 @@ if (empty($f['required']) || in_array($f['type'], ['radio', 'select'], true)) {
                                                     <div class="area is-actions">
                                                         <button type="button" class="btn is-sm" data-target="c-formEditor__choiceAdd">＋ 選択肢を追加</button>
                                                     </div>
-                                                    <textarea name="fields[<?= $idx ?>][options]" class="fb-options-source" rows="4" hidden><?= e($f['options'] ?? '') ?></textarea>
+                                                    <textarea name="fields[<?= $idx ?>][options]" data-target="c-formEditor__optionsSource" rows="4" hidden><?= e($f['options'] ?? '') ?></textarea>
                                                 </div>
                                             </div>
                                         </div>
@@ -316,7 +316,7 @@ if (empty($f['required']) || in_array($f['type'], ['radio', 'select'], true)) {
                                     </div>
                                 </div>
                             </div>
-                            <input type="hidden" name="fields[<?= $idx ?>][_remove]" value="0" class="fb-remove-flag">
+                            <input type="hidden" name="fields[<?= $idx ?>][_remove]" value="0" data-target="c-formEditor__removeFlag">
                         </div>
                     </div>
                 </div>

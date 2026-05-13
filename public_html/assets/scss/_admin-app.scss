@@ -1143,7 +1143,7 @@ form.is-inline {
     flex-wrap: wrap;
   }
 
-  .fb-regex-kind {
+  [data-target="c-formEditor__regexKind"] {
     flex: 1 1 200px;
     max-width: 100%;
     min-width: 140px;
@@ -1153,7 +1153,7 @@ form.is-inline {
     flex: 2 1 220px;
     min-width: 140px;
 
-    .fb-regex-custom {
+    [data-target="c-formEditor__regexCustomInput"] {
       width: 100%;
       box-sizing: border-box;
     }

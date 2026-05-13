@@ -720,7 +720,7 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                                             </div>
                                             <div class="area is-field">
                                                 <div class="c-formEditor__row">
-                                                    <div><label class="label" data-module="m-boldTitle01">ラベル</label><div data-module="m-input01"><input type="text" data-name="label" class="fb-input-label"></div></div>
+                                                    <div><label class="label" data-module="m-boldTitle01">ラベル</label><div data-module="m-input01"><input type="text" data-name="label" data-target="c-formEditor__labelInput"></div></div>
                                                     <div class="c-formEditor__fieldKeyColumn">
                                                         <label class="label" data-module="m-boldTitle01">フィールドキー</label>
                                                         <div class="c-formEditor__fieldKey">
@@ -734,7 +734,7 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                                                     <div>
                                                         <label class="label" data-module="m-boldTitle01">型</label>
                                                         <div data-module="m-input01">
-                                                            <select data-name="type" class="fb-type">
+                                                            <select data-name="type" data-target="c-formEditor__type">
                                                                 <?php foreach (\Models\FormField::TYPE_LABELS() as $tVal => $tLabel): ?>
                                                                     <option value="<?= e($tVal) ?>"><?= e($tLabel) ?></option>
                                                                 <?php endforeach; ?>
@@ -758,13 +758,13 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                                                         <label class="label" data-module="m-boldTitle01">必須</label>
                                                         <div class="c-formEditor__validationControls">
                                                             <div class="c-formEditor__required">
-                                                                <label class="label is-choice"><input type="checkbox" data-name="required" value="1" class="fb-required-toggle"><span>必須にする</span></label>
+                                                                <label class="label is-choice"><input type="checkbox" data-name="required" value="1" data-target="c-formEditor__required"><span>必須にする</span></label>
                                                             </div>
                                                             <div data-target="c-formEditor__regex" style="display:none">
                                                                 <div class="c-formEditor__regexList">
                                                                     <div class="c-formEditor__regexRow">
                                                                         <div data-module="m-input01">
-                                                                            <select class="fb-regex-kind" aria-label="入力チェックの種類">
+                                                                            <select data-target="c-formEditor__regexKind" aria-label="入力チェックの種類">
                                                                                 <?php foreach ($regexPresetChoices as $patVal => $patLabel): ?>
                                                                                     <option value="<?= e($patVal) ?>"><?= e($patLabel) ?></option>
                                                                                 <?php endforeach; ?>
@@ -773,13 +773,13 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                                                                         </div>
                                                                         <div class="c-formEditor__regexCustom" style="display:none">
                                                                             <div data-module="m-input01">
-                                                                                <input type="text" class="fb-regex-custom" placeholder="正規表現" spellcheck="false" autocomplete="off">
+                                                                                <input type="text" data-target="c-formEditor__regexCustomInput" placeholder="正規表現" spellcheck="false" autocomplete="off">
                                                                             </div>
                                                                         </div>
-                                                                        <input type="hidden" class="fb-regex-value" value="">
+                                                                        <input type="hidden" data-target="c-formEditor__regexValue" value="">
                                                                     </div>
                                                                 </div>
-                                                                <input type="hidden" data-name="checkbox_limit_enabled" class="fb-checkbox-limit-enabled" value="0">
+                                                                <input type="hidden" data-name="checkbox_limit_enabled" data-target="c-formEditor__checkboxLimitEnabled" value="0">
                                                                 <div class="c-formEditor__checkboxLimit" style="display:none">
                                                                     <div><label class="label" data-module="m-boldTitle01">最小選択数</label><div data-module="m-input01"><input type="number" min="1" data-name="checkbox_min_selections"></div></div>
                                                                     <div><label class="label" data-module="m-boldTitle01">最大選択数</label><div data-module="m-input01"><input type="number" min="1" data-name="checkbox_max_selections"></div></div>
@@ -797,7 +797,7 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                                                     <div class="area is-actions">
                                                         <button type="button" class="btn is-sm" data-target="c-formEditor__choiceAdd">＋ 選択肢を追加</button>
                                                     </div>
-                                                    <textarea data-name="options" class="fb-options-source" rows="4" hidden></textarea>
+                                                    <textarea data-name="options" data-target="c-formEditor__optionsSource" rows="4" hidden></textarea>
                                                 </div>
                                             </div>
                                         </div>
@@ -833,7 +833,7 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                                         </div>
                                     </div>
                                 </div>
-                                <input type="hidden" data-name="_remove" value="0" class="fb-remove-flag">
+                                <input type="hidden" data-name="_remove" value="0" data-target="c-formEditor__removeFlag">
                             </div>
                         </div>
                     </div>

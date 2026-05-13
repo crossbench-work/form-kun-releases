@@ -1072,7 +1072,7 @@ form.is-inline {
   margin-bottom: 8px;
   flex-wrap: wrap;
 }
-[data-module=m-formBuilder01] .fb-regex-kind {
+[data-module=m-formBuilder01] [data-target=c-formEditor__regexKind] {
   flex: 1 1 200px;
   max-width: 100%;
   min-width: 140px;
@@ -1081,7 +1081,7 @@ form.is-inline {
   flex: 2 1 220px;
   min-width: 140px;
 }
-[data-module=m-formBuilder01] .c-formEditor__regexCustom .fb-regex-custom {
+[data-module=m-formBuilder01] .c-formEditor__regexCustom [data-target=c-formEditor__regexCustomInput] {
   width: 100%;
   box-sizing: border-box;
 }

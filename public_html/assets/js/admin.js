@@ -231,12 +231,12 @@
     }
 
     function syncRegexRowValue(row) {
-        var sel = row.querySelector('.fb-regex-kind');
-        var hidden = row.querySelector('.fb-regex-value');
+        var sel = row.querySelector('[data-target="c-formEditor__regexKind"]');
+        var hidden = row.querySelector('[data-target="c-formEditor__regexValue"]');
         var wrap = row.querySelector('.c-formEditor__regexCustom');
-        var customInp = row.querySelector('.fb-regex-custom');
+        var customInp = row.querySelector('[data-target="c-formEditor__regexCustomInput"]');
         var li = row.closest('.c-formEditor__item');
-        var checkboxLimitEnabled = li ? li.querySelector('.fb-checkbox-limit-enabled') : null;
+        var checkboxLimitEnabled = li ? li.querySelector('[data-target="c-formEditor__checkboxLimitEnabled"]') : null;
         var checkboxLimitSettings = li ? li.querySelector('.c-formEditor__checkboxLimit') : null;
         var checkboxMinInput = li ? li.querySelector('[data-name="checkbox_min_selections"], [name$="[checkbox_min_selections]"]') : null;
         var checkboxMaxInput = li ? li.querySelector('[data-name="checkbox_max_selections"], [name$="[checkbox_max_selections]"]') : null;
@@ -289,11 +289,11 @@
     }
 
     function updateFieldSummary(li) {
-        var labelInp = li.querySelector('.fb-input-label');
-        var typeSel = li.querySelector('.fb-type');
-        var requiredToggle = li.querySelector('.fb-required-toggle');
-        var regexKind = li.querySelector('.fb-regex-kind');
-        var regexCustom = li.querySelector('.fb-regex-custom');
+        var labelInp = li.querySelector('[data-target="c-formEditor__labelInput"]');
+        var typeSel = li.querySelector('[data-target="c-formEditor__type"]');
+        var requiredToggle = li.querySelector('[data-target="c-formEditor__required"]');
+        var regexKind = li.querySelector('[data-target="c-formEditor__regexKind"]');
+        var regexCustom = li.querySelector('[data-target="c-formEditor__regexCustomInput"]');
         var labelEl = li.querySelector('[data-target="c-formEditor__summaryLabel"]');
         var typeEl = li.querySelector('[data-target="c-formEditor__summaryType"]');
         var requiredEl = li.querySelector('[data-target="c-formEditor__summaryRequired"]');
@@ -375,16 +375,16 @@
         var items = getFieldItems();
         items.forEach(function (li, i) {
             li.querySelectorAll('input, textarea, select').forEach(function (el) {
-                if (el.classList.contains('fb-regex-custom') ||
-                    el.classList.contains('fb-regex-kind') ||
-                    el.classList.contains('fb-regex-value')) {
+                if (el.matches('[data-target="c-formEditor__regexCustomInput"]') ||
+                    el.matches('[data-target="c-formEditor__regexKind"]') ||
+                    el.matches('[data-target="c-formEditor__regexValue"]')) {
                     return;
                 }
                 var name = el.getAttribute('data-name') || extractDataName(el.getAttribute('name'));
                 if (!name) return;
                 el.setAttribute('name', 'fields[' + i + '][' + name + ']');
             });
-            var rv = li.querySelector('.fb-regex-value');
+            var rv = li.querySelector('[data-target="c-formEditor__regexValue"]');
             if (rv) {
                 rv.setAttribute('name', 'fields[' + i + '][regex_pattern]');
             }
@@ -397,8 +397,8 @@
     }
 
     function bindRegexRow(row, li) {
-        var sel = row.querySelector('.fb-regex-kind');
-        var customInp = row.querySelector('.fb-regex-custom');
+        var sel = row.querySelector('[data-target="c-formEditor__regexKind"]');
+        var customInp = row.querySelector('[data-target="c-formEditor__regexCustomInput"]');
         if (sel) {
             sel.addEventListener('change', function () {
                 syncRegexRowValue(row);
@@ -422,10 +422,10 @@
     }
 
     function syncChoiceEditor(box) {
-        var source = box.querySelector('.fb-options-source');
+        var source = box.querySelector('[data-target="c-formEditor__optionsSource"]');
         if (!source) return;
         var values = [];
-        box.querySelectorAll('.fb-choice-input').forEach(function (input) {
+        box.querySelectorAll('[data-target="c-formEditor__choiceInput"]').forEach(function (input) {
             var value = input.value.trim();
             if (value !== '') {
                 values.push(value);
@@ -451,14 +451,14 @@
         row.setAttribute('data-choice-item', '');
         row.innerHTML =
             '<div>' +
-                '<input type="text" class="fb-choice-input" placeholder="選択肢">' +
+                '<input type="text" data-target="c-formEditor__choiceInput" placeholder="選択肢">' +
             '</div>' +
             '<div class="c-formEditor__actions">' +
                 '<button type="button" class="btn is-sm" data-target="c-formEditor__choiceUp">↑</button>' +
                 '<button type="button" class="btn is-sm" data-target="c-formEditor__choiceDown">↓</button>' +
                 '<button type="button" class="btn is-sm is-danger" data-target="c-formEditor__choiceRemove">削除</button>' +
             '</div>';
-        var input = row.querySelector('.fb-choice-input');
+        var input = row.querySelector('[data-target="c-formEditor__choiceInput"]');
         if (input) {
             input.value = value || '';
         }
@@ -466,7 +466,7 @@
     }
 
     function bindChoiceItem(item, box) {
-        var input = item.querySelector('.fb-choice-input');
+        var input = item.querySelector('[data-target="c-formEditor__choiceInput"]');
         var up = item.querySelector('[data-target="c-formEditor__choiceUp"]');
         var down = item.querySelector('[data-target="c-formEditor__choiceDown"]');
         var remove = item.querySelector('[data-target="c-formEditor__choiceRemove"]');
@@ -511,7 +511,7 @@
                 list.appendChild(item);
                 bindChoiceItem(item, box);
                 syncChoiceEditor(box);
-                var input = item.querySelector('.fb-choice-input');
+                var input = item.querySelector('[data-target="c-formEditor__choiceInput"]');
                 if (input) input.focus();
             });
             syncChoiceEditor(box);
@@ -543,25 +543,25 @@
     }
 
     function bind(li) {
-        var typeSelect = li.querySelector('.fb-type');
-        var requiredToggle = li.querySelector('.fb-required-toggle');
+        var typeSelect = li.querySelector('[data-target="c-formEditor__type"]');
+        var requiredToggle = li.querySelector('[data-target="c-formEditor__required"]');
         var optionsBox = li.querySelector('[data-target="c-formEditor__options"]');
         var textPairSettings = li.querySelector('[data-target="c-formEditor__textPairSettings"]');
         var textPairPlaceholders = li.querySelector('[data-target="c-formEditor__textPairPlaceholders"]');
         var maxLengthWrap = li.querySelector('[data-target="c-formEditor__maxLength"]');
         var maxLengthInput = maxLengthWrap ? maxLengthWrap.querySelector('input') : null;
         var regexWrap = li.querySelector('[data-target="c-formEditor__regex"]');
-        var regexKind = regexWrap ? regexWrap.querySelector('.fb-regex-kind') : null;
+        var regexKind = regexWrap ? regexWrap.querySelector('[data-target="c-formEditor__regexKind"]') : null;
         var placeholderWrap = li.querySelector('[data-target="c-formEditor__placeholder"]');
         var placeholderInput = placeholderWrap ? placeholderWrap.querySelector('input') : null;
-        var checkboxLimitEnabled = li.querySelector('.fb-checkbox-limit-enabled');
+        var checkboxLimitEnabled = li.querySelector('[data-target="c-formEditor__checkboxLimitEnabled"]');
         var checkboxLimitSettings = li.querySelector('.c-formEditor__checkboxLimit');
         var checkboxMinInput = li.querySelector('[data-name="checkbox_min_selections"], [name$="[checkbox_min_selections]"]');
         var checkboxMaxInput = li.querySelector('[data-name="checkbox_max_selections"], [name$="[checkbox_max_selections]"]');
         function clearRegexSettings() {
             if (!regexWrap) return;
-            var regexCustom = regexWrap.querySelector('.fb-regex-custom');
-            var regexValue = regexWrap.querySelector('.fb-regex-value');
+            var regexCustom = regexWrap.querySelector('[data-target="c-formEditor__regexCustomInput"]');
+            var regexValue = regexWrap.querySelector('[data-target="c-formEditor__regexValue"]');
             if (regexKind) regexKind.value = '';
             if (regexCustom) regexCustom.value = '';
             if (regexValue) regexValue.value = '';
@@ -670,7 +670,7 @@
         bindChoiceEditor(li);
         syncTypeSpecificUi();
 
-        var labInp = li.querySelector('.fb-input-label');
+        var labInp = li.querySelector('[data-target="c-formEditor__labelInput"]');
         if (labInp) {
             labInp.addEventListener('input', function () {
                 updateFieldSummary(li);
@@ -774,7 +774,7 @@
     if (addBtn && template) {
         addBtn.addEventListener('click', function () {
             var clone = appendField();
-            var labelInput = clone ? clone.querySelector('.fb-input-label') : null;
+            var labelInput = clone ? clone.querySelector('[data-target="c-formEditor__labelInput"]') : null;
             if (labelInput) {
                 labelInput.focus();
             }
