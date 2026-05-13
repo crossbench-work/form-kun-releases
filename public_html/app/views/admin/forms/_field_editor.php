@@ -92,9 +92,15 @@ if (empty($f['required']) || in_array($f['type'], ['radio', 'select'], true)) {
                                         <div class="area is-field">
                                             <div class="c-formEditor__row">
                                                 <div>
-                                                    <label class="label" data-module="m-labelTitle01">ラベル</label>
-                                                    <div data-module="m-input01">
-                                                        <input type="text" name="fields[<?= $idx ?>][label]" data-target="c-formEditor__labelInput" value="<?= e($f['label']) ?>">
+                                                    <div class="wrapper">
+                                                        <div class="block is-title">
+                                                            <label class="label" data-module="m-labelTitle01">ラベル</label>
+                                                        </div>
+                                                        <div class="block is-field">
+                                                            <div data-module="m-input01">
+                                                                <input type="text" name="fields[<?= $idx ?>][label]" data-target="c-formEditor__labelInput" value="<?= e($f['label']) ?>">
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                                 <?php if ($isAgreementField): ?>
@@ -102,25 +108,37 @@ if (empty($f['required']) || in_array($f['type'], ['radio', 'select'], true)) {
                                                     <input type="hidden" name="fields[<?= $idx ?>][type]" value="<?= e($agreementDefaults['type']) ?>" data-target="c-formEditor__type">
                                                 <?php else: ?>
                                                     <div class="c-formEditor__fieldKeyColumn">
-                                                        <label class="label" data-module="m-labelTitle01">フィールドキー</label>
-                                                        <div class="c-formEditor__fieldKey">
-                                                            <div data-module="m-input01">
-                                                                <input type="text" name="fields[<?= $idx ?>][field_key]" value="<?= e($f['field_key']) ?>" data-target="c-formEditor__fieldKeyInput" class="<?= $fkLocked ? 'is-locked' : '' ?>" <?= $fkLocked ? 'readonly' : '' ?> spellcheck="false">
+                                                        <div class="wrapper">
+                                                            <div class="block is-title">
+                                                                <label class="label" data-module="m-labelTitle01">フィールドキー</label>
                                                             </div>
-                                                            <button type="button" class="btn is-icon" data-target="c-formEditor__fieldKeyLock" aria-label="<?= $fkLocked ? 'キーを編集' : 'キーをロック' ?>" title="<?= $fkLocked ? '編集する' : 'ロックする' ?>" aria-pressed="<?= $fkLocked ? 'true' : 'false' ?>">
-                                                                <svg data-target="c-formEditor__fieldKeyLockedIcon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" <?= $fkLocked ? '' : 'style="display:none"' ?> aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
-                                                                <svg data-target="c-formEditor__fieldKeyOpenIcon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" <?= $fkLocked ? 'style="display:none"' : '' ?> aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M8 11V7a4 4 0 118 0m-4 8v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2z"/></svg>
-                                                            </button>
+                                                            <div class="block is-field">
+                                                                <div class="c-formEditor__fieldKey">
+                                                                    <div data-module="m-input01">
+                                                                        <input type="text" name="fields[<?= $idx ?>][field_key]" value="<?= e($f['field_key']) ?>" data-target="c-formEditor__fieldKeyInput" class="<?= $fkLocked ? 'is-locked' : '' ?>" <?= $fkLocked ? 'readonly' : '' ?> spellcheck="false">
+                                                                    </div>
+                                                                    <button type="button" class="btn is-icon" data-target="c-formEditor__fieldKeyLock" aria-label="<?= $fkLocked ? 'キーを編集' : 'キーをロック' ?>" title="<?= $fkLocked ? '編集する' : 'ロックする' ?>" aria-pressed="<?= $fkLocked ? 'true' : 'false' ?>">
+                                                                        <svg data-target="c-formEditor__fieldKeyLockedIcon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" <?= $fkLocked ? '' : 'style="display:none"' ?> aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+                                                                        <svg data-target="c-formEditor__fieldKeyOpenIcon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" <?= $fkLocked ? 'style="display:none"' : '' ?> aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M8 11V7a4 4 0 118 0m-4 8v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2z"/></svg>
+                                                                    </button>
+                                                                </div>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                     <div>
-                                                        <label class="label" data-module="m-labelTitle01">型</label>
-                                                        <div data-module="m-input01">
-                                                            <select name="fields[<?= $idx ?>][type]" data-target="c-formEditor__type">
-                                                            <?php foreach (\Models\FormField::TYPE_LABELS() as $tVal => $tLabel): ?>
-                                                                <option value="<?= e($tVal) ?>" <?= $f['type'] === $tVal ? 'selected' : '' ?>><?= e($tLabel) ?></option>
-                                                            <?php endforeach; ?>
-                                                            </select>
+                                                        <div class="wrapper">
+                                                            <div class="block is-title">
+                                                                <label class="label" data-module="m-labelTitle01">型</label>
+                                                            </div>
+                                                            <div class="block is-field">
+                                                                <div data-module="m-input01">
+                                                                    <select name="fields[<?= $idx ?>][type]" data-target="c-formEditor__type">
+                                                                    <?php foreach (\Models\FormField::TYPE_LABELS() as $tVal => $tLabel): ?>
+                                                                        <option value="<?= e($tVal) ?>" <?= $f['type'] === $tVal ? 'selected' : '' ?>><?= e($tLabel) ?></option>
+                                                                    <?php endforeach; ?>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 <?php endif; ?>
@@ -147,70 +165,88 @@ if (empty($f['required']) || in_array($f['type'], ['radio', 'select'], true)) {
                                             <div class="area is-field">
                                                 <div class="c-formEditor__row">
                                                     <div class="c-formEditor__validation">
-                                                        <label class="label" data-module="m-labelTitle01">必須</label>
-                                                        <div class="c-formEditor__validationControls">
-                                                            <div class="c-formEditor__required">
-                                                                <label class="label is-choice">
-                                                                    <input type="checkbox" name="fields[<?= $idx ?>][required]" value="1" data-target="c-formEditor__required" <?= !empty($f['required']) ? 'checked' : '' ?>>
-                                                                    <span>必須にする</span>
-                                                                </label>
+                                                        <div class="wrapper">
+                                                            <div class="block is-title">
+                                                                <label class="label" data-module="m-labelTitle01">必須</label>
                                                             </div>
-                                                            <div data-target="c-formEditor__regex" <?= (empty($f['required']) || in_array($f['type'], ['radio', 'select'], true)) ? 'style="display:none"' : '' ?>>
-                                                                <div class="c-formEditor__regexList">
-                                                                    <?php
-                                                                    if ($f['type'] === 'checkbox' && !empty($f['checkbox_limit_enabled'])) {
-                                                                        $selVal = $FB_REGEX_CHECKBOX_LIMIT;
-                                                                        $customVal = '';
-                                                                    } elseif ($f['type'] === 'checkbox') {
-                                                                        $selVal = $FB_REGEX_CUSTOM;
-                                                                        $customVal = ($rp !== '' && !array_key_exists($rp, $regexPresetChoices)) ? $rp : '';
-                                                                    } elseif ($rp === '') {
-                                                                        $selVal = '';
-                                                                        $customVal = '';
-                                                                    } elseif ($rp !== '' && array_key_exists($rp, $regexPresetChoices) && $rp !== $FB_REGEX_CUSTOM) {
-                                                                        $selVal = $rp;
-                                                                        $customVal = '';
-                                                                    } else {
-                                                                        $selVal = $FB_REGEX_CUSTOM;
-                                                                        $customVal = $rp;
-                                                                    }
-                                                                    $showCustom = ($selVal === $FB_REGEX_CUSTOM);
-                                                                    $hiddenVal = $showCustom ? $customVal : ($selVal === $FB_REGEX_CHECKBOX_LIMIT ? '' : $selVal);
-                                                                    ?>
-                                                                    <div class="c-formEditor__regexRow">
-                                                                        <div data-module="m-input01">
-                                                                            <select data-target="c-formEditor__regexKind" aria-label="入力チェックの種類">
-                                                                                <?php foreach ($regexPresetChoices as $patVal => $patLabel): ?>
-                                                                                    <?php if ($f['type'] === 'checkbox' && $patVal !== $FB_REGEX_CUSTOM): ?>
-                                                                                        <?php continue; ?>
-                                                                                    <?php endif; ?>
-                                                                                    <option value="<?= e($patVal) ?>" <?= $selVal === $patVal ? 'selected' : '' ?>><?= e($patLabel) ?></option>
-                                                                                <?php endforeach; ?>
-                                                                                <?php if ($f['type'] === 'checkbox'): ?>
-                                                                                    <option value="<?= e($FB_REGEX_CHECKBOX_LIMIT) ?>" <?= $selVal === $FB_REGEX_CHECKBOX_LIMIT ? 'selected' : '' ?>>選択数を設定する</option>
-                                                                                <?php endif; ?>
-                                                                            </select>
-                                                                        </div>
-                                                                        <div class="c-formEditor__regexCustom"<?= $showCustom ? '' : ' style="display:none"' ?>>
-                                                                            <div data-module="m-input01">
-                                                                                <input type="text" data-target="c-formEditor__regexCustomInput" value="<?= e($customVal) ?>" placeholder="正規表現" spellcheck="false" autocomplete="off">
+                                                            <div class="block is-field">
+                                                                <div class="c-formEditor__validationControls">
+                                                                    <div class="c-formEditor__required">
+                                                                        <label class="label is-choice">
+                                                                            <input type="checkbox" name="fields[<?= $idx ?>][required]" value="1" data-target="c-formEditor__required" <?= !empty($f['required']) ? 'checked' : '' ?>>
+                                                                            <span>必須にする</span>
+                                                                        </label>
+                                                                    </div>
+                                                                    <div data-target="c-formEditor__regex" <?= (empty($f['required']) || in_array($f['type'], ['radio', 'select'], true)) ? 'style="display:none"' : '' ?>>
+                                                                        <div class="c-formEditor__regexList">
+                                                                            <?php
+                                                                            if ($f['type'] === 'checkbox' && !empty($f['checkbox_limit_enabled'])) {
+                                                                                $selVal = $FB_REGEX_CHECKBOX_LIMIT;
+                                                                                $customVal = '';
+                                                                            } elseif ($f['type'] === 'checkbox') {
+                                                                                $selVal = $FB_REGEX_CUSTOM;
+                                                                                $customVal = ($rp !== '' && !array_key_exists($rp, $regexPresetChoices)) ? $rp : '';
+                                                                            } elseif ($rp === '') {
+                                                                                $selVal = '';
+                                                                                $customVal = '';
+                                                                            } elseif ($rp !== '' && array_key_exists($rp, $regexPresetChoices) && $rp !== $FB_REGEX_CUSTOM) {
+                                                                                $selVal = $rp;
+                                                                                $customVal = '';
+                                                                            } else {
+                                                                                $selVal = $FB_REGEX_CUSTOM;
+                                                                                $customVal = $rp;
+                                                                            }
+                                                                            $showCustom = ($selVal === $FB_REGEX_CUSTOM);
+                                                                            $hiddenVal = $showCustom ? $customVal : ($selVal === $FB_REGEX_CHECKBOX_LIMIT ? '' : $selVal);
+                                                                            ?>
+                                                                            <div class="c-formEditor__regexRow">
+                                                                                <div data-module="m-input01">
+                                                                                    <select data-target="c-formEditor__regexKind" aria-label="入力チェックの種類">
+                                                                                        <?php foreach ($regexPresetChoices as $patVal => $patLabel): ?>
+                                                                                            <?php if ($f['type'] === 'checkbox' && $patVal !== $FB_REGEX_CUSTOM): ?>
+                                                                                                <?php continue; ?>
+                                                                                            <?php endif; ?>
+                                                                                            <option value="<?= e($patVal) ?>" <?= $selVal === $patVal ? 'selected' : '' ?>><?= e($patLabel) ?></option>
+                                                                                        <?php endforeach; ?>
+                                                                                        <?php if ($f['type'] === 'checkbox'): ?>
+                                                                                            <option value="<?= e($FB_REGEX_CHECKBOX_LIMIT) ?>" <?= $selVal === $FB_REGEX_CHECKBOX_LIMIT ? 'selected' : '' ?>>選択数を設定する</option>
+                                                                                        <?php endif; ?>
+                                                                                    </select>
+                                                                                </div>
+                                                                                <div class="c-formEditor__regexCustom"<?= $showCustom ? '' : ' style="display:none"' ?>>
+                                                                                    <div data-module="m-input01">
+                                                                                        <input type="text" data-target="c-formEditor__regexCustomInput" value="<?= e($customVal) ?>" placeholder="正規表現" spellcheck="false" autocomplete="off">
+                                                                                    </div>
+                                                                                </div>
+                                                                                <input type="hidden" data-target="c-formEditor__regexValue" value="<?= e($hiddenVal) ?>" spellcheck="false">
                                                                             </div>
                                                                         </div>
-                                                                        <input type="hidden" data-target="c-formEditor__regexValue" value="<?= e($hiddenVal) ?>" spellcheck="false">
-                                                                    </div>
-                                                                </div>
-                                                                <input type="hidden" name="fields[<?= $idx ?>][checkbox_limit_enabled]" data-target="c-formEditor__checkboxLimitEnabled" value="<?= !empty($f['checkbox_limit_enabled']) ? '1' : '0' ?>">
-                                                                <div class="c-formEditor__checkboxLimit" <?= ($f['type'] === 'checkbox' && !empty($f['required']) && !empty($f['checkbox_limit_enabled'])) ? '' : 'style="display:none"' ?>>
-                                                                    <div>
-                                                                        <label class="label" data-module="m-labelTitle01">最小選択数</label>
-                                                                        <div data-module="m-input01">
-                                                                            <input type="number" min="1" name="fields[<?= $idx ?>][checkbox_min_selections]" value="<?= e($f['checkbox_min_selections'] ?? '') ?>">
-                                                                        </div>
-                                                                    </div>
-                                                                    <div>
-                                                                        <label class="label" data-module="m-labelTitle01">最大選択数</label>
-                                                                        <div data-module="m-input01">
-                                                                            <input type="number" min="1" name="fields[<?= $idx ?>][checkbox_max_selections]" value="<?= e($f['checkbox_max_selections'] ?? '') ?>">
+                                                                        <input type="hidden" name="fields[<?= $idx ?>][checkbox_limit_enabled]" data-target="c-formEditor__checkboxLimitEnabled" value="<?= !empty($f['checkbox_limit_enabled']) ? '1' : '0' ?>">
+                                                                        <div class="c-formEditor__checkboxLimit" <?= ($f['type'] === 'checkbox' && !empty($f['required']) && !empty($f['checkbox_limit_enabled'])) ? '' : 'style="display:none"' ?>>
+                                                                            <div>
+                                                                                <div class="wrapper">
+                                                                                    <div class="block is-title">
+                                                                                        <label class="label" data-module="m-labelTitle01">最小選択数</label>
+                                                                                    </div>
+                                                                                    <div class="block is-field">
+                                                                                        <div data-module="m-input01">
+                                                                                            <input type="number" min="1" name="fields[<?= $idx ?>][checkbox_min_selections]" value="<?= e($f['checkbox_min_selections'] ?? '') ?>">
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div>
+                                                                                <div class="wrapper">
+                                                                                    <div class="block is-title">
+                                                                                        <label class="label" data-module="m-labelTitle01">最大選択数</label>
+                                                                                    </div>
+                                                                                    <div class="block is-field">
+                                                                                        <div data-module="m-input01">
+                                                                                            <input type="number" min="1" name="fields[<?= $idx ?>][checkbox_max_selections]" value="<?= e($f['checkbox_max_selections'] ?? '') ?>">
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -218,9 +254,15 @@ if (empty($f['required']) || in_array($f['type'], ['radio', 'select'], true)) {
                                                         </div>
                                                     </div>
                                                     <div data-target="c-formEditor__maxLength" <?= in_array($f['type'], ['radio', 'checkbox', 'select'], true) ? 'style="display:none"' : '' ?>>
-                                                        <label class="label" data-module="m-labelTitle01">最大文字数（任意）</label>
-                                                        <div data-module="m-input01">
-                                                            <input type="number" min="1" name="fields[<?= $idx ?>][max_length]" value="<?= e($f['max_length']) ?>">
+                                                        <div class="wrapper">
+                                                            <div class="block is-title">
+                                                                <label class="label" data-module="m-labelTitle01">最大文字数（任意）</label>
+                                                            </div>
+                                                            <div class="block is-field">
+                                                                <div data-module="m-input01">
+                                                                    <input type="number" min="1" name="fields[<?= $idx ?>][max_length]" value="<?= e($f['max_length']) ?>">
+                                                                </div>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -264,9 +306,15 @@ if (empty($f['required']) || in_array($f['type'], ['radio', 'select'], true)) {
                                         <div class="area is-field">
                                             <div class="c-formEditor__row">
                                                 <div data-target="c-formEditor__placeholder" <?= ($isTextPair || in_array($f['type'], ['radio', 'checkbox', 'select'], true)) ? 'style="display:none"' : '' ?>>
-                                                    <label class="label" data-module="m-labelTitle01">プレースホルダ（任意）</label>
-                                                    <div data-module="m-input01">
-                                                        <input type="text" name="fields[<?= $idx ?>][placeholder]" value="<?= e($f['placeholder']) ?>">
+                                                    <div class="wrapper">
+                                                        <div class="block is-title">
+                                                            <label class="label" data-module="m-labelTitle01">プレースホルダ（任意）</label>
+                                                        </div>
+                                                        <div class="block is-field">
+                                                            <div data-module="m-input01">
+                                                                <input type="text" name="fields[<?= $idx ?>][placeholder]" value="<?= e($f['placeholder']) ?>">
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -274,15 +322,27 @@ if (empty($f['required']) || in_array($f['type'], ['radio', 'select'], true)) {
                                         <div class="area is-field">
                                             <div class="c-formEditor__row" data-target="c-formEditor__textPairSettings" <?= $isTextPair ? '' : 'style="display:none"' ?>>
                                                 <div>
-                                                    <label class="label" data-module="m-labelTitle01">1つ目の入力欄の表示名</label>
-                                                    <div data-module="m-input01">
-                                                        <input type="text" name="fields[<?= $idx ?>][pair_label_left]" value="<?= e($f['pair_label_left'] ?? '') ?>">
+                                                    <div class="wrapper">
+                                                        <div class="block is-title">
+                                                            <label class="label" data-module="m-labelTitle01">1つ目の入力欄の表示名</label>
+                                                        </div>
+                                                        <div class="block is-field">
+                                                            <div data-module="m-input01">
+                                                                <input type="text" name="fields[<?= $idx ?>][pair_label_left]" value="<?= e($f['pair_label_left'] ?? '') ?>">
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                                 <div>
-                                                    <label class="label" data-module="m-labelTitle01">2つ目の入力欄の表示名</label>
-                                                    <div data-module="m-input01">
-                                                        <input type="text" name="fields[<?= $idx ?>][pair_label_right]" value="<?= e($f['pair_label_right'] ?? '') ?>">
+                                                    <div class="wrapper">
+                                                        <div class="block is-title">
+                                                            <label class="label" data-module="m-labelTitle01">2つ目の入力欄の表示名</label>
+                                                        </div>
+                                                        <div class="block is-field">
+                                                            <div data-module="m-input01">
+                                                                <input type="text" name="fields[<?= $idx ?>][pair_label_right]" value="<?= e($f['pair_label_right'] ?? '') ?>">
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -290,15 +350,27 @@ if (empty($f['required']) || in_array($f['type'], ['radio', 'select'], true)) {
                                         <div class="area is-field">
                                             <div class="c-formEditor__row" data-target="c-formEditor__textPairPlaceholders" <?= $isTextPair ? '' : 'style="display:none"' ?>>
                                                 <div>
-                                                    <label class="label" data-module="m-labelTitle01">1つ目のプレースホルダ（任意）</label>
-                                                    <div data-module="m-input01">
-                                                        <input type="text" name="fields[<?= $idx ?>][pair_placeholder_left]" value="<?= e($f['pair_placeholder_left'] ?? '') ?>">
+                                                    <div class="wrapper">
+                                                        <div class="block is-title">
+                                                            <label class="label" data-module="m-labelTitle01">1つ目のプレースホルダ（任意）</label>
+                                                        </div>
+                                                        <div class="block is-field">
+                                                            <div data-module="m-input01">
+                                                                <input type="text" name="fields[<?= $idx ?>][pair_placeholder_left]" value="<?= e($f['pair_placeholder_left'] ?? '') ?>">
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                                 <div>
-                                                    <label class="label" data-module="m-labelTitle01">2つ目のプレースホルダ（任意）</label>
-                                                    <div data-module="m-input01">
-                                                        <input type="text" name="fields[<?= $idx ?>][pair_placeholder_right]" value="<?= e($f['pair_placeholder_right'] ?? '') ?>">
+                                                    <div class="wrapper">
+                                                        <div class="block is-title">
+                                                            <label class="label" data-module="m-labelTitle01">2つ目のプレースホルダ（任意）</label>
+                                                        </div>
+                                                        <div class="block is-field">
+                                                            <div data-module="m-input01">
+                                                                <input type="text" name="fields[<?= $idx ?>][pair_placeholder_right]" value="<?= e($f['pair_placeholder_right'] ?? '') ?>">
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>

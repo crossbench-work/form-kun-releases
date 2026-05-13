@@ -1073,6 +1073,11 @@ form.is-inline {
   flex: 1;
   min-width: 180px;
 }
+[data-module=m-formBuilder01] .c-formEditor__row > div > .wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
 [data-module=m-formBuilder01] .c-formEditor__actions {
   margin-top: 8px;
   display: flex;
@@ -1109,6 +1114,11 @@ form.is-inline {
 [data-module=m-formBuilder01] .c-formEditor__checkboxLimit > div {
   flex: 1;
   min-width: 140px;
+}
+[data-module=m-formBuilder01] .c-formEditor__checkboxLimit > div > .wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
 }
 [data-module=m-formBuilder01] [data-target=c-formEditor__fieldKeyInput] {
   flex: 1;

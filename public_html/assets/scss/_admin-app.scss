@@ -1138,6 +1138,12 @@ form.is-inline {
     > div {
       flex: 1;
       min-width: 180px;
+
+      > .wrapper {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+      }
     }
   }
 
@@ -1183,6 +1189,12 @@ form.is-inline {
     > div {
       flex: 1;
       min-width: 140px;
+
+      > .wrapper {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+      }
     }
   }
 
