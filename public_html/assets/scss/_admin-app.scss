@@ -1032,6 +1032,10 @@ form.is-inline {
     }
   }
 
+  [data-module="m-deleteBtn01"] {
+    // Moved to global scope - see line XXX
+  }
+
   .c-formEditor__itemHeader > .wrapper > .block.is-contents > .area.is-move {
     display: flex;
     align-items: center;
