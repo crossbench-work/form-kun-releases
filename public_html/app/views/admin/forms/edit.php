@@ -28,45 +28,53 @@ foreach ($fields as $field) {
 }
 $renderDescriptionEditor = static function (string $namePrefix, array $blocks, string $positionMode): void {
     ?>
-    <div class="area is-field fb-description-editor" data-description-editor data-name-prefix="<?= e($namePrefix) ?>" data-position-mode="<?= e($positionMode) ?>">
-        <div class="fb-description-blocks">
-            <?php foreach ($blocks as $i => $block): ?>
-                <div class="fb-description-block" data-index="<?= $i ?>">
-                    <input type="hidden" name="<?= e($namePrefix) ?>[<?= $i ?>][id]" value="<?= e($block['id'] ?? ($namePrefix . '-' . $i)) ?>" data-name="id">
-                    <div class="fb-description-block-header">
-                        <strong class="fb-description-block-title">説明文</strong>
-                        <button type="button" class="btn is-sm is-icon is-danger fb-description-remove" aria-label="削除" title="削除">
-                            <svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M3 6h18"/>
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M8 6V4h8v2"/>
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M19 6l-1 14H6L5 6"/>
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M10 11v6M14 11v6"/>
-                            </svg>
-                        </button>
-                    </div>
-                    <div class="fb-row fb-description-block-controls" style="display: flex;">
-                        <div class="fb-description-position-wrap">
-                            <div data-module="m-input01">
-                                <select name="<?= e($namePrefix) ?>[<?= $i ?>][position]" class="fb-description-position" data-name="position" data-value="<?= e((string) ($block['position'] ?? 0)) ?>" aria-label="説明文"></select>
+    <div class="area is-field">
+        <div data-module="c-descriptionEditor01" data-description-editor data-name-prefix="<?= e($namePrefix) ?>" data-position-mode="<?= e($positionMode) ?>">
+            <div class="wrapper">
+                <div class="block is-contents">
+                    <div class="fb-description-blocks">
+                        <?php foreach ($blocks as $i => $block): ?>
+                            <div class="fb-description-block" data-index="<?= $i ?>">
+                                <input type="hidden" name="<?= e($namePrefix) ?>[<?= $i ?>][id]" value="<?= e($block['id'] ?? ($namePrefix . '-' . $i)) ?>" data-name="id">
+                                <div class="fb-description-block-header">
+                                    <strong class="fb-description-block-title">説明文</strong>
+                                    <button type="button" class="btn is-sm is-icon is-danger fb-description-remove" aria-label="削除" title="削除">
+                                        <svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M3 6h18"/>
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M8 6V4h8v2"/>
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M19 6l-1 14H6L5 6"/>
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M10 11v6M14 11v6"/>
+                                        </svg>
+                                    </button>
+                                </div>
+                                <div class="fb-row fb-description-block-controls" style="display: flex;">
+                                    <div class="fb-description-position-wrap">
+                                        <div data-module="m-input01">
+                                            <select name="<?= e($namePrefix) ?>[<?= $i ?>][position]" class="fb-description-position" data-name="position" data-value="<?= e((string) ($block['position'] ?? 0)) ?>" aria-label="説明文"></select>
+                                        </div>
+                                    </div>
+                                    <div class="fb-description-visible-wrap">
+                                        <label class="label is-choice fb-basic-display-toggle">
+                                            <input type="checkbox" name="<?= e($namePrefix) ?>[<?= $i ?>][visible]" value="1" data-name="visible" <?= !empty($block['visible']) ? 'checked' : '' ?>>
+                                            表示する
+                                        </label>
+                                    </div>
+                                </div>
+                                <div data-module="m-input01">
+                                    <textarea name="<?= e($namePrefix) ?>[<?= $i ?>][html]" rows="6" data-name="html"><?= e((string) ($block['html'] ?? '')) ?></textarea>
+                                </div>
+                                <p class="text is-help">HTML を直接入力できます。一部のタグと属性だけが保存されます。</p>
                             </div>
-                        </div>
-                        <div class="fb-description-visible-wrap">
-                            <label class="label is-choice fb-basic-display-toggle">
-                                <input type="checkbox" name="<?= e($namePrefix) ?>[<?= $i ?>][visible]" value="1" data-name="visible" <?= !empty($block['visible']) ? 'checked' : '' ?>>
-                                表示する
-                            </label>
-                        </div>
+                        <?php endforeach; ?>
                     </div>
-                    <div data-module="m-input01">
-                        <textarea name="<?= e($namePrefix) ?>[<?= $i ?>][html]" rows="6" data-name="html"><?= e((string) ($block['html'] ?? '')) ?></textarea>
-                    </div>
-                    <p class="text is-help">HTML を直接入力できます。一部のタグと属性だけが保存されます。</p>
                 </div>
-            <?php endforeach; ?>
-        </div>
-        <div class="fb-description-toolbar">
-            <div class="area is-actions">
-                <button type="button" class="btn is-sm fb-description-add">説明文を追加する</button>
+                <div class="block is-toolbar">
+                    <div class="fb-description-toolbar">
+                        <div class="area is-actions">
+                            <button type="button" class="btn is-sm fb-description-add">説明文を追加する</button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
