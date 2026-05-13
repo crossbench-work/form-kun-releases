@@ -899,14 +899,17 @@ form.is-inline {
   border-radius: 6px;
 }
 [data-module=m-formBuilder01] .c-formEditor__itemHeader {
+  background: #fff;
+  cursor: pointer;
+}
+[data-module=m-formBuilder01] .c-formEditor__itemHeader > .wrapper > .block.is-contents {
   display: flex;
   align-items: center;
   gap: 6px;
   padding: 10px 12px;
-  background: #fff;
-  cursor: pointer;
 }
-[data-module=m-formBuilder01] .fb-drag-handle {
+[data-module=m-formBuilder01] .c-formEditor__dragHandle {
+  display: inline-flex;
   flex-shrink: 0;
   cursor: grab;
   color: #94a3b8;
@@ -915,174 +918,154 @@ form.is-inline {
   border-radius: 4px;
   user-select: none;
 }
-[data-module=m-formBuilder01] .fb-drag-handle:active {
+[data-module=m-formBuilder01] .c-formEditor__dragHandle:active {
   cursor: grabbing;
 }
-[data-module=m-formBuilder01] .fb-drag-handle:hover {
+[data-module=m-formBuilder01] .c-formEditor__dragHandle:hover {
   color: #64748b;
   background: #f1f5f9;
 }
-[data-module=m-formBuilder01] .fb-field-toggle {
-  flex-shrink: 0;
-  appearance: none;
-  border: none;
-  background: transparent;
-  padding: 4px 6px;
-  cursor: pointer;
-  color: #64748b;
-  border-radius: 4px;
-  line-height: 1;
-}
-[data-module=m-formBuilder01] .fb-field-toggle:hover {
-  background: #f1f5f9;
-  color: #1f2937;
-}
-[data-module=m-formBuilder01] .fb-field-toggle-icon {
-  display: inline-block;
-  font-size: 16px;
-  font-weight: 600;
-  min-width: 10px;
-  text-align: center;
-}
-[data-module=m-formBuilder01] .fb-field-summary {
-  flex: 1;
-  min-width: 0;
-  font-size: 13px;
-  color: #475569;
-}
-[data-module=m-formBuilder01] .fb-header-actions {
+[data-module=m-formBuilder01] .c-formEditor__moveButtons {
   display: flex;
   align-items: center;
   gap: 8px;
   flex-wrap: wrap;
   flex-shrink: 0;
 }
-[data-module=m-formBuilder01] .fb-header-delete {
-  flex-shrink: 0;
+[data-module=m-formBuilder01] .c-formEditor__itemHeader > .wrapper > .block.is-contents > .area.is-summary {
+  flex: 1;
+  min-width: 0;
+  font-size: 13px;
+  color: #475569;
 }
-[data-module=m-formBuilder01] .fb-field-summary-main {
+[data-module=m-formBuilder01] .c-formEditor__itemHeader > .wrapper > .block.is-contents > .area.is-summary > .text {
+  margin: 0;
   display: block;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
-[data-module=m-formBuilder01] .fb-field-summary .fb-num {
+[data-module=m-formBuilder01] .c-formEditor__itemHeader > .wrapper > .block.is-contents > .area.is-summary [data-target=c-formEditor__summaryIndex] {
   font-weight: 600;
   color: #334155;
 }
-[data-module=m-formBuilder01] .fb-field-summary .fb-summary-type {
+[data-module=m-formBuilder01] .c-formEditor__itemHeader > .wrapper > .block.is-contents > .area.is-summary [data-target=c-formEditor__summaryType] {
   font-size: 12px;
   background: #f1f5f9;
   padding: 1px 6px;
   border-radius: 4px;
 }
-[data-module=m-formBuilder01] .fb-field-summary .fb-summary-badge {
+[data-module=m-formBuilder01] .c-formEditor__itemHeader > .wrapper > .block.is-contents > .area.is-summary .badge {
   display: inline-block;
   font-size: 12px;
   padding: 1px 6px;
   border-radius: 999px;
 }
-[data-module=m-formBuilder01] .fb-field-summary .fb-summary-required {
+[data-module=m-formBuilder01] .c-formEditor__itemHeader > .wrapper > .block.is-contents > .area.is-summary .badge.is-required {
   background: #eef2ff;
   color: #4338ca;
 }
-[data-module=m-formBuilder01] .fb-field-summary .fb-summary-regex {
+[data-module=m-formBuilder01] .c-formEditor__itemHeader > .wrapper > .block.is-contents > .area.is-summary .badge.is-regex {
   background: #f8fafc;
   color: #475569;
 }
-[data-module=m-formBuilder01] .c-formEditor__itemBody {
+[data-module=m-formBuilder01] .c-formEditor__itemBody > .wrapper > .block.is-contents {
   padding: 16px;
 }
-[data-module=m-formBuilder01] .fb-field-section + .fb-field-section {
+[data-module=m-formBuilder01] .c-formEditor__section + .c-formEditor__section {
   margin-top: 20px;
 }
-[data-module=m-formBuilder01] .fb-field-section-title {
+[data-module=m-formBuilder01] .c-formEditor__section > .wrapper > .block.is-contents {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+[data-module=m-formBuilder01] .c-formEditor__section > .wrapper > .block.is-contents > .area.is-title {
   display: flex;
   align-items: center;
   gap: 12px;
-  margin: 0 0 10px;
-  font-size: 13px;
-  font-weight: 700;
-  color: #334155;
 }
-[data-module=m-formBuilder01] .fb-field-section-title::after {
+[data-module=m-formBuilder01] .c-formEditor__section > .wrapper > .block.is-contents > .area.is-title::after {
   content: "";
   flex: 1;
   height: 1px;
   background: #e2e8f0;
 }
-[data-module=m-formBuilder01] .fb-field-body .box.is-field > .label {
-  font-size: 12px;
+[data-module=m-formBuilder01] .c-formEditor__section > .wrapper > .block.is-contents > .area.is-title > [data-module=m-boldTitle01] {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 700;
+  color: #334155;
 }
 [data-module=m-formBuilder01] .c-formEditor__item.is-collapsed > .wrapper > .block.is-contents > .area.is-body {
   display: none;
 }
-[data-module=m-formBuilder01] .fb-row {
+[data-module=m-formBuilder01] .c-formEditor__row {
   display: flex;
   gap: 12px;
   flex-wrap: wrap;
 }
-[data-module=m-formBuilder01] .fb-row label {
+[data-module=m-formBuilder01] .c-formEditor__row label {
   font-size: 12px;
 }
-[data-module=m-formBuilder01] .fb-row > div {
+[data-module=m-formBuilder01] .c-formEditor__row > div {
   flex: 1;
   min-width: 180px;
 }
-[data-module=m-formBuilder01] .fb-actions {
+[data-module=m-formBuilder01] .c-formEditor__actions {
   margin-top: 8px;
   display: flex;
   gap: 8px;
 }
-[data-module=m-formBuilder01] .fb-field-key-row {
+[data-module=m-formBuilder01] .c-formEditor__fieldKey {
   display: flex;
   align-items: center;
   gap: 8px;
 }
-[data-module=m-formBuilder01] .fb-validation-wrap {
+[data-module=m-formBuilder01] .c-formEditor__validation {
   min-width: 320px;
 }
-[data-module=m-formBuilder01] .fb-validation-controls {
+[data-module=m-formBuilder01] .c-formEditor__validationControls {
   display: flex;
   align-items: flex-start;
   gap: 12px;
   flex-wrap: wrap;
 }
-[data-module=m-formBuilder01] .fb-required-wrap {
+[data-module=m-formBuilder01] .c-formEditor__required {
   flex: 0 0 auto;
   min-width: auto;
 }
-[data-module=m-formBuilder01] .fb-validation-controls .fb-regex-wrap {
+[data-module=m-formBuilder01] .c-formEditor__validationControls > [data-target=c-formEditor__regex] {
   flex: 1 1 220px;
   min-width: 220px;
 }
-[data-module=m-formBuilder01] .fb-checkbox-limit-settings {
+[data-module=m-formBuilder01] .c-formEditor__checkboxLimit {
   display: flex;
   gap: 12px;
   margin-top: 8px;
   flex-wrap: wrap;
 }
-[data-module=m-formBuilder01] .fb-checkbox-limit-settings > div {
+[data-module=m-formBuilder01] .c-formEditor__checkboxLimit > div {
   flex: 1;
   min-width: 140px;
 }
-[data-module=m-formBuilder01] .fb-field-key-input {
+[data-module=m-formBuilder01] [data-target=c-formEditor__fieldKeyInput] {
   flex: 1;
   min-width: 0;
 }
-[data-module=m-formBuilder01] .fb-field-key-input.is-locked {
+[data-module=m-formBuilder01] [data-target=c-formEditor__fieldKeyInput].is-locked {
   background: #f3f4f6;
   color: #374151;
   cursor: default;
 }
-[data-module=m-formBuilder01] .fb-regex-wrap {
+[data-module=m-formBuilder01] [data-target=c-formEditor__regex] {
   flex: 2 1 320px;
   min-width: 280px;
 }
-[data-module=m-formBuilder01] .fb-regex-list {
+[data-module=m-formBuilder01] .c-formEditor__regexList {
   margin-bottom: 8px;
 }
-[data-module=m-formBuilder01] .fb-regex-row {
+[data-module=m-formBuilder01] .c-formEditor__regexRow {
   display: flex;
   align-items: flex-start;
   gap: 8px;
@@ -1094,11 +1077,11 @@ form.is-inline {
   max-width: 100%;
   min-width: 140px;
 }
-[data-module=m-formBuilder01] .fb-regex-custom-wrap {
+[data-module=m-formBuilder01] .c-formEditor__regexCustom {
   flex: 2 1 220px;
   min-width: 140px;
 }
-[data-module=m-formBuilder01] .fb-regex-custom-wrap .fb-regex-custom {
+[data-module=m-formBuilder01] .c-formEditor__regexCustom .fb-regex-custom {
   width: 100%;
   box-sizing: border-box;
 }
