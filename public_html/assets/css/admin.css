@@ -361,7 +361,7 @@ textarea[data-module=m-inout01] {
 
 [data-module=m-largeTitle01] {
   font-size: 17px;
-  margin: 0 0 12px;
+  margin: 0;
   color: #374151;
 }
 
@@ -374,6 +374,12 @@ textarea[data-module=m-inout01] {
 
 [data-module=c-formBlock01] > .wrapper > .block.is-contents {
   padding: 20px 24px;
+}
+[data-module=c-formBlock01] > .wrapper > .block.is-contents > .area.is-title {
+  margin-bottom: 12px;
+}
+[data-module=c-formBlock01] > .wrapper > .block.is-contents > .area.is-field + .area.is-field {
+  margin-top: 16px;
 }
 
 .m-toolbar01 {
@@ -631,10 +637,10 @@ form.is-inline {
   word-break: break-word;
 }
 
-[data-module=c-formBlock01] > .wrapper > .block.is-contents .box.is-field {
-  margin-bottom: 16px;
+[data-module=c-formBlock01] > .wrapper > .block.is-contents .area.is-title .fb-panel-header {
+  margin-bottom: 0;
 }
-[data-module=c-formBlock01] > .wrapper > .block.is-contents .box.is-field label,
+[data-module=c-formBlock01] > .wrapper > .block.is-contents .area.is-field label,
 [data-module=c-formBlock01] > .wrapper > .block.is-contents .label {
   display: block;
   font-weight: 600;

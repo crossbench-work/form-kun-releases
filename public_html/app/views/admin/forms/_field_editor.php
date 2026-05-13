@@ -178,7 +178,7 @@ if (empty($f['required']) || in_array($f['type'], ['radio', 'select'], true)) {
                     <input data-module="m-inout01" type="number" min="1" name="fields[<?= $idx ?>][max_length]" value="<?= e($f['max_length']) ?>">
                 </div>
             </div>
-            <div class="box is-field fb-options" <?= in_array($f['type'], ['radio','checkbox','select'], true) ? '' : 'style="display:none"' ?>>
+            <div class="area is-field fb-options" <?= in_array($f['type'], ['radio','checkbox','select'], true) ? '' : 'style="display:none"' ?>>
                 <label class="label">選択肢（1行に1つ）</label>
                 <?php $choiceOptions = \Models\FormField::parseOptions($f['options'] ?? ''); ?>
                 <div class="fb-choiceEditor" data-choice-editor>
@@ -232,7 +232,7 @@ if (empty($f['required']) || in_array($f['type'], ['radio', 'select'], true)) {
                 <input data-module="m-inout01" type="text" name="fields[<?= $idx ?>][pair_placeholder_right]" value="<?= e($f['pair_placeholder_right'] ?? '') ?>">
             </div>
         </div>
-        <div class="box is-field">
+        <div class="area is-field">
             <?php if ($isAgreementField): ?>
                 <label class="label">説明文</label>
                 <textarea data-module="m-inout01" name="fields[<?= $idx ?>][help_text]" rows="6"><?= e($f['help_text']) ?></textarea>

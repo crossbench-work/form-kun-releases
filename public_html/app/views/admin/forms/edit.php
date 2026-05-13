@@ -28,7 +28,7 @@ foreach ($fields as $field) {
 }
 $renderDescriptionEditor = static function (string $namePrefix, array $blocks, string $positionMode): void {
     ?>
-    <div class="box is-field fb-description-editor" data-description-editor data-name-prefix="<?= e($namePrefix) ?>" data-position-mode="<?= e($positionMode) ?>">
+    <div class="area is-field fb-description-editor" data-description-editor data-name-prefix="<?= e($namePrefix) ?>" data-position-mode="<?= e($positionMode) ?>">
         <div class="fb-description-blocks">
             <?php foreach ($blocks as $i => $block): ?>
                 <div class="fb-description-block" data-index="<?= $i ?>">
@@ -102,8 +102,10 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                 <div data-module="c-formBlock01">
                     <div class="wrapper">
                         <div class="block is-contents">
-            <h2 data-module="m-largeTitle01">基本設定</h2>
-            <div class="box is-field">
+            <div class="area is-title">
+                <h2 data-module="m-largeTitle01">基本設定</h2>
+            </div>
+            <div class="area is-field">
                 <div class="fb-basic-label-row">
                     <label class="label" for="title">タイトル <span class="is-required">必須</span></label>
                     <label class="label is-choice fb-basic-display-toggle">
@@ -113,12 +115,12 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                 </div>
                 <input data-module="m-inout01" type="text" id="title" name="title" value="<?= e($form['title']) ?>" required>
             </div>
-            <div class="box is-field">
+            <div class="area is-field">
                 <label class="label" for="slug">スラッグ（URL用） <span class="is-required">必須</span></label>
                 <input data-module="m-inout01" type="text" id="slug" name="slug" value="<?= e($form['slug']) ?>" required>
                 <p class="text is-help"><a id="slug-link" href="<?= e(url('/f/' . $slugPreviewValue)) ?>" target="_blank" rel="noopener"><code><?= e(url('/f/')) ?></code><strong id="slug-preview"><?= e($slugPreviewValue) ?></strong></a></p>
             </div>
-            <div class="box is-field">
+            <div class="area is-field">
                 <label class="label" for="status">公開状態</label>
                 <select data-module="m-inout01" id="status" name="status">
                     <option value="draft"    <?= $form['status'] === 'draft' ? 'selected' : '' ?>>下書き</option>
@@ -141,7 +143,8 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                 <div data-module="c-formBlock01">
                     <div class="wrapper">
                         <div class="block is-contents">
-            <div class="fb-panel-header">
+            <div class="area is-title">
+                <div class="fb-panel-header">
                 <h2 id="input-screen-title-preview" data-module="m-largeTitle01">表示設定</h2>
                 <button
                     type="submit"
@@ -151,6 +154,7 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                     formtarget="_blank"
                     formnovalidate
                 >プレビュー</button>
+                </div>
             </div>
             <?php $renderDescriptionEditor('description_blocks', $descriptionBlocks, 'input'); ?>
                         </div>
@@ -165,7 +169,10 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                 <div data-module="c-formBlock01">
                     <div class="wrapper">
                         <div class="block is-contents" data-module="m-formBuilder01">
-            <h2 data-module="m-largeTitle01">項目設定</h2>
+            <div class="area is-title">
+                <h2 data-module="m-largeTitle01">項目設定</h2>
+            </div>
+            <div class="area is-field">
             <ul id="fb-fields" class="fb-fields">
             <?php foreach ($sortableFields as $i => $f): ?>
                 <?php $idx = $i; $isAgreementField = false; ?>
@@ -182,6 +189,7 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                     <?php include __DIR__ . '/_field_editor.php'; ?>
                 </ul>
             <?php endif; ?>
+            </div>
                         </div>
                     </div>
                 </div>
@@ -194,8 +202,10 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                 <div data-module="c-formBlock01">
                     <div class="wrapper">
                         <div class="block is-contents">
-            <h2 data-module="m-largeTitle01">スパム対策</h2>
-            <div class="box is-field">
+            <div class="area is-title">
+                <h2 data-module="m-largeTitle01">スパム対策</h2>
+            </div>
+            <div class="area is-field">
                 <label class="label">
                     <input type="checkbox" name="captcha_enabled" value="1" <?= !empty($form['captcha_enabled']) ? 'checked' : '' ?>>
                     スパム対策（簡易計算CAPTCHA）を有効にする
@@ -213,8 +223,10 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                 <div data-module="c-formBlock01">
                     <div class="wrapper">
                         <div class="block is-contents">
-            <h2 data-module="m-largeTitle01">ボタン設定</h2>
-            <div class="box is-field">
+            <div class="area is-title">
+                <h2 data-module="m-largeTitle01">ボタン設定</h2>
+            </div>
+            <div class="area is-field">
                 <label class="label" for="confirm_button_text">ボタンテキスト</label>
                 <input data-module="m-inout01" type="text" id="confirm_button_text" name="confirm_button_text" value="<?= e($form['confirm_button_text'] ?? '入力内容を確認する') ?>">
             </div>
@@ -233,7 +245,8 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                 <div data-module="c-formBlock01">
                     <div class="wrapper">
                         <div class="block is-contents">
-            <div class="fb-panel-header">
+            <div class="area is-title">
+                <div class="fb-panel-header">
                 <h2 id="confirm-screen-title-preview" data-module="m-largeTitle01">表示設定</h2>
                 <button
                     type="submit"
@@ -243,6 +256,7 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                     formtarget="_blank"
                     formnovalidate
                 >プレビュー</button>
+                </div>
             </div>
             <?php $renderDescriptionEditor('confirm_blocks', $confirmBlocks, 'simple'); ?>
                         </div>
@@ -257,12 +271,14 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                 <div data-module="c-formBlock01">
                     <div class="wrapper">
                         <div class="block is-contents">
-            <h2 data-module="m-largeTitle01">ボタン設定</h2>
-            <div class="box is-field">
+            <div class="area is-title">
+                <h2 data-module="m-largeTitle01">ボタン設定</h2>
+            </div>
+            <div class="area is-field">
                 <label class="label" for="submit_button_text">送信ボタンテキスト</label>
                 <input data-module="m-inout01" type="text" id="submit_button_text" name="submit_button_text" value="<?= e($form['submit_button_text'] ?? '送信する') ?>">
             </div>
-            <div class="box is-field">
+            <div class="area is-field">
                 <label class="label" for="back_button_text">戻るボタンテキスト</label>
                 <input data-module="m-inout01" type="text" id="back_button_text" name="back_button_text" value="<?= e($form['back_button_text'] ?? '入力に戻る') ?>">
             </div>
@@ -281,7 +297,8 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                 <div data-module="c-formBlock01">
                     <div class="wrapper">
                         <div class="block is-contents">
-            <div class="fb-panel-header">
+            <div class="area is-title">
+                <div class="fb-panel-header">
                 <h2 id="thanks-screen-title-preview" data-module="m-largeTitle01">表示設定</h2>
                 <button
                     type="submit"
@@ -291,6 +308,7 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                     formtarget="_blank"
                     formnovalidate
                 >プレビュー</button>
+                </div>
             </div>
             <?php $renderDescriptionEditor('thanks_blocks', $thanksBlocks, 'simple'); ?>
                         </div>
@@ -305,12 +323,14 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                 <div data-module="c-formBlock01">
                     <div class="wrapper">
                         <div class="block is-contents">
-            <h2 data-module="m-largeTitle01">ボタン設定</h2>
-            <div class="box is-field">
+            <div class="area is-title">
+                <h2 data-module="m-largeTitle01">ボタン設定</h2>
+            </div>
+            <div class="area is-field">
                 <label class="label" for="thanks_button_text">ボタンテキスト</label>
                 <input data-module="m-inout01" type="text" id="thanks_button_text" name="thanks_button_text" value="<?= e($form['thanks_button_text'] ?? 'トップへ戻る') ?>">
             </div>
-            <div class="box is-field">
+            <div class="area is-field">
                 <label class="label" for="thanks_button_url">ボタンURL</label>
                 <input data-module="m-inout01" type="text" id="thanks_button_url" name="thanks_button_url" value="<?= e($form['thanks_button_url'] ?? '/') ?>" placeholder="/ または https://example.com/">
             </div>
@@ -329,16 +349,18 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                 <div data-module="c-formBlock01">
                     <div class="wrapper">
                         <div class="block is-contents">
-            <h2 data-module="m-largeTitle01">管理者通知メール</h2>
-            <div class="box is-field">
+            <div class="area is-title">
+                <h2 data-module="m-largeTitle01">管理者通知メール</h2>
+            </div>
+            <div class="area is-field">
                 <label class="label">送信先メールアドレス（カンマ区切りで複数可）</label>
                 <input data-module="m-inout01" type="text" name="admin_emails" value="<?= e($form['admin_emails']) ?>" placeholder="admin@example.com, sub@example.com">
             </div>
-            <div class="box is-field">
+            <div class="area is-field">
                 <label class="label">件名</label>
                 <input data-module="m-inout01" type="text" name="mail_subject_admin" value="<?= e($form['mail_subject_admin']) ?>" placeholder="[{{__form_title__}}] 新規送信">
             </div>
-            <div class="box is-field">
+            <div class="area is-field">
                 <label class="label">表示設定</label>
                 <textarea data-module="m-inout01" name="mail_template_admin" rows="6"><?= e($form['mail_template_admin']) ?></textarea>
                 <p class="text is-help">使用可能な変数: <code>{{field_key}}</code> / <code>{{__all__}}</code> / <code>{{__form_title__}}</code> / <code>{{__submitted_at__}}</code> / <code>{{__ip__}}</code></p>
@@ -356,22 +378,24 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                 <div data-module="c-formBlock01">
                     <div class="wrapper">
                         <div class="block is-contents">
-            <h2 data-module="m-largeTitle01">送信者への自動返信メール</h2>
-            <div class="box is-field">
+            <div class="area is-title">
+                <h2 data-module="m-largeTitle01">送信者への自動返信メール</h2>
+            </div>
+            <div class="area is-field">
                 <label class="label">
                     <input type="checkbox" name="reply_enabled" value="1" <?= !empty($form['reply_enabled']) ? 'checked' : '' ?>>
                     自動返信を有効にする
                 </label>
             </div>
-            <div class="box is-field">
+            <div class="area is-field">
                 <label class="label">送信先のフィールドキー（メール型項目）</label>
                 <input data-module="m-inout01" type="text" name="reply_from_field_key" value="<?= e($form['reply_from_field_key']) ?>" placeholder="メール項目のフィールドキー（UUID または任意のキー）">
             </div>
-            <div class="box is-field">
+            <div class="area is-field">
                 <label class="label">件名</label>
                 <input data-module="m-inout01" type="text" name="reply_subject" value="<?= e($form['reply_subject']) ?>">
             </div>
-            <div class="box is-field">
+            <div class="area is-field">
                 <label class="label">表示設定</label>
                 <textarea data-module="m-inout01" name="reply_template" rows="6"><?= e($form['reply_template']) ?></textarea>
             </div>
@@ -510,7 +534,7 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                 </div>
                 <div class="fb-max-length-wrap"><label>最大文字数（任意）</label><input data-module="m-inout01" type="number" min="1" data-name="max_length"></div>
             </div>
-            <div class="box is-field fb-options" style="display:none">
+            <div class="area is-field fb-options" style="display:none">
                 <label>選択肢（1行に1つ）</label>
                 <div class="fb-choiceEditor" data-choice-editor>
                     <div class="fb-choiceList"></div>
@@ -534,7 +558,7 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                 <div><label>1つ目のプレースホルダ（任意）</label><input data-module="m-inout01" type="text" data-name="pair_placeholder_left"></div>
                 <div><label>2つ目のプレースホルダ（任意）</label><input data-module="m-inout01" type="text" data-name="pair_placeholder_right"></div>
             </div>
-            <div class="box is-field"><label class="label">備考</label><textarea data-module="m-inout01" data-name="help_text" rows="3"></textarea></div>
+            <div class="area is-field"><label class="label">備考</label><textarea data-module="m-inout01" data-name="help_text" rows="3"></textarea></div>
         </div>
         <input type="hidden" data-name="_remove" value="0" class="fb-remove-flag">
         </div>

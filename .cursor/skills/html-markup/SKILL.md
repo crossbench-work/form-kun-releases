@@ -121,7 +121,7 @@ assets/
 ## `.wrapper` / `.inner`（l- / m- / c- 共通）
 
 - 任意で **`.wrapper`**。さらに必要なら **`.wrapper` > `.inner`**。
-- **管理画面パネルは、`<div data-module="c-panel01"><div class="wrapper"><div class="block is-contents"><div data-module="c-formBlock01"><div class="wrapper"><div class="block is-contents">...</div></div></div></div></div></div>` の形を正とし、設定 UI などの実コンテンツは `c-formBlock01` の内側へ置く**。
+- **管理画面パネルは、`<div data-module="c-panel01"><div class="wrapper"><div class="block is-contents"><div data-module="c-formBlock01"><div class="wrapper"><div class="block is-contents"><div class="area is-title">...</div><div class="area is-field">...</div></div></div></div></div></div></div>` の形を正とし、設定 UI などの実コンテンツは `c-formBlock01` の `area is-title` / `area is-field` に分けて置く**。
 
 ### SCSS: 直下の `.wrapper` は子セレクタで縛る
 
