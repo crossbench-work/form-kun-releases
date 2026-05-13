@@ -122,15 +122,23 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                 <h2 data-module="m-largeTitle01">基本設定</h2>
             </div>
             <div class="area is-field">
-                <div class="fb-basic-label-row">
-                    <label class="label" for="title">タイトル <span class="is-required">必須</span></label>
-                    <label class="label is-choice fb-basic-display-toggle">
-                        <input type="checkbox" name="show_title" value="1" <?= !empty($form['show_title']) ? 'checked' : '' ?>>
-                        表示する
-                    </label>
-                </div>
-                <div data-module="m-input01">
-                    <input type="text" id="title" name="title" value="<?= e($form['title']) ?>" required>
+                <div data-module="c-inputSet01">
+                    <div class="wrapper">
+                        <div class="block is-contents">
+                            <div class="area is-title">
+                                <label class="label" for="title">タイトル <span class="is-required">必須</span></label>
+                                <label class="label is-choice fb-basic-display-toggle">
+                                    <input type="checkbox" name="show_title" value="1" <?= !empty($form['show_title']) ? 'checked' : '' ?>>
+                                    表示する
+                                </label>
+                            </div>
+                            <div class="area is-field">
+                                <div data-module="m-input01">
+                                    <input type="text" id="title" name="title" value="<?= e($form['title']) ?>" required>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="area is-field">

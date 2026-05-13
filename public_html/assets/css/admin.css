@@ -747,14 +747,6 @@ form.is-inline {
   font-weight: 400;
   margin-bottom: 0;
 }
-[data-module=c-formBlock01] > .wrapper > .block.is-contents .fb-basic-label-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  flex-wrap: wrap;
-  margin-bottom: 6px;
-}
 [data-module=c-formBlock01] > .wrapper > .block.is-contents .fb-basic-display-toggle {
   font-size: 13px;
   color: #64748b;
@@ -811,6 +803,15 @@ form.is-inline {
   justify-content: flex-end;
   margin-top: 16px;
   margin-bottom: 16px;
+}
+
+[data-module=c-inputSet01] > .wrapper > .block.is-contents > .area.is-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 6px;
 }
 
 .m-badge01 {
