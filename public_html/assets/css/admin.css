@@ -362,6 +362,15 @@ body.l-adminShell01 a:hover {
   text-decoration: underline;
 }
 
+.l-adminContainer01 {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.l-adminBody01 {
+  flex: 1 1 auto;
+}
 .l-adminBody01 > .wrapper {
   padding: 24px;
   max-width: 1200px;

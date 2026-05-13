@@ -86,12 +86,6 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
 };
 ?>
 
-<?php if (!empty($errors)): ?>
-    <div class="m-alert01 is-danger">
-        <ul><?php foreach ($errors as $msg): ?><li><?= e($msg) ?></li><?php endforeach; ?></ul>
-    </div>
-<?php endif; ?>
-
 <div class="c-breadcrumb01">
     <div class="wrapper">
         <div class="block is-contents">
@@ -107,6 +101,12 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
 
 <form method="post" action="<?= e($isNew ? base_path('/admin/forms') : base_path('/admin/forms/' . (int)$form['id'])) ?>" class="p-formEdit01">
     <?= \Core\Csrf::field() ?>
+
+    <?php if (!empty($errors)): ?>
+        <div class="m-alert01 is-danger">
+            <ul><?php foreach ($errors as $msg): ?><li><?= e($msg) ?></li><?php endforeach; ?></ul>
+        </div>
+    <?php endif; ?>
 
     <div class="p-formEditTabs01" data-module="m-formEditTabs01">
         <div class="tab" role="tablist" aria-label="フォーム設定のセクション">

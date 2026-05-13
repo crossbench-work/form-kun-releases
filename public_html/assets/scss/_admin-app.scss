@@ -250,7 +250,15 @@ body.l-adminShell01 {
   }
 }
 
+.l-adminContainer01 {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
 .l-adminBody01 {
+  flex: 1 1 auto;
+
   & > .wrapper {
     padding: 24px;
     max-width: 1200px;
