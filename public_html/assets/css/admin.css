@@ -551,7 +551,7 @@ form.is-inline {
   border-bottom: 2px solid #e2e8f0;
   margin-bottom: 20px;
 }
-[data-module=c-formEditTabs01] > .wrapper > .block.is-contents .box.is-tabPanel[hidden] {
+[data-module=c-formEditTabs01] > .wrapper > .block.is-contents .area.is-contents[role=tabpanel][hidden] {
   display: none !important;
 }
 

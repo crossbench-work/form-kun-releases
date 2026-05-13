@@ -476,7 +476,7 @@ form.is-inline {
     }
 
     > .block.is-contents {
-      .box.is-tabPanel[hidden] {
+      .area.is-contents[role="tabpanel"][hidden] {
         display: none !important;
       }
     }

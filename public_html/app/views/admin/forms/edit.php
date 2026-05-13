@@ -120,7 +120,7 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                     </div>
 
                     <div class="block is-contents">
-        <div id="tab-panel-basic" class="box is-tabPanel" role="tabpanel" aria-labelledby="tab-btn-basic">
+        <div id="tab-panel-basic" class="area is-contents" role="tabpanel" aria-labelledby="tab-btn-basic">
     <div data-module="c-panel01">
         <div class="wrapper">
             <div class="block is-contents">
@@ -197,7 +197,7 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
     </div>
         </div>
 
-        <div id="tab-panel-fields" class="box is-tabPanel" role="tabpanel" aria-labelledby="tab-btn-fields" hidden>
+        <div id="tab-panel-fields" class="area is-contents" role="tabpanel" aria-labelledby="tab-btn-fields" hidden>
     <div data-module="c-panel01">
         <div class="wrapper">
             <div class="block is-contents">
@@ -311,7 +311,7 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
     </div>
         </div>
 
-        <div id="tab-panel-confirm" class="box is-tabPanel" role="tabpanel" aria-labelledby="tab-btn-confirm" hidden>
+        <div id="tab-panel-confirm" class="area is-contents" role="tabpanel" aria-labelledby="tab-btn-confirm" hidden>
     <div data-module="c-panel01">
         <div class="wrapper">
             <div class="block is-contents">
@@ -387,7 +387,7 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
     </div>
         </div>
 
-        <div id="tab-panel-thanks" class="box is-tabPanel" role="tabpanel" aria-labelledby="tab-btn-thanks" hidden>
+        <div id="tab-panel-thanks" class="area is-contents" role="tabpanel" aria-labelledby="tab-btn-thanks" hidden>
     <div data-module="c-panel01">
         <div class="wrapper">
             <div class="block is-contents">
@@ -463,7 +463,7 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
     </div>
         </div>
 
-        <div id="tab-panel-mail" class="box is-tabPanel" role="tabpanel" aria-labelledby="tab-btn-mail" hidden>
+        <div id="tab-panel-mail" class="area is-contents" role="tabpanel" aria-labelledby="tab-btn-mail" hidden>
     <div data-module="c-panel01">
         <div class="wrapper">
             <div class="block is-contents">
