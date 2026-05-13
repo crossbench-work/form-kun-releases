@@ -279,9 +279,19 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                 <h2 data-module="m-largeTitle01">ボタン設定</h2>
             </div>
             <div class="area is-field">
-                <label class="label" data-module="m-boldTitle01" for="confirm_button_text">ボタンテキスト</label>
-                <div data-module="m-input01">
-                    <input type="text" id="confirm_button_text" name="confirm_button_text" value="<?= e($form['confirm_button_text'] ?? '入力内容を確認する') ?>">
+                <div data-module="c-inputSet01">
+                    <div class="wrapper">
+                        <div class="block is-contents">
+                            <div class="area is-title">
+                                <label class="label" data-module="m-boldTitle01" for="confirm_button_text">ボタンテキスト</label>
+                            </div>
+                            <div class="area is-field">
+                                <div data-module="m-input01">
+                                    <input type="text" id="confirm_button_text" name="confirm_button_text" value="<?= e($form['confirm_button_text'] ?? '入力内容を確認する') ?>">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
                         </div>
@@ -329,15 +339,35 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                 <h2 data-module="m-largeTitle01">ボタン設定</h2>
             </div>
             <div class="area is-field">
-                <label class="label" data-module="m-boldTitle01" for="submit_button_text">送信ボタンテキスト</label>
-                <div data-module="m-input01">
-                    <input type="text" id="submit_button_text" name="submit_button_text" value="<?= e($form['submit_button_text'] ?? '送信する') ?>">
+                <div data-module="c-inputSet01">
+                    <div class="wrapper">
+                        <div class="block is-contents">
+                            <div class="area is-title">
+                                <label class="label" data-module="m-boldTitle01" for="submit_button_text">送信ボタンテキスト</label>
+                            </div>
+                            <div class="area is-field">
+                                <div data-module="m-input01">
+                                    <input type="text" id="submit_button_text" name="submit_button_text" value="<?= e($form['submit_button_text'] ?? '送信する') ?>">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="area is-field">
-                <label class="label" data-module="m-boldTitle01" for="back_button_text">戻るボタンテキスト</label>
-                <div data-module="m-input01">
-                    <input type="text" id="back_button_text" name="back_button_text" value="<?= e($form['back_button_text'] ?? '入力に戻る') ?>">
+                <div data-module="c-inputSet01">
+                    <div class="wrapper">
+                        <div class="block is-contents">
+                            <div class="area is-title">
+                                <label class="label" data-module="m-boldTitle01" for="back_button_text">戻るボタンテキスト</label>
+                            </div>
+                            <div class="area is-field">
+                                <div data-module="m-input01">
+                                    <input type="text" id="back_button_text" name="back_button_text" value="<?= e($form['back_button_text'] ?? '入力に戻る') ?>">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
                         </div>
@@ -385,15 +415,35 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                 <h2 data-module="m-largeTitle01">ボタン設定</h2>
             </div>
             <div class="area is-field">
-                <label class="label" data-module="m-boldTitle01" for="thanks_button_text">ボタンテキスト</label>
-                <div data-module="m-input01">
-                    <input type="text" id="thanks_button_text" name="thanks_button_text" value="<?= e($form['thanks_button_text'] ?? 'トップへ戻る') ?>">
+                <div data-module="c-inputSet01">
+                    <div class="wrapper">
+                        <div class="block is-contents">
+                            <div class="area is-title">
+                                <label class="label" data-module="m-boldTitle01" for="thanks_button_text">ボタンテキスト</label>
+                            </div>
+                            <div class="area is-field">
+                                <div data-module="m-input01">
+                                    <input type="text" id="thanks_button_text" name="thanks_button_text" value="<?= e($form['thanks_button_text'] ?? 'トップへ戻る') ?>">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="area is-field">
-                <label class="label" data-module="m-boldTitle01" for="thanks_button_url">ボタンURL</label>
-                <div data-module="m-input01">
-                    <input type="text" id="thanks_button_url" name="thanks_button_url" value="<?= e($form['thanks_button_url'] ?? '/') ?>" placeholder="/ または https://example.com/">
+                <div data-module="c-inputSet01">
+                    <div class="wrapper">
+                        <div class="block is-contents">
+                            <div class="area is-title">
+                                <label class="label" data-module="m-boldTitle01" for="thanks_button_url">ボタンURL</label>
+                            </div>
+                            <div class="area is-field">
+                                <div data-module="m-input01">
+                                    <input type="text" id="thanks_button_url" name="thanks_button_url" value="<?= e($form['thanks_button_url'] ?? '/') ?>" placeholder="/ または https://example.com/">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
                         </div>
@@ -415,23 +465,55 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                 <h2 data-module="m-largeTitle01">管理者通知メール</h2>
             </div>
             <div class="area is-field">
-                <label class="label" data-module="m-boldTitle01">送信先メールアドレス（カンマ区切りで複数可）</label>
-                <div data-module="m-input01">
-                    <input type="text" name="admin_emails" value="<?= e($form['admin_emails']) ?>" placeholder="admin@example.com, sub@example.com">
+                <div data-module="c-inputSet01">
+                    <div class="wrapper">
+                        <div class="block is-contents">
+                            <div class="area is-title">
+                                <label class="label" data-module="m-boldTitle01">送信先メールアドレス（カンマ区切りで複数可）</label>
+                            </div>
+                            <div class="area is-field">
+                                <div data-module="m-input01">
+                                    <input type="text" name="admin_emails" value="<?= e($form['admin_emails']) ?>" placeholder="admin@example.com, sub@example.com">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="area is-field">
-                <label class="label" data-module="m-boldTitle01">件名</label>
-                <div data-module="m-input01">
-                    <input type="text" name="mail_subject_admin" value="<?= e($form['mail_subject_admin']) ?>" placeholder="[{{__form_title__}}] 新規送信">
+                <div data-module="c-inputSet01">
+                    <div class="wrapper">
+                        <div class="block is-contents">
+                            <div class="area is-title">
+                                <label class="label" data-module="m-boldTitle01">件名</label>
+                            </div>
+                            <div class="area is-field">
+                                <div data-module="m-input01">
+                                    <input type="text" name="mail_subject_admin" value="<?= e($form['mail_subject_admin']) ?>" placeholder="[{{__form_title__}}] 新規送信">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="area is-field">
-                <label class="label" data-module="m-boldTitle01">表示設定</label>
-                <div data-module="m-input01">
-                    <textarea name="mail_template_admin" rows="6"><?= e($form['mail_template_admin']) ?></textarea>
+                <div data-module="c-inputSet01">
+                    <div class="wrapper">
+                        <div class="block is-contents">
+                            <div class="area is-title">
+                                <label class="label" data-module="m-boldTitle01">表示設定</label>
+                            </div>
+                            <div class="area is-field">
+                                <div data-module="m-input01">
+                                    <textarea name="mail_template_admin" rows="6"><?= e($form['mail_template_admin']) ?></textarea>
+                                </div>
+                            </div>
+                            <div class="area is-help">
+                                <p class="text is-help">使用可能な変数: <code>{{field_key}}</code> / <code>{{__all__}}</code> / <code>{{__form_title__}}</code> / <code>{{__submitted_at__}}</code> / <code>{{__ip__}}</code></p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <p class="text is-help">使用可能な変数: <code>{{field_key}}</code> / <code>{{__all__}}</code> / <code>{{__form_title__}}</code> / <code>{{__submitted_at__}}</code> / <code>{{__ip__}}</code></p>
             </div>
                         </div>
                     </div>
@@ -456,21 +538,51 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                 </label>
             </div>
             <div class="area is-field">
-                <label class="label" data-module="m-boldTitle01">送信先のフィールドキー（メール型項目）</label>
-                <div data-module="m-input01">
-                    <input type="text" name="reply_from_field_key" value="<?= e($form['reply_from_field_key']) ?>" placeholder="メール項目のフィールドキー（UUID または任意のキー）">
+                <div data-module="c-inputSet01">
+                    <div class="wrapper">
+                        <div class="block is-contents">
+                            <div class="area is-title">
+                                <label class="label" data-module="m-boldTitle01">送信先のフィールドキー（メール型項目）</label>
+                            </div>
+                            <div class="area is-field">
+                                <div data-module="m-input01">
+                                    <input type="text" name="reply_from_field_key" value="<?= e($form['reply_from_field_key']) ?>" placeholder="メール項目のフィールドキー（UUID または任意のキー）">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="area is-field">
-                <label class="label" data-module="m-boldTitle01">件名</label>
-                <div data-module="m-input01">
-                    <input type="text" name="reply_subject" value="<?= e($form['reply_subject']) ?>">
+                <div data-module="c-inputSet01">
+                    <div class="wrapper">
+                        <div class="block is-contents">
+                            <div class="area is-title">
+                                <label class="label" data-module="m-boldTitle01">件名</label>
+                            </div>
+                            <div class="area is-field">
+                                <div data-module="m-input01">
+                                    <input type="text" name="reply_subject" value="<?= e($form['reply_subject']) ?>">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="area is-field">
-                <label class="label" data-module="m-boldTitle01">表示設定</label>
-                <div data-module="m-input01">
-                    <textarea name="reply_template" rows="6"><?= e($form['reply_template']) ?></textarea>
+                <div data-module="c-inputSet01">
+                    <div class="wrapper">
+                        <div class="block is-contents">
+                            <div class="area is-title">
+                                <label class="label" data-module="m-boldTitle01">表示設定</label>
+                            </div>
+                            <div class="area is-field">
+                                <div data-module="m-input01">
+                                    <textarea name="reply_template" rows="6"><?= e($form['reply_template']) ?></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
                         </div>
