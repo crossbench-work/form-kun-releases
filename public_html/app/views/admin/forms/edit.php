@@ -101,14 +101,15 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
 
 <form method="post" action="<?= e($isNew ? base_path('/admin/forms') : base_path('/admin/forms/' . (int)$form['id'])) ?>" class="p-formEdit01">
     <?= \Core\Csrf::field() ?>
+    <div class="wrapper">
+        <div class="block is-contents">
+            <?php if (!empty($errors)): ?>
+                <div class="m-alert01 is-danger">
+                    <ul><?php foreach ($errors as $msg): ?><li><?= e($msg) ?></li><?php endforeach; ?></ul>
+                </div>
+            <?php endif; ?>
 
-    <?php if (!empty($errors)): ?>
-        <div class="m-alert01 is-danger">
-            <ul><?php foreach ($errors as $msg): ?><li><?= e($msg) ?></li><?php endforeach; ?></ul>
-        </div>
-    <?php endif; ?>
-
-    <div class="p-formEditTabs01" data-module="m-formEditTabs01">
+            <div class="p-formEditTabs01" data-module="m-formEditTabs01">
         <div class="tab" role="tablist" aria-label="フォーム設定のセクション">
             <button type="button" class="tab-item" role="tab" id="tab-btn-basic" aria-selected="true" aria-controls="tab-panel-basic">基本</button>
             <button type="button" class="tab-item" role="tab" id="tab-btn-fields" aria-selected="false" aria-controls="tab-panel-fields" tabindex="-1">入力画面</button>
@@ -599,11 +600,15 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
     </div>
         </div>
 
-    </div>
+            </div>
+        </div>
 
-    <div class="area is-actions">
-        <button type="submit" class="btn is-primary"><?= $isNew ? '作成する' : '保存する' ?></button>
-        <a class="btn" href="<?= e(base_path('/admin/forms')) ?>">キャンセル</a>
+        <div class="block bottom">
+            <div class="area is-actions">
+                <button type="submit" class="btn is-primary"><?= $isNew ? '作成する' : '保存する' ?></button>
+                <a class="btn" href="<?= e(base_path('/admin/forms')) ?>">キャンセル</a>
+            </div>
+        </div>
     </div>
 </form>
 

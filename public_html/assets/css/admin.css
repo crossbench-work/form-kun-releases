@@ -578,13 +578,15 @@ form.is-inline {
   display: none !important;
 }
 
-.p-formEdit01 > .area.is-actions {
+.p-formEdit01 > .wrapper > .block.bottom {
   margin-top: 16px;
+}
+.p-formEdit01 > .wrapper > .block.bottom > .area.is-actions {
   display: flex;
   gap: 10px;
   flex-wrap: wrap;
 }
-.p-formEdit01 > .area.is-actions .btn {
+.p-formEdit01 > .wrapper > .block.bottom > .area.is-actions .btn {
   display: inline-block;
   padding: 8px 16px;
   border: 1px solid #cbd5e1;
@@ -597,16 +599,16 @@ form.is-inline {
   text-decoration: none;
   line-height: 1.4;
 }
-.p-formEdit01 > .area.is-actions .btn:hover {
+.p-formEdit01 > .wrapper > .block.bottom > .area.is-actions .btn:hover {
   background: #f1f5f9;
   text-decoration: none;
 }
-.p-formEdit01 > .area.is-actions .btn.is-primary {
+.p-formEdit01 > .wrapper > .block.bottom > .area.is-actions .btn.is-primary {
   background: #2563eb;
   border-color: #2563eb;
   color: #fff;
 }
-.p-formEdit01 > .area.is-actions .btn.is-primary:hover {
+.p-formEdit01 > .wrapper > .block.bottom > .area.is-actions .btn.is-primary:hover {
   background: #1d4ed8;
 }
 
