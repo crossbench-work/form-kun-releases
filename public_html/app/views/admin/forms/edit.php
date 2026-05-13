@@ -142,20 +142,42 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                 </div>
             </div>
             <div class="area is-field">
-                <label class="label" for="slug">スラッグ（URL用） <span class="is-required">必須</span></label>
-                <div data-module="m-input01">
-                    <input type="text" id="slug" name="slug" value="<?= e($form['slug']) ?>" required>
+                <div data-module="c-inputSet01">
+                    <div class="wrapper">
+                        <div class="block is-contents">
+                            <div class="area is-title">
+                                <label class="label" for="slug">スラッグ（URL用） <span class="is-required">必須</span></label>
+                            </div>
+                            <div class="area is-field">
+                                <div data-module="m-input01">
+                                    <input type="text" id="slug" name="slug" value="<?= e($form['slug']) ?>" required>
+                                </div>
+                            </div>
+                            <div class="area is-help">
+                                <p class="text is-help"><a id="slug-link" href="<?= e(url('/f/' . $slugPreviewValue)) ?>" target="_blank" rel="noopener"><code><?= e(url('/f/')) ?></code><strong id="slug-preview"><?= e($slugPreviewValue) ?></strong></a></p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <p class="text is-help"><a id="slug-link" href="<?= e(url('/f/' . $slugPreviewValue)) ?>" target="_blank" rel="noopener"><code><?= e(url('/f/')) ?></code><strong id="slug-preview"><?= e($slugPreviewValue) ?></strong></a></p>
             </div>
             <div class="area is-field">
-                <label class="label" for="status">公開状態</label>
-                <div data-module="m-input01">
-                    <select id="status" name="status">
-                        <option value="draft"    <?= $form['status'] === 'draft' ? 'selected' : '' ?>>下書き</option>
-                        <option value="active"   <?= $form['status'] === 'active' ? 'selected' : '' ?>>公開中</option>
-                        <option value="archived" <?= $form['status'] === 'archived' ? 'selected' : '' ?>>停止</option>
-                    </select>
+                <div data-module="c-inputSet01">
+                    <div class="wrapper">
+                        <div class="block is-contents">
+                            <div class="area is-title">
+                                <label class="label" for="status">公開状態</label>
+                            </div>
+                            <div class="area is-field">
+                                <div data-module="m-input01">
+                                    <select id="status" name="status">
+                                        <option value="draft"    <?= $form['status'] === 'draft' ? 'selected' : '' ?>>下書き</option>
+                                        <option value="active"   <?= $form['status'] === 'active' ? 'selected' : '' ?>>公開中</option>
+                                        <option value="archived" <?= $form['status'] === 'archived' ? 'selected' : '' ?>>停止</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
                         </div>
