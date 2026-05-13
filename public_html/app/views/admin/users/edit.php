@@ -18,27 +18,27 @@
                             <div class="box is-field">
                                 <label class="label">ユーザー名</label>
                                 <?php if ($isNew): ?>
-                                    <input type="text" name="username" value="<?= e($user['username']) ?>" required>
+                                    <input data-module="m-inout01" type="text" name="username" value="<?= e($user['username']) ?>" required>
                                     <p class="text is-help">半角英数字・記号(_.-)で 3〜64 文字。後から変更できません。</p>
                                 <?php else: ?>
-                                    <input type="text" value="<?= e($user['username']) ?>" disabled>
+                                    <input data-module="m-inout01" type="text" value="<?= e($user['username']) ?>" disabled>
                                 <?php endif; ?>
                             </div>
 
                             <div class="box is-field">
                                 <label class="label">表示名</label>
-                                <input type="text" name="display_name" value="<?= e($user['display_name'] ?? '') ?>">
+                                <input data-module="m-inout01" type="text" name="display_name" value="<?= e($user['display_name'] ?? '') ?>">
                             </div>
 
                             <div class="box is-field">
                                 <label class="label">メールアドレス（任意）</label>
-                                <input type="email" name="email" value="<?= e($user['email'] ?? '') ?>" autocomplete="email">
+                                <input data-module="m-inout01" type="email" name="email" value="<?= e($user['email'] ?? '') ?>" autocomplete="email">
                                 <p class="text is-help">「パスワードを忘れたとき」に再設定リンクを送るために使用します。</p>
                             </div>
 
                             <div class="box is-field">
                                 <label class="label">権限</label>
-                                <select name="role">
+                                <select data-module="m-inout01" name="role">
                                     <option value="editor" <?= ($user['role'] ?? '') === 'editor' ? 'selected' : '' ?>>editor（フォーム/送信履歴の編集）</option>
                                     <option value="admin"  <?= ($user['role'] ?? '') === 'admin'  ? 'selected' : '' ?>>admin（ユーザー管理含む全権限）</option>
                                 </select>
@@ -46,14 +46,14 @@
 
                             <div class="box is-field">
                                 <label class="label">パスワード <?php if ($isNew): ?><span class="is-required">必須</span><?php endif; ?></label>
-                                <input type="password" name="password" autocomplete="new-password" <?= $isNew ? 'required' : '' ?>>
+                                <input data-module="m-inout01" type="password" name="password" autocomplete="new-password" <?= $isNew ? 'required' : '' ?>>
                                 <?php if (!$isNew): ?>
                                     <p class="text is-help">変更しない場合は空のままにしてください。</p>
                                 <?php endif; ?>
                             </div>
                             <div class="box is-field">
                                 <label class="label">パスワード（確認）</label>
-                                <input type="password" name="password_confirm" autocomplete="new-password">
+                                <input data-module="m-inout01" type="password" name="password_confirm" autocomplete="new-password">
                             </div>
                         </div>
                     </div>

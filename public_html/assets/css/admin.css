@@ -224,28 +224,6 @@ body.l-adminShell01 a:hover {
   font-size: 13px;
   margin: 4px 0 0;
 }
-.m-authForm01 input[type=text],
-.m-authForm01 input[type=email],
-.m-authForm01 input[type=tel],
-.m-authForm01 input[type=number],
-.m-authForm01 input[type=password],
-.m-authForm01 input[type=date],
-.m-authForm01 input[type=time],
-.m-authForm01 textarea,
-.m-authForm01 select {
-  width: 100%;
-  padding: 8px 10px;
-  border: 1px solid #cbd5e1;
-  border-radius: 6px;
-  font-size: 14px;
-  font-family: inherit;
-  background: #fff;
-  color: #111;
-}
-.m-authForm01 textarea {
-  min-height: 100px;
-  resize: vertical;
-}
 .m-authForm01 .area.is-actions {
   margin-top: 16px;
   display: flex;
@@ -298,6 +276,22 @@ body.l-adminShell01 a:hover {
   border-radius: 3px;
   margin-left: 4px;
   font-weight: 400;
+}
+
+[data-module=m-inout01] {
+  width: 100%;
+  padding: 8px 10px;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  font-size: 14px;
+  font-family: inherit;
+  background: #fff;
+  color: #111;
+}
+
+textarea[data-module=m-inout01] {
+  min-height: 100px;
+  resize: vertical;
 }
 
 .l-adminHeader01 {
@@ -656,28 +650,6 @@ form.is-inline {
   color: #b91c1c;
   font-size: 13px;
   margin: 4px 0 0;
-}
-[data-module=c-formBlock01] > .wrapper > .block.is-contents input[type=text],
-[data-module=c-formBlock01] > .wrapper > .block.is-contents input[type=email],
-[data-module=c-formBlock01] > .wrapper > .block.is-contents input[type=tel],
-[data-module=c-formBlock01] > .wrapper > .block.is-contents input[type=number],
-[data-module=c-formBlock01] > .wrapper > .block.is-contents input[type=password],
-[data-module=c-formBlock01] > .wrapper > .block.is-contents input[type=date],
-[data-module=c-formBlock01] > .wrapper > .block.is-contents input[type=time],
-[data-module=c-formBlock01] > .wrapper > .block.is-contents textarea,
-[data-module=c-formBlock01] > .wrapper > .block.is-contents select {
-  width: 100%;
-  padding: 8px 10px;
-  border: 1px solid #cbd5e1;
-  border-radius: 6px;
-  font-size: 14px;
-  font-family: inherit;
-  background: #fff;
-  color: #111;
-}
-[data-module=c-formBlock01] > .wrapper > .block.is-contents textarea {
-  min-height: 100px;
-  resize: vertical;
 }
 [data-module=c-formBlock01] > .wrapper > .block.is-contents .area.is-actions {
   margin-top: 16px;

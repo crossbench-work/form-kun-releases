@@ -5,7 +5,7 @@
     <?= \Core\Csrf::field() ?>
     <div class="box is-field">
         <label class="label" for="identifier">ユーザー名またはメールアドレス</label>
-        <input type="text" id="identifier" name="identifier" autocomplete="username" required>
+        <input data-module="m-inout01" type="text" id="identifier" name="identifier" autocomplete="username" required>
     </div>
     <div class="area is-actions">
         <button type="submit" class="btn is-primary">再設定メールを送る</button>

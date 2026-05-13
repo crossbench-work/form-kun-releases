@@ -4,11 +4,11 @@
     <?= \Core\Csrf::field() ?>
     <div class="box is-field">
         <label class="label" for="username">ユーザー名</label>
-        <input type="text" id="username" name="username" autocomplete="username" required>
+        <input data-module="m-inout01" type="text" id="username" name="username" autocomplete="username" required>
     </div>
     <div class="box is-field">
         <label class="label" for="password">パスワード</label>
-        <input type="password" id="password" name="password" autocomplete="current-password" required>
+        <input data-module="m-inout01" type="password" id="password" name="password" autocomplete="current-password" required>
     </div>
     <div class="area is-actions">
         <button type="submit" class="btn is-primary">ログイン</button>

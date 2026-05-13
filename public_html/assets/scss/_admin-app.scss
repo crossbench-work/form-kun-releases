@@ -90,30 +90,6 @@ body.l-adminShell01 {
     margin: 4px 0 0;
   }
 
-  input[type="text"],
-  input[type="email"],
-  input[type="tel"],
-  input[type="number"],
-  input[type="password"],
-  input[type="date"],
-  input[type="time"],
-  textarea,
-  select {
-    width: 100%;
-    padding: 8px 10px;
-    border: 1px solid #cbd5e1;
-    border-radius: 6px;
-    font-size: 14px;
-    font-family: inherit;
-    background: #fff;
-    color: #111;
-  }
-
-  textarea {
-    min-height: 100px;
-    resize: vertical;
-  }
-
   .area.is-actions {
     margin-top: 16px;
     display: flex;
@@ -175,6 +151,22 @@ body.l-adminShell01 {
     margin-left: 4px;
     font-weight: 400;
   }
+}
+
+[data-module="m-inout01"] {
+  width: 100%;
+  padding: 8px 10px;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  font-size: 14px;
+  font-family: inherit;
+  background: #fff;
+  color: #111;
+}
+
+textarea[data-module="m-inout01"] {
+  min-height: 100px;
+  resize: vertical;
 }
 
 // --- 管理ヘッダー・メイン ---
@@ -595,30 +587,6 @@ form.is-inline {
     color: #b91c1c;
     font-size: 13px;
     margin: 4px 0 0;
-  }
-
-  input[type="text"],
-  input[type="email"],
-  input[type="tel"],
-  input[type="number"],
-  input[type="password"],
-  input[type="date"],
-  input[type="time"],
-  textarea,
-  select {
-    width: 100%;
-    padding: 8px 10px;
-    border: 1px solid #cbd5e1;
-    border-radius: 6px;
-    font-size: 14px;
-    font-family: inherit;
-    background: #fff;
-    color: #111;
-  }
-
-  textarea {
-    min-height: 100px;
-    resize: vertical;
   }
 
   .area.is-actions {
