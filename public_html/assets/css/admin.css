@@ -400,6 +400,16 @@ body.l-adminShell01 a:hover {
   font-size: 13px;
   font-weight: 700;
   color: #334155;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+}
+[data-module=m-borderTitle01]::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: #e2e8f0;
 }
 
 [data-module=c-panel01] {
@@ -989,17 +999,6 @@ form.is-inline {
   display: flex;
   flex-direction: column;
   gap: 10px;
-}
-[data-module=m-formBuilder01] .c-formEditor__section > .wrapper > .block.is-contents > .area.is-title {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-[data-module=m-formBuilder01] .c-formEditor__section > .wrapper > .block.is-contents > .area.is-title::after {
-  content: "";
-  flex: 1;
-  height: 1px;
-  background: #e2e8f0;
 }
 [data-module=m-formBuilder01] .c-formEditor__section > .wrapper > .block.is-contents > .area.is-title > [data-module=m-borderTitle01] {
   margin: 0;

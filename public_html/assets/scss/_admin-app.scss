@@ -292,6 +292,17 @@ body.l-adminShell01 {
   font-size: 13px;
   font-weight: 700;
   color: #334155;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+
+  &::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: #e2e8f0;
+  }
 }
 
 // --- パネル・ツールバー ---
@@ -1034,17 +1045,6 @@ form.is-inline {
         gap: 10px;
 
         > .area.is-title {
-          display: flex;
-          align-items: center;
-          gap: 12px;
-
-          &::after {
-            content: "";
-            flex: 1;
-            height: 1px;
-            background: #e2e8f0;
-          }
-
           > [data-module="m-borderTitle01"] {
             margin: 0;
           }
