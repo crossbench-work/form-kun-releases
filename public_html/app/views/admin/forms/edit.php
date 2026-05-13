@@ -63,6 +63,9 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
         <div class="fb-description-toolbar">
             <div class="area is-actions">
                 <button type="button" class="btn is-sm fb-description-add">説明文を追加する</button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -99,6 +102,9 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
     <div data-module="c-panel01">
         <div class="wrapper">
             <div class="block is-contents">
+                <div data-module="c-formBlock01">
+                    <div class="wrapper">
+                        <div class="block is-contents">
             <h2>基本設定</h2>
             <div class="box is-field">
                 <div class="fb-basic-label-row">
@@ -123,6 +129,9 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                     <option value="archived" <?= $form['status'] === 'archived' ? 'selected' : '' ?>>停止</option>
                 </select>
             </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -132,6 +141,9 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
     <div data-module="c-panel01">
         <div class="wrapper">
             <div class="block is-contents">
+                <div data-module="c-formBlock01">
+                    <div class="wrapper">
+                        <div class="block is-contents">
             <div class="fb-panel-header">
                 <h2 id="input-screen-title-preview">表示設定</h2>
                 <button
@@ -144,12 +156,18 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                 >プレビュー</button>
             </div>
             <?php $renderDescriptionEditor('description_blocks', $descriptionBlocks, 'input'); ?>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
     <div data-module="c-panel01">
         <div class="wrapper">
-            <div class="block is-contents" data-module="m-formBuilder01">
+            <div class="block is-contents">
+                <div data-module="c-formBlock01">
+                    <div class="wrapper">
+                        <div class="block is-contents" data-module="m-formBuilder01">
             <h2>項目設定</h2>
             <ul id="fb-fields" class="fb-fields">
             <?php foreach ($sortableFields as $i => $f): ?>
@@ -167,12 +185,18 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                     <?php include __DIR__ . '/_field_editor.php'; ?>
                 </ul>
             <?php endif; ?>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
     <div data-module="c-panel01">
         <div class="wrapper">
             <div class="block is-contents">
+                <div data-module="c-formBlock01">
+                    <div class="wrapper">
+                        <div class="block is-contents">
             <h2>スパム対策</h2>
             <div class="box is-field">
                 <label class="label">
@@ -180,17 +204,26 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                     スパム対策（簡易計算CAPTCHA）を有効にする
                 </label>
             </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
     <div data-module="c-panel01">
         <div class="wrapper">
             <div class="block is-contents">
+                <div data-module="c-formBlock01">
+                    <div class="wrapper">
+                        <div class="block is-contents">
             <h2>ボタン設定</h2>
             <div class="box is-field">
                 <label class="label" for="confirm_button_text">ボタンテキスト</label>
                 <input type="text" id="confirm_button_text" name="confirm_button_text" value="<?= e($form['confirm_button_text'] ?? '入力内容を確認する') ?>">
             </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -200,6 +233,9 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
     <div data-module="c-panel01">
         <div class="wrapper">
             <div class="block is-contents">
+                <div data-module="c-formBlock01">
+                    <div class="wrapper">
+                        <div class="block is-contents">
             <div class="fb-panel-header">
                 <h2 id="confirm-screen-title-preview">表示設定</h2>
                 <button
@@ -212,12 +248,18 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                 >プレビュー</button>
             </div>
             <?php $renderDescriptionEditor('confirm_blocks', $confirmBlocks, 'simple'); ?>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
     <div data-module="c-panel01">
         <div class="wrapper">
             <div class="block is-contents">
+                <div data-module="c-formBlock01">
+                    <div class="wrapper">
+                        <div class="block is-contents">
             <h2>ボタン設定</h2>
             <div class="box is-field">
                 <label class="label" for="submit_button_text">送信ボタンテキスト</label>
@@ -227,6 +269,9 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                 <label class="label" for="back_button_text">戻るボタンテキスト</label>
                 <input type="text" id="back_button_text" name="back_button_text" value="<?= e($form['back_button_text'] ?? '入力に戻る') ?>">
             </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -236,6 +281,9 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
     <div data-module="c-panel01">
         <div class="wrapper">
             <div class="block is-contents">
+                <div data-module="c-formBlock01">
+                    <div class="wrapper">
+                        <div class="block is-contents">
             <div class="fb-panel-header">
                 <h2 id="thanks-screen-title-preview">表示設定</h2>
                 <button
@@ -248,12 +296,18 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                 >プレビュー</button>
             </div>
             <?php $renderDescriptionEditor('thanks_blocks', $thanksBlocks, 'simple'); ?>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
     <div data-module="c-panel01">
         <div class="wrapper">
             <div class="block is-contents">
+                <div data-module="c-formBlock01">
+                    <div class="wrapper">
+                        <div class="block is-contents">
             <h2>ボタン設定</h2>
             <div class="box is-field">
                 <label class="label" for="thanks_button_text">ボタンテキスト</label>
@@ -263,6 +317,9 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                 <label class="label" for="thanks_button_url">ボタンURL</label>
                 <input type="text" id="thanks_button_url" name="thanks_button_url" value="<?= e($form['thanks_button_url'] ?? '/') ?>" placeholder="/ または https://example.com/">
             </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -272,6 +329,9 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
     <div data-module="c-panel01">
         <div class="wrapper">
             <div class="block is-contents">
+                <div data-module="c-formBlock01">
+                    <div class="wrapper">
+                        <div class="block is-contents">
             <h2>管理者通知メール</h2>
             <div class="box is-field">
                 <label class="label">送信先メールアドレス（カンマ区切りで複数可）</label>
@@ -286,6 +346,9 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                 <textarea name="mail_template_admin" rows="6"><?= e($form['mail_template_admin']) ?></textarea>
                 <p class="text is-help">使用可能な変数: <code>{{field_key}}</code> / <code>{{__all__}}</code> / <code>{{__form_title__}}</code> / <code>{{__submitted_at__}}</code> / <code>{{__ip__}}</code></p>
             </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -293,6 +356,9 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
     <div data-module="c-panel01">
         <div class="wrapper">
             <div class="block is-contents">
+                <div data-module="c-formBlock01">
+                    <div class="wrapper">
+                        <div class="block is-contents">
             <h2>送信者への自動返信メール</h2>
             <div class="box is-field">
                 <label class="label">
@@ -312,6 +378,9 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                 <label class="label">表示設定</label>
                 <textarea name="reply_template" rows="6"><?= e($form['reply_template']) ?></textarea>
             </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

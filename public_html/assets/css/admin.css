@@ -377,7 +377,8 @@ body.l-adminShell01 a:hover {
   border-radius: 8px;
   margin-bottom: 16px;
 }
-[data-module=c-panel01] > .wrapper > .block.is-contents {
+
+[data-module=c-formBlock01] > .wrapper > .block.is-contents {
   padding: 20px 24px;
 }
 
@@ -636,35 +637,35 @@ form.is-inline {
   word-break: break-word;
 }
 
-[data-module=c-panel01] > .wrapper > .block.is-contents .box.is-field {
+[data-module=c-formBlock01] > .wrapper > .block.is-contents .box.is-field {
   margin-bottom: 16px;
 }
-[data-module=c-panel01] > .wrapper > .block.is-contents .box.is-field label,
-[data-module=c-panel01] > .wrapper > .block.is-contents .label {
+[data-module=c-formBlock01] > .wrapper > .block.is-contents .box.is-field label,
+[data-module=c-formBlock01] > .wrapper > .block.is-contents .label {
   display: block;
   font-weight: 600;
   margin-bottom: 4px;
   color: #374151;
 }
-[data-module=c-panel01] > .wrapper > .block.is-contents .text.is-help {
+[data-module=c-formBlock01] > .wrapper > .block.is-contents .text.is-help {
   font-size: 13px;
   color: #6b7280;
   margin: 4px 0 0;
 }
-[data-module=c-panel01] > .wrapper > .block.is-contents .text.is-error {
+[data-module=c-formBlock01] > .wrapper > .block.is-contents .text.is-error {
   color: #b91c1c;
   font-size: 13px;
   margin: 4px 0 0;
 }
-[data-module=c-panel01] > .wrapper > .block.is-contents input[type=text],
-[data-module=c-panel01] > .wrapper > .block.is-contents input[type=email],
-[data-module=c-panel01] > .wrapper > .block.is-contents input[type=tel],
-[data-module=c-panel01] > .wrapper > .block.is-contents input[type=number],
-[data-module=c-panel01] > .wrapper > .block.is-contents input[type=password],
-[data-module=c-panel01] > .wrapper > .block.is-contents input[type=date],
-[data-module=c-panel01] > .wrapper > .block.is-contents input[type=time],
-[data-module=c-panel01] > .wrapper > .block.is-contents textarea,
-[data-module=c-panel01] > .wrapper > .block.is-contents select {
+[data-module=c-formBlock01] > .wrapper > .block.is-contents input[type=text],
+[data-module=c-formBlock01] > .wrapper > .block.is-contents input[type=email],
+[data-module=c-formBlock01] > .wrapper > .block.is-contents input[type=tel],
+[data-module=c-formBlock01] > .wrapper > .block.is-contents input[type=number],
+[data-module=c-formBlock01] > .wrapper > .block.is-contents input[type=password],
+[data-module=c-formBlock01] > .wrapper > .block.is-contents input[type=date],
+[data-module=c-formBlock01] > .wrapper > .block.is-contents input[type=time],
+[data-module=c-formBlock01] > .wrapper > .block.is-contents textarea,
+[data-module=c-formBlock01] > .wrapper > .block.is-contents select {
   width: 100%;
   padding: 8px 10px;
   border: 1px solid #cbd5e1;
@@ -674,17 +675,17 @@ form.is-inline {
   background: #fff;
   color: #111;
 }
-[data-module=c-panel01] > .wrapper > .block.is-contents textarea {
+[data-module=c-formBlock01] > .wrapper > .block.is-contents textarea {
   min-height: 100px;
   resize: vertical;
 }
-[data-module=c-panel01] > .wrapper > .block.is-contents .area.is-actions {
+[data-module=c-formBlock01] > .wrapper > .block.is-contents .area.is-actions {
   margin-top: 16px;
   display: flex;
   gap: 10px;
   flex-wrap: wrap;
 }
-[data-module=c-panel01] > .wrapper > .block.is-contents .btn {
+[data-module=c-formBlock01] > .wrapper > .block.is-contents .btn {
   display: inline-block;
   padding: 8px 16px;
   border: 1px solid #cbd5e1;
@@ -697,31 +698,31 @@ form.is-inline {
   text-decoration: none;
   line-height: 1.4;
 }
-[data-module=c-panel01] > .wrapper > .block.is-contents .btn:hover {
+[data-module=c-formBlock01] > .wrapper > .block.is-contents .btn:hover {
   background: #f1f5f9;
   text-decoration: none;
 }
-[data-module=c-panel01] > .wrapper > .block.is-contents .btn.is-primary {
+[data-module=c-formBlock01] > .wrapper > .block.is-contents .btn.is-primary {
   background: #2563eb;
   border-color: #2563eb;
   color: #fff;
 }
-[data-module=c-panel01] > .wrapper > .block.is-contents .btn.is-primary:hover {
+[data-module=c-formBlock01] > .wrapper > .block.is-contents .btn.is-primary:hover {
   background: #1d4ed8;
 }
-[data-module=c-panel01] > .wrapper > .block.is-contents .btn.is-danger {
+[data-module=c-formBlock01] > .wrapper > .block.is-contents .btn.is-danger {
   background: #dc2626;
   border-color: #dc2626;
   color: #fff;
 }
-[data-module=c-panel01] > .wrapper > .block.is-contents .btn.is-danger:hover {
+[data-module=c-formBlock01] > .wrapper > .block.is-contents .btn.is-danger:hover {
   background: #b91c1c;
 }
-[data-module=c-panel01] > .wrapper > .block.is-contents .btn.is-sm {
+[data-module=c-formBlock01] > .wrapper > .block.is-contents .btn.is-sm {
   padding: 4px 10px;
   font-size: 13px;
 }
-[data-module=c-panel01] > .wrapper > .block.is-contents .btn.is-icon {
+[data-module=c-formBlock01] > .wrapper > .block.is-contents .btn.is-icon {
   flex-shrink: 0;
   padding: 8px 10px;
   line-height: 1;
@@ -729,7 +730,7 @@ form.is-inline {
   align-items: center;
   justify-content: center;
 }
-[data-module=c-panel01] > .wrapper > .block.is-contents .is-required {
+[data-module=c-formBlock01] > .wrapper > .block.is-contents .is-required {
   display: inline-block;
   background: #ef4444;
   color: #fff;
@@ -739,14 +740,14 @@ form.is-inline {
   margin-left: 4px;
   font-weight: 400;
 }
-[data-module=c-panel01] > .wrapper > .block.is-contents .label.is-choice {
+[data-module=c-formBlock01] > .wrapper > .block.is-contents .label.is-choice {
   display: inline-flex;
   align-items: center;
   gap: 6px;
   font-weight: 400;
   margin-bottom: 0;
 }
-[data-module=c-panel01] > .wrapper > .block.is-contents .fb-basic-label-row {
+[data-module=c-formBlock01] > .wrapper > .block.is-contents .fb-basic-label-row {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -754,17 +755,17 @@ form.is-inline {
   flex-wrap: wrap;
   margin-bottom: 6px;
 }
-[data-module=c-panel01] > .wrapper > .block.is-contents .fb-basic-display-toggle {
+[data-module=c-formBlock01] > .wrapper > .block.is-contents .fb-basic-display-toggle {
   font-size: 13px;
   color: #64748b;
 }
-[data-module=c-panel01] > .wrapper > .block.is-contents .fb-description-toolbar {
+[data-module=c-formBlock01] > .wrapper > .block.is-contents .fb-description-toolbar {
   display: flex;
   justify-content: flex-end;
   margin-top: 16px;
   margin-bottom: 16px;
 }
-[data-module=c-panel01] > .wrapper > .block.is-contents .fb-panel-header {
+[data-module=c-formBlock01] > .wrapper > .block.is-contents .fb-panel-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -772,21 +773,21 @@ form.is-inline {
   margin-bottom: 12px;
   flex-wrap: wrap;
 }
-[data-module=c-panel01] > .wrapper > .block.is-contents .fb-panel-header h2 {
+[data-module=c-formBlock01] > .wrapper > .block.is-contents .fb-panel-header h2 {
   margin-bottom: 0;
 }
-[data-module=c-panel01] > .wrapper > .block.is-contents .fb-description-blocks {
+[data-module=c-formBlock01] > .wrapper > .block.is-contents .fb-description-blocks {
   display: flex;
   flex-direction: column;
   gap: 16px;
 }
-[data-module=c-panel01] > .wrapper > .block.is-contents .fb-description-block {
+[data-module=c-formBlock01] > .wrapper > .block.is-contents .fb-description-block {
   border: 1px solid #e2e8f0;
   border-radius: 8px;
   padding: 16px;
   background: #f8fafc;
 }
-[data-module=c-panel01] > .wrapper > .block.is-contents .fb-description-block-header {
+[data-module=c-formBlock01] > .wrapper > .block.is-contents .fb-description-block-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -794,20 +795,20 @@ form.is-inline {
   margin-bottom: 12px;
   flex-wrap: wrap;
 }
-[data-module=c-panel01] > .wrapper > .block.is-contents .fb-description-block-title {
+[data-module=c-formBlock01] > .wrapper > .block.is-contents .fb-description-block-title {
   color: #334155;
 }
-[data-module=c-panel01] > .wrapper > .block.is-contents .fb-description-remove {
+[data-module=c-formBlock01] > .wrapper > .block.is-contents .fb-description-remove {
   flex-shrink: 0;
 }
-[data-module=c-panel01] > .wrapper > .block.is-contents .fb-description-block-controls {
+[data-module=c-formBlock01] > .wrapper > .block.is-contents .fb-description-block-controls {
   align-items: center;
   margin-bottom: 12px;
 }
-[data-module=c-panel01] > .wrapper > .block.is-contents .fb-description-position-wrap {
+[data-module=c-formBlock01] > .wrapper > .block.is-contents .fb-description-position-wrap {
   flex: 1 1 200px;
 }
-[data-module=c-panel01] > .wrapper > .block.is-contents .fb-description-visible-wrap {
+[data-module=c-formBlock01] > .wrapper > .block.is-contents .fb-description-visible-wrap {
   flex: 0 0 auto;
   min-width: auto;
   display: flex;

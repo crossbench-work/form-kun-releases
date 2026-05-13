@@ -121,7 +121,7 @@ assets/
 ## `.wrapper` / `.inner`（l- / m- / c- 共通）
 
 - 任意で **`.wrapper`**。さらに必要なら **`.wrapper` > `.inner`**。
-- **管理画面パネルは、`<div data-module="c-panel01"><div class="wrapper"><div class="block is-contents">...</div></div></div>` の形を正とし、`[data-module="c-panel01"] > .wrapper > .block.is-contents` を前提に組む**。
+- **管理画面パネルは、`<div data-module="c-panel01"><div class="wrapper"><div class="block is-contents"><div data-module="c-formBlock01"><div class="wrapper"><div class="block is-contents">...</div></div></div></div></div></div>` の形を正とし、設定 UI などの実コンテンツは `c-formBlock01` の内側へ置く**。
 
 ### SCSS: 直下の `.wrapper` は子セレクタで縛る
 
@@ -146,7 +146,7 @@ assets/
 
 - **l-**: **`.l-*` > `.wrapper`**。`.block` / `.area` / `.box` は **使わない**。
 - **m-**: **`.m-*` > `.wrapper`**。通常はモジュール内に **`.block` / `.area` / `.box` は使わない**。
-- **管理画面のパネル系コンポーネントは `data-module="c-panel01"` を使い、`[data-module="c-panel01"] > .wrapper > .block.is-contents` を守る。`componentWrapper` のような別名ラッパーは増やさない**。
+- **管理画面のパネル系コンポーネントは `data-module="c-panel01"` を外枠、`data-module="c-formBlock01"` を内側の実コンテンツに使う。`componentWrapper` のような別名ラッパーは増やさない**。
 
 ## `c-`（コンポーネント）
 
