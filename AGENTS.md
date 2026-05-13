@@ -2,6 +2,22 @@
 
 このファイルを **AI 作業の正** とする。詳細ルール・履歴・ADR は `docs/ai/` を参照する。
 
+## 作業の流れ（必須に近い運用）
+
+**変更前に読む**
+
+- 本ファイル（`AGENTS.md`）
+- 最新の [`docs/ai/changelog/`](docs/ai/changelog/)（日付が新しいファイルから）
+- 関連する [`docs/ai/decisions/`](docs/ai/decisions/) の ADR
+
+**作業後に行う**
+
+- [`docs/ai/changelog/`](docs/ai/changelog/) を更新する（`YYYY-MM-DD.md` に追記、なければ新規）
+- 設計判断が変わったら ADR を追加し、changelog からリンクする
+- 運用ルール自体を変えた場合は **本ファイル** と [`docs/ai/shared-rules.md`](docs/ai/shared-rules.md) 等の付随ファイルを更新する
+- `npm run build:css` 等、該当するビルド／確認を行う
+- **コミットまで行う**（**`git push` は禁止**／リモートへの反映は人が行う）
+
 ## プロジェクト概要
 
 - **スタック**: PHP 8+（素の PHP）、MySQL / MariaDB、Apache（`mod_rewrite` 想定）。フロントは Bootstrap なし、**SCSS → CSS**（`npm run build:css`）。

@@ -447,7 +447,7 @@
 
     function createChoiceItem(value) {
         var row = document.createElement('div');
-        row.className = 'c-formEditor__row c-formEditor__choiceItem';
+        row.className = 'c-formEditor__field c-formEditor__choiceItem';
         row.setAttribute('data-choice-item', '');
         row.innerHTML =
             '<div>' +

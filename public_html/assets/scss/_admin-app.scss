@@ -323,11 +323,13 @@ body.l-adminShell01 {
 [data-module="c-formBlock01"] > .wrapper > .block.is-contents {
   padding: 20px 24px;
 
-  > .area.is-title {
+  > .area.is-title,
+  > .block.is-title {
     margin-bottom: 12px;
   }
 
-  > .area.is-field + .area.is-field {
+  > .area.is-field + .area.is-field,
+  > .block.is-field + .block.is-field {
     margin-top: 16px;
   }
 }
@@ -659,11 +661,13 @@ form.is-inline {
 
 // --- 管理画面フォーム（パネル内）---
 [data-module="c-formBlock01"] > .wrapper > .block.is-contents {
-  .area.is-title .fb-panel-header {
+  .area.is-title .fb-panel-header,
+  .block.is-title .fb-panel-header {
     margin-bottom: 0;
   }
 
   .area.is-field label,
+  .block.is-field label,
   .label {
     display: block;
     font-weight: 600;
@@ -844,7 +848,8 @@ form.is-inline {
 [data-module="c-inputSet01"] {
   > .wrapper {
     > .block.is-contents {
-      > .area.is-title {
+      > .area.is-title,
+      > .block.is-title {
         display: flex;
         align-items: center;
         justify-content: space-between;
@@ -904,7 +909,7 @@ form.is-inline {
     }
 
     & > .wrapper {
-      > .block {
+      > .block.is-contents {
         display: flex;
         flex-direction: column;
         gap: 12px;
@@ -919,15 +924,13 @@ form.is-inline {
     overflow: hidden;
 
     > .wrapper {
-      > .block.is-contents {
-        > .area.is-body {
-          border-top: 1px solid #e2e8f0;
-        }
+      > .block.is-body {
+        border-top: 1px solid #e2e8f0;
       }
     }
   }
 
-  .c-formEditor > .wrapper > .block > .fb-sortable-placeholder {
+  .c-formEditor > .wrapper > .block.is-contents > .fb-sortable-placeholder {
     visibility: visible !important;
     border: 2px dashed #93c5fd !important;
     background: #eff6ff !important;
@@ -937,7 +940,7 @@ form.is-inline {
     box-sizing: border-box;
   }
 
-  .c-formEditor > .wrapper > .block > .ui-sortable-helper {
+  .c-formEditor > .wrapper > .block.is-contents > .ui-sortable-helper {
     box-shadow: 0 12px 32px rgba(0, 0, 0, 0.2);
     border-radius: 6px;
   }
@@ -1092,45 +1095,30 @@ form.is-inline {
     }
   }
 
-  .c-formEditor__itemBody {
-    > .wrapper {
-      > .block.is-contents {
-        padding: 16px;
-      }
-    }
+  .c-formEditor__item > .wrapper > .block.is-body {
+    padding: 0 16px 16px;
   }
 
-  .c-formEditor__section + .c-formEditor__section {
+  .c-formEditor__itemBody > .wrapper > .block.is-contents + .block.is-contents {
     margin-top: 20px;
   }
 
-  .c-formEditor__section {
-    > .wrapper {
-      > .block.is-contents {
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-
-        > .area.is-title {
-          > [data-module="m-borderTitle01"] {
-            margin: 0;
-          }
-        }
-      }
-    }
+  .c-formEditor__itemBody > .wrapper > .block.is-contents {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
   }
 
-  .c-formEditor__item.is-collapsed {
-    > .wrapper {
-      > .block.is-contents {
-        > .area.is-body {
-          display: none;
-        }
-      }
-    }
+  .c-formEditor__itemBody > .wrapper > .block.is-contents > .block.is-title [data-module="m-borderTitle01"],
+  .c-formEditor__itemBody > .wrapper > .block.is-contents > [data-module="m-borderTitle01"] {
+    margin: 0;
   }
 
-  .c-formEditor__row {
+  .c-formEditor__item.is-collapsed > .wrapper > .block.is-body {
+    display: none;
+  }
+
+  .c-formEditor__field {
     > .wrapper {
       display: flex;
       gap: 12px;

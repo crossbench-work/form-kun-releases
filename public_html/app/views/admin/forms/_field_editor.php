@@ -30,8 +30,7 @@ if (empty($f['required']) || in_array($f['type'], ['radio', 'select'], true)) {
 ?>
 <div class="c-formEditor__item is-collapsed" data-index="<?= $idx ?>" data-field-item="1"<?= $isAgreementField ? ' data-is-agreement-field="1"' : '' ?>>
     <div class="wrapper">
-        <div class="block is-contents">
-            <div class="area is-header">
+        <div class="block is-header">
                 <div class="c-formEditor__itemHeader">
                     <div class="wrapper">
                         <div class="block is-contents">
@@ -78,25 +77,24 @@ if (empty($f['required']) || in_array($f['type'], ['radio', 'select'], true)) {
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="area is-body">
+        </div>
+        <div class="block is-body">
                 <div class="c-formEditor__itemBody">
                     <div class="wrapper">
-                        <div class="block is-contents">
-                            <div class="c-formEditor__section">
-                                <div class="wrapper">
-                                    <div class="block is-contents">
-                                        <div class="area is-title">
+                            <div class="block is-contents">
+                                        <div class="block is-title">
                                             <p data-module="m-borderTitle01">基本設定</p>
                                         </div>
-                                        <div class="area is-field">
-                                            <div class="c-formEditor__row">
+                            </div>
+                            <div class="block is-contents">
+                                        <div class="block is-field">
+                                            <div class="c-formEditor__field">
                                                 <div class="wrapper">
                                                     <div class="block is-contents">
-                                                        <div class="area is-title">
+                                                        <div class="block is-title">
                                                             <label class="label" data-module="m-labelTitle01">ラベル</label>
                                                         </div>
-                                                        <div class="area is-field">
+                                                        <div class="block is-field">
                                                             <div data-module="m-input01">
                                                                 <input type="text" name="fields[<?= $idx ?>][label]" data-target="c-formEditor__labelInput" value="<?= e($f['label']) ?>">
                                                             </div>
@@ -107,10 +105,10 @@ if (empty($f['required']) || in_array($f['type'], ['radio', 'select'], true)) {
                                                         <input type="hidden" name="fields[<?= $idx ?>][type]" value="<?= e($agreementDefaults['type']) ?>" data-target="c-formEditor__type">
                                                     <?php else: ?>
                                                         <div class="block is-contents c-formEditor__fieldKeyColumn">
-                                                            <div class="area is-title">
+                                                            <div class="block is-title">
                                                                 <label class="label" data-module="m-labelTitle01">フィールドキー</label>
                                                             </div>
-                                                            <div class="area is-field">
+                                                            <div class="block is-field">
                                                                 <div class="c-formEditor__fieldKey">
                                                                     <div data-module="m-input01">
                                                                         <input type="text" name="fields[<?= $idx ?>][field_key]" value="<?= e($f['field_key']) ?>" data-target="c-formEditor__fieldKeyInput" class="<?= $fkLocked ? 'is-locked' : '' ?>" <?= $fkLocked ? 'readonly' : '' ?> spellcheck="false">
@@ -123,10 +121,10 @@ if (empty($f['required']) || in_array($f['type'], ['radio', 'select'], true)) {
                                                             </div>
                                                         </div>
                                                         <div class="block is-contents">
-                                                            <div class="area is-title">
+                                                            <div class="block is-title">
                                                                 <label class="label" data-module="m-labelTitle01">型</label>
                                                             </div>
-                                                            <div class="area is-field">
+                                                            <div class="block is-field">
                                                                 <div data-module="m-input01">
                                                                     <select name="fields[<?= $idx ?>][type]" data-target="c-formEditor__type">
                                                                     <?php foreach (\Models\FormField::TYPE_LABELS() as $tVal => $tLabel): ?>
@@ -140,8 +138,6 @@ if (empty($f['required']) || in_array($f['type'], ['radio', 'select'], true)) {
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </div>
                             </div>
                             <?php if ($isAgreementField): ?>
                                 <input type="hidden" name="fields[<?= $idx ?>][required]" value="1" data-target="c-formEditor__required">
@@ -152,20 +148,20 @@ if (empty($f['required']) || in_array($f['type'], ['radio', 'select'], true)) {
                                 <textarea name="fields[<?= $idx ?>][options]" data-target="c-formEditor__optionsSource" hidden><?= e($agreementDefaults['options']) ?></textarea>
                                 <input type="hidden" name="fields[<?= $idx ?>][max_length]" value="">
                             <?php else: ?>
-                                <div class="c-formEditor__section">
-                                    <div class="wrapper">
-                                        <div class="block is-contents">
-                                            <div class="area is-title">
+                                <div class="block is-contents">
+                                            <div class="block is-title">
                                                 <p data-module="m-borderTitle01">入力設定</p>
                                             </div>
-                                            <div class="area is-field">
-                                                <div class="c-formEditor__row">
+                                </div>
+                                <div class="block is-contents">
+                                            <div class="block is-field">
+                                                <div class="c-formEditor__field">
                                                     <div class="wrapper">
                                                         <div class="block is-contents c-formEditor__validation">
-                                                            <div class="area is-title">
+                                                            <div class="block is-title">
                                                                 <label class="label" data-module="m-labelTitle01">必須</label>
                                                             </div>
-                                                            <div class="area is-field">
+                                                            <div class="block is-field">
                                                                 <div class="c-formEditor__validationControls">
                                                                     <div class="c-formEditor__required">
                                                                         <label class="label is-choice">
@@ -221,20 +217,20 @@ if (empty($f['required']) || in_array($f['type'], ['radio', 'select'], true)) {
                                                                         <div class="c-formEditor__checkboxLimit" <?= ($f['type'] === 'checkbox' && !empty($f['required']) && !empty($f['checkbox_limit_enabled'])) ? '' : 'style="display:none"' ?>>
                                                                             <div class="wrapper">
                                                                                 <div class="block is-contents">
-                                                                                    <div class="area is-title">
+                                                                                    <div class="block is-title">
                                                                                         <label class="label" data-module="m-labelTitle01">最小選択数</label>
                                                                                     </div>
-                                                                                    <div class="area is-field">
+                                                                                    <div class="block is-field">
                                                                                         <div data-module="m-input01">
                                                                                             <input type="number" min="1" name="fields[<?= $idx ?>][checkbox_min_selections]" value="<?= e($f['checkbox_min_selections'] ?? '') ?>">
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
                                                                                 <div class="block is-contents">
-                                                                                    <div class="area is-title">
+                                                                                    <div class="block is-title">
                                                                                         <label class="label" data-module="m-labelTitle01">最大選択数</label>
                                                                                     </div>
-                                                                                    <div class="area is-field">
+                                                                                    <div class="block is-field">
                                                                                         <div data-module="m-input01">
                                                                                             <input type="number" min="1" name="fields[<?= $idx ?>][checkbox_max_selections]" value="<?= e($f['checkbox_max_selections'] ?? '') ?>">
                                                                                         </div>
@@ -247,10 +243,10 @@ if (empty($f['required']) || in_array($f['type'], ['radio', 'select'], true)) {
                                                             </div>
                                                         </div>
                                                         <div class="block is-contents" data-target="c-formEditor__maxLength" <?= in_array($f['type'], ['radio', 'checkbox', 'select'], true) ? 'style="display:none"' : '' ?>>
-                                                            <div class="area is-title">
+                                                            <div class="block is-title">
                                                                 <label class="label" data-module="m-labelTitle01">最大文字数（任意）</label>
                                                             </div>
-                                                            <div class="area is-field">
+                                                            <div class="block is-field">
                                                                 <div data-module="m-input01">
                                                                     <input type="number" min="1" name="fields[<?= $idx ?>][max_length]" value="<?= e($f['max_length']) ?>">
                                                                 </div>
@@ -259,13 +255,13 @@ if (empty($f['required']) || in_array($f['type'], ['radio', 'select'], true)) {
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="area is-field" data-target="c-formEditor__options" <?= in_array($f['type'], ['radio','checkbox','select'], true) ? '' : 'style="display:none"' ?>>
+                                            <div class="block is-field" data-target="c-formEditor__options" <?= in_array($f['type'], ['radio','checkbox','select'], true) ? '' : 'style="display:none"' ?>>
                                                 <label class="label" data-module="m-labelTitle01">選択肢（1行に1つ）</label>
                                                 <?php $choiceOptions = \Models\FormField::parseOptions($f['options'] ?? ''); ?>
                                                 <div class="c-formEditor__choiceEditor" data-choice-editor>
                                                     <div class="c-formEditor__choiceList">
                                                         <?php foreach ($choiceOptions as $choiceOpt): ?>
-                                                            <div class="c-formEditor__row c-formEditor__choiceItem" data-choice-item>
+                                                            <div class="c-formEditor__field c-formEditor__choiceItem" data-choice-item>
                                                                 <div>
                                                                     <div data-module="m-input01">
                                                                         <input type="text" data-target="c-formEditor__choiceInput" value="<?= e($choiceOpt) ?>" placeholder="選択肢">
@@ -285,24 +281,22 @@ if (empty($f['required']) || in_array($f['type'], ['radio', 'select'], true)) {
                                                     <textarea name="fields[<?= $idx ?>][options]" data-target="c-formEditor__optionsSource" rows="4" hidden><?= e($f['options'] ?? '') ?></textarea>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </div>
                                 </div>
                             <?php endif; ?>
-                            <div class="c-formEditor__section">
-                                <div class="wrapper">
-                                    <div class="block is-contents">
-                                        <div class="area is-title">
+                            <div class="block is-contents">
+                                        <div class="block is-title">
                                             <p data-module="m-borderTitle01">表示設定</p>
                                         </div>
-                                        <div class="area is-field">
-                                            <div class="c-formEditor__row">
+                            </div>
+                            <div class="block is-contents">
+                                        <div class="block is-field">
+                                            <div class="c-formEditor__field">
                                                 <div class="wrapper">
                                                     <div class="block is-contents" data-target="c-formEditor__placeholder" <?= ($isTextPair || in_array($f['type'], ['radio', 'checkbox', 'select'], true)) ? 'style="display:none"' : '' ?>>
-                                                        <div class="area is-title">
+                                                        <div class="block is-title">
                                                             <label class="label" data-module="m-labelTitle01">プレースホルダ（任意）</label>
                                                         </div>
-                                                        <div class="area is-field">
+                                                        <div class="block is-field">
                                                             <div data-module="m-input01">
                                                                 <input type="text" name="fields[<?= $idx ?>][placeholder]" value="<?= e($f['placeholder']) ?>">
                                                             </div>
@@ -311,24 +305,24 @@ if (empty($f['required']) || in_array($f['type'], ['radio', 'select'], true)) {
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="area is-field">
-                                            <div class="c-formEditor__row" data-target="c-formEditor__textPairSettings" <?= $isTextPair ? '' : 'style="display:none"' ?>>
+                                        <div class="block is-field">
+                                            <div class="c-formEditor__field" data-target="c-formEditor__textPairSettings" <?= $isTextPair ? '' : 'style="display:none"' ?>>
                                                 <div class="wrapper">
                                                     <div class="block is-contents">
-                                                        <div class="area is-title">
+                                                        <div class="block is-title">
                                                             <label class="label" data-module="m-labelTitle01">1つ目の入力欄の表示名</label>
                                                         </div>
-                                                        <div class="area is-field">
+                                                        <div class="block is-field">
                                                             <div data-module="m-input01">
                                                                 <input type="text" name="fields[<?= $idx ?>][pair_label_left]" value="<?= e($f['pair_label_left'] ?? '') ?>">
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <div class="block is-contents">
-                                                        <div class="area is-title">
+                                                        <div class="block is-title">
                                                             <label class="label" data-module="m-labelTitle01">2つ目の入力欄の表示名</label>
                                                         </div>
-                                                        <div class="area is-field">
+                                                        <div class="block is-field">
                                                             <div data-module="m-input01">
                                                                 <input type="text" name="fields[<?= $idx ?>][pair_label_right]" value="<?= e($f['pair_label_right'] ?? '') ?>">
                                                             </div>
@@ -337,24 +331,24 @@ if (empty($f['required']) || in_array($f['type'], ['radio', 'select'], true)) {
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="area is-field">
-                                            <div class="c-formEditor__row" data-target="c-formEditor__textPairPlaceholders" <?= $isTextPair ? '' : 'style="display:none"' ?>>
+                                        <div class="block is-field">
+                                            <div class="c-formEditor__field" data-target="c-formEditor__textPairPlaceholders" <?= $isTextPair ? '' : 'style="display:none"' ?>>
                                                 <div class="wrapper">
                                                     <div class="block is-contents">
-                                                        <div class="area is-title">
+                                                        <div class="block is-title">
                                                             <label class="label" data-module="m-labelTitle01">1つ目のプレースホルダ（任意）</label>
                                                         </div>
-                                                        <div class="area is-field">
+                                                        <div class="block is-field">
                                                             <div data-module="m-input01">
                                                                 <input type="text" name="fields[<?= $idx ?>][pair_placeholder_left]" value="<?= e($f['pair_placeholder_left'] ?? '') ?>">
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <div class="block is-contents">
-                                                        <div class="area is-title">
+                                                        <div class="block is-title">
                                                             <label class="label" data-module="m-labelTitle01">2つ目のプレースホルダ（任意）</label>
                                                         </div>
-                                                        <div class="area is-field">
+                                                        <div class="block is-field">
                                                             <div data-module="m-input01">
                                                                 <input type="text" name="fields[<?= $idx ?>][pair_placeholder_right]" value="<?= e($f['pair_placeholder_right'] ?? '') ?>">
                                                             </div>
@@ -363,7 +357,7 @@ if (empty($f['required']) || in_array($f['type'], ['radio', 'select'], true)) {
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="area is-field">
+                                        <div class="block is-field">
                                             <?php if ($isAgreementField): ?>
                                                 <label class="label" data-module="m-labelTitle01">説明文</label>
                                                 <div data-module="m-input01">
@@ -377,11 +371,7 @@ if (empty($f['required']) || in_array($f['type'], ['radio', 'select'], true)) {
                                                 </div>
                                             <?php endif; ?>
                                         </div>
-                                    </div>
-                                </div>
-                            </div>
                             <input type="hidden" name="fields[<?= $idx ?>][_remove]" value="0" data-target="c-formEditor__removeFlag">
-                        </div>
                     </div>
                 </div>
             </div>

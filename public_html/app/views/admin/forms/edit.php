@@ -28,7 +28,7 @@ foreach ($fields as $field) {
 }
 $renderDescriptionEditor = static function (string $namePrefix, array $blocks, string $positionMode): void {
     ?>
-    <div class="area is-field">
+    <div class="block is-field">
         <div data-module="c-descriptionEditor01" data-description-editor data-name-prefix="<?= e($namePrefix) ?>" data-position-mode="<?= e($positionMode) ?>">
             <div class="wrapper">
                 <div class="block is-contents">
@@ -127,21 +127,21 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                 <div data-module="c-formBlock01">
                     <div class="wrapper">
                         <div class="block is-contents">
-            <div class="area is-title">
+            <div class="block is-title">
                 <h2 data-module="m-largeTitle01">基本設定</h2>
             </div>
-            <div class="area is-field">
+            <div class="block is-field">
                 <div data-module="c-inputSet01">
                     <div class="wrapper">
                         <div class="block is-contents">
-                            <div class="area is-title">
+                            <div class="block is-title">
                                 <label class="label" data-module="m-boldTitle01" for="title">タイトル <span data-module="m-required01" data-type="required">必須</span></label>
                                 <label class="label is-choice fb-basic-display-toggle">
                                     <input type="checkbox" name="show_title" value="1" <?= !empty($form['show_title']) ? 'checked' : '' ?>>
                                     表示する
                                 </label>
                             </div>
-                            <div class="area is-field">
+                            <div class="block is-field">
                                 <div data-module="m-input01">
                                     <input type="text" id="title" name="title" value="<?= e($form['title']) ?>" required>
                                 </div>
@@ -150,14 +150,14 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                     </div>
                 </div>
             </div>
-            <div class="area is-field">
+            <div class="block is-field">
                 <div data-module="c-inputSet01">
                     <div class="wrapper">
                         <div class="block is-contents">
-                            <div class="area is-title">
+                            <div class="block is-title">
                                 <label class="label" data-module="m-boldTitle01" for="slug">スラッグ（URL用） <span data-module="m-required01" data-type="required">必須</span></label>
                             </div>
-                            <div class="area is-field">
+                            <div class="block is-field">
                                 <div data-module="m-input01">
                                     <input type="text" id="slug" name="slug" value="<?= e($form['slug']) ?>" required>
                                 </div>
@@ -169,14 +169,14 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                     </div>
                 </div>
             </div>
-            <div class="area is-field">
+            <div class="block is-field">
                 <div data-module="c-inputSet01">
                     <div class="wrapper">
                         <div class="block is-contents">
-                            <div class="area is-title">
+                            <div class="block is-title">
                                 <label class="label" data-module="m-boldTitle01" for="status">公開状態</label>
                             </div>
-                            <div class="area is-field">
+                            <div class="block is-field">
                                 <div data-module="m-input01">
                                     <select id="status" name="status">
                                         <option value="draft"    <?= $form['status'] === 'draft' ? 'selected' : '' ?>>下書き</option>
@@ -204,7 +204,7 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                 <div data-module="c-formBlock01">
                     <div class="wrapper">
                         <div class="block is-contents">
-            <div class="area is-title">
+            <div class="block is-title">
                 <div class="fb-panel-header">
                 <h2 data-target="c-formEditTabs01__previewTitle" data-module="m-largeTitle01">表示設定</h2>
                 <button
@@ -230,13 +230,13 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                 <div data-module="c-formBlock01">
                     <div class="wrapper">
                         <div class="block is-contents" data-module="m-formBuilder01">
-            <div class="area is-title">
+            <div class="block is-title">
                 <h2 data-module="m-largeTitle01">項目設定</h2>
             </div>
-            <div class="area is-field">
+            <div class="block is-field">
             <div class="c-formEditor">
                 <div class="wrapper">
-                    <div class="block" data-target="m-formBuilder01__fields">
+                    <div class="block is-contents" data-target="m-formBuilder01__fields">
             <?php foreach ($sortableFields as $i => $f): ?>
                 <?php $idx = $i; $isAgreementField = false; ?>
                 <?php include __DIR__ . '/_field_editor.php'; ?>
@@ -251,7 +251,7 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
             <?php if ($agreementField !== null): ?>
                 <div class="c-formEditor is-static">
                     <div class="wrapper">
-                        <div class="block">
+                        <div class="block is-contents">
                     <?php $idx = count($sortableFields); $f = $agreementField; $isAgreementField = true; ?>
                     <?php include __DIR__ . '/_field_editor.php'; ?>
                         </div>
@@ -271,10 +271,10 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                 <div data-module="c-formBlock01">
                     <div class="wrapper">
                         <div class="block is-contents">
-            <div class="area is-title">
+            <div class="block is-title">
                 <h2 data-module="m-largeTitle01">スパム対策</h2>
             </div>
-            <div class="area is-field">
+            <div class="block is-field">
                 <label class="label is-choice">
                     <input type="checkbox" name="captcha_enabled" value="1" <?= !empty($form['captcha_enabled']) ? 'checked' : '' ?>>
                     スパム対策（簡易計算CAPTCHA）を有効にする
@@ -292,17 +292,17 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                 <div data-module="c-formBlock01">
                     <div class="wrapper">
                         <div class="block is-contents">
-            <div class="area is-title">
+            <div class="block is-title">
                 <h2 data-module="m-largeTitle01">ボタン設定</h2>
             </div>
-            <div class="area is-field">
+            <div class="block is-field">
                 <div data-module="c-inputSet01">
                     <div class="wrapper">
                         <div class="block is-contents">
-                            <div class="area is-title">
+                            <div class="block is-title">
                                 <label class="label" data-module="m-boldTitle01" for="confirm_button_text">ボタンテキスト</label>
                             </div>
-                            <div class="area is-field">
+                            <div class="block is-field">
                                 <div data-module="m-input01">
                                     <input type="text" id="confirm_button_text" name="confirm_button_text" value="<?= e($form['confirm_button_text'] ?? '入力内容を確認する') ?>">
                                 </div>
@@ -326,7 +326,7 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                 <div data-module="c-formBlock01">
                     <div class="wrapper">
                         <div class="block is-contents">
-            <div class="area is-title">
+            <div class="block is-title">
                 <div class="fb-panel-header">
                 <h2 data-target="c-formEditTabs01__previewTitle" data-module="m-largeTitle01">表示設定</h2>
                 <button
@@ -352,17 +352,17 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                 <div data-module="c-formBlock01">
                     <div class="wrapper">
                         <div class="block is-contents">
-            <div class="area is-title">
+            <div class="block is-title">
                 <h2 data-module="m-largeTitle01">ボタン設定</h2>
             </div>
-            <div class="area is-field">
+            <div class="block is-field">
                 <div data-module="c-inputSet01">
                     <div class="wrapper">
                         <div class="block is-contents">
-                            <div class="area is-title">
+                            <div class="block is-title">
                                 <label class="label" data-module="m-boldTitle01" for="submit_button_text">送信ボタンテキスト</label>
                             </div>
-                            <div class="area is-field">
+                            <div class="block is-field">
                                 <div data-module="m-input01">
                                     <input type="text" id="submit_button_text" name="submit_button_text" value="<?= e($form['submit_button_text'] ?? '送信する') ?>">
                                 </div>
@@ -371,14 +371,14 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                     </div>
                 </div>
             </div>
-            <div class="area is-field">
+            <div class="block is-field">
                 <div data-module="c-inputSet01">
                     <div class="wrapper">
                         <div class="block is-contents">
-                            <div class="area is-title">
+                            <div class="block is-title">
                                 <label class="label" data-module="m-boldTitle01" for="back_button_text">戻るボタンテキスト</label>
                             </div>
-                            <div class="area is-field">
+                            <div class="block is-field">
                                 <div data-module="m-input01">
                                     <input type="text" id="back_button_text" name="back_button_text" value="<?= e($form['back_button_text'] ?? '入力に戻る') ?>">
                                 </div>
@@ -402,7 +402,7 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                 <div data-module="c-formBlock01">
                     <div class="wrapper">
                         <div class="block is-contents">
-            <div class="area is-title">
+            <div class="block is-title">
                 <div class="fb-panel-header">
                 <h2 data-target="c-formEditTabs01__previewTitle" data-module="m-largeTitle01">表示設定</h2>
                 <button
@@ -428,17 +428,17 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                 <div data-module="c-formBlock01">
                     <div class="wrapper">
                         <div class="block is-contents">
-            <div class="area is-title">
+            <div class="block is-title">
                 <h2 data-module="m-largeTitle01">ボタン設定</h2>
             </div>
-            <div class="area is-field">
+            <div class="block is-field">
                 <div data-module="c-inputSet01">
                     <div class="wrapper">
                         <div class="block is-contents">
-                            <div class="area is-title">
+                            <div class="block is-title">
                                 <label class="label" data-module="m-boldTitle01" for="thanks_button_text">ボタンテキスト</label>
                             </div>
-                            <div class="area is-field">
+                            <div class="block is-field">
                                 <div data-module="m-input01">
                                     <input type="text" id="thanks_button_text" name="thanks_button_text" value="<?= e($form['thanks_button_text'] ?? 'トップへ戻る') ?>">
                                 </div>
@@ -447,14 +447,14 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                     </div>
                 </div>
             </div>
-            <div class="area is-field">
+            <div class="block is-field">
                 <div data-module="c-inputSet01">
                     <div class="wrapper">
                         <div class="block is-contents">
-                            <div class="area is-title">
+                            <div class="block is-title">
                                 <label class="label" data-module="m-boldTitle01" for="thanks_button_url">ボタンURL</label>
                             </div>
-                            <div class="area is-field">
+                            <div class="block is-field">
                                 <div data-module="m-input01">
                                     <input type="text" id="thanks_button_url" name="thanks_button_url" value="<?= e($form['thanks_button_url'] ?? '/') ?>" placeholder="/ または https://example.com/">
                                 </div>
@@ -478,17 +478,17 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                 <div data-module="c-formBlock01">
                     <div class="wrapper">
                         <div class="block is-contents">
-            <div class="area is-title">
+            <div class="block is-title">
                 <h2 data-module="m-largeTitle01">管理者通知メール</h2>
             </div>
-            <div class="area is-field">
+            <div class="block is-field">
                 <div data-module="c-inputSet01">
                     <div class="wrapper">
                         <div class="block is-contents">
-                            <div class="area is-title">
+                            <div class="block is-title">
                                 <label class="label" data-module="m-boldTitle01">送信先メールアドレス（カンマ区切りで複数可）</label>
                             </div>
-                            <div class="area is-field">
+                            <div class="block is-field">
                                 <div data-module="m-input01">
                                     <input type="text" name="admin_emails" value="<?= e($form['admin_emails']) ?>" placeholder="admin@example.com, sub@example.com">
                                 </div>
@@ -497,14 +497,14 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                     </div>
                 </div>
             </div>
-            <div class="area is-field">
+            <div class="block is-field">
                 <div data-module="c-inputSet01">
                     <div class="wrapper">
                         <div class="block is-contents">
-                            <div class="area is-title">
+                            <div class="block is-title">
                                 <label class="label" data-module="m-boldTitle01">件名</label>
                             </div>
-                            <div class="area is-field">
+                            <div class="block is-field">
                                 <div data-module="m-input01">
                                     <input type="text" name="mail_subject_admin" value="<?= e($form['mail_subject_admin']) ?>" placeholder="[{{__form_title__}}] 新規送信">
                                 </div>
@@ -513,14 +513,14 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                     </div>
                 </div>
             </div>
-            <div class="area is-field">
+            <div class="block is-field">
                 <div data-module="c-inputSet01">
                     <div class="wrapper">
                         <div class="block is-contents">
-                            <div class="area is-title">
+                            <div class="block is-title">
                                 <label class="label" data-module="m-boldTitle01">表示設定</label>
                             </div>
-                            <div class="area is-field">
+                            <div class="block is-field">
                                 <div data-module="m-input01">
                                     <textarea name="mail_template_admin" rows="6"><?= e($form['mail_template_admin']) ?></textarea>
                                 </div>
@@ -545,23 +545,23 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                 <div data-module="c-formBlock01">
                     <div class="wrapper">
                         <div class="block is-contents">
-            <div class="area is-title">
+            <div class="block is-title">
                 <h2 data-module="m-largeTitle01">送信者への自動返信メール</h2>
             </div>
-            <div class="area is-field">
+            <div class="block is-field">
                 <label class="label is-choice">
                     <input type="checkbox" name="reply_enabled" value="1" <?= !empty($form['reply_enabled']) ? 'checked' : '' ?>>
                     自動返信を有効にする
                 </label>
             </div>
-            <div class="area is-field">
+            <div class="block is-field">
                 <div data-module="c-inputSet01">
                     <div class="wrapper">
                         <div class="block is-contents">
-                            <div class="area is-title">
+                            <div class="block is-title">
                                 <label class="label" data-module="m-boldTitle01">送信先のフィールドキー（メール型項目）</label>
                             </div>
-                            <div class="area is-field">
+                            <div class="block is-field">
                                 <div data-module="m-input01">
                                     <input type="text" name="reply_from_field_key" value="<?= e($form['reply_from_field_key']) ?>" placeholder="メール項目のフィールドキー（UUID または任意のキー）">
                                 </div>
@@ -570,14 +570,14 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                     </div>
                 </div>
             </div>
-            <div class="area is-field">
+            <div class="block is-field">
                 <div data-module="c-inputSet01">
                     <div class="wrapper">
                         <div class="block is-contents">
-                            <div class="area is-title">
+                            <div class="block is-title">
                                 <label class="label" data-module="m-boldTitle01">件名</label>
                             </div>
-                            <div class="area is-field">
+                            <div class="block is-field">
                                 <div data-module="m-input01">
                                     <input type="text" name="reply_subject" value="<?= e($form['reply_subject']) ?>">
                                 </div>
@@ -586,14 +586,14 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                     </div>
                 </div>
             </div>
-            <div class="area is-field">
+            <div class="block is-field">
                 <div data-module="c-inputSet01">
                     <div class="wrapper">
                         <div class="block is-contents">
-                            <div class="area is-title">
+                            <div class="block is-title">
                                 <label class="label" data-module="m-boldTitle01">表示設定</label>
                             </div>
-                            <div class="area is-field">
+                            <div class="block is-field">
                                 <div data-module="m-input01">
                                     <textarea name="reply_template" rows="6"><?= e($form['reply_template']) ?></textarea>
                                 </div>
@@ -671,8 +671,7 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
 <template data-target="m-formBuilder01__fieldTemplate">
     <div class="c-formEditor__item is-collapsed" data-field-item="1">
         <div class="wrapper">
-            <div class="block is-contents">
-                <div class="area is-header">
+            <div class="block is-header">
                     <div class="c-formEditor__itemHeader">
                         <div class="wrapper">
                             <div class="block is-contents">
@@ -715,56 +714,49 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="area is-body">
+            </div>
+            <div class="block is-body">
                     <div class="c-formEditor__itemBody">
                         <div class="wrapper">
-                            <div class="block is-contents">
-                                <div class="c-formEditor__section">
-                                    <div class="wrapper">
-                                        <div class="block is-contents">
-                                            <div class="area is-title">
+                                <div class="block is-contents">
+                                            <div class="block is-title">
                                                 <p data-module="m-borderTitle01">基本設定</p>
                                             </div>
-                                            <div class="area is-field">
-                                                <div class="c-formEditor__row">
+                                            <div class="block is-field">
+                                                <div class="c-formEditor__field">
                                                     <div class="wrapper">
                                                         <div class="block is-contents">
-                                                            <div class="area is-title"><label class="label" data-module="m-labelTitle01">ラベル</label></div>
-                                                            <div class="area is-field"><div data-module="m-input01"><input type="text" data-name="label" data-target="c-formEditor__labelInput"></div></div>
+                                                            <div class="block is-title"><label class="label" data-module="m-labelTitle01">ラベル</label></div>
+                                                            <div class="block is-field"><div data-module="m-input01"><input type="text" data-name="label" data-target="c-formEditor__labelInput"></div></div>
                                                         </div>
                                                         <div class="block is-contents c-formEditor__fieldKeyColumn">
-                                                            <div class="area is-title"><label class="label" data-module="m-labelTitle01">フィールドキー</label></div>
-                                                            <div class="area is-field"><div class="c-formEditor__fieldKey"><div data-module="m-input01"><input type="text" data-name="field_key" data-target="c-formEditor__fieldKeyInput" class="is-locked" readonly spellcheck="false"></div><button type="button" class="btn is-icon" data-target="c-formEditor__fieldKeyLock" aria-label="キーを編集" title="編集する" aria-pressed="true"><svg data-target="c-formEditor__fieldKeyLockedIcon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg><svg data-target="c-formEditor__fieldKeyOpenIcon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:none" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M8 11V7a4 4 0 118 0m-4 8v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2z"/></svg></button></div></div>
+                                                            <div class="block is-title"><label class="label" data-module="m-labelTitle01">フィールドキー</label></div>
+                                                            <div class="block is-field"><div class="c-formEditor__fieldKey"><div data-module="m-input01"><input type="text" data-name="field_key" data-target="c-formEditor__fieldKeyInput" class="is-locked" readonly spellcheck="false"></div><button type="button" class="btn is-icon" data-target="c-formEditor__fieldKeyLock" aria-label="キーを編集" title="編集する" aria-pressed="true"><svg data-target="c-formEditor__fieldKeyLockedIcon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg><svg data-target="c-formEditor__fieldKeyOpenIcon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:none" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M8 11V7a4 4 0 118 0m-4 8v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2z"/></svg></button></div></div>
                                                         </div>
                                                         <div class="block is-contents">
-                                                            <div class="area is-title"><label class="label" data-module="m-labelTitle01">型</label></div>
-                                                            <div class="area is-field"><div data-module="m-input01"><select data-name="type" data-target="c-formEditor__type"><?php foreach (\Models\FormField::TYPE_LABELS() as $tVal => $tLabel): ?><option value="<?= e($tVal) ?>"><?= e($tLabel) ?></option><?php endforeach; ?></select></div></div>
+                                                            <div class="block is-title"><label class="label" data-module="m-labelTitle01">型</label></div>
+                                                            <div class="block is-field"><div data-module="m-input01"><select data-name="type" data-target="c-formEditor__type"><?php foreach (\Models\FormField::TYPE_LABELS() as $tVal => $tLabel): ?><option value="<?= e($tVal) ?>"><?= e($tLabel) ?></option><?php endforeach; ?></select></div></div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </div>
                                 </div>
-                                <div class="c-formEditor__section">
-                                    <div class="wrapper">
-                                        <div class="block is-contents">
-                                            <div class="area is-title">
+                                <div class="block is-contents">
+                                            <div class="block is-title">
                                                 <p data-module="m-borderTitle01">入力設定</p>
                                             </div>
-                                            <div class="area is-field">
-                                                <div class="c-formEditor__row">
+                                            <div class="block is-field">
+                                                <div class="c-formEditor__field">
                                                     <div class="wrapper">
                                                         <div class="block is-contents c-formEditor__validation">
-                                                            <div class="area is-title"><label class="label" data-module="m-labelTitle01">必須</label></div>
-                                                            <div class="area is-field"><div class="c-formEditor__validationControls"><div class="c-formEditor__required"><label class="label is-choice"><input type="checkbox" data-name="required" value="1" data-target="c-formEditor__required"><span>必須にする</span></label></div><div data-target="c-formEditor__regex" style="display:none"><div class="c-formEditor__regexList"><div class="c-formEditor__regexRow"><div data-module="m-input01"><select data-target="c-formEditor__regexKind" aria-label="入力チェックの種類"><?php foreach ($regexPresetChoices as $patVal => $patLabel): ?><option value="<?= e($patVal) ?>"><?= e($patLabel) ?></option><?php endforeach; ?><option value="<?= e($FB_REGEX_CHECKBOX_LIMIT) ?>">選択数を設定する</option></select></div><div class="c-formEditor__regexCustom" style="display:none"><div data-module="m-input01"><input type="text" data-target="c-formEditor__regexCustomInput" placeholder="正規表現" spellcheck="false" autocomplete="off"></div></div><input type="hidden" data-target="c-formEditor__regexValue" value=""></div></div><input type="hidden" data-name="checkbox_limit_enabled" data-target="c-formEditor__checkboxLimitEnabled" value="0"><div class="c-formEditor__checkboxLimit" style="display:none"><div class="wrapper"><div class="block is-contents"><div class="area is-title"><label class="label" data-module="m-labelTitle01">最小選択数</label></div><div class="area is-field"><div data-module="m-input01"><input type="number" min="1" data-name="checkbox_min_selections"></div></div></div><div class="block is-contents"><div class="area is-title"><label class="label" data-module="m-labelTitle01">最大選択数</label></div><div class="area is-field"><div data-module="m-input01"><input type="number" min="1" data-name="checkbox_max_selections"></div></div></div></div></div></div>
+                                                            <div class="block is-title"><label class="label" data-module="m-labelTitle01">必須</label></div>
+                                                            <div class="block is-field"><div class="c-formEditor__validationControls"><div class="c-formEditor__required"><label class="label is-choice"><input type="checkbox" data-name="required" value="1" data-target="c-formEditor__required"><span>必須にする</span></label></div><div data-target="c-formEditor__regex" style="display:none"><div class="c-formEditor__regexList"><div class="c-formEditor__regexRow"><div data-module="m-input01"><select data-target="c-formEditor__regexKind" aria-label="入力チェックの種類"><?php foreach ($regexPresetChoices as $patVal => $patLabel): ?><option value="<?= e($patVal) ?>"><?= e($patLabel) ?></option><?php endforeach; ?><option value="<?= e($FB_REGEX_CHECKBOX_LIMIT) ?>">選択数を設定する</option></select></div><div class="c-formEditor__regexCustom" style="display:none"><div data-module="m-input01"><input type="text" data-target="c-formEditor__regexCustomInput" placeholder="正規表現" spellcheck="false" autocomplete="off"></div></div><input type="hidden" data-target="c-formEditor__regexValue" value=""></div></div><input type="hidden" data-name="checkbox_limit_enabled" data-target="c-formEditor__checkboxLimitEnabled" value="0"><div class="c-formEditor__checkboxLimit" style="display:none"><div class="wrapper"><div class="block is-contents"><div class="block is-title"><label class="label" data-module="m-labelTitle01">最小選択数</label></div><div class="block is-field"><div data-module="m-input01"><input type="number" min="1" data-name="checkbox_min_selections"></div></div></div><div class="block is-contents"><div class="block is-title"><label class="label" data-module="m-labelTitle01">最大選択数</label></div><div class="block is-field"><div data-module="m-input01"><input type="number" min="1" data-name="checkbox_max_selections"></div></div></div></div></div></div>
                                                         </div>
-                                                        <div class="block is-contents" data-target="c-formEditor__maxLength"><div class="area is-title"><label class="label" data-module="m-labelTitle01">最大文字数（任意）</label></div><div class="area is-field"><div data-module="m-input01"><input type="number" min="1" data-name="max_length"></div></div></div>
+                                                        <div class="block is-contents" data-target="c-formEditor__maxLength"><div class="block is-title"><label class="label" data-module="m-labelTitle01">最大文字数（任意）</label></div><div class="block is-field"><div data-module="m-input01"><input type="number" min="1" data-name="max_length"></div></div></div>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="area is-field" data-target="c-formEditor__options" style="display:none">
+                                            <div class="block is-field" data-target="c-formEditor__options" style="display:none">
                                                 <label class="label" data-module="m-labelTitle01">選択肢（1行に1つ）</label>
                                                 <div class="c-formEditor__choiceEditor" data-choice-editor>
                                                     <div class="c-formEditor__choiceList"></div>
@@ -774,47 +766,39 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                                                     <textarea data-name="options" data-target="c-formEditor__optionsSource" rows="4" hidden></textarea>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </div>
                                 </div>
-                                <div class="c-formEditor__section">
-                                    <div class="wrapper">
-                                        <div class="block is-contents">
-                                            <div class="area is-title">
+                                <div class="block is-contents">
+                                            <div class="block is-title">
                                                 <p data-module="m-borderTitle01">表示設定</p>
                                             </div>
-                                            <div class="area is-field">
-                                                <div class="c-formEditor__row">
+                                            <div class="block is-field">
+                                                <div class="c-formEditor__field">
                                                     <div class="wrapper">
-                                                        <div class="block is-contents" data-target="c-formEditor__placeholder"><div class="area is-title"><label class="label" data-module="m-labelTitle01">プレースホルダ（任意）</label></div><div class="area is-field"><div data-module="m-input01"><input type="text" data-name="placeholder"></div></div></div>
+                                                        <div class="block is-contents" data-target="c-formEditor__placeholder"><div class="block is-title"><label class="label" data-module="m-labelTitle01">プレースホルダ（任意）</label></div><div class="block is-field"><div data-module="m-input01"><input type="text" data-name="placeholder"></div></div></div>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="area is-field">
-                                                <div class="c-formEditor__row" data-target="c-formEditor__textPairSettings" style="display:none">
+                                            <div class="block is-field">
+                                                <div class="c-formEditor__field" data-target="c-formEditor__textPairSettings" style="display:none">
                                                     <div class="wrapper">
-                                                        <div class="block is-contents"><div class="area is-title"><label class="label" data-module="m-labelTitle01">1つ目の入力欄の表示名</label></div><div class="area is-field"><div data-module="m-input01"><input type="text" data-name="pair_label_left"></div></div></div>
-                                                        <div class="block is-contents"><div class="area is-title"><label class="label" data-module="m-labelTitle01">2つ目の入力欄の表示名</label></div><div class="area is-field"><div data-module="m-input01"><input type="text" data-name="pair_label_right"></div></div></div>
+                                                        <div class="block is-contents"><div class="block is-title"><label class="label" data-module="m-labelTitle01">1つ目の入力欄の表示名</label></div><div class="block is-field"><div data-module="m-input01"><input type="text" data-name="pair_label_left"></div></div></div>
+                                                        <div class="block is-contents"><div class="block is-title"><label class="label" data-module="m-labelTitle01">2つ目の入力欄の表示名</label></div><div class="block is-field"><div data-module="m-input01"><input type="text" data-name="pair_label_right"></div></div></div>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="area is-field">
-                                                <div class="c-formEditor__row" data-target="c-formEditor__textPairPlaceholders" style="display:none">
+                                            <div class="block is-field">
+                                                <div class="c-formEditor__field" data-target="c-formEditor__textPairPlaceholders" style="display:none">
                                                     <div class="wrapper">
-                                                        <div class="block is-contents"><div class="area is-title"><label class="label" data-module="m-labelTitle01">1つ目のプレースホルダ（任意）</label></div><div class="area is-field"><div data-module="m-input01"><input type="text" data-name="pair_placeholder_left"></div></div></div>
-                                                        <div class="block is-contents"><div class="area is-title"><label class="label" data-module="m-labelTitle01">2つ目のプレースホルダ（任意）</label></div><div class="area is-field"><div data-module="m-input01"><input type="text" data-name="pair_placeholder_right"></div></div></div>
+                                                        <div class="block is-contents"><div class="block is-title"><label class="label" data-module="m-labelTitle01">1つ目のプレースホルダ（任意）</label></div><div class="block is-field"><div data-module="m-input01"><input type="text" data-name="pair_placeholder_left"></div></div></div>
+                                                        <div class="block is-contents"><div class="block is-title"><label class="label" data-module="m-labelTitle01">2つ目のプレースホルダ（任意）</label></div><div class="block is-field"><div data-module="m-input01"><input type="text" data-name="pair_placeholder_right"></div></div></div>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="area is-field">
+                                            <div class="block is-field">
                                                 <label class="label" data-module="m-labelTitle01">備考</label>
                                                 <div data-module="m-input01"><textarea data-name="help_text" rows="3"></textarea></div>
                                             </div>
-                                        </div>
-                                    </div>
-                                </div>
                                 <input type="hidden" data-name="_remove" value="0" data-target="c-formEditor__removeFlag">
-                            </div>
                         </div>
                     </div>
                 </div>
