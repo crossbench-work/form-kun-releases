@@ -346,9 +346,7 @@ body.l-adminShell01 {
 
 [data-module="m-requiredCheck01"] {
   label {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    display: block;
     padding: 8px 12px;
     font-size: 11px;
     background: #efefef;
@@ -1235,6 +1233,10 @@ body.is-field-type-modal-open {
           display: inline-flex;
           align-items: center;
           gap: 4px;
+
+          &[hidden] {
+            display: none;
+          }
 
           svg {
             flex: 0 0 auto;
