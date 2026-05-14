@@ -64,7 +64,7 @@ class FormController
         $form = Form::find($id);
         if (!$form) { $this->notFound(); return; }
         $form = self::prepareFormForEdit($form);
-        $fields = FormField::forForm($id);
+        $fields = FormField::forForm($id, true);
 
         // 編集ビュー用に options をテキストに変換
         $editFields = array_map(function ($f) {
@@ -342,6 +342,7 @@ class FormController
                 $fields[] = [
                     'field_key'       => $key,
                     'label'           => trim((string) ($f['label'] ?? '')),
+                    'visible'         => !empty($f['visible']) ? 1 : 0,
                     'type'            => $type,
                     'required'        => $required,
                     'max_length'      => $maxLength,
@@ -828,6 +829,7 @@ class FormController
                 'sort_order' => $i + 1,
                 'field_key' => (string) ($field['field_key'] ?? ''),
                 'label' => (string) ($field['label'] ?? ''),
+                'visible' => !array_key_exists('visible', $field) || !empty($field['visible']) ? 1 : 0,
                 'type' => (string) ($field['type'] ?? 'text'),
                 'required' => !empty($field['required']) ? 1 : 0,
                 'max_length' => isset($field['max_length']) && $field['max_length'] !== '' ? (int) $field['max_length'] : null,
@@ -846,6 +848,7 @@ class FormController
         return [
             'field_key' => FieldKey::generateUuidV4(),
             'label' => 'お名前',
+            'visible' => 1,
             'type'  => 'text_multi',
             'required' => 1,
             'max_length' => 100,

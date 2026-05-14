@@ -43,6 +43,7 @@ class SchemaPatch
             self::ensureFormFieldsTypeEnumTextPair();
 
             self::ensureFormFieldsTypeEnumTextMulti();
+            self::ensureFormFieldsVisible();
 
             self::ensureFormsDisplayFlags();
 
@@ -204,6 +205,33 @@ class SchemaPatch
             );
         } catch (\Throwable $e) {
             error_log('[formkun] SchemaPatch form_fields.type text_multi: ' . $e->getMessage());
+        }
+    }
+
+    /**
+     * form_fields に visible 列を追加。
+     */
+    public static function ensureFormFieldsVisible(): void
+    {
+        try {
+            $dbRow = Database::fetchOne('SELECT DATABASE() AS n');
+            $schema = (string) ($dbRow['n'] ?? '');
+            if ($schema === '') {
+                return;
+            }
+
+            $hasVisible = Database::fetchOne(
+                'SELECT COUNT(*) AS c FROM information_schema.COLUMNS
+                 WHERE TABLE_SCHEMA = ? AND TABLE_NAME = ? AND COLUMN_NAME = ?',
+                [$schema, 'form_fields', 'visible']
+            );
+            if ((int) ($hasVisible['c'] ?? 0) === 0) {
+                Database::execute(
+                    'ALTER TABLE form_fields ADD COLUMN visible TINYINT(1) NOT NULL DEFAULT 1 AFTER label'
+                );
+            }
+        } catch (\Throwable $e) {
+            error_log('[formkun] SchemaPatch form_fields.visible: ' . $e->getMessage());
         }
     }
 

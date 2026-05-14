@@ -12,6 +12,9 @@
 
 <dl class="list is-confirm">
 <?php foreach ($fields as $field):
+    if (empty($field['visible'])) {
+        continue;
+    }
     $key = $field['field_key'];
     $val = $values[$key] ?? '';
     if (!in_array($field['type'], ['address', 'text_pair', 'text_multi'], true) && is_array($val)) {

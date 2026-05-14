@@ -1414,6 +1414,45 @@ body.is-field-type-modal-open {
     }
   }
 
+  .c-formEditorSummary01__visibility {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 auto;
+    width: 20px;
+    height: 20px;
+    color: #94a3b8;
+    cursor: pointer;
+    margin-bottom: 0;
+
+    input {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      cursor: pointer;
+      margin: 0;
+    }
+
+    span {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .is-hiddenLine {
+      opacity: 0;
+    }
+
+    input:not(:checked) + span {
+      color: #cbd5e1;
+    }
+
+    input:not(:checked) + span .is-hiddenLine {
+      opacity: 1;
+    }
+  }
+
   .c-formEditor__item > .wrapper > .block.is-body {
     padding: 16px;
   }

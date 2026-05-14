@@ -30,7 +30,7 @@ class SubmissionController
         $result = Submission::search($formId, $q ?: null, $from ?: null, $to ?: null, $page, $perPage);
         $totalPages = max(1, (int) ceil($result['total'] / $perPage));
 
-        $fields = FormField::forForm($formId);
+        $fields = FormField::forForm($formId, true);
         // 一覧プレビュー用に各送信の値を取得
         $previewKeys = array_slice(array_map(fn($f) => $f['field_key'], $fields), 0, 3);
         $previews = [];
@@ -68,7 +68,7 @@ class SubmissionController
         if (!$sub) { $this->notFound(); return; }
         $form = Form::find((int) $sub['form_id']);
         if (!$form) { $this->notFound(); return; }
-        $fields = FormField::forForm((int) $form['id']);
+        $fields = FormField::forForm((int) $form['id'], true);
         $values = Submission::valuesFor($id);
         $files  = Submission::filesFor($id);
 

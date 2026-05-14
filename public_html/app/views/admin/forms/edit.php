@@ -1103,6 +1103,16 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                                         <div class="wrapper">
                                             <div class="block is-contents">
                                                 <p class="index" data-target="c-formEditor__summaryIndex">1</p>
+                                                <label class="c-formEditorSummary01__visibility" title="表示中">
+                                                    <input type="checkbox" data-name="visible" value="1" checked>
+                                                    <span aria-hidden="true">
+                                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                            <path stroke-linecap="round" stroke-linejoin="round" d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z"/>
+                                                            <circle cx="12" cy="12" r="3"/>
+                                                            <path class="is-hiddenLine" stroke-linecap="round" stroke-linejoin="round" d="M4 20L20 4"/>
+                                                        </svg>
+                                                    </span>
+                                                </label>
                                                 <p class="label" data-target="c-formEditor__summaryLabel"></p>
                                                 <p class="type" data-target="c-formEditor__summaryType"><?= e(\Models\FormField::typeLabel('text_multi')) ?></p>
                                                 <p class="required" data-target="c-formEditor__summaryRequired" hidden>必須</p>

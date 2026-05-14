@@ -86,6 +86,7 @@ CREATE TABLE IF NOT EXISTS form_fields (
     sort_order      INT NOT NULL DEFAULT 0,
     field_key       VARCHAR(64) NOT NULL,
     label           VARCHAR(200) NOT NULL,
+    visible         TINYINT(1) NOT NULL DEFAULT 1,
     type            ENUM(
         'text','textarea','email','tel','number','address','text_pair','text_multi',
         'radio','checkbox','select','date','time','file'

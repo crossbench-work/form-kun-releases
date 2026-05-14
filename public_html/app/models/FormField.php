@@ -107,15 +107,17 @@ class FormField
         return array_key_exists($type, self::TYPE_LABELS()) ? $type : 'text_multi';
     }
 
-    public static function forForm(int $formId): array
+    public static function forForm(int $formId, bool $includeHidden = false): array
     {
         $fields = Database::fetchAll(
             'SELECT * FROM form_fields WHERE form_id = ? ORDER BY sort_order ASC, id ASC',
             [$formId]
         );
 
-        return array_values(array_filter(array_map([self::class, 'normalizeField'], $fields), static function ($field): bool {
-            return is_array($field) && !self::isAgreementFieldRecord($field);
+        return array_values(array_filter(array_map([self::class, 'normalizeField'], $fields), static function ($field) use ($includeHidden): bool {
+            return is_array($field)
+                && !self::isAgreementFieldRecord($field)
+                && ($includeHidden || !empty($field['visible']));
         }));
     }
 
@@ -162,14 +164,15 @@ class FormField
                 }
                 Database::execute(
                     'INSERT INTO form_fields (
-                        form_id, sort_order, field_key, label, type,
+                        form_id, sort_order, field_key, label, visible, type,
                         required, max_length, regex, help_text, placeholder, options_json
-                     ) VALUES (?,?,?,?,?,?,?,?,?,?,?)',
+                     ) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)',
                     [
                         $formId,
                         $order,
                         $f['field_key'],
                         $f['label'],
+                        !array_key_exists('visible', $f) || !empty($f['visible']) ? 1 : 0,
                         $type,
                         !empty($f['required']) ? 1 : 0,
                         $maxLength,
@@ -434,6 +437,11 @@ class FormField
      */
     private static function normalizeField(array $field): array
     {
+        if (!array_key_exists('visible', $field)) {
+            $field['visible'] = 1;
+        } else {
+            $field['visible'] = !empty($field['visible']) ? 1 : 0;
+        }
         $originalType = (string) ($field['type'] ?? '');
         $normalizedType = self::normalizeType($originalType);
         if ($normalizedType === $originalType) {

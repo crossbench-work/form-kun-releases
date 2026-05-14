@@ -462,6 +462,7 @@
         var labelInp = li.querySelector('[data-target="c-formEditor__labelInput"]');
         var typeSel = li.querySelector('[data-target="c-formEditor__type"]');
         var requiredToggle = li.querySelector('[data-target="c-formEditor__required"]');
+        var visibilityToggle = li.querySelector('[data-name="visible"]');
         var regexKind = li.querySelector('[data-target="c-formEditor__regexKind"]');
         var regexCustom = li.querySelector('[data-target="c-formEditor__regexCustomInput"]');
         var labelEl = li.querySelector('[data-target="c-formEditor__summaryLabel"]');
@@ -469,8 +470,12 @@
         var requiredEl = li.querySelector('[data-target="c-formEditor__summaryRequired"]');
         var regexWrapEl = li.querySelector('[data-target="c-formEditor__summaryRegexWrap"]');
         var regexEl = li.querySelector('[data-target="c-formEditor__summaryRegex"]');
+        var visibilityLabel = li.querySelector('.c-formEditorSummary01__visibility');
         if (!labelEl) return;
         labelEl.textContent = (labelInp && labelInp.value.trim()) ? labelInp.value.trim() : '（無題）';
+        if (visibilityLabel && visibilityToggle) {
+            visibilityLabel.title = visibilityToggle.checked ? '表示中' : '非表示';
+        }
         if (!typeEl || !requiredEl || !regexEl || !regexWrapEl) return;
         var typeValue = typeSel ? typeSel.value : '';
         var typeLabel = typeSel ? (typeSel.getAttribute('data-type-label') || '') : '';
@@ -504,7 +509,7 @@
         if (!header) return;
 
         header.addEventListener('click', function (e) {
-            if (e.target.closest('.area.is-move') || e.target.closest('.area.is-delete')) {
+            if (e.target.closest('.area.is-move') || e.target.closest('.area.is-delete') || e.target.closest('.c-formEditorSummary01__visibility')) {
                 return;
             }
             li.classList.toggle('is-collapsed');
@@ -824,6 +829,7 @@
         var minLengthInput = maxLengthWrap ? maxLengthWrap.querySelector('input[data-name="min_length"]') : null;
         var regexWrap = li.querySelector('[data-target="c-formEditor__regex"]');
         var regexKind = regexWrap ? regexWrap.querySelector('[data-target="c-formEditor__regexKind"]') : null;
+        var visibilityToggle = li.querySelector('[data-name="visible"]');
         var placeholderWrap = li.querySelector('[data-target="c-formEditor__placeholder"]');
         var placeholderInput = placeholderWrap ? placeholderWrap.querySelector('input') : null;
         var checkboxLimitEnabled = li.querySelector('[data-target="c-formEditor__checkboxLimitEnabled"]');
@@ -908,6 +914,11 @@
         if (requiredToggle) {
             requiredToggle.addEventListener('change', function () {
                 syncTypeSpecificUi();
+                updateFieldSummary(li);
+            });
+        }
+        if (visibilityToggle) {
+            visibilityToggle.addEventListener('change', function () {
                 updateFieldSummary(li);
             });
         }

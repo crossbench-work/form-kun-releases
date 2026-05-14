@@ -26,7 +26,7 @@ class FormController
             $this->notFound();
             return;
         }
-        $fields = FormField::forForm((int) $form['id']);
+        $fields = FormField::forForm((int) $form['id'], true);
 
         $this->view->render('front/form/show', [
             'title'      => $form['title'],
@@ -43,12 +43,13 @@ class FormController
         if (!$form) { $this->notFound(); return; }
 
         Csrf::verify();
-        $fields = FormField::forForm((int) $form['id']);
+        $fields = FormField::forForm((int) $form['id'], true);
+        $visibleFields = self::visibleFields($fields);
 
         // バリデーション
         $validator = new Validator();
-        $files = self::buildFileMap($fields);
-        $result = $validator->validate($fields, $_POST, $files);
+        $files = self::buildFileMap($visibleFields);
+        $result = $validator->validate($visibleFields, $_POST, $files);
 
         if (!empty($result['errors'])) {
             $this->view->render('front/form/show', [
@@ -107,7 +108,8 @@ class FormController
             redirect('/f/' . $slug);
         }
 
-        $fields = FormField::forForm((int) $form['id']);
+        $fields = FormField::forForm((int) $form['id'], true);
+        $visibleFields = self::visibleFields($fields);
 
         // 戻るで再編集
         if (!empty($_POST['_back'])) {
@@ -139,7 +141,7 @@ class FormController
         Csrf::rotate();
 
         // メール送信
-        $this->sendMails($form, $fields, $pending['values'], $pending['file_metas'] ?? []);
+        $this->sendMails($form, $visibleFields, $pending['values'], $pending['file_metas'] ?? []);
 
         $this->view->render('front/form/thanks', [
             'title' => '送信完了',
@@ -162,6 +164,17 @@ class FormController
             }
         }
         return $map;
+    }
+
+    /**
+     * @param array<int, array<string, mixed>> $fields
+     * @return array<int, array<string, mixed>>
+     */
+    private static function visibleFields(array $fields): array
+    {
+        return array_values(array_filter($fields, static function ($field): bool {
+            return !empty($field['visible']);
+        }));
     }
 
     private function sendMails(array $form, array $fields, array $values, array $fileMetas): void

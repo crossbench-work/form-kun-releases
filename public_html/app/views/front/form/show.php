@@ -21,7 +21,9 @@
     <?php endif; ?>
 
     <?php foreach ($fields as $i => $field): ?>
-        <?php include __DIR__ . '/_field.php'; ?>
+        <?php if (!empty($field['visible'])): ?>
+            <?php include __DIR__ . '/_field.php'; ?>
+        <?php endif; ?>
         <?= render_form_description_blocks_at($descriptionBlocks, $i + 1) ?>
     <?php endforeach; ?>
 

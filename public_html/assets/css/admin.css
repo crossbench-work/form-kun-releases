@@ -1332,6 +1332,39 @@ body.is-field-type-modal-open {
 [data-module=m-formBuilder01] .c-formEditorSummary01 > .wrapper > .block.is-contents > .regex svg {
   flex: 0 0 auto;
 }
+[data-module=m-formBuilder01] .c-formEditorSummary01__visibility {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  width: 20px;
+  height: 20px;
+  color: #94a3b8;
+  cursor: pointer;
+  margin-bottom: 0;
+}
+[data-module=m-formBuilder01] .c-formEditorSummary01__visibility input {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  cursor: pointer;
+  margin: 0;
+}
+[data-module=m-formBuilder01] .c-formEditorSummary01__visibility span {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+[data-module=m-formBuilder01] .c-formEditorSummary01__visibility .is-hiddenLine {
+  opacity: 0;
+}
+[data-module=m-formBuilder01] .c-formEditorSummary01__visibility input:not(:checked) + span {
+  color: #cbd5e1;
+}
+[data-module=m-formBuilder01] .c-formEditorSummary01__visibility input:not(:checked) + span .is-hiddenLine {
+  opacity: 1;
+}
 [data-module=m-formBuilder01] .c-formEditor__item > .wrapper > .block.is-body {
   padding: 16px;
 }
