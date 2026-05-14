@@ -47,8 +47,7 @@ class SchemaPatch
             self::ensureFormsDisplayFlags();
 
             self::ensureFormsPageTitles();
-
-            self::ensureAppSettingsTable();
+            self::ensureFormsMailSettings();
 
             $hasTbl = Database::fetchOne(
                 'SELECT COUNT(*) AS c FROM information_schema.TABLES
@@ -427,9 +426,9 @@ class SchemaPatch
     }
 
     /**
-     * SMTP など管理画面から編集するアプリ設定保存テーブルを追加。
+     * forms にフォーム単位の通知メール設定列を追加。
      */
-    public static function ensureAppSettingsTable(): void
+    public static function ensureFormsMailSettings(): void
     {
         try {
             $dbRow = Database::fetchOne('SELECT DATABASE() AS n');
@@ -438,27 +437,34 @@ class SchemaPatch
                 return;
             }
 
-            $hasTable = Database::fetchOne(
-                'SELECT COUNT(*) AS c FROM information_schema.TABLES
-                 WHERE TABLE_SCHEMA = ? AND TABLE_NAME = ?',
-                [$schema, 'app_settings']
-            );
-            if ((int) ($hasTable['c'] ?? 0) !== 0) {
-                return;
-            }
+            $columns = [
+                'mail_transport' => 'ALTER TABLE forms ADD COLUMN mail_transport VARCHAR(10) DEFAULT NULL AFTER mail_template_admin',
+                'mail_from_email' => 'ALTER TABLE forms ADD COLUMN mail_from_email VARCHAR(255) DEFAULT NULL AFTER mail_transport',
+                'mail_from_name' => 'ALTER TABLE forms ADD COLUMN mail_from_name VARCHAR(255) DEFAULT NULL AFTER mail_from_email',
+                'mail_smtp_host' => 'ALTER TABLE forms ADD COLUMN mail_smtp_host VARCHAR(255) DEFAULT NULL AFTER mail_from_name',
+                'mail_smtp_port' => 'ALTER TABLE forms ADD COLUMN mail_smtp_port INT DEFAULT NULL AFTER mail_smtp_host',
+                'mail_smtp_secure' => 'ALTER TABLE forms ADD COLUMN mail_smtp_secure VARCHAR(10) DEFAULT NULL AFTER mail_smtp_port',
+                'mail_smtp_username' => 'ALTER TABLE forms ADD COLUMN mail_smtp_username VARCHAR(255) DEFAULT NULL AFTER mail_smtp_secure',
+                'mail_smtp_password' => 'ALTER TABLE forms ADD COLUMN mail_smtp_password VARCHAR(255) DEFAULT NULL AFTER mail_smtp_username',
+                'mail_smtp_timeout' => 'ALTER TABLE forms ADD COLUMN mail_smtp_timeout INT DEFAULT NULL AFTER mail_smtp_password',
+                'mail_smtp_ehlo_host' => 'ALTER TABLE forms ADD COLUMN mail_smtp_ehlo_host VARCHAR(255) DEFAULT NULL AFTER mail_smtp_timeout',
+                'mail_smtp_verify_peer' => 'ALTER TABLE forms ADD COLUMN mail_smtp_verify_peer TINYINT(1) NOT NULL DEFAULT 1 AFTER mail_smtp_ehlo_host',
+                'mail_smtp_verify_peer_name' => 'ALTER TABLE forms ADD COLUMN mail_smtp_verify_peer_name TINYINT(1) NOT NULL DEFAULT 1 AFTER mail_smtp_verify_peer',
+                'mail_smtp_allow_self_signed' => 'ALTER TABLE forms ADD COLUMN mail_smtp_allow_self_signed TINYINT(1) NOT NULL DEFAULT 0 AFTER mail_smtp_verify_peer_name',
+            ];
 
-            Database::execute(
-                'CREATE TABLE app_settings (
-                    id INT AUTO_INCREMENT PRIMARY KEY,
-                    setting_key VARCHAR(120) NOT NULL,
-                    setting_value TEXT DEFAULT NULL,
-                    created_at DATETIME NOT NULL,
-                    updated_at DATETIME NOT NULL,
-                    UNIQUE KEY uk_app_settings_key (setting_key)
-                ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci'
-            );
+            foreach ($columns as $column => $sql) {
+                $hasColumn = Database::fetchOne(
+                    'SELECT COUNT(*) AS c FROM information_schema.COLUMNS
+                     WHERE TABLE_SCHEMA = ? AND TABLE_NAME = ? AND COLUMN_NAME = ?',
+                    [$schema, 'forms', $column]
+                );
+                if ((int) ($hasColumn['c'] ?? 0) === 0) {
+                    Database::execute($sql);
+                }
+            }
         } catch (\Throwable $e) {
-            error_log('[formkun] SchemaPatch app_settings: ' . $e->getMessage());
+            error_log('[formkun] SchemaPatch forms mail settings: ' . $e->getMessage());
         }
     }
 }

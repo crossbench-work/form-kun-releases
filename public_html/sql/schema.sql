@@ -57,6 +57,19 @@ CREATE TABLE IF NOT EXISTS forms (
     admin_emails            VARCHAR(500) DEFAULT NULL,
     mail_subject_admin      VARCHAR(200) DEFAULT NULL,
     mail_template_admin     TEXT DEFAULT NULL,
+    mail_transport          VARCHAR(10) DEFAULT NULL,
+    mail_from_email         VARCHAR(255) DEFAULT NULL,
+    mail_from_name          VARCHAR(255) DEFAULT NULL,
+    mail_smtp_host          VARCHAR(255) DEFAULT NULL,
+    mail_smtp_port          INT DEFAULT NULL,
+    mail_smtp_secure        VARCHAR(10) DEFAULT NULL,
+    mail_smtp_username      VARCHAR(255) DEFAULT NULL,
+    mail_smtp_password      VARCHAR(255) DEFAULT NULL,
+    mail_smtp_timeout       INT DEFAULT NULL,
+    mail_smtp_ehlo_host     VARCHAR(255) DEFAULT NULL,
+    mail_smtp_verify_peer   TINYINT(1) NOT NULL DEFAULT 1,
+    mail_smtp_verify_peer_name TINYINT(1) NOT NULL DEFAULT 1,
+    mail_smtp_allow_self_signed TINYINT(1) NOT NULL DEFAULT 0,
     reply_enabled           TINYINT(1) NOT NULL DEFAULT 0,
     reply_from_field_key    VARCHAR(64) DEFAULT NULL,
     reply_subject           VARCHAR(200) DEFAULT NULL,
@@ -130,16 +143,6 @@ CREATE TABLE IF NOT EXISTS login_attempts (
     success         TINYINT(1) NOT NULL DEFAULT 0,
     attempted_at    DATETIME NOT NULL,
     KEY idx_ip_time (ip, attempted_at)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- アプリ設定（通知設定など）
-CREATE TABLE IF NOT EXISTS app_settings (
-    id              INT AUTO_INCREMENT PRIMARY KEY,
-    setting_key     VARCHAR(120) NOT NULL,
-    setting_value   TEXT DEFAULT NULL,
-    created_at      DATETIME NOT NULL,
-    updated_at      DATETIME NOT NULL,
-    UNIQUE KEY uk_app_settings_key (setting_key)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 SET FOREIGN_KEY_CHECKS = 1;

@@ -171,6 +171,7 @@ class FormController
             'form_title'   => $form['title'],
             'ip'           => client_ip(),
         ];
+        $mailConfig = $this->resolveFormMailConfig($form);
 
         // 管理者通知
         $admins = $form['admin_emails'] ?? '';
@@ -183,7 +184,7 @@ class FormController
                 ? $form['mail_template_admin']
                 : "フォーム「{{__form_title__}}」に新しい送信がありました。\n受信日時: {{__submitted_at__}}\nIP: {{__ip__}}\n\n{{__all__}}";
             $body = Mailer::renderTemplate($template, $fields, $values, $context);
-            Mailer::send($admins, $subject, $body);
+            Mailer::send($admins, $subject, $body, [], $mailConfig);
         }
 
         // 自動返信
@@ -197,9 +198,40 @@ class FormController
                 $template = (string) ($form['reply_template'] ?? "お問い合わせいただきありがとうございました。\n以下の内容で受け付けました。\n\n{{__all__}}");
                 $body = Mailer::renderTemplate($template, $fields, $values, $context);
 
-                Mailer::send($to, $subject, $body);
+                Mailer::send($to, $subject, $body, [], $mailConfig);
             }
         }
+    }
+
+    /**
+     * @param array<string, mixed> $form
+     * @return array<string, mixed>
+     */
+    private function resolveFormMailConfig(array $form): array
+    {
+        return [
+            'transport' => (string) ($form['mail_transport'] ?? config('mail.transport', 'mail')),
+            'from_email' => (string) ($form['mail_from_email'] ?? config('mail.from_email', 'noreply@example.com')),
+            'from_name' => (string) ($form['mail_from_name'] ?? config('mail.from_name', '')),
+            'smtp' => [
+                'host' => (string) ($form['mail_smtp_host'] ?? config('mail.smtp.host', '')),
+                'port' => (int) ($form['mail_smtp_port'] ?? config('mail.smtp.port', 25)),
+                'secure' => (string) ($form['mail_smtp_secure'] ?? config('mail.smtp.secure', '')),
+                'username' => (string) ($form['mail_smtp_username'] ?? config('mail.smtp.username', '')),
+                'password' => (string) ($form['mail_smtp_password'] ?? config('mail.smtp.password', '')),
+                'timeout' => (int) ($form['mail_smtp_timeout'] ?? config('mail.smtp.timeout', 10)),
+                'ehlo_host' => (string) ($form['mail_smtp_ehlo_host'] ?? config('mail.smtp.ehlo_host', '')),
+                'verify_peer' => !array_key_exists('mail_smtp_verify_peer', $form)
+                    ? !empty(config('mail.smtp.verify_peer', true))
+                    : !empty($form['mail_smtp_verify_peer']),
+                'verify_peer_name' => !array_key_exists('mail_smtp_verify_peer_name', $form)
+                    ? !empty(config('mail.smtp.verify_peer_name', true))
+                    : !empty($form['mail_smtp_verify_peer_name']),
+                'allow_self_signed' => !array_key_exists('mail_smtp_allow_self_signed', $form)
+                    ? !empty(config('mail.smtp.allow_self_signed', false))
+                    : !empty($form['mail_smtp_allow_self_signed']),
+            ],
+        ];
     }
 
     private function notFound(): void

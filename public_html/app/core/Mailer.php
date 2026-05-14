@@ -6,7 +6,7 @@ class Mailer
     /**
      * メール送信。複数宛先はカンマ区切り or 配列。
      */
-    public static function send($to, string $subject, string $body, array $extraHeaders = []): bool
+    public static function send($to, string $subject, string $body, array $extraHeaders = [], array $mailConfig = []): bool
     {
         $recipients = [];
         if (is_array($to)) {
@@ -25,13 +25,13 @@ class Mailer
 
         $sent = false;
         foreach ($recipients as $recipient) {
-            $sent = self::sendSingle($recipient, $subject, $body, $extraHeaders) || $sent;
+            $sent = self::sendSingle($recipient, $subject, $body, $extraHeaders, $mailConfig) || $sent;
         }
 
         return $sent;
     }
 
-    private static function sendSingle(string $to, string $subject, string $body, array $extraHeaders = []): bool
+    private static function sendSingle(string $to, string $subject, string $body, array $extraHeaders = [], array $mailConfig = []): bool
     {
         $to = trim($to);
         if ($to === '') {
@@ -45,16 +45,17 @@ class Mailer
             mb_internal_encoding('UTF-8');
         }
 
-        $headers = self::buildHeaders($extraHeaders);
+        $resolvedMailConfig = self::resolveMailConfig($mailConfig);
+        $headers = self::buildHeaders($extraHeaders, $resolvedMailConfig);
         if ($headers === null) {
             return false;
         }
 
-        if (self::shouldUseSmtp()) {
-            return self::sendViaSmtp($to, $subject, $body, $headers);
+        if (self::shouldUseSmtp($resolvedMailConfig)) {
+            return self::sendViaSmtp($to, $subject, $body, $headers, $resolvedMailConfig);
         }
 
-        $fromEmail = self::extractEnvelopeFrom($headers['From'] ?? '');
+        $fromEmail = self::extractEnvelopeFrom($headers['From'] ?? '', $resolvedMailConfig);
         $additional = '';
         foreach ($headers as $k => $v) {
             if (in_array(strtolower($k), ['mime-version', 'content-type', 'content-transfer-encoding'], true)) {
@@ -82,15 +83,15 @@ class Mailer
         return $sent;
     }
 
-    private static function shouldUseSmtp(): bool
+    private static function shouldUseSmtp(array $mailConfig): bool
     {
-        $transport = strtolower(trim((string) config('mail.transport', 'mail')));
-        return $transport === 'smtp' || !empty(config('mail.smtp.enabled', false));
+        $transport = strtolower(trim((string) ($mailConfig['transport'] ?? 'mail')));
+        return $transport === 'smtp' || !empty($mailConfig['smtp']['enabled']);
     }
 
-    private static function sendViaSmtp(string $to, string $subject, string $body, array $headers): bool
+    private static function sendViaSmtp(string $to, string $subject, string $body, array $headers, array $mailConfig): bool
     {
-        $socket = self::openSmtpSocket();
+        $socket = self::openSmtpSocket($mailConfig);
         if (!is_resource($socket)) {
             return false;
         }
@@ -98,7 +99,7 @@ class Mailer
         try {
             self::expectSmtpResponse($socket, [220]);
 
-            $ehloHost = trim((string) config('mail.smtp.ehlo_host', $_SERVER['SERVER_NAME'] ?? 'localhost'));
+            $ehloHost = trim((string) ($mailConfig['smtp']['ehlo_host'] ?? ($_SERVER['SERVER_NAME'] ?? 'localhost')));
             if ($ehloHost === '') {
                 $ehloHost = 'localhost';
             }
@@ -106,7 +107,7 @@ class Mailer
             self::writeSmtpCommand($socket, 'EHLO ' . $ehloHost);
             self::expectSmtpResponse($socket, [250]);
 
-            $secure = strtolower(trim((string) config('mail.smtp.secure', '')));
+            $secure = strtolower(trim((string) ($mailConfig['smtp']['secure'] ?? '')));
             if ($secure === 'tls') {
                 self::writeSmtpCommand($socket, 'STARTTLS');
                 self::expectSmtpResponse($socket, [220]);
@@ -124,8 +125,8 @@ class Mailer
                 self::expectSmtpResponse($socket, [250]);
             }
 
-            $username = trim((string) config('mail.smtp.username', ''));
-            $password = (string) config('mail.smtp.password', '');
+            $username = trim((string) ($mailConfig['smtp']['username'] ?? ''));
+            $password = (string) ($mailConfig['smtp']['password'] ?? '');
             if ($username !== '') {
                 self::writeSmtpCommand($socket, 'AUTH LOGIN');
                 self::expectSmtpResponse($socket, [334]);
@@ -135,7 +136,7 @@ class Mailer
                 self::expectSmtpResponse($socket, [235]);
             }
 
-            $fromEmail = self::extractEnvelopeFrom($headers['From'] ?? '');
+            $fromEmail = self::extractEnvelopeFrom($headers['From'] ?? '', $mailConfig);
             if (!filter_var($fromEmail, FILTER_VALIDATE_EMAIL)) {
                 throw new \RuntimeException('SMTP の送信元メールアドレスが不正です。');
             }
@@ -169,12 +170,12 @@ class Mailer
     /**
      * @return resource|null
      */
-    private static function openSmtpSocket()
+    private static function openSmtpSocket(array $mailConfig)
     {
-        $host = trim((string) config('mail.smtp.host', ''));
-        $port = (int) config('mail.smtp.port', 25);
-        $secure = strtolower(trim((string) config('mail.smtp.secure', '')));
-        $timeout = (int) config('mail.smtp.timeout', 10);
+        $host = trim((string) ($mailConfig['smtp']['host'] ?? ''));
+        $port = (int) ($mailConfig['smtp']['port'] ?? 25);
+        $secure = strtolower(trim((string) ($mailConfig['smtp']['secure'] ?? '')));
+        $timeout = (int) ($mailConfig['smtp']['timeout'] ?? 10);
 
         if ($host === '' || $port <= 0) {
             error_log('[formkun] mailer smtp: host または port が未設定です。');
@@ -189,9 +190,9 @@ class Mailer
         $remote = $transport . '://' . $host . ':' . $port;
         $context = stream_context_create([
             'ssl' => [
-                'verify_peer' => !empty(config('mail.smtp.verify_peer', true)),
-                'verify_peer_name' => !empty(config('mail.smtp.verify_peer_name', true)),
-                'allow_self_signed' => !empty(config('mail.smtp.allow_self_signed', false)),
+                'verify_peer' => !empty($mailConfig['smtp']['verify_peer']),
+                'verify_peer_name' => !empty($mailConfig['smtp']['verify_peer_name']),
+                'allow_self_signed' => !empty($mailConfig['smtp']['allow_self_signed']),
             ],
         ]);
 
@@ -286,10 +287,10 @@ class Mailer
     /**
      * @return array<string, string>|null
      */
-    private static function buildHeaders(array $extraHeaders): ?array
+    private static function buildHeaders(array $extraHeaders, array $mailConfig): ?array
     {
         $headers = array_merge([
-            'From' => self::buildDefaultFromHeader(),
+            'From' => self::buildDefaultFromHeader($mailConfig),
             'MIME-Version' => '1.0',
             'Content-Type' => 'text/plain; charset=UTF-8',
         ], $extraHeaders);
@@ -315,10 +316,10 @@ class Mailer
         return $normalized;
     }
 
-    private static function buildDefaultFromHeader(): string
+    private static function buildDefaultFromHeader(array $mailConfig): string
     {
-        $fromEmail = trim((string) config('mail.from_email', 'noreply@example.com'));
-        $fromName = trim((string) config('mail.from_name', ''));
+        $fromEmail = trim((string) ($mailConfig['from_email'] ?? 'noreply@example.com'));
+        $fromName = trim((string) ($mailConfig['from_name'] ?? ''));
         if ($fromName === '') {
             return $fromEmail;
         }
@@ -326,7 +327,7 @@ class Mailer
         return self::encodeMimeHeader($fromName) . ' <' . $fromEmail . '>';
     }
 
-    private static function extractEnvelopeFrom(string $fromHeader): string
+    private static function extractEnvelopeFrom(string $fromHeader, array $mailConfig): string
     {
         if (preg_match('/<([^>]+)>/', $fromHeader, $matches) === 1) {
             return trim((string) $matches[1]);
@@ -337,7 +338,24 @@ class Mailer
             return $candidate;
         }
 
-        return trim((string) config('mail.from_email', 'noreply@example.com'));
+        return trim((string) ($mailConfig['from_email'] ?? 'noreply@example.com'));
+    }
+
+    /**
+     * @param array<string, mixed> $mailConfig
+     * @return array<string, mixed>
+     */
+    private static function resolveMailConfig(array $mailConfig): array
+    {
+        $baseConfig = (array) config('mail', []);
+        if (!isset($baseConfig['smtp']) || !is_array($baseConfig['smtp'])) {
+            $baseConfig['smtp'] = [];
+        }
+        if (!isset($mailConfig['smtp']) || !is_array($mailConfig['smtp'])) {
+            $mailConfig['smtp'] = [];
+        }
+
+        return array_replace_recursive($baseConfig, $mailConfig);
     }
 
     private static function encodeMimeHeader(string $value): string

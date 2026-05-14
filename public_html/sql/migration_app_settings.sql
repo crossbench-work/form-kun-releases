@@ -1,8 +1,0 @@
-CREATE TABLE IF NOT EXISTS app_settings (
-    id              INT AUTO_INCREMENT PRIMARY KEY,
-    setting_key     VARCHAR(120) NOT NULL,
-    setting_value   TEXT DEFAULT NULL,
-    created_at      DATETIME NOT NULL,
-    updated_at      DATETIME NOT NULL,
-    UNIQUE KEY uk_app_settings_key (setting_key)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;

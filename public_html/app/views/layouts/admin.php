@@ -23,7 +23,6 @@
                     <a href="<?= e(base_path('/admin/')) ?>">ダッシュボード</a>
                     <a href="<?= e(base_path('/admin/forms')) ?>">フォーム</a>
                     <?php if (\Core\Auth::role() === 'admin'): ?>
-                        <a href="<?= e(base_path('/admin/settings/mail')) ?>">通知設定</a>
                         <a href="<?= e(base_path('/admin/users')) ?>">ユーザー</a>
                     <?php endif; ?>
                 </nav>

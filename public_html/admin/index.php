@@ -53,8 +53,4 @@ $router->get('/users/{id}/edit',      fn($p) => (new \Controllers\Admin\UserCont
 $router->post('/users/{id}',          fn($p) => (new \Controllers\Admin\UserController())->update((int)$p['id']));
 $router->post('/users/{id}/delete',   fn($p) => (new \Controllers\Admin\UserController())->destroy((int)$p['id']));
 
-// 通知設定
-$router->get('/settings/mail',        fn() => (new \Controllers\Admin\MailSettingController())->edit());
-$router->post('/settings/mail',       fn() => (new \Controllers\Admin\MailSettingController())->update());
-
 $router->dispatch();

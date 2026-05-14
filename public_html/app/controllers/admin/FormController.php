@@ -44,7 +44,7 @@ class FormController
         if (!empty($errors)) {
             (new View())->render('admin/forms/edit', [
                 'title' => 'フォーム新規作成',
-                'form'  => $data['form'],
+                'form'  => self::prepareFormForEdit($data['form']),
                 'fields'=> $data['fields'],
                 'errors'=> $errors,
                 'isNew' => true,
@@ -123,12 +123,13 @@ class FormController
 
         Csrf::verify();
         $data = $this->collect();
+        $data['form'] = self::mergeStoredMailPassword($data['form'], $form);
         $errors = $this->validate($data, $id);
 
         if (!empty($errors)) {
             (new View())->render('admin/forms/edit', [
                 'title' => 'フォーム編集',
-                'form'  => array_merge($form, $data['form']),
+                'form'  => self::prepareFormForEdit(array_merge($form, $data['form'])),
                 'fields'=> $data['fields'],
                 'errors'=> $errors,
                 'isNew' => false,
@@ -223,6 +224,20 @@ class FormController
             'admin_emails'         => trim((string) ($_POST['admin_emails'] ?? '')),
             'mail_subject_admin'   => trim((string) ($_POST['mail_subject_admin'] ?? '')),
             'mail_template_admin'  => (string) ($_POST['mail_template_admin'] ?? ''),
+            'mail_transport'       => in_array($_POST['mail_transport'] ?? '', ['mail', 'smtp'], true) ? (string) $_POST['mail_transport'] : 'mail',
+            'mail_from_email'      => trim((string) ($_POST['mail_from_email'] ?? '')),
+            'mail_from_name'       => trim((string) ($_POST['mail_from_name'] ?? '')),
+            'mail_smtp_host'       => trim((string) ($_POST['mail_smtp_host'] ?? '')),
+            'mail_smtp_port'       => trim((string) ($_POST['mail_smtp_port'] ?? '')),
+            'mail_smtp_secure'     => (string) ($_POST['mail_smtp_secure'] ?? ''),
+            'mail_smtp_username'   => trim((string) ($_POST['mail_smtp_username'] ?? '')),
+            'mail_smtp_password'   => (string) ($_POST['mail_smtp_password'] ?? ''),
+            'mail_smtp_timeout'    => trim((string) ($_POST['mail_smtp_timeout'] ?? '')),
+            'mail_smtp_ehlo_host'  => trim((string) ($_POST['mail_smtp_ehlo_host'] ?? '')),
+            'mail_smtp_verify_peer' => !empty($_POST['mail_smtp_verify_peer']) ? 1 : 0,
+            'mail_smtp_verify_peer_name' => !empty($_POST['mail_smtp_verify_peer_name']) ? 1 : 0,
+            'mail_smtp_allow_self_signed' => !empty($_POST['mail_smtp_allow_self_signed']) ? 1 : 0,
+            'mail_smtp_clear_password' => !empty($_POST['mail_smtp_clear_password']) ? 1 : 0,
             'reply_enabled'        => !empty($_POST['reply_enabled']) ? 1 : 0,
             'reply_from_field_key' => trim((string) ($_POST['reply_from_field_key'] ?? '')),
             'reply_subject'        => trim((string) ($_POST['reply_subject'] ?? '')),
@@ -261,6 +276,12 @@ class FormController
         }
         if ($form['thanks_button_url'] === '') {
             $form['thanks_button_url'] = '/';
+        }
+        if ($form['mail_smtp_port'] === '') {
+            $form['mail_smtp_port'] = '25';
+        }
+        if ($form['mail_smtp_timeout'] === '') {
+            $form['mail_smtp_timeout'] = '10';
         }
 
         $descriptionBlocks = self::collectContentBlocks('description_blocks', 'description');
@@ -392,6 +413,32 @@ class FormController
         if (!is_form_button_url($form['thanks_button_url'])) {
             $errors[] = '完了画面のボタンURLは http:// / https:// で始まるURL、または / から始まるパスを指定してください。';
         }
+        if ($form['mail_from_email'] === '' || !filter_var($form['mail_from_email'], FILTER_VALIDATE_EMAIL)) {
+            $errors[] = '通知設定の差出人メールアドレスは有効なメールアドレスを入力してください。';
+        }
+        if (!in_array($form['mail_transport'], ['mail', 'smtp'], true)) {
+            $errors[] = '通知設定の送信方式が不正です。';
+        }
+        if ($form['mail_transport'] === 'smtp') {
+            if ($form['mail_smtp_host'] === '') {
+                $errors[] = '通知設定の SMTPホストは必須です。';
+            }
+            if (!ctype_digit((string) $form['mail_smtp_port']) || (int) $form['mail_smtp_port'] < 1 || (int) $form['mail_smtp_port'] > 65535) {
+                $errors[] = '通知設定の SMTPポートは 1〜65535 の整数で入力してください。';
+            }
+            if (!in_array($form['mail_smtp_secure'], ['', 'ssl', 'tls'], true)) {
+                $errors[] = '通知設定の暗号化方式は「なし」「SSL」「STARTTLS」のいずれかを選択してください。';
+            }
+            if (!ctype_digit((string) $form['mail_smtp_timeout']) || (int) $form['mail_smtp_timeout'] < 1 || (int) $form['mail_smtp_timeout'] > 300) {
+                $errors[] = '通知設定の SMTPタイムアウトは 1〜300 秒で入力してください。';
+            }
+            if (
+                trim((string) $form['mail_smtp_username']) !== ''
+                && trim((string) $form['mail_smtp_password']) === ''
+            ) {
+                $errors[] = '通知設定で SMTPユーザー名を使う場合は、SMTPパスワードも入力してください。';
+            }
+        }
 
         if (count($fields) === 0) {
             $errors[] = '項目を1つ以上設定してください。';
@@ -518,6 +565,21 @@ class FormController
             'admin_emails' => '',
             'mail_subject_admin' => '',
             'mail_template_admin' => "フォーム「{{__form_title__}}」に新しい送信がありました。\n受信日時: {{__submitted_at__}}\nIP: {{__ip__}}\n\n{{__all__}}",
+            'mail_transport' => (string) config('mail.transport', 'mail'),
+            'mail_from_email' => (string) config('mail.from_email', 'noreply@example.com'),
+            'mail_from_name' => (string) config('mail.from_name', ''),
+            'mail_smtp_host' => (string) config('mail.smtp.host', ''),
+            'mail_smtp_port' => (string) config('mail.smtp.port', 25),
+            'mail_smtp_secure' => (string) config('mail.smtp.secure', ''),
+            'mail_smtp_username' => (string) config('mail.smtp.username', ''),
+            'mail_smtp_password' => '',
+            'mail_smtp_timeout' => (string) config('mail.smtp.timeout', 10),
+            'mail_smtp_ehlo_host' => (string) config('mail.smtp.ehlo_host', ''),
+            'mail_smtp_verify_peer' => !empty(config('mail.smtp.verify_peer', true)) ? 1 : 0,
+            'mail_smtp_verify_peer_name' => !empty(config('mail.smtp.verify_peer_name', true)) ? 1 : 0,
+            'mail_smtp_allow_self_signed' => !empty(config('mail.smtp.allow_self_signed', false)) ? 1 : 0,
+            'mail_smtp_password_configured' => 0,
+            'mail_smtp_clear_password' => 0,
             'reply_enabled' => 0,
             'reply_from_field_key' => '',
             'reply_subject' => '送信ありがとうございました',
@@ -559,6 +621,39 @@ class FormController
         $form['thanks_button_url'] = trim((string) ($form['thanks_button_url'] ?? '')) !== ''
             ? (string) $form['thanks_button_url']
             : '/';
+        $form['mail_transport'] = in_array(($form['mail_transport'] ?? null), ['mail', 'smtp'], true)
+            ? (string) $form['mail_transport']
+            : (string) config('mail.transport', 'mail');
+        $form['mail_from_email'] = trim((string) ($form['mail_from_email'] ?? '')) !== ''
+            ? (string) $form['mail_from_email']
+            : (string) config('mail.from_email', 'noreply@example.com');
+        $form['mail_from_name'] = array_key_exists('mail_from_name', $form)
+            ? (string) ($form['mail_from_name'] ?? '')
+            : (string) config('mail.from_name', '');
+        $form['mail_smtp_host'] = array_key_exists('mail_smtp_host', $form)
+            ? (string) ($form['mail_smtp_host'] ?? '')
+            : (string) config('mail.smtp.host', '');
+        $form['mail_smtp_port'] = trim((string) ($form['mail_smtp_port'] ?? '')) !== ''
+            ? (string) $form['mail_smtp_port']
+            : (string) config('mail.smtp.port', 25);
+        $form['mail_smtp_secure'] = in_array(($form['mail_smtp_secure'] ?? null), ['', 'ssl', 'tls'], true)
+            ? (string) ($form['mail_smtp_secure'] ?? '')
+            : (string) config('mail.smtp.secure', '');
+        $form['mail_smtp_username'] = array_key_exists('mail_smtp_username', $form)
+            ? (string) ($form['mail_smtp_username'] ?? '')
+            : (string) config('mail.smtp.username', '');
+        $form['mail_smtp_timeout'] = trim((string) ($form['mail_smtp_timeout'] ?? '')) !== ''
+            ? (string) $form['mail_smtp_timeout']
+            : (string) config('mail.smtp.timeout', 10);
+        $form['mail_smtp_ehlo_host'] = array_key_exists('mail_smtp_ehlo_host', $form)
+            ? (string) ($form['mail_smtp_ehlo_host'] ?? '')
+            : (string) config('mail.smtp.ehlo_host', '');
+        $form['mail_smtp_verify_peer'] = !array_key_exists('mail_smtp_verify_peer', $form) || !empty($form['mail_smtp_verify_peer']) ? 1 : 0;
+        $form['mail_smtp_verify_peer_name'] = !array_key_exists('mail_smtp_verify_peer_name', $form) || !empty($form['mail_smtp_verify_peer_name']) ? 1 : 0;
+        $form['mail_smtp_allow_self_signed'] = !empty($form['mail_smtp_allow_self_signed']) ? 1 : 0;
+        $form['mail_smtp_password_configured'] = trim((string) ($form['mail_smtp_password'] ?? '')) !== '' ? 1 : 0;
+        $form['mail_smtp_password'] = '';
+        $form['mail_smtp_clear_password'] = !empty($form['mail_smtp_clear_password']) ? 1 : 0;
         $form['description_blocks'] = self::normalizeDescriptionBlocks(
             decode_form_description_blocks($form['description'] ?? '', !empty($form['show_description'])),
             false,
@@ -575,6 +670,25 @@ class FormController
             'thanks'
         );
         return $form;
+    }
+
+    /**
+     * @param array<string, mixed> $submittedForm
+     * @param array<string, mixed> $storedForm
+     * @return array<string, mixed>
+     */
+    private static function mergeStoredMailPassword(array $submittedForm, array $storedForm): array
+    {
+        if (!empty($submittedForm['mail_smtp_clear_password'])) {
+            $submittedForm['mail_smtp_password'] = '';
+            return $submittedForm;
+        }
+
+        if (trim((string) ($submittedForm['mail_smtp_password'] ?? '')) === '') {
+            $submittedForm['mail_smtp_password'] = (string) ($storedForm['mail_smtp_password'] ?? '');
+        }
+
+        return $submittedForm;
     }
 
     /**
