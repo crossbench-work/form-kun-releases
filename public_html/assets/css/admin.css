@@ -951,7 +951,6 @@ form.is-inline {
 }
 [data-module=c-descriptionEditor01] > .wrapper > .block.is-toolbar > .area.is-actions {
   display: flex;
-  justify-content: flex-end;
   margin-top: 16px;
   margin-bottom: 16px;
 }
@@ -1051,6 +1050,7 @@ form.is-inline {
   text-overflow: ellipsis;
   white-space: nowrap;
   color: #334155;
+  font-size: 13px;
   font-weight: 700;
 }
 [data-module=c-descriptionEditor01] .c-formEditor__itemBody > .wrapper > .block.is-contents {

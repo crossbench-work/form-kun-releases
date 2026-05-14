@@ -944,7 +944,6 @@ form.is-inline {
     > .block.is-toolbar {
       > .area.is-actions {
         display: flex;
-        justify-content: flex-end;
         margin-top: 16px;
         margin-bottom: 16px;
       }
@@ -1064,6 +1063,7 @@ form.is-inline {
     text-overflow: ellipsis;
     white-space: nowrap;
     color: #334155;
+    font-size: 13px;
     font-weight: 700;
   }
 
