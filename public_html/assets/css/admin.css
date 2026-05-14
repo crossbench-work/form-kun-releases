@@ -168,6 +168,43 @@ body.l-adminShell01 a:hover {
   color: #2563eb;
 }
 
+.c-copyTagList01 {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.c-copyTagList01__items {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.c-copyTagList01__tag {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 10px;
+  border: 1px solid #cbd5e1;
+  border-radius: 999px;
+  background: #fff;
+  color: #2563eb;
+  cursor: pointer;
+  transition: background-color 0.16s ease, border-color 0.16s ease, color 0.16s ease;
+}
+.c-copyTagList01__tag:hover {
+  background: #eff6ff;
+  border-color: #93c5fd;
+}
+.c-copyTagList01__tag code {
+  font-size: 12px;
+  color: inherit;
+}
+.c-copyTagList01 .text.is-help {
+  margin: 0;
+}
+.c-copyTagList01 .text.is-feedback {
+  color: #2563eb;
+}
+
 .is-visuallyHidden {
   position: absolute;
   width: 1px;

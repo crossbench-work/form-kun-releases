@@ -1,6 +1,53 @@
 (function () {
     'use strict';
 
+    (function initCopyTags() {
+        var tags = document.querySelectorAll('[data-copy-text]');
+        if (!tags.length) return;
+
+        function fallbackCopy(text) {
+            var input = document.createElement('textarea');
+            input.value = text;
+            input.setAttribute('readonly', 'readonly');
+            input.style.position = 'absolute';
+            input.style.left = '-9999px';
+            document.body.appendChild(input);
+            input.select();
+            document.execCommand('copy');
+            document.body.removeChild(input);
+        }
+
+        function showFeedback(tag, message) {
+            var root = tag.closest('.c-copyTagList01');
+            if (!root) return;
+            var feedback = root.querySelector('[data-copy-feedback]');
+            if (!feedback) return;
+            feedback.textContent = message;
+            window.clearTimeout(feedback._copyTimer);
+            feedback._copyTimer = window.setTimeout(function () {
+                feedback.textContent = '';
+            }, 1600);
+        }
+
+        tags.forEach(function (tag) {
+            tag.addEventListener('click', function () {
+                var text = tag.getAttribute('data-copy-text') || '';
+                if (!text) return;
+                if (navigator.clipboard && navigator.clipboard.writeText) {
+                    navigator.clipboard.writeText(text).then(function () {
+                        showFeedback(tag, 'コピーしました');
+                    }).catch(function () {
+                        fallbackCopy(text);
+                        showFeedback(tag, 'コピーしました');
+                    });
+                    return;
+                }
+                fallbackCopy(text);
+                showFeedback(tag, 'コピーしました');
+            });
+        });
+    })();
+
     (function initFormEditTabs() {
         var root = document.querySelector('[data-module="c-formEditTabs01"]');
         if (!root) return;
