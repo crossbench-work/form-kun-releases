@@ -1404,7 +1404,7 @@ body.is-field-type-modal-open {
   display: inline-block;
   padding: 2px 8px;
   border-radius: 10px;
-  font-size: 12px;
+  font-size: 10px;
 }
 .m-badge01.is-active {
   background: #dcfce7;
