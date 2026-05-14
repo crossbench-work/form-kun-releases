@@ -174,6 +174,46 @@
         );
     }
 
+    (function initSettingsMaxFormsModal() {
+        var modal = document.querySelector('[data-module="c-settingsFormLimitModal01"]');
+        var openBtn = document.querySelector('[data-target="settings-max-forms-open"]');
+        if (!modal || !openBtn) return;
+
+        function openModal() {
+            modal.hidden = false;
+            document.body.classList.add('is-settings-max-forms-modal-open');
+            var input = modal.querySelector('#max_forms_modal');
+            if (input) {
+                input.focus();
+                if (typeof input.select === 'function') {
+                    input.select();
+                }
+            }
+        }
+
+        function closeModal() {
+            modal.hidden = true;
+            document.body.classList.remove('is-settings-max-forms-modal-open');
+            openBtn.focus();
+        }
+
+        openBtn.addEventListener('click', function () {
+            openModal();
+        });
+
+        modal.querySelectorAll('[data-target="settings-max-forms-close"]').forEach(function (el) {
+            el.addEventListener('click', function () {
+                closeModal();
+            });
+        });
+
+        document.addEventListener('keydown', function (event) {
+            if (event.key === 'Escape' && !modal.hidden) {
+                closeModal();
+            }
+        });
+    })();
+
     var list = document.querySelector('[data-target="m-formBuilder01__fields"]');
     if (!list) return;
 
@@ -1183,43 +1223,4 @@
         });
     }
 
-    (function initSettingsMaxFormsModal() {
-        var modal = document.querySelector('[data-module="c-settingsFormLimitModal01"]');
-        var openBtn = document.querySelector('[data-target="settings-max-forms-open"]');
-        if (!modal || !openBtn) return;
-
-        function openModal() {
-            modal.hidden = false;
-            document.body.classList.add('is-settings-max-forms-modal-open');
-            var input = modal.querySelector('#max_forms_modal');
-            if (input) {
-                input.focus();
-                if (typeof input.select === 'function') {
-                    input.select();
-                }
-            }
-        }
-
-        function closeModal() {
-            modal.hidden = true;
-            document.body.classList.remove('is-settings-max-forms-modal-open');
-            openBtn.focus();
-        }
-
-        openBtn.addEventListener('click', function () {
-            openModal();
-        });
-
-        modal.querySelectorAll('[data-target="settings-max-forms-close"]').forEach(function (el) {
-            el.addEventListener('click', function () {
-                closeModal();
-            });
-        });
-
-        document.addEventListener('keydown', function (event) {
-            if (event.key === 'Escape' && !modal.hidden) {
-                closeModal();
-            }
-        });
-    })();
 })();
