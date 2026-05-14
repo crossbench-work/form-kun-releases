@@ -477,8 +477,8 @@ class FormController
         }
 
         if (!empty($form['reply_enabled'])) {
-            if (!in_array($form['reply_from_field_key'], $usedKeys, true)) {
-                $errors[] = '送り元のメールアドレスは、項目に存在するメールアドレス項目のフィールドキーを指定してください。';
+            if ($form['reply_from_field_key'] !== '' && !filter_var($form['reply_from_field_key'], FILTER_VALIDATE_EMAIL)) {
+                $errors[] = '送り元のメールアドレスはメールアドレス形式で入力してください。';
             }
         }
 
@@ -566,6 +566,9 @@ class FormController
             false,
             'thanks'
         );
+        if (($form['reply_from_field_key'] ?? '') !== '' && !filter_var((string) $form['reply_from_field_key'], FILTER_VALIDATE_EMAIL)) {
+            $form['reply_from_field_key'] = '';
+        }
 
         return $form;
     }

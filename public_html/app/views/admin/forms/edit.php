@@ -551,7 +551,7 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                             </div>
                             <div class="block is-field">
                                 <div data-module="m-input01">
-                                    <input type="text" name="reply_from_field_key" value="<?= e($form['reply_from_field_key']) ?>" placeholder="メールアドレス項目のフィールドキー（UUID または任意のキー）">
+                                    <input type="email" name="reply_from_field_key" value="<?= e($form['reply_from_field_key']) ?>" placeholder="noreply@example.com">
                                 </div>
                             </div>
                         </div>
