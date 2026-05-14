@@ -5,6 +5,8 @@ body.l-adminShell01 {
   background: #f1f5f9;
   line-height: 1.6;
   letter-spacing: 0.04em;
+  // 固定ヘッダー分（上オフセット + ヘッダー帯の目安高さ + 本文とのすき間）
+  --admin-header-space: 88px;
 
   a {
     color: #2563eb;
@@ -244,8 +246,14 @@ body.l-adminShell01 {
 
 // --- 管理ヘッダー・メイン ---
 .c-adminHeader01 {
+  position: fixed;
+  top: 12px;
+  left: 12px;
+  z-index: 100;
   width: calc(100% - 24px);
-  margin: 12px auto 0;
+  max-width: none;
+  margin: 0;
+  box-sizing: border-box;
   background: #fff;
   color: #fff;
   border-radius: 100px;
@@ -317,6 +325,7 @@ body.l-adminShell01 {
 
 .l-adminBody01 {
   flex: 1 1 auto;
+  padding-top: var(--admin-header-space);
 
   & > .wrapper {
     padding: 24px;
