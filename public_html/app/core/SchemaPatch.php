@@ -333,6 +333,17 @@ class SchemaPatch
                 );
             }
 
+            $hasShowInputPageTitle = Database::fetchOne(
+                'SELECT COUNT(*) AS c FROM information_schema.COLUMNS
+                 WHERE TABLE_SCHEMA = ? AND TABLE_NAME = ? AND COLUMN_NAME = ?',
+                [$schema, 'forms', 'show_input_page_title']
+            );
+            if ((int) ($hasShowInputPageTitle['c'] ?? 0) === 0) {
+                Database::execute(
+                    'ALTER TABLE forms ADD COLUMN show_input_page_title TINYINT(1) NOT NULL DEFAULT 1 AFTER input_page_title'
+                );
+            }
+
             $hasConfirmPageTitle = Database::fetchOne(
                 'SELECT COUNT(*) AS c FROM information_schema.COLUMNS
                  WHERE TABLE_SCHEMA = ? AND TABLE_NAME = ? AND COLUMN_NAME = ?',
@@ -341,6 +352,17 @@ class SchemaPatch
             if ((int) ($hasConfirmPageTitle['c'] ?? 0) === 0) {
                 Database::execute(
                     'ALTER TABLE forms ADD COLUMN confirm_page_title VARCHAR(200) DEFAULT NULL AFTER show_description'
+                );
+            }
+
+            $hasShowConfirmPageTitle = Database::fetchOne(
+                'SELECT COUNT(*) AS c FROM information_schema.COLUMNS
+                 WHERE TABLE_SCHEMA = ? AND TABLE_NAME = ? AND COLUMN_NAME = ?',
+                [$schema, 'forms', 'show_confirm_page_title']
+            );
+            if ((int) ($hasShowConfirmPageTitle['c'] ?? 0) === 0) {
+                Database::execute(
+                    'ALTER TABLE forms ADD COLUMN show_confirm_page_title TINYINT(1) NOT NULL DEFAULT 1 AFTER confirm_page_title'
                 );
             }
 
@@ -355,6 +377,17 @@ class SchemaPatch
                 );
             }
 
+            $hasShowThanksPageTitle = Database::fetchOne(
+                'SELECT COUNT(*) AS c FROM information_schema.COLUMNS
+                 WHERE TABLE_SCHEMA = ? AND TABLE_NAME = ? AND COLUMN_NAME = ?',
+                [$schema, 'forms', 'show_thanks_page_title']
+            );
+            if ((int) ($hasShowThanksPageTitle['c'] ?? 0) === 0) {
+                Database::execute(
+                    'ALTER TABLE forms ADD COLUMN show_thanks_page_title TINYINT(1) NOT NULL DEFAULT 1 AFTER thanks_page_title'
+                );
+            }
+
             Database::execute(
                 "UPDATE forms
                     SET input_page_title = title
@@ -363,13 +396,28 @@ class SchemaPatch
             );
             Database::execute(
                 "UPDATE forms
+                    SET show_input_page_title = 1
+                  WHERE show_input_page_title IS NULL OR show_input_page_title NOT IN (0, 1)"
+            );
+            Database::execute(
+                "UPDATE forms
                     SET confirm_page_title = '入力内容のご確認'
                   WHERE confirm_page_title IS NULL OR confirm_page_title = ''"
             );
             Database::execute(
                 "UPDATE forms
+                    SET show_confirm_page_title = 1
+                  WHERE show_confirm_page_title IS NULL OR show_confirm_page_title NOT IN (0, 1)"
+            );
+            Database::execute(
+                "UPDATE forms
                     SET thanks_page_title = '送信が完了しました'
                   WHERE thanks_page_title IS NULL OR thanks_page_title = ''"
+            );
+            Database::execute(
+                "UPDATE forms
+                    SET show_thanks_page_title = 1
+                  WHERE show_thanks_page_title IS NULL OR show_thanks_page_title NOT IN (0, 1)"
             );
         } catch (\Throwable $e) {
             error_log('[formkun] SchemaPatch forms page titles: ' . $e->getMessage());

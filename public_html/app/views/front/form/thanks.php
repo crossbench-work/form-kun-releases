@@ -10,7 +10,9 @@
 <?php $thanksButtonText = trim((string) ($form['thanks_button_text'] ?? '')) !== '' ? (string) $form['thanks_button_text'] : 'トップへ戻る'; ?>
 <?php $thanksButtonUrl = trim((string) ($form['thanks_button_url'] ?? '')) !== '' ? (string) $form['thanks_button_url'] : '/'; ?>
 <section data-module="c-thanksSummary01">
+    <?php if (!empty($form['show_thanks_page_title']) && $thanksPageTitle !== ''): ?>
     <h1 class="title"><?= e($thanksPageTitle) ?></h1>
+    <?php endif; ?>
     <?= render_form_description_blocks_at($thanksBlocks, 0) ?>
 
 <?php if (!$hasThanksContent): ?>

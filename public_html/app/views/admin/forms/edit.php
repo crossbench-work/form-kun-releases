@@ -210,6 +210,10 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                         <div class="block is-contents">
                             <div class="block is-title">
                                 <label class="label" data-module="m-boldTitle01" for="input_page_title">タイトル</label>
+                                <label class="label is-choice">
+                                    <input type="checkbox" name="show_input_page_title" value="1" <?= !empty($form['show_input_page_title']) ? 'checked' : '' ?>>
+                                    表示する
+                                </label>
                             </div>
                             <div class="block is-field">
                                 <div data-module="m-input01">
@@ -299,6 +303,10 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                         <div class="block is-contents">
                             <div class="block is-title">
                                 <label class="label" data-module="m-boldTitle01" for="confirm_page_title">タイトル</label>
+                                <label class="label is-choice">
+                                    <input type="checkbox" name="show_confirm_page_title" value="1" <?= !empty($form['show_confirm_page_title']) ? 'checked' : '' ?>>
+                                    表示する
+                                </label>
                             </div>
                             <div class="block is-field">
                                 <div data-module="m-input01">
@@ -379,6 +387,10 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                         <div class="block is-contents">
                             <div class="block is-title">
                                 <label class="label" data-module="m-boldTitle01" for="thanks_page_title">タイトル</label>
+                                <label class="label is-choice">
+                                    <input type="checkbox" name="show_thanks_page_title" value="1" <?= !empty($form['show_thanks_page_title']) ? 'checked' : '' ?>>
+                                    表示する
+                                </label>
                             </div>
                             <div class="block is-field">
                                 <div data-module="m-input01">

@@ -4,7 +4,7 @@
 <?php $previewMode = !empty($previewMode); ?>
 <?php $confirmButtonText = trim((string) ($form['confirm_button_text'] ?? '')) !== '' ? (string) $form['confirm_button_text'] : '入力内容を確認する'; ?>
 <?php $inputPageTitle = trim((string) ($form['input_page_title'] ?? '')); ?>
-<?php if ($inputPageTitle !== ''): ?>
+<?php if (!empty($form['show_input_page_title']) && $inputPageTitle !== ''): ?>
     <h1 class="title"><?= e($inputPageTitle) ?></h1>
 <?php endif; ?>
 <?= render_form_description_blocks_at($descriptionBlocks, 0) ?>
