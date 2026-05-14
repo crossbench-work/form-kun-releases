@@ -30,8 +30,9 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                         <div data-module="c-descriptionEditor01" data-description-editor data-name-prefix="<?= e($namePrefix) ?>" data-position-mode="<?= e($positionMode) ?>">
                             <div class="wrapper">
                                 <div class="block is-contents">
-                                    <div class="c-descriptionEditor01__editor">
-                                        <div class="wrapper" data-description-list>
+                                    <div class="c-formEditor">
+                                        <div class="wrapper">
+                                            <div class="block is-contents" data-description-list>
                                             <?php foreach ($blocks as $i => $block): ?>
                                                 <?php
                                                 $blockId = (string) ($block['id'] ?? ($namePrefix . '-' . $i));
@@ -41,7 +42,7 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                                                 $positionInputId = $blockId . '-position';
                                                 $htmlInputId = $blockId . '-html';
                                                 ?>
-                                                <div class="c-formEditor__item c-descriptionEditor01__item is-collapsed" data-description-block data-index="<?= $i ?>">
+                                                <div class="c-formEditor__item is-collapsed" data-description-block data-index="<?= $i ?>">
                                                     <input type="hidden" name="<?= e($namePrefix) ?>[<?= $i ?>][id]" value="<?= e($blockId) ?>" data-name="id">
                                                     <div class="wrapper">
                                                         <div class="block is-header">
@@ -160,6 +161,7 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                                                     </div>
                                                 </div>
                                             <?php endforeach; ?>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -958,7 +960,7 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
 </div>
 
 <template data-target="m-formBuilder01__descriptionTemplate">
-    <div class="c-formEditor__item c-descriptionEditor01__item is-collapsed" data-description-block>
+    <div class="c-formEditor__item is-collapsed" data-description-block>
         <input type="hidden" data-name="id" value="">
         <div class="wrapper">
             <div class="block is-header">
