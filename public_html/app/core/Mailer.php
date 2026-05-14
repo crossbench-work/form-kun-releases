@@ -8,9 +8,31 @@ class Mailer
      */
     public static function send($to, string $subject, string $body, array $extraHeaders = []): bool
     {
+        $recipients = [];
         if (is_array($to)) {
-            $to = implode(',', $to);
+            foreach ($to as $address) {
+                $address = trim((string) $address);
+                if ($address !== '') {
+                    $recipients[] = $address;
+                }
+            }
+        } else {
+            $recipients = array_filter(array_map('trim', preg_split('/[,;]+/', (string) $to) ?: []));
         }
+        if ($recipients === []) {
+            return false;
+        }
+
+        $sent = false;
+        foreach ($recipients as $recipient) {
+            $sent = self::sendSingle($recipient, $subject, $body, $extraHeaders) || $sent;
+        }
+
+        return $sent;
+    }
+
+    private static function sendSingle(string $to, string $subject, string $body, array $extraHeaders = []): bool
+    {
         $to = trim($to);
         if ($to === '') {
             return false;
