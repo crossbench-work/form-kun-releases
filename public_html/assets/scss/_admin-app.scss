@@ -380,7 +380,7 @@ body.l-adminShell01 {
 
 [data-module="m-boldTitle01"] {
   margin: 0;
-  font-size: 14px;
+  font-size: 12px;
   font-weight: 700;
   color: #334155;
 }
@@ -1000,14 +1000,14 @@ form.is-inline {
   }
 
   .text.is-help {
-    font-size: 13px;
+    font-size: 10px;
     color: #6b7280;
     margin: 4px 0 0;
   }
 
   .text.is-error {
     color: #b91c1c;
-    font-size: 13px;
+    font-size: 12px;
     margin: 4px 0 0;
   }
 
@@ -1018,7 +1018,8 @@ form.is-inline {
     flex-wrap: wrap;
   }
 
-  .btn {
+  // c-formBlock01 内の素の .btn（m-btn01 で包まない箇所用）。:where で詳細度を下げ、m-btn01 内のボタンを上書きしない
+  :where([data-module="c-formBlock01"] > .wrapper > .block.is-contents) .btn {
     display: inline-block;
     padding: 8px 16px;
     border: 1px solid #cbd5e1;
@@ -1425,6 +1426,10 @@ body.is-field-type-modal-open {
         gap: 12px;
         flex-wrap: wrap;
         margin-bottom: 6px;
+
+        >.label.is-bold {
+          font-size: 10px;
+        }
       }
     }
   }

@@ -480,7 +480,7 @@ body.l-adminShell01 a:hover {
 
 [data-module=m-boldTitle01] {
   margin: 0;
-  font-size: 14px;
+  font-size: 12px;
   font-weight: 700;
   color: #334155;
 }
@@ -1014,13 +1014,13 @@ form.is-inline {
   color: #374151;
 }
 [data-module=c-formBlock01] > .wrapper > .block.is-contents .text.is-help {
-  font-size: 13px;
+  font-size: 10px;
   color: #6b7280;
   margin: 4px 0 0;
 }
 [data-module=c-formBlock01] > .wrapper > .block.is-contents .text.is-error {
   color: #b91c1c;
-  font-size: 13px;
+  font-size: 12px;
   margin: 4px 0 0;
 }
 [data-module=c-formBlock01] > .wrapper > .block.is-contents .area.is-actions {
@@ -1029,7 +1029,7 @@ form.is-inline {
   gap: 10px;
   flex-wrap: wrap;
 }
-[data-module=c-formBlock01] > .wrapper > .block.is-contents .btn {
+[data-module=c-formBlock01] > .wrapper > .block.is-contents :where([data-module=c-formBlock01] > .wrapper > .block.is-contents) .btn {
   display: inline-block;
   padding: 8px 16px;
   border: 1px solid #cbd5e1;
@@ -1042,31 +1042,31 @@ form.is-inline {
   text-decoration: none;
   line-height: 1.4;
 }
-[data-module=c-formBlock01] > .wrapper > .block.is-contents .btn:hover {
+[data-module=c-formBlock01] > .wrapper > .block.is-contents :where([data-module=c-formBlock01] > .wrapper > .block.is-contents) .btn:hover {
   background: #f1f5f9;
   text-decoration: none;
 }
-[data-module=c-formBlock01] > .wrapper > .block.is-contents .btn.is-primary {
+[data-module=c-formBlock01] > .wrapper > .block.is-contents :where([data-module=c-formBlock01] > .wrapper > .block.is-contents) .btn.is-primary {
   background: #3C8CFD;
   border-color: #3C8CFD;
   color: #fff;
 }
-[data-module=c-formBlock01] > .wrapper > .block.is-contents .btn.is-primary:hover {
+[data-module=c-formBlock01] > .wrapper > .block.is-contents :where([data-module=c-formBlock01] > .wrapper > .block.is-contents) .btn.is-primary:hover {
   background: #1d4ed8;
 }
-[data-module=c-formBlock01] > .wrapper > .block.is-contents .btn.is-danger {
+[data-module=c-formBlock01] > .wrapper > .block.is-contents :where([data-module=c-formBlock01] > .wrapper > .block.is-contents) .btn.is-danger {
   background: #dc2626;
   border-color: #dc2626;
   color: #fff;
 }
-[data-module=c-formBlock01] > .wrapper > .block.is-contents .btn.is-danger:hover {
+[data-module=c-formBlock01] > .wrapper > .block.is-contents :where([data-module=c-formBlock01] > .wrapper > .block.is-contents) .btn.is-danger:hover {
   background: #b91c1c;
 }
-[data-module=c-formBlock01] > .wrapper > .block.is-contents .btn.is-sm {
+[data-module=c-formBlock01] > .wrapper > .block.is-contents :where([data-module=c-formBlock01] > .wrapper > .block.is-contents) .btn.is-sm {
   padding: 4px 10px;
   font-size: 13px;
 }
-[data-module=c-formBlock01] > .wrapper > .block.is-contents .btn.is-icon {
+[data-module=c-formBlock01] > .wrapper > .block.is-contents :where([data-module=c-formBlock01] > .wrapper > .block.is-contents) .btn.is-icon {
   flex-shrink: 0;
   padding: 8px 10px;
   line-height: 1;
@@ -1385,6 +1385,10 @@ body.is-field-type-modal-open {
   gap: 12px;
   flex-wrap: wrap;
   margin-bottom: 6px;
+}
+[data-module=c-inputSet01] > .wrapper > .block.is-contents > .area.is-title > .label.is-bold,
+[data-module=c-inputSet01] > .wrapper > .block.is-contents > .block.is-title > .label.is-bold {
+  font-size: 10px;
 }
 
 .m-badge01 {
