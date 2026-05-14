@@ -1134,7 +1134,7 @@ form.is-inline {
   }
 
   .c-formEditor__item > .wrapper > .block.is-body {
-    padding: 0 16px 16px;
+    padding: 16px;
   }
 
   .c-formEditor__itemBody > .wrapper > .block.is-contents + .block.is-contents {
@@ -1203,6 +1203,11 @@ form.is-inline {
   .c-formEditor__validationControls > [data-target="c-formEditor__regex"] {
     flex: 1 1 220px;
     min-width: 220px;
+    transition: opacity 0.2s ease;
+
+    &:has([data-target="c-formEditor__regexKind"]:disabled) {
+      opacity: 0.4;
+    }
   }
 
   .c-formEditor__checkboxLimit {
@@ -1255,6 +1260,13 @@ form.is-inline {
     flex: 1 1 200px;
     max-width: 100%;
     min-width: 140px;
+  }
+
+  [data-target="c-formEditor__regexKind"]:disabled,
+  [data-target="c-formEditor__regexCustomInput"]:disabled {
+    background: #f8fafc;
+    border-color: #e5e7eb;
+    color: #94a3b8;
   }
 
   .c-formEditor__regexCustom {

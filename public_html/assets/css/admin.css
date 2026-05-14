@@ -1088,7 +1088,7 @@ form.is-inline {
   background: #f8fafc;
 }
 [data-module=m-formBuilder01] .c-formEditor__item > .wrapper > .block.is-body {
-  padding: 0 16px 16px;
+  padding: 16px;
 }
 [data-module=m-formBuilder01] .c-formEditor__itemBody > .wrapper > .block.is-contents + .block.is-contents {
   margin-top: 20px;
@@ -1143,6 +1143,10 @@ form.is-inline {
 [data-module=m-formBuilder01] .c-formEditor__validationControls > [data-target=c-formEditor__regex] {
   flex: 1 1 220px;
   min-width: 220px;
+  transition: opacity 0.2s ease;
+}
+[data-module=m-formBuilder01] .c-formEditor__validationControls > [data-target=c-formEditor__regex]:has([data-target=c-formEditor__regexKind]:disabled) {
+  opacity: 0.4;
 }
 [data-module=m-formBuilder01] .c-formEditor__checkboxLimit {
   margin-top: 8px;
@@ -1186,6 +1190,12 @@ form.is-inline {
   flex: 1 1 200px;
   max-width: 100%;
   min-width: 140px;
+}
+[data-module=m-formBuilder01] [data-target=c-formEditor__regexKind]:disabled,
+[data-module=m-formBuilder01] [data-target=c-formEditor__regexCustomInput]:disabled {
+  background: #f8fafc;
+  border-color: #e5e7eb;
+  color: #94a3b8;
 }
 [data-module=m-formBuilder01] .c-formEditor__regexCustom {
   flex: 2 1 220px;
