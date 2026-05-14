@@ -499,9 +499,19 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                                     <textarea name="mail_template_admin" rows="6"><?= e($form['mail_template_admin']) ?></textarea>
                                 </div>
                             </div>
-                            <div class="area is-help">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="block is-field">
+                <div data-module="c-inputSet01">
+                    <div class="wrapper">
+                        <div class="block is-contents">
+                            <div class="block is-title">
+                                <label class="label" data-module="m-boldTitle01">使用可能な変数</label>
+                            </div>
+                            <div class="block is-field">
                                 <div class="c-copyTagList01">
-                                    <p class="text is-help">使用可能な変数:</p>
                                     <div class="c-copyTagList01__items">
                                         <button type="button" class="c-copyTagList01__tag" data-copy-text="{{field_key}}"><code>{{field_key}}</code></button>
                                         <button type="button" class="c-copyTagList01__tag" data-copy-text="{{__all__}}"><code>{{__all__}}</code></button>
@@ -576,9 +586,19 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                                     <textarea name="reply_template" rows="6"><?= e($form['reply_template']) ?></textarea>
                                 </div>
                             </div>
-                            <div class="area is-help">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="block is-field">
+                <div data-module="c-inputSet01">
+                    <div class="wrapper">
+                        <div class="block is-contents">
+                            <div class="block is-title">
+                                <label class="label" data-module="m-boldTitle01">使用可能な変数</label>
+                            </div>
+                            <div class="block is-field">
                                 <div class="c-copyTagList01">
-                                    <p class="text is-help">使用可能な変数:</p>
                                     <div class="c-copyTagList01__items">
                                         <button type="button" class="c-copyTagList01__tag" data-copy-text="{{field_key}}"><code>{{field_key}}</code></button>
                                         <button type="button" class="c-copyTagList01__tag" data-copy-text="{{__all__}}"><code>{{__all__}}</code></button>
