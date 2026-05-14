@@ -317,15 +317,19 @@
         Array.prototype.forEach.call(select.options, function (option) {
             var allow = true;
             if (typeValue === 'checkbox') {
-                allow = option.value === FB_REGEX_CUSTOM || option.value === FB_REGEX_CHECKBOX_LIMIT;
+                allow = option.value === '' || option.value === FB_REGEX_CUSTOM || option.value === FB_REGEX_CHECKBOX_LIMIT;
+            } else if (typeValue === 'radio' || typeValue === 'select') {
+                allow = option.value === '';
             }
             option.hidden = !allow;
             option.disabled = !allow;
         });
         if (typeValue === 'checkbox') {
-            if (select.value !== FB_REGEX_CUSTOM && select.value !== FB_REGEX_CHECKBOX_LIMIT) {
-                select.value = FB_REGEX_CUSTOM;
+            if (select.value !== '' && select.value !== FB_REGEX_CUSTOM && select.value !== FB_REGEX_CHECKBOX_LIMIT) {
+                select.value = '';
             }
+        } else if (typeValue === 'radio' || typeValue === 'select') {
+            select.value = '';
         } else if (select.value === FB_REGEX_CHECKBOX_LIMIT) {
             select.value = '';
         }
@@ -743,7 +747,7 @@
                 }
             }
             if (regexWrap) {
-                var hideRegex = v === 'radio' || v === 'select';
+                var hideRegex = false;
                 regexWrap.style.display = hideRegex ? 'none' : '';
                 var isRequiredChecked = requiredToggle && requiredToggle.checked;
                 if (regexKind) {

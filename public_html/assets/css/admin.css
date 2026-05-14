@@ -456,8 +456,8 @@ body.l-adminShell01 a:hover {
   display: inline-flex !important;
   flex-direction: column !important;
   align-items: center !important;
-  gap: 4px !important;
-  padding: 8px 12px;
+  gap: 0px !important;
+  padding: 4px 10px;
   font-size: 11px;
   background: #efefef;
   border: 1px solid #ccc;
@@ -476,7 +476,8 @@ body.l-adminShell01 a:hover {
 [data-module=m-requiredCheck01] label span,
 [data-module=m-requiredCheck01] .label span,
 [data-module=m-requiredCheck01] .label.is-choice span {
-  margin-left: 0;
+  font-size: 9px;
+  line-height: 1;
 }
 [data-module=m-requiredCheck01] label:has(input:checked),
 [data-module=m-requiredCheck01] .label:has(input:checked),
@@ -1248,7 +1249,7 @@ body.is-field-type-modal-open {
 [data-module=m-formBuilder01] .c-formEditor__validationControls {
   display: flex;
   align-items: flex-start;
-  gap: 12px;
+  gap: 6px;
   flex-wrap: wrap;
 }
 [data-module=m-formBuilder01] .c-formEditor__required {

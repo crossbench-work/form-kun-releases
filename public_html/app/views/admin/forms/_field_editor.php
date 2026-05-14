@@ -129,14 +129,14 @@ if (empty($f['required']) || in_array($f['type'], ['radio', 'select'], true)) {
                                                                             <span>必須</span>
                                                                         </label>
                                                                     </div>
-                                                                    <div data-target="c-formEditor__regex" <?= in_array($f['type'], ['radio', 'select'], true) ? 'style="display:none"' : '' ?>>
+                                                                    <div data-target="c-formEditor__regex">
                                                                         <div class="c-formEditor__regexList">
                                                                             <?php
                                                                             if ($f['type'] === 'checkbox' && !empty($f['checkbox_limit_enabled'])) {
                                                                                 $selVal = $FB_REGEX_CHECKBOX_LIMIT;
                                                                                 $customVal = '';
                                                                             } elseif ($f['type'] === 'checkbox') {
-                                                                                $selVal = $FB_REGEX_CUSTOM;
+                                                                                $selVal = $rp !== '' ? $FB_REGEX_CUSTOM : '';
                                                                                 $customVal = ($rp !== '' && !array_key_exists($rp, $regexPresetChoices)) ? $rp : '';
                                                                             } elseif ($rp === '') {
                                                                                 $selVal = '';
@@ -155,7 +155,10 @@ if (empty($f['required']) || in_array($f['type'], ['radio', 'select'], true)) {
                                                                                 <div data-module="m-input01">
                                                                                     <select data-target="c-formEditor__regexKind" aria-label="入力チェックの種類" <?= empty($f['required']) ? 'disabled' : '' ?>>
                                                                                         <?php foreach ($regexPresetChoices as $patVal => $patLabel): ?>
-                                                                                            <?php if ($f['type'] === 'checkbox' && $patVal !== $FB_REGEX_CUSTOM): ?>
+                                                                                            <?php if ($f['type'] === 'checkbox' && !in_array($patVal, ['', $FB_REGEX_CUSTOM], true)): ?>
+                                                                                                <?php continue; ?>
+                                                                                            <?php endif; ?>
+                                                                                            <?php if (in_array($f['type'], ['radio', 'select'], true) && $patVal !== ''): ?>
                                                                                                 <?php continue; ?>
                                                                                             <?php endif; ?>
                                                                                             <option value="<?= e($patVal) ?>" <?= $selVal === $patVal ? 'selected' : '' ?>><?= e($patLabel) ?></option>
