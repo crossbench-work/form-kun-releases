@@ -2,9 +2,10 @@
     <div class="wrapper">
         <?php $confirmBlocks = decode_form_description_blocks($form['confirm_message'] ?? '', true); ?>
         <?php $previewMode = !empty($previewMode); ?>
+        <?php $confirmPageTitle = trim((string) ($form['confirm_page_title'] ?? '')) !== '' ? (string) $form['confirm_page_title'] : '入力内容のご確認'; ?>
         <?php $submitButtonText = trim((string) ($form['submit_button_text'] ?? '')) !== '' ? (string) $form['submit_button_text'] : '送信する'; ?>
         <?php $backButtonText = trim((string) ($form['back_button_text'] ?? '')) !== '' ? (string) $form['back_button_text'] : '入力に戻る'; ?>
-        <h1 class="title">入力内容のご確認</h1>
+        <h1 class="title"><?= e($confirmPageTitle) ?></h1>
         <?= render_form_description_blocks_at($confirmBlocks, 0) ?>
 
 <dl class="list is-confirm">

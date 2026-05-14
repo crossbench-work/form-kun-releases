@@ -133,10 +133,6 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                         <div class="block is-contents">
                             <div class="block is-title">
                                 <label class="label" data-module="m-boldTitle01" for="title">タイトル <span data-module="m-required01" data-type="required">必須</span></label>
-                                <label class="label is-choice fb-basic-display-toggle">
-                                    <input type="checkbox" name="show_title" value="1" <?= !empty($form['show_title']) ? 'checked' : '' ?>>
-                                    表示する
-                                </label>
                             </div>
                             <div class="block is-field">
                                 <div data-module="m-input01">
@@ -206,6 +202,22 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                         formtarget="_blank"
                         formnovalidate
                     >プレビュー</button>
+                </div>
+            </div>
+            <div class="block is-field">
+                <div data-module="c-inputSet01">
+                    <div class="wrapper">
+                        <div class="block is-contents">
+                            <div class="block is-title">
+                                <label class="label" data-module="m-boldTitle01" for="input_page_title">タイトル</label>
+                            </div>
+                            <div class="block is-field">
+                                <div data-module="m-input01">
+                                    <input type="text" id="input_page_title" name="input_page_title" value="<?= e($form['input_page_title'] ?? '') ?>">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <?php $renderDescriptionEditor('description_blocks', $descriptionBlocks, 'input'); ?>
@@ -281,6 +293,22 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                     >プレビュー</button>
                 </div>
             </div>
+            <div class="block is-field">
+                <div data-module="c-inputSet01">
+                    <div class="wrapper">
+                        <div class="block is-contents">
+                            <div class="block is-title">
+                                <label class="label" data-module="m-boldTitle01" for="confirm_page_title">タイトル</label>
+                            </div>
+                            <div class="block is-field">
+                                <div data-module="m-input01">
+                                    <input type="text" id="confirm_page_title" name="confirm_page_title" value="<?= e($form['confirm_page_title'] ?? '') ?>">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <?php $renderDescriptionEditor('confirm_blocks', $confirmBlocks, 'simple'); ?>
                         </div>
                     </div>
@@ -343,6 +371,22 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                         formtarget="_blank"
                         formnovalidate
                     >プレビュー</button>
+                </div>
+            </div>
+            <div class="block is-field">
+                <div data-module="c-inputSet01">
+                    <div class="wrapper">
+                        <div class="block is-contents">
+                            <div class="block is-title">
+                                <label class="label" data-module="m-boldTitle01" for="thanks_page_title">タイトル</label>
+                            </div>
+                            <div class="block is-field">
+                                <div data-module="m-input01">
+                                    <input type="text" id="thanks_page_title" name="thanks_page_title" value="<?= e($form['thanks_page_title'] ?? '') ?>">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <?php $renderDescriptionEditor('thanks_blocks', $thanksBlocks, 'simple'); ?>

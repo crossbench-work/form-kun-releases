@@ -46,6 +46,8 @@ class SchemaPatch
 
             self::ensureFormsDisplayFlags();
 
+            self::ensureFormsPageTitles();
+
             $hasTbl = Database::fetchOne(
                 'SELECT COUNT(*) AS c FROM information_schema.TABLES
                  WHERE TABLE_SCHEMA = ? AND TABLE_NAME = ?',
@@ -305,6 +307,72 @@ class SchemaPatch
             }
         } catch (\Throwable $e) {
             error_log('[formkun] SchemaPatch forms display flags: ' . $e->getMessage());
+        }
+    }
+
+    /**
+     * forms に入力 / 確認 / 完了画面ごとのタイトル列を追加。
+     */
+    public static function ensureFormsPageTitles(): void
+    {
+        try {
+            $dbRow = Database::fetchOne('SELECT DATABASE() AS n');
+            $schema = (string) ($dbRow['n'] ?? '');
+            if ($schema === '') {
+                return;
+            }
+
+            $hasInputPageTitle = Database::fetchOne(
+                'SELECT COUNT(*) AS c FROM information_schema.COLUMNS
+                 WHERE TABLE_SCHEMA = ? AND TABLE_NAME = ? AND COLUMN_NAME = ?',
+                [$schema, 'forms', 'input_page_title']
+            );
+            if ((int) ($hasInputPageTitle['c'] ?? 0) === 0) {
+                Database::execute(
+                    'ALTER TABLE forms ADD COLUMN input_page_title VARCHAR(200) DEFAULT NULL AFTER title'
+                );
+            }
+
+            $hasConfirmPageTitle = Database::fetchOne(
+                'SELECT COUNT(*) AS c FROM information_schema.COLUMNS
+                 WHERE TABLE_SCHEMA = ? AND TABLE_NAME = ? AND COLUMN_NAME = ?',
+                [$schema, 'forms', 'confirm_page_title']
+            );
+            if ((int) ($hasConfirmPageTitle['c'] ?? 0) === 0) {
+                Database::execute(
+                    'ALTER TABLE forms ADD COLUMN confirm_page_title VARCHAR(200) DEFAULT NULL AFTER show_description'
+                );
+            }
+
+            $hasThanksPageTitle = Database::fetchOne(
+                'SELECT COUNT(*) AS c FROM information_schema.COLUMNS
+                 WHERE TABLE_SCHEMA = ? AND TABLE_NAME = ? AND COLUMN_NAME = ?',
+                [$schema, 'forms', 'thanks_page_title']
+            );
+            if ((int) ($hasThanksPageTitle['c'] ?? 0) === 0) {
+                Database::execute(
+                    'ALTER TABLE forms ADD COLUMN thanks_page_title VARCHAR(200) DEFAULT NULL AFTER confirm_message'
+                );
+            }
+
+            Database::execute(
+                "UPDATE forms
+                    SET input_page_title = title
+                  WHERE (input_page_title IS NULL OR input_page_title = '')
+                    AND title IS NOT NULL AND title <> ''"
+            );
+            Database::execute(
+                "UPDATE forms
+                    SET confirm_page_title = '入力内容のご確認'
+                  WHERE confirm_page_title IS NULL OR confirm_page_title = ''"
+            );
+            Database::execute(
+                "UPDATE forms
+                    SET thanks_page_title = '送信が完了しました'
+                  WHERE thanks_page_title IS NULL OR thanks_page_title = ''"
+            );
+        } catch (\Throwable $e) {
+            error_log('[formkun] SchemaPatch forms page titles: ' . $e->getMessage());
         }
     }
 }

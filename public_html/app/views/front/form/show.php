@@ -3,8 +3,9 @@
 <?php $descriptionEndPosition = count($fields) + 1; ?>
 <?php $previewMode = !empty($previewMode); ?>
 <?php $confirmButtonText = trim((string) ($form['confirm_button_text'] ?? '')) !== '' ? (string) $form['confirm_button_text'] : '入力内容を確認する'; ?>
-<?php if (!empty($form['show_title'])): ?>
-    <h1 class="title"><?= e($form['title']) ?></h1>
+<?php $inputPageTitle = trim((string) ($form['input_page_title'] ?? '')); ?>
+<?php if ($inputPageTitle !== ''): ?>
+    <h1 class="title"><?= e($inputPageTitle) ?></h1>
 <?php endif; ?>
 <?= render_form_description_blocks_at($descriptionBlocks, 0) ?>
 

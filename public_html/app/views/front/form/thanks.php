@@ -6,10 +6,11 @@
         <?php break; ?>
     <?php endif; ?>
 <?php endforeach; ?>
+<?php $thanksPageTitle = trim((string) ($form['thanks_page_title'] ?? '')) !== '' ? (string) $form['thanks_page_title'] : '送信が完了しました'; ?>
 <?php $thanksButtonText = trim((string) ($form['thanks_button_text'] ?? '')) !== '' ? (string) $form['thanks_button_text'] : 'トップへ戻る'; ?>
 <?php $thanksButtonUrl = trim((string) ($form['thanks_button_url'] ?? '')) !== '' ? (string) $form['thanks_button_url'] : '/'; ?>
 <section data-module="c-thanksSummary01">
-    <h1 class="title">送信が完了しました</h1>
+    <h1 class="title"><?= e($thanksPageTitle) ?></h1>
     <?= render_form_description_blocks_at($thanksBlocks, 0) ?>
 
 <?php if (!$hasThanksContent): ?>

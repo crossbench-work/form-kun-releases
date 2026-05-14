@@ -205,13 +205,16 @@ class FormController
         $form = [
             'slug'                 => trim((string) ($_POST['slug'] ?? '')),
             'title'                => trim((string) ($_POST['title'] ?? '')),
+            'input_page_title'     => trim((string) ($_POST['input_page_title'] ?? '')),
             'description'          => null,
-            'show_title'           => !empty($_POST['show_title']) ? 1 : 0,
+            'show_title'           => 0,
             'show_description'     => 0,
+            'confirm_page_title'   => trim((string) ($_POST['confirm_page_title'] ?? '')),
             'confirm_button_text'  => trim((string) ($_POST['confirm_button_text'] ?? '')),
             'submit_button_text'   => trim((string) ($_POST['submit_button_text'] ?? '')),
             'back_button_text'     => trim((string) ($_POST['back_button_text'] ?? '')),
             'confirm_message'      => null,
+            'thanks_page_title'    => trim((string) ($_POST['thanks_page_title'] ?? '')),
             'thanks_message'       => null,
             'thanks_button_text'   => trim((string) ($_POST['thanks_button_text'] ?? '')),
             'thanks_button_url'    => trim((string) ($_POST['thanks_button_url'] ?? '')),
@@ -228,11 +231,20 @@ class FormController
         if ($form['confirm_button_text'] === '') {
             $form['confirm_button_text'] = '入力内容を確認する';
         }
+        if ($form['input_page_title'] === '') {
+            $form['input_page_title'] = $form['title'];
+        }
+        if ($form['confirm_page_title'] === '') {
+            $form['confirm_page_title'] = '入力内容のご確認';
+        }
         if ($form['submit_button_text'] === '') {
             $form['submit_button_text'] = '送信する';
         }
         if ($form['back_button_text'] === '') {
             $form['back_button_text'] = '入力に戻る';
+        }
+        if ($form['thanks_page_title'] === '') {
+            $form['thanks_page_title'] = '送信が完了しました';
         }
         if ($form['thanks_button_text'] === '') {
             $form['thanks_button_text'] = 'トップへ戻る';
@@ -329,6 +341,12 @@ class FormController
         if ($form['title'] === '') {
             $errors[] = 'タイトルは必須です。';
         }
+        if (mb_strlen($form['input_page_title']) > 200) {
+            $errors[] = '入力画面のタイトルは200文字以内にしてください。';
+        }
+        if (mb_strlen($form['confirm_page_title']) > 200) {
+            $errors[] = '確認画面のタイトルは200文字以内にしてください。';
+        }
         if (!preg_match('/\A[a-zA-Z0-9_\-]{1,64}\z/', $form['slug'])) {
             $errors[] = 'スラッグは半角英数字・ハイフン・アンダースコアで64文字以内にしてください。';
         } elseif (!Form::isSlugAvailable($form['slug'], $excludeId)) {
@@ -345,6 +363,9 @@ class FormController
         }
         if (mb_strlen($form['thanks_button_text']) > 200) {
             $errors[] = '完了画面のボタンテキストは200文字以内にしてください。';
+        }
+        if (mb_strlen($form['thanks_page_title']) > 200) {
+            $errors[] = '完了画面のタイトルは200文字以内にしてください。';
         }
         if (mb_strlen($form['thanks_button_url']) > 500) {
             $errors[] = '完了画面のボタンURLは500文字以内にしてください。';
@@ -460,13 +481,16 @@ class FormController
             'id' => null,
             'slug' => '',
             'title' => '',
+            'input_page_title' => '',
             'description' => '',
-            'show_title' => 1,
+            'show_title' => 0,
             'show_description' => 1,
+            'confirm_page_title' => '入力内容のご確認',
             'confirm_button_text' => '入力内容を確認する',
             'submit_button_text' => '送信する',
             'back_button_text' => '入力に戻る',
             'confirm_message' => '',
+            'thanks_page_title' => '送信が完了しました',
             'thanks_message' => '',
             'thanks_button_text' => 'トップへ戻る',
             'thanks_button_url' => '/',
@@ -488,6 +512,12 @@ class FormController
      */
     private static function prepareFormForEdit(array $form): array
     {
+        $form['input_page_title'] = trim((string) ($form['input_page_title'] ?? '')) !== ''
+            ? (string) $form['input_page_title']
+            : trim((string) ($form['title'] ?? ''));
+        $form['confirm_page_title'] = trim((string) ($form['confirm_page_title'] ?? '')) !== ''
+            ? (string) $form['confirm_page_title']
+            : '入力内容のご確認';
         $form['confirm_button_text'] = trim((string) ($form['confirm_button_text'] ?? '')) !== ''
             ? (string) $form['confirm_button_text']
             : '入力内容を確認する';
@@ -497,6 +527,9 @@ class FormController
         $form['back_button_text'] = trim((string) ($form['back_button_text'] ?? '')) !== ''
             ? (string) $form['back_button_text']
             : '入力に戻る';
+        $form['thanks_page_title'] = trim((string) ($form['thanks_page_title'] ?? '')) !== ''
+            ? (string) $form['thanks_page_title']
+            : '送信が完了しました';
         $form['thanks_button_text'] = trim((string) ($form['thanks_button_text'] ?? '')) !== ''
             ? (string) $form['thanks_button_text']
             : 'トップへ戻る';
