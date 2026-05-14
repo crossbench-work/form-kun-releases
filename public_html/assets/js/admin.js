@@ -541,6 +541,18 @@
         }
     }
 
+    /** 公開フォームで非表示の項目は編集本文を操作不能にする（送信値は維持。ヘッダーの表示切替・削除・並べ替えは有効のまま）。 */
+    function syncFieldItemHiddenState(li) {
+        var visibilityToggle = li.querySelector('[data-name="visible"]');
+        var body = li.querySelector('.c-formEditor__itemBody');
+        if (!visibilityToggle || !body) return;
+        var off = !visibilityToggle.checked;
+        li.classList.toggle('is-field-hidden', off);
+        if ('inert' in HTMLElement.prototype) {
+            body.inert = off;
+        }
+    }
+
     function updateFieldSummary(li) {
         var labelInp = li.querySelector('[data-target="c-formEditor__labelInput"]');
         var typeSel = li.querySelector('[data-target="c-formEditor__type"]');
@@ -1002,6 +1014,7 @@
         }
         if (visibilityToggle) {
             visibilityToggle.addEventListener('change', function () {
+                syncFieldItemHiddenState(li);
                 updateFieldSummary(li);
             });
         }
@@ -1036,6 +1049,7 @@
                 refreshAllDescriptionPositionOptions();
             });
         }
+        syncFieldItemHiddenState(li);
         updateFieldSummary(li);
     }
 

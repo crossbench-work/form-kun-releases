@@ -1312,6 +1312,16 @@ form.is-inline {
   .c-formEditor__item.is-collapsed > .wrapper > .block.is-body {
     display: none;
   }
+
+  .c-formEditor__item.is-field-hidden .c-formEditor__itemHeader {
+    opacity: 0.92;
+  }
+
+  .c-formEditor__item.is-field-hidden .c-formEditor__itemBody {
+    opacity: 0.58;
+    pointer-events: none;
+    user-select: none;
+  }
 }
 
 [data-module="c-htmlInputEditor01"] {
