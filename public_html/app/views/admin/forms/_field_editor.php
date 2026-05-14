@@ -23,7 +23,7 @@ if (empty($f['required']) || in_array($f['type'], ['radio', 'select'], true)) {
     $summaryRegex = 'カスタム';
 }
 ?>
-<div class="c-formEditor__item is-collapsed" data-index="<?= $idx ?>" data-field-item="1">
+<div class="c-formEditor__item is-collapsed<?= (array_key_exists('visible', $f) && empty($f['visible'])) ? ' is-editor-item-hidden' : '' ?>" data-index="<?= $idx ?>" data-field-item="1">
     <div class="wrapper">
         <div class="block is-header">
                 <div class="c-formEditor__itemHeader">

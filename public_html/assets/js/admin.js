@@ -332,6 +332,21 @@
         }
     }
 
+    /** 項目設定・説明文の .c-formEditor__item 共通: 公開非表示なら is-editor-item-hidden + 本文 inert（c-formEditorList01 の SCSS と対。disabled は付けない）。 */
+    function syncFormEditorItemPublicHidden(item) {
+        if (!item || !item.classList.contains('c-formEditor__item')) return;
+        var visibilityToggle = item.querySelector(
+            '.c-formEditorSummary01__visibility [data-name="visible"], .c-descriptionEditorSummary01__visibility [data-name="visible"]'
+        );
+        var body = item.querySelector('.c-formEditor__itemBody');
+        if (!visibilityToggle || !body) return;
+        var off = !visibilityToggle.checked;
+        item.classList.toggle('is-editor-item-hidden', off);
+        if ('inert' in HTMLElement.prototype) {
+            body.inert = off;
+        }
+    }
+
     function reindexDescriptionBlocks(editor) {
         var descriptionList = getDescriptionList(editor);
         if (!descriptionList) return;
@@ -364,7 +379,7 @@
                 if (textareaLabel) textareaLabel.setAttribute('for', textarea.id);
             }
             updateDescriptionSummary(block);
-            syncDescriptionBlockHiddenState(block);
+            syncFormEditorItemPublicHidden(block);
         });
     }
 
@@ -419,19 +434,6 @@
         descriptionList.dataset.fbSortable = '1';
     }
 
-    /** 説明文ブロックが公開非表示のとき: カード全体を均一に弱表示し、本文に inert（項目設定の is-field-hidden とは別見た目）。 */
-    function syncDescriptionBlockHiddenState(block) {
-        if (!block || !block.hasAttribute('data-description-block')) return;
-        var visibilityToggle = block.querySelector('[data-name="visible"]');
-        var body = block.querySelector('.c-formEditor__itemBody');
-        if (!visibilityToggle || !body) return;
-        var off = !visibilityToggle.checked;
-        block.classList.toggle('is-description-hidden', off);
-        if ('inert' in HTMLElement.prototype) {
-            body.inert = off;
-        }
-    }
-
     function bindDescriptionBlock(editor, block) {
         var remove = block.querySelector('[data-target="fb-description-remove"]');
         var select = block.querySelector('.fb-description-position');
@@ -469,14 +471,14 @@
         }
         if (visibilityToggle) {
             visibilityToggle.addEventListener('change', function () {
-                syncDescriptionBlockHiddenState(block);
+                syncFormEditorItemPublicHidden(block);
                 var label = visibilityToggle.closest('.c-descriptionEditorSummary01__visibility');
                 if (label) {
                     label.title = visibilityToggle.checked ? '表示中' : '非表示';
                 }
             });
         }
-        syncDescriptionBlockHiddenState(block);
+        syncFormEditorItemPublicHidden(block);
     }
 
     function createDescriptionBlock(editor, position) {
@@ -557,19 +559,6 @@
         }
     }
 
-    /** 公開フォームで非表示の項目は編集本文を操作不能にする（送信値は維持。ヘッダーの表示切替・削除・並べ替えは有効のまま）。 */
-    function syncFieldItemHiddenState(li) {
-        var visibilityToggle = li.querySelector('[data-name="visible"]');
-        var body = li.querySelector('.c-formEditor__itemBody');
-        if (!visibilityToggle || !body) return;
-        var off = !visibilityToggle.checked;
-        li.classList.toggle('is-field-hidden', off);
-        if ('inert' in HTMLElement.prototype) {
-            body.inert = off;
-        }
-    }
-
-    function updateFieldSummary(li) {
         var labelInp = li.querySelector('[data-target="c-formEditor__labelInput"]');
         var typeSel = li.querySelector('[data-target="c-formEditor__type"]');
         var requiredToggle = li.querySelector('[data-target="c-formEditor__required"]');
@@ -684,6 +673,7 @@
             var numEl = li.querySelector('[data-target="c-formEditor__summaryIndex"]');
             if (numEl) numEl.textContent = String(i + 1);
             updateFieldSummary(li);
+            syncFormEditorItemPublicHidden(li);
         });
         syncAllRegexRows();
         refreshAllDescriptionPositionOptions();
@@ -1030,7 +1020,7 @@
         }
         if (visibilityToggle) {
             visibilityToggle.addEventListener('change', function () {
-                syncFieldItemHiddenState(li);
+                syncFormEditorItemPublicHidden(li);
                 updateFieldSummary(li);
             });
         }
@@ -1065,7 +1055,7 @@
                 refreshAllDescriptionPositionOptions();
             });
         }
-        syncFieldItemHiddenState(li);
+        syncFormEditorItemPublicHidden(li);
         updateFieldSummary(li);
     }
 

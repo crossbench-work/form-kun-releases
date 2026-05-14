@@ -1186,14 +1186,6 @@ form.is-inline {
   background: #f1f5f9;
   color: #475569;
 }
-[data-module=c-descriptionEditor01] .c-formEditor__item[data-description-block].is-description-hidden {
-  opacity: 0.72;
-  filter: grayscale(0.06);
-}
-[data-module=c-descriptionEditor01] .c-formEditor__item[data-description-block].is-description-hidden .c-formEditor__itemBody {
-  pointer-events: none;
-  user-select: none;
-}
 
 [data-module=c-formEditorList01] > .wrapper > .block.is-contents {
   display: flex;
@@ -1286,11 +1278,11 @@ form.is-inline {
 [data-module=c-formEditorList01] .c-formEditor__item.is-collapsed > .wrapper > .block.is-body {
   display: none;
 }
-[data-module=c-formEditorList01] .c-formEditor__item.is-field-hidden .c-formEditor__itemHeader {
-  opacity: 0.92;
+[data-module=c-formEditorList01] .c-formEditor__item.is-editor-item-hidden {
+  opacity: 0.4;
+  filter: grayscale(0.06);
 }
-[data-module=c-formEditorList01] .c-formEditor__item.is-field-hidden .c-formEditor__itemBody {
-  opacity: 0.58;
+[data-module=c-formEditorList01] .c-formEditor__item.is-editor-item-hidden .c-formEditor__itemBody {
   pointer-events: none;
   user-select: none;
 }

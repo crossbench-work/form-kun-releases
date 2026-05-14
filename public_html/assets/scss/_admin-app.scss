@@ -1199,16 +1199,6 @@ form.is-inline {
     color: #475569;
   }
 
-  // 公開非表示: ヘッダーだけ薄くするのではなくカード全体を均一に弱表示し、本文は inert で操作不能（admin.js）
-  .c-formEditor__item[data-description-block].is-description-hidden {
-    opacity: 0.72;
-    filter: grayscale(0.06);
-
-    .c-formEditor__itemBody {
-      pointer-events: none;
-      user-select: none;
-    }
-  }
 }
 
 // --- c-formEditor リストシェル（項目設定・説明文で同一の data-module / クラス c-formEditorList01）---
@@ -1324,14 +1314,15 @@ form.is-inline {
     display: none;
   }
 
-  .c-formEditor__item.is-field-hidden .c-formEditor__itemHeader {
-    opacity: 0.92;
-  }
+  // 公開非表示（項目・説明文共通）: c-formEditorList01 配下で同一クラス。カード全体を弱表示し本文は inert（admin.js）
+  .c-formEditor__item.is-editor-item-hidden {
+    opacity: 0.4;
+    filter: grayscale(0.06);
 
-  .c-formEditor__item.is-field-hidden .c-formEditor__itemBody {
-    opacity: 0.58;
-    pointer-events: none;
-    user-select: none;
+    .c-formEditor__itemBody {
+      pointer-events: none;
+      user-select: none;
+    }
   }
 }
 
