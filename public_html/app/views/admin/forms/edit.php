@@ -41,7 +41,7 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                                                 $positionInputId = $blockId . '-position';
                                                 $htmlInputId = $blockId . '-html';
                                                 ?>
-                                                <div class="c-formEditor__item is-collapsed" data-description-block data-index="<?= $i ?>">
+                                                <div class="c-formEditor__item is-collapsed<?= empty($block['visible']) ? ' is-description-hidden' : '' ?>" data-description-block data-index="<?= $i ?>">
                                                     <input type="hidden" name="<?= e($namePrefix) ?>[<?= $i ?>][id]" value="<?= e($blockId) ?>" data-name="id">
                                                     <div class="wrapper">
                                                         <div class="block is-header">

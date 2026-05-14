@@ -1198,6 +1198,17 @@ form.is-inline {
     background: #f1f5f9;
     color: #475569;
   }
+
+  // 公開非表示: ヘッダーだけ薄くするのではなくカード全体を均一に弱表示し、本文は inert で操作不能（admin.js）
+  .c-formEditor__item[data-description-block].is-description-hidden {
+    opacity: 0.72;
+    filter: grayscale(0.06);
+
+    .c-formEditor__itemBody {
+      pointer-events: none;
+      user-select: none;
+    }
+  }
 }
 
 // --- c-formEditor リストシェル（項目設定・説明文で同一の data-module / クラス c-formEditorList01）---

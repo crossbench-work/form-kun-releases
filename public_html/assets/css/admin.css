@@ -1186,6 +1186,14 @@ form.is-inline {
   background: #f1f5f9;
   color: #475569;
 }
+[data-module=c-descriptionEditor01] .c-formEditor__item[data-description-block].is-description-hidden {
+  opacity: 0.72;
+  filter: grayscale(0.06);
+}
+[data-module=c-descriptionEditor01] .c-formEditor__item[data-description-block].is-description-hidden .c-formEditor__itemBody {
+  pointer-events: none;
+  user-select: none;
+}
 
 [data-module=c-formEditorList01] > .wrapper > .block.is-contents {
   display: flex;
