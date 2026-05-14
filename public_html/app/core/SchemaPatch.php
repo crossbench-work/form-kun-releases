@@ -51,6 +51,7 @@ class SchemaPatch
             self::ensureFormsMailSettings();
 
             self::ensureAppSettingsTable();
+            self::ensureAppSettingsCreatedAtColumn();
 
             $hasTbl = Database::fetchOne(
                 'SELECT COUNT(*) AS c FROM information_schema.TABLES
@@ -520,11 +521,50 @@ class SchemaPatch
                 'CREATE TABLE app_settings (
                     setting_key VARCHAR(64) NOT NULL PRIMARY KEY,
                     setting_value TEXT NOT NULL,
+                    created_at DATETIME NOT NULL,
                     updated_at DATETIME NOT NULL
                 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci'
             );
         } catch (\Throwable $e) {
             error_log('[formkun] SchemaPatch app_settings: ' . $e->getMessage());
+        }
+    }
+
+    /**
+     * 旧定義の app_settings（created_at が無い 3 列のみ）に created_at を追加する。
+     */
+    private static function ensureAppSettingsCreatedAtColumn(): void
+    {
+        try {
+            $dbRow = Database::fetchOne('SELECT DATABASE() AS n');
+            $schema = (string) ($dbRow['n'] ?? '');
+            if ($schema === '') {
+                return;
+            }
+
+            $hasTbl = Database::fetchOne(
+                'SELECT COUNT(*) AS c FROM information_schema.TABLES
+                 WHERE TABLE_SCHEMA = ? AND TABLE_NAME = ?',
+                [$schema, 'app_settings']
+            );
+            if ((int) ($hasTbl['c'] ?? 0) === 0) {
+                return;
+            }
+
+            $hasCol = Database::fetchOne(
+                'SELECT COUNT(*) AS c FROM information_schema.COLUMNS
+                 WHERE TABLE_SCHEMA = ? AND TABLE_NAME = ? AND COLUMN_NAME = ?',
+                [$schema, 'app_settings', 'created_at']
+            );
+            if ((int) ($hasCol['c'] ?? 0) > 0) {
+                return;
+            }
+
+            Database::execute(
+                'ALTER TABLE app_settings ADD COLUMN created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP AFTER setting_value'
+            );
+        } catch (\Throwable $e) {
+            error_log('[formkun] SchemaPatch app_settings created_at: ' . $e->getMessage());
         }
     }
 }

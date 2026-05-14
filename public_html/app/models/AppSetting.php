@@ -23,9 +23,9 @@ class AppSetting
     {
         $now = date('Y-m-d H:i:s');
         Database::execute(
-            'INSERT INTO app_settings (setting_key, setting_value, updated_at) VALUES (?, ?, ?)
+            'INSERT INTO app_settings (setting_key, setting_value, created_at, updated_at) VALUES (?, ?, ?, ?)
              ON DUPLICATE KEY UPDATE setting_value = VALUES(setting_value), updated_at = VALUES(updated_at)',
-            [$key, $value, $now]
+            [$key, $value, $now, $now]
         );
     }
 }
