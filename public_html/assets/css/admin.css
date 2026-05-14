@@ -515,8 +515,8 @@ body.l-adminShell01 a:hover {
   background: #fff5f5;
   color: #dc2626;
   border-radius: 6px;
-  width: 32px;
-  height: 32px;
+  width: 24px;
+  height: 24px;
   padding: 0;
   display: inline-flex;
   align-items: center;
@@ -972,7 +972,7 @@ form.is-inline {
 .table th,
 .table td {
   text-align: left;
-  padding: 10px 12px;
+  padding: 6px 12px;
   vertical-align: middle;
 }
 .table th {
