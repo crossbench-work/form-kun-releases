@@ -451,7 +451,9 @@ body.l-adminShell01 a:hover {
 }
 
 [data-module=m-requiredCheck01] label {
-  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   padding: 8px 12px;
   font-size: 11px;
   background: #efefef;
