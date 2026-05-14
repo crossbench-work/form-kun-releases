@@ -916,6 +916,9 @@ form.is-inline {
   display: flex;
   justify-content: flex-start;
 }
+[data-module=c-htmlInputEditor01] > .wrapper > .block.is-toolbar .c-htmlInputEditor01__toggle {
+  font-size: 12px;
+}
 
 [data-module=c-inputSet01] > .wrapper > .block.is-contents > .area.is-title,
 [data-module=c-inputSet01] > .wrapper > .block.is-contents > .block.is-title {

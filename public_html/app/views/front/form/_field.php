@@ -148,7 +148,7 @@ $prefOptions = japanese_prefectures();
     </label>
 
     <?php if (!empty($field['help_text'])): ?>
-        <p class="text is-help"><?= nl2br(e($field['help_text'])) ?></p>
+        <div class="text is-help"><?= render_rich_text_html($field['help_text']) ?></div>
     <?php endif; ?>
 
     <?php switch ($type):

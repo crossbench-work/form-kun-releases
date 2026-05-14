@@ -292,6 +292,9 @@ class FormController
                 $checkboxMaxSelections = ($checkboxLimitEnabled && isset($f['checkbox_max_selections']) && $f['checkbox_max_selections'] !== '')
                     ? (int) $f['checkbox_max_selections']
                     : '';
+                $helpTextRaw = trim((string) ($f['help_text'] ?? ''));
+                $helpTextIsHtml = !empty($f['help_text_is_html']);
+                $helpText = $helpTextIsHtml ? sanitize_rich_text_html($helpTextRaw) : $helpTextRaw;
 
                 $fields[] = [
                     'field_key'       => $key,
@@ -300,7 +303,7 @@ class FormController
                     'required'        => $required,
                     'max_length'      => $maxLength,
                     'regex'           => $regexStored,
-                    'help_text'       => trim((string) ($f['help_text'] ?? '')),
+                    'help_text'       => $helpText,
                     'placeholder'     => $placeholder,
                     'pair_label_left' => trim((string) ($f['pair_label_left'] ?? '')),
                     'pair_label_right'=> trim((string) ($f['pair_label_right'] ?? '')),

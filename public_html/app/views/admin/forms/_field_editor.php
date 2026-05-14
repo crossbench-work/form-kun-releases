@@ -7,6 +7,7 @@ $isTextMulti = (($f['type'] ?? '') === 'text_multi');
 $multiTextItems = $isTextMulti
     ? \Models\FormField::decodeTextMultiItems($f['multi_text_items'] ?? ($f['options_json'] ?? null), true)
     : [];
+$helpTextIsHtml = preg_match('/<\s*\/?[a-zA-Z][^>]*>/', (string) ($f['help_text'] ?? '')) === 1;
 $summaryRequired = !empty($f['required']) ? '必須' : '任意';
 if (empty($f['required']) || in_array($f['type'], ['radio', 'select'], true)) {
     $summaryRegex = 'なし';
@@ -326,8 +327,20 @@ if (empty($f['required']) || in_array($f['type'], ['radio', 'select'], true)) {
                                         </div>
                                         <div class="block is-field">
                                             <label class="label" data-module="m-labelTitle01">備考</label>
-                                            <div data-module="m-input01">
-                                                <textarea name="fields[<?= $idx ?>][help_text]" rows="3"><?= e($f['help_text']) ?></textarea>
+                                            <div data-module="c-htmlInputEditor01" data-html-toggle-editor>
+                                                <div class="wrapper">
+                                                    <div class="block is-editor">
+                                                        <div data-module="m-input01">
+                                                            <textarea name="fields[<?= $idx ?>][help_text]" rows="3" data-target="c-htmlInputEditor01__textarea"><?= e($f['help_text']) ?></textarea>
+                                                        </div>
+                                                    </div>
+                                                    <div class="block is-toolbar">
+                                                        <label class="label is-choice c-htmlInputEditor01__toggle">
+                                                            <input type="checkbox" name="fields[<?= $idx ?>][help_text_is_html]" value="1" data-target="c-htmlInputEditor01__toggle" <?= $helpTextIsHtml ? 'checked' : '' ?>>
+                                                            HTMLで入力する
+                                                        </label>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                             <input type="hidden" name="fields[<?= $idx ?>][_remove]" value="0" data-target="c-formEditor__removeFlag">

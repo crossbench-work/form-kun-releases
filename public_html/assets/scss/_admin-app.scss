@@ -912,6 +912,10 @@ form.is-inline {
     > .block.is-toolbar {
       display: flex;
       justify-content: flex-start;
+
+      .c-htmlInputEditor01__toggle {
+        font-size: 12px;
+      }
     }
   }
 }
