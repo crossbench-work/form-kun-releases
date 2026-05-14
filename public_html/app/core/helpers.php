@@ -382,9 +382,10 @@ if (!function_exists('decode_form_description_blocks')) {
                         continue;
                     }
                     $rawContent = trim((string) ($item['html'] ?? ''));
+                    $labelTrim = trim((string) ($item['label'] ?? ''));
                     $isHtml = $resolveIsHtml($item, $rawContent);
                     $html = $normalizeBlockContent($rawContent, $isHtml);
-                    if ($html === '') {
+                    if ($html === '' && $labelTrim === '') {
                         continue;
                     }
                     $position = isset($item['position']) && is_numeric($item['position'])
@@ -397,7 +398,7 @@ if (!function_exists('decode_form_description_blocks')) {
                     }
                     $blocks[] = [
                         'id' => $id,
-                        'label' => trim((string) ($item['label'] ?? '')),
+                        'label' => $labelTrim,
                         'html' => $html,
                         'position' => $position,
                         'visible' => $visible,
@@ -441,7 +442,8 @@ if (!function_exists('encode_form_description_blocks')) {
             if ($isHtml) {
                 $html = sanitize_rich_text_html($html);
             }
-            if ($html === '') {
+            $labelTrim = trim((string) ($block['label'] ?? ''));
+            if ($html === '' && $labelTrim === '') {
                 continue;
             }
             $position = isset($block['position']) && is_numeric($block['position'])
@@ -453,7 +455,7 @@ if (!function_exists('encode_form_description_blocks')) {
             }
             $out[] = [
                 'id' => $id,
-                'label' => trim((string) ($block['label'] ?? '')),
+                'label' => $labelTrim,
                 'html' => $html,
                 'position' => $position,
                 'visible' => !empty($block['visible']) ? 1 : 0,

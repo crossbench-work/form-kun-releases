@@ -37,7 +37,6 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                                                 <?php
                                                 $blockId = (string) ($block['id'] ?? ($namePrefix . '-' . $i));
                                                 $labelValue = trim((string) ($block['label'] ?? ''));
-                                                $summaryLabel = $labelValue !== '' ? $labelValue : '説明文';
                                                 $labelInputId = $blockId . '-label';
                                                 $positionInputId = $blockId . '-position';
                                                 $htmlInputId = $blockId . '-html';
@@ -60,7 +59,7 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                                                                             <div class="c-descriptionEditorSummary01">
                                                                                 <div class="wrapper">
                                                                                     <div class="block is-contents">
-                                                                                        <p class="label" data-target="c-descriptionEditor__summaryLabel"><?= e($summaryLabel) ?></p>
+                                                                                        <p class="label" data-target="c-descriptionEditor__summaryLabel"<?= $labelValue === '' ? ' hidden' : '' ?>><?= $labelValue !== '' ? e($labelValue) : '' ?></p>
                                                                                         <p class="position" data-target="c-descriptionEditor__summaryPosition"><?= e(((int) ($block['position'] ?? 0)) === 0 ? '先頭' : '末尾') ?></p>
                                                                                     </div>
                                                                                 </div>
@@ -982,7 +981,7 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                                 <div class="c-descriptionEditorSummary01">
                                     <div class="wrapper">
                                         <div class="block is-contents">
-                                            <p class="label" data-target="c-descriptionEditor__summaryLabel">説明文</p>
+                                            <p class="label" data-target="c-descriptionEditor__summaryLabel" hidden></p>
                                             <p class="position" data-target="c-descriptionEditor__summaryPosition">先頭</p>
                                         </div>
                                     </div>

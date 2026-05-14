@@ -323,7 +323,8 @@
         var summaryPosition = block.querySelector('[data-target="c-descriptionEditor__summaryPosition"]');
         if (summaryLabel) {
             var value = labelInput ? labelInput.value.trim() : '';
-            summaryLabel.textContent = value || '説明文';
+            summaryLabel.textContent = value;
+            summaryLabel.hidden = !value;
         }
         if (summaryPosition && positionSelect) {
             var selected = positionSelect.selectedOptions && positionSelect.selectedOptions[0];

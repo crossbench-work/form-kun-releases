@@ -673,17 +673,17 @@ class FormController
         $form['mail_smtp_clear_password'] = !empty($form['mail_smtp_clear_password']) ? 1 : 0;
         $form['description_blocks'] = self::normalizeDescriptionBlocks(
             decode_form_description_blocks($form['description'] ?? '', !empty($form['show_description'])),
-            false,
+            true,
             'description'
         );
         $form['confirm_blocks'] = self::normalizeDescriptionBlocks(
             decode_form_description_blocks($form['confirm_message'] ?? '', true),
-            false,
+            true,
             'confirm'
         );
         $form['thanks_blocks'] = self::normalizeDescriptionBlocks(
             decode_form_description_blocks($form['thanks_message'] ?? '', true),
-            false,
+            true,
             'thanks'
         );
         return $form;
