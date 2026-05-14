@@ -924,6 +924,9 @@ body.is-field-type-modal-open {
   overflow: hidden;
 }
 
+[data-module=c-fieldTypeModal01][hidden] {
+  display: none;
+}
 [data-module=c-fieldTypeModal01] {
   position: fixed;
   inset: 0;

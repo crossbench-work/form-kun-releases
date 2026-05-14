@@ -925,6 +925,10 @@ body.is-field-type-modal-open {
 }
 
 [data-module="c-fieldTypeModal01"] {
+  &[hidden] {
+    display: none;
+  }
+
   position: fixed;
   inset: 0;
   z-index: 1200;
