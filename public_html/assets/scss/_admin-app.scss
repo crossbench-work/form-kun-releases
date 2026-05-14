@@ -244,9 +244,11 @@ body.l-adminShell01 {
 
 // --- 管理ヘッダー・メイン ---
 .c-adminHeader01 {
-  background: #1f2937;
+  width: calc(100% - 24px);
+  margin: 12px auto 0;
+  background: #fff;
   color: #fff;
-  height: 52px;
+  border-radius: 100px;
 
   & > .wrapper {
     max-width: none;
@@ -256,32 +258,32 @@ body.l-adminShell01 {
     > .block.is-contents {
       display: flex;
       align-items: center;
-      padding: 0 16px;
+      padding: 16px 32px;
       height: 100%;
-      gap: 24px;
+      gap: 32px;
     }
   }
 
   .area.is-logo {
     a {
-      color: #fff;
+      color: #333;
       font-weight: 700;
+      text-decoration: none;
     }
   }
 
   .area.is-nav {
     display: flex;
-    gap: 4px;
+    gap: 12px;
     flex: 1;
 
     a {
-      color: #cbd5e1;
-      padding: 8px 12px;
-      border-radius: 4px;
+      color: #333;
+      font-size: 13px;
+      line-height: 1;
 
       &:hover {
-        background: #374151;
-        color: #fff;
+        opacity: 0.8;
         text-decoration: none;
       }
     }
@@ -424,7 +426,6 @@ body.l-adminShell01 {
 // --- パネル・ツールバー ---
 [data-module="c-formBlock01"] {
   background: #fff;
-  border: 1px solid #e2e8f0;
   border-radius: 8px;
   margin-bottom: 16px;
 }
@@ -735,11 +736,17 @@ form.is-inline {
   border-collapse: collapse;
   font-size: 14px;
 
+  tr {
+    border-bottom: 1px solid #f7f7f7;
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+
   th,
   td {
     text-align: left;
     padding: 10px 12px;
-    border-bottom: 1px solid #e5e7eb;
     vertical-align: middle;
   }
 

@@ -27,7 +27,7 @@ $config = [
         // サブディレクトリ運用時はここに（例: '/formkun'）。ドキュメントルート直下なら ''
         'base_path'  => '',
         // 管理画面のサイト名表示
-        'admin_name' => 'フォーム管理システム',
+        'admin_name' => 'ふぉーむくん',
         // タイムゾーン
         'timezone'   => 'Asia/Tokyo',
         // ロケール
@@ -40,7 +40,7 @@ $config = [
         'transport' => 'mail',
         // From に使うメールアドレス（管理者通知や自動返信の差出人）
         'from_email' => 'noreply@example.com',
-        'from_name'  => 'フォーム管理システム',
+        'from_name'  => 'ふぉーむくん',
         'smtp' => [
             'enabled' => false,
             'host' => '127.0.0.1',
@@ -56,7 +56,7 @@ $config = [
             'allow_self_signed' => false,
         ],
         // パスワード再設定メール（{{reset_url}} を置換）
-        'password_reset_subject' => '[フォーム管理] パスワード再設定のご案内',
+        'password_reset_subject' => '[ふぉーむくん] パスワード再設定のご案内',
         'password_reset_body'    => "管理画面へログインするパスワードを再設定するには、次のURLにアクセスしてください（1時間以内）。\n\n{{reset_url}}\n\n心当たりがない場合はこのメールを無視してください。",
     ],
 

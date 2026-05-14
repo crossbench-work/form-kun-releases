@@ -124,7 +124,7 @@ class AuthController
         try {
             $token = PasswordReset::issueToken((int) $user['id']);
             $resetUrl = url('/admin/reset-password?token=' . rawurlencode($token));
-            $subject = (string) config('mail.password_reset_subject', '[フォーム管理] パスワード再設定');
+            $subject = (string) config('mail.password_reset_subject', '[ふぉーむくん] パスワード再設定');
             $bodyTpl = (string) config(
                 'mail.password_reset_body',
                 "管理画面のパスワードを再設定するには、次のURLにアクセスしてください（1時間以内）。\n\n{{reset_url}}\n\n心当たりがない場合はこのメールを無視してください。"
