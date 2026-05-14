@@ -253,27 +253,6 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                     <div class="wrapper">
                         <div class="block is-contents">
             <div class="block is-title">
-                <h2 data-module="m-largeTitle01">スパム対策</h2>
-            </div>
-            <div class="block is-field">
-                <label class="label is-choice">
-                    <input type="checkbox" name="captcha_enabled" value="1" <?= !empty($form['captcha_enabled']) ? 'checked' : '' ?>>
-                    スパム対策（簡易計算CAPTCHA）を有効にする
-                </label>
-            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div data-module="c-panel01">
-        <div class="wrapper">
-            <div class="block is-contents">
-                <div data-module="c-formBlock01">
-                    <div class="wrapper">
-                        <div class="block is-contents">
-            <div class="block is-title">
                 <h2 data-module="m-largeTitle01">ボタン設定</h2>
             </div>
             <div class="block is-field">

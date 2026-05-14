@@ -222,7 +222,7 @@ class FormController
             'reply_from_field_key' => trim((string) ($_POST['reply_from_field_key'] ?? '')),
             'reply_subject'        => trim((string) ($_POST['reply_subject'] ?? '')),
             'reply_template'       => (string) ($_POST['reply_template'] ?? ''),
-            'captcha_enabled'      => !empty($_POST['captcha_enabled']) ? 1 : 0,
+            'captcha_enabled'      => 1,
             'status'               => in_array($_POST['status'] ?? '', ['active','draft','archived'], true) ? $_POST['status'] : 'draft',
         ];
         if ($form['confirm_button_text'] === '') {
