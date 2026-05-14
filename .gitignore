@@ -10,6 +10,8 @@ node_modules/
 
 # ローカル専用設定（DB パスワード等）
 public_html/app/config.local.php
+# サーバー用の作業コピー（例から複製した config.local）
+public_html/app/_stg/config.local.php
 
 # アップロード保存先（yyyymm フォルダ内はコミットしない）
 public_html/uploads/[0-9][0-9][0-9][0-9][0-9][0-9]/
