@@ -239,21 +239,14 @@
         syncHtmlToggleEditor(editor);
     }
 
-    function sortDescriptionBlocks(editor) {
-        var descriptionList = getDescriptionList(editor);
-        if (!descriptionList) return;
-        var blocks = Array.prototype.slice.call(descriptionList.querySelectorAll('[data-description-block]'));
-        blocks
-            .sort(function (a, b) {
-                var aSelect = a.querySelector('.fb-description-position');
-                var bSelect = b.querySelector('.fb-description-position');
-                var aPos = aSelect ? parseInt(aSelect.value || '0', 10) : 0;
-                var bPos = bSelect ? parseInt(bSelect.value || '0', 10) : 0;
-                return aPos - bPos;
-            })
-            .forEach(function (block) {
-                descriptionList.appendChild(block);
-            });
+    function updateDescriptionSummary(block) {
+        if (!block) return;
+        var labelInput = block.querySelector('[data-target="c-descriptionEditor__labelInput"]');
+        var summaryLabel = block.querySelector('[data-target="c-descriptionEditor__summaryLabel"]');
+        if (summaryLabel) {
+            var value = labelInput ? labelInput.value.trim() : '';
+            summaryLabel.textContent = value || '説明文';
+        }
     }
 
     function reindexDescriptionBlocks(editor) {
@@ -267,6 +260,27 @@
                 if (!name) return;
                 el.setAttribute('name', prefix + '[' + i + '][' + name + ']');
             });
+            var idInput = block.querySelector('[data-name="id"]');
+            var blockId = idInput ? (idInput.value || (prefix.replace(/_blocks$/, '') + '-' + i)) : (prefix.replace(/_blocks$/, '') + '-' + i);
+            var labelInput = block.querySelector('[data-target="c-descriptionEditor__labelInput"]');
+            var labelLabel = labelInput ? labelInput.closest('[data-module="c-inputSet01"]').querySelector('.block.is-title label') : null;
+            var positionSelect = block.querySelector('.fb-description-position');
+            var positionLabel = positionSelect ? positionSelect.closest('[data-module="c-inputSet01"]').querySelector('.block.is-title label') : null;
+            var textarea = block.querySelector('[data-target="c-htmlInputEditor01__textarea"]');
+            var textareaLabel = textarea ? textarea.closest('[data-module="c-inputSet01"]').querySelector('.block.is-title label') : null;
+            if (labelInput) {
+                labelInput.id = blockId + '-label';
+                if (labelLabel) labelLabel.setAttribute('for', labelInput.id);
+            }
+            if (positionSelect) {
+                positionSelect.id = blockId + '-position';
+                if (positionLabel) positionLabel.setAttribute('for', positionSelect.id);
+            }
+            if (textarea) {
+                textarea.id = blockId + '-html';
+                if (textareaLabel) textareaLabel.setAttribute('for', textarea.id);
+            }
+            updateDescriptionSummary(block);
         });
     }
 
@@ -284,22 +298,84 @@
         });
     }
 
+    function refreshDescriptionSortable(editor) {
+        var descriptionList = getDescriptionList(editor);
+        if (!descriptionList || descriptionList.dataset.fbSortable !== '1' || typeof jQuery === 'undefined') return;
+        try {
+            jQuery(descriptionList).sortable('refresh');
+        } catch (e1) {}
+    }
+
+    function initDescriptionSortable(editor) {
+        var descriptionList = getDescriptionList(editor);
+        if (!descriptionList || typeof jQuery === 'undefined' || !jQuery.fn.sortable) return;
+        if (descriptionList.dataset.fbSortable === '1') {
+            refreshDescriptionSortable(editor);
+            return;
+        }
+        jQuery(descriptionList).sortable({
+            handle: '[data-target="c-descriptionEditor__dragHandle"]',
+            axis: 'y',
+            items: '> .c-formEditor__item',
+            placeholder: 'fb-sortable-placeholder',
+            tolerance: 'pointer',
+            cursor: 'grabbing',
+            opacity: 0.88,
+            scroll: true,
+            scrollSensitivity: 48,
+            scrollSpeed: 28,
+            forcePlaceholderSize: true,
+            delay: 0,
+            distance: 4,
+            zIndex: 9999,
+            update: function () {
+                reindexDescriptionBlocks(editor);
+            }
+        });
+        descriptionList.dataset.fbSortable = '1';
+    }
+
     function bindDescriptionBlock(editor, block) {
-        var remove = block.querySelector('.fb-description-remove');
+        var remove = block.querySelector('[data-target="fb-description-remove"]');
         var select = block.querySelector('.fb-description-position');
+        var labelInput = block.querySelector('[data-target="c-descriptionEditor__labelInput"]');
+        var visibilityToggle = block.querySelector('[data-name="visible"]');
+        var header = block.querySelector('.c-formEditor__itemHeader');
         bindHtmlToggleEditor(block.querySelector('[data-html-toggle-editor]'));
+        updateDescriptionSummary(block);
+        if (header && header.getAttribute('data-accordion-bound') !== '1') {
+            header.addEventListener('click', function (e) {
+                if (e.target.closest('.area.is-move') || e.target.closest('.area.is-delete') || e.target.closest('.c-descriptionEditorSummary01__visibility')) {
+                    return;
+                }
+                block.classList.toggle('is-collapsed');
+            });
+            header.setAttribute('data-accordion-bound', '1');
+        }
         if (remove) {
             remove.addEventListener('click', function () {
                 block.parentNode.removeChild(block);
                 reindexDescriptionBlocks(editor);
                 refreshDescriptionPositionOptions(editor);
+                refreshDescriptionSortable(editor);
             });
         }
         if (select) {
             select.addEventListener('change', function () {
                 select.setAttribute('data-value', select.value);
-                sortDescriptionBlocks(editor);
-                reindexDescriptionBlocks(editor);
+            });
+        }
+        if (labelInput) {
+            labelInput.addEventListener('input', function () {
+                updateDescriptionSummary(block);
+            });
+        }
+        if (visibilityToggle) {
+            visibilityToggle.addEventListener('change', function () {
+                var label = visibilityToggle.closest('.c-descriptionEditorSummary01__visibility');
+                if (label) {
+                    label.title = visibilityToggle.checked ? '表示中' : '非表示';
+                }
             });
         }
     }
@@ -972,6 +1048,8 @@
             descriptionList.querySelectorAll('[data-description-block]').forEach(function (block) {
                 bindDescriptionBlock(editor, block);
             });
+            initDescriptionSortable(editor);
+            reindexDescriptionBlocks(editor);
         }
         if (addButton && descriptionTemplate) {
             addButton.addEventListener('click', function () {
@@ -986,8 +1064,8 @@
                     select.value = String(position);
                     select.setAttribute('data-value', select.value);
                 }
-                sortDescriptionBlocks(editor);
                 reindexDescriptionBlocks(editor);
+                refreshDescriptionSortable(editor);
                 var textarea = block.querySelector('[data-target="c-htmlInputEditor01__textarea"]');
                 if (textarea) textarea.focus();
             });
@@ -1001,7 +1079,6 @@
             list.querySelectorAll('[data-choice-editor]').forEach(syncChoiceEditor);
             list.querySelectorAll('[data-text-multi-editor]').forEach(syncTextMultiEditor);
             descriptionEditors.forEach(function (editor) {
-                sortDescriptionBlocks(editor);
                 reindexDescriptionBlocks(editor);
             });
         });

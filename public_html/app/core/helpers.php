@@ -287,7 +287,7 @@ if (!function_exists('render_rich_text_html')) {
 
 if (!function_exists('decode_form_description_blocks')) {
     /**
-     * @return array<int, array{id:string,html:string,position:int,visible:int,is_html:int}>
+     * @return array<int, array{id:string,label:string,html:string,position:int,visible:int,is_html:int}>
      */
     function decode_form_description_blocks($stored, bool $legacyVisible = true): array
     {
@@ -343,6 +343,7 @@ if (!function_exists('decode_form_description_blocks')) {
                     }
                     $blocks[] = [
                         'id' => $id,
+                        'label' => trim((string) ($item['label'] ?? '')),
                         'html' => $html,
                         'position' => $position,
                         'visible' => $visible,
@@ -361,6 +362,7 @@ if (!function_exists('decode_form_description_blocks')) {
 
         return [[
             'id' => 'description-0',
+            'label' => '',
             'html' => $html,
             'position' => 0,
             'visible' => $legacyVisible ? 1 : 0,
@@ -397,6 +399,7 @@ if (!function_exists('encode_form_description_blocks')) {
             }
             $out[] = [
                 'id' => $id,
+                'label' => trim((string) ($block['label'] ?? '')),
                 'html' => $html,
                 'position' => $position,
                 'visible' => !empty($block['visible']) ? 1 : 0,

@@ -14,9 +14,9 @@ $regexPresetChoices = [
 ];
 $breadcrumbTitle = trim((string) ($form['title'] ?? '')) !== '' ? (string) $form['title'] : '（無題）';
 $slugPreviewValue = trim((string) ($form['slug'] ?? '')) !== '' ? (string) $form['slug'] : 'your-slug';
-$descriptionBlocks = $form['description_blocks'] ?? [['id' => 'description-0', 'html' => '', 'position' => 0, 'visible' => 1, 'is_html' => 0]];
-$confirmBlocks = $form['confirm_blocks'] ?? [['id' => 'confirm-0', 'html' => '', 'position' => 0, 'visible' => 1, 'is_html' => 0]];
-$thanksBlocks = $form['thanks_blocks'] ?? [['id' => 'thanks-0', 'html' => '', 'position' => 0, 'visible' => 1, 'is_html' => 0]];
+$descriptionBlocks = $form['description_blocks'] ?? [['id' => 'description-0', 'label' => '', 'html' => '', 'position' => 0, 'visible' => 1, 'is_html' => 0]];
+$confirmBlocks = $form['confirm_blocks'] ?? [['id' => 'confirm-0', 'label' => '', 'html' => '', 'position' => 0, 'visible' => 1, 'is_html' => 0]];
+$thanksBlocks = $form['thanks_blocks'] ?? [['id' => 'thanks-0', 'label' => '', 'html' => '', 'position' => 0, 'visible' => 1, 'is_html' => 0]];
 $renderDescriptionEditor = static function (string $namePrefix, array $blocks, string $positionMode): void {
     ?>
     <div class="block is-field">
@@ -25,52 +25,133 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                 <div class="block is-contents">
                     <div class="c-descriptionEditor01__editor">
                         <div class="wrapper" data-description-list>
-                                <?php foreach ($blocks as $i => $block): ?>
-                                    <div class="block is-contents" data-description-block data-index="<?= $i ?>">
-                                        <input type="hidden" name="<?= e($namePrefix) ?>[<?= $i ?>][id]" value="<?= e($block['id'] ?? ($namePrefix . '-' . $i)) ?>" data-name="id">
-                                        <div class="area is-header">
-                                            <p data-module="m-boldTitle01">説明文</p>
-                                            <button type="button" data-module="m-deleteBtn01" data-target="fb-description-remove" aria-label="削除" title="削除">
-                                                <svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" d="M3 6h18"/>
-                                                    <path stroke-linecap="round" stroke-linejoin="round" d="M8 6V4h8v2"/>
-                                                    <path stroke-linecap="round" stroke-linejoin="round" d="M19 6l-1 14H6L5 6"/>
-                                                    <path stroke-linecap="round" stroke-linejoin="round" d="M10 11v6M14 11v6"/>
-                                                </svg>
-                                            </button>
-                                        </div>
-                                        <div class="area is-controls fb-row" style="display: flex;">
-                                            <div class="fb-description-position-wrap">
-                                                <div data-module="m-input01">
-                                                    <select name="<?= e($namePrefix) ?>[<?= $i ?>][position]" class="fb-description-position" data-name="position" data-value="<?= e((string) ($block['position'] ?? 0)) ?>" aria-label="説明文"></select>
-                                                </div>
-                                            </div>
-                                            <div class="fb-description-visible-wrap">
-                                                <label class="label is-choice fb-basic-display-toggle">
-                                                    <input type="checkbox" name="<?= e($namePrefix) ?>[<?= $i ?>][visible]" value="1" data-name="visible" <?= !empty($block['visible']) ? 'checked' : '' ?>>
-                                                    表示する
-                                                </label>
-                                            </div>
-                                        </div>
-                                        <div class="area is-editor">
-                                            <div data-module="c-htmlInputEditor01" data-html-toggle-editor>
+                            <?php foreach ($blocks as $i => $block): ?>
+                                <?php
+                                $blockId = (string) ($block['id'] ?? ($namePrefix . '-' . $i));
+                                $labelValue = trim((string) ($block['label'] ?? ''));
+                                $summaryLabel = $labelValue !== '' ? $labelValue : '説明文';
+                                $labelInputId = $blockId . '-label';
+                                $positionInputId = $blockId . '-position';
+                                $htmlInputId = $blockId . '-html';
+                                ?>
+                                <div class="c-formEditor__item c-descriptionEditor01__item is-collapsed" data-description-block data-index="<?= $i ?>">
+                                    <input type="hidden" name="<?= e($namePrefix) ?>[<?= $i ?>][id]" value="<?= e($blockId) ?>" data-name="id">
+                                    <div class="wrapper">
+                                        <div class="block is-header">
+                                            <div class="c-formEditor__itemHeader">
                                                 <div class="wrapper">
-                                                    <div class="block is-editor">
-                                                        <div data-module="m-input01">
-                                                            <textarea name="<?= e($namePrefix) ?>[<?= $i ?>][html]" rows="6" data-name="html" data-target="c-htmlInputEditor01__textarea"><?= e((string) ($block['html'] ?? '')) ?></textarea>
+                                                    <div class="block is-contents">
+                                                        <div class="area is-move">
+                                                            <div class="box is-handle ui-sortable-handle" title="ドラッグして並べ替え">
+                                                                <p data-module="m-dragHandle01" data-target="c-descriptionEditor__dragHandle">
+                                                                    <svg width="14" height="18" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="currentColor"><circle cx="9" cy="6" r="2"/><circle cx="15" cy="6" r="2"/><circle cx="9" cy="12" r="2"/><circle cx="15" cy="12" r="2"/><circle cx="9" cy="18" r="2"/><circle cx="15" cy="18" r="2"/></svg>
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                        <div class="area is-summary">
+                                                            <div class="c-descriptionEditorSummary01">
+                                                                <div class="wrapper">
+                                                                    <div class="block is-contents">
+                                                                        <label class="c-descriptionEditorSummary01__visibility" title="<?= !empty($block['visible']) ? '表示中' : '非表示' ?>">
+                                                                            <input type="checkbox" name="<?= e($namePrefix) ?>[<?= $i ?>][visible]" value="1" data-name="visible" <?= !empty($block['visible']) ? 'checked' : '' ?>>
+                                                                            <span aria-hidden="true">
+                                                                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                                                    <path stroke-linecap="round" stroke-linejoin="round" d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z"/>
+                                                                                    <circle cx="12" cy="12" r="3"/>
+                                                                                    <path class="is-hiddenLine" stroke-linecap="round" stroke-linejoin="round" d="M4 20L20 4"/>
+                                                                                </svg>
+                                                                            </span>
+                                                                        </label>
+                                                                        <p class="label" data-target="c-descriptionEditor__summaryLabel"><?= e($summaryLabel) ?></p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="area is-delete">
+                                                            <button type="button" data-module="m-deleteBtn01" data-target="fb-description-remove" aria-label="削除" title="削除">
+                                                                <svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2">
+                                                                    <path stroke-linecap="round" stroke-linejoin="round" d="M3 6h18"/>
+                                                                    <path stroke-linecap="round" stroke-linejoin="round" d="M8 6V4h8v2"/>
+                                                                    <path stroke-linecap="round" stroke-linejoin="round" d="M19 6l-1 14H6L5 6"/>
+                                                                    <path stroke-linecap="round" stroke-linejoin="round" d="M10 11v6M14 11v6"/>
+                                                                </svg>
+                                                            </button>
                                                         </div>
                                                     </div>
-                                                    <div class="block is-toolbar">
-                                                        <label class="label is-choice c-htmlInputEditor01__toggle">
-                                                            <input type="checkbox" name="<?= e($namePrefix) ?>[<?= $i ?>][is_html]" value="1" data-name="is_html" data-target="c-htmlInputEditor01__toggle" <?= !empty($block['is_html']) ? 'checked' : '' ?>>
-                                                            HTMLで入力する
-                                                        </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="block is-body">
+                                            <div class="c-formEditor__itemBody">
+                                                <div class="wrapper">
+                                                    <div class="block is-contents">
+                                                        <div class="block is-field">
+                                                            <div data-module="c-inputSet01">
+                                                                <div class="wrapper">
+                                                                    <div class="block is-contents">
+                                                                        <div class="block is-title">
+                                                                            <label class="label" data-module="m-boldTitle01" for="<?= e($labelInputId) ?>">ラベル</label>
+                                                                        </div>
+                                                                        <div class="block is-field">
+                                                                            <div data-module="m-input01">
+                                                                                <input type="text" id="<?= e($labelInputId) ?>" name="<?= e($namePrefix) ?>[<?= $i ?>][label]" value="<?= e($labelValue) ?>" data-name="label" data-target="c-descriptionEditor__labelInput">
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="block is-field">
+                                                            <div data-module="c-inputSet01">
+                                                                <div class="wrapper">
+                                                                    <div class="block is-contents">
+                                                                        <div class="block is-title">
+                                                                            <label class="label" data-module="m-boldTitle01" for="<?= e($positionInputId) ?>">表示位置</label>
+                                                                        </div>
+                                                                        <div class="block is-field">
+                                                                            <div data-module="m-input01">
+                                                                                <select id="<?= e($positionInputId) ?>" name="<?= e($namePrefix) ?>[<?= $i ?>][position]" class="fb-description-position" data-name="position" data-value="<?= e((string) ($block['position'] ?? 0)) ?>" aria-label="説明文の表示位置"></select>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="block is-field">
+                                                            <div data-module="c-inputSet01">
+                                                                <div class="wrapper">
+                                                                    <div class="block is-contents">
+                                                                        <div class="block is-title">
+                                                                            <label class="label" data-module="m-boldTitle01" for="<?= e($htmlInputId) ?>">説明文</label>
+                                                                        </div>
+                                                                        <div class="block is-field">
+                                                                            <div data-module="c-htmlInputEditor01" data-html-toggle-editor>
+                                                                                <div class="wrapper">
+                                                                                    <div class="block is-editor">
+                                                                                        <div data-module="m-input01">
+                                                                                            <textarea id="<?= e($htmlInputId) ?>" name="<?= e($namePrefix) ?>[<?= $i ?>][html]" rows="6" data-name="html" data-target="c-htmlInputEditor01__textarea"><?= e((string) ($block['html'] ?? '')) ?></textarea>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="block is-toolbar">
+                                                                                        <label class="label is-choice c-htmlInputEditor01__toggle">
+                                                                                            <input type="checkbox" name="<?= e($namePrefix) ?>[<?= $i ?>][is_html]" value="1" data-name="is_html" data-target="c-htmlInputEditor01__toggle" <?= !empty($block['is_html']) ? 'checked' : '' ?>>
+                                                                                            HTMLで入力する
+                                                                                        </label>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                <?php endforeach; ?>
+                                </div>
+                            <?php endforeach; ?>
                         </div>
                     </div>
                 </div>
@@ -867,45 +948,118 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
 </div>
 
 <template data-target="m-formBuilder01__descriptionTemplate">
-    <div class="block is-contents" data-description-block>
+    <div class="c-formEditor__item c-descriptionEditor01__item is-collapsed" data-description-block>
         <input type="hidden" data-name="id" value="">
-        <div class="area is-header">
-            <p data-module="m-boldTitle01">説明文</p>
-            <button type="button" data-module="m-deleteBtn01" data-target="fb-description-remove" aria-label="削除" title="削除">
-                <svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M3 6h18"/>
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M8 6V4h8v2"/>
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M19 6l-1 14H6L5 6"/>
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M10 11v6M14 11v6"/>
-                </svg>
-            </button>
-        </div>
-        <div class="area is-controls fb-row" style="display: flex;">
-            <div class="fb-description-position-wrap">
-                <div data-module="m-input01">
-                    <select class="fb-description-position" data-name="position" data-value="0" aria-label="説明文"></select>
-                </div>
-            </div>
-            <div class="fb-description-visible-wrap">
-                <label class="label is-choice fb-basic-display-toggle">
-                    <input type="checkbox" data-name="visible" value="1" checked>
-                    表示する
-                </label>
-            </div>
-        </div>
-        <div class="area is-editor">
-            <div data-module="c-htmlInputEditor01" data-html-toggle-editor>
-                <div class="wrapper">
-                    <div class="block is-editor">
-                        <div data-module="m-input01">
-                            <textarea rows="6" data-name="html" data-target="c-htmlInputEditor01__textarea"></textarea>
+        <div class="wrapper">
+            <div class="block is-header">
+                <div class="c-formEditor__itemHeader">
+                    <div class="wrapper">
+                        <div class="block is-contents">
+                            <div class="area is-move">
+                                <div class="box is-handle ui-sortable-handle" title="ドラッグして並べ替え">
+                                    <p data-module="m-dragHandle01" data-target="c-descriptionEditor__dragHandle">
+                                        <svg width="14" height="18" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="currentColor"><circle cx="9" cy="6" r="2"/><circle cx="15" cy="6" r="2"/><circle cx="9" cy="12" r="2"/><circle cx="15" cy="12" r="2"/><circle cx="9" cy="18" r="2"/><circle cx="15" cy="18" r="2"/></svg>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="area is-summary">
+                                <div class="c-descriptionEditorSummary01">
+                                    <div class="wrapper">
+                                        <div class="block is-contents">
+                                            <label class="c-descriptionEditorSummary01__visibility" title="表示中">
+                                                <input type="checkbox" data-name="visible" value="1" checked>
+                                                <span aria-hidden="true">
+                                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z"/>
+                                                        <circle cx="12" cy="12" r="3"/>
+                                                        <path class="is-hiddenLine" stroke-linecap="round" stroke-linejoin="round" d="M4 20L20 4"/>
+                                                    </svg>
+                                                </span>
+                                            </label>
+                                            <p class="label" data-target="c-descriptionEditor__summaryLabel">説明文</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="area is-delete">
+                                <button type="button" data-module="m-deleteBtn01" data-target="fb-description-remove" aria-label="削除" title="削除">
+                                    <svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M3 6h18"/>
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M8 6V4h8v2"/>
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M19 6l-1 14H6L5 6"/>
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M10 11v6M14 11v6"/>
+                                    </svg>
+                                </button>
+                            </div>
                         </div>
                     </div>
-                    <div class="block is-toolbar">
-                        <label class="label is-choice c-htmlInputEditor01__toggle">
-                            <input type="checkbox" data-name="is_html" data-target="c-htmlInputEditor01__toggle" value="1">
-                            HTMLで入力する
-                        </label>
+                </div>
+            </div>
+            <div class="block is-body">
+                <div class="c-formEditor__itemBody">
+                    <div class="wrapper">
+                        <div class="block is-contents">
+                            <div class="block is-field">
+                                <div data-module="c-inputSet01">
+                                    <div class="wrapper">
+                                        <div class="block is-contents">
+                                            <div class="block is-title">
+                                                <label class="label" data-module="m-boldTitle01">ラベル</label>
+                                            </div>
+                                            <div class="block is-field">
+                                                <div data-module="m-input01">
+                                                    <input type="text" data-name="label" data-target="c-descriptionEditor__labelInput">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="block is-field">
+                                <div data-module="c-inputSet01">
+                                    <div class="wrapper">
+                                        <div class="block is-contents">
+                                            <div class="block is-title">
+                                                <label class="label" data-module="m-boldTitle01">表示位置</label>
+                                            </div>
+                                            <div class="block is-field">
+                                                <div data-module="m-input01">
+                                                    <select class="fb-description-position" data-name="position" data-value="0" aria-label="説明文の表示位置"></select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="block is-field">
+                                <div data-module="c-inputSet01">
+                                    <div class="wrapper">
+                                        <div class="block is-contents">
+                                            <div class="block is-title">
+                                                <label class="label" data-module="m-boldTitle01">説明文</label>
+                                            </div>
+                                            <div class="block is-field">
+                                                <div data-module="c-htmlInputEditor01" data-html-toggle-editor>
+                                                    <div class="wrapper">
+                                                        <div class="block is-editor">
+                                                            <div data-module="m-input01">
+                                                                <textarea rows="6" data-name="html" data-target="c-htmlInputEditor01__textarea"></textarea>
+                                                            </div>
+                                                        </div>
+                                                        <div class="block is-toolbar">
+                                                            <label class="label is-choice c-htmlInputEditor01__toggle">
+                                                                <input type="checkbox" data-name="is_html" data-target="c-htmlInputEditor01__toggle" value="1">
+                                                                HTMLで入力する
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

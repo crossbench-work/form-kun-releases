@@ -908,45 +908,35 @@ form.is-inline {
     > .block.is-contents {
       > .c-descriptionEditor01__editor {
         > .wrapper[data-description-list] {
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
+          display: flex;
+          flex-direction: column;
+          gap: 12px;
 
-            > .block.is-contents {
-              border: 1px solid #e2e8f0;
-              border-radius: 8px;
+          > .c-formEditor__item {
+            background: #f9fafb;
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            overflow: hidden;
+
+            > .wrapper > .block.is-body {
+              border-top: 1px solid #e2e8f0;
               padding: 16px;
-              background: #f8fafc;
-
-              > .area.is-header {
-                display: flex;
-                align-items: center;
-                justify-content: space-between;
-                gap: 12px;
-                margin-bottom: 12px;
-                flex-wrap: wrap;
-
-                .fb-description-remove {
-                  flex-shrink: 0;
-                }
-              }
-
-              > .area.is-controls {
-                align-items: center;
-                margin-bottom: 12px;
-              }
-
-              .fb-description-position-wrap {
-                flex: 1 1 200px;
-              }
-
-              .fb-description-visible-wrap {
-                flex: 0 0 auto;
-                min-width: auto;
-                display: flex;
-                align-items: center;
-              }
             }
+          }
+
+          > .fb-sortable-placeholder {
+            visibility: visible !important;
+            border: 2px dashed #93c5fd !important;
+            background: #eff6ff !important;
+            min-height: 56px !important;
+            border-radius: 6px;
+            box-sizing: border-box;
+          }
+
+          > .ui-sortable-helper {
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.2);
+            border-radius: 6px;
+          }
         }
       }
     }
@@ -959,6 +949,132 @@ form.is-inline {
         margin-bottom: 16px;
       }
     }
+  }
+
+  .c-formEditor__itemHeader {
+    background: #fff;
+    cursor: pointer;
+
+    > .wrapper > .block.is-contents {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 12px;
+    }
+  }
+
+  .c-formEditor__item.is-collapsed > .wrapper > .block.is-body {
+    display: none;
+  }
+
+  .c-formEditor__itemHeader > .wrapper > .block.is-contents > .area.is-move,
+  .c-formEditor__itemHeader > .wrapper > .block.is-contents > .area.is-delete {
+    flex-shrink: 0;
+  }
+
+  .c-formEditor__itemHeader > .wrapper > .block.is-contents > .area.is-move > .box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+  }
+
+  .c-formEditor__itemHeader > .wrapper > .block.is-contents > .area.is-summary {
+    flex: 1;
+    min-width: 0;
+  }
+
+  [data-module="m-dragHandle01"] {
+    margin: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    cursor: grab;
+    color: #94a3b8;
+    padding: 2px 4px;
+    line-height: 1;
+    border-radius: 4px;
+    user-select: none;
+
+    &:active {
+      cursor: grabbing;
+    }
+
+    &:hover {
+      color: #64748b;
+      background: #f1f5f9;
+    }
+  }
+
+  .c-descriptionEditorSummary01 {
+    min-width: 0;
+
+    > .wrapper > .block.is-contents {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-width: 0;
+    }
+  }
+
+  .c-descriptionEditorSummary01__visibility {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 auto;
+    width: 20px;
+    height: 20px;
+    color: #94a3b8;
+    cursor: pointer;
+    margin-bottom: 0;
+
+    input {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      cursor: pointer;
+      margin: 0;
+    }
+
+    span {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .is-hiddenLine {
+      opacity: 0;
+    }
+
+    input:not(:checked) + span {
+      color: #cbd5e1;
+    }
+
+    input:not(:checked) + span .is-hiddenLine {
+      opacity: 1;
+    }
+  }
+
+  .c-descriptionEditorSummary01 .label {
+    margin: 0;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: #334155;
+    font-weight: 700;
+  }
+
+  .c-formEditor__itemBody > .wrapper > .block.is-contents {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .c-formEditor__itemBody > .wrapper > .block.is-contents > .block.is-field + .block.is-field {
+    margin-top: 4px;
   }
 }
 

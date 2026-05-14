@@ -693,7 +693,7 @@ class FormController
 
     /**
      * @param array<int, array<string, mixed>> $blocks
-     * @return array<int, array{id:string,html:string,position:int,visible:int,is_html:int}>
+     * @return array<int, array{id:string,label:string,html:string,position:int,visible:int,is_html:int}>
      */
     private static function normalizeDescriptionBlocks(array $blocks, bool $allowEmptyHtml = false, string $idPrefix = 'description'): array
     {
@@ -716,6 +716,7 @@ class FormController
             }
             $out[] = [
                 'id' => $id,
+                'label' => trim((string) ($block['label'] ?? '')),
                 'html' => $html,
                 'position' => isset($block['position']) && is_numeric($block['position']) ? max(0, (int) $block['position']) : 0,
                 'visible' => !empty($block['visible']) ? 1 : 0,
@@ -726,6 +727,7 @@ class FormController
         if ($out === []) {
             $out[] = [
                 'id' => $idPrefix . '-0',
+                'label' => '',
                 'html' => '',
                 'position' => 0,
                 'visible' => 1,
@@ -737,7 +739,7 @@ class FormController
     }
 
     /**
-     * @return array<int, array{id:string,html:string,position:int,visible:int,is_html:int}>
+     * @return array<int, array{id:string,label:string,html:string,position:int,visible:int,is_html:int}>
      */
     private static function collectContentBlocks(string $postKey, string $idPrefix): array
     {
@@ -753,6 +755,7 @@ class FormController
             }
             $blocks[] = [
                 'id' => trim((string) ($block['id'] ?? '')) !== '' ? trim((string) $block['id']) : $idPrefix . '-' . $i,
+                'label' => trim((string) ($block['label'] ?? '')),
                 'html' => (string) ($block['html'] ?? ''),
                 'position' => isset($block['position']) && is_numeric($block['position']) ? max(0, (int) $block['position']) : 0,
                 'visible' => !empty($block['visible']) ? 1 : 0,

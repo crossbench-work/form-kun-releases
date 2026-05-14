@@ -925,43 +925,141 @@ form.is-inline {
 [data-module=c-descriptionEditor01] > .wrapper > .block.is-contents > .c-descriptionEditor01__editor > .wrapper[data-description-list] {
   display: flex;
   flex-direction: column;
-  gap: 16px;
-}
-[data-module=c-descriptionEditor01] > .wrapper > .block.is-contents > .c-descriptionEditor01__editor > .wrapper[data-description-list] > .block.is-contents {
-  border: 1px solid #e2e8f0;
-  border-radius: 8px;
-  padding: 16px;
-  background: #f8fafc;
-}
-[data-module=c-descriptionEditor01] > .wrapper > .block.is-contents > .c-descriptionEditor01__editor > .wrapper[data-description-list] > .block.is-contents > .area.is-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
   gap: 12px;
-  margin-bottom: 12px;
-  flex-wrap: wrap;
 }
-[data-module=c-descriptionEditor01] > .wrapper > .block.is-contents > .c-descriptionEditor01__editor > .wrapper[data-description-list] > .block.is-contents > .area.is-header .fb-description-remove {
-  flex-shrink: 0;
+[data-module=c-descriptionEditor01] > .wrapper > .block.is-contents > .c-descriptionEditor01__editor > .wrapper[data-description-list] > .c-formEditor__item {
+  background: #f9fafb;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  overflow: hidden;
 }
-[data-module=c-descriptionEditor01] > .wrapper > .block.is-contents > .c-descriptionEditor01__editor > .wrapper[data-description-list] > .block.is-contents > .area.is-controls {
-  align-items: center;
-  margin-bottom: 12px;
+[data-module=c-descriptionEditor01] > .wrapper > .block.is-contents > .c-descriptionEditor01__editor > .wrapper[data-description-list] > .c-formEditor__item > .wrapper > .block.is-body {
+  border-top: 1px solid #e2e8f0;
+  padding: 16px;
 }
-[data-module=c-descriptionEditor01] > .wrapper > .block.is-contents > .c-descriptionEditor01__editor > .wrapper[data-description-list] > .block.is-contents .fb-description-position-wrap {
-  flex: 1 1 200px;
+[data-module=c-descriptionEditor01] > .wrapper > .block.is-contents > .c-descriptionEditor01__editor > .wrapper[data-description-list] > .fb-sortable-placeholder {
+  visibility: visible !important;
+  border: 2px dashed #93c5fd !important;
+  background: #eff6ff !important;
+  min-height: 56px !important;
+  border-radius: 6px;
+  box-sizing: border-box;
 }
-[data-module=c-descriptionEditor01] > .wrapper > .block.is-contents > .c-descriptionEditor01__editor > .wrapper[data-description-list] > .block.is-contents .fb-description-visible-wrap {
-  flex: 0 0 auto;
-  min-width: auto;
-  display: flex;
-  align-items: center;
+[data-module=c-descriptionEditor01] > .wrapper > .block.is-contents > .c-descriptionEditor01__editor > .wrapper[data-description-list] > .ui-sortable-helper {
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.2);
+  border-radius: 6px;
 }
 [data-module=c-descriptionEditor01] > .wrapper > .block.is-toolbar > .area.is-actions {
   display: flex;
   justify-content: flex-end;
   margin-top: 16px;
   margin-bottom: 16px;
+}
+[data-module=c-descriptionEditor01] .c-formEditor__itemHeader {
+  background: #fff;
+  cursor: pointer;
+}
+[data-module=c-descriptionEditor01] .c-formEditor__itemHeader > .wrapper > .block.is-contents {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+}
+[data-module=c-descriptionEditor01] .c-formEditor__item.is-collapsed > .wrapper > .block.is-body {
+  display: none;
+}
+[data-module=c-descriptionEditor01] .c-formEditor__itemHeader > .wrapper > .block.is-contents > .area.is-move,
+[data-module=c-descriptionEditor01] .c-formEditor__itemHeader > .wrapper > .block.is-contents > .area.is-delete {
+  flex-shrink: 0;
+}
+[data-module=c-descriptionEditor01] .c-formEditor__itemHeader > .wrapper > .block.is-contents > .area.is-move > .box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+[data-module=c-descriptionEditor01] .c-formEditor__itemHeader > .wrapper > .block.is-contents > .area.is-summary {
+  flex: 1;
+  min-width: 0;
+}
+[data-module=c-descriptionEditor01] [data-module=m-dragHandle01] {
+  margin: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  cursor: grab;
+  color: #94a3b8;
+  padding: 2px 4px;
+  line-height: 1;
+  border-radius: 4px;
+  user-select: none;
+}
+[data-module=c-descriptionEditor01] [data-module=m-dragHandle01]:active {
+  cursor: grabbing;
+}
+[data-module=c-descriptionEditor01] [data-module=m-dragHandle01]:hover {
+  color: #64748b;
+  background: #f1f5f9;
+}
+[data-module=c-descriptionEditor01] .c-descriptionEditorSummary01 {
+  min-width: 0;
+}
+[data-module=c-descriptionEditor01] .c-descriptionEditorSummary01 > .wrapper > .block.is-contents {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+[data-module=c-descriptionEditor01] .c-descriptionEditorSummary01__visibility {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  width: 20px;
+  height: 20px;
+  color: #94a3b8;
+  cursor: pointer;
+  margin-bottom: 0;
+}
+[data-module=c-descriptionEditor01] .c-descriptionEditorSummary01__visibility input {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  cursor: pointer;
+  margin: 0;
+}
+[data-module=c-descriptionEditor01] .c-descriptionEditorSummary01__visibility span {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+[data-module=c-descriptionEditor01] .c-descriptionEditorSummary01__visibility .is-hiddenLine {
+  opacity: 0;
+}
+[data-module=c-descriptionEditor01] .c-descriptionEditorSummary01__visibility input:not(:checked) + span {
+  color: #cbd5e1;
+}
+[data-module=c-descriptionEditor01] .c-descriptionEditorSummary01__visibility input:not(:checked) + span .is-hiddenLine {
+  opacity: 1;
+}
+[data-module=c-descriptionEditor01] .c-descriptionEditorSummary01 .label {
+  margin: 0;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: #334155;
+  font-weight: 700;
+}
+[data-module=c-descriptionEditor01] .c-formEditor__itemBody > .wrapper > .block.is-contents {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+[data-module=c-descriptionEditor01] .c-formEditor__itemBody > .wrapper > .block.is-contents > .block.is-field + .block.is-field {
+  margin-top: 4px;
 }
 
 [data-module=c-htmlInputEditor01] > .wrapper {
