@@ -219,9 +219,9 @@ body.l-adminShell01 {
   > textarea {
     width: 100%;
     padding: 8px 10px;
-    border: 1px solid #cbd5e1;
+    border: 1px solid #eaeaea;
     border-radius: 6px;
-    font-size: 14px;
+    font-size: 12px;
     font-family: inherit;
     background: #fff;
     color: #111;
@@ -1204,16 +1204,9 @@ form.is-inline {
 
 [data-module="m-formBuilder01"] .c-formEditor__item,
 [data-module="c-descriptionEditor01"] .c-formEditor__item {
-  background: #f9fafb;
-  border: 1px solid #e2e8f0;
+  background: #f5f4f4;
   border-radius: 6px;
   overflow: hidden;
-
-  > .wrapper {
-    > .block.is-body {
-      border-top: 1px solid #e2e8f0;
-    }
-  }
 }
 
 [data-module="m-formBuilder01"] .c-formEditor > .wrapper > .block.is-contents > .fb-sortable-placeholder,
@@ -1235,7 +1228,7 @@ form.is-inline {
 
 [data-module="m-formBuilder01"] .c-formEditor__itemHeader,
 [data-module="c-descriptionEditor01"] .c-formEditor__itemHeader {
-  background: #fff;
+  background: #fafafb;
   cursor: pointer;
 
   > .wrapper {
