@@ -121,10 +121,7 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
 
                     <div class="block is-contents">
         <div data-target="c-formEditTabs01__contents" data-tab-panel="basic" class="area is-contents" role="tabpanel" aria-label="基本">
-    <div data-module="c-panel01">
-        <div class="wrapper">
-            <div class="block is-contents">
-                <div data-module="c-formBlock01">
+    <div data-module="c-formBlock01">
                     <div class="wrapper">
                         <div class="block is-contents">
             <div class="block is-title">
@@ -192,16 +189,10 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
         </div>
 
         <div data-target="c-formEditTabs01__contents" data-tab-panel="fields" class="area is-contents" role="tabpanel" aria-label="入力画面" hidden>
-    <div data-module="c-panel01">
-        <div class="wrapper">
-            <div class="block is-contents">
-                <div data-module="c-formBlock01">
+    <div data-module="c-formBlock01">
                     <div class="wrapper">
                         <div class="block is-contents">
             <div class="block is-title">
@@ -221,13 +212,7 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
-    <div data-module="c-panel01">
-        <div class="wrapper">
-            <div class="block is-contents">
-                <div data-module="c-formBlock01">
+    <div data-module="c-formBlock01">
                     <div class="wrapper">
                         <div class="block is-contents" data-module="m-formBuilder01">
             <div class="block is-title">
@@ -252,13 +237,7 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
-    <div data-module="c-panel01">
-        <div class="wrapper">
-            <div class="block is-contents">
-                <div data-module="c-formBlock01">
+    <div data-module="c-formBlock01">
                     <div class="wrapper">
                         <div class="block is-contents">
             <div class="block is-title">
@@ -283,16 +262,10 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
         </div>
 
         <div data-target="c-formEditTabs01__contents" data-tab-panel="confirm" class="area is-contents" role="tabpanel" aria-label="確認画面" hidden>
-    <div data-module="c-panel01">
-        <div class="wrapper">
-            <div class="block is-contents">
-                <div data-module="c-formBlock01">
+    <div data-module="c-formBlock01">
                     <div class="wrapper">
                         <div class="block is-contents">
             <div class="block is-title">
@@ -312,13 +285,7 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
-    <div data-module="c-panel01">
-        <div class="wrapper">
-            <div class="block is-contents">
-                <div data-module="c-formBlock01">
+    <div data-module="c-formBlock01">
                     <div class="wrapper">
                         <div class="block is-contents">
             <div class="block is-title">
@@ -359,16 +326,10 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
         </div>
 
         <div data-target="c-formEditTabs01__contents" data-tab-panel="thanks" class="area is-contents" role="tabpanel" aria-label="完了画面" hidden>
-    <div data-module="c-panel01">
-        <div class="wrapper">
-            <div class="block is-contents">
-                <div data-module="c-formBlock01">
+    <div data-module="c-formBlock01">
                     <div class="wrapper">
                         <div class="block is-contents">
             <div class="block is-title">
@@ -388,13 +349,7 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
-    <div data-module="c-panel01">
-        <div class="wrapper">
-            <div class="block is-contents">
-                <div data-module="c-formBlock01">
+    <div data-module="c-formBlock01">
                     <div class="wrapper">
                         <div class="block is-contents">
             <div class="block is-title">
@@ -435,16 +390,10 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
         </div>
 
         <div data-target="c-formEditTabs01__contents" data-tab-panel="mail" class="area is-contents" role="tabpanel" aria-label="通知" hidden>
-    <div data-module="c-panel01">
-        <div class="wrapper">
-            <div class="block is-contents">
-                <div data-module="c-formBlock01">
+    <div data-module="c-formBlock01">
                     <div class="wrapper">
                         <div class="block is-contents">
             <div class="block is-title">
@@ -504,14 +453,8 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
 
-    <div data-module="c-panel01">
-        <div class="wrapper">
-            <div class="block is-contents">
-                <div data-module="c-formBlock01">
+    <div data-module="c-formBlock01">
                     <div class="wrapper">
                         <div class="block is-contents">
             <div class="block is-title">
@@ -574,9 +517,6 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
                     </div>
                 </div>
 

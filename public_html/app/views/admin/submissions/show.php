@@ -10,12 +10,9 @@
     </form>
 </div>
 
-<div data-module="c-panel01">
+<div data-module="c-formBlock01">
     <div class="wrapper">
         <div class="block is-contents">
-                <div data-module="c-formBlock01">
-                    <div class="wrapper">
-                        <div class="block is-contents">
                             <div class="area is-field">
                                 <table class="table is-kv">
                                     <tr><th>フォーム</th><td><?= e($form['title']) ?>（<code><?= e($form['slug']) ?></code>）</td></tr>
@@ -24,19 +21,13 @@
                                     <tr><th>User-Agent</th><td><?= e($sub['user_agent']) ?></td></tr>
                                 </table>
                             </div>
-                        </div>
-                    </div>
-                </div>
         </div>
     </div>
 </div>
 
-<div data-module="c-panel01">
+<div data-module="c-formBlock01">
     <div class="wrapper">
         <div class="block is-contents">
-                <div data-module="c-formBlock01">
-                    <div class="wrapper">
-                        <div class="block is-contents">
                             <div class="area is-title">
                                 <h2 data-module="m-largeTitle01">入力内容</h2>
                             </div>
@@ -95,9 +86,6 @@
                                 <?php endforeach; ?>
                                 </table>
                             </div>
-                        </div>
-                    </div>
-                </div>
         </div>
     </div>
 </div>

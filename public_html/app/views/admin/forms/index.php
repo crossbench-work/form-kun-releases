@@ -4,12 +4,9 @@
     <a class="btn is-primary" href="<?= e(base_path('/admin/forms/new')) ?>">＋ 新規作成</a>
 </div>
 
-<div data-module="c-panel01">
+<div data-module="c-formBlock01">
     <div class="wrapper">
         <div class="block is-contents">
-                <div data-module="c-formBlock01">
-                    <div class="wrapper">
-                        <div class="block is-contents">
                             <div class="area is-field">
                                 <?php if (empty($forms)): ?>
                                     <p class="text is-muted">まだフォームがありません。</p>
@@ -48,9 +45,6 @@
                                     </table>
                                 <?php endif; ?>
                             </div>
-                        </div>
-                    </div>
-                </div>
         </div>
     </div>
 </div>

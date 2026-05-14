@@ -9,12 +9,9 @@
 <form method="post" action="<?= e($isNew ? base_path('/admin/users') : base_path('/admin/users/' . (int)$user['id'])) ?>">
     <?= \Core\Csrf::field() ?>
 
-    <div data-module="c-panel01">
+    <div data-module="c-formBlock01">
         <div class="wrapper">
             <div class="block is-contents">
-                <div data-module="c-formBlock01">
-                    <div class="wrapper">
-                        <div class="block is-contents">
                             <div class="area is-field">
                                 <label class="label" data-module="m-boldTitle01">ユーザー名</label>
                                 <?php if ($isNew): ?>
@@ -69,9 +66,6 @@
                                     <input type="password" name="password_confirm" autocomplete="new-password">
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     </div>

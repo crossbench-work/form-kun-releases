@@ -5,12 +5,9 @@
     <a class="btn" href="<?= e(base_path('/admin/forms')) ?>">フォーム一覧へ</a>
 </div>
 
-<div data-module="c-panel01">
+<div data-module="c-formBlock01">
     <div class="wrapper">
         <div class="block is-contents">
-                <div data-module="c-formBlock01">
-                    <div class="wrapper">
-                        <div class="block is-contents">
                             <div class="area is-field">
                                 <form method="get" action="<?= e(base_path('/admin/forms/' . $form['id'] . '/submissions')) ?>" class="m-toolbar01">
                                     <div data-module="m-input01">
@@ -123,9 +120,6 @@
                                     <?php endif; ?>
                                 <?php endif; ?>
                             </div>
-                        </div>
-                    </div>
-                </div>
         </div>
     </div>
 </div>

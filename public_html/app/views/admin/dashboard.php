@@ -1,11 +1,8 @@
 <h1 class="title">ダッシュボード</h1>
 
-<div data-module="c-panel01">
+<div data-module="c-formBlock01">
         <div class="wrapper">
             <div class="block is-contents">
-                <div data-module="c-formBlock01">
-                    <div class="wrapper">
-                        <div class="block is-contents">
                             <div class="area is-title">
                                 <h2 data-module="m-largeTitle01">フォーム別 受信件数</h2>
                             </div>
@@ -32,19 +29,13 @@
                                     </table>
                                 <?php endif; ?>
                             </div>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
 </div>
 
-<div data-module="c-panel01">
+<div data-module="c-formBlock01">
         <div class="wrapper">
             <div class="block is-contents">
-                <div data-module="c-formBlock01">
-                    <div class="wrapper">
-                        <div class="block is-contents">
                             <div class="area is-title">
                                 <h2 data-module="m-largeTitle01">最近の送信</h2>
                             </div>
@@ -67,9 +58,6 @@
                                     </table>
                                 <?php endif; ?>
                             </div>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
 </div>

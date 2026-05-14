@@ -121,7 +121,7 @@ assets/
 ## `.wrapper` / `.inner`（l- / m- / c- 共通）
 
 - 任意で **`.wrapper`**。さらに必要なら **`.wrapper` > `.inner`**。
-- **管理画面パネルは、`<div data-module="c-panel01"><div class="wrapper"><div class="block is-contents"><div data-module="c-formBlock01"><div class="wrapper"><div class="block is-contents"><div class="block is-title">...</div><div class="block is-field">...</div></div></div></div></div></div></div>` の形を正とし、設定 UI などの実コンテンツは `c-formBlock01` の `block is-title` / `block is-field` に分けて置く**。
+- **管理画面パネルは、`<div data-module="c-formBlock01"><div class="wrapper"><div class="block is-contents"><div class="block is-title">...</div><div class="block is-field">...</div></div></div></div>` の形を正とし、設定 UI などの実コンテンツは `c-formBlock01` の `block is-title` / `block is-field` に分けて置く**。
 - **説明文エディタのようにコンポーネント専用ラッパー（例: `.c-descriptionEditor01__editor`）を置く場合も、その直下は `<div class="wrapper" data-...><div class="block is-contents">...</div></div>` の形にし、必要なメタ属性は `wrapper` に寄せつつ、ブロック内は `area` を優先して階層を増やしすぎない**。
 - **ラベル行と入力欄を 1 セットで扱うときは、`<div data-module="c-inputSet01"><div class="wrapper"><div class="block is-contents"><div class="block is-title">...</div><div class="block is-field">...</div></div></div></div>` のように component 化して、単発の行レイアウト用クラスを増やさない**。
 - **複数ボタンをまとめるときは、`<div data-module="c-btnSet01"><div class="wrapper"><div class="block is-contents"><div class="area is-contents"><div data-module="m-btn01">...</div></div></div></div></div>` のように button set と各ボタンを分けて組む**。
@@ -150,7 +150,7 @@ assets/
 
 - **l-**: **`.l-*` > `.wrapper`**。`.block` / `.area` / `.box` は **使わない**。
 - **m-**: **`.m-*` > `.wrapper`**。通常はモジュール内に **`.block` / `.area` / `.box` は使わない**。
-- **管理画面のパネル系コンポーネントは `data-module="c-panel01"` を外枠、`data-module="c-formBlock01"` を内側の実コンテンツに使う。`componentWrapper` のような別名ラッパーは増やさない**。
+- **管理画面のパネル系コンポーネントは `data-module="c-formBlock01"` をルートに使い、内側は `.wrapper > .block.is-contents` 配下へ直接 `block is-title` / `block is-field` を置く。`componentWrapper` のような別名ラッパーや `c-panel01` の外枠は増やさない**。
 - **管理画面の `input` / `select` / `textarea` は `<div data-module="m-input01">...</div>` の内側に置き、見た目は入力要素ごとの直指定ではなくこのモジュールに集約する**。
 - **太字の小見出しや通常の入力ラベルは、`<p data-module="m-boldTitle01">...</p>` や `<label class="label" data-module="m-boldTitle01">...</label>` のように `m-boldTitle01` を使って作る。フォーム項目エディタ内の小さめラベルは `<label class="label" data-module="m-labelTitle01">...</label>` を使い、右側に区切り線を引く見出しは `m-borderTitle01` を使う**。
 - **「必須」バッジは `<span data-module="m-required01" data-type="required">必須</span>` を正とし、`.is-required` のような見た目用 class は増やさない**。
