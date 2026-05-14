@@ -45,44 +45,312 @@ class Mailer
             mb_internal_encoding('UTF-8');
         }
 
-        $fromEmail = (string) config('mail.from_email', 'noreply@example.com');
-        $fromName  = (string) config('mail.from_name', '');
-        $fromHeader = $fromName !== ''
-            ? sprintf('%s <%s>', mb_encode_mimeheader($fromName, 'UTF-8'), $fromEmail)
-            : $fromEmail;
-
-        $headers = array_merge([
-            'From'         => $fromHeader,
-            'MIME-Version' => '1.0',
-            'Content-Type' => 'text/plain; charset=UTF-8',
-        ], $extraHeaders);
-
-        // mb_send_mail は MIME-Version / Content-Type を自分で付与するため二重指定しないよう注意。
-        // ヘッダ整形（CRLF/制御文字混入チェック）
-        foreach ($headers as $k => $v) {
-            if (preg_match('/[\r\n]/', $v)) {
-                error_log('[formkun] mailer: header injection blocked');
-                return false;
-            }
+        $headers = self::buildHeaders($extraHeaders);
+        if ($headers === null) {
+            return false;
         }
+
+        if (self::shouldUseSmtp()) {
+            return self::sendViaSmtp($to, $subject, $body, $headers);
+        }
+
+        $fromEmail = self::extractEnvelopeFrom($headers['From'] ?? '');
         $additional = '';
         foreach ($headers as $k => $v) {
             if (in_array(strtolower($k), ['mime-version', 'content-type', 'content-transfer-encoding'], true)) {
-                continue; // mb_send_mail に任せる
+                continue;
             }
             $additional .= $k . ': ' . $v . "\r\n";
         }
 
         if (function_exists('mb_send_mail')) {
-            return @mb_send_mail($to, $subject, $body, $additional, '-f' . $fromEmail);
+            $sent = mb_send_mail($to, $subject, $body, $additional, '-f' . $fromEmail);
+            if (!$sent) {
+                error_log('[formkun] mailer: mb_send_mail failed');
+            }
+            return $sent;
         }
 
-        // フォールバック
         $allHeaders = '';
         foreach ($headers as $k => $v) {
             $allHeaders .= $k . ': ' . $v . "\r\n";
         }
-        return @mail($to, '=?UTF-8?B?' . base64_encode($subject) . '?=', $body, $allHeaders, '-f' . $fromEmail);
+        $sent = mail($to, self::encodeMimeHeader($subject), $body, $allHeaders, '-f' . $fromEmail);
+        if (!$sent) {
+            error_log('[formkun] mailer: mail fallback failed');
+        }
+        return $sent;
+    }
+
+    private static function shouldUseSmtp(): bool
+    {
+        $transport = strtolower(trim((string) config('mail.transport', 'mail')));
+        return $transport === 'smtp' || !empty(config('mail.smtp.enabled', false));
+    }
+
+    private static function sendViaSmtp(string $to, string $subject, string $body, array $headers): bool
+    {
+        $socket = self::openSmtpSocket();
+        if (!is_resource($socket)) {
+            return false;
+        }
+
+        try {
+            self::expectSmtpResponse($socket, [220]);
+
+            $ehloHost = trim((string) config('mail.smtp.ehlo_host', $_SERVER['SERVER_NAME'] ?? 'localhost'));
+            if ($ehloHost === '') {
+                $ehloHost = 'localhost';
+            }
+
+            self::writeSmtpCommand($socket, 'EHLO ' . $ehloHost);
+            self::expectSmtpResponse($socket, [250]);
+
+            $secure = strtolower(trim((string) config('mail.smtp.secure', '')));
+            if ($secure === 'tls') {
+                self::writeSmtpCommand($socket, 'STARTTLS');
+                self::expectSmtpResponse($socket, [220]);
+
+                if (!defined('STREAM_CRYPTO_METHOD_TLS_CLIENT')) {
+                    throw new \RuntimeException('この PHP 環境は STARTTLS に対応していません。');
+                }
+
+                $cryptoEnabled = stream_socket_enable_crypto($socket, true, STREAM_CRYPTO_METHOD_TLS_CLIENT);
+                if ($cryptoEnabled !== true) {
+                    throw new \RuntimeException('STARTTLS の開始に失敗しました。');
+                }
+
+                self::writeSmtpCommand($socket, 'EHLO ' . $ehloHost);
+                self::expectSmtpResponse($socket, [250]);
+            }
+
+            $username = trim((string) config('mail.smtp.username', ''));
+            $password = (string) config('mail.smtp.password', '');
+            if ($username !== '') {
+                self::writeSmtpCommand($socket, 'AUTH LOGIN');
+                self::expectSmtpResponse($socket, [334]);
+                self::writeSmtpCommand($socket, base64_encode($username));
+                self::expectSmtpResponse($socket, [334]);
+                self::writeSmtpCommand($socket, base64_encode($password));
+                self::expectSmtpResponse($socket, [235]);
+            }
+
+            $fromEmail = self::extractEnvelopeFrom($headers['From'] ?? '');
+            if (!filter_var($fromEmail, FILTER_VALIDATE_EMAIL)) {
+                throw new \RuntimeException('SMTP の送信元メールアドレスが不正です。');
+            }
+
+            self::writeSmtpCommand($socket, 'MAIL FROM:<' . $fromEmail . '>');
+            self::expectSmtpResponse($socket, [250]);
+            self::writeSmtpCommand($socket, 'RCPT TO:<' . $to . '>');
+            self::expectSmtpResponse($socket, [250, 251]);
+            self::writeSmtpCommand($socket, 'DATA');
+            self::expectSmtpResponse($socket, [354]);
+
+            $message = self::buildSmtpMessage($to, $subject, $body, $headers);
+            $bytesWritten = fwrite($socket, $message . "\r\n.\r\n");
+            if ($bytesWritten === false) {
+                throw new \RuntimeException('SMTP メッセージ本文の送信に失敗しました。');
+            }
+            self::expectSmtpResponse($socket, [250]);
+
+            self::writeSmtpCommand($socket, 'QUIT');
+            self::expectSmtpResponse($socket, [221]);
+
+            return true;
+        } catch (\RuntimeException $e) {
+            error_log('[formkun] mailer smtp: ' . $e->getMessage());
+            return false;
+        } finally {
+            fclose($socket);
+        }
+    }
+
+    /**
+     * @return resource|null
+     */
+    private static function openSmtpSocket()
+    {
+        $host = trim((string) config('mail.smtp.host', ''));
+        $port = (int) config('mail.smtp.port', 25);
+        $secure = strtolower(trim((string) config('mail.smtp.secure', '')));
+        $timeout = (int) config('mail.smtp.timeout', 10);
+
+        if ($host === '' || $port <= 0) {
+            error_log('[formkun] mailer smtp: host または port が未設定です。');
+            return null;
+        }
+        if (!in_array($secure, ['', 'ssl', 'tls'], true)) {
+            error_log('[formkun] mailer smtp: secure は "", "ssl", "tls" のいずれかを指定してください。');
+            return null;
+        }
+
+        $transport = $secure === 'ssl' ? 'ssl' : 'tcp';
+        $remote = $transport . '://' . $host . ':' . $port;
+        $context = stream_context_create([
+            'ssl' => [
+                'verify_peer' => !empty(config('mail.smtp.verify_peer', true)),
+                'verify_peer_name' => !empty(config('mail.smtp.verify_peer_name', true)),
+                'allow_self_signed' => !empty(config('mail.smtp.allow_self_signed', false)),
+            ],
+        ]);
+
+        $errno = 0;
+        $errstr = '';
+        $socket = stream_socket_client($remote, $errno, $errstr, max(1, $timeout), STREAM_CLIENT_CONNECT, $context);
+        if (!is_resource($socket)) {
+            error_log('[formkun] mailer smtp: 接続に失敗しました。' . $errstr . ' (' . $errno . ')');
+            return null;
+        }
+
+        stream_set_timeout($socket, max(1, $timeout));
+        return $socket;
+    }
+
+    private static function writeSmtpCommand($socket, string $command): void
+    {
+        $bytesWritten = fwrite($socket, $command . "\r\n");
+        if ($bytesWritten === false) {
+            throw new \RuntimeException('SMTP コマンド送信に失敗しました。');
+        }
+    }
+
+    /**
+     * @param array<int, int> $expectedCodes
+     */
+    private static function expectSmtpResponse($socket, array $expectedCodes): string
+    {
+        $response = self::readSmtpResponse($socket);
+        $code = (int) substr($response, 0, 3);
+        if (!in_array($code, $expectedCodes, true)) {
+            throw new \RuntimeException('SMTP 応答が不正です。受信: ' . trim($response));
+        }
+        return $response;
+    }
+
+    private static function readSmtpResponse($socket): string
+    {
+        $response = '';
+        while (($line = fgets($socket, 515)) !== false) {
+            $response .= $line;
+            if (strlen($line) < 4 || $line[3] === ' ') {
+                break;
+            }
+        }
+
+        if ($response === '') {
+            throw new \RuntimeException('SMTP 応答を受信できませんでした。');
+        }
+
+        $meta = stream_get_meta_data($socket);
+        if (!empty($meta['timed_out'])) {
+            throw new \RuntimeException('SMTP 応答がタイムアウトしました。');
+        }
+
+        return $response;
+    }
+
+    private static function buildSmtpMessage(string $to, string $subject, string $body, array $headers): string
+    {
+        $messageHeaders = array_merge(
+            [
+                'To' => $to,
+                'Subject' => self::encodeMimeHeader($subject),
+                'Date' => date(DATE_RFC2822),
+            ],
+            $headers
+        );
+
+        $lines = [];
+        foreach ($messageHeaders as $k => $v) {
+            $lines[] = $k . ': ' . $v;
+        }
+
+        return implode("\r\n", $lines) . "\r\n\r\n" . self::normalizeMessageBody($body);
+    }
+
+    private static function normalizeMessageBody(string $body): string
+    {
+        $normalized = str_replace(["\r\n", "\r"], "\n", $body);
+        $lines = explode("\n", $normalized);
+        foreach ($lines as &$line) {
+            if (strpos($line, '.') === 0) {
+                $line = '.' . $line;
+            }
+        }
+        unset($line);
+
+        return implode("\r\n", $lines);
+    }
+
+    /**
+     * @return array<string, string>|null
+     */
+    private static function buildHeaders(array $extraHeaders): ?array
+    {
+        $headers = array_merge([
+            'From' => self::buildDefaultFromHeader(),
+            'MIME-Version' => '1.0',
+            'Content-Type' => 'text/plain; charset=UTF-8',
+        ], $extraHeaders);
+
+        $normalized = [];
+        foreach ($headers as $k => $v) {
+            $name = trim((string) $k);
+            $value = trim((string) $v);
+            if ($name === '' || $value === '') {
+                continue;
+            }
+            if (!preg_match('/\A[A-Za-z0-9\-]+\z/', $name)) {
+                error_log('[formkun] mailer: invalid header name blocked');
+                return null;
+            }
+            if (preg_match('/[\r\n]/', $value)) {
+                error_log('[formkun] mailer: header injection blocked');
+                return null;
+            }
+            $normalized[$name] = $value;
+        }
+
+        return $normalized;
+    }
+
+    private static function buildDefaultFromHeader(): string
+    {
+        $fromEmail = trim((string) config('mail.from_email', 'noreply@example.com'));
+        $fromName = trim((string) config('mail.from_name', ''));
+        if ($fromName === '') {
+            return $fromEmail;
+        }
+
+        return self::encodeMimeHeader($fromName) . ' <' . $fromEmail . '>';
+    }
+
+    private static function extractEnvelopeFrom(string $fromHeader): string
+    {
+        if (preg_match('/<([^>]+)>/', $fromHeader, $matches) === 1) {
+            return trim((string) $matches[1]);
+        }
+
+        $candidate = trim($fromHeader);
+        if (filter_var($candidate, FILTER_VALIDATE_EMAIL)) {
+            return $candidate;
+        }
+
+        return trim((string) config('mail.from_email', 'noreply@example.com'));
+    }
+
+    private static function encodeMimeHeader(string $value): string
+    {
+        if ($value === '') {
+            return '';
+        }
+
+        if (preg_match('/\A[\x20-\x7E]+\z/', $value) === 1) {
+            return $value;
+        }
+
+        return '=?UTF-8?B?' . base64_encode($value) . '?=';
     }
 
     /**

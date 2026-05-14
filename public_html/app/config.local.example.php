@@ -25,4 +25,21 @@ return [
         'base_url'  => 'http://127.0.0.1:8080',
         'base_path' => '',
     ],
+    'mail' => [
+        // Mailpit / MailHog などローカル SMTP を使う場合の例
+        'transport' => 'smtp',
+        'smtp' => [
+            'enabled' => true,
+            'host' => '127.0.0.1',
+            'port' => 1025,
+            'secure' => '',
+            'username' => '',
+            'password' => '',
+            'timeout' => 10,
+            'ehlo_host' => 'localhost',
+            'verify_peer' => false,
+            'verify_peer_name' => false,
+            'allow_self_signed' => true,
+        ],
+    ],
 ];

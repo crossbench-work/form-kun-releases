@@ -36,9 +36,25 @@ $config = [
 
     // メール送信設定
     'mail' => [
+        // mail() / mb_send_mail() を使う場合は mail、SMTP サーバーへ直接送る場合は smtp
+        'transport' => 'mail',
         // From に使うメールアドレス（管理者通知や自動返信の差出人）
         'from_email' => 'noreply@example.com',
         'from_name'  => 'フォーム管理システム',
+        'smtp' => [
+            'enabled' => false,
+            'host' => '127.0.0.1',
+            'port' => 1025,
+            // '', 'ssl', 'tls' のいずれか
+            'secure' => '',
+            'username' => '',
+            'password' => '',
+            'timeout' => 10,
+            'ehlo_host' => 'localhost',
+            'verify_peer' => true,
+            'verify_peer_name' => true,
+            'allow_self_signed' => false,
+        ],
         // パスワード再設定メール（{{reset_url}} を置換）
         'password_reset_subject' => '[フォーム管理] パスワード再設定のご案内',
         'password_reset_body'    => "管理画面へログインするパスワードを再設定するには、次のURLにアクセスしてください（1時間以内）。\n\n{{reset_url}}\n\n心当たりがない場合はこのメールを無視してください。",
