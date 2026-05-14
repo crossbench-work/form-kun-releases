@@ -55,19 +55,16 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                                         <div class="area is-editor">
                                             <div data-module="c-htmlInputEditor01" data-html-toggle-editor>
                                                 <div class="wrapper">
-                                                    <div class="block is-toolbar">
-                                                        <label class="label is-choice c-htmlInputEditor01__toggle">
-                                                            <input type="checkbox" name="<?= e($namePrefix) ?>[<?= $i ?>][is_html]" value="1" data-name="is_html" data-target="c-htmlInputEditor01__toggle" <?= !empty($block['is_html']) ? 'checked' : '' ?>>
-                                                            HTMLで入力する
-                                                        </label>
-                                                    </div>
                                                     <div class="block is-editor">
                                                         <div data-module="m-input01">
                                                             <textarea name="<?= e($namePrefix) ?>[<?= $i ?>][html]" rows="6" data-name="html" data-target="c-htmlInputEditor01__textarea"><?= e((string) ($block['html'] ?? '')) ?></textarea>
                                                         </div>
                                                     </div>
-                                                    <div class="block is-help">
-                                                        <p class="text is-help" data-target="c-htmlInputEditor01__help">通常はテキストとして表示され、改行もそのまま反映されます。</p>
+                                                    <div class="block is-toolbar">
+                                                        <label class="label is-choice c-htmlInputEditor01__toggle">
+                                                            <input type="checkbox" name="<?= e($namePrefix) ?>[<?= $i ?>][is_html]" value="1" data-name="is_html" data-target="c-htmlInputEditor01__toggle" <?= !empty($block['is_html']) ? 'checked' : '' ?>>
+                                                            HTMLで入力する
+                                                        </label>
                                                     </div>
                                                 </div>
                                             </div>
@@ -632,19 +629,16 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
         <div class="area is-editor">
             <div data-module="c-htmlInputEditor01" data-html-toggle-editor>
                 <div class="wrapper">
-                    <div class="block is-toolbar">
-                        <label class="label is-choice c-htmlInputEditor01__toggle">
-                            <input type="checkbox" data-name="is_html" data-target="c-htmlInputEditor01__toggle" value="1">
-                            HTMLで入力する
-                        </label>
-                    </div>
                     <div class="block is-editor">
                         <div data-module="m-input01">
                             <textarea rows="6" data-name="html" data-target="c-htmlInputEditor01__textarea"></textarea>
                         </div>
                     </div>
-                    <div class="block is-help">
-                        <p class="text is-help" data-target="c-htmlInputEditor01__help">通常はテキストとして表示され、改行もそのまま反映されます。</p>
+                    <div class="block is-toolbar">
+                        <label class="label is-choice c-htmlInputEditor01__toggle">
+                            <input type="checkbox" data-name="is_html" data-target="c-htmlInputEditor01__toggle" value="1">
+                            HTMLで入力する
+                        </label>
                     </div>
                 </div>
             </div>

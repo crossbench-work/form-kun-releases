@@ -914,10 +914,7 @@ form.is-inline {
 }
 [data-module=c-htmlInputEditor01] > .wrapper > .block.is-toolbar {
   display: flex;
-  justify-content: flex-end;
-}
-[data-module=c-htmlInputEditor01].is-html-mode > .wrapper > .block.is-help .text.is-help {
-  color: #1d4ed8;
+  justify-content: flex-start;
 }
 
 [data-module=c-inputSet01] > .wrapper > .block.is-contents > .area.is-title,

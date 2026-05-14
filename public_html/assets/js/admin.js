@@ -154,17 +154,11 @@
         if (!editor) return;
         var toggle = editor.querySelector('[data-target="c-htmlInputEditor01__toggle"]');
         var textarea = editor.querySelector('[data-target="c-htmlInputEditor01__textarea"]');
-        var help = editor.querySelector('[data-target="c-htmlInputEditor01__help"]');
         var isHtmlMode = !!(toggle && toggle.checked);
         editor.classList.toggle('is-html-mode', isHtmlMode);
         if (textarea) {
             textarea.spellcheck = !isHtmlMode;
             textarea.placeholder = isHtmlMode ? '<p>説明文を入力</p>' : '説明文を入力';
-        }
-        if (help) {
-            help.textContent = isHtmlMode
-                ? 'HTML を直接入力できます。一部のタグと属性だけが保存されます。'
-                : '通常はテキストとして表示され、改行もそのまま反映されます。';
         }
     }
 

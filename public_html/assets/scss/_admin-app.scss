@@ -911,17 +911,7 @@ form.is-inline {
 
     > .block.is-toolbar {
       display: flex;
-      justify-content: flex-end;
-    }
-  }
-
-  &.is-html-mode {
-    > .wrapper {
-      > .block.is-help {
-        .text.is-help {
-          color: #1d4ed8;
-        }
-      }
+      justify-content: flex-start;
     }
   }
 }
