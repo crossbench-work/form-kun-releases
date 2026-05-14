@@ -431,7 +431,7 @@ h2 {
 }
 @media (min-width: 640px) {
   [data-module=c-publicForm01] .box.is-textMulti {
-    grid-template-columns: repeat(1, minmax(0, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   }
 }
 @media (min-width: 640px) {
