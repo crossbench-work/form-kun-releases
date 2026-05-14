@@ -576,6 +576,19 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                                     <textarea name="reply_template" rows="6"><?= e($form['reply_template']) ?></textarea>
                                 </div>
                             </div>
+                            <div class="area is-help">
+                                <div class="c-copyTagList01">
+                                    <p class="text is-help">使用可能な変数:</p>
+                                    <div class="c-copyTagList01__items">
+                                        <button type="button" class="c-copyTagList01__tag" data-copy-text="{{field_key}}"><code>{{field_key}}</code></button>
+                                        <button type="button" class="c-copyTagList01__tag" data-copy-text="{{__all__}}"><code>{{__all__}}</code></button>
+                                        <button type="button" class="c-copyTagList01__tag" data-copy-text="{{__form_title__}}"><code>{{__form_title__}}</code></button>
+                                        <button type="button" class="c-copyTagList01__tag" data-copy-text="{{__submitted_at__}}"><code>{{__submitted_at__}}</code></button>
+                                        <button type="button" class="c-copyTagList01__tag" data-copy-text="{{__ip__}}"><code>{{__ip__}}</code></button>
+                                    </div>
+                                    <p class="text is-help is-feedback" data-copy-feedback aria-live="polite"></p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
