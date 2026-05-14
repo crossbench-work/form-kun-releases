@@ -576,7 +576,10 @@ class Validator
                 return [];
             }
         }
-        return array_values(array_filter(array_map('strval', $arr), fn($v) => $v !== ''));
+        return array_values(array_filter(array_map(
+            static fn($value): string => is_scalar($value) ? (string) $value : '',
+            $arr
+        ), static fn($value): bool => $value !== ''));
     }
 
     public static function formatBytes(int $bytes): string
