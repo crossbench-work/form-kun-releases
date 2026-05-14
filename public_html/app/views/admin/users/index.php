@@ -1,7 +1,9 @@
 <div class="m-toolbar01">
     <h1 class="title" style="margin:0;">ユーザー管理</h1>
     <div class="spacer"></div>
-    <a class="btn is-primary" href="<?= e(base_path('/admin/users/new')) ?>">＋ 新規作成</a>
+    <div data-module="m-btn01">
+        <a class="btn is-primary" href="<?= e(base_path('/admin/users/new')) ?>">＋ 新規作成</a>
+    </div>
 </div>
 
 <div data-module="c-formBlock01">
