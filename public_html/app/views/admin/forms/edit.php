@@ -795,6 +795,27 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                                                 </div>
                                             </div>
                                             <div class="block is-field">
+                                                <div class="c-formEditor__field" data-target="c-formEditor__textMultiSettings" style="display:none">
+                                                    <div class="c-formEditor__textMultiEditor" data-text-multi-editor>
+                                                        <div class="c-formEditor__textMultiList">
+                                                            <div class="c-formEditor__field c-formEditor__textMultiItem" data-text-multi-item>
+                                                                <div class="wrapper">
+                                                                    <div class="block is-contents"><div class="block is-title"><label class="label" data-module="m-labelTitle01">表示名</label></div><div class="block is-field"><div data-module="m-input01"><input type="text" data-target="c-formEditor__textMultiLabelInput"></div></div></div>
+                                                                    <div class="block is-contents"><div class="block is-title"><label class="label" data-module="m-labelTitle01">プレースホルダ（任意）</label></div><div class="block is-field"><div data-module="m-input01"><input type="text" data-target="c-formEditor__textMultiPlaceholderInput"></div></div></div>
+                                                                </div>
+                                                                <div class="c-formEditor__actions">
+                                                                    <button type="button" class="btn is-sm is-danger" data-target="c-formEditor__textMultiRemove">削除</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="area is-actions">
+                                                            <button type="button" class="btn is-sm" data-target="c-formEditor__textMultiAdd">＋ 入力欄を追加する</button>
+                                                        </div>
+                                                        <textarea data-name="multi_text_items" data-target="c-formEditor__textMultiSource" hidden>[{"label":"","placeholder":""}]</textarea>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="block is-field">
                                                 <label class="label" data-module="m-labelTitle01">備考</label>
                                                 <div data-module="m-input01"><textarea data-name="help_text" rows="3"></textarea></div>
                                             </div>

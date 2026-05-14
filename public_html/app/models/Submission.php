@@ -19,7 +19,7 @@ class Submission
 
             foreach ($values as $key => $val) {
                 if (is_array($val)) {
-                    $val = self::isAddressValueShape($val) || self::isTextPairValueShape($val)
+                    $val = self::isAddressValueShape($val) || self::isTextPairValueShape($val) || self::isTextMultiValueShape($val)
                         ? json_encode($val, JSON_UNESCAPED_UNICODE)
                         : implode("\n", array_map('strval', $val));
                 }
@@ -83,6 +83,22 @@ class Submission
         $keys = array_keys($arr);
         sort($keys);
         return $keys === ['left', 'right'];
+    }
+
+    /**
+     * 複数入力テキストの値かどうか。items 配列を JSON のまま保持する。
+     */
+    private static function isTextMultiValueShape(array $arr): bool
+    {
+        if ($arr === []) {
+            return false;
+        }
+        $keys = array_keys($arr);
+        sort($keys);
+        if ($keys !== ['items']) {
+            return false;
+        }
+        return is_array($arr['items']);
     }
 
     public static function find(int $id): ?array

@@ -84,6 +84,17 @@ class Validator
                 'right' => isset($raw['right']) ? trim((string) $raw['right']) : '',
             ];
         }
+        if ($type === 'text_multi') {
+            if (!is_array($raw)) {
+                return ['items' => []];
+            }
+            $rawItems = isset($raw['items']) && is_array($raw['items']) ? $raw['items'] : $raw;
+            $items = [];
+            foreach ($rawItems as $item) {
+                $items[] = trim((string) $item);
+            }
+            return ['items' => array_values($items)];
+        }
         if (is_array($raw)) {
             $arr = [];
             foreach ($raw as $v) {
@@ -124,6 +135,10 @@ class Validator
         }
         if ($type === 'text_pair') {
             $this->validateTextPairField($field, $value);
+            return;
+        }
+        if ($type === 'text_multi') {
+            $this->validateTextMultiField($field, $value);
             return;
         }
 
@@ -279,6 +294,94 @@ class Validator
     }
 
     /**
+     * @param mixed $value normalize 済みの配列を想定
+     */
+    private function validateTextMultiField(array $field, $value): void
+    {
+        $key   = $field['field_key'];
+        $label = $field['label'];
+        $req   = (int) ($field['required'] ?? 0) === 1;
+        $maxL  = isset($field['max_length']) ? (int) $field['max_length'] : 0;
+        $regexStored = $field['regex'] ?? '';
+        $regexPatterns = is_string($regexStored)
+            ? FormField::decodeRegexPatterns($regexStored)
+            : [];
+        $configuredItems = FormField::decodeTextMultiItems($field['options_json'] ?? null, true);
+
+        if (!is_array($value) || !isset($value['items']) || !is_array($value['items'])) {
+            $this->addTextMultiPartError($key, '_root', $label . 'の入力形式が不正です。');
+            return;
+        }
+
+        $items = array_values(array_map(static fn($item): string => trim((string) $item), $value['items']));
+        $expectedCount = count($configuredItems);
+        if ($expectedCount === 0) {
+            $this->addTextMultiPartError($key, '_root', $label . 'の入力欄設定が不正です。');
+            return;
+        }
+        if (count($items) > $expectedCount) {
+            $this->addTextMultiPartError($key, '_root', $label . 'の入力数が不正です。');
+            return;
+        }
+        for ($i = count($items); $i < $expectedCount; $i++) {
+            $items[$i] = '';
+        }
+
+        $allEmpty = true;
+        foreach ($items as $itemValue) {
+            if ($itemValue !== '') {
+                $allEmpty = false;
+                break;
+            }
+        }
+
+        if ($req && $allEmpty) {
+            foreach ($configuredItems as $index => $item) {
+                $partLabel = trim((string) ($item['label'] ?? ''));
+                if ($partLabel === '') {
+                    $partLabel = '入力欄' . ($index + 1);
+                }
+                $this->addTextMultiPartError($key, (string) $index, $label . 'の' . $partLabel . 'を入力してください。');
+            }
+            return;
+        }
+        if (!$req && $allEmpty) {
+            return;
+        }
+
+        foreach ($configuredItems as $index => $item) {
+            $partLabel = trim((string) ($item['label'] ?? ''));
+            if ($partLabel === '') {
+                $partLabel = '入力欄' . ($index + 1);
+            }
+            $itemValue = (string) ($items[$index] ?? '');
+            if ($req && $itemValue === '') {
+                $this->addTextMultiPartError($key, (string) $index, $label . 'の' . $partLabel . 'を入力してください。');
+                continue;
+            }
+            if ($itemValue === '') {
+                continue;
+            }
+            if ($maxL > 0 && mb_strlen($itemValue, 'UTF-8') > $maxL) {
+                $this->addTextMultiPartError($key, (string) $index, $label . 'の' . $partLabel . 'は' . $maxL . '文字以内で入力してください。');
+            }
+            foreach ($regexPatterns as $regex) {
+                if ($regex === '') {
+                    continue;
+                }
+                if (@preg_match($regex, '') === false) {
+                    $this->addTextMultiPartError($key, (string) $index, $label . 'の検証設定が不正です。');
+                    break 2;
+                }
+                if (!preg_match($regex, $itemValue)) {
+                    $this->addTextMultiPartError($key, (string) $index, $label . 'の' . $partLabel . 'の形式が正しくありません。');
+                    break;
+                }
+            }
+        }
+    }
+
+    /**
      * @param mixed $value normalize 済みの連想配列を想定
      */
     private function validateAddressField(array $field, $value): void
@@ -379,6 +482,30 @@ class Validator
             $this->errors[$key][$part] = [];
         }
         $this->errors[$key][$part][] = $message;
+    }
+
+    /**
+     * @param string $part 数値文字列または _root
+     */
+    private function addTextMultiPartError(string $key, string $part, string $message): void
+    {
+        if (!isset($this->errors[$key])) {
+            $this->errors[$key] = [];
+        }
+        if ($part === '_root') {
+            if (!isset($this->errors[$key]['_root'])) {
+                $this->errors[$key]['_root'] = [];
+            }
+            $this->errors[$key]['_root'][] = $message;
+            return;
+        }
+        if (!isset($this->errors[$key]['items'])) {
+            $this->errors[$key]['items'] = [];
+        }
+        if (!isset($this->errors[$key]['items'][(int) $part])) {
+            $this->errors[$key]['items'][(int) $part] = [];
+        }
+        $this->errors[$key]['items'][(int) $part][] = $message;
     }
 
     private function isValidPostalDigits(string $postal): bool

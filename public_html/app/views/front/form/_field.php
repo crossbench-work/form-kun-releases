@@ -10,6 +10,7 @@ $value = $values[$key] ?? '';
 $err   = $errors[$key] ?? [];
 $addrErrParts = ($type === 'address') ? address_errors_normalize($err) : [];
 $pairErrParts = ($type === 'text_pair') ? text_pair_errors_normalize($err) : [];
+$multiErrParts = ($type === 'text_multi') ? text_multi_errors_normalize($err) : ['_root' => [], 'items' => []];
 $opts  = \Core\Validator::decodeOptions($field['options_json'] ?? null);
 $pairLabels = ($type === 'text_pair')
     ? \Models\FormField::decodeTextPairLabels($field['options_json'] ?? null)
@@ -17,13 +18,18 @@ $pairLabels = ($type === 'text_pair')
 $pairPlaceholders = ($type === 'text_pair')
     ? \Models\FormField::decodeTextPairPlaceholders($field['placeholder'] ?? null)
     : ['left_placeholder' => '', 'right_placeholder' => ''];
+$multiItems = ($type === 'text_multi')
+    ? \Models\FormField::decodeTextMultiItems($field['options_json'] ?? null, true)
+    : [];
 $ph    = $field['placeholder'] ?? '';
 $isAgreementField = ((string) ($field['field_key'] ?? '')) === 'agreement_consent';
 $agreementDescriptionHtml = $isAgreementField ? render_rich_text_html($field['help_text'] ?? '') : '';
 
 $labelFor = $type === 'address'
     ? 'f_' . $key . '_postal3'
-    : ($type === 'text_pair' ? 'f_' . $key . '_left' : 'f_' . $key);
+    : ($type === 'text_pair'
+        ? 'f_' . $key . '_left'
+        : ($type === 'text_multi' ? 'f_' . $key . '_0' : 'f_' . $key));
 
 $addrPostal = '';
 $addrPref   = '';
@@ -32,6 +38,7 @@ $addrNumber = '';
 $addrBuilding = '';
 $pairLeft = '';
 $pairRight = '';
+$multiValues = [];
 if ($type === 'address') {
     if (is_array($value)) {
         if (isset($value['prefecture']) || isset($value['city']) || isset($value['street'])
@@ -92,6 +99,24 @@ if ($type === 'text_pair') {
         }
     }
 }
+if ($type === 'text_multi') {
+    if (is_array($value)) {
+        if (isset($value['items']) && is_array($value['items'])) {
+            $multiValues = array_values(array_map(static fn($item): string => trim((string) $item), $value['items']));
+        } else {
+            $multiValues = array_values(array_map(static fn($item): string => trim((string) $item), $value));
+        }
+    } elseif (is_string($value) && $value !== '') {
+        $dec = json_decode($value, true);
+        if (is_array($dec)) {
+            if (isset($dec['items']) && is_array($dec['items'])) {
+                $multiValues = array_values(array_map(static fn($item): string => trim((string) $item), $dec['items']));
+            } else {
+                $multiValues = array_values(array_map(static fn($item): string => trim((string) $item), $dec));
+            }
+        }
+    }
+}
 
 $postal3 = '';
 $postal4 = '';
@@ -110,7 +135,7 @@ if ($type === 'address' && $addrPostal !== '') {
 
 $prefOptions = japanese_prefectures();
 ?>
-<div class="box is-field <?= ($type !== 'address' && $type !== 'text_pair' && !empty($err)) ? 'is-error' : '' ?>">
+<div class="box is-field <?= ($type !== 'address' && $type !== 'text_pair' && $type !== 'text_multi' && !empty($err)) ? 'is-error' : '' ?>">
     <label for="<?= e($labelFor) ?>" class="label">
         <?= e($label) ?>
         <?php if ($req && $type !== 'address'): ?><span data-module="m-required01" data-type="required">必須</span><?php endif; ?>
@@ -305,6 +330,43 @@ $prefOptions = japanese_prefectures();
             </div>
             <?php break; ?>
 
+        <?php case 'text_multi': ?>
+            <div class="box is-textMulti" id="f_<?= e($key) ?>">
+                <?php foreach (($multiErrParts['_root'] ?? []) as $m): ?>
+                    <p class="text is-error"><?= e($m) ?></p>
+                <?php endforeach; ?>
+                <?php foreach ($multiItems as $index => $multiItem): ?>
+                    <?php
+                        $multiItemLabel = trim((string) ($multiItem['label'] ?? ''));
+                        if ($multiItemLabel === '') {
+                            $multiItemLabel = '入力欄' . ($index + 1);
+                        }
+                        $multiItemPlaceholder = (string) ($multiItem['placeholder'] ?? '');
+                        $multiItemValue = (string) ($multiValues[$index] ?? '');
+                        $multiItemErrors = $multiErrParts['items'][$index] ?? [];
+                    ?>
+                    <div class="box is-textMultiCol <?= !empty($multiItemErrors) ? 'is-error' : '' ?>">
+                        <label class="label is-sublabel" for="f_<?= e($key) ?>_<?= $index ?>">
+                            <?= e($multiItemLabel) ?>
+                        </label>
+                        <input
+                            type="text"
+                            id="f_<?= e($key) ?>_<?= $index ?>"
+                            name="<?= e($key) ?>[items][]"
+                            value="<?= e($multiItemValue) ?>"
+                            <?= $field['max_length'] ? 'maxlength="' . (int) $field['max_length'] . '"' : '' ?>
+                            placeholder="<?= e($multiItemPlaceholder) ?>"
+                            aria-label="<?= e($multiItemLabel) ?>"
+                            <?= $req ? 'required' : '' ?>
+                            >
+                        <?php foreach ($multiItemErrors as $m): ?>
+                            <p class="text is-error"><?= e($m) ?></p>
+                        <?php endforeach; ?>
+                    </div>
+                <?php endforeach; ?>
+            </div>
+            <?php break; ?>
+
         <?php case 'select': ?>
             <select id="f_<?= e($key) ?>" name="<?= e($key) ?>" <?= $req ? 'required' : '' ?>>
                 <option value="">選択してください</option>
@@ -349,7 +411,7 @@ $prefOptions = japanese_prefectures();
             <?php break; ?>
     <?php endswitch; ?>
 
-    <?php if ($type !== 'address' && $type !== 'text_pair'): ?>
+    <?php if ($type !== 'address' && $type !== 'text_pair' && $type !== 'text_multi'): ?>
         <?php foreach ($err as $msg): ?>
             <p class="text is-error"><?= e($msg) ?></p>
         <?php endforeach; ?>

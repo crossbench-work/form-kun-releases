@@ -66,6 +66,7 @@ class FormField
         return [
             'text' => '1行テキスト',
             'text_pair' => '1行テキスト（2入力）',
+            'text_multi' => '1行テキスト（複数入力）',
             'textarea' => '複数行テキスト',
             'address' => '住所',
             'email' => 'メールアドレス',
@@ -129,9 +130,13 @@ class FormField
                         (string) ($f['pair_label_left'] ?? ''),
                         (string) ($f['pair_label_right'] ?? '')
                     );
+                } elseif ($f['type'] === 'text_multi') {
+                    $optionsJson = self::encodeTextMultiItems(
+                        self::decodeTextMultiItems($f['multi_text_items'] ?? null)
+                    );
                 }
                 $placeholder = isset($f['placeholder']) && $f['placeholder'] !== '' ? (string) $f['placeholder'] : null;
-                if (in_array($f['type'], ['radio', 'checkbox', 'select'], true)) {
+                if (in_array($f['type'], ['radio', 'checkbox', 'select', 'text_multi'], true)) {
                     $placeholder = null;
                 }
                 if ($f['type'] === 'text_pair') {
@@ -333,5 +338,82 @@ class FormField
         }
 
         return json_encode($payload, JSON_UNESCAPED_UNICODE);
+    }
+
+    /**
+     * @param mixed $json
+     * @return array<int, array{label:string,placeholder:string}>
+     */
+    public static function decodeTextMultiItems($json, bool $ensureDefault = false): array
+    {
+        $default = $ensureDefault ? [['label' => '', 'placeholder' => '']] : [];
+        if (!is_string($json) || trim($json) === '') {
+            return $default;
+        }
+
+        $decoded = json_decode($json, true);
+        if (!is_array($decoded)) {
+            return $default;
+        }
+
+        $items = [];
+        foreach ($decoded as $item) {
+            if (is_string($item)) {
+                $label = trim($item);
+                $placeholder = '';
+            } elseif (is_array($item)) {
+                $label = trim((string) ($item['label'] ?? $item[0] ?? ''));
+                $placeholder = trim((string) ($item['placeholder'] ?? $item[1] ?? ''));
+            } else {
+                continue;
+            }
+
+            if ($label === '' && $placeholder === '') {
+                continue;
+            }
+
+            $items[] = [
+                'label' => $label,
+                'placeholder' => $placeholder,
+            ];
+        }
+
+        if ($items === []) {
+            return $default;
+        }
+
+        return array_values($items);
+    }
+
+    /**
+     * @param array<int, array{label?:string,placeholder?:string}|string> $items
+     */
+    public static function encodeTextMultiItems(array $items): ?string
+    {
+        $payload = [];
+        foreach ($items as $item) {
+            if (is_string($item)) {
+                $label = trim($item);
+                $placeholder = '';
+            } else {
+                $label = trim((string) ($item['label'] ?? ''));
+                $placeholder = trim((string) ($item['placeholder'] ?? ''));
+            }
+
+            if ($label === '' && $placeholder === '') {
+                continue;
+            }
+
+            $payload[] = [
+                'label' => $label,
+                'placeholder' => $placeholder,
+            ];
+        }
+
+        if ($payload === []) {
+            return null;
+        }
+
+        return json_encode(array_values($payload), JSON_UNESCAPED_UNICODE);
     }
 }

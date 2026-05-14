@@ -423,24 +423,33 @@ h2 {
 [data-module=c-publicForm01] .box.is-address {
   margin-top: 4px;
 }
-[data-module=c-publicForm01] .box.is-textPair {
+[data-module=c-publicForm01] .box.is-textPair,
+[data-module=c-publicForm01] .box.is-textMulti {
   display: grid;
   gap: 14px;
   margin-top: 4px;
+}
+@media (min-width: 640px) {
+  [data-module=c-publicForm01] .box.is-textMulti {
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+  }
 }
 @media (min-width: 640px) {
   [data-module=c-publicForm01] .box.is-textPair {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
-[data-module=c-publicForm01] .box.is-textPairCol {
+[data-module=c-publicForm01] .box.is-textPairCol,
+[data-module=c-publicForm01] .box.is-textMultiCol {
   margin-bottom: 0;
 }
-[data-module=c-publicForm01] .box.is-textPairCol .text.is-error {
+[data-module=c-publicForm01] .box.is-textPairCol .text.is-error,
+[data-module=c-publicForm01] .box.is-textMultiCol .text.is-error {
   margin-top: 4px;
   margin-bottom: 0;
 }
-[data-module=c-publicForm01] .box.is-textPairCol.is-error input {
+[data-module=c-publicForm01] .box.is-textPairCol.is-error input,
+[data-module=c-publicForm01] .box.is-textMultiCol.is-error input {
   border-color: #ef4444;
 }
 [data-module=c-publicForm01] .box.is-addressRow {

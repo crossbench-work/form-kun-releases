@@ -13,6 +13,10 @@ $agreementDefaults = [
 $regexDecoded = \Models\FormField::decodeRegexPatterns(isset($f['regex']) ? (string) $f['regex'] : null);
 $rp = $regexDecoded[0] ?? '';
 $isTextPair = (($f['type'] ?? '') === 'text_pair');
+$isTextMulti = (($f['type'] ?? '') === 'text_multi');
+$multiTextItems = $isTextMulti
+    ? \Models\FormField::decodeTextMultiItems($f['multi_text_items'] ?? ($f['options_json'] ?? null), true)
+    : [];
 $summaryRequired = !empty($f['required']) ? '必須' : '任意';
 if (empty($f['required']) || in_array($f['type'], ['radio', 'select'], true)) {
     $summaryRegex = 'なし';
@@ -295,7 +299,7 @@ if (empty($f['required']) || in_array($f['type'], ['radio', 'select'], true)) {
                                         <div class="block is-field">
                                             <div class="c-formEditor__field">
                                                 <div class="wrapper">
-                                                    <div class="block is-contents" data-target="c-formEditor__placeholder" <?= ($isTextPair || in_array($f['type'], ['radio', 'checkbox', 'select'], true)) ? 'style="display:none"' : '' ?>>
+                                                    <div class="block is-contents" data-target="c-formEditor__placeholder" <?= (($isTextPair || $isTextMulti) || in_array($f['type'], ['radio', 'checkbox', 'select'], true)) ? 'style="display:none"' : '' ?>>
                                                         <div class="block is-title">
                                                             <label class="label" data-module="m-labelTitle01">プレースホルダ（任意）</label>
                                                         </div>
@@ -357,6 +361,47 @@ if (empty($f['required']) || in_array($f['type'], ['radio', 'select'], true)) {
                                                             </div>
                                                         </div>
                                                     </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="block is-field">
+                                            <div class="c-formEditor__field" data-target="c-formEditor__textMultiSettings" <?= $isTextMulti ? '' : 'style="display:none"' ?>>
+                                                <div class="c-formEditor__textMultiEditor" data-text-multi-editor>
+                                                    <div class="c-formEditor__textMultiList">
+                                                        <?php foreach ($multiTextItems as $multiTextItem): ?>
+                                                            <div class="c-formEditor__field c-formEditor__textMultiItem" data-text-multi-item>
+                                                                <div class="wrapper">
+                                                                    <div class="block is-contents">
+                                                                        <div class="block is-title">
+                                                                            <label class="label" data-module="m-labelTitle01">表示名</label>
+                                                                        </div>
+                                                                        <div class="block is-field">
+                                                                            <div data-module="m-input01">
+                                                                                <input type="text" data-target="c-formEditor__textMultiLabelInput" value="<?= e($multiTextItem['label'] ?? '') ?>">
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="block is-contents">
+                                                                        <div class="block is-title">
+                                                                            <label class="label" data-module="m-labelTitle01">プレースホルダ（任意）</label>
+                                                                        </div>
+                                                                        <div class="block is-field">
+                                                                            <div data-module="m-input01">
+                                                                                <input type="text" data-target="c-formEditor__textMultiPlaceholderInput" value="<?= e($multiTextItem['placeholder'] ?? '') ?>">
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="c-formEditor__actions">
+                                                                    <button type="button" class="btn is-sm is-danger" data-target="c-formEditor__textMultiRemove">削除</button>
+                                                                </div>
+                                                            </div>
+                                                        <?php endforeach; ?>
+                                                    </div>
+                                                    <div class="area is-actions">
+                                                        <button type="button" class="btn is-sm" data-target="c-formEditor__textMultiAdd">＋ 入力欄を追加する</button>
+                                                    </div>
+                                                    <textarea name="fields[<?= $idx ?>][multi_text_items]" data-target="c-formEditor__textMultiSource" hidden><?= e(json_encode($multiTextItems, JSON_UNESCAPED_UNICODE)) ?></textarea>
                                                 </div>
                                             </div>
                                         </div>

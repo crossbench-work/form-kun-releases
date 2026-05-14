@@ -80,6 +80,18 @@ class FormController
                 $f['checkbox_limit_enabled'] = 0;
                 $f['checkbox_min_selections'] = '';
                 $f['checkbox_max_selections'] = '';
+                $f['multi_text_items'] = '';
+            } elseif (($f['type'] ?? '') === 'text_multi') {
+                $f['multi_text_items'] = (string) ($f['options_json'] ?? '');
+                $f['placeholder'] = '';
+                $f['options'] = '';
+                $f['checkbox_limit_enabled'] = 0;
+                $f['checkbox_min_selections'] = '';
+                $f['checkbox_max_selections'] = '';
+                $f['pair_label_left'] = '';
+                $f['pair_label_right'] = '';
+                $f['pair_placeholder_left'] = '';
+                $f['pair_placeholder_right'] = '';
             } else {
                 if (($f['type'] ?? '') === 'checkbox') {
                     $checkboxSettings = \Models\FormField::decodeCheckboxSettings($f['options_json'] ?? null);
@@ -100,6 +112,7 @@ class FormController
                 $f['pair_label_right'] = '';
                 $f['pair_placeholder_left'] = '';
                 $f['pair_placeholder_right'] = '';
+                $f['multi_text_items'] = '';
             }
             return $f;
         }, $fields);
@@ -279,7 +292,7 @@ class FormController
                 }
 
                 $placeholder = trim((string) ($f['placeholder'] ?? ''));
-                if (in_array($type, ['radio', 'checkbox', 'select'], true)) {
+                if (in_array($type, ['radio', 'checkbox', 'select', 'text_multi'], true)) {
                     $placeholder = '';
                 }
                 $maxLength = isset($f['max_length']) && $f['max_length'] !== '' ? (int) $f['max_length'] : '';
@@ -307,6 +320,7 @@ class FormController
                     'pair_label_right'=> trim((string) ($f['pair_label_right'] ?? '')),
                     'pair_placeholder_left' => trim((string) ($f['pair_placeholder_left'] ?? '')),
                     'pair_placeholder_right'=> trim((string) ($f['pair_placeholder_right'] ?? '')),
+                    'multi_text_items' => (string) ($f['multi_text_items'] ?? ''),
                     'checkbox_limit_enabled' => $checkboxLimitEnabled,
                     'checkbox_min_selections' => $checkboxMinSelections,
                     'checkbox_max_selections' => $checkboxMaxSelections,
@@ -406,6 +420,36 @@ class FormController
                 }
                 if ($f['pair_label_right'] === '') {
                     $errors[] = "項目{$no}: 2つ目の入力欄の表示名を入力してください。";
+                }
+            } elseif ($f['type'] === 'text_multi') {
+                $decodedItems = json_decode((string) ($f['multi_text_items'] ?? ''), true);
+                $multiTextItems = [];
+                if (is_array($decodedItems)) {
+                    foreach ($decodedItems as $item) {
+                        if (is_string($item)) {
+                            $multiTextItems[] = [
+                                'label' => trim($item),
+                                'placeholder' => '',
+                            ];
+                            continue;
+                        }
+                        if (!is_array($item)) {
+                            continue;
+                        }
+                        $multiTextItems[] = [
+                            'label' => trim((string) ($item['label'] ?? '')),
+                            'placeholder' => trim((string) ($item['placeholder'] ?? '')),
+                        ];
+                    }
+                }
+                if (count($multiTextItems) === 0) {
+                    $errors[] = "項目{$no}: 複数入力の入力欄を1つ以上設定してください。";
+                }
+                foreach ($multiTextItems as $itemIndex => $item) {
+                    if (($item['label'] ?? '') === '') {
+                        $displayIndex = $itemIndex + 1;
+                        $errors[] = "項目{$no}: {$displayIndex}つ目の入力欄の表示名を入力してください。";
+                    }
                 }
             }
             $regexPatterns = FormField::decodeRegexPatterns(
@@ -610,10 +654,14 @@ class FormController
                     (string) ($field['pair_label_left'] ?? ''),
                     (string) ($field['pair_label_right'] ?? '')
                 );
+            } elseif (($field['type'] ?? '') === 'text_multi') {
+                $optionsJson = FormField::encodeTextMultiItems(
+                    FormField::decodeTextMultiItems($field['multi_text_items'] ?? null)
+                );
             }
 
             $placeholder = isset($field['placeholder']) && $field['placeholder'] !== '' ? (string) $field['placeholder'] : null;
-            if (in_array($field['type'], ['radio', 'checkbox', 'select'], true)) {
+            if (in_array($field['type'], ['radio', 'checkbox', 'select', 'text_multi'], true)) {
                 $placeholder = null;
             } elseif (($field['type'] ?? '') === 'text_pair') {
                 $placeholder = FormField::encodeTextPairPlaceholders(
@@ -656,6 +704,7 @@ class FormController
             'pair_label_right' => '',
             'pair_placeholder_left' => '',
             'pair_placeholder_right' => '',
+            'multi_text_items' => '',
             'checkbox_limit_enabled' => 0,
             'checkbox_min_selections' => '',
             'checkbox_max_selections' => '',
@@ -694,6 +743,7 @@ class FormController
         $agreement['pair_label_right'] = '';
         $agreement['pair_placeholder_left'] = '';
         $agreement['pair_placeholder_right'] = '';
+        $agreement['multi_text_items'] = '';
         $agreement['checkbox_limit_enabled'] = 0;
         $agreement['checkbox_min_selections'] = '';
         $agreement['checkbox_max_selections'] = '';
@@ -753,6 +803,7 @@ class FormController
             'pair_label_right' => '',
             'pair_placeholder_left' => '',
             'pair_placeholder_right' => '',
+            'multi_text_items' => '',
             'checkbox_limit_enabled' => 0,
             'checkbox_min_selections' => '',
             'checkbox_max_selections' => '',

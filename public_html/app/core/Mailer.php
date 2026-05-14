@@ -97,6 +97,12 @@ class Mailer
                 $allLines[] = $f['label'] . ":\n" . $valStr;
                 continue;
             }
+            if ($f['type'] === 'text_multi') {
+                $multiItems = \Models\FormField::decodeTextMultiItems($f['options_json'] ?? null, true);
+                $valStr = \format_text_multi_value_display($val, $multiItems);
+                $allLines[] = $f['label'] . ":\n" . $valStr;
+                continue;
+            }
             if (is_array($val)) {
                 $val = implode(', ', $val);
             }
@@ -124,6 +130,16 @@ class Mailer
                 }
                 $pairLabels = \Models\FormField::decodeTextPairLabels($field['options_json'] ?? null);
                 $val = \format_text_pair_value_display($val, $pairLabels);
+            } elseif (($typesByKey[$key] ?? '') === 'text_multi') {
+                $field = null;
+                foreach ($fields as $f) {
+                    if (($f['field_key'] ?? '') === $key) {
+                        $field = $f;
+                        break;
+                    }
+                }
+                $multiItems = \Models\FormField::decodeTextMultiItems($field['options_json'] ?? null, true);
+                $val = \format_text_multi_value_display($val, $multiItems);
             } elseif (is_array($val)) {
                 if (isset($val['name'])) {
                     $val = (string) $val['name'];

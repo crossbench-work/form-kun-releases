@@ -510,6 +510,56 @@ if (!function_exists('text_pair_errors_normalize')) {
     }
 }
 
+if (!function_exists('text_multi_errors_normalize')) {
+    /**
+     * @param mixed $err
+     * @return array{_root:string[],items:array<int, array<int, string>>}
+     */
+    function text_multi_errors_normalize($err): array
+    {
+        $defaults = [
+            '_root' => [],
+            'items' => [],
+        ];
+        if (!is_array($err) || $err === []) {
+            return $defaults;
+        }
+        $looksNested = isset($err['items']) || isset($err['_root']);
+        if (!$looksNested) {
+            foreach ($err as $m) {
+                if (is_string($m)) {
+                    $defaults['_root'][] = $m;
+                }
+            }
+            return $defaults;
+        }
+        if (!empty($err['_root']) && is_array($err['_root'])) {
+            foreach ($err['_root'] as $m) {
+                if (is_string($m)) {
+                    $defaults['_root'][] = $m;
+                }
+            }
+        }
+        if (!empty($err['items']) && is_array($err['items'])) {
+            foreach ($err['items'] as $index => $messages) {
+                if (!is_array($messages)) {
+                    continue;
+                }
+                $normalized = [];
+                foreach ($messages as $m) {
+                    if (is_string($m)) {
+                        $normalized[] = $m;
+                    }
+                }
+                if ($normalized !== []) {
+                    $defaults['items'][(int) $index] = $normalized;
+                }
+            }
+        }
+        return $defaults;
+    }
+}
+
 if (!function_exists('japanese_prefectures')) {
     /**
      * @return string[] 都道府県名（47）
@@ -691,6 +741,56 @@ if (!function_exists('format_text_pair_value_display')) {
         if ($right !== '') {
             $lines[] = ($rightLabel !== '' ? $rightLabel . ': ' : '') . $right;
         }
+        return implode("\n", $lines);
+    }
+}
+
+if (!function_exists('format_text_multi_value_display')) {
+    /**
+     * @param array|string $value
+     * @param array<int, array{label?:string,placeholder?:string}>|null $items
+     */
+    function format_text_multi_value_display($value, ?array $items = null): string
+    {
+        $items = is_array($items) ? array_values($items) : [];
+        $values = [];
+
+        if (is_array($value)) {
+            if (isset($value['items']) && is_array($value['items'])) {
+                $values = array_values(array_map(static fn($item): string => trim((string) $item), $value['items']));
+            } else {
+                $values = array_values(array_map(static fn($item): string => trim((string) $item), $value));
+            }
+        } else {
+            $s = trim((string) $value);
+            if ($s === '') {
+                return '';
+            }
+            $decoded = json_decode($s, true);
+            if (is_array($decoded)) {
+                if (isset($decoded['items']) && is_array($decoded['items'])) {
+                    $values = array_values(array_map(static fn($item): string => trim((string) $item), $decoded['items']));
+                } else {
+                    $values = array_values(array_map(static fn($item): string => trim((string) $item), $decoded));
+                }
+            } else {
+                $values = preg_split('/\r\n|\r|\n/', $s) ?: [];
+                $values = array_values(array_map(static fn($item): string => trim((string) $item), $values));
+            }
+        }
+
+        $lines = [];
+        foreach ($values as $index => $itemValue) {
+            if ($itemValue === '') {
+                continue;
+            }
+            $label = trim((string) ($items[$index]['label'] ?? ''));
+            if ($label === '') {
+                $label = '入力欄' . ($index + 1);
+            }
+            $lines[] = $label . ': ' . $itemValue;
+        }
+
         return implode("\n", $lines);
     }
 }

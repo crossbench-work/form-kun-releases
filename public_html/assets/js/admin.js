@@ -518,6 +518,101 @@
         });
     }
 
+    function syncTextMultiEditor(box) {
+        var source = box.querySelector('[data-target="c-formEditor__textMultiSource"]');
+        if (!source) return;
+        var items = [];
+        box.querySelectorAll('[data-text-multi-item]').forEach(function (item) {
+            var labelInput = item.querySelector('[data-target="c-formEditor__textMultiLabelInput"]');
+            var placeholderInput = item.querySelector('[data-target="c-formEditor__textMultiPlaceholderInput"]');
+            items.push({
+                label: labelInput ? labelInput.value.trim() : '',
+                placeholder: placeholderInput ? placeholderInput.value.trim() : ''
+            });
+        });
+        source.value = JSON.stringify(items);
+    }
+
+    function createTextMultiItem(data) {
+        var item = document.createElement('div');
+        item.className = 'c-formEditor__field c-formEditor__textMultiItem';
+        item.setAttribute('data-text-multi-item', '');
+        item.innerHTML =
+            '<div class="wrapper">' +
+                '<div class="block is-contents">' +
+                    '<div class="block is-title"><label class="label" data-module="m-labelTitle01">表示名</label></div>' +
+                    '<div class="block is-field"><div data-module="m-input01"><input type="text" data-target="c-formEditor__textMultiLabelInput"></div></div>' +
+                '</div>' +
+                '<div class="block is-contents">' +
+                    '<div class="block is-title"><label class="label" data-module="m-labelTitle01">プレースホルダ（任意）</label></div>' +
+                    '<div class="block is-field"><div data-module="m-input01"><input type="text" data-target="c-formEditor__textMultiPlaceholderInput"></div></div>' +
+                '</div>' +
+            '</div>' +
+            '<div class="c-formEditor__actions">' +
+                '<button type="button" class="btn is-sm is-danger" data-target="c-formEditor__textMultiRemove">削除</button>' +
+            '</div>';
+        var labelInput = item.querySelector('[data-target="c-formEditor__textMultiLabelInput"]');
+        var placeholderInput = item.querySelector('[data-target="c-formEditor__textMultiPlaceholderInput"]');
+        if (labelInput) {
+            labelInput.value = data && typeof data.label === 'string' ? data.label : '';
+        }
+        if (placeholderInput) {
+            placeholderInput.value = data && typeof data.placeholder === 'string' ? data.placeholder : '';
+        }
+        return item;
+    }
+
+    function bindTextMultiItem(item, box) {
+        var labelInput = item.querySelector('[data-target="c-formEditor__textMultiLabelInput"]');
+        var placeholderInput = item.querySelector('[data-target="c-formEditor__textMultiPlaceholderInput"]');
+        var remove = item.querySelector('[data-target="c-formEditor__textMultiRemove"]');
+
+        function sync() {
+            syncTextMultiEditor(box);
+        }
+
+        if (labelInput) {
+            labelInput.addEventListener('input', sync);
+            labelInput.addEventListener('change', sync);
+        }
+        if (placeholderInput) {
+            placeholderInput.addEventListener('input', sync);
+            placeholderInput.addEventListener('change', sync);
+        }
+        if (remove) {
+            remove.addEventListener('click', function () {
+                var list = item.parentNode;
+                if (!list) return;
+                if (list.querySelectorAll('[data-text-multi-item]').length <= 1) {
+                    alert('入力欄は1つ以上必要です。');
+                    return;
+                }
+                list.removeChild(item);
+                syncTextMultiEditor(box);
+            });
+        }
+    }
+
+    function bindTextMultiEditor(li) {
+        li.querySelectorAll('[data-text-multi-editor]').forEach(function (box) {
+            var list = box.querySelector('.c-formEditor__textMultiList');
+            var add = box.querySelector('[data-target="c-formEditor__textMultiAdd"]');
+            if (!list || !add) return;
+            list.querySelectorAll('[data-text-multi-item]').forEach(function (item) {
+                bindTextMultiItem(item, box);
+            });
+            add.addEventListener('click', function () {
+                var item = createTextMultiItem();
+                list.appendChild(item);
+                bindTextMultiItem(item, box);
+                syncTextMultiEditor(box);
+                var labelInput = item.querySelector('[data-target="c-formEditor__textMultiLabelInput"]');
+                if (labelInput) labelInput.focus();
+            });
+            syncTextMultiEditor(box);
+        });
+    }
+
     function bindFieldKeyLock(li) {
         var btn = li.querySelector('[data-target="c-formEditor__fieldKeyLock"]');
         var input = li.querySelector('[data-target="c-formEditor__fieldKeyInput"]');
@@ -548,6 +643,7 @@
         var optionsBox = li.querySelector('[data-target="c-formEditor__options"]');
         var textPairSettings = li.querySelector('[data-target="c-formEditor__textPairSettings"]');
         var textPairPlaceholders = li.querySelector('[data-target="c-formEditor__textPairPlaceholders"]');
+        var textMultiSettings = li.querySelector('[data-target="c-formEditor__textMultiSettings"]');
         var maxLengthWrap = li.querySelector('[data-target="c-formEditor__minMaxLength"]');
         var maxLengthInput = maxLengthWrap ? maxLengthWrap.querySelector('input[data-name="max_length"]') : null;
         var minLengthInput = maxLengthWrap ? maxLengthWrap.querySelector('input[data-name="min_length"]') : null;
@@ -623,8 +719,11 @@
             if (textPairPlaceholders) {
                 textPairPlaceholders.style.display = (v === 'text_pair') ? '' : 'none';
             }
+            if (textMultiSettings) {
+                textMultiSettings.style.display = (v === 'text_multi') ? '' : 'none';
+            }
             if (placeholderWrap) {
-                var hidePlaceholder = (v === 'text_pair' || v === 'radio' || v === 'checkbox' || v === 'select');
+                var hidePlaceholder = (v === 'text_pair' || v === 'text_multi' || v === 'radio' || v === 'checkbox' || v === 'select');
                 placeholderWrap.style.display = hidePlaceholder ? 'none' : '';
                 if (hidePlaceholder && placeholderInput) {
                     placeholderInput.value = '';
@@ -678,6 +777,7 @@
         bindFieldKeyLock(li);
         bindRegexBlock(li);
         bindChoiceEditor(li);
+        bindTextMultiEditor(li);
         syncTypeSpecificUi();
 
         var labInp = li.querySelector('[data-target="c-formEditor__labelInput"]');
@@ -774,6 +874,7 @@
         mainForm.addEventListener('submit', function () {
             syncAllRegexRows();
             list.querySelectorAll('[data-choice-editor]').forEach(syncChoiceEditor);
+            list.querySelectorAll('[data-text-multi-editor]').forEach(syncTextMultiEditor);
             descriptionEditors.forEach(function (editor) {
                 sortDescriptionBlocks(editor);
                 reindexDescriptionBlocks(editor);

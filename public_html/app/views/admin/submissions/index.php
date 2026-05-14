@@ -66,6 +66,8 @@
                                                         $v = format_address_value_display($v);
                                                     } elseif (($fieldDef['type'] ?? '') === 'text_pair') {
                                                         $v = format_text_pair_value_display($v, \Models\FormField::decodeTextPairLabels($fieldDef['options_json'] ?? null));
+                                                    } elseif (($fieldDef['type'] ?? '') === 'text_multi') {
+                                                        $v = format_text_multi_value_display($v, \Models\FormField::decodeTextMultiItems($fieldDef['options_json'] ?? null, true));
                                                     }
                                                     $v = mb_substr((string) $v, 0, 40);
                                                 ?>
