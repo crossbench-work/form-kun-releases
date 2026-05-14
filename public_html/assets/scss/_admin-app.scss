@@ -817,9 +817,15 @@ form.is-inline {
     text-decoration: none;
     line-height: 1.4;
 
-    &:hover {
+    &:hover:not(:disabled):not([aria-disabled="true"]) {
       background: #f1f5f9;
       text-decoration: none;
+    }
+
+    &:disabled,
+    &[aria-disabled="true"] {
+      opacity: 0.55;
+      cursor: not-allowed;
     }
 
     &.is-primary {
@@ -827,7 +833,7 @@ form.is-inline {
       border-color: #3C8CFD;
       color: #fff;
 
-      &:hover {
+      &:hover:not(:disabled):not([aria-disabled="true"]) {
         background: #1d4ed8;
       }
     }

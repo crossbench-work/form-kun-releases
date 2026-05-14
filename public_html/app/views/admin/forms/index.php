@@ -2,9 +2,13 @@
     <h1 class="title" style="margin:0;">フォーム一覧</h1>
     <div class="spacer"></div>
     <?php if (!empty($at_form_limit)): ?>
-        <button type="button" class="btn is-primary" disabled aria-disabled="true">＋ 新規作成（上限）</button>
+        <div data-module="m-btn01">
+            <button type="button" class="btn is-primary" disabled aria-disabled="true">＋ 新規作成</button>
+        </div>
     <?php else: ?>
-        <a class="btn is-primary" href="<?= e(base_path('/admin/forms/new')) ?>">＋ 新規作成</a>
+        <div data-module="m-btn01">
+            <a class="btn is-primary" href="<?= e(base_path('/admin/forms/new')) ?>">＋ 新規作成</a>
+        </div>
     <?php endif; ?>
 </div>
 

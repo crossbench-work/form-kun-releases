@@ -857,11 +857,19 @@ form.is-inline {
   text-decoration: none;
   line-height: 1.4;
 }
-[data-module=m-btn01] > .btn:hover,
-[data-module=m-btn01] > button:hover,
-[data-module=m-btn01] > a:hover {
+[data-module=m-btn01] > .btn:hover:not(:disabled):not([aria-disabled=true]),
+[data-module=m-btn01] > button:hover:not(:disabled):not([aria-disabled=true]),
+[data-module=m-btn01] > a:hover:not(:disabled):not([aria-disabled=true]) {
   background: #f1f5f9;
   text-decoration: none;
+}
+[data-module=m-btn01] > .btn:disabled, [data-module=m-btn01] > .btn[aria-disabled=true],
+[data-module=m-btn01] > button:disabled,
+[data-module=m-btn01] > button[aria-disabled=true],
+[data-module=m-btn01] > a:disabled,
+[data-module=m-btn01] > a[aria-disabled=true] {
+  opacity: 0.55;
+  cursor: not-allowed;
 }
 [data-module=m-btn01] > .btn.is-primary,
 [data-module=m-btn01] > button.is-primary,
@@ -870,9 +878,9 @@ form.is-inline {
   border-color: #3C8CFD;
   color: #fff;
 }
-[data-module=m-btn01] > .btn.is-primary:hover,
-[data-module=m-btn01] > button.is-primary:hover,
-[data-module=m-btn01] > a.is-primary:hover {
+[data-module=m-btn01] > .btn.is-primary:hover:not(:disabled):not([aria-disabled=true]),
+[data-module=m-btn01] > button.is-primary:hover:not(:disabled):not([aria-disabled=true]),
+[data-module=m-btn01] > a.is-primary:hover:not(:disabled):not([aria-disabled=true]) {
   background: #1d4ed8;
 }
 
