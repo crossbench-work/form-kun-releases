@@ -64,7 +64,7 @@ class FormField
     public static function TYPE_LABELS(): array
     {
         return [
-            'text_multi' => '1行テキスト（複数入力）',
+            'text_multi' => '1行テキスト',
             'textarea' => '複数行テキスト',
             'address' => '住所',
             'email' => 'メールアドレス',
@@ -114,7 +114,9 @@ class FormField
             [$formId]
         );
 
-        return array_map([self::class, 'normalizeField'], $fields);
+        return array_values(array_filter(array_map([self::class, 'normalizeField'], $fields), static function ($field): bool {
+            return is_array($field) && !self::isAgreementFieldRecord($field);
+        }));
     }
 
     /**
@@ -128,6 +130,9 @@ class FormField
             Database::execute('DELETE FROM form_fields WHERE form_id = ?', [$formId]);
             $order = 0;
             foreach ($fields as $f) {
+                if (self::isAgreementFieldRecord($f)) {
+                    continue;
+                }
                 $order++;
                 $type = self::sanitizeType((string) ($f['type'] ?? 'text_multi'));
                 $optionsJson = null;
@@ -462,5 +467,35 @@ class FormField
         }
 
         return $field;
+    }
+
+    /**
+     * @param array<string, mixed> $field
+     */
+    private static function isAgreementFieldRecord(array $field): bool
+    {
+        $fieldKey = trim((string) ($field['field_key'] ?? ''));
+        if ($fieldKey === 'agreement_consent') {
+            return true;
+        }
+
+        if ((string) ($field['type'] ?? '') !== 'checkbox') {
+            return false;
+        }
+
+        $label = trim((string) ($field['label'] ?? ''));
+        if ($label !== '規約への同意') {
+            return false;
+        }
+
+        $options = [];
+        if (array_key_exists('options', $field)) {
+            $options = self::parseOptions((string) ($field['options'] ?? ''));
+        } else {
+            $checkboxSettings = self::decodeCheckboxSettings($field['options_json'] ?? null);
+            $options = $checkboxSettings['options'];
+        }
+
+        return count($options) === 1 && (string) ($options[0] ?? '') === '規約に同意する';
     }
 }

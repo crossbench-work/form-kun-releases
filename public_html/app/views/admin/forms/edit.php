@@ -17,15 +17,6 @@ $slugPreviewValue = trim((string) ($form['slug'] ?? '')) !== '' ? (string) $form
 $descriptionBlocks = $form['description_blocks'] ?? [['id' => 'description-0', 'html' => '', 'position' => 0, 'visible' => 1]];
 $confirmBlocks = $form['confirm_blocks'] ?? [['id' => 'confirm-0', 'html' => '', 'position' => 0, 'visible' => 1]];
 $thanksBlocks = $form['thanks_blocks'] ?? [['id' => 'thanks-0', 'html' => '', 'position' => 0, 'visible' => 1]];
-$agreementField = null;
-$sortableFields = [];
-foreach ($fields as $field) {
-    if ($agreementField === null && !empty($field['_is_agreement_field'])) {
-        $agreementField = $field;
-        continue;
-    }
-    $sortableFields[] = $field;
-}
 $renderDescriptionEditor = static function (string $namePrefix, array $blocks, string $positionMode): void {
     ?>
     <div class="block is-field">
@@ -237,8 +228,8 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
             <div class="c-formEditor">
                 <div class="wrapper">
                     <div class="block is-contents" data-target="m-formBuilder01__fields">
-            <?php foreach ($sortableFields as $i => $f): ?>
-                <?php $idx = $i; $isAgreementField = false; ?>
+            <?php foreach ($fields as $i => $f): ?>
+                <?php $idx = $i; ?>
                 <?php include __DIR__ . '/_field_editor.php'; ?>
             <?php endforeach; ?>
                     </div>
@@ -248,16 +239,6 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
             <div class="area is-actions">
                 <button type="button" data-target="m-formBuilder01__add" class="btn">＋ 項目を追加</button>
             </div>
-            <?php if ($agreementField !== null): ?>
-                <div class="c-formEditor is-static">
-                    <div class="wrapper">
-                        <div class="block is-contents">
-                    <?php $idx = count($sortableFields); $f = $agreementField; $isAgreementField = true; ?>
-                    <?php include __DIR__ . '/_field_editor.php'; ?>
-                        </div>
-                    </div>
-                </div>
-            <?php endif; ?>
             </div>
                         </div>
                     </div>

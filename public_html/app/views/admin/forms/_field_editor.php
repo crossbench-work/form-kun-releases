@@ -1,15 +1,6 @@
 <?php
 $fk = (string) ($f['field_key'] ?? '');
 $fkLocked = $fk !== '' && \Core\FieldKey::isUuidFormat($fk);
-$agreementDefaults = [
-    'field_key' => 'agreement_consent',
-    'type' => 'checkbox',
-    'required' => 1,
-    'checkbox_limit_enabled' => 0,
-    'checkbox_min_selections' => '',
-    'checkbox_max_selections' => '',
-    'options' => '規約に同意する',
-];
 $regexDecoded = \Models\FormField::decodeRegexPatterns(isset($f['regex']) ? (string) $f['regex'] : null);
 $rp = $regexDecoded[0] ?? '';
 $isTextMulti = (($f['type'] ?? '') === 'text_multi');
@@ -31,27 +22,25 @@ if (empty($f['required']) || in_array($f['type'], ['radio', 'select'], true)) {
     $summaryRegex = 'カスタム';
 }
 ?>
-<div class="c-formEditor__item is-collapsed" data-index="<?= $idx ?>" data-field-item="1"<?= $isAgreementField ? ' data-is-agreement-field="1"' : '' ?>>
+<div class="c-formEditor__item is-collapsed" data-index="<?= $idx ?>" data-field-item="1">
     <div class="wrapper">
         <div class="block is-header">
                 <div class="c-formEditor__itemHeader">
                     <div class="wrapper">
                         <div class="block is-contents">
-                            <?php if (!$isAgreementField): ?>
-                                <div class="area is-move">
-                                    <div class="box is-handle ui-sortable-handle" title="ドラッグして並べ替え">
-                                        <p data-module="m-dragHandle01" data-target="c-formEditor__dragHandle">
-                                            <svg width="14" height="18" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="currentColor"><circle cx="9" cy="6" r="2"/><circle cx="15" cy="6" r="2"/><circle cx="9" cy="12" r="2"/><circle cx="15" cy="12" r="2"/><circle cx="9" cy="18" r="2"/><circle cx="15" cy="18" r="2"/></svg>
-                                        </p>
-                                    </div>
-                                    <div class="box is-button">
-                                        <button type="button" data-module="m-arrowBtn01" data-type="up" data-target="c-formEditor__moveUp" aria-label="上へ移動" title="上へ移動">↑</button>
-                                    </div>
-                                    <div class="box is-button">
-                                        <button type="button" data-module="m-arrowBtn01" data-type="down" data-target="c-formEditor__moveDown" aria-label="下へ移動" title="下へ移動">↓</button>
-                                    </div>
+                            <div class="area is-move">
+                                <div class="box is-handle ui-sortable-handle" title="ドラッグして並べ替え">
+                                    <p data-module="m-dragHandle01" data-target="c-formEditor__dragHandle">
+                                        <svg width="14" height="18" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="currentColor"><circle cx="9" cy="6" r="2"/><circle cx="15" cy="6" r="2"/><circle cx="9" cy="12" r="2"/><circle cx="15" cy="12" r="2"/><circle cx="9" cy="18" r="2"/><circle cx="15" cy="18" r="2"/></svg>
+                                    </p>
                                 </div>
-                            <?php endif; ?>
+                                <div class="box is-button">
+                                    <button type="button" data-module="m-arrowBtn01" data-type="up" data-target="c-formEditor__moveUp" aria-label="上へ移動" title="上へ移動">↑</button>
+                                </div>
+                                <div class="box is-button">
+                                    <button type="button" data-module="m-arrowBtn01" data-type="down" data-target="c-formEditor__moveDown" aria-label="下へ移動" title="下へ移動">↓</button>
+                                </div>
+                            </div>
                             <div class="area is-summary">
                                 <div class="c-formEditorSummary01">
                                     <div class="wrapper">
@@ -65,18 +54,16 @@ if (empty($f['required']) || in_array($f['type'], ['radio', 'select'], true)) {
                                     </div>
                                 </div>
                             </div>
-                            <?php if (!$isAgreementField): ?>
-                                <div class="area is-delete">
-                                    <button type="button" data-module="m-deleteBtn01" data-target="c-formEditor__remove" aria-label="削除" title="削除">
-                                        <svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2">
-                                            <path stroke-linecap="round" stroke-linejoin="round" d="M3 6h18"/>
-                                            <path stroke-linecap="round" stroke-linejoin="round" d="M8 6V4h8v2"/>
-                                            <path stroke-linecap="round" stroke-linejoin="round" d="M19 6l-1 14H6L5 6"/>
-                                            <path stroke-linecap="round" stroke-linejoin="round" d="M10 11v6M14 11v6"/>
-                                        </svg>
-                                    </button>
-                                </div>
-                            <?php endif; ?>
+                            <div class="area is-delete">
+                                <button type="button" data-module="m-deleteBtn01" data-target="c-formEditor__remove" aria-label="削除" title="削除">
+                                    <svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M3 6h18"/>
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M8 6V4h8v2"/>
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M19 6l-1 14H6L5 6"/>
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M10 11v6M14 11v6"/>
+                                    </svg>
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -101,55 +88,41 @@ if (empty($f['required']) || in_array($f['type'], ['radio', 'select'], true)) {
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <?php if ($isAgreementField): ?>
-                                                        <input type="hidden" name="fields[<?= $idx ?>][field_key]" value="<?= e($agreementDefaults['field_key']) ?>">
-                                                        <input type="hidden" name="fields[<?= $idx ?>][type]" value="<?= e($agreementDefaults['type']) ?>" data-target="c-formEditor__type">
-                                                    <?php else: ?>
-                                                        <div class="block is-contents c-formEditor__fieldKeyColumn">
-                                                            <div class="block is-title">
-                                                                <label class="label" data-module="m-labelTitle01">フィールドキー</label>
-                                                            </div>
-                                                            <div class="block is-field">
-                                                                <div class="c-formEditor__fieldKey">
-                                                                    <div data-module="m-input01">
-                                                                        <input type="text" name="fields[<?= $idx ?>][field_key]" value="<?= e($f['field_key']) ?>" data-target="c-formEditor__fieldKeyInput" class="<?= $fkLocked ? 'is-locked' : '' ?>" <?= $fkLocked ? 'readonly' : '' ?> spellcheck="false">
-                                                                    </div>
-                                                                    <button type="button" class="btn is-icon" data-target="c-formEditor__fieldKeyLock" aria-label="<?= $fkLocked ? 'キーを編集' : 'キーをロック' ?>" title="<?= $fkLocked ? '編集する' : 'ロックする' ?>" aria-pressed="<?= $fkLocked ? 'true' : 'false' ?>">
-                                                                        <svg data-target="c-formEditor__fieldKeyLockedIcon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" <?= $fkLocked ? '' : 'style="display:none"' ?> aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
-                                                                        <svg data-target="c-formEditor__fieldKeyOpenIcon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" <?= $fkLocked ? 'style="display:none"' : '' ?> aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M8 11V7a4 4 0 118 0m-4 8v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2z"/></svg>
-                                                                    </button>
-                                                                </div>
-                                                            </div>
+                                                    <div class="block is-contents c-formEditor__fieldKeyColumn">
+                                                        <div class="block is-title">
+                                                            <label class="label" data-module="m-labelTitle01">フィールドキー</label>
                                                         </div>
-                                                        <div class="block is-contents">
-                                                            <div class="block is-title">
-                                                                <label class="label" data-module="m-labelTitle01">型</label>
-                                                            </div>
-                                                            <div class="block is-field">
+                                                        <div class="block is-field">
+                                                            <div class="c-formEditor__fieldKey">
                                                                 <div data-module="m-input01">
-                                                                    <select name="fields[<?= $idx ?>][type]" data-target="c-formEditor__type">
-                                                                    <?php foreach (\Models\FormField::TYPE_LABELS() as $tVal => $tLabel): ?>
-                                                                        <option value="<?= e($tVal) ?>" <?= $f['type'] === $tVal ? 'selected' : '' ?>><?= e($tLabel) ?></option>
-                                                                    <?php endforeach; ?>
-                                                                    </select>
+                                                                    <input type="text" name="fields[<?= $idx ?>][field_key]" value="<?= e($f['field_key']) ?>" data-target="c-formEditor__fieldKeyInput" class="<?= $fkLocked ? 'is-locked' : '' ?>" <?= $fkLocked ? 'readonly' : '' ?> spellcheck="false">
                                                                 </div>
+                                                                <button type="button" class="btn is-icon" data-target="c-formEditor__fieldKeyLock" aria-label="<?= $fkLocked ? 'キーを編集' : 'キーをロック' ?>" title="<?= $fkLocked ? '編集する' : 'ロックする' ?>" aria-pressed="<?= $fkLocked ? 'true' : 'false' ?>">
+                                                                    <svg data-target="c-formEditor__fieldKeyLockedIcon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" <?= $fkLocked ? '' : 'style="display:none"' ?> aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+                                                                    <svg data-target="c-formEditor__fieldKeyOpenIcon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" <?= $fkLocked ? 'style="display:none"' : '' ?> aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M8 11V7a4 4 0 118 0m-4 8v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2z"/></svg>
+                                                                </button>
                                                             </div>
                                                         </div>
-                                                    <?php endif; ?>
+                                                    </div>
+                                                    <div class="block is-contents">
+                                                        <div class="block is-title">
+                                                            <label class="label" data-module="m-labelTitle01">型</label>
+                                                        </div>
+                                                        <div class="block is-field">
+                                                            <div data-module="m-input01">
+                                                                <select name="fields[<?= $idx ?>][type]" data-target="c-formEditor__type">
+                                                                <?php foreach (\Models\FormField::TYPE_LABELS() as $tVal => $tLabel): ?>
+                                                                    <option value="<?= e($tVal) ?>" <?= $f['type'] === $tVal ? 'selected' : '' ?>><?= e($tLabel) ?></option>
+                                                                <?php endforeach; ?>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                             </div>
-                            <?php if ($isAgreementField): ?>
-                                <input type="hidden" name="fields[<?= $idx ?>][required]" value="1" data-target="c-formEditor__required">
-                                <input type="hidden" name="fields[<?= $idx ?>][regex_pattern]" value="" data-target="c-formEditor__regexValue" spellcheck="false">
-                                <input type="hidden" name="fields[<?= $idx ?>][checkbox_limit_enabled]" data-target="c-formEditor__checkboxLimitEnabled" value="0">
-                                <input type="hidden" name="fields[<?= $idx ?>][checkbox_min_selections]" value="">
-                                <input type="hidden" name="fields[<?= $idx ?>][checkbox_max_selections]" value="">
-                                <textarea name="fields[<?= $idx ?>][options]" data-target="c-formEditor__optionsSource" hidden><?= e($agreementDefaults['options']) ?></textarea>
-                                <input type="hidden" name="fields[<?= $idx ?>][max_length]" value="">
-                            <?php else: ?>
-                                <div class="block is-contents">
+                            <div class="block is-contents">
                                             <div class="block is-title">
                                                 <p data-module="m-borderTitle01">入力設定</p>
                                             </div>
@@ -290,7 +263,6 @@ if (empty($f['required']) || in_array($f['type'], ['radio', 'select'], true)) {
                                                 </div>
                                             </div>
                                 </div>
-                            <?php endif; ?>
                             <div class="block is-contents">
                                         <div class="block is-title">
                                             <p data-module="m-borderTitle01">表示設定</p>
@@ -353,18 +325,10 @@ if (empty($f['required']) || in_array($f['type'], ['radio', 'select'], true)) {
                                             </div>
                                         </div>
                                         <div class="block is-field">
-                                            <?php if ($isAgreementField): ?>
-                                                <label class="label" data-module="m-labelTitle01">説明文</label>
-                                                <div data-module="m-input01">
-                                                    <textarea name="fields[<?= $idx ?>][help_text]" rows="6"><?= e($f['help_text']) ?></textarea>
-                                                </div>
-                                                <p class="text is-help">HTML を直接入力できます。説明文はチェックボックスの上に表示されます。</p>
-                                            <?php else: ?>
-                                                <label class="label" data-module="m-labelTitle01">備考</label>
-                                                <div data-module="m-input01">
-                                                    <textarea name="fields[<?= $idx ?>][help_text]" rows="3"><?= e($f['help_text']) ?></textarea>
-                                                </div>
-                                            <?php endif; ?>
+                                            <label class="label" data-module="m-labelTitle01">備考</label>
+                                            <div data-module="m-input01">
+                                                <textarea name="fields[<?= $idx ?>][help_text]" rows="3"><?= e($f['help_text']) ?></textarea>
+                                            </div>
                                         </div>
                             <input type="hidden" name="fields[<?= $idx ?>][_remove]" value="0" data-target="c-formEditor__removeFlag">
                     </div>
