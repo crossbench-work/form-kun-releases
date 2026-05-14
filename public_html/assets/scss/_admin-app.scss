@@ -9,7 +9,7 @@ body.l-adminShell01 {
   --admin-sidebar-width: 180px;
 
   a {
-    color: #2563eb;
+    color: #3C8CFD;
     text-decoration: none;
 
     &:hover {
@@ -22,7 +22,7 @@ body.l-adminShell01 {
   color: #6b7280;
 
   a {
-    color: #2563eb;
+    color: #3C8CFD;
   }
 }
 
@@ -45,7 +45,7 @@ body.l-adminShell01 {
     border: 1px solid #cbd5e1;
     border-radius: 999px;
     background: #fff;
-    color: #2563eb;
+    color: #3C8CFD;
     cursor: pointer;
     transition: background-color 0.16s ease, border-color 0.16s ease, color 0.16s ease;
 
@@ -65,7 +65,7 @@ body.l-adminShell01 {
   }
 
   .text.is-feedback {
-    color: #2563eb;
+    color: #3C8CFD;
   }
 }
 
@@ -98,7 +98,7 @@ body.l-adminShell01 {
 
     > h1.title {
       text-align: center;
-      color: #2563eb;
+      color: #3C8CFD;
       font-size: 22px;
       margin: 0 0 24px;
     }
@@ -120,7 +120,7 @@ body.l-adminShell01 {
   box-shadow: 0 4px 24px rgba(0, 0, 0, 0.04);
 
   .text.is-muted a {
-    color: #2563eb;
+    color: #3C8CFD;
   }
 
   .box.is-field {
@@ -173,8 +173,8 @@ body.l-adminShell01 {
     }
 
     &.is-primary {
-      background: #2563eb;
-      border-color: #2563eb;
+      background: #3C8CFD;
+      border-color: #3C8CFD;
       color: #fff;
 
       &:hover {
@@ -526,8 +526,8 @@ body.l-adminShell01 {
     }
 
     &.is-primary {
-      background: #2563eb;
-      border-color: #2563eb;
+      background: #3C8CFD;
+      border-color: #3C8CFD;
       color: #fff;
 
       &:hover {
@@ -646,8 +646,8 @@ form.is-inline {
     }
 
     &.is-primary {
-      background: #2563eb;
-      border-color: #2563eb;
+      background: #3C8CFD;
+      border-color: #3C8CFD;
       color: #fff;
 
       &:hover {
@@ -664,13 +664,12 @@ form.is-inline {
   > .wrapper {
     > .block.is-tabs {
       display: flex;
-      gap: 0;
+      gap: 8px;
       flex-wrap: wrap;
-      border-bottom: 2px solid #e2e8f0;
       margin-bottom: 20px;
-      padding: 10px;
-      background-color: #d7dee3;
-      border-radius: 100px;
+      padding: 8px 24px;
+      background-color: #e0e6eb;
+      border-radius: 12px;
     }
 
     > .block.is-contents {
@@ -682,14 +681,14 @@ form.is-inline {
 }
 
 [data-module="m-formEditTab01"] {
-  font-size: 14px;
-  padding: 10px 16px;
-  margin: 0 0 -2px;
-  border-bottom: 2px solid transparent;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 8px 18px;
+  line-height: 1.0;
   background: transparent;
   color: #64748b;
   cursor: pointer;
-  border-radius: 6px 6px 0 0;
+  border-radius: 100px;
 
   &:hover {
     color: #1f2937;
@@ -697,9 +696,10 @@ form.is-inline {
   }
 
   &[aria-selected="true"] {
-    color: #2563eb;
+    color: #fff;
     font-weight: 600;
-    background: #fff;
+    background: #3C8CFD;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
   }
 }
 
@@ -747,8 +747,8 @@ form.is-inline {
     }
 
     &.is-primary {
-      background: #2563eb;
-      border-color: #2563eb;
+      background: #3C8CFD;
+      border-color: #3C8CFD;
       color: #fff;
 
       &:hover {
@@ -962,8 +962,8 @@ form.is-inline {
     }
 
     &.is-primary {
-      background: #2563eb;
-      border-color: #2563eb;
+      background: #3C8CFD;
+      border-color: #3C8CFD;
       color: #fff;
 
       &:hover {
@@ -1308,7 +1308,7 @@ body.is-field-type-modal-open {
 
     &:hover,
     &:focus-visible {
-      border-color: #2563eb;
+      border-color: #3C8CFD;
       box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.16);
       outline: none;
       background: #eff6ff;
@@ -1754,9 +1754,9 @@ body.is-field-type-modal-open {
   }
 
   .current {
-    background: #2563eb;
+    background: #3C8CFD;
     color: #fff;
-    border-color: #2563eb;
+    border-color: #3C8CFD;
   }
 
   .disabled {

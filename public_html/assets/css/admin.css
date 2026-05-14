@@ -155,7 +155,7 @@ body.l-adminShell01 {
   --admin-sidebar-width: 180px;
 }
 body.l-adminShell01 a {
-  color: #2563eb;
+  color: #3C8CFD;
   text-decoration: none;
 }
 body.l-adminShell01 a:hover {
@@ -166,7 +166,7 @@ body.l-adminShell01 a:hover {
   color: #6b7280;
 }
 .text.is-muted a {
-  color: #2563eb;
+  color: #3C8CFD;
 }
 
 .c-copyTagList01 {
@@ -187,7 +187,7 @@ body.l-adminShell01 a:hover {
   border: 1px solid #cbd5e1;
   border-radius: 999px;
   background: #fff;
-  color: #2563eb;
+  color: #3C8CFD;
   cursor: pointer;
   transition: background-color 0.16s ease, border-color 0.16s ease, color 0.16s ease;
 }
@@ -203,7 +203,7 @@ body.l-adminShell01 a:hover {
   margin: 0;
 }
 .c-copyTagList01 .text.is-feedback {
-  color: #2563eb;
+  color: #3C8CFD;
 }
 
 .is-visuallyHidden {
@@ -233,7 +233,7 @@ body.l-adminShell01 a:hover {
 }
 .l-authCard01 > .wrapper > h1.title {
   text-align: center;
-  color: #2563eb;
+  color: #3C8CFD;
   font-size: 22px;
   margin: 0 0 24px;
 }
@@ -252,7 +252,7 @@ body.l-adminShell01 a:hover {
   box-shadow: 0 4px 24px rgba(0, 0, 0, 0.04);
 }
 .m-authForm01 .text.is-muted a {
-  color: #2563eb;
+  color: #3C8CFD;
 }
 .m-authForm01 .box.is-field {
   margin-bottom: 16px;
@@ -298,8 +298,8 @@ body.l-adminShell01 a:hover {
   text-decoration: none;
 }
 .m-authForm01 .btn.is-primary {
-  background: #2563eb;
-  border-color: #2563eb;
+  background: #3C8CFD;
+  border-color: #3C8CFD;
   color: #fff;
 }
 .m-authForm01 .btn.is-primary:hover {
@@ -618,8 +618,8 @@ body.l-adminShell01 a:hover {
   text-decoration: none;
 }
 .m-toolbar01 .btn.is-primary {
-  background: #2563eb;
-  border-color: #2563eb;
+  background: #3C8CFD;
+  border-color: #3C8CFD;
   color: #fff;
 }
 .m-toolbar01 .btn.is-primary:hover {
@@ -717,8 +717,8 @@ form.is-inline {
   text-decoration: none;
 }
 .l-adminBody01 form > .area.is-actions .btn.is-primary {
-  background: #2563eb;
-  border-color: #2563eb;
+  background: #3C8CFD;
+  border-color: #3C8CFD;
   color: #fff;
 }
 .l-adminBody01 form > .area.is-actions .btn.is-primary:hover {
@@ -730,37 +730,36 @@ form.is-inline {
 }
 [data-module=c-formEditTabs01] > .wrapper > .block.is-tabs {
   display: flex;
-  gap: 0;
+  gap: 8px;
   flex-wrap: wrap;
-  border-bottom: 2px solid #e2e8f0;
   margin-bottom: 20px;
-  padding: 10px;
-  background-color: #d7dee3;
-  border-radius: 100px;
+  padding: 8px 24px;
+  background-color: #e0e6eb;
+  border-radius: 12px;
 }
 [data-module=c-formEditTabs01] > .wrapper > .block.is-contents .area.is-contents[role=tabpanel][hidden] {
   display: none !important;
 }
 
 [data-module=m-formEditTab01] {
-  font-size: 14px;
-  padding: 10px 16px;
-  margin: 0 0 -2px;
-  border-bottom: 2px solid transparent;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 8px 18px;
+  line-height: 1;
   background: transparent;
   color: #64748b;
   cursor: pointer;
-  border-radius: 6px 6px 0 0;
+  border-radius: 100px;
 }
 [data-module=m-formEditTab01]:hover {
   color: #1f2937;
   background: #f8fafc;
 }
 [data-module=m-formEditTab01][aria-selected=true] {
-  color: #2563eb;
+  color: #fff;
   font-weight: 600;
-  border-bottom-color: #2563eb;
-  background: #fff;
+  background: #3C8CFD;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
 }
 
 .p-formEdit01 > .wrapper > .block.bottom {
@@ -800,8 +799,8 @@ form.is-inline {
 [data-module=m-btn01] > .btn.is-primary,
 [data-module=m-btn01] > button.is-primary,
 [data-module=m-btn01] > a.is-primary {
-  background: #2563eb;
-  border-color: #2563eb;
+  background: #3C8CFD;
+  border-color: #3C8CFD;
   color: #fff;
 }
 [data-module=m-btn01] > .btn.is-primary:hover,
@@ -982,8 +981,8 @@ form.is-inline {
   text-decoration: none;
 }
 [data-module=c-formBlock01] > .wrapper > .block.is-contents .btn.is-primary {
-  background: #2563eb;
-  border-color: #2563eb;
+  background: #3C8CFD;
+  border-color: #3C8CFD;
   color: #fff;
 }
 [data-module=c-formBlock01] > .wrapper > .block.is-contents .btn.is-primary:hover {
@@ -1268,7 +1267,7 @@ body.is-field-type-modal-open {
   transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
 }
 [data-module=c-fieldTypeModal01] .c-fieldTypeModal01__option:hover, [data-module=c-fieldTypeModal01] .c-fieldTypeModal01__option:focus-visible {
-  border-color: #2563eb;
+  border-color: #3C8CFD;
   box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.16);
   outline: none;
   background: #eff6ff;
@@ -1627,9 +1626,9 @@ body.is-field-type-modal-open {
   background: #fff;
 }
 .pagination .current {
-  background: #2563eb;
+  background: #3C8CFD;
   color: #fff;
-  border-color: #2563eb;
+  border-color: #3C8CFD;
 }
 .pagination .disabled {
   color: #9ca3af;
