@@ -1069,8 +1069,9 @@ form.is-inline {
   font-size: 13px;
 }
 [data-module=m-formBuilder01] .c-formEditorSummary01 > .wrapper > .block.is-contents > .index {
+  font-size: 10px;
   font-weight: 600;
-  color: #334155;
+  color: #9ea7b4;
 }
 [data-module=m-formBuilder01] .c-formEditorSummary01 > .wrapper > .block.is-contents > .label {
   color: #334155;
