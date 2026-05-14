@@ -187,43 +187,19 @@ class FormController
         }
 
         // 自動返信
-        if (!empty($form['reply_enabled'])) {
-            $to = $this->resolveReplyRecipient($fields, $values);
-            if ($to !== null) {
+        if (!empty($form['reply_enabled']) && !empty($form['reply_from_field_key'])) {
+            $to = $values[$form['reply_from_field_key']] ?? null;
+            if (is_array($to)) {
+                $to = reset($to);
+            }
+            if (is_string($to) && filter_var($to, FILTER_VALIDATE_EMAIL)) {
                 $subject  = (string) ($form['reply_subject'] ?? '送信ありがとうございました');
                 $template = (string) ($form['reply_template'] ?? "お問い合わせいただきありがとうございました。\n以下の内容で受け付けました。\n\n{{__all__}}");
                 $body = Mailer::renderTemplate($template, $fields, $values, $context);
 
-                $headers = [];
-                $fromEmail = trim((string) ($form['reply_from_field_key'] ?? ''));
-                if ($fromEmail !== '' && filter_var($fromEmail, FILTER_VALIDATE_EMAIL)) {
-                    $headers['From'] = $fromEmail;
-                    $headers['Reply-To'] = $fromEmail;
-                }
-
-                Mailer::send($to, $subject, $body, $headers);
+                Mailer::send($to, $subject, $body);
             }
         }
-    }
-
-    private function resolveReplyRecipient(array $fields, array $values): ?string
-    {
-        foreach ($fields as $field) {
-            if (($field['type'] ?? '') !== 'email') {
-                continue;
-            }
-
-            $value = $values[$field['field_key']] ?? null;
-            if (is_array($value)) {
-                $value = reset($value);
-            }
-
-            if (is_string($value) && filter_var($value, FILTER_VALIDATE_EMAIL)) {
-                return $value;
-            }
-        }
-
-        return null;
     }
 
     private function notFound(): void

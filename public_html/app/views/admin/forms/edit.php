@@ -547,11 +547,11 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                     <div class="wrapper">
                         <div class="block is-contents">
                             <div class="block is-title">
-                                <label class="label" data-module="m-boldTitle01">送り元のメールアドレス</label>
+                                <label class="label" data-module="m-boldTitle01">送信先のフィールドキー（メール型項目）</label>
                             </div>
                             <div class="block is-field">
                                 <div data-module="m-input01">
-                                    <input type="email" name="reply_from_field_key" value="<?= e($form['reply_from_field_key']) ?>" placeholder="noreply@example.com">
+                                    <input type="text" name="reply_from_field_key" value="<?= e($form['reply_from_field_key']) ?>" placeholder="メールアドレス項目のフィールドキー（UUID または任意のキー）">
                                 </div>
                             </div>
                         </div>
