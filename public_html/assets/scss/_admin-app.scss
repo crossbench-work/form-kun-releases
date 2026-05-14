@@ -805,13 +805,14 @@ form.is-inline {
   > button,
   > a {
     display: inline-block;
-    padding: 8px 16px;
+    padding: 8px 12px;
     border: 1px solid #cbd5e1;
     background: #fff;
     color: #111;
     border-radius: 6px;
     cursor: pointer;
-    font-size: 14px;
+    font-size: 12px;
+    font-weight: 700;
     font-family: inherit;
     text-decoration: none;
     line-height: 1.4;
@@ -1427,7 +1428,7 @@ body.is-field-type-modal-open {
         flex-wrap: wrap;
         margin-bottom: 6px;
 
-        >.label.is-bold {
+        >.label.label.is-choice {
           font-size: 10px;
         }
       }
