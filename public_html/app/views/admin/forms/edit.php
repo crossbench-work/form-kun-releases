@@ -164,7 +164,7 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                                 </div>
                                 <div class="block is-toolbar">
                                     <div class="area is-actions">
-                                        <button type="button" class="btn is-sm fb-description-add">説明文を追加する</button>
+                                        <button type="button" data-target="m-formBuilder01__add" class="btn fb-description-add">＋ 項目を追加</button>
                                     </div>
                                 </div>
                             </div>

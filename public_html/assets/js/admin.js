@@ -143,7 +143,7 @@
 
     var builderRoot = list.closest('[data-module="m-formBuilder01"]');
     var template = document.querySelector('[data-target="m-formBuilder01__fieldTemplate"]');
-    var addBtn = document.querySelector('[data-target="m-formBuilder01__add"]');
+    var addBtn = builderRoot ? builderRoot.querySelector('[data-target="m-formBuilder01__add"]') : document.querySelector('[data-target="m-formBuilder01__add"]');
     var typeModal = document.querySelector('[data-target="m-formBuilder01__typeModal"]');
     var descriptionTemplate = document.querySelector('[data-target="m-formBuilder01__descriptionTemplate"]');
     var descriptionEditors = document.querySelectorAll('[data-description-editor]');
@@ -1043,7 +1043,7 @@
     getFieldItems().forEach(bind);
     descriptionEditors.forEach(function (editor) {
         var descriptionList = getDescriptionList(editor);
-        var addButton = editor.querySelector('.fb-description-add');
+        var addButton = editor.querySelector('[data-target="m-formBuilder01__add"]');
         if (descriptionList) {
             descriptionList.querySelectorAll('[data-description-block]').forEach(function (block) {
                 bindDescriptionBlock(editor, block);
