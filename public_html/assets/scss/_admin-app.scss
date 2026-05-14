@@ -1230,6 +1230,13 @@ body.is-field-type-modal-open {
 
         > .regex {
           background: #f8fafc;
+          display: inline-flex;
+          align-items: center;
+          gap: 4px;
+
+          svg {
+            flex: 0 0 auto;
+          }
         }
       }
     }

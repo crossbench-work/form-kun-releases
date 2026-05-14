@@ -1172,6 +1172,12 @@ body.is-field-type-modal-open {
 }
 [data-module=m-formBuilder01] .c-formEditorSummary01 > .wrapper > .block.is-contents > .regex {
   background: #f8fafc;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+[data-module=m-formBuilder01] .c-formEditorSummary01 > .wrapper > .block.is-contents > .regex svg {
+  flex: 0 0 auto;
 }
 [data-module=m-formBuilder01] .c-formEditor__item > .wrapper > .block.is-body {
   padding: 16px;

@@ -698,8 +698,8 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                                                 <p class="index" data-target="c-formEditor__summaryIndex">1</p>
                                                 <p class="label" data-target="c-formEditor__summaryLabel"></p>
                                                 <p class="type" data-target="c-formEditor__summaryType"><?= e(\Models\FormField::typeLabel('text_multi')) ?></p>
-                                                <p class="required" data-target="c-formEditor__summaryRequired">任意</p>
-                                                <p class="regex">入力チェック: <span data-target="c-formEditor__summaryRegex">なし</span></p>
+                                                <p class="required" data-target="c-formEditor__summaryRequired" hidden>必須</p>
+                                                <p class="regex" data-target="c-formEditor__summaryRegexWrap" hidden><svg width="12" height="12" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M20 6L9 17l-5-5"/></svg><span data-target="c-formEditor__summaryRegex">なし</span></p>
                                             </div>
                                         </div>
                                     </div>

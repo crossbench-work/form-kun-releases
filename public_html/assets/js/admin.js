@@ -340,15 +340,18 @@
         var labelEl = li.querySelector('[data-target="c-formEditor__summaryLabel"]');
         var typeEl = li.querySelector('[data-target="c-formEditor__summaryType"]');
         var requiredEl = li.querySelector('[data-target="c-formEditor__summaryRequired"]');
+        var regexWrapEl = li.querySelector('[data-target="c-formEditor__summaryRegexWrap"]');
         var regexEl = li.querySelector('[data-target="c-formEditor__summaryRegex"]');
         if (!labelEl) return;
         labelEl.textContent = (labelInp && labelInp.value.trim()) ? labelInp.value.trim() : '（無題）';
-        if (!typeEl || !requiredEl || !regexEl) return;
+        if (!typeEl || !requiredEl || !regexEl || !regexWrapEl) return;
         var typeValue = typeSel ? typeSel.value : '';
         var typeLabel = typeSel ? (typeSel.getAttribute('data-type-label') || '') : '';
         typeEl.textContent = typeLabel || '—';
         var isRequired = !!(requiredToggle && requiredToggle.checked);
-        requiredEl.textContent = isRequired ? '必須' : '任意';
+        requiredEl.textContent = '必須';
+        requiredEl.hidden = !isRequired;
+        regexWrapEl.hidden = !isRequired;
         if (!isRequired || !regexKind || regexKind.value === '' || typeValue === 'radio' || typeValue === 'select') {
             regexEl.textContent = 'なし';
         } else if (regexKind.value === FB_REGEX_CHECKBOX_LIMIT) {
