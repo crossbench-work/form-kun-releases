@@ -34,6 +34,19 @@ class Form
         );
     }
 
+    /**
+     * 公開状態（DB 値）を管理画面表示用ラベルへ（フォーム編集の「公開状態」プルダウンと同じ文言）。
+     */
+    public static function statusLabel(string $status): string
+    {
+        return match ($status) {
+            'draft' => '下書き',
+            'active' => '公開中',
+            'archived' => '停止',
+            default => $status,
+        };
+    }
+
     public static function create(array $data): int
     {
         $now = date('Y-m-d H:i:s');

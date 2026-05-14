@@ -16,7 +16,7 @@
                                         <?php foreach ($byForm as $r): ?>
                                             <tr>
                                                 <td><?= e($r['title']) ?> <span class="text is-muted">(<?= e($r['slug']) ?>)</span></td>
-                                                <td><span class="m-badge01 is-<?= e($r['status']) ?>"><?= e($r['status']) ?></span></td>
+                                                <td><span class="m-badge01 is-<?= e($r['status']) ?>"><?= e(\Models\Form::statusLabel((string) $r['status'])) ?></span></td>
                                                 <td class="num"><?= (int) $r['cnt'] ?></td>
                                                 <td>
                                                     <a href="<?= e(base_path('/admin/forms/' . $r['id'] . '/submissions')) ?>">送信履歴</a>

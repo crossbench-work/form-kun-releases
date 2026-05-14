@@ -34,7 +34,7 @@
                                             <tr>
                                                 <td><strong><?= e($f['title']) ?></strong></td>
                                                 <td><code><?= e($f['slug']) ?></code></td>
-                                                <td><span class="m-badge01 is-<?= e($f['status']) ?>"><?= e($f['status']) ?></span></td>
+                                                <td><span class="m-badge01 is-<?= e($f['status']) ?>"><?= e(\Models\Form::statusLabel((string) $f['status'])) ?></span></td>
                                                 <td><?= e($f['updated_at']) ?></td>
                                                 <td>
                                                     <a href="<?= e(base_path('/admin/forms/' . $f['id'] . '/edit')) ?>">編集</a> ｜
