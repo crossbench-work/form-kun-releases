@@ -641,8 +641,6 @@
         var typeSelect = li.querySelector('[data-target="c-formEditor__type"]');
         var requiredToggle = li.querySelector('[data-target="c-formEditor__required"]');
         var optionsBox = li.querySelector('[data-target="c-formEditor__options"]');
-        var textPairSettings = li.querySelector('[data-target="c-formEditor__textPairSettings"]');
-        var textPairPlaceholders = li.querySelector('[data-target="c-formEditor__textPairPlaceholders"]');
         var textMultiSettings = li.querySelector('[data-target="c-formEditor__textMultiSettings"]');
         var maxLengthWrap = li.querySelector('[data-target="c-formEditor__minMaxLength"]');
         var maxLengthInput = maxLengthWrap ? maxLengthWrap.querySelector('input[data-name="max_length"]') : null;
@@ -713,17 +711,11 @@
             if (v !== 'checkbox') {
                 clearCheckboxLimitSettings();
             }
-            if (textPairSettings) {
-                textPairSettings.style.display = (v === 'text_pair') ? '' : 'none';
-            }
-            if (textPairPlaceholders) {
-                textPairPlaceholders.style.display = (v === 'text_pair') ? '' : 'none';
-            }
             if (textMultiSettings) {
                 textMultiSettings.style.display = (v === 'text_multi') ? '' : 'none';
             }
             if (placeholderWrap) {
-                var hidePlaceholder = (v === 'text_pair' || v === 'text_multi' || v === 'radio' || v === 'checkbox' || v === 'select');
+                var hidePlaceholder = (v === 'text_multi' || v === 'radio' || v === 'checkbox' || v === 'select');
                 placeholderWrap.style.display = hidePlaceholder ? 'none' : '';
                 if (hidePlaceholder && placeholderInput) {
                     placeholderInput.value = '';

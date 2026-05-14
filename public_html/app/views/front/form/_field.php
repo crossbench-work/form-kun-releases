@@ -111,9 +111,17 @@ if ($type === 'text_multi') {
         if (is_array($dec)) {
             if (isset($dec['items']) && is_array($dec['items'])) {
                 $multiValues = array_values(array_map(static fn($item): string => trim((string) $item), $dec['items']));
+            } elseif (isset($dec['left']) || isset($dec['right'])) {
+                $multiValues = [
+                    trim((string) ($dec['left'] ?? '')),
+                    trim((string) ($dec['right'] ?? '')),
+                ];
             } else {
                 $multiValues = array_values(array_map(static fn($item): string => trim((string) $item), $dec));
             }
+        } else {
+            $multiValues = preg_split('/\r\n|\r|\n/', $value) ?: [];
+            $multiValues = array_values(array_map(static fn($item): string => trim((string) $item), $multiValues));
         }
     }
 }
@@ -338,7 +346,8 @@ $prefOptions = japanese_prefectures();
                 <?php foreach ($multiItems as $index => $multiItem): ?>
                     <?php
                         $multiItemLabel = trim((string) ($multiItem['label'] ?? ''));
-                        if ($multiItemLabel === '') {
+                        $hasSingleUnnamedMultiItem = count($multiItems) === 1 && $multiItemLabel === '';
+                        if (!$hasSingleUnnamedMultiItem && $multiItemLabel === '') {
                             $multiItemLabel = '入力欄' . ($index + 1);
                         }
                         $multiItemPlaceholder = (string) ($multiItem['placeholder'] ?? '');
@@ -346,9 +355,11 @@ $prefOptions = japanese_prefectures();
                         $multiItemErrors = $multiErrParts['items'][$index] ?? [];
                     ?>
                     <div class="box is-textMultiCol <?= !empty($multiItemErrors) ? 'is-error' : '' ?>">
-                        <label class="label is-sublabel" for="f_<?= e($key) ?>_<?= $index ?>">
-                            <?= e($multiItemLabel) ?>
-                        </label>
+                        <?php if (!$hasSingleUnnamedMultiItem): ?>
+                            <label class="label is-sublabel" for="f_<?= e($key) ?>_<?= $index ?>">
+                                <?= e($multiItemLabel) ?>
+                            </label>
+                        <?php endif; ?>
                         <input
                             type="text"
                             id="f_<?= e($key) ?>_<?= $index ?>"
@@ -356,7 +367,7 @@ $prefOptions = japanese_prefectures();
                             value="<?= e($multiItemValue) ?>"
                             <?= $field['max_length'] ? 'maxlength="' . (int) $field['max_length'] . '"' : '' ?>
                             placeholder="<?= e($multiItemPlaceholder) ?>"
-                            aria-label="<?= e($multiItemLabel) ?>"
+                            aria-label="<?= e($hasSingleUnnamedMultiItem ? $label : $multiItemLabel) ?>"
                             <?= $req ? 'required' : '' ?>
                             >
                         <?php foreach ($multiItemErrors as $m): ?>

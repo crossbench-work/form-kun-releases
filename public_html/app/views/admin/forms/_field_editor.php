@@ -12,7 +12,6 @@ $agreementDefaults = [
 ];
 $regexDecoded = \Models\FormField::decodeRegexPatterns(isset($f['regex']) ? (string) $f['regex'] : null);
 $rp = $regexDecoded[0] ?? '';
-$isTextPair = (($f['type'] ?? '') === 'text_pair');
 $isTextMulti = (($f['type'] ?? '') === 'text_multi');
 $multiTextItems = $isTextMulti
     ? \Models\FormField::decodeTextMultiItems($f['multi_text_items'] ?? ($f['options_json'] ?? null), true)
@@ -299,65 +298,13 @@ if (empty($f['required']) || in_array($f['type'], ['radio', 'select'], true)) {
                                         <div class="block is-field">
                                             <div class="c-formEditor__field">
                                                 <div class="wrapper">
-                                                    <div class="block is-contents" data-target="c-formEditor__placeholder" <?= (($isTextPair || $isTextMulti) || in_array($f['type'], ['radio', 'checkbox', 'select'], true)) ? 'style="display:none"' : '' ?>>
+                                                    <div class="block is-contents" data-target="c-formEditor__placeholder" <?= ($isTextMulti || in_array($f['type'], ['radio', 'checkbox', 'select'], true)) ? 'style="display:none"' : '' ?>>
                                                         <div class="block is-title">
                                                             <label class="label" data-module="m-labelTitle01">プレースホルダ（任意）</label>
                                                         </div>
                                                         <div class="block is-field">
                                                             <div data-module="m-input01">
                                                                 <input type="text" name="fields[<?= $idx ?>][placeholder]" value="<?= e($f['placeholder']) ?>">
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="block is-field">
-                                            <div class="c-formEditor__field" data-target="c-formEditor__textPairSettings" <?= $isTextPair ? '' : 'style="display:none"' ?>>
-                                                <div class="wrapper">
-                                                    <div class="block is-contents">
-                                                        <div class="block is-title">
-                                                            <label class="label" data-module="m-labelTitle01">1つ目の入力欄の表示名</label>
-                                                        </div>
-                                                        <div class="block is-field">
-                                                            <div data-module="m-input01">
-                                                                <input type="text" name="fields[<?= $idx ?>][pair_label_left]" value="<?= e($f['pair_label_left'] ?? '') ?>">
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="block is-contents">
-                                                        <div class="block is-title">
-                                                            <label class="label" data-module="m-labelTitle01">2つ目の入力欄の表示名</label>
-                                                        </div>
-                                                        <div class="block is-field">
-                                                            <div data-module="m-input01">
-                                                                <input type="text" name="fields[<?= $idx ?>][pair_label_right]" value="<?= e($f['pair_label_right'] ?? '') ?>">
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="block is-field">
-                                            <div class="c-formEditor__field" data-target="c-formEditor__textPairPlaceholders" <?= $isTextPair ? '' : 'style="display:none"' ?>>
-                                                <div class="wrapper">
-                                                    <div class="block is-contents">
-                                                        <div class="block is-title">
-                                                            <label class="label" data-module="m-labelTitle01">1つ目のプレースホルダ（任意）</label>
-                                                        </div>
-                                                        <div class="block is-field">
-                                                            <div data-module="m-input01">
-                                                                <input type="text" name="fields[<?= $idx ?>][pair_placeholder_left]" value="<?= e($f['pair_placeholder_left'] ?? '') ?>">
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="block is-contents">
-                                                        <div class="block is-title">
-                                                            <label class="label" data-module="m-labelTitle01">2つ目のプレースホルダ（任意）</label>
-                                                        </div>
-                                                        <div class="block is-field">
-                                                            <div data-module="m-input01">
-                                                                <input type="text" name="fields[<?= $idx ?>][pair_placeholder_right]" value="<?= e($f['pair_placeholder_right'] ?? '') ?>">
                                                             </div>
                                                         </div>
                                                     </div>

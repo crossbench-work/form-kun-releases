@@ -779,22 +779,6 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                                                 </div>
                                             </div>
                                             <div class="block is-field">
-                                                <div class="c-formEditor__field" data-target="c-formEditor__textPairSettings" style="display:none">
-                                                    <div class="wrapper">
-                                                        <div class="block is-contents"><div class="block is-title"><label class="label" data-module="m-labelTitle01">1つ目の入力欄の表示名</label></div><div class="block is-field"><div data-module="m-input01"><input type="text" data-name="pair_label_left"></div></div></div>
-                                                        <div class="block is-contents"><div class="block is-title"><label class="label" data-module="m-labelTitle01">2つ目の入力欄の表示名</label></div><div class="block is-field"><div data-module="m-input01"><input type="text" data-name="pair_label_right"></div></div></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="block is-field">
-                                                <div class="c-formEditor__field" data-target="c-formEditor__textPairPlaceholders" style="display:none">
-                                                    <div class="wrapper">
-                                                        <div class="block is-contents"><div class="block is-title"><label class="label" data-module="m-labelTitle01">1つ目のプレースホルダ（任意）</label></div><div class="block is-field"><div data-module="m-input01"><input type="text" data-name="pair_placeholder_left"></div></div></div>
-                                                        <div class="block is-contents"><div class="block is-title"><label class="label" data-module="m-labelTitle01">2つ目のプレースホルダ（任意）</label></div><div class="block is-field"><div data-module="m-input01"><input type="text" data-name="pair_placeholder_right"></div></div></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="block is-field">
                                                 <div class="c-formEditor__field" data-target="c-formEditor__textMultiSettings" style="display:none">
                                                     <div class="c-formEditor__textMultiEditor" data-text-multi-editor>
                                                         <div class="c-formEditor__textMultiList">

@@ -770,6 +770,11 @@ if (!function_exists('format_text_multi_value_display')) {
             if (is_array($decoded)) {
                 if (isset($decoded['items']) && is_array($decoded['items'])) {
                     $values = array_values(array_map(static fn($item): string => trim((string) $item), $decoded['items']));
+                } elseif (isset($decoded['left']) || isset($decoded['right'])) {
+                    $values = [
+                        trim((string) ($decoded['left'] ?? '')),
+                        trim((string) ($decoded['right'] ?? '')),
+                    ];
                 } else {
                     $values = array_values(array_map(static fn($item): string => trim((string) $item), $decoded));
                 }
@@ -780,11 +785,16 @@ if (!function_exists('format_text_multi_value_display')) {
         }
 
         $lines = [];
+        $hasSingleUnnamedItem = count($items) === 1 && trim((string) ($items[0]['label'] ?? '')) === '';
         foreach ($values as $index => $itemValue) {
             if ($itemValue === '') {
                 continue;
             }
             $label = trim((string) ($items[$index]['label'] ?? ''));
+            if ($hasSingleUnnamedItem) {
+                $lines[] = $itemValue;
+                continue;
+            }
             if ($label === '') {
                 $label = '入力欄' . ($index + 1);
             }

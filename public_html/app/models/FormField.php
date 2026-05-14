@@ -64,8 +64,6 @@ class FormField
     public static function TYPE_LABELS(): array
     {
         return [
-            'text' => '1行テキスト',
-            'text_pair' => '1行テキスト（2入力）',
             'text_multi' => '1行テキスト（複数入力）',
             'textarea' => '複数行テキスト',
             'address' => '住所',
@@ -88,17 +86,35 @@ class FormField
 
     public static function typeLabel(string $type): string
     {
+        $type = self::normalizeType($type);
         $labels = self::TYPE_LABELS();
 
         return $labels[$type] ?? $type;
     }
 
+    public static function normalizeType(string $type): string
+    {
+        if (in_array($type, ['text', 'text_pair'], true)) {
+            return 'text_multi';
+        }
+
+        return $type;
+    }
+
+    public static function sanitizeType(string $type): string
+    {
+        $type = self::normalizeType($type);
+        return array_key_exists($type, self::TYPE_LABELS()) ? $type : 'text_multi';
+    }
+
     public static function forForm(int $formId): array
     {
-        return Database::fetchAll(
+        $fields = Database::fetchAll(
             'SELECT * FROM form_fields WHERE form_id = ? ORDER BY sort_order ASC, id ASC',
             [$formId]
         );
+
+        return array_map([self::class, 'normalizeField'], $fields);
     }
 
     /**
@@ -113,10 +129,11 @@ class FormField
             $order = 0;
             foreach ($fields as $f) {
                 $order++;
+                $type = self::sanitizeType((string) ($f['type'] ?? 'text_multi'));
                 $optionsJson = null;
-                if (in_array($f['type'], ['radio','checkbox','select'], true) && !empty($f['options'])) {
+                if (in_array($type, ['radio','checkbox','select'], true) && !empty($f['options'])) {
                     $opts = self::parseOptions($f['options']);
-                    if ($f['type'] === 'checkbox') {
+                    if ($type === 'checkbox') {
                         $optionsJson = self::encodeCheckboxSettings(
                             $opts,
                             $f['checkbox_min_selections'] ?? '',
@@ -125,28 +142,17 @@ class FormField
                     } else {
                         $optionsJson = json_encode($opts, JSON_UNESCAPED_UNICODE);
                     }
-                } elseif ($f['type'] === 'text_pair') {
-                    $optionsJson = self::encodeTextPairLabels(
-                        (string) ($f['pair_label_left'] ?? ''),
-                        (string) ($f['pair_label_right'] ?? '')
-                    );
-                } elseif ($f['type'] === 'text_multi') {
+                } elseif ($type === 'text_multi') {
                     $optionsJson = self::encodeTextMultiItems(
                         self::decodeTextMultiItems($f['multi_text_items'] ?? null)
                     );
                 }
                 $placeholder = isset($f['placeholder']) && $f['placeholder'] !== '' ? (string) $f['placeholder'] : null;
-                if (in_array($f['type'], ['radio', 'checkbox', 'select', 'text_multi'], true)) {
+                if (in_array($type, ['radio', 'checkbox', 'select', 'text_multi'], true)) {
                     $placeholder = null;
                 }
-                if ($f['type'] === 'text_pair') {
-                    $placeholder = self::encodeTextPairPlaceholders(
-                        (string) ($f['pair_placeholder_left'] ?? ''),
-                        (string) ($f['pair_placeholder_right'] ?? '')
-                    );
-                }
                 $maxLength = isset($f['max_length']) && $f['max_length'] !== '' ? (int) $f['max_length'] : null;
-                if (in_array($f['type'], ['radio', 'checkbox', 'select'], true)) {
+                if (in_array($type, ['radio', 'checkbox', 'select'], true)) {
                     $maxLength = null;
                 }
                 Database::execute(
@@ -159,7 +165,7 @@ class FormField
                         $order,
                         $f['field_key'],
                         $f['label'],
-                        $f['type'],
+                        $type,
                         !empty($f['required']) ? 1 : 0,
                         $maxLength,
                         isset($f['regex']) && $f['regex'] !== null && $f['regex'] !== ''
@@ -415,5 +421,46 @@ class FormField
         }
 
         return json_encode(array_values($payload), JSON_UNESCAPED_UNICODE);
+    }
+
+    /**
+     * @param array<string, mixed> $field
+     * @return array<string, mixed>
+     */
+    private static function normalizeField(array $field): array
+    {
+        $originalType = (string) ($field['type'] ?? '');
+        $normalizedType = self::normalizeType($originalType);
+        if ($normalizedType === $originalType) {
+            return $field;
+        }
+
+        $field['type'] = $normalizedType;
+        if ($originalType === 'text') {
+            $field['options_json'] = self::encodeTextMultiItems([[
+                'label' => '',
+                'placeholder' => trim((string) ($field['placeholder'] ?? '')),
+            ]]);
+            $field['placeholder'] = null;
+            return $field;
+        }
+
+        if ($originalType === 'text_pair') {
+            $labels = self::decodeTextPairLabels($field['options_json'] ?? null);
+            $placeholders = self::decodeTextPairPlaceholders($field['placeholder'] ?? null);
+            $field['options_json'] = self::encodeTextMultiItems([
+                [
+                    'label' => $labels['left_label'],
+                    'placeholder' => $placeholders['left_placeholder'],
+                ],
+                [
+                    'label' => $labels['right_label'],
+                    'placeholder' => $placeholders['right_placeholder'],
+                ],
+            ]);
+            $field['placeholder'] = null;
+        }
+
+        return $field;
     }
 }

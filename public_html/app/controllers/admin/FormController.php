@@ -68,20 +68,7 @@ class FormController
 
         // 編集ビュー用に options をテキストに変換
         $editFields = array_map(function ($f) {
-            if (($f['type'] ?? '') === 'text_pair') {
-                $pairLabels = \Models\FormField::decodeTextPairLabels($f['options_json'] ?? null);
-                $pairPlaceholders = \Models\FormField::decodeTextPairPlaceholders($f['placeholder'] ?? null);
-                $f['pair_label_left'] = $pairLabels['left_label'];
-                $f['pair_label_right'] = $pairLabels['right_label'];
-                $f['pair_placeholder_left'] = $pairPlaceholders['left_placeholder'];
-                $f['pair_placeholder_right'] = $pairPlaceholders['right_placeholder'];
-                $f['placeholder'] = '';
-                $f['options'] = '';
-                $f['checkbox_limit_enabled'] = 0;
-                $f['checkbox_min_selections'] = '';
-                $f['checkbox_max_selections'] = '';
-                $f['multi_text_items'] = '';
-            } elseif (($f['type'] ?? '') === 'text_multi') {
+            if (($f['type'] ?? '') === 'text_multi') {
                 $f['multi_text_items'] = (string) ($f['options_json'] ?? '');
                 $f['placeholder'] = '';
                 $f['options'] = '';
@@ -278,7 +265,7 @@ class FormController
                 }
 
                 $required = !empty($f['required']) ? 1 : 0;
-                $type = in_array($f['type'] ?? '', FormField::ALLOWED_TYPES(), true) ? $f['type'] : 'text';
+                $type = FormField::sanitizeType((string) ($f['type'] ?? 'text_multi'));
                 $patterns = [];
                 $singleRx = trim((string) ($f['regex_pattern'] ?? ''));
                 if ($singleRx !== '' && $singleRx !== '__custom__') {
@@ -414,13 +401,6 @@ class FormController
                         $errors[] = "項目{$no}: 最小選択数は選択肢数以下にしてください。";
                     }
                 }
-            } elseif ($f['type'] === 'text_pair') {
-                if ($f['pair_label_left'] === '') {
-                    $errors[] = "項目{$no}: 1つ目の入力欄の表示名を入力してください。";
-                }
-                if ($f['pair_label_right'] === '') {
-                    $errors[] = "項目{$no}: 2つ目の入力欄の表示名を入力してください。";
-                }
             } elseif ($f['type'] === 'text_multi') {
                 $decodedItems = json_decode((string) ($f['multi_text_items'] ?? ''), true);
                 $multiTextItems = [];
@@ -446,7 +426,7 @@ class FormController
                     $errors[] = "項目{$no}: 複数入力の入力欄を1つ以上設定してください。";
                 }
                 foreach ($multiTextItems as $itemIndex => $item) {
-                    if (($item['label'] ?? '') === '') {
+                    if (count($multiTextItems) > 1 && ($item['label'] ?? '') === '') {
                         $displayIndex = $itemIndex + 1;
                         $errors[] = "項目{$no}: {$displayIndex}つ目の入力欄の表示名を入力してください。";
                     }
@@ -649,11 +629,6 @@ class FormController
                 } else {
                     $optionsJson = json_encode($options, JSON_UNESCAPED_UNICODE);
                 }
-            } elseif (($field['type'] ?? '') === 'text_pair') {
-                $optionsJson = FormField::encodeTextPairLabels(
-                    (string) ($field['pair_label_left'] ?? ''),
-                    (string) ($field['pair_label_right'] ?? '')
-                );
             } elseif (($field['type'] ?? '') === 'text_multi') {
                 $optionsJson = FormField::encodeTextMultiItems(
                     FormField::decodeTextMultiItems($field['multi_text_items'] ?? null)
@@ -663,11 +638,6 @@ class FormController
             $placeholder = isset($field['placeholder']) && $field['placeholder'] !== '' ? (string) $field['placeholder'] : null;
             if (in_array($field['type'], ['radio', 'checkbox', 'select', 'text_multi'], true)) {
                 $placeholder = null;
-            } elseif (($field['type'] ?? '') === 'text_pair') {
-                $placeholder = FormField::encodeTextPairPlaceholders(
-                    (string) ($field['pair_placeholder_left'] ?? ''),
-                    (string) ($field['pair_placeholder_right'] ?? '')
-                );
             }
 
             $previewFields[] = [
@@ -694,7 +664,7 @@ class FormController
         return [
             'field_key' => FieldKey::generateUuidV4(),
             'label' => 'お名前',
-            'type'  => 'text',
+            'type'  => 'text_multi',
             'required' => 1,
             'max_length' => 100,
             'regex' => null,
