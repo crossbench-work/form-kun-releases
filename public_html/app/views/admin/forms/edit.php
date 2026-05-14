@@ -815,7 +815,6 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                                         <button type="button" class="c-copyTagList01__tag" data-copy-text="{{__submitted_at__}}"><code>{{__submitted_at__}}</code></button>
                                         <button type="button" class="c-copyTagList01__tag" data-copy-text="{{__ip__}}"><code>{{__ip__}}</code></button>
                                     </div>
-                                    <p class="text is-help is-feedback" data-copy-feedback aria-live="polite"></p>
                                 </div>
                             </div>
                         </div>
@@ -902,7 +901,6 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                                         <button type="button" class="c-copyTagList01__tag" data-copy-text="{{__submitted_at__}}"><code>{{__submitted_at__}}</code></button>
                                         <button type="button" class="c-copyTagList01__tag" data-copy-text="{{__ip__}}"><code>{{__ip__}}</code></button>
                                     </div>
-                                    <p class="text is-help is-feedback" data-copy-feedback aria-live="polite"></p>
                                 </div>
                             </div>
                         </div>

@@ -1,6 +1,47 @@
 (function () {
     'use strict';
 
+    var TOAST_MS = 4500;
+    var TOAST_LEAVE_MS = 280;
+
+    window.formkunShowAdminToast = function (message, type) {
+        type = type || 'success';
+        var stack = document.getElementById('admin-toast-stack');
+        if (!stack || !message) return;
+        var el = document.createElement('div');
+        el.className = 'c-adminToast01 is-' + type;
+        el.setAttribute('role', 'status');
+        el.textContent = message;
+        stack.appendChild(el);
+        window.requestAnimationFrame(function () {
+            el.classList.add('is-visible');
+        });
+        window.setTimeout(function () {
+            el.classList.remove('is-visible');
+            el.classList.add('is-leaving');
+            window.setTimeout(function () {
+                if (el.parentNode) el.parentNode.removeChild(el);
+            }, TOAST_LEAVE_MS);
+        }, TOAST_MS);
+    };
+
+    (function initAdminFlashToasts() {
+        var stack = document.getElementById('admin-toast-stack');
+        if (!stack) return;
+        stack.querySelectorAll('[data-admin-autotoast]').forEach(function (el) {
+            window.requestAnimationFrame(function () {
+                el.classList.add('is-visible');
+            });
+            window.setTimeout(function () {
+                el.classList.remove('is-visible');
+                el.classList.add('is-leaving');
+                window.setTimeout(function () {
+                    if (el.parentNode) el.parentNode.removeChild(el);
+                }, TOAST_LEAVE_MS);
+            }, TOAST_MS);
+        });
+    })();
+
     (function initCopyTags() {
         var tags = document.querySelectorAll('[data-copy-text]');
         if (!tags.length) return;
@@ -17,16 +58,11 @@
             document.body.removeChild(input);
         }
 
-        function showFeedback(tag, message) {
-            var root = tag.closest('.c-copyTagList01');
-            if (!root) return;
-            var feedback = root.querySelector('[data-copy-feedback]');
-            if (!feedback) return;
-            feedback.textContent = message;
-            window.clearTimeout(feedback._copyTimer);
-            feedback._copyTimer = window.setTimeout(function () {
-                feedback.textContent = '';
-            }, 1600);
+        function showCopyToast(text) {
+            if (typeof window.formkunShowAdminToast === 'function') {
+                var shortText = text.length > 48 ? text.slice(0, 45) + '…' : text;
+                window.formkunShowAdminToast('「' + shortText + '」をコピーしました', 'success');
+            }
         }
 
         tags.forEach(function (tag) {
@@ -35,15 +71,15 @@
                 if (!text) return;
                 if (navigator.clipboard && navigator.clipboard.writeText) {
                     navigator.clipboard.writeText(text).then(function () {
-                        showFeedback(tag, 'コピーしました');
+                        showCopyToast(text);
                     }).catch(function () {
                         fallbackCopy(text);
-                        showFeedback(tag, 'コピーしました');
+                        showCopyToast(text);
                     });
                     return;
                 }
                 fallbackCopy(text);
-                showFeedback(tag, 'コピーしました');
+                showCopyToast(text);
             });
         });
     })();

@@ -46,12 +46,14 @@ $__navSettings = str_starts_with($__nav, '/settings');
 
     <main class="l-adminBody01">
         <div class="wrapper">
-            <?php foreach ((flash() ?? []) as $f): ?>
-                <div class="m-alert01 is-<?= e($f['type']) ?>"><?= e($f['message']) ?></div>
-            <?php endforeach; ?>
             <?= $content ?? '' ?>
         </div>
     </main>
+</div>
+<div class="c-adminToastStack01" id="admin-toast-stack" aria-live="polite" aria-relevant="additions text">
+<?php foreach ((flash() ?? []) as $f): ?>
+    <div class="c-adminToast01 is-<?= e($f['type']) ?>" role="status" data-admin-autotoast><?= e($f['message']) ?></div>
+<?php endforeach; ?>
 </div>
 </body>
 </html>
