@@ -1197,6 +1197,12 @@ body.is-field-type-modal-open {
 [data-module=m-formBuilder01] .c-formEditor__item.is-collapsed > .wrapper > .block.is-body {
   display: none;
 }
+[data-module=m-formBuilder01] .c-formEditor__field {
+  padding: 0 8px;
+}
+[data-module=m-formBuilder01] .c-formEditor__field .c-formEditor__field {
+  padding: 0;
+}
 [data-module=m-formBuilder01] .c-formEditor__field > .wrapper {
   display: flex;
   gap: 12px;

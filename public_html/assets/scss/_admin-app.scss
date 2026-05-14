@@ -1266,6 +1266,10 @@ body.is-field-type-modal-open {
   }
 
   .c-formEditor__field {
+    padding: 0 8px;
+    .c-formEditor__field {
+      padding: 0;
+    }
     > .wrapper {
       display: flex;
       gap: 12px;
