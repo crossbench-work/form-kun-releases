@@ -438,12 +438,6 @@ body.l-adminShell01 a:hover {
 .c-adminHeader01 .area.is-user .name {
   color: #64748b;
 }
-.c-adminHeader01 .area.is-user .link.is-logout {
-  color: #b91c1c;
-}
-.c-adminHeader01 .area.is-user .link.is-logout:hover {
-  text-decoration: underline;
-}
 
 .l-adminContainer01 {
   min-height: 100vh;
@@ -879,6 +873,20 @@ form.is-inline {
 [data-module=m-btn01] > button.is-primary:hover:not(:disabled):not([aria-disabled=true]),
 [data-module=m-btn01] > a.is-primary:hover:not(:disabled):not([aria-disabled=true]) {
   background: #1d4ed8;
+}
+[data-module=m-btn01] > .btn.is-danger,
+[data-module=m-btn01] > button.is-danger,
+[data-module=m-btn01] > a.is-danger {
+  background: #fff;
+  border-color: #dc2626;
+  color: #b91c1c;
+}
+[data-module=m-btn01] > .btn.is-danger:hover:not(:disabled):not([aria-disabled=true]),
+[data-module=m-btn01] > button.is-danger:hover:not(:disabled):not([aria-disabled=true]),
+[data-module=m-btn01] > a.is-danger:hover:not(:disabled):not([aria-disabled=true]) {
+  background: #fef2f2;
+  border-color: #b91c1c;
+  color: #991b1b;
 }
 
 .m-alert01 {

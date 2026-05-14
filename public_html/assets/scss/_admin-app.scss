@@ -333,14 +333,6 @@ body.l-adminShell01 {
     .name {
       color: #64748b;
     }
-
-    .link.is-logout {
-      color: #b91c1c;
-
-      &:hover {
-        text-decoration: underline;
-      }
-    }
   }
 }
 
@@ -831,6 +823,18 @@ form.is-inline {
 
       &:hover:not(:disabled):not([aria-disabled="true"]) {
         background: #1d4ed8;
+      }
+    }
+
+    &.is-danger {
+      background: #fff;
+      border-color: #dc2626;
+      color: #b91c1c;
+
+      &:hover:not(:disabled):not([aria-disabled="true"]) {
+        background: #fef2f2;
+        border-color: #b91c1c;
+        color: #991b1b;
       }
     }
   }

@@ -37,7 +37,9 @@ $__navSettings = str_starts_with($__nav, '/settings');
                 <div class="area is-user">
                     <?php if ($u = \Core\Auth::user()): ?>
                         <span class="name"><?= e($u['display_name'] ?? $u['username']) ?>（<?= e($u['role']) ?>）</span>
-                        <a class="link is-logout" href="<?= e(base_path('/admin/logout')) ?>">ログアウト</a>
+                        <div data-module="m-btn01">
+                            <a class="btn is-danger" href="<?= e(base_path('/admin/logout')) ?>">ログアウト</a>
+                        </div>
                     <?php endif; ?>
                 </div>
             </div>
