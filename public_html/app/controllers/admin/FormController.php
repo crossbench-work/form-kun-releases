@@ -491,7 +491,7 @@ class FormController
     {
         return [
             'id' => null,
-            'slug' => '',
+            'slug' => FieldKey::generateUuidV4(),
             'title' => '',
             'input_page_title' => '',
             'show_input_page_title' => 1,
