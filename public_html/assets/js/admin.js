@@ -559,6 +559,7 @@
         }
     }
 
+    function updateFieldSummary(li) {
         var labelInp = li.querySelector('[data-target="c-formEditor__labelInput"]');
         var typeSel = li.querySelector('[data-target="c-formEditor__type"]');
         var requiredToggle = li.querySelector('[data-target="c-formEditor__required"]');
