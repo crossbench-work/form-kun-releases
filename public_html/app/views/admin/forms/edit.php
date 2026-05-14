@@ -30,7 +30,7 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                         <div data-module="c-descriptionEditor01" data-description-editor data-name-prefix="<?= e($namePrefix) ?>" data-position-mode="<?= e($positionMode) ?>">
                             <div class="wrapper">
                                 <div class="block is-contents">
-                                    <div class="c-formEditor">
+                                    <div class="c-formEditor c-formEditorList01" data-module="c-formEditorList01">
                                         <div class="wrapper">
                                             <div class="block is-contents" data-description-list>
                                             <?php foreach ($blocks as $i => $block): ?>
@@ -331,7 +331,7 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                 <h2 data-module="m-largeTitle01">項目設定</h2>
             </div>
             <div class="block is-field">
-            <div class="c-formEditor">
+            <div class="c-formEditor c-formEditorList01" data-module="c-formEditorList01">
                 <div class="wrapper">
                     <div class="block is-contents" data-target="m-formBuilder01__fields">
             <?php foreach ($fields as $i => $f): ?>
