@@ -478,7 +478,7 @@ class FormController
 
         if (!empty($form['reply_enabled'])) {
             if (!in_array($form['reply_from_field_key'], $usedKeys, true)) {
-                $errors[] = '自動返信先のフィールドキーは、項目に存在するキーを指定してください。';
+                $errors[] = '送り元のメールアドレスは、項目に存在するメールアドレス項目のフィールドキーを指定してください。';
             }
         }
 
