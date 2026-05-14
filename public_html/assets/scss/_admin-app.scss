@@ -1042,18 +1042,12 @@ form.is-inline {
 
   [data-module="m-arrowBtn01"] {
     appearance: none;
-    border: 1px solid #cbd5e1;
-    background: #fff;
     color: #334155;
-    border-radius: 6px;
-    min-width: 32px;
-    height: 32px;
-    padding: 0 10px;
     display: inline-flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    font-size: 14px;
+    font-size: 12px;
     line-height: 1;
 
     &:hover {
