@@ -6,7 +6,7 @@ body.l-adminShell01 {
   line-height: 1.6;
   letter-spacing: 0.04em;
   // 左固定ナビの幅（本文の padding-left と一致させる）
-  --admin-sidebar-width: 240px;
+  --admin-sidebar-width: 180px;
 
   a {
     color: #2563eb;
@@ -253,17 +253,18 @@ body.l-adminShell01 {
   z-index: 100;
   width: var(--admin-sidebar-width);
   margin: 0;
+  padding: 20px 0 20px 20px;
   box-sizing: border-box;
-  background: #fff;
-  color: #1f2937;
-  border-right: 1px solid #e2e8f0;
-  border-radius: 0;
+  
 
   & > .wrapper {
     max-width: none;
     width: 100%;
     height: 100%;
     box-sizing: border-box;
+    background: #fff;
+    color: #1f2937;
+    border-radius: 20px;
 
     > .block.is-contents {
       display: flex;
@@ -299,7 +300,7 @@ body.l-adminShell01 {
 
     a {
       color: #334155;
-      font-size: 14px;
+      font-size: 12px;
       line-height: 1.4;
       padding: 10px 12px;
       border-radius: 8px;
@@ -346,7 +347,7 @@ body.l-adminShell01 {
 .l-adminBody01 {
   flex: 1 1 auto;
   padding-top: 0;
-  padding-left: calc(var(--admin-sidebar-width) + 24px);
+  padding-left: var(--admin-sidebar-width);
   box-sizing: border-box;
   min-height: 100vh;
 
