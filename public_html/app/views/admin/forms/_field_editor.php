@@ -105,15 +105,7 @@ if (empty($f['required']) || in_array($f['type'], ['radio', 'select'], true)) {
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="block is-contents">
-                                                        <div class="block is-title">
-                                                            <label class="label" data-module="m-labelTitle01">型</label>
-                                                        </div>
-                                                        <div class="block is-field">
-                                                            <input type="hidden" name="fields[<?= $idx ?>][type]" value="<?= e($f['type']) ?>" data-target="c-formEditor__type" data-type-label="<?= e(\Models\FormField::typeLabel($f['type'])) ?>">
-                                                            <p class="c-formEditor__typeText" data-target="c-formEditor__typeLabel"><?= e(\Models\FormField::typeLabel($f['type'])) ?></p>
-                                                        </div>
-                                                    </div>
+                                                    <input type="hidden" name="fields[<?= $idx ?>][type]" value="<?= e($f['type']) ?>" data-target="c-formEditor__type" data-type-label="<?= e(\Models\FormField::typeLabel($f['type'])) ?>">
                                                 </div>
                                             </div>
                                         </div>

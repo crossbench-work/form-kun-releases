@@ -1208,17 +1208,6 @@ body.is-field-type-modal-open {
   align-items: center;
   gap: 8px;
 }
-[data-module=m-formBuilder01] .c-formEditor__typeText {
-  min-height: 44px;
-  display: flex;
-  align-items: center;
-  padding: 10px 12px;
-  border: 1px solid #d1d5db;
-  border-radius: 8px;
-  background: #f8fafc;
-  color: #334155;
-  font-size: 14px;
-}
 [data-module=m-formBuilder01] .c-formEditor__validation {
   min-width: 320px;
 }
