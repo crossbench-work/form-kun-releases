@@ -1067,6 +1067,16 @@ form.is-inline {
     font-weight: 700;
   }
 
+  .c-descriptionEditorSummary01 .position {
+    margin: 0;
+    flex: 0 0 auto;
+    font-size: 12px;
+    padding: 1px 6px;
+    border-radius: 999px;
+    background: #f1f5f9;
+    color: #475569;
+  }
+
   .c-formEditor__itemBody > .wrapper > .block.is-contents {
     display: flex;
     flex-direction: column;

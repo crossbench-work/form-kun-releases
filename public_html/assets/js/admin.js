@@ -242,10 +242,16 @@
     function updateDescriptionSummary(block) {
         if (!block) return;
         var labelInput = block.querySelector('[data-target="c-descriptionEditor__labelInput"]');
+        var positionSelect = block.querySelector('.fb-description-position');
         var summaryLabel = block.querySelector('[data-target="c-descriptionEditor__summaryLabel"]');
+        var summaryPosition = block.querySelector('[data-target="c-descriptionEditor__summaryPosition"]');
         if (summaryLabel) {
             var value = labelInput ? labelInput.value.trim() : '';
             summaryLabel.textContent = value || '説明文';
+        }
+        if (summaryPosition && positionSelect) {
+            var selected = positionSelect.selectedOptions && positionSelect.selectedOptions[0];
+            summaryPosition.textContent = selected ? selected.textContent.trim() : '先頭';
         }
     }
 

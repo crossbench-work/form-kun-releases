@@ -70,6 +70,7 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                                                                                             </span>
                                                                                         </label>
                                                                                         <p class="label" data-target="c-descriptionEditor__summaryLabel"><?= e($summaryLabel) ?></p>
+                                                                                        <p class="position" data-target="c-descriptionEditor__summaryPosition"><?= e(((int) ($block['position'] ?? 0)) === 0 ? '先頭' : '末尾') ?></p>
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
@@ -988,6 +989,7 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                                                 </span>
                                             </label>
                                             <p class="label" data-target="c-descriptionEditor__summaryLabel">説明文</p>
+                                            <p class="position" data-target="c-descriptionEditor__summaryPosition">先頭</p>
                                         </div>
                                     </div>
                                 </div>
