@@ -8,7 +8,7 @@
                             </div>
                             <div class="area is-field">
                                 <?php if (empty($byForm)): ?>
-                                    <p class="text is-muted">まだフォームがありません。 <a href="<?= e(base_path('/admin/forms/new')) ?>">新規作成</a></p>
+                                    <p class="text is-muted">まだフォームがありません。<?php if (empty($at_form_limit)): ?> <a href="<?= e(base_path('/admin/forms/new')) ?>">新規作成</a><?php endif; ?></p>
                                 <?php else: ?>
                                     <table class="table">
                                         <thead><tr><th>タイトル</th><th>状態</th><th class="num">受信</th><th>操作</th></tr></thead>

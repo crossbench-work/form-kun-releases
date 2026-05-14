@@ -18,14 +18,24 @@ class FormController
     public function index(): void
     {
         $forms = Form::all();
+        $formCount = Form::count();
+        $maxForms = effective_max_forms();
         (new View())->render('admin/forms/index', [
-            'title' => 'フォーム一覧',
-            'forms' => $forms,
+            'title'          => 'フォーム一覧',
+            'forms'          => $forms,
+            'form_count'     => $formCount,
+            'max_forms'      => $maxForms,
+            'at_form_limit'  => $formCount >= $maxForms,
         ], 'admin');
     }
 
     public function createForm(): void
     {
+        if (Form::count() >= effective_max_forms()) {
+            flash('danger', 'フォームの作成上限（' . effective_max_forms() . ' 件）に達しています。設定から上限を変更するか、不要なフォームを削除してください。');
+            redirect('/admin/forms');
+        }
+
         (new View())->render('admin/forms/edit', [
             'title' => 'フォーム新規作成',
             'form'  => self::prepareFormForEdit(self::defaultForm()),
@@ -38,6 +48,12 @@ class FormController
     public function store(): void
     {
         Csrf::verify();
+
+        if (Form::count() >= effective_max_forms()) {
+            flash('danger', 'フォームの作成上限（' . effective_max_forms() . ' 件）に達しています。設定から上限を変更するか、不要なフォームを削除してください。');
+            redirect('/admin/forms');
+        }
+
         $data = $this->collect();
         $errors = $this->validate($data, null);
 

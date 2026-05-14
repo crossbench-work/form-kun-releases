@@ -136,6 +136,13 @@ CREATE TABLE IF NOT EXISTS submission_files (
     CONSTRAINT fk_subfile_submission FOREIGN KEY (submission_id) REFERENCES submissions(id) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+-- アプリ設定（キー・値。例: フォーム作成数上限）
+CREATE TABLE IF NOT EXISTS app_settings (
+    setting_key   VARCHAR(64) NOT NULL PRIMARY KEY,
+    setting_value TEXT NOT NULL,
+    updated_at    DATETIME NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 -- ログイン試行ログ（ブルートフォース対策）
 CREATE TABLE IF NOT EXISTS login_attempts (
     id              INT AUTO_INCREMENT PRIMARY KEY,

@@ -10,6 +10,12 @@ class Form
         return Database::fetchAll('SELECT * FROM forms ORDER BY id DESC');
     }
 
+    public static function count(): int
+    {
+        $row = Database::fetchOne('SELECT COUNT(*) AS c FROM forms');
+        return (int) ($row['c'] ?? 0);
+    }
+
     public static function find(int $id): ?array
     {
         return Database::fetchOne('SELECT * FROM forms WHERE id = ?', [$id]);

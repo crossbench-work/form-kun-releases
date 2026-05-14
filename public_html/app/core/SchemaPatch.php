@@ -50,6 +50,8 @@ class SchemaPatch
             self::ensureFormsPageTitles();
             self::ensureFormsMailSettings();
 
+            self::ensureAppSettingsTable();
+
             $hasTbl = Database::fetchOne(
                 'SELECT COUNT(*) AS c FROM information_schema.TABLES
                  WHERE TABLE_SCHEMA = ? AND TABLE_NAME = ?',
@@ -493,6 +495,36 @@ class SchemaPatch
             }
         } catch (\Throwable $e) {
             error_log('[formkun] SchemaPatch forms mail settings: ' . $e->getMessage());
+        }
+    }
+
+    private static function ensureAppSettingsTable(): void
+    {
+        try {
+            $dbRow = Database::fetchOne('SELECT DATABASE() AS n');
+            $schema = (string) ($dbRow['n'] ?? '');
+            if ($schema === '') {
+                return;
+            }
+
+            $hasTbl = Database::fetchOne(
+                'SELECT COUNT(*) AS c FROM information_schema.TABLES
+                 WHERE TABLE_SCHEMA = ? AND TABLE_NAME = ?',
+                [$schema, 'app_settings']
+            );
+            if ((int) ($hasTbl['c'] ?? 0) > 0) {
+                return;
+            }
+
+            Database::execute(
+                'CREATE TABLE app_settings (
+                    setting_key VARCHAR(64) NOT NULL PRIMARY KEY,
+                    setting_value TEXT NOT NULL,
+                    updated_at DATETIME NOT NULL
+                ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci'
+            );
+        } catch (\Throwable $e) {
+            error_log('[formkun] SchemaPatch app_settings: ' . $e->getMessage());
         }
     }
 }

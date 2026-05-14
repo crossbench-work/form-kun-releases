@@ -1,7 +1,11 @@
 <div class="m-toolbar01">
     <h1 class="title" style="margin:0;">フォーム一覧</h1>
     <div class="spacer"></div>
-    <a class="btn is-primary" href="<?= e(base_path('/admin/forms/new')) ?>">＋ 新規作成</a>
+    <?php if (!empty($at_form_limit)): ?>
+        <button type="button" class="btn is-primary" disabled aria-disabled="true">＋ 新規作成（上限）</button>
+    <?php else: ?>
+        <a class="btn is-primary" href="<?= e(base_path('/admin/forms/new')) ?>">＋ 新規作成</a>
+    <?php endif; ?>
 </div>
 
 <div data-module="c-formBlock01">
@@ -9,7 +13,7 @@
         <div class="block is-contents">
                             <div class="area is-field">
                                 <?php if (empty($forms)): ?>
-                                    <p class="text is-muted">まだフォームがありません。</p>
+                                    <p class="text is-muted">まだフォームがありません。<?php if (empty($at_form_limit)): ?><a href="<?= e(base_path('/admin/forms/new')) ?>">新規作成</a><?php endif; ?></p>
                                 <?php else: ?>
                                     <table class="table">
                                         <thead>

@@ -32,6 +32,28 @@ if (!function_exists('config')) {
     }
 }
 
+if (!function_exists('effective_max_forms')) {
+    /**
+     * 作成できるフォーム数の上限。
+     * 管理画面の設定で DB に保存した値が有効ならそれを使い、なければ config の limits.max_forms（既定 50）。
+     */
+    function effective_max_forms(): int
+    {
+        $fallback = (int) config('limits.max_forms', 50);
+        if ($fallback < 1) {
+            $fallback = 50;
+        }
+        $raw = \Models\AppSetting::get(\Models\AppSetting::KEY_MAX_FORMS);
+        if ($raw !== null && $raw !== '') {
+            $n = (int) $raw;
+            if ($n >= 1) {
+                return min($n, 999999);
+            }
+        }
+        return min($fallback, 999999);
+    }
+}
+
 if (!function_exists('base_path')) {
     /**
      * サブディレクトリ運用に対応したベースパス + 任意のパス。
