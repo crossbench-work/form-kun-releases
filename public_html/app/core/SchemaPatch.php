@@ -48,6 +48,8 @@ class SchemaPatch
 
             self::ensureFormsPageTitles();
 
+            self::ensureAppSettingsTable();
+
             $hasTbl = Database::fetchOne(
                 'SELECT COUNT(*) AS c FROM information_schema.TABLES
                  WHERE TABLE_SCHEMA = ? AND TABLE_NAME = ?',
@@ -421,6 +423,42 @@ class SchemaPatch
             );
         } catch (\Throwable $e) {
             error_log('[formkun] SchemaPatch forms page titles: ' . $e->getMessage());
+        }
+    }
+
+    /**
+     * SMTP など管理画面から編集するアプリ設定保存テーブルを追加。
+     */
+    public static function ensureAppSettingsTable(): void
+    {
+        try {
+            $dbRow = Database::fetchOne('SELECT DATABASE() AS n');
+            $schema = (string) ($dbRow['n'] ?? '');
+            if ($schema === '') {
+                return;
+            }
+
+            $hasTable = Database::fetchOne(
+                'SELECT COUNT(*) AS c FROM information_schema.TABLES
+                 WHERE TABLE_SCHEMA = ? AND TABLE_NAME = ?',
+                [$schema, 'app_settings']
+            );
+            if ((int) ($hasTable['c'] ?? 0) !== 0) {
+                return;
+            }
+
+            Database::execute(
+                'CREATE TABLE app_settings (
+                    id INT AUTO_INCREMENT PRIMARY KEY,
+                    setting_key VARCHAR(120) NOT NULL,
+                    setting_value TEXT DEFAULT NULL,
+                    created_at DATETIME NOT NULL,
+                    updated_at DATETIME NOT NULL,
+                    UNIQUE KEY uk_app_settings_key (setting_key)
+                ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci'
+            );
+        } catch (\Throwable $e) {
+            error_log('[formkun] SchemaPatch app_settings: ' . $e->getMessage());
         }
     }
 }

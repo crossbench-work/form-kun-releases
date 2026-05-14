@@ -20,6 +20,32 @@ define('UPLOADS_DIR', PUBLIC_DIR . DIRECTORY_SEPARATOR . 'uploads');
 
 // 設定読込（config.local.php で上書き可）
 $config = require APP_DIR . '/config.php';
+
+// オートローダ（PSR-4 風だがフラットな配置）
+spl_autoload_register(function ($class) {
+    $map = [
+        'Core\\'              => APP_DIR . '/core/',
+        'Controllers\\'       => APP_DIR . '/controllers/',
+        'Controllers\\Admin\\'=> APP_DIR . '/controllers/admin/',
+        'Models\\'            => APP_DIR . '/models/',
+    ];
+
+    foreach ($map as $prefix => $base) {
+        if (strpos($class, $prefix) === 0) {
+            $relative = substr($class, strlen($prefix));
+            $file = $base . str_replace('\\', '/', $relative) . '.php';
+            if (is_file($file)) {
+                require $file;
+                return;
+            }
+        }
+    }
+});
+
+// DB 初期化と DB 保存設定の読込
+\Core\Database::configure($config['db']);
+\Core\SchemaPatch::ensureLatest();
+$config = array_replace_recursive($config, \Models\AppSetting::loadConfigOverrides());
 define('FORMKUN_CONFIG', $config);
 
 $debug = !empty($config['debug']);
@@ -47,27 +73,6 @@ if (function_exists('mb_language')) {
 if (!empty($config['site']['locale'])) {
     @setlocale(LC_ALL, $config['site']['locale']);
 }
-
-// オートローダ（PSR-4 風だがフラットな配置）
-spl_autoload_register(function ($class) {
-    $map = [
-        'Core\\'              => APP_DIR . '/core/',
-        'Controllers\\'       => APP_DIR . '/controllers/',
-        'Controllers\\Admin\\'=> APP_DIR . '/controllers/admin/',
-        'Models\\'            => APP_DIR . '/models/',
-    ];
-
-    foreach ($map as $prefix => $base) {
-        if (strpos($class, $prefix) === 0) {
-            $relative = substr($class, strlen($prefix));
-            $file = $base . str_replace('\\', '/', $relative) . '.php';
-            if (is_file($file)) {
-                require $file;
-                return;
-            }
-        }
-    }
-});
 
 // 共通の安全ヘッダ
 if (!headers_sent()) {
@@ -131,12 +136,6 @@ set_exception_handler(function (\Throwable $e) use ($debug) {
     }
     exit;
 });
-
-// DB 初期化（必要時に取得）
-\Core\Database::configure($config['db']);
-
-// 旧 DB に users.email 等が無い場合の自動補正（1 リクエストにつき 1 回）
-\Core\SchemaPatch::ensureLatest();
 
 // ヘルパ関数
 require APP_DIR . '/core/helpers.php';
