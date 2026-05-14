@@ -150,6 +150,36 @@
         return editor ? editor.querySelector('[data-description-list]') : null;
     }
 
+    function syncHtmlToggleEditor(editor) {
+        if (!editor) return;
+        var toggle = editor.querySelector('[data-target="c-htmlInputEditor01__toggle"]');
+        var textarea = editor.querySelector('[data-target="c-htmlInputEditor01__textarea"]');
+        var help = editor.querySelector('[data-target="c-htmlInputEditor01__help"]');
+        var isHtmlMode = !!(toggle && toggle.checked);
+        editor.classList.toggle('is-html-mode', isHtmlMode);
+        if (textarea) {
+            textarea.spellcheck = !isHtmlMode;
+            textarea.placeholder = isHtmlMode ? '<p>説明文を入力</p>' : '説明文を入力';
+        }
+        if (help) {
+            help.textContent = isHtmlMode
+                ? 'HTML を直接入力できます。一部のタグと属性だけが保存されます。'
+                : '通常はテキストとして表示され、改行もそのまま反映されます。';
+        }
+    }
+
+    function bindHtmlToggleEditor(editor) {
+        if (!editor || editor.getAttribute('data-html-toggle-bound') === '1') return;
+        var toggle = editor.querySelector('[data-target="c-htmlInputEditor01__toggle"]');
+        if (toggle) {
+            toggle.addEventListener('change', function () {
+                syncHtmlToggleEditor(editor);
+            });
+        }
+        editor.setAttribute('data-html-toggle-bound', '1');
+        syncHtmlToggleEditor(editor);
+    }
+
     function sortDescriptionBlocks(editor) {
         var descriptionList = getDescriptionList(editor);
         if (!descriptionList) return;
@@ -198,6 +228,7 @@
     function bindDescriptionBlock(editor, block) {
         var remove = block.querySelector('.fb-description-remove');
         var select = block.querySelector('.fb-description-position');
+        bindHtmlToggleEditor(block.querySelector('[data-html-toggle-editor]'));
         if (remove) {
             remove.addEventListener('click', function () {
                 block.parentNode.removeChild(block);
@@ -855,7 +886,7 @@
                 }
                 sortDescriptionBlocks(editor);
                 reindexDescriptionBlocks(editor);
-                var textarea = block.querySelector('textarea');
+                var textarea = block.querySelector('[data-target="c-htmlInputEditor01__textarea"]');
                 if (textarea) textarea.focus();
             });
         }

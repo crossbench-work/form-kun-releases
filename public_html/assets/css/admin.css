@@ -907,6 +907,19 @@ form.is-inline {
   margin-bottom: 16px;
 }
 
+[data-module=c-htmlInputEditor01] > .wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+[data-module=c-htmlInputEditor01] > .wrapper > .block.is-toolbar {
+  display: flex;
+  justify-content: flex-end;
+}
+[data-module=c-htmlInputEditor01].is-html-mode > .wrapper > .block.is-help .text.is-help {
+  color: #1d4ed8;
+}
+
 [data-module=c-inputSet01] > .wrapper > .block.is-contents > .area.is-title,
 [data-module=c-inputSet01] > .wrapper > .block.is-contents > .block.is-title {
   display: flex;
@@ -987,7 +1000,7 @@ form.is-inline {
 [data-module=m-formBuilder01] .c-formEditor__itemHeader > .wrapper > .block.is-contents {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 12px;
   padding: 10px 12px;
 }
 [data-module=m-formBuilder01] [data-module=m-dragHandle01] {
@@ -1012,18 +1025,12 @@ form.is-inline {
 }
 [data-module=m-formBuilder01] [data-module=m-arrowBtn01] {
   appearance: none;
-  border: 1px solid #cbd5e1;
-  background: #fff;
   color: #334155;
-  border-radius: 6px;
-  min-width: 32px;
-  height: 32px;
-  padding: 0 10px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  font-size: 14px;
+  font-size: 12px;
   line-height: 1;
 }
 [data-module=m-formBuilder01] [data-module=m-arrowBtn01]:hover {
@@ -1033,8 +1040,14 @@ form.is-inline {
 [data-module=m-formBuilder01] .c-formEditor__itemHeader > .wrapper > .block.is-contents > .area.is-move {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
   flex-shrink: 0;
+}
+[data-module=m-formBuilder01] .c-formEditor__itemHeader > .wrapper > .block.is-contents > .area.is-move > .box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
 }
 [data-module=m-formBuilder01] .c-formEditor__itemHeader > .wrapper > .block.is-contents > .area.is-summary {
   flex: 1;

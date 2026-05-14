@@ -287,7 +287,7 @@ if (!function_exists('render_rich_text_html')) {
 
 if (!function_exists('decode_form_description_blocks')) {
     /**
-     * @return array<int, array{id:string,html:string,position:int,visible:int}>
+     * @return array<int, array{id:string,html:string,position:int,visible:int,is_html:int}>
      */
     function decode_form_description_blocks($stored, bool $legacyVisible = true): array
     {
@@ -295,6 +295,22 @@ if (!function_exists('decode_form_description_blocks')) {
         if ($stored === '') {
             return [];
         }
+
+        $normalizeBlockContent = static function ($value, bool $isHtml): string {
+            $content = trim((string) $value);
+            if ($content === '') {
+                return '';
+            }
+
+            return $isHtml ? sanitize_rich_text_html($content) : $content;
+        };
+        $resolveIsHtml = static function (array $item, string $content): bool {
+            if (array_key_exists('is_html', $item)) {
+                return !empty($item['is_html']);
+            }
+
+            return preg_match('/<\s*\/?[a-zA-Z][^>]*>/', $content) === 1;
+        };
 
         $decoded = json_decode($stored, true);
         if (is_array($decoded) && ($decoded === [] || array_keys($decoded) === range(0, count($decoded) - 1))) {
@@ -311,7 +327,9 @@ if (!function_exists('decode_form_description_blocks')) {
                     if (!is_array($item)) {
                         continue;
                     }
-                    $html = sanitize_rich_text_html($item['html'] ?? '');
+                    $rawContent = trim((string) ($item['html'] ?? ''));
+                    $isHtml = $resolveIsHtml($item, $rawContent);
+                    $html = $normalizeBlockContent($rawContent, $isHtml);
                     if ($html === '') {
                         continue;
                     }
@@ -328,13 +346,15 @@ if (!function_exists('decode_form_description_blocks')) {
                         'html' => $html,
                         'position' => $position,
                         'visible' => $visible,
+                        'is_html' => $isHtml ? 1 : 0,
                     ];
                 }
                 return $blocks;
             }
         }
 
-        $html = sanitize_rich_text_html($stored);
+        $isHtml = preg_match('/<\s*\/?[a-zA-Z][^>]*>/', $stored) === 1;
+        $html = $normalizeBlockContent($stored, $isHtml);
         if ($html === '') {
             return [];
         }
@@ -344,6 +364,7 @@ if (!function_exists('decode_form_description_blocks')) {
             'html' => $html,
             'position' => 0,
             'visible' => $legacyVisible ? 1 : 0,
+            'is_html' => $isHtml ? 1 : 0,
         ]];
     }
 }
@@ -359,7 +380,11 @@ if (!function_exists('encode_form_description_blocks')) {
             if (!is_array($block)) {
                 continue;
             }
-            $html = sanitize_rich_text_html($block['html'] ?? '');
+            $isHtml = !empty($block['is_html']);
+            $html = trim((string) ($block['html'] ?? ''));
+            if ($isHtml) {
+                $html = sanitize_rich_text_html($html);
+            }
             if ($html === '') {
                 continue;
             }
@@ -375,6 +400,7 @@ if (!function_exists('encode_form_description_blocks')) {
                 'html' => $html,
                 'position' => $position,
                 'visible' => !empty($block['visible']) ? 1 : 0,
+                'is_html' => $isHtml ? 1 : 0,
             ];
         }
 
@@ -388,7 +414,7 @@ if (!function_exists('encode_form_description_blocks')) {
 
 if (!function_exists('render_form_description_blocks_at')) {
     /**
-     * @param array<int, array{id:string,html:string,position:int,visible:int}> $blocks
+     * @param array<int, array{id:string,html:string,position:int,visible:int,is_html?:int}> $blocks
      */
     function render_form_description_blocks_at(array $blocks, int $position): string
     {
@@ -397,7 +423,10 @@ if (!function_exists('render_form_description_blocks_at')) {
             if ((int) ($block['position'] ?? 0) !== $position || empty($block['visible']) || empty($block['html'])) {
                 continue;
             }
-            $html .= '<div class="block is-lead">' . render_rich_text_html($block['html']) . '</div>';
+            $content = !empty($block['is_html'])
+                ? render_rich_text_html($block['html'])
+                : nl2br(e((string) $block['html']));
+            $html .= '<div class="block is-lead">' . $content . '</div>';
         }
         return $html;
     }
@@ -409,7 +438,9 @@ if (!function_exists('first_form_description_block_html')) {
         $blocks = decode_form_description_blocks($stored, $legacyVisible);
         foreach ($blocks as $block) {
             if (!empty($block['visible']) && !empty($block['html'])) {
-                return render_rich_text_html($block['html']);
+                return !empty($block['is_html'])
+                    ? render_rich_text_html($block['html'])
+                    : nl2br(e((string) $block['html']));
             }
         }
         return '';

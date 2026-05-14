@@ -521,7 +521,7 @@ class FormController
 
     /**
      * @param array<int, array<string, mixed>> $blocks
-     * @return array<int, array{id:string,html:string,position:int,visible:int}>
+     * @return array<int, array{id:string,html:string,position:int,visible:int,is_html:int}>
      */
     private static function normalizeDescriptionBlocks(array $blocks, bool $allowEmptyHtml = false, string $idPrefix = 'description'): array
     {
@@ -530,8 +530,11 @@ class FormController
             if (!is_array($block)) {
                 continue;
             }
-            $rawHtml = (string) ($block['html'] ?? '');
-            $html = $allowEmptyHtml ? $rawHtml : sanitize_rich_text_html($rawHtml);
+            $rawHtml = trim((string) ($block['html'] ?? ''));
+            $isHtml = array_key_exists('is_html', $block)
+                ? !empty($block['is_html'])
+                : preg_match('/<\s*\/?[a-zA-Z][^>]*>/', $rawHtml) === 1;
+            $html = $allowEmptyHtml ? $rawHtml : ($isHtml ? sanitize_rich_text_html($rawHtml) : $rawHtml);
             if (!$allowEmptyHtml && $html === '') {
                 continue;
             }
@@ -544,6 +547,7 @@ class FormController
                 'html' => $html,
                 'position' => isset($block['position']) && is_numeric($block['position']) ? max(0, (int) $block['position']) : 0,
                 'visible' => !empty($block['visible']) ? 1 : 0,
+                'is_html' => $isHtml ? 1 : 0,
             ];
         }
 
@@ -553,6 +557,7 @@ class FormController
                 'html' => '',
                 'position' => 0,
                 'visible' => 1,
+                'is_html' => 0,
             ];
         }
 
@@ -560,7 +565,7 @@ class FormController
     }
 
     /**
-     * @return array<int, array{id:string,html:string,position:int,visible:int}>
+     * @return array<int, array{id:string,html:string,position:int,visible:int,is_html:int}>
      */
     private static function collectContentBlocks(string $postKey, string $idPrefix): array
     {
@@ -579,6 +584,7 @@ class FormController
                 'html' => (string) ($block['html'] ?? ''),
                 'position' => isset($block['position']) && is_numeric($block['position']) ? max(0, (int) $block['position']) : 0,
                 'visible' => !empty($block['visible']) ? 1 : 0,
+                'is_html' => !empty($block['is_html']) ? 1 : 0,
             ];
         }
 
@@ -588,7 +594,10 @@ class FormController
     private static function hasVisibleContentBlocks(array $blocks): bool
     {
         foreach ($blocks as $block) {
-            if (!empty($block['visible']) && sanitize_rich_text_html($block['html'] ?? '') !== '') {
+            $content = !empty($block['is_html'])
+                ? sanitize_rich_text_html($block['html'] ?? '')
+                : trim((string) ($block['html'] ?? ''));
+            if (!empty($block['visible']) && $content !== '') {
                 return true;
             }
         }

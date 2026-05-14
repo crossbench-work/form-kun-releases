@@ -903,6 +903,29 @@ form.is-inline {
   }
 }
 
+[data-module="c-htmlInputEditor01"] {
+  > .wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+
+    > .block.is-toolbar {
+      display: flex;
+      justify-content: flex-end;
+    }
+  }
+
+  &.is-html-mode {
+    > .wrapper {
+      > .block.is-help {
+        .text.is-help {
+          color: #1d4ed8;
+        }
+      }
+    }
+  }
+}
+
 [data-module="c-inputSet01"] {
   > .wrapper {
     > .block.is-contents {
@@ -1011,7 +1034,7 @@ form.is-inline {
       > .block.is-contents {
         display: flex;
         align-items: center;
-        gap: 6px;
+        gap: 12px;
         padding: 10px 12px;
       }
     }
@@ -1059,8 +1082,15 @@ form.is-inline {
   .c-formEditor__itemHeader > .wrapper > .block.is-contents > .area.is-move {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 6px;
     flex-shrink: 0;
+  }
+
+  .c-formEditor__itemHeader > .wrapper > .block.is-contents > .area.is-move > .box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
   }
 
   .c-formEditor__itemHeader > .wrapper > .block.is-contents > .area.is-summary {
