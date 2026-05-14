@@ -928,25 +928,7 @@
                 updateFieldSummary(li);
             });
         }
-        var up = li.querySelector('[data-target="c-formEditor__moveUp"]');
-        var dn = li.querySelector('[data-target="c-formEditor__moveDown"]');
         var rm = li.querySelector('[data-target="c-formEditor__remove"]');
-        if (up) up.addEventListener('click', function () {
-            var prev = li.previousElementSibling;
-            if (prev) {
-                list.insertBefore(li, prev);
-                reindex();
-                refreshFbSortable();
-            }
-        });
-        if (dn) dn.addEventListener('click', function () {
-            var next = li.nextElementSibling;
-            if (next) {
-                list.insertBefore(next, li);
-                reindex();
-                refreshFbSortable();
-            }
-        });
         if (rm) rm.addEventListener('click', function () {
             if (list.querySelectorAll('.c-formEditor__item').length <= 1) {
                 alert('項目は1つ以上必要です。');

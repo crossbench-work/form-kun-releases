@@ -1257,24 +1257,9 @@ body.is-field-type-modal-open {
   color: #64748b;
   background: #f1f5f9;
 }
-[data-module=m-formBuilder01] [data-module=m-arrowBtn01] {
-  appearance: none;
-  color: #334155;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  font-size: 12px;
-  line-height: 1;
-}
-[data-module=m-formBuilder01] [data-module=m-arrowBtn01]:hover {
-  background: #f8fafc;
-  border-color: #94a3b8;
-}
 [data-module=m-formBuilder01] .c-formEditor__itemHeader > .wrapper > .block.is-contents > .area.is-move {
   display: flex;
   align-items: center;
-  gap: 6px;
   flex-shrink: 0;
 }
 [data-module=m-formBuilder01] .c-formEditor__itemHeader > .wrapper > .block.is-contents > .area.is-move > .box {
@@ -1289,6 +1274,9 @@ body.is-field-type-modal-open {
 }
 [data-module=m-formBuilder01] .c-formEditor__itemHeader > .wrapper > .block.is-contents > .area.is-delete {
   flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 [data-module=m-formBuilder01] .c-formEditorSummary01 {
   min-width: 0;

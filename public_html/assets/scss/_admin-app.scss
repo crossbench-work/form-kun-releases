@@ -1321,26 +1321,9 @@ body.is-field-type-modal-open {
     }
   }
 
-  [data-module="m-arrowBtn01"] {
-    appearance: none;
-    color: #334155;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    font-size: 12px;
-    line-height: 1;
-
-    &:hover {
-      background: #f8fafc;
-      border-color: #94a3b8;
-    }
-  }
-
   .c-formEditor__itemHeader > .wrapper > .block.is-contents > .area.is-move {
     display: flex;
     align-items: center;
-    gap: 6px;
     flex-shrink: 0;
   }
 
@@ -1358,6 +1341,9 @@ body.is-field-type-modal-open {
 
   .c-formEditor__itemHeader > .wrapper > .block.is-contents > .area.is-delete {
     flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
   }
 
   .c-formEditorSummary01 {

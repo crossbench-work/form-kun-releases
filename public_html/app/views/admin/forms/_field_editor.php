@@ -35,12 +35,6 @@ if (empty($f['required']) || in_array($f['type'], ['radio', 'select'], true)) {
                                         <svg width="14" height="18" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="currentColor"><circle cx="9" cy="6" r="2"/><circle cx="15" cy="6" r="2"/><circle cx="9" cy="12" r="2"/><circle cx="15" cy="12" r="2"/><circle cx="9" cy="18" r="2"/><circle cx="15" cy="18" r="2"/></svg>
                                     </p>
                                 </div>
-                                <div class="box is-button">
-                                    <button type="button" data-module="m-arrowBtn01" data-type="up" data-target="c-formEditor__moveUp" aria-label="上へ移動" title="上へ移動">↑</button>
-                                </div>
-                                <div class="box is-button">
-                                    <button type="button" data-module="m-arrowBtn01" data-type="down" data-target="c-formEditor__moveDown" aria-label="下へ移動" title="下へ移動">↓</button>
-                                </div>
                             </div>
                             <div class="area is-summary">
                                 <div class="c-formEditorSummary01">
