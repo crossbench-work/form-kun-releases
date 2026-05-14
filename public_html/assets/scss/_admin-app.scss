@@ -1117,7 +1117,7 @@ form.is-inline {
         > .wrapper[data-description-list] {
           display: flex;
           flex-direction: column;
-          gap: 12px;
+          gap: 8px;
 
           > .c-formEditor__item {
             background: #f9fafb;
@@ -1165,7 +1165,7 @@ form.is-inline {
       display: flex;
       align-items: center;
       gap: 12px;
-      padding: 10px 12px;
+      padding: 8px;
     }
   }
 
@@ -1224,6 +1224,7 @@ form.is-inline {
       align-items: center;
       gap: 10px;
       min-width: 0;
+      font-size: 11px;
     }
   }
 
@@ -1273,14 +1274,12 @@ form.is-inline {
     text-overflow: ellipsis;
     white-space: nowrap;
     color: #334155;
-    font-size: 13px;
     font-weight: 700;
   }
 
   .c-descriptionEditorSummary01 .position {
     margin: 0;
     flex: 0 0 auto;
-    font-size: 12px;
     padding: 1px 6px;
     border-radius: 999px;
     background: #f1f5f9;
@@ -1458,7 +1457,7 @@ body.is-field-type-modal-open {
       > .block.is-contents {
         display: flex;
         flex-direction: column;
-        gap: 12px;
+        gap: 8px;
       }
     }
   }
@@ -1500,7 +1499,7 @@ body.is-field-type-modal-open {
         display: flex;
         align-items: center;
         gap: 12px;
-        padding: 10px 12px;
+        padding: 8px;
       }
     }
   }
@@ -1563,11 +1562,11 @@ body.is-field-type-modal-open {
         gap: 8px;
         min-width: 0;
         flex-wrap: wrap;
+        font-size: 11px;
 
         > p {
           margin: 0;
           color: #475569;
-          font-size: 13px;
         }
 
         > .index {
@@ -1588,7 +1587,6 @@ body.is-field-type-modal-open {
         > .type,
         > .required,
         > .regex {
-          font-size: 12px;
           padding: 1px 6px;
           border-radius: 999px;
         }
