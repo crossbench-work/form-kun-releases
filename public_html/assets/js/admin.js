@@ -351,21 +351,25 @@
         var isRequired = !!(requiredToggle && requiredToggle.checked);
         requiredEl.textContent = '必須';
         requiredEl.hidden = !isRequired;
-        regexWrapEl.hidden = !isRequired;
+        var regexText = 'なし';
         if (!isRequired || !regexKind || regexKind.value === '' || typeValue === 'radio' || typeValue === 'select') {
-            regexEl.textContent = 'なし';
+            regexText = 'なし';
         } else if (regexKind.value === FB_REGEX_CHECKBOX_LIMIT) {
-            regexEl.textContent = '選択数';
+            regexText = '選択数';
         } else if (regexKind.value === FB_REGEX_CUSTOM) {
             if (!regexCustom || !regexCustom.value.trim()) {
-                regexEl.textContent = 'なし';
+                regexText = 'なし';
+                regexEl.textContent = regexText;
+                regexWrapEl.hidden = !isRequired || regexText === 'なし';
                 return;
             }
-            regexEl.textContent = 'カスタム';
+            regexText = 'カスタム';
         } else {
             var regexOpt = regexKind.selectedOptions && regexKind.selectedOptions[0];
-            regexEl.textContent = regexOpt ? regexOpt.textContent.trim() : 'なし';
+            regexText = regexOpt ? regexOpt.textContent.trim() : 'なし';
         }
+        regexEl.textContent = regexText;
+        regexWrapEl.hidden = !isRequired || regexText === 'なし';
     }
 
     function bindAccordion(li) {
