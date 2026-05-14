@@ -450,7 +450,8 @@ body.l-adminShell01 a:hover {
   border-color: #fca5a5;
 }
 
-[data-module=m-requiredCheck01] label {
+[data-module=m-requiredCheck01] label,
+[data-module=m-requiredCheck01] .label.is-choice {
   display: inline-flex;
   flex-direction: column;
   align-items: center;
@@ -463,13 +464,16 @@ body.l-adminShell01 a:hover {
   cursor: pointer;
   margin: 0;
 }
-[data-module=m-requiredCheck01] label input {
+[data-module=m-requiredCheck01] label input,
+[data-module=m-requiredCheck01] .label.is-choice input {
   cursor: pointer;
 }
-[data-module=m-requiredCheck01] label span {
+[data-module=m-requiredCheck01] label span,
+[data-module=m-requiredCheck01] .label.is-choice span {
   margin-left: 0;
 }
-[data-module=m-requiredCheck01] label:has(input:checked) {
+[data-module=m-requiredCheck01] label:has(input:checked),
+[data-module=m-requiredCheck01] .label.is-choice:has(input:checked) {
   background: #fee2e2;
 }
 

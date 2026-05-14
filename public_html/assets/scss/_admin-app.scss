@@ -345,7 +345,8 @@ body.l-adminShell01 {
 }
 
 [data-module="m-requiredCheck01"] {
-  label {
+  label,
+  .label.is-choice {
     display: inline-flex;
     flex-direction: column;
     align-items: center;
