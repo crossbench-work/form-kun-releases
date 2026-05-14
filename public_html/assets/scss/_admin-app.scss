@@ -366,12 +366,14 @@ body.l-adminShell01 {
 }
 
 .l-adminShell01 h1 {
-  font-size: 22px;
+  font-size: 18px;
+  font-weight: 700;
   margin: 0 0 16px;
 }
 
 [data-module="m-largeTitle01"] {
-  font-size: 17px;
+  font-size: 15px;
+  font-weight: 700;
   margin: 0;
   color: #374151;
 }
@@ -568,6 +570,79 @@ body.l-adminShell01 {
   dd {
     margin: 0;
     word-break: break-word;
+  }
+}
+
+.admin-settings-dl__countRow {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.admin-settings-dl__countText {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+body.is-settings-max-forms-modal-open {
+  overflow: hidden;
+}
+
+[data-module="c-settingsFormLimitModal01"] {
+  &[hidden] {
+    display: none;
+  }
+
+  position: fixed;
+  inset: 0;
+  z-index: 1200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+
+  .c-settingsFormLimitModal01__backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(15, 23, 42, 0.56);
+  }
+
+  .c-settingsFormLimitModal01__dialog {
+    position: relative;
+    width: min(480px, 100%);
+    max-height: calc(100vh - 48px);
+    overflow: auto;
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 24px 48px rgba(15, 23, 42, 0.18);
+    padding: 24px;
+  }
+
+  .c-settingsFormLimitModal01__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 20px;
+
+    h2 {
+      margin: 0;
+      font-size: 20px;
+    }
+  }
+
+  .c-settingsFormLimitModal01__body {
+    .area.is-field {
+      margin-bottom: 20px;
+    }
+  }
+
+  .c-settingsFormLimitModal01__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: flex-end;
   }
 }
 
@@ -859,7 +934,7 @@ form.is-inline {
 .table {
   width: 100%;
   border-collapse: collapse;
-  font-size: 14px;
+  font-size: 11px;
 
   tr {
     border-bottom: 1px solid #f7f7f7;
@@ -871,7 +946,7 @@ form.is-inline {
   th,
   td {
     text-align: left;
-    padding: 10px 12px;
+    padding: 6px 12px;
     vertical-align: middle;
   }
 

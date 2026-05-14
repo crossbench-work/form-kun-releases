@@ -31,26 +31,47 @@
             <div class="block is-field">
                 <dl class="admin-settings-dl">
                     <dt>現在のフォーム数</dt>
-                    <dd><?= (int) $form_count ?> 件 / 上限 <?= (int) $max_forms ?> 件</dd>
+                    <dd>
+                        <span class="admin-settings-dl__countRow">
+                            <span class="admin-settings-dl__countText"><?= (int) $form_count ?> 件 / 上限 <?= (int) $max_forms ?> 件</span>
+                            <?php if (\Core\Auth::role() === 'admin'): ?>
+                                <button type="button" class="btn is-sm" data-target="settings-max-forms-open">編集</button>
+                            <?php endif; ?>
+                        </span>
+                    </dd>
                 </dl>
-                <?php if (\Core\Auth::role() === 'admin'): ?>
-                    <form method="post" action="<?= e(base_path('/admin/settings')) ?>">
-                        <?= \Core\Csrf::field() ?>
-                        <div class="area is-field">
-                            <label class="label" data-module="m-boldTitle01" for="max_forms">フォームの作成上限</label>
-                            <div data-module="m-input01">
-                                <input type="number" name="max_forms" id="max_forms" min="1" max="999999" step="1" value="<?= (int) $max_forms ?>" required>
-                            </div>
-                            <p class="text is-help">1 以上の整数を指定してください。保存後、一覧の新規作成やこの上限を超える作成はできません。</p>
-                        </div>
-                        <div class="area is-field">
-                            <button type="submit" class="btn is-primary">保存</button>
-                        </div>
-                    </form>
-                <?php else: ?>
+                <?php if (\Core\Auth::role() !== 'admin'): ?>
                     <p class="text is-muted">作成上限の変更は管理者のみ行えます。</p>
                 <?php endif; ?>
             </div>
         </div>
     </div>
 </div>
+
+<?php if (\Core\Auth::role() === 'admin'): ?>
+<div data-module="c-settingsFormLimitModal01" hidden>
+    <div class="c-settingsFormLimitModal01__backdrop" data-target="settings-max-forms-close"></div>
+    <div class="c-settingsFormLimitModal01__dialog" role="dialog" aria-modal="true" aria-labelledby="settings-max-forms-modal-title">
+        <div class="c-settingsFormLimitModal01__header">
+            <h2 id="settings-max-forms-modal-title">フォームの作成上限</h2>
+            <button type="button" class="btn is-sm" data-target="settings-max-forms-close">閉じる</button>
+        </div>
+        <div class="c-settingsFormLimitModal01__body">
+            <form method="post" action="<?= e(base_path('/admin/settings')) ?>">
+                <?= \Core\Csrf::field() ?>
+                <div class="area is-field">
+                    <label class="label" data-module="m-boldTitle01" for="max_forms_modal">フォームの作成上限</label>
+                    <div data-module="m-input01">
+                        <input type="number" name="max_forms" id="max_forms_modal" min="1" max="999999" step="1" value="<?= (int) $max_forms ?>" required>
+                    </div>
+                    <p class="text is-help">1 以上の整数を指定してください。保存後、一覧の新規作成やこの上限を超える作成はできません。</p>
+                </div>
+                <div class="c-settingsFormLimitModal01__actions">
+                    <button type="button" class="btn" data-target="settings-max-forms-close">キャンセル</button>
+                    <button type="submit" class="btn is-primary">保存</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<?php endif; ?>
