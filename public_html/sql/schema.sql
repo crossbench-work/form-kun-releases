@@ -61,7 +61,6 @@ CREATE TABLE IF NOT EXISTS forms (
     reply_from_field_key    VARCHAR(64) DEFAULT NULL,
     reply_subject           VARCHAR(200) DEFAULT NULL,
     reply_template          TEXT DEFAULT NULL,
-    captcha_enabled         TINYINT(1) NOT NULL DEFAULT 1,
     status                  ENUM('active','draft','archived') NOT NULL DEFAULT 'draft',
     created_at              DATETIME NOT NULL,
     updated_at              DATETIME NOT NULL

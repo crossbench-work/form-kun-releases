@@ -1,7 +1,6 @@
 <?php
 namespace Controllers;
 
-use Core\Captcha;
 use Core\Csrf;
 use Core\FileStorage;
 use Core\Mailer;
@@ -28,7 +27,6 @@ class FormController
             return;
         }
         $fields = FormField::forForm((int) $form['id']);
-        $captchaQuestion = !empty($form['captcha_enabled']) ? Captcha::generate() : null;
 
         $this->view->render('front/form/show', [
             'title'      => $form['title'],
@@ -36,7 +34,6 @@ class FormController
             'fields'     => $fields,
             'values'     => [],
             'errors'     => [],
-            'captchaQuestion' => $captchaQuestion,
         ], 'public');
     }
 
@@ -48,47 +45,18 @@ class FormController
         Csrf::verify();
         $fields = FormField::forForm((int) $form['id']);
 
-        // ハニーポット
-        if (!empty($_POST['website'])) {
-            // ボット判定。あえてサンクスを表示しスパマーに気付かせない。
-            $this->view->render('front/form/thanks', [
-                'title' => '送信完了',
-                'form'  => $form,
-            ], 'public');
-            return;
-        }
-
-        // CAPTCHA
-        if (!empty($form['captcha_enabled'])) {
-            if (!Captcha::check($_POST['captcha'] ?? null)) {
-                $newQuestion = Captcha::generate();
-                $errors = ['_captcha' => ['認証コードが正しくありません。']];
-                $this->view->render('front/form/show', [
-                    'title'      => $form['title'],
-                    'form'       => $form,
-                    'fields'     => $fields,
-                    'values'     => $_POST,
-                    'errors'     => $errors,
-                    'captchaQuestion' => $newQuestion,
-                ], 'public');
-                return;
-            }
-        }
-
         // バリデーション
         $validator = new Validator();
         $files = self::buildFileMap($fields);
         $result = $validator->validate($fields, $_POST, $files);
 
         if (!empty($result['errors'])) {
-            $captchaQuestion = !empty($form['captcha_enabled']) ? Captcha::generate() : null;
             $this->view->render('front/form/show', [
                 'title'      => $form['title'],
                 'form'       => $form,
                 'fields'     => $fields,
                 'values'     => $result['values'],
                 'errors'     => $result['errors'],
-                'captchaQuestion' => $captchaQuestion,
             ], 'public');
             return;
         }
@@ -149,14 +117,12 @@ class FormController
                 FileStorage::delete($meta['stored_path']);
             }
             unset($_SESSION['_pending_submission']);
-            $captchaQuestion = !empty($form['captcha_enabled']) ? Captcha::generate() : null;
             $this->view->render('front/form/show', [
                 'title'      => $form['title'],
                 'form'       => $form,
                 'fields'     => $fields,
                 'values'     => $values,
                 'errors'     => [],
-                'captchaQuestion' => $captchaQuestion,
             ], 'public');
             return;
         }

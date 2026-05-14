@@ -36,8 +36,8 @@ class Form
                 slug, title, input_page_title, show_input_page_title, description, show_title, show_description, confirm_page_title, show_confirm_page_title, confirm_button_text, submit_button_text, back_button_text, confirm_message, thanks_page_title, show_thanks_page_title, thanks_message, thanks_button_text, thanks_button_url,
                 admin_emails, mail_subject_admin, mail_template_admin,
                 reply_enabled, reply_from_field_key, reply_subject, reply_template,
-                captcha_enabled, status, created_at, updated_at
-            ) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',
+                status, created_at, updated_at
+            ) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',
             [
                 $data['slug'],
                 $data['title'],
@@ -64,7 +64,6 @@ class Form
                 $data['reply_from_field_key'] ?? null,
                 $data['reply_subject'] ?? null,
                 $data['reply_template'] ?? null,
-                !empty($data['captcha_enabled']) ? 1 : 0,
                 $data['status'] ?? 'draft',
                 $now,
                 $now,
@@ -81,7 +80,7 @@ class Form
                 slug = ?, title = ?, input_page_title = ?, show_input_page_title = ?, description = ?, show_title = ?, show_description = ?, confirm_page_title = ?, show_confirm_page_title = ?, confirm_button_text = ?, submit_button_text = ?, back_button_text = ?, confirm_message = ?, thanks_page_title = ?, show_thanks_page_title = ?, thanks_message = ?, thanks_button_text = ?, thanks_button_url = ?,
                 admin_emails = ?, mail_subject_admin = ?, mail_template_admin = ?,
                 reply_enabled = ?, reply_from_field_key = ?, reply_subject = ?, reply_template = ?,
-                captcha_enabled = ?, status = ?, updated_at = ?
+                status = ?, updated_at = ?
               WHERE id = ?',
             [
                 $data['slug'],
@@ -109,7 +108,6 @@ class Form
                 $data['reply_from_field_key'] ?? null,
                 $data['reply_subject'] ?? null,
                 $data['reply_template'] ?? null,
-                !empty($data['captcha_enabled']) ? 1 : 0,
                 $data['status'] ?? 'draft',
                 $now,
                 $id,

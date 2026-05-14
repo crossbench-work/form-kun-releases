@@ -154,7 +154,6 @@ class FormController
             'fields' => self::preparePreviewFields($data['fields']),
             'values' => [],
             'errors' => [],
-            'captchaQuestion' => null,
             'previewMode' => true,
         ], 'public');
     }
@@ -228,7 +227,6 @@ class FormController
             'reply_from_field_key' => trim((string) ($_POST['reply_from_field_key'] ?? '')),
             'reply_subject'        => trim((string) ($_POST['reply_subject'] ?? '')),
             'reply_template'       => (string) ($_POST['reply_template'] ?? ''),
-            'captcha_enabled'      => 1,
             'status'               => in_array($_POST['status'] ?? '', ['active','draft','archived'], true) ? $_POST['status'] : 'draft',
         ];
         if ($form['confirm_button_text'] === '') {
@@ -516,7 +514,6 @@ class FormController
             'reply_from_field_key' => '',
             'reply_subject' => '送信ありがとうございました',
             'reply_template' => "お問い合わせいただきありがとうございました。\n以下の内容で受け付けました。\n\n{{__all__}}",
-            'captcha_enabled' => 1,
             'status' => 'draft',
         ];
     }
@@ -667,7 +664,6 @@ class FormController
     {
         return array_merge($form, [
             'slug' => trim((string) ($form['slug'] ?? '')) !== '' ? (string) $form['slug'] : '__preview__',
-            'captcha_enabled' => 0,
         ]);
     }
 
