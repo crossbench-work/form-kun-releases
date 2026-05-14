@@ -12,6 +12,13 @@
 <script defer src="<?= e(base_path('/assets/js/admin.js')) ?>"></script>
 </head>
 <body class="l-adminShell01">
+<?php
+$__nav = admin_relative_path();
+$__navDash = ($__nav === '/' || $__nav === '');
+$__navForms = str_starts_with($__nav, '/forms') || str_starts_with($__nav, '/submissions') || str_starts_with($__nav, '/files');
+$__navUsers = str_starts_with($__nav, '/users');
+$__navSettings = str_starts_with($__nav, '/settings');
+?>
 <div class="l-adminContainer01">
     <header class="c-adminHeader01">
         <div class="wrapper">
@@ -20,11 +27,12 @@
                     <a href="<?= e(base_path('/admin/')) ?>"><?= e(config('site.admin_name')) ?></a>
                 </div>
                 <nav class="area is-nav">
-                    <a href="<?= e(base_path('/admin/')) ?>">ダッシュボード</a>
-                    <a href="<?= e(base_path('/admin/forms')) ?>">フォーム</a>
+                    <a href="<?= e(base_path('/admin/')) ?>" class="<?= $__navDash ? 'is-active' : '' ?>"<?= $__navDash ? ' aria-current="page"' : '' ?>>ダッシュボード</a>
+                    <a href="<?= e(base_path('/admin/forms')) ?>" class="<?= $__navForms ? 'is-active' : '' ?>"<?= $__navForms ? ' aria-current="page"' : '' ?>>フォーム</a>
                     <?php if (\Core\Auth::role() === 'admin'): ?>
-                        <a href="<?= e(base_path('/admin/users')) ?>">ユーザー</a>
+                        <a href="<?= e(base_path('/admin/users')) ?>" class="<?= $__navUsers ? 'is-active' : '' ?>"<?= $__navUsers ? ' aria-current="page"' : '' ?>>ユーザー</a>
                     <?php endif; ?>
+                    <a href="<?= e(base_path('/admin/settings')) ?>" class="<?= $__navSettings ? 'is-active' : '' ?>"<?= $__navSettings ? ' aria-current="page"' : '' ?>>設定</a>
                 </nav>
                 <div class="area is-user">
                     <?php if ($u = \Core\Auth::user()): ?>

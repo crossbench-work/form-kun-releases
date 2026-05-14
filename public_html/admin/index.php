@@ -28,6 +28,9 @@ $router->post('/setup', fn() => (new \Controllers\Admin\SetupController())->crea
 $router->get('/',  fn() => (new \Controllers\Admin\DashboardController())->index());
 $router->get('',   fn() => (new \Controllers\Admin\DashboardController())->index());
 
+// 全体設定（表示のみ・config 参照）
+$router->get('/settings', fn() => (new \Controllers\Admin\SettingsController())->index());
+
 // フォーム管理
 $router->get('/forms',                  fn() => (new \Controllers\Admin\FormController())->index());
 $router->get('/forms/new',              fn() => (new \Controllers\Admin\FormController())->createForm());

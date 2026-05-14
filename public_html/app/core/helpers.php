@@ -68,6 +68,38 @@ if (!function_exists('redirect')) {
     }
 }
 
+if (!function_exists('admin_relative_path')) {
+    /**
+     * 管理画面ルーターと同じ基準のパス（/admin プレフィックス除去後）。
+     * 例: '/', '/forms', '/forms/1/edit', '/settings'
+     */
+    function admin_relative_path(): string
+    {
+        if (isset($_GET['path']) && $_GET['path'] !== '') {
+            $path = '/' . ltrim((string) $_GET['path'], '/');
+        } else {
+            $path = parse_url($_SERVER['REQUEST_URI'] ?? '/', PHP_URL_PATH) ?: '/';
+        }
+        $base = rtrim((string) config('site.base_path', ''), '/');
+        if ($base !== '' && strpos($path, $base) === 0) {
+            $path = substr($path, strlen($base));
+        }
+        $path = '/' . ltrim((string) $path, '/');
+        $prefix = '/admin';
+        if ($prefix !== '' && strpos($path, $prefix) === 0) {
+            $path = substr($path, strlen($prefix));
+            if ($path === '' || $path === false) {
+                $path = '/';
+            }
+        }
+        if ($path !== '/' && substr($path, -1) === '/') {
+            $path = rtrim($path, '/');
+        }
+
+        return $path;
+    }
+}
+
 if (!function_exists('is_form_button_url')) {
     /**
      * 完了画面ボタンに指定できるURLか判定する。
