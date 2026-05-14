@@ -920,6 +920,78 @@ form.is-inline {
   }
 }
 
+body.is-field-type-modal-open {
+  overflow: hidden;
+}
+
+[data-module="c-fieldTypeModal01"] {
+  position: fixed;
+  inset: 0;
+  z-index: 1200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+
+  .c-fieldTypeModal01__backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(15, 23, 42, 0.56);
+  }
+
+  .c-fieldTypeModal01__dialog {
+    position: relative;
+    width: min(720px, 100%);
+    max-height: calc(100vh - 48px);
+    overflow: auto;
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 24px 48px rgba(15, 23, 42, 0.18);
+    padding: 24px;
+  }
+
+  .c-fieldTypeModal01__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 20px;
+
+    h2 {
+      margin: 0;
+      font-size: 20px;
+    }
+  }
+
+  .c-fieldTypeModal01__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 12px;
+  }
+
+  .c-fieldTypeModal01__option {
+    appearance: none;
+    border: 1px solid #d1d5db;
+    border-radius: 12px;
+    background: #fff;
+    padding: 16px;
+    text-align: left;
+    font-size: 14px;
+    font-weight: 600;
+    color: #1f2937;
+    cursor: pointer;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+
+    &:hover,
+    &:focus-visible {
+      border-color: #2563eb;
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.16);
+      outline: none;
+      background: #eff6ff;
+    }
+  }
+}
+
 [data-module="c-inputSet01"] {
   > .wrapper {
     > .block.is-contents {
@@ -1201,6 +1273,18 @@ form.is-inline {
     display: flex;
     align-items: center;
     gap: 8px;
+  }
+
+  .c-formEditor__typeText {
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    padding: 10px 12px;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    background: #f8fafc;
+    color: #334155;
+    font-size: 14px;
   }
 
   .c-formEditor__validation {

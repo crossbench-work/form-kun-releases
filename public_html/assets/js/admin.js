@@ -97,6 +97,7 @@
     var builderRoot = list.closest('[data-module="m-formBuilder01"]');
     var template = document.querySelector('[data-target="m-formBuilder01__fieldTemplate"]');
     var addBtn = document.querySelector('[data-target="m-formBuilder01__add"]');
+    var typeModal = document.querySelector('[data-target="m-formBuilder01__typeModal"]');
     var descriptionTemplate = document.querySelector('[data-target="m-formBuilder01__descriptionTemplate"]');
     var descriptionEditors = document.querySelectorAll('[data-description-editor]');
 
@@ -148,6 +149,23 @@
 
     function getDescriptionList(editor) {
         return editor ? editor.querySelector('[data-description-list]') : null;
+    }
+
+    function setFieldType(li, typeValue, typeLabel) {
+        if (!li) return;
+        var typeInput = li.querySelector('[data-target="c-formEditor__type"]');
+        var typeLabelEl = li.querySelector('[data-target="c-formEditor__typeLabel"]');
+        var summaryTypeEl = li.querySelector('[data-target="c-formEditor__summaryType"]');
+        if (typeInput) {
+            typeInput.value = typeValue || 'text_multi';
+            typeInput.setAttribute('data-type-label', typeLabel || '');
+        }
+        if (typeLabelEl) {
+            typeLabelEl.textContent = typeLabel || '';
+        }
+        if (summaryTypeEl) {
+            summaryTypeEl.textContent = typeLabel || '';
+        }
     }
 
     function syncHtmlToggleEditor(editor) {
@@ -326,9 +344,9 @@
         if (!labelEl) return;
         labelEl.textContent = (labelInp && labelInp.value.trim()) ? labelInp.value.trim() : '（無題）';
         if (!typeEl || !requiredEl || !regexEl) return;
-        var opt = typeSel && typeSel.selectedOptions && typeSel.selectedOptions[0];
         var typeValue = typeSel ? typeSel.value : '';
-        typeEl.textContent = opt ? opt.textContent.trim() : '—';
+        var typeLabel = typeSel ? (typeSel.getAttribute('data-type-label') || '') : '';
+        typeEl.textContent = typeLabel || '—';
         var isRequired = !!(requiredToggle && requiredToggle.checked);
         requiredEl.textContent = isRequired ? '必須' : '任意';
         if (!isRequired || !regexKind || regexKind.value === '' || typeValue === 'radio' || typeValue === 'select') {
@@ -814,7 +832,7 @@
     function applyFieldPreset(li, preset) {
         if (!preset) return;
         var labelInput = li.querySelector('[data-name="label"]');
-        var typeSelect = li.querySelector('[data-name="type"]');
+        var typeInput = li.querySelector('[data-name="type"]');
         var requiredToggle = li.querySelector('[data-name="required"]');
         var optionsSource = li.querySelector('[data-name="options"]');
         var choiceList = li.querySelector('.c-formEditor__choiceList');
@@ -822,8 +840,8 @@
         if (labelInput && typeof preset.label === 'string') {
             labelInput.value = preset.label;
         }
-        if (typeSelect && typeof preset.type === 'string') {
-            typeSelect.value = preset.type;
+        if (typeInput && typeof preset.type === 'string') {
+            setFieldType(li, preset.type, preset.typeLabel || '');
         }
         if (requiredToggle) {
             requiredToggle.checked = !!preset.required;
@@ -837,6 +855,19 @@
         if (optionsSource && Array.isArray(preset.options)) {
             optionsSource.value = preset.options.join('\n');
         }
+    }
+
+    function createFieldPreset(typeValue, typeLabel) {
+        var preset = {
+            type: typeValue || 'text_multi',
+            typeLabel: typeLabel || '',
+            label: '',
+            required: false
+        };
+        if (typeValue === 'radio' || typeValue === 'checkbox' || typeValue === 'select') {
+            preset.options = [''];
+        }
+        return preset;
     }
 
     function appendField(preset) {
@@ -854,6 +885,25 @@
         reindex();
         initFbSortable();
         return clone;
+    }
+
+    function openTypeModal() {
+        if (!typeModal) return;
+        typeModal.hidden = false;
+        document.body.classList.add('is-field-type-modal-open');
+        var firstOption = typeModal.querySelector('[data-target="m-formBuilder01__typeOption"]');
+        if (firstOption) {
+            firstOption.focus();
+        }
+    }
+
+    function closeTypeModal() {
+        if (!typeModal) return;
+        typeModal.hidden = true;
+        document.body.classList.remove('is-field-type-modal-open');
+        if (addBtn) {
+            addBtn.focus();
+        }
     }
 
     getFieldItems().forEach(bind);
@@ -899,13 +949,34 @@
         });
     }
 
+    if (typeModal) {
+        typeModal.querySelectorAll('[data-target="m-formBuilder01__typeModalClose"]').forEach(function (button) {
+            button.addEventListener('click', function () {
+                closeTypeModal();
+            });
+        });
+        typeModal.querySelectorAll('[data-target="m-formBuilder01__typeOption"]').forEach(function (button) {
+            button.addEventListener('click', function () {
+                var typeValue = button.getAttribute('data-field-type') || 'text_multi';
+                var typeLabel = button.getAttribute('data-field-type-label') || '';
+                var clone = appendField(createFieldPreset(typeValue, typeLabel));
+                closeTypeModal();
+                var labelInput = clone ? clone.querySelector('[data-target="c-formEditor__labelInput"]') : null;
+                if (labelInput) {
+                    labelInput.focus();
+                }
+            });
+        });
+        document.addEventListener('keydown', function (event) {
+            if (event.key === 'Escape' && !typeModal.hidden) {
+                closeTypeModal();
+            }
+        });
+    }
+
     if (addBtn && template) {
         addBtn.addEventListener('click', function () {
-            var clone = appendField();
-            var labelInput = clone ? clone.querySelector('[data-target="c-formEditor__labelInput"]') : null;
-            if (labelInput) {
-                labelInput.focus();
-            }
+            openTypeModal();
         });
     }
 

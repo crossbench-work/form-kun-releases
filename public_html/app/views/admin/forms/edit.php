@@ -599,6 +599,31 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
     </div>
 </form>
 
+<div data-module="c-fieldTypeModal01" data-target="m-formBuilder01__typeModal" hidden>
+    <div class="c-fieldTypeModal01__backdrop" data-target="m-formBuilder01__typeModalClose"></div>
+    <div class="c-fieldTypeModal01__dialog" role="dialog" aria-modal="true" aria-labelledby="field-type-modal-title">
+        <div class="c-fieldTypeModal01__header">
+            <h2 id="field-type-modal-title">追加する型を選択</h2>
+            <button type="button" class="btn is-sm" data-target="m-formBuilder01__typeModalClose">閉じる</button>
+        </div>
+        <div class="c-fieldTypeModal01__body">
+            <div class="c-fieldTypeModal01__grid">
+                <?php foreach (\Models\FormField::TYPE_LABELS() as $typeValue => $typeLabel): ?>
+                    <button
+                        type="button"
+                        class="c-fieldTypeModal01__option"
+                        data-target="m-formBuilder01__typeOption"
+                        data-field-type="<?= e($typeValue) ?>"
+                        data-field-type-label="<?= e($typeLabel) ?>"
+                    >
+                        <?= e($typeLabel) ?>
+                    </button>
+                <?php endforeach; ?>
+            </div>
+        </div>
+    </div>
+</div>
+
 <template data-target="m-formBuilder01__descriptionTemplate">
     <div class="block is-contents" data-description-block>
         <input type="hidden" data-name="id" value="">
@@ -672,7 +697,7 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                                             <div class="block is-contents">
                                                 <p class="index" data-target="c-formEditor__summaryIndex">1</p>
                                                 <p class="label" data-target="c-formEditor__summaryLabel"></p>
-                                                <p class="type" data-target="c-formEditor__summaryType"><?= e(\Models\FormField::typeLabel('text')) ?></p>
+                                                <p class="type" data-target="c-formEditor__summaryType"><?= e(\Models\FormField::typeLabel('text_multi')) ?></p>
                                                 <p class="required" data-target="c-formEditor__summaryRequired">任意</p>
                                                 <p class="regex">入力チェック: <span data-target="c-formEditor__summaryRegex">なし</span></p>
                                             </div>
@@ -713,7 +738,7 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                                                         </div>
                                                         <div class="block is-contents">
                                                             <div class="block is-title"><label class="label" data-module="m-labelTitle01">型</label></div>
-                                                            <div class="block is-field"><div data-module="m-input01"><select data-name="type" data-target="c-formEditor__type"><?php foreach (\Models\FormField::TYPE_LABELS() as $tVal => $tLabel): ?><option value="<?= e($tVal) ?>"><?= e($tLabel) ?></option><?php endforeach; ?></select></div></div>
+                                                            <div class="block is-field"><input type="hidden" data-name="type" data-target="c-formEditor__type" value="text_multi" data-type-label="<?= e(\Models\FormField::typeLabel('text_multi')) ?>"><p class="c-formEditor__typeText" data-target="c-formEditor__typeLabel"><?= e(\Models\FormField::typeLabel('text_multi')) ?></p></div>
                                                         </div>
                                                     </div>
                                                 </div>

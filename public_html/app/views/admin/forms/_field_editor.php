@@ -110,13 +110,8 @@ if (empty($f['required']) || in_array($f['type'], ['radio', 'select'], true)) {
                                                             <label class="label" data-module="m-labelTitle01">型</label>
                                                         </div>
                                                         <div class="block is-field">
-                                                            <div data-module="m-input01">
-                                                                <select name="fields[<?= $idx ?>][type]" data-target="c-formEditor__type">
-                                                                <?php foreach (\Models\FormField::TYPE_LABELS() as $tVal => $tLabel): ?>
-                                                                    <option value="<?= e($tVal) ?>" <?= $f['type'] === $tVal ? 'selected' : '' ?>><?= e($tLabel) ?></option>
-                                                                <?php endforeach; ?>
-                                                                </select>
-                                                            </div>
+                                                            <input type="hidden" name="fields[<?= $idx ?>][type]" value="<?= e($f['type']) ?>" data-target="c-formEditor__type" data-type-label="<?= e(\Models\FormField::typeLabel($f['type'])) ?>">
+                                                            <p class="c-formEditor__typeText" data-target="c-formEditor__typeLabel"><?= e(\Models\FormField::typeLabel($f['type'])) ?></p>
                                                         </div>
                                                     </div>
                                                 </div>
