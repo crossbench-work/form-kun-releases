@@ -12,9 +12,7 @@ class FormController
 {
     private const DEFAULT_META_HTML = <<<'HTML'
 <meta name="description" content="フォームの概要を入力してください。">
-<meta property="og:title" content="フォームのタイトル">
-<meta property="og:description" content="フォームの概要を入力してください。">
-<meta property="og:type" content="website">
+<meta name="keywords" content="フォーム, お問い合わせ">
 HTML;
 
     public function __construct()

@@ -285,14 +285,14 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                     <div class="wrapper">
                         <div class="block is-contents">
             <div class="block is-title">
-                <h2 data-module="m-largeTitle01">meta情報</h2>
+                <h2 data-module="m-largeTitle01">共通設定</h2>
             </div>
             <div class="block is-field">
                 <div data-module="c-inputSet01">
                     <div class="wrapper">
                         <div class="block is-contents">
                             <div class="block is-title">
-                                <label class="label" data-module="m-boldTitle01" for="meta_html">meta情報（HTML）</label>
+                                <label class="label" data-module="m-boldTitle01" for="meta_html">head</label>
                             </div>
                             <div class="block is-field">
                                 <div data-module="m-input01">
