@@ -1278,13 +1278,52 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                                                 </div>
                                             </div>
                                             <div class="block is-field" data-target="c-formEditor__options" style="display:none">
-                                                <label class="label" data-module="m-labelTitle01">選択肢（1行に1つ）</label>
-                                                <div class="c-formEditor__choiceEditor" data-choice-editor>
-                                                    <div class="c-formEditor__choiceList"></div>
-                                                    <div class="area is-actions">
-                                                        <button type="button" class="btn is-sm" data-target="c-formEditor__choiceAdd">＋ 選択肢を追加</button>
+                                                <div class="c-formEditor__field">
+                                                    <div class="wrapper">
+                                                        <div class="block is-contents">
+                                                            <div class="area is-title">
+                                                                <label class="label" data-module="m-labelTitle01">選択肢（1行に1つ）</label>
+                                                            </div>
+                                                            <div class="area is-field">
+                                                                <div class="c-formEditor__choiceEditor" data-choice-editor>
+                                                                    <div class="c-formEditor__choiceList">
+                                                                        <div class="wrapper">
+                                                                            <div class="block is-contents" data-target="c-formEditor__choiceListContents">
+                                                                                <div class="area is-contents">
+                                                                                    <div class="c-formEditor__choiceItem" data-choice-item>
+                                                                                        <div class="wrapper">
+                                                                                            <div class="block is-contents">
+                                                                                                <div class="c-formEditor__child__field">
+                                                                                                    <div class="wrapper">
+                                                                                                        <div class="block is-contents">
+                                                                                                            <div class="area is-field">
+                                                                                                                <div data-module="m-input01"><input type="text" data-target="c-formEditor__choiceInput" placeholder="選択肢"></div>
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                                <div class="c-formEditor__actions">
+                                                                                                    <button type="button" class="btn is-sm" data-target="c-formEditor__choiceUp">↑</button>
+                                                                                                    <button type="button" class="btn is-sm" data-target="c-formEditor__choiceDown">↓</button>
+                                                                                                    <button type="button" class="btn is-sm is-danger" data-target="c-formEditor__choiceRemove">削除</button>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="area is-contents" data-target="c-formEditor__choiceControls">
+                                                                                    <div data-module="m-btn01" data-position="center">
+                                                                                        <button type="button" class="btn is-add" data-target="c-formEditor__choiceAdd">＋ 選択肢を追加</button>
+                                                                                        <textarea data-name="options" data-target="c-formEditor__optionsSource" rows="4" hidden></textarea>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
                                                     </div>
-                                                    <textarea data-name="options" data-target="c-formEditor__optionsSource" rows="4" hidden></textarea>
                                                 </div>
                                             </div>
                                 </div>

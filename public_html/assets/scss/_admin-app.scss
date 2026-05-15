@@ -1654,6 +1654,10 @@ body.is-field-type-modal-open {
         gap: 6px;
         
         min-width: 180px;
+
+        > .area.is-title {
+          width: 100%;
+        }
       }
     }
     > .wrapper > .block.is-contents > .area.is-field {
@@ -1713,6 +1717,42 @@ body.is-field-type-modal-open {
           }
         }
       }
+    }
+  }
+
+  .c-formEditor__choiceList {
+    > .wrapper {
+      > .block.is-contents {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+
+        > .area.is-contents {
+          width: 100%;
+        }
+      }
+    }
+  }
+
+  .c-formEditor__choiceItem {
+    > .wrapper {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+
+      > .block.is-contents {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        background: #fafafb;
+        border-radius: 8px;
+        padding: 8px 16px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.03);
+      }
+    }
+
+    .c-formEditor__actions {
+      margin-top: 0;
     }
   }
 

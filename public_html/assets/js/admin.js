@@ -719,34 +719,50 @@
     }
 
     function moveChoiceItem(item, direction) {
-        var sibling = direction === 'up' ? item.previousElementSibling : item.nextElementSibling;
+        var area = item.parentNode;
+        if (!area) return;
+        var sibling = direction === 'up' ? area.previousElementSibling : area.nextElementSibling;
+        if (sibling && sibling.getAttribute('data-target') === 'c-formEditor__choiceControls') {
+            sibling = null;
+        }
         if (!sibling) return;
-        var list = item.parentNode;
+        var list = area.parentNode;
         if (direction === 'up') {
-            list.insertBefore(item, sibling);
+            list.insertBefore(area, sibling);
         } else {
-            list.insertBefore(sibling, item);
+            list.insertBefore(sibling, area);
         }
     }
 
     function createChoiceItem(value) {
+        var area = document.createElement('div');
+        area.className = 'area is-contents';
         var row = document.createElement('div');
-        row.className = 'c-formEditor__field c-formEditor__choiceItem';
+        row.className = 'c-formEditor__choiceItem';
         row.setAttribute('data-choice-item', '');
         row.innerHTML =
-            '<div>' +
-                '<input type="text" data-target="c-formEditor__choiceInput" placeholder="選択肢">' +
-            '</div>' +
-            '<div class="c-formEditor__actions">' +
-                '<button type="button" class="btn is-sm" data-target="c-formEditor__choiceUp">↑</button>' +
-                '<button type="button" class="btn is-sm" data-target="c-formEditor__choiceDown">↓</button>' +
-                '<button type="button" class="btn is-sm is-danger" data-target="c-formEditor__choiceRemove">削除</button>' +
+            '<div class="wrapper">' +
+                '<div class="block is-contents">' +
+                    '<div class="c-formEditor__child__field">' +
+                        '<div class="wrapper">' +
+                            '<div class="block is-contents">' +
+                                '<div class="area is-field"><div data-module="m-input01"><input type="text" data-target="c-formEditor__choiceInput" placeholder="選択肢"></div></div>' +
+                            '</div>' +
+                        '</div>' +
+                    '</div>' +
+                    '<div class="c-formEditor__actions">' +
+                        '<button type="button" class="btn is-sm" data-target="c-formEditor__choiceUp">↑</button>' +
+                        '<button type="button" class="btn is-sm" data-target="c-formEditor__choiceDown">↓</button>' +
+                        '<button type="button" class="btn is-sm is-danger" data-target="c-formEditor__choiceRemove">削除</button>' +
+                    '</div>' +
+                '</div>' +
             '</div>';
+        area.appendChild(row);
         var input = row.querySelector('[data-target="c-formEditor__choiceInput"]');
         if (input) {
             input.value = value || '';
         }
-        return row;
+        return area;
     }
 
     function bindChoiceItem(item, box) {
@@ -776,7 +792,9 @@
         }
         if (remove) {
             remove.addEventListener('click', function () {
-                item.parentNode.removeChild(item);
+                var area = item.parentNode;
+                if (!area || !area.parentNode) return;
+                area.parentNode.removeChild(area);
                 syncChoiceEditor(box);
             });
         }
@@ -784,7 +802,7 @@
 
     function bindChoiceEditor(li) {
         li.querySelectorAll('[data-choice-editor]').forEach(function (box) {
-            var list = box.querySelector('.c-formEditor__choiceList');
+            var list = box.querySelector('[data-target="c-formEditor__choiceListContents"]');
             var add = box.querySelector('[data-target="c-formEditor__choiceAdd"]');
             if (!list || !add) return;
             list.querySelectorAll('[data-choice-item]').forEach(function (item) {
@@ -792,8 +810,13 @@
             });
             add.addEventListener('click', function () {
                 var item = createChoiceItem('');
-                list.appendChild(item);
-                bindChoiceItem(item, box);
+                var controls = box.querySelector('[data-target="c-formEditor__choiceControls"]');
+                if (controls) {
+                    list.insertBefore(item, controls);
+                } else {
+                    list.appendChild(item);
+                }
+                bindChoiceItem(item.querySelector('[data-choice-item]'), box);
                 syncChoiceEditor(box);
                 var input = item.querySelector('[data-target="c-formEditor__choiceInput"]');
                 if (input) input.focus();
@@ -1082,7 +1105,7 @@
         var typeInput = li.querySelector('[data-name="type"]');
         var requiredToggle = li.querySelector('[data-name="required"]');
         var optionsSource = li.querySelector('[data-name="options"]');
-        var choiceList = li.querySelector('.c-formEditor__choiceList');
+        var choiceList = li.querySelector('[data-target="c-formEditor__choiceListContents"]');
 
         if (labelInput && typeof preset.label === 'string') {
             labelInput.value = preset.label;
@@ -1094,9 +1117,20 @@
             requiredToggle.checked = !!preset.required;
         }
         if (choiceList && Array.isArray(preset.options)) {
-            choiceList.innerHTML = '';
+            var controls = li.querySelector('[data-target="c-formEditor__choiceControls"]');
+            choiceList.querySelectorAll('[data-choice-item]').forEach(function (item) {
+                var area = item.parentNode;
+                if (area && area.parentNode === choiceList) {
+                    choiceList.removeChild(area);
+                }
+            });
             preset.options.forEach(function (option) {
-                choiceList.appendChild(createChoiceItem(option));
+                var item = createChoiceItem(option);
+                if (controls) {
+                    choiceList.insertBefore(item, controls);
+                } else {
+                    choiceList.appendChild(item);
+                }
             });
         }
         if (optionsSource && Array.isArray(preset.options)) {

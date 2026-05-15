@@ -246,29 +246,57 @@ if (empty($f['required']) || in_array($f['type'], ['radio', 'select'], true)) {
                                                 </div>
                                             </div>
                                             <div class="block is-field" data-target="c-formEditor__options" <?= in_array($f['type'], ['radio','checkbox','select'], true) ? '' : 'style="display:none"' ?>>
-                                                <label class="label" data-module="m-labelTitle01">選択肢（1行に1つ）</label>
                                                 <?php $choiceOptions = \Models\FormField::parseOptions($f['options'] ?? ''); ?>
-                                                <div class="c-formEditor__choiceEditor" data-choice-editor>
-                                                    <div class="c-formEditor__choiceList">
-                                                        <?php foreach ($choiceOptions as $choiceOpt): ?>
-                                                            <div class="c-formEditor__field c-formEditor__choiceItem" data-choice-item>
-                                                                <div>
-                                                                    <div data-module="m-input01">
-                                                                        <input type="text" data-target="c-formEditor__choiceInput" value="<?= e($choiceOpt) ?>" placeholder="選択肢">
+                                                <div class="c-formEditor__field">
+                                                    <div class="wrapper">
+                                                        <div class="block is-contents">
+                                                            <div class="area is-title">
+                                                                <label class="label" data-module="m-labelTitle01">選択肢（1行に1つ）</label>
+                                                            </div>
+                                                            <div class="area is-field">
+                                                                <div class="c-formEditor__choiceEditor" data-choice-editor>
+                                                                    <div class="c-formEditor__choiceList">
+                                                                        <div class="wrapper">
+                                                                            <div class="block is-contents" data-target="c-formEditor__choiceListContents">
+                                                                                <?php foreach ($choiceOptions as $choiceOpt): ?>
+                                                                                    <div class="area is-contents">
+                                                                                        <div class="c-formEditor__choiceItem" data-choice-item>
+                                                                                            <div class="wrapper">
+                                                                                                <div class="block is-contents">
+                                                                                                    <div class="c-formEditor__child__field">
+                                                                                                        <div class="wrapper">
+                                                                                                            <div class="block is-contents">
+                                                                                                                <div class="area is-field">
+                                                                                                                    <div data-module="m-input01">
+                                                                                                                        <input type="text" data-target="c-formEditor__choiceInput" value="<?= e($choiceOpt) ?>" placeholder="選択肢">
+                                                                                                                    </div>
+                                                                                                                </div>
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                    <div class="c-formEditor__actions">
+                                                                                                        <button type="button" class="btn is-sm" data-target="c-formEditor__choiceUp">↑</button>
+                                                                                                        <button type="button" class="btn is-sm" data-target="c-formEditor__choiceDown">↓</button>
+                                                                                                        <button type="button" class="btn is-sm is-danger" data-target="c-formEditor__choiceRemove">削除</button>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                <?php endforeach; ?>
+                                                                                <div class="area is-contents" data-target="c-formEditor__choiceControls">
+                                                                                    <div data-module="m-btn01" data-position="center">
+                                                                                        <button type="button" class="btn is-add" data-target="c-formEditor__choiceAdd">＋ 選択肢を追加</button>
+                                                                                        <textarea name="fields[<?= $idx ?>][options]" data-target="c-formEditor__optionsSource" rows="4" hidden><?= e($f['options'] ?? '') ?></textarea>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
                                                                     </div>
                                                                 </div>
-                                                                <div class="c-formEditor__actions">
-                                                                    <button type="button" class="btn is-sm" data-target="c-formEditor__choiceUp">↑</button>
-                                                                    <button type="button" class="btn is-sm" data-target="c-formEditor__choiceDown">↓</button>
-                                                                    <button type="button" class="btn is-sm is-danger" data-target="c-formEditor__choiceRemove">削除</button>
-                                                                </div>
                                                             </div>
-                                                        <?php endforeach; ?>
+                                                        </div>
                                                     </div>
-                                                    <div class="area is-actions">
-                                                        <button type="button" class="btn is-sm" data-target="c-formEditor__choiceAdd">＋ 選択肢を追加</button>
-                                                    </div>
-                                                    <textarea name="fields[<?= $idx ?>][options]" data-target="c-formEditor__optionsSource" rows="4" hidden><?= e($f['options'] ?? '') ?></textarea>
                                                 </div>
                                             </div>
                                 </div>
