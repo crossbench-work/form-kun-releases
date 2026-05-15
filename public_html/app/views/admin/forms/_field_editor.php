@@ -288,7 +288,7 @@ if (empty($f['required']) || in_array($f['type'], ['radio', 'select'], true)) {
                                                                     <div class="c-formEditor__textMultiItem" data-text-multi-item>
                                                                         <div class="wrapper">
                                                                             <div class="block is-contents">
-                                                                                <div class="c-formEditor__field">
+                                                                                <div class="c-formEditor__child__field">
                                                                                     <div class="wrapper">
                                                                                         <div class="block is-contents">
                                                                                             <div class="area is-title">

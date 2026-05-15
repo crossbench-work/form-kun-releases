@@ -1540,23 +1540,23 @@ body.is-field-type-modal-open {
   align-items: flex-start;
   gap: 8px;
 }
-[data-module=m-formBuilder01] .c-formEditor__textMultiItem .c-formEditor__field {
+[data-module=m-formBuilder01] .c-formEditor__textMultiItem .c-formEditor__child__field {
   flex: 1 1 auto;
 }
-[data-module=m-formBuilder01] .c-formEditor__textMultiItem .c-formEditor__field > .wrapper {
+[data-module=m-formBuilder01] .c-formEditor__textMultiItem .c-formEditor__child__field > .wrapper {
   display: flex;
   flex-direction: column;
   gap: 8px;
 }
-[data-module=m-formBuilder01] .c-formEditor__textMultiItem .c-formEditor__field .block.is-contents {
+[data-module=m-formBuilder01] .c-formEditor__textMultiItem .c-formEditor__child__field .block.is-contents {
   display: flex;
   align-items: center;
   gap: 12px;
 }
-[data-module=m-formBuilder01] .c-formEditor__textMultiItem .c-formEditor__field .area.is-title {
+[data-module=m-formBuilder01] .c-formEditor__textMultiItem .c-formEditor__child__field .area.is-title {
   flex: 0 0 64px;
 }
-[data-module=m-formBuilder01] .c-formEditor__textMultiItem .c-formEditor__field .area.is-field {
+[data-module=m-formBuilder01] .c-formEditor__textMultiItem .c-formEditor__child__field .area.is-field {
   flex: 1 1 auto;
 }
 [data-module=m-formBuilder01] .c-formEditor__fieldKey {

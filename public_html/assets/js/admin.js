@@ -824,7 +824,7 @@
         item.innerHTML =
             '<div class="wrapper">' +
                 '<div class="block is-contents">' +
-                    '<div class="c-formEditor__field">' +
+                    '<div class="c-formEditor__child__field">' +
                         '<div class="wrapper">' +
                             '<div class="block is-contents">' +
                                 '<div class="area is-title"><label class="label" data-module="m-labelTitle01">表示</label></div>' +
