@@ -1449,6 +1449,9 @@ body.is-field-type-modal-open {
 [data-module=m-formBuilder01] .c-formEditor__child__field .area.is-field {
   flex: 1 1 auto;
 }
+[data-module=m-formBuilder01] .c-formEditor__child__field .area.is-title {
+  white-space: nowrap;
+}
 [data-module=m-formBuilder01] .c-formEditorSummary01 {
   min-width: 0;
 }

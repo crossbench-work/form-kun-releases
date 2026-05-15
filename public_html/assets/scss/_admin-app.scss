@@ -1011,8 +1011,6 @@ form.is-inline {
     flex-wrap: wrap;
   }
 
-  .area.is-field label,
-  .block.is-field label,
   .label {
     display: block;
     font-weight: 600;
@@ -1501,6 +1499,36 @@ body.is-field-type-modal-open {
     }
   }
 
+  .c-formEditor__child__field {
+    flex: 1 1 auto;
+
+    > .wrapper {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+
+      > .block.is-contents {
+        flex: 1 1 0;
+        width: auto;
+      }
+    }
+
+    .block.is-contents {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      width: 100%;
+    }
+
+    .area.is-field {
+      flex: 1 1 auto;
+    }
+
+    .area.is-title {
+      white-space: nowrap;
+    }
+  }
+
   .c-formEditorSummary01 {
     min-width: 0;
 
@@ -1631,7 +1659,6 @@ body.is-field-type-modal-open {
       }
     }
     > .wrapper > .block.is-contents > .area.is-field {
-      flex: 1 1 auto;
       min-width: 0;
     }
   }
@@ -1672,17 +1699,20 @@ body.is-field-type-modal-open {
 
   .c-formEditor__textMultiList {
     > .wrapper {
-      background: #f3f3f4;
-      border-radius: 8px;
-      padding: 16px;
-      box-shadow: 0 0 20px inset rgb(0 0 0 / 0.05);
+      
       > .block.is-contents {
         display: flex;
         flex-direction: column;
-        gap: 12px;
+        gap: 8px;
 
         > .area.is-contents {
           width: 100%;
+          &:has(.c-formEditor__textMultiItem) {
+            background: #fafafb;
+            border-radius: 8px;
+            padding: 8px 16px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.03);
+          }
         }
       }
     }
@@ -1701,31 +1731,7 @@ body.is-field-type-modal-open {
       }
     }
 
-    .c-formEditor__child__field {
-      flex: 1 1 auto;
-
-      > .wrapper {
-        display: flex;
-        gap: 12px;
-        align-items: flex-start;
-
-        > .block.is-contents {
-          flex: 1 1 0;
-          width: auto;
-        }
-      }
-
-      .block.is-contents {
-        display: flex;
-        align-items: center;
-        gap: 6px;
-        width: 100%;
-      }
-
-      .area.is-field {
-        flex: 1 1 auto;
-      }
-    }
+    
   }
 
   .c-formEditor__fieldKey {
@@ -1784,15 +1790,10 @@ body.is-field-type-modal-open {
     min-width: 280px;
   }
 
-  .c-formEditor__regexList {
-    margin-bottom: 8px;
-  }
-
   .c-formEditor__regexRow {
     display: flex;
     align-items: flex-start;
     gap: 8px;
-    margin-bottom: 8px;
     flex-wrap: wrap;
   }
 
