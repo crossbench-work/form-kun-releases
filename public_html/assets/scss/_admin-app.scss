@@ -384,6 +384,13 @@ body.l-adminShell01 {
   color: #334155;
 }
 
+[data-module="m-labelSmallTitle01"] {
+  margin: 0;
+  font-size: 10px;
+  font-weight: 700;
+  color: #334155;
+}
+
 [data-module="m-borderTitle01"] {
   margin: 0;
   font-size: 13px;
@@ -1637,7 +1644,7 @@ body.is-field-type-modal-open {
     > .wrapper {
       > .block.is-contents {
         display: flex;
-        align-items: flex-start;
+        align-items: center;
         gap: 8px;
       }
     }
@@ -1655,10 +1662,7 @@ body.is-field-type-modal-open {
         display: flex;
         align-items: center;
         gap: 12px;
-      }
-
-      .area.is-title {
-        flex: 0 0 64px;
+        width: 100%;
       }
 
       .area.is-field {
