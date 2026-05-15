@@ -1623,6 +1623,26 @@ body.is-field-type-modal-open {
     gap: 8px;
   }
 
+  .c-formEditor__textMultiList {
+    > .wrapper {
+      > .block.is-contents {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+    }
+  }
+
+  .c-formEditor__textMultiItem {
+    > .wrapper {
+      > .block.is-contents {
+        display: flex;
+        align-items: flex-start;
+        gap: 8px;
+      }
+    }
+  }
+
   .c-formEditor__fieldKey {
     display: flex;
     align-items: center;
