@@ -323,14 +323,14 @@ if (empty($f['required']) || in_array($f['type'], ['radio', 'select'], true)) {
                                                                     </div>
                                                                 </div>
                                                             <?php endforeach; ?>
+                                                            <div class="block is-contents">
+                                                                <div data-module="m-btn01">
+                                                                    <button type="button" data-target="c-formEditor__textMultiAdd" class="btn is-add fb-description-add">＋ 文字を追加</button>
+                                                                    <textarea name="fields[<?= $idx ?>][multi_text_items]" data-target="c-formEditor__textMultiSource" hidden><?= e(json_encode($multiTextItems, JSON_UNESCAPED_UNICODE)) ?></textarea>
+                                                                </div>
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                    <div class="area is-actions">
-                                                        <div data-module="m-btn01">
-                                                            <button type="button" data-target="c-formEditor__textMultiAdd" class="btn is-add fb-description-add">＋ 文字を追加</button>
-                                                        </div>
-                                                    </div>
-                                                    <textarea name="fields[<?= $idx ?>][multi_text_items]" data-target="c-formEditor__textMultiSource" hidden><?= e(json_encode($multiTextItems, JSON_UNESCAPED_UNICODE)) ?></textarea>
                                                 </div>
                                             </div>
                                         </div>
