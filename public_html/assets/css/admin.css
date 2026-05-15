@@ -895,6 +895,20 @@ form.is-inline {
   border-color: #b91c1c;
   color: #991b1b;
 }
+[data-module=m-btn01] > .btn.is-add,
+[data-module=m-btn01] > button.is-add,
+[data-module=m-btn01] > a.is-add {
+  background: #eff6ff;
+  border-color: #93c5fd;
+  color: #1d4ed8;
+}
+[data-module=m-btn01] > .btn.is-add:hover:not(:disabled):not([aria-disabled=true]),
+[data-module=m-btn01] > button.is-add:hover:not(:disabled):not([aria-disabled=true]),
+[data-module=m-btn01] > a.is-add:hover:not(:disabled):not([aria-disabled=true]) {
+  background: #dbeafe;
+  border-color: #60a5fa;
+  color: #1e40af;
+}
 
 .m-alert01 {
   padding: 10px 14px;
@@ -1552,13 +1566,13 @@ body.is-field-type-modal-open {
 }
 [data-module=m-formBuilder01] .c-formEditor__textMultiItem .c-formEditor__child__field > .wrapper {
   display: flex;
-  gap: 8px;
+  gap: 12px;
   align-items: flex-start;
 }
 [data-module=m-formBuilder01] .c-formEditor__textMultiItem .c-formEditor__child__field .block.is-contents {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 6px;
   width: 100%;
 }
 [data-module=m-formBuilder01] .c-formEditor__textMultiItem .c-formEditor__child__field .area.is-field {

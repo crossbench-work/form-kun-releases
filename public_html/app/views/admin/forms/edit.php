@@ -1284,7 +1284,7 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                                                         </div>
                                                         <div class="area is-actions">
                                                             <div data-module="m-btn01">
-                                                                <button type="button" data-target="c-formEditor__textMultiAdd" class="btn fb-description-add">＋ 文字を追加</button>
+                                                                <button type="button" data-target="c-formEditor__textMultiAdd" class="btn is-add fb-description-add">＋ 文字を追加</button>
                                                             </div>
                                                         </div>
                                                         <textarea data-name="multi_text_items" data-target="c-formEditor__textMultiSource" hidden>[{"label":"","placeholder":""}]</textarea>
