@@ -1633,6 +1633,13 @@ body.is-field-type-modal-open {
 [data-module=m-formBuilder01] .c-formEditor__validation {
   min-width: 320px;
 }
+[data-module=m-formBuilder01] .c-formEditor__validation > .area.is-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
 [data-module=m-formBuilder01] .c-formEditor__validationControls {
   display: flex;
   align-items: flex-start;

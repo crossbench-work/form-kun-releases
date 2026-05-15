@@ -1743,6 +1743,14 @@ body.is-field-type-modal-open {
 
   .c-formEditor__validation {
     min-width: 320px;
+
+    > .area.is-title {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
   }
 
   .c-formEditor__validationControls {
