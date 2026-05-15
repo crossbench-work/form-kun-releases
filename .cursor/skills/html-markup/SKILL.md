@@ -29,6 +29,56 @@ assets/
 - 画像パスは **`/assets/images/common/...`** のように、上記 `images` 配下を基準に書く。
 - 動画は **`movie/`** に置き、参照もそこを基準にする。
 
+### このリポジトリのディレクトリ構造（サイトマップ）
+
+`form-kun` ルートでは、HTML / SCSS / 管理画面改修時に次の構造を前提に把握する。
+
+```text
+form-kun/
+  .cursor/
+    skills/
+      html-markup/        # この SKILL と参照用 markdown
+  .github/
+    copilot-instructions.md
+  docker/
+    php-apache/           # Docker 開発環境
+  docs/
+    ai/
+      changelog/          # AI 作業ログ
+      decisions/          # ADR
+      prompts/
+    specs/                # 仕様メモ
+  public_html/            # 公開ルート
+    admin/
+      index.php           # 管理画面フロント
+    app/
+      controllers/
+      core/
+      models/
+      views/              # PHP ビュー
+    assets/
+      css/                # ビルド済み CSS
+      images/
+      js/
+      scss/               # SCSS ソース
+    sql/
+      schema.sql
+      migration_*.sql
+    uploads/              # アップロード保存先
+    index.php             # 公開フォームフロント
+  scripts/
+    dev-server.sh
+  AGENTS.md               # AI 共通指示
+  CLAUDE.md
+  README.md
+  docker-compose.yml
+  package.json            # CSS ビルド設定
+```
+
+- **公開ページ・管理画面の入口**は `public_html/index.php` / `public_html/admin/index.php`。
+- **PHP の実装本体**は `public_html/app/`、**見た目のソース**は `public_html/assets/scss/`、**出力済み CSS** は `public_html/assets/css/`。
+- **管理画面 UI を触るとき**は `public_html/app/views/admin/` と `public_html/assets/scss/_admin-app.scss` / `public_html/assets/js/admin.js` を優先確認する。
+
 ### SCSS エントリの読み込み順（例: `scss/style.scss`）
 
 **必ず次の順**にする。先頭は次の 2 行を **このまま**置く（パスはプロジェクトの `scss/` 直下に `_s_reset.scss` / `_s_config.scss` がある想定。サブフォルダに置く場合はパスだけ変える）。
