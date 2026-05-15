@@ -6,11 +6,11 @@ require_once APP_COMPONENTS_DIR . '/c-formBlock01/c-formBlock01.php';
     <h1 class="title" style="margin:0;">フォーム一覧</h1>
     <div class="spacer"></div>
     <?php if (!empty($at_form_limit)): ?>
-        <div data-module="m-btn01">
+        <?php admin_m_btn01_open(); ?>
             <button type="button" class="btn is-primary" disabled aria-disabled="true">＋ 新規作成</button>
         </div>
     <?php else: ?>
-        <div data-module="m-btn01">
+        <?php admin_m_btn01_open(); ?>
             <a class="btn is-primary" href="<?= e(base_path('/admin/forms/new')) ?>">＋ 新規作成</a>
         </div>
     <?php endif; ?>

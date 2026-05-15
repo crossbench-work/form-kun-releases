@@ -3,7 +3,7 @@
 <?php admin_c_form_block01_open(); ?>
             <div class="block is-title">
                 <?php admin_m_large_title01('表示設定'); ?>
-                <div data-module="m-btn01">
+                <?php admin_m_btn01_open(); ?>
                     <button
                         type="submit"
                         class="btn"

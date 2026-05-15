@@ -162,7 +162,7 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                                 </div>
                                 <div class="block is-toolbar">
                                     <div class="area is-actions">
-                                        <div data-module="m-btn01">
+                                        <?php admin_m_btn01_open(); ?>
                                             <button type="button" data-target="m-formBuilder01__add" class="btn fb-description-add">＋ 項目を追加</button>
                                         </div>
                                     </div>
@@ -191,10 +191,10 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                 <p class="text">未保存の変更があります</p>
             </div>
             <div class="block is-actions">
-                <div data-module="m-btn01">
+                <?php admin_m_btn01_open(); ?>
                     <button type="submit" class="btn is-primary"><?= $isNew ? '作成する' : '保存する' ?></button>
                 </div>
-                <div data-module="m-btn01">
+                <?php admin_m_btn01_open(); ?>
                     <button type="button" class="btn" data-target="p-formEdit01__dirtyCancel">キャンセル</button>
                 </div>
             </div>
@@ -220,10 +220,10 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                 <div class="wrapper">
                     <div class="block is-contents">
                         <div class="area is-contents">
-                            <div data-module="m-btn01">
+                            <?php admin_m_btn01_open(); ?>
                                 <button type="submit" class="btn is-primary"><?= $isNew ? '作成する' : '保存する' ?></button>
                             </div>
-                            <div data-module="m-btn01">
+                            <?php admin_m_btn01_open(); ?>
                                 <a class="btn" href="<?= e(base_path('/admin/forms')) ?>">キャンセル</a>
                             </div>
                         </div>
@@ -542,7 +542,7 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                                                                                     </div>
                                                                                 </div>
                                                                                 <div class="area is-contents" data-target="c-formEditor__choiceControls">
-                                                                                    <div data-module="m-btn01" data-position="center">
+                                                                                    <?php admin_m_btn01_open('center'); ?>
                                                                                         <button type="button" class="btn is-add" data-target="c-formEditor__choiceAdd">＋ 選択肢を追加</button>
                                                                                         <textarea data-name="options" data-target="c-formEditor__optionsSource" rows="4" hidden></textarea>
                                                                                     </div>
@@ -589,7 +589,7 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                                                                     </div>
                                                                 </div>
                                                                 <div class="area is-contents" data-target="c-formEditor__textMultiControls">
-                                                                    <div data-module="m-btn01" data-position="center">
+                                                                    <?php admin_m_btn01_open('center'); ?>
                                                                         <button type="button" data-target="c-formEditor__textMultiAdd" class="btn is-add fb-description-add">＋ 入力エリアを追加</button>
                                                                         <textarea data-name="multi_text_items" data-target="c-formEditor__textMultiSource" hidden>[{"label":"","placeholder":""}]</textarea>
                                                                     </div>

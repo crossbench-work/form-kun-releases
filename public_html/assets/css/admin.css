@@ -363,6 +363,87 @@ body {
   font-weight: 600;
 }
 
+[data-module=m-btn01] {
+  width: fit-content;
+}
+[data-module=m-btn01][data-position=center] {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+[data-module=m-btn01] > .btn,
+[data-module=m-btn01] > button,
+[data-module=m-btn01] > a {
+  display: inline-block;
+  padding: 8px 12px;
+  border: 1px solid #cbd5e1;
+  background: #fff;
+  color: #111;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 700;
+  font-family: inherit;
+  text-decoration: none;
+  line-height: 1.4;
+}
+[data-module=m-btn01] > .btn:hover:not(:disabled):not([aria-disabled=true]),
+[data-module=m-btn01] > button:hover:not(:disabled):not([aria-disabled=true]),
+[data-module=m-btn01] > a:hover:not(:disabled):not([aria-disabled=true]) {
+  background: #f1f5f9;
+  text-decoration: none;
+}
+[data-module=m-btn01] > .btn:disabled, [data-module=m-btn01] > .btn[aria-disabled=true],
+[data-module=m-btn01] > button:disabled,
+[data-module=m-btn01] > button[aria-disabled=true],
+[data-module=m-btn01] > a:disabled,
+[data-module=m-btn01] > a[aria-disabled=true] {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+[data-module=m-btn01] > .btn.is-primary,
+[data-module=m-btn01] > button.is-primary,
+[data-module=m-btn01] > a.is-primary {
+  background: #3C8CFD;
+  border-color: #3C8CFD;
+  color: #fff;
+}
+[data-module=m-btn01] > .btn.is-primary:hover:not(:disabled):not([aria-disabled=true]),
+[data-module=m-btn01] > button.is-primary:hover:not(:disabled):not([aria-disabled=true]),
+[data-module=m-btn01] > a.is-primary:hover:not(:disabled):not([aria-disabled=true]) {
+  background: #1d4ed8;
+}
+[data-module=m-btn01] > .btn.is-danger,
+[data-module=m-btn01] > button.is-danger,
+[data-module=m-btn01] > a.is-danger {
+  background: #fff;
+  border-color: #dc2626;
+  color: #b91c1c;
+}
+[data-module=m-btn01] > .btn.is-danger:hover:not(:disabled):not([aria-disabled=true]),
+[data-module=m-btn01] > button.is-danger:hover:not(:disabled):not([aria-disabled=true]),
+[data-module=m-btn01] > a.is-danger:hover:not(:disabled):not([aria-disabled=true]) {
+  background: #fef2f2;
+  border-color: #b91c1c;
+  color: #991b1b;
+}
+[data-module=m-btn01] > .btn.is-add,
+[data-module=m-btn01] > button.is-add,
+[data-module=m-btn01] > a.is-add {
+  background: #eff6ff;
+  border-color: #cae3ff;
+  color: #5072d1;
+  font-size: 10px;
+  padding: 6px 10px;
+}
+[data-module=m-btn01] > .btn.is-add:hover:not(:disabled):not([aria-disabled=true]),
+[data-module=m-btn01] > button.is-add:hover:not(:disabled):not([aria-disabled=true]),
+[data-module=m-btn01] > a.is-add:hover:not(:disabled):not([aria-disabled=true]) {
+  background: #5072d1;
+  border-color: #5072d1;
+  color: #fff;
+}
+
 body.l-adminShell01 {
   color: #1f2937;
   background: #f1f5f9;
@@ -1033,87 +1114,6 @@ form.is-inline {
   display: flex;
   gap: 10px;
   flex-wrap: wrap;
-}
-
-[data-module=m-btn01] {
-  width: fit-content;
-}
-[data-module=m-btn01][data-position=center] {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-}
-[data-module=m-btn01] > .btn,
-[data-module=m-btn01] > button,
-[data-module=m-btn01] > a {
-  display: inline-block;
-  padding: 8px 12px;
-  border: 1px solid #cbd5e1;
-  background: #fff;
-  color: #111;
-  border-radius: 6px;
-  cursor: pointer;
-  font-size: 12px;
-  font-weight: 700;
-  font-family: inherit;
-  text-decoration: none;
-  line-height: 1.4;
-}
-[data-module=m-btn01] > .btn:hover:not(:disabled):not([aria-disabled=true]),
-[data-module=m-btn01] > button:hover:not(:disabled):not([aria-disabled=true]),
-[data-module=m-btn01] > a:hover:not(:disabled):not([aria-disabled=true]) {
-  background: #f1f5f9;
-  text-decoration: none;
-}
-[data-module=m-btn01] > .btn:disabled, [data-module=m-btn01] > .btn[aria-disabled=true],
-[data-module=m-btn01] > button:disabled,
-[data-module=m-btn01] > button[aria-disabled=true],
-[data-module=m-btn01] > a:disabled,
-[data-module=m-btn01] > a[aria-disabled=true] {
-  opacity: 0.55;
-  cursor: not-allowed;
-}
-[data-module=m-btn01] > .btn.is-primary,
-[data-module=m-btn01] > button.is-primary,
-[data-module=m-btn01] > a.is-primary {
-  background: #3C8CFD;
-  border-color: #3C8CFD;
-  color: #fff;
-}
-[data-module=m-btn01] > .btn.is-primary:hover:not(:disabled):not([aria-disabled=true]),
-[data-module=m-btn01] > button.is-primary:hover:not(:disabled):not([aria-disabled=true]),
-[data-module=m-btn01] > a.is-primary:hover:not(:disabled):not([aria-disabled=true]) {
-  background: #1d4ed8;
-}
-[data-module=m-btn01] > .btn.is-danger,
-[data-module=m-btn01] > button.is-danger,
-[data-module=m-btn01] > a.is-danger {
-  background: #fff;
-  border-color: #dc2626;
-  color: #b91c1c;
-}
-[data-module=m-btn01] > .btn.is-danger:hover:not(:disabled):not([aria-disabled=true]),
-[data-module=m-btn01] > button.is-danger:hover:not(:disabled):not([aria-disabled=true]),
-[data-module=m-btn01] > a.is-danger:hover:not(:disabled):not([aria-disabled=true]) {
-  background: #fef2f2;
-  border-color: #b91c1c;
-  color: #991b1b;
-}
-[data-module=m-btn01] > .btn.is-add,
-[data-module=m-btn01] > button.is-add,
-[data-module=m-btn01] > a.is-add {
-  background: #eff6ff;
-  border-color: #cae3ff;
-  color: #5072d1;
-  font-size: 10px;
-  padding: 6px 10px;
-}
-[data-module=m-btn01] > .btn.is-add:hover:not(:disabled):not([aria-disabled=true]),
-[data-module=m-btn01] > button.is-add:hover:not(:disabled):not([aria-disabled=true]),
-[data-module=m-btn01] > a.is-add:hover:not(:disabled):not([aria-disabled=true]) {
-  background: #5072d1;
-  border-color: #5072d1;
-  color: #fff;
 }
 
 .m-alert01 {

@@ -5,7 +5,7 @@ require_once APP_COMPONENTS_DIR . '/c-formBlock01/c-formBlock01.php';
 <div class="m-toolbar01">
     <h1 class="title" style="margin:0;">ユーザー管理</h1>
     <div class="spacer"></div>
-    <div data-module="m-btn01">
+    <?php admin_m_btn01_open(); ?>
         <a class="btn is-primary" href="<?= e(base_path('/admin/users/new')) ?>">＋ 新規作成</a>
     </div>
 </div>

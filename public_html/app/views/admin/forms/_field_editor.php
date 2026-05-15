@@ -295,7 +295,7 @@ if (empty($f['required']) || in_array($f['type'], ['radio', 'select'], true)) {
                                                                                     </div>
                                                                                 <?php endforeach; ?>
                                                                                 <div class="area is-contents" data-target="c-formEditor__choiceControls">
-                                                                                    <div data-module="m-btn01" data-position="center">
+                                                                                    <?php admin_m_btn01_open('center'); ?>
                                                                                         <button type="button" class="btn is-add" data-target="c-formEditor__choiceAdd">＋ 選択肢を追加</button>
                                                                                         <textarea name="fields[<?= $idx ?>][options]" data-target="c-formEditor__optionsSource" rows="4" hidden><?= e($f['options'] ?? '') ?></textarea>
                                                                                     </div>
@@ -378,7 +378,7 @@ if (empty($f['required']) || in_array($f['type'], ['radio', 'select'], true)) {
                                                                 </div>
                                                             <?php endforeach; ?>
                                                             <div class="area is-contents" data-target="c-formEditor__textMultiControls">
-                                                                <div data-module="m-btn01" data-position="center">
+                                                                <?php admin_m_btn01_open('center'); ?>
                                                                     <button type="button" data-target="c-formEditor__textMultiAdd" class="btn is-add fb-description-add">＋ 入力エリアを追加</button>
                                                                     <textarea name="fields[<?= $idx ?>][multi_text_items]" data-target="c-formEditor__textMultiSource" hidden><?= e(json_encode($multiTextItems, JSON_UNESCAPED_UNICODE)) ?></textarea>
                                                                 </div>

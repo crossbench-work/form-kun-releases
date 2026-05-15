@@ -13,6 +13,7 @@
 </head>
 <body class="l-adminShell01">
 <?php
+require_once APP_COMPONENTS_DIR . '/m-btn01/m-btn01.php';
 $__nav = admin_relative_path();
 $__navDash = ($__nav === '/' || $__nav === '');
 $__navForms = str_starts_with($__nav, '/forms') || str_starts_with($__nav, '/submissions') || str_starts_with($__nav, '/files');
@@ -37,7 +38,7 @@ $__navSettings = str_starts_with($__nav, '/settings');
                 <div class="area is-user">
                     <?php if ($u = \Core\Auth::user()): ?>
                         <span class="name"><?= e($u['display_name'] ?? $u['username']) ?>（<?= e($u['role']) ?>）</span>
-                        <div data-module="m-btn01">
+                        <?php admin_m_btn01_open(); ?>
                             <a class="btn is-danger" href="<?= e(base_path('/admin/logout')) ?>">ログアウト</a>
                         </div>
                     <?php endif; ?>
