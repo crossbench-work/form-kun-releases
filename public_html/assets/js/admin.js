@@ -827,11 +827,11 @@
                     '<div class="c-formEditor__child__field">' +
                         '<div class="wrapper">' +
                             '<div class="block is-contents">' +
-                                '<div class="area is-title"><label class="label" data-module="m-labelTitle01">表示</label></div>' +
+                                '<div class="area is-title"><label class="label" data-module="m-labelSmallTitle01">表示</label></div>' +
                                 '<div class="area is-field"><div data-module="m-input01"><input type="text" data-target="c-formEditor__textMultiLabelInput"></div></div>' +
                             '</div>' +
                             '<div class="block is-contents">' +
-                                '<div class="area is-title"><label class="label" data-module="m-labelTitle01">入力例</label></div>' +
+                                '<div class="area is-title"><label class="label" data-module="m-labelSmallTitle01">入力例</label></div>' +
                                 '<div class="area is-field"><div data-module="m-input01"><input type="text" data-target="c-formEditor__textMultiPlaceholderInput"></div></div>' +
                             '</div>' +
                         '</div>' +

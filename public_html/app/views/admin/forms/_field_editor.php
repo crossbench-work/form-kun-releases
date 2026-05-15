@@ -292,7 +292,7 @@ if (empty($f['required']) || in_array($f['type'], ['radio', 'select'], true)) {
                                                                                     <div class="wrapper">
                                                                                         <div class="block is-contents">
                                                                                             <div class="area is-title">
-                                                                                                <label class="label" data-module="m-labelTitle01">表示</label>
+                                                                                                <label class="label" data-module="m-labelSmallTitle01">表示</label>
                                                                                             </div>
                                                                                             <div class="area is-field">
                                                                                                 <div data-module="m-input01">
@@ -302,7 +302,7 @@ if (empty($f['required']) || in_array($f['type'], ['radio', 'select'], true)) {
                                                                                         </div>
                                                                                         <div class="block is-contents">
                                                                                             <div class="area is-title">
-                                                                                                <label class="label" data-module="m-labelTitle01">入力例</label>
+                                                                                                <label class="label" data-module="m-labelSmallTitle01">入力例</label>
                                                                                             </div>
                                                                                             <div class="area is-field">
                                                                                                 <div data-module="m-input01">
