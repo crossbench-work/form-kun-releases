@@ -1019,7 +1019,7 @@ form.is-inline {
 }
 
 // --- テーブル ---
-.table {
+[data-module="m-table01"] {
   width: 100%;
   border-collapse: collapse;
   font-size: 11px;

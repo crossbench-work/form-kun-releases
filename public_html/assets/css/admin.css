@@ -1039,38 +1039,38 @@ form.is-inline {
   border-color: #fecaca;
 }
 
-.table {
+[data-module=m-table01] {
   width: 100%;
   border-collapse: collapse;
   font-size: 11px;
 }
-.table tr {
+[data-module=m-table01] tr {
   border-bottom: 1px solid #f7f7f7;
 }
-.table tr:last-child {
+[data-module=m-table01] tr:last-child {
   border-bottom: none;
 }
-.table th,
-.table td {
+[data-module=m-table01] th,
+[data-module=m-table01] td {
   text-align: left;
   padding: 6px 12px;
   vertical-align: middle;
 }
-.table th {
+[data-module=m-table01] th {
   background: #f9fafb;
   color: #374151;
   font-weight: 600;
 }
-.table td.num,
-.table th.num {
+[data-module=m-table01] td.num,
+[data-module=m-table01] th.num {
   text-align: right;
 }
-.table.is-kv th {
+[data-module=m-table01].is-kv th {
   width: 200px;
   text-align: left;
   vertical-align: top;
 }
-.table.is-kv td {
+[data-module=m-table01].is-kv td {
   white-space: pre-wrap;
   word-break: break-word;
 }

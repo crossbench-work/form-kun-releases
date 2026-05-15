@@ -14,7 +14,7 @@
     <div class="wrapper">
         <div class="block is-contents">
                             <div class="area is-field">
-                                <table class="table is-kv">
+                                <table data-module="m-table01" class="is-kv">
                                     <tr><th>フォーム</th><td><?= e($form['title']) ?>（<code><?= e($form['slug']) ?></code>）</td></tr>
                                     <tr><th>受信日時</th><td><?= e($sub['submitted_at']) ?></td></tr>
                                     <tr><th>IPアドレス</th><td><?= e($sub['ip']) ?></td></tr>
@@ -32,7 +32,7 @@
                                 <h2 data-module="m-largeTitle01">入力内容</h2>
                             </div>
                             <div class="area is-field">
-                                <table class="table is-kv">
+                                <table data-module="m-table01" class="is-kv">
                                 <?php foreach ($fields as $f):
                                     $key = $f['field_key'];
                                 ?>

@@ -13,7 +13,7 @@
                                 <?php if (empty($users)): ?>
                                     <p class="text is-muted">ユーザーがありません。</p>
                                 <?php else: ?>
-                                    <table class="table">
+                                    <table data-module="m-table01">
                                         <thead>
                                             <tr>
                                                 <th>ユーザー名</th>

@@ -10,7 +10,7 @@
                                 <?php if (empty($byForm)): ?>
                                     <p class="text is-muted">まだフォームがありません。<?php if (empty($at_form_limit)): ?> <a href="<?= e(base_path('/admin/forms/new')) ?>">新規作成</a><?php endif; ?></p>
                                 <?php else: ?>
-                                    <table class="table">
+                                    <table data-module="m-table01">
                                         <thead><tr><th>タイトル</th><th>状態</th><th class="num">受信</th><th>操作</th></tr></thead>
                                         <tbody>
                                         <?php foreach ($byForm as $r): ?>
@@ -43,7 +43,7 @@
                                 <?php if (empty($recent)): ?>
                                     <p class="text is-muted">まだ送信はありません。</p>
                                 <?php else: ?>
-                                    <table class="table">
+                                    <table data-module="m-table01">
                                         <thead><tr><th>受信日時</th><th>フォーム</th><th>IP</th><th>操作</th></tr></thead>
                                         <tbody>
                                         <?php foreach ($recent as $r): ?>

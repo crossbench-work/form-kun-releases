@@ -19,7 +19,7 @@
                                 <?php if (empty($forms)): ?>
                                     <p class="text is-muted">まだフォームがありません。<?php if (empty($at_form_limit)): ?><a href="<?= e(base_path('/admin/forms/new')) ?>">新規作成</a><?php endif; ?></p>
                                 <?php else: ?>
-                                    <table class="table">
+                                    <table data-module="m-table01">
                                         <thead>
                                             <tr>
                                                 <th>タイトル</th>

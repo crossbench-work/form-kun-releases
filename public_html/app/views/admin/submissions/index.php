@@ -32,7 +32,7 @@
                                 <?php if (empty($rows)): ?>
                                     <p class="text is-muted">該当する送信がありません。</p>
                                 <?php else: ?>
-                                    <table class="table">
+                                    <table data-module="m-table01">
                                         <thead>
                                             <tr>
                                                 <th>受信日時</th>
