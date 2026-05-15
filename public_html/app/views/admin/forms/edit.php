@@ -281,6 +281,47 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                         </div>
                     </div>
                 </div>
+    <div data-module="c-formBlock01">
+                    <div class="wrapper">
+                        <div class="block is-contents">
+            <div class="block is-title">
+                <h2 data-module="m-largeTitle01">meta情報</h2>
+            </div>
+            <div class="block is-field">
+                <div data-module="c-inputSet01">
+                    <div class="wrapper">
+                        <div class="block is-contents">
+                            <div class="block is-title">
+                                <label class="label" data-module="m-boldTitle01" for="meta_title">metaタイトル</label>
+                            </div>
+                            <div class="block is-field">
+                                <div data-module="m-input01">
+                                    <input type="text" id="meta_title" name="meta_title" value="<?= e($form['meta_title'] ?? '') ?>" placeholder="空欄のときは各画面タイトルを使用します">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="block is-field">
+                <div data-module="c-inputSet01">
+                    <div class="wrapper">
+                        <div class="block is-contents">
+                            <div class="block is-title">
+                                <label class="label" data-module="m-boldTitle01" for="meta_description">meta説明文</label>
+                            </div>
+                            <div class="block is-field">
+                                <div data-module="m-input01">
+                                    <textarea id="meta_description" name="meta_description" rows="4" placeholder="公開フォームの説明を入力できます"><?= e($form['meta_description'] ?? '') ?></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+                        </div>
+                    </div>
+                </div>
         </div>
 
         <div data-target="c-formEditTabs01__contents" data-tab-panel="fields" class="area is-contents" role="tabpanel" aria-label="入力画面" hidden>

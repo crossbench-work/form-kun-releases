@@ -27,9 +27,12 @@ class FormController
             return;
         }
         $fields = FormField::forForm((int) $form['id'], true);
+        $inputPageTitle = trim((string) ($form['input_page_title'] ?? '')) !== ''
+            ? (string) $form['input_page_title']
+            : (string) ($form['title'] ?? 'フォーム');
 
         $this->view->render('front/form/show', [
-            'title'      => $form['title'],
+            'title'      => $inputPageTitle,
             'form'       => $form,
             'fields'     => $fields,
             'values'     => [],
@@ -50,10 +53,13 @@ class FormController
         $validator = new Validator();
         $files = self::buildFileMap($visibleFields);
         $result = $validator->validate($visibleFields, $_POST, $files);
+        $inputPageTitle = trim((string) ($form['input_page_title'] ?? '')) !== ''
+            ? (string) $form['input_page_title']
+            : (string) ($form['title'] ?? 'フォーム');
 
         if (!empty($result['errors'])) {
             $this->view->render('front/form/show', [
-                'title'      => $form['title'],
+                'title'      => $inputPageTitle,
                 'form'       => $form,
                 'fields'     => $fields,
                 'values'     => $result['values'],
@@ -83,7 +89,9 @@ class FormController
         Csrf::rotate();
 
         $this->view->render('front/form/confirm', [
-            'title'  => '入力内容の確認',
+            'title'  => trim((string) ($form['confirm_page_title'] ?? '')) !== ''
+                ? (string) $form['confirm_page_title']
+                : '入力内容のご確認',
             'form'   => $form,
             'fields' => $fields,
             'values' => $result['values'],
@@ -120,7 +128,9 @@ class FormController
             }
             unset($_SESSION['_pending_submission']);
             $this->view->render('front/form/show', [
-                'title'      => $form['title'],
+                'title'      => trim((string) ($form['input_page_title'] ?? '')) !== ''
+                    ? (string) $form['input_page_title']
+                    : (string) ($form['title'] ?? 'フォーム'),
                 'form'       => $form,
                 'fields'     => $fields,
                 'values'     => $values,
@@ -144,7 +154,9 @@ class FormController
         $this->sendMails($form, $visibleFields, $pending['values'], $pending['file_metas'] ?? []);
 
         $this->view->render('front/form/thanks', [
-            'title' => '送信完了',
+            'title' => trim((string) ($form['thanks_page_title'] ?? '')) !== ''
+                ? (string) $form['thanks_page_title']
+                : '送信が完了しました',
             'form'  => $form,
             'submissionId' => $sid,
         ], 'public');

@@ -164,10 +164,13 @@ class FormController
     {
         Csrf::verify();
         $data = $this->collect();
+        $previewForm = self::buildPreviewForm($data['form']);
 
         (new View())->render('front/form/show', [
-            'title' => '入力画面プレビュー',
-            'form' => self::buildPreviewForm($data['form']),
+            'title' => trim((string) ($previewForm['input_page_title'] ?? '')) !== ''
+                ? (string) $previewForm['input_page_title']
+                : '入力画面プレビュー',
+            'form' => $previewForm,
             'fields' => self::preparePreviewFields($data['fields']),
             'values' => [],
             'errors' => [],
@@ -179,10 +182,13 @@ class FormController
     {
         Csrf::verify();
         $data = $this->collect();
+        $previewForm = self::buildPreviewForm($data['form']);
 
         (new View())->render('front/form/confirm', [
-            'title' => '確認画面プレビュー',
-            'form' => self::buildPreviewForm($data['form']),
+            'title' => trim((string) ($previewForm['confirm_page_title'] ?? '')) !== ''
+                ? (string) $previewForm['confirm_page_title']
+                : '確認画面プレビュー',
+            'form' => $previewForm,
             'fields' => self::preparePreviewFields($data['fields']),
             'values' => [],
             'fileMetas' => [],
@@ -194,10 +200,13 @@ class FormController
     {
         Csrf::verify();
         $data = $this->collect();
+        $previewForm = self::buildPreviewForm($data['form']);
 
         (new View())->render('front/form/thanks', [
-            'title' => '完了画面プレビュー',
-            'form' => self::buildPreviewForm($data['form']),
+            'title' => trim((string) ($previewForm['thanks_page_title'] ?? '')) !== ''
+                ? (string) $previewForm['thanks_page_title']
+                : '完了画面プレビュー',
+            'form' => $previewForm,
             'previewMode' => true,
         ], 'public');
     }
@@ -221,6 +230,8 @@ class FormController
         $form = [
             'slug'                 => trim((string) ($_POST['slug'] ?? '')),
             'title'                => trim((string) ($_POST['title'] ?? '')),
+            'meta_title'           => trim((string) ($_POST['meta_title'] ?? '')),
+            'meta_description'     => trim((string) ($_POST['meta_description'] ?? '')),
             'input_page_title'     => trim((string) ($_POST['input_page_title'] ?? '')),
             'show_input_page_title'=> !empty($_POST['show_input_page_title']) ? 1 : 0,
             'description'          => null,
@@ -388,6 +399,12 @@ class FormController
 
         if ($form['title'] === '') {
             $errors[] = 'タイトルは必須です。';
+        }
+        if (mb_strlen($form['meta_title']) > 255) {
+            $errors[] = 'metaタイトルは255文字以内にしてください。';
+        }
+        if (mb_strlen($form['meta_description']) > 500) {
+            $errors[] = 'meta説明文は500文字以内にしてください。';
         }
         if (mb_strlen($form['input_page_title']) > 200) {
             $errors[] = '入力画面のタイトルは200文字以内にしてください。';
@@ -563,6 +580,8 @@ class FormController
             'id' => null,
             'slug' => FieldKey::generateUuidV4(),
             'title' => '',
+            'meta_title' => '',
+            'meta_description' => '',
             'input_page_title' => '',
             'show_input_page_title' => 1,
             'description' => '',
@@ -614,6 +633,8 @@ class FormController
         $form['input_page_title'] = trim((string) ($form['input_page_title'] ?? '')) !== ''
             ? (string) $form['input_page_title']
             : trim((string) ($form['title'] ?? ''));
+        $form['meta_title'] = trim((string) ($form['meta_title'] ?? ''));
+        $form['meta_description'] = trim((string) ($form['meta_description'] ?? ''));
         $form['show_input_page_title'] = !array_key_exists('show_input_page_title', $form) || !empty($form['show_input_page_title']) ? 1 : 0;
         $form['confirm_page_title'] = trim((string) ($form['confirm_page_title'] ?? '')) !== ''
             ? (string) $form['confirm_page_title']

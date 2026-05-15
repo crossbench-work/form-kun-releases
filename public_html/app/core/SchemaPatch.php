@@ -48,6 +48,7 @@ class SchemaPatch
             self::ensureFormsDisplayFlags();
 
             self::ensureFormsPageTitles();
+            self::ensureFormsMetaSettings();
             self::ensureFormsMailSettings();
 
             self::ensureAppSettingsTable();
@@ -453,6 +454,44 @@ class SchemaPatch
             );
         } catch (\Throwable $e) {
             error_log('[formkun] SchemaPatch forms page titles: ' . $e->getMessage());
+        }
+    }
+
+    /**
+     * forms に公開フォーム用の meta 情報列を追加。
+     */
+    public static function ensureFormsMetaSettings(): void
+    {
+        try {
+            $dbRow = Database::fetchOne('SELECT DATABASE() AS n');
+            $schema = (string) ($dbRow['n'] ?? '');
+            if ($schema === '') {
+                return;
+            }
+
+            $hasMetaTitle = Database::fetchOne(
+                'SELECT COUNT(*) AS c FROM information_schema.COLUMNS
+                 WHERE TABLE_SCHEMA = ? AND TABLE_NAME = ? AND COLUMN_NAME = ?',
+                [$schema, 'forms', 'meta_title']
+            );
+            if ((int) ($hasMetaTitle['c'] ?? 0) === 0) {
+                Database::execute(
+                    'ALTER TABLE forms ADD COLUMN meta_title VARCHAR(255) DEFAULT NULL AFTER title'
+                );
+            }
+
+            $hasMetaDescription = Database::fetchOne(
+                'SELECT COUNT(*) AS c FROM information_schema.COLUMNS
+                 WHERE TABLE_SCHEMA = ? AND TABLE_NAME = ? AND COLUMN_NAME = ?',
+                [$schema, 'forms', 'meta_description']
+            );
+            if ((int) ($hasMetaDescription['c'] ?? 0) === 0) {
+                Database::execute(
+                    'ALTER TABLE forms ADD COLUMN meta_description VARCHAR(500) DEFAULT NULL AFTER meta_title'
+                );
+            }
+        } catch (\Throwable $e) {
+            error_log('[formkun] SchemaPatch forms meta settings: ' . $e->getMessage());
         }
     }
 

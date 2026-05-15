@@ -1,10 +1,24 @@
 <!doctype html>
 <html lang="ja">
 <head>
+<?php
+$pageTitle = trim((string) ($title ?? 'フォーム'));
+$resolvedMetaTitle = trim((string) ($metaTitle ?? ($form['meta_title'] ?? '')));
+$resolvedMetaDescription = trim((string) ($metaDescription ?? ($form['meta_description'] ?? '')));
+$documentTitle = $pageTitle !== '' ? $pageTitle : 'フォーム';
+if ($resolvedMetaTitle !== '') {
+    $documentTitle = ($pageTitle === '' || $pageTitle === $resolvedMetaTitle)
+        ? $resolvedMetaTitle
+        : $pageTitle . ' | ' . $resolvedMetaTitle;
+}
+?>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex,nofollow">
-<title><?= e($title ?? 'フォーム') ?></title>
+<title><?= e($documentTitle) ?></title>
+<?php if ($resolvedMetaDescription !== ''): ?>
+<meta name="description" content="<?= e($resolvedMetaDescription) ?>">
+<?php endif; ?>
 <link rel="stylesheet" href="<?= e(base_path('/assets/css/public.css')) ?>">
 </head>
 <body>
