@@ -839,6 +839,11 @@ form.is-inline {
 [data-module=m-btn01] {
   width: fit-content;
 }
+[data-module=m-btn01][data-position=center] {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
 [data-module=m-btn01] > .btn,
 [data-module=m-btn01] > button,
 [data-module=m-btn01] > a {
@@ -899,15 +904,17 @@ form.is-inline {
 [data-module=m-btn01] > button.is-add,
 [data-module=m-btn01] > a.is-add {
   background: #eff6ff;
-  border-color: #93c5fd;
-  color: #1d4ed8;
+  border-color: #cae3ff;
+  color: #5072d1;
+  font-size: 10px;
+  padding: 6px 10px;
 }
 [data-module=m-btn01] > .btn.is-add:hover:not(:disabled):not([aria-disabled=true]),
 [data-module=m-btn01] > button.is-add:hover:not(:disabled):not([aria-disabled=true]),
 [data-module=m-btn01] > a.is-add:hover:not(:disabled):not([aria-disabled=true]) {
-  background: #dbeafe;
-  border-color: #60a5fa;
-  color: #1e40af;
+  background: #5072d1;
+  border-color: #5072d1;
+  color: #fff;
 }
 
 .m-alert01 {

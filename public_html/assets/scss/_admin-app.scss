@@ -796,6 +796,12 @@ form.is-inline {
 [data-module="m-btn01"] {
   width: fit-content;
 
+  &[data-position="center"] {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
   > .btn,
   > button,
   > a {
@@ -847,13 +853,15 @@ form.is-inline {
 
     &.is-add {
       background: #eff6ff;
-      border-color: #93c5fd;
-      color: #1d4ed8;
+      border-color: #cae3ff;
+      color: #5072d1;
+      font-size: 10px;
+      padding: 6px 10px;
 
       &:hover:not(:disabled):not([aria-disabled="true"]) {
-        background: #dbeafe;
-        border-color: #60a5fa;
-        color: #1e40af;
+        background: #5072d1;
+        border-color: #5072d1;
+        color: #fff;
       }
     }
   }
