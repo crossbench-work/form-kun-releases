@@ -283,7 +283,7 @@ if (empty($f['required']) || in_array($f['type'], ['radio', 'select'], true)) {
                                                 <div class="c-formEditor__textMultiList" data-text-multi-editor>
                                                     <div class="wrapper">
                                                         <div class="block is-contents" data-target="c-formEditor__textMultiListContents">
-                                                            <?php foreach ($multiTextItems as $multiTextItem): ?>
+                                                            <?php foreach ($multiTextItems as $multiTextIndex => $multiTextItem): ?>
                                                                 <div class="c-formEditor__textMultiItem" data-text-multi-item>
                                                                     <div class="wrapper">
                                                                         <div class="block is-contents">
@@ -320,15 +320,17 @@ if (empty($f['required']) || in_array($f['type'], ['radio', 'select'], true)) {
                                                                                 </svg>
                                                                             </button>
                                                                         </div>
+                                                                        <?php if ($multiTextIndex === array_key_last($multiTextItems)): ?>
+                                                                            <div class="block is-contents" data-target="c-formEditor__textMultiControls">
+                                                                                <div data-module="m-btn01">
+                                                                                    <button type="button" data-target="c-formEditor__textMultiAdd" class="btn is-add fb-description-add">＋ 文字を追加</button>
+                                                                                    <textarea name="fields[<?= $idx ?>][multi_text_items]" data-target="c-formEditor__textMultiSource" hidden><?= e(json_encode($multiTextItems, JSON_UNESCAPED_UNICODE)) ?></textarea>
+                                                                                </div>
+                                                                            </div>
+                                                                        <?php endif; ?>
                                                                     </div>
                                                                 </div>
                                                             <?php endforeach; ?>
-                                                            <div class="block is-contents">
-                                                                <div data-module="m-btn01">
-                                                                    <button type="button" data-target="c-formEditor__textMultiAdd" class="btn is-add fb-description-add">＋ 文字を追加</button>
-                                                                    <textarea name="fields[<?= $idx ?>][multi_text_items]" data-target="c-formEditor__textMultiSource" hidden><?= e(json_encode($multiTextItems, JSON_UNESCAPED_UNICODE)) ?></textarea>
-                                                                </div>
-                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>

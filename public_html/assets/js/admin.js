@@ -852,6 +852,21 @@
         return item;
     }
 
+    function moveTextMultiControls(box) {
+        var list = box.querySelector('[data-target="c-formEditor__textMultiListContents"]');
+        var controls = box.querySelector('[data-target="c-formEditor__textMultiControls"]');
+        if (!list || !controls) return;
+        var items = list.querySelectorAll('[data-text-multi-item]');
+        if (!items.length) {
+            list.appendChild(controls);
+            return;
+        }
+        var lastItem = items[items.length - 1];
+        var wrapper = lastItem.querySelector('.wrapper');
+        if (!wrapper) return;
+        wrapper.appendChild(controls);
+    }
+
     function bindTextMultiItem(item, box) {
         var labelInput = item.querySelector('[data-target="c-formEditor__textMultiLabelInput"]');
         var placeholderInput = item.querySelector('[data-target="c-formEditor__textMultiPlaceholderInput"]');
@@ -877,7 +892,12 @@
                     alert('入力欄は1つ以上必要です。');
                     return;
                 }
+                var controls = item.querySelector('[data-target="c-formEditor__textMultiControls"]');
+                if (controls) {
+                    list.appendChild(controls);
+                }
                 list.removeChild(item);
+                moveTextMultiControls(box);
                 syncTextMultiEditor(box);
             });
         }
@@ -895,10 +915,12 @@
                 var item = createTextMultiItem();
                 list.appendChild(item);
                 bindTextMultiItem(item, box);
+                moveTextMultiControls(box);
                 syncTextMultiEditor(box);
                 var labelInput = item.querySelector('[data-target="c-formEditor__textMultiLabelInput"]');
                 if (labelInput) labelInput.focus();
             });
+            moveTextMultiControls(box);
             syncTextMultiEditor(box);
         });
     }
