@@ -832,9 +832,9 @@
                     '<div class="block is-field"><div data-module="m-input01"><input type="text" data-target="c-formEditor__textMultiPlaceholderInput"></div></div>' +
                 '</div>' +
             '</div>' +
-            '<div class="c-formEditor__actions">' +
-                '<button type="button" class="btn is-sm is-danger" data-target="c-formEditor__textMultiRemove">削除</button>' +
-            '</div>';
+            '<button type="button" data-module="m-deleteBtn01" data-target="c-formEditor__textMultiRemove" aria-label="削除" title="削除">' +
+                '<svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 6h18"/><path stroke-linecap="round" stroke-linejoin="round" d="M8 6V4h8v2"/><path stroke-linecap="round" stroke-linejoin="round" d="M19 6l-1 14H6L5 6"/><path stroke-linecap="round" stroke-linejoin="round" d="M10 11v6M14 11v6"/></svg>' +
+            '</button>';
         var labelInput = item.querySelector('[data-target="c-formEditor__textMultiLabelInput"]');
         var placeholderInput = item.querySelector('[data-target="c-formEditor__textMultiPlaceholderInput"]');
         if (labelInput) {
@@ -880,7 +880,7 @@
     function bindTextMultiEditor(li) {
         li.querySelectorAll('[data-text-multi-editor]').forEach(function (box) {
             var list = box.querySelector('.c-formEditor__textMultiList');
-            var add = box.querySelector('[data-target="c-formEditor__textMultiAdd"]');
+            var add = box.querySelector('[data-target="m-formBuilder01__add"]');
             if (!list || !add) return;
             list.querySelectorAll('[data-text-multi-item]').forEach(function (item) {
                 bindTextMultiItem(item, box);

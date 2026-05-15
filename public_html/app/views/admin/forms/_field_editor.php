@@ -306,14 +306,21 @@ if (empty($f['required']) || in_array($f['type'], ['radio', 'select'], true)) {
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                                <div class="c-formEditor__actions">
-                                                                    <button type="button" class="btn is-sm is-danger" data-target="c-formEditor__textMultiRemove">削除</button>
-                                                                </div>
+                                                                <button type="button" data-module="m-deleteBtn01" data-target="c-formEditor__textMultiRemove" aria-label="削除" title="削除">
+                                                                    <svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2">
+                                                                        <path stroke-linecap="round" stroke-linejoin="round" d="M3 6h18"/>
+                                                                        <path stroke-linecap="round" stroke-linejoin="round" d="M8 6V4h8v2"/>
+                                                                        <path stroke-linecap="round" stroke-linejoin="round" d="M19 6l-1 14H6L5 6"/>
+                                                                        <path stroke-linecap="round" stroke-linejoin="round" d="M10 11v6M14 11v6"/>
+                                                                    </svg>
+                                                                </button>
                                                             </div>
                                                         <?php endforeach; ?>
                                                     </div>
                                                     <div class="area is-actions">
-                                                        <button type="button" class="btn is-sm" data-target="c-formEditor__textMultiAdd">＋ 入力欄を追加する</button>
+                                                        <div data-module="m-btn01">
+                                                            <button type="button" data-target="m-formBuilder01__add" class="btn fb-description-add">＋ 項目を追加</button>
+                                                        </div>
                                                     </div>
                                                     <textarea name="fields[<?= $idx ?>][multi_text_items]" data-target="c-formEditor__textMultiSource" hidden><?= e(json_encode($multiTextItems, JSON_UNESCAPED_UNICODE)) ?></textarea>
                                                 </div>
