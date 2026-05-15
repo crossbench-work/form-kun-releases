@@ -4,6 +4,8 @@
 <?php
 $pageTitle = trim((string) ($title ?? 'フォーム'));
 $metaHtml = trim((string) ($metaHtml ?? ($form['meta_html'] ?? '')));
+$customCss = trim((string) ($customCss ?? ($form['custom_css'] ?? '')));
+$customJs = trim((string) ($customJs ?? ($form['custom_js'] ?? '')));
 ?>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -13,6 +15,11 @@ $metaHtml = trim((string) ($metaHtml ?? ($form['meta_html'] ?? '')));
 <?= $metaHtml . "\n" ?>
 <?php endif; ?>
 <link rel="stylesheet" href="<?= e(base_path('/assets/css/public.css')) ?>">
+<?php if ($customCss !== ''): ?>
+<style>
+<?= $customCss . "\n" ?>
+</style>
+<?php endif; ?>
 </head>
 <body>
 <header class="l-siteHeader01">
@@ -40,5 +47,10 @@ $metaHtml = trim((string) ($metaHtml ?? ($form['meta_html'] ?? '')));
 window.FORMKUN_BASE = <?= json_encode(base_path(''), JSON_HEX_TAG | JSON_HEX_AMP | JSON_UNESCAPED_UNICODE | JSON_HEX_APOS) ?>;
 </script>
 <script src="<?= e(base_path('/assets/js/public-form.js')) ?>" defer></script>
+<?php if ($customJs !== ''): ?>
+<script>
+<?= $customJs . "\n" ?>
+</script>
+<?php endif; ?>
 </body>
 </html>

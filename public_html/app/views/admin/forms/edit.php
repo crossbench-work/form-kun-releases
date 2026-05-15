@@ -306,6 +306,44 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                     </div>
                 </div>
             </div>
+            <div class="block is-field">
+                <div data-module="c-inputSet01">
+                    <div class="wrapper">
+                        <div class="block is-contents">
+                            <div class="block is-title">
+                                <label class="label" data-module="m-boldTitle01" for="custom_css">css</label>
+                            </div>
+                            <div class="block is-field">
+                                <div data-module="m-input01">
+                                    <textarea id="custom_css" name="custom_css" rows="8" placeholder=".p-formShow01 {\n  background: #fff;\n}"><?= e($form['custom_css'] ?? '') ?></textarea>
+                                </div>
+                            </div>
+                            <div class="area is-help">
+                                <p class="text is-help">公開フォーム専用の CSS をそのまま入力できます。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="block is-field">
+                <div data-module="c-inputSet01">
+                    <div class="wrapper">
+                        <div class="block is-contents">
+                            <div class="block is-title">
+                                <label class="label" data-module="m-boldTitle01" for="custom_js">js</label>
+                            </div>
+                            <div class="block is-field">
+                                <div data-module="m-input01">
+                                    <textarea id="custom_js" name="custom_js" rows="8" placeholder="document.addEventListener('DOMContentLoaded', function () {\n  console.log('form loaded');\n});"><?= e($form['custom_js'] ?? '') ?></textarea>
+                                </div>
+                            </div>
+                            <div class="area is-help">
+                                <p class="text is-help">公開フォーム専用の JavaScript をそのまま入力できます。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
                         </div>
                     </div>
                 </div>

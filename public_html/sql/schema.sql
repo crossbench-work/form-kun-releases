@@ -39,6 +39,8 @@ CREATE TABLE IF NOT EXISTS forms (
     slug                    VARCHAR(64) UNIQUE NOT NULL,
     title                   VARCHAR(200) NOT NULL,
     meta_html               TEXT DEFAULT NULL,
+    custom_css              TEXT DEFAULT NULL,
+    custom_js               TEXT DEFAULT NULL,
     input_page_title        VARCHAR(200) DEFAULT NULL,
     show_input_page_title   TINYINT(1) NOT NULL DEFAULT 1,
     description             TEXT DEFAULT NULL,

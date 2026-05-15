@@ -479,6 +479,28 @@ class SchemaPatch
                     'ALTER TABLE forms ADD COLUMN meta_html TEXT DEFAULT NULL AFTER title'
                 );
             }
+
+            $hasCustomCss = Database::fetchOne(
+                'SELECT COUNT(*) AS c FROM information_schema.COLUMNS
+                 WHERE TABLE_SCHEMA = ? AND TABLE_NAME = ? AND COLUMN_NAME = ?',
+                [$schema, 'forms', 'custom_css']
+            );
+            if ((int) ($hasCustomCss['c'] ?? 0) === 0) {
+                Database::execute(
+                    'ALTER TABLE forms ADD COLUMN custom_css TEXT DEFAULT NULL AFTER meta_html'
+                );
+            }
+
+            $hasCustomJs = Database::fetchOne(
+                'SELECT COUNT(*) AS c FROM information_schema.COLUMNS
+                 WHERE TABLE_SCHEMA = ? AND TABLE_NAME = ? AND COLUMN_NAME = ?',
+                [$schema, 'forms', 'custom_js']
+            );
+            if ((int) ($hasCustomJs['c'] ?? 0) === 0) {
+                Database::execute(
+                    'ALTER TABLE forms ADD COLUMN custom_js TEXT DEFAULT NULL AFTER custom_css'
+                );
+            }
         } catch (\Throwable $e) {
             error_log('[formkun] SchemaPatch forms meta settings: ' . $e->getMessage());
         }

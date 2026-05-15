@@ -52,13 +52,13 @@ class Form
         $now = date('Y-m-d H:i:s');
         Database::execute(
             'INSERT INTO forms (
-                slug, title, meta_html, input_page_title, show_input_page_title, description, show_title, show_description, confirm_page_title, show_confirm_page_title, confirm_button_text, submit_button_text, back_button_text, confirm_message, thanks_page_title, show_thanks_page_title, thanks_message, thanks_button_text, thanks_button_url,
+                slug, title, meta_html, custom_css, custom_js, input_page_title, show_input_page_title, description, show_title, show_description, confirm_page_title, show_confirm_page_title, confirm_button_text, submit_button_text, back_button_text, confirm_message, thanks_page_title, show_thanks_page_title, thanks_message, thanks_button_text, thanks_button_url,
                 admin_emails, mail_subject_admin, mail_template_admin,
                 mail_transport, mail_from_email, mail_from_name, mail_smtp_host, mail_smtp_port, mail_smtp_secure, mail_smtp_username, mail_smtp_password, mail_smtp_timeout, mail_smtp_ehlo_host, mail_smtp_verify_peer, mail_smtp_verify_peer_name, mail_smtp_allow_self_signed,
                 reply_enabled, reply_from_field_key, reply_subject, reply_template,
                 status, created_at, updated_at
             ) VALUES (
-                ?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,
+                ?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,
                 ?,?,?,
                 ?,?,?,?,?,?,?,?,?,?,?,?,?,
                 ?,?,?,?,
@@ -68,6 +68,8 @@ class Form
                 $data['slug'],
                 $data['title'],
                 $data['meta_html'] ?? null,
+                $data['custom_css'] ?? null,
+                $data['custom_js'] ?? null,
                 $data['input_page_title'] ?? null,
                 !empty($data['show_input_page_title']) ? 1 : 0,
                 $data['description'] ?? null,
@@ -117,7 +119,7 @@ class Form
         $now = date('Y-m-d H:i:s');
         Database::execute(
             'UPDATE forms SET
-                slug = ?, title = ?, meta_html = ?, input_page_title = ?, show_input_page_title = ?, description = ?, show_title = ?, show_description = ?, confirm_page_title = ?, show_confirm_page_title = ?, confirm_button_text = ?, submit_button_text = ?, back_button_text = ?, confirm_message = ?, thanks_page_title = ?, show_thanks_page_title = ?, thanks_message = ?, thanks_button_text = ?, thanks_button_url = ?,
+                slug = ?, title = ?, meta_html = ?, custom_css = ?, custom_js = ?, input_page_title = ?, show_input_page_title = ?, description = ?, show_title = ?, show_description = ?, confirm_page_title = ?, show_confirm_page_title = ?, confirm_button_text = ?, submit_button_text = ?, back_button_text = ?, confirm_message = ?, thanks_page_title = ?, show_thanks_page_title = ?, thanks_message = ?, thanks_button_text = ?, thanks_button_url = ?,
                 admin_emails = ?, mail_subject_admin = ?, mail_template_admin = ?,
                 mail_transport = ?, mail_from_email = ?, mail_from_name = ?, mail_smtp_host = ?, mail_smtp_port = ?, mail_smtp_secure = ?, mail_smtp_username = ?, mail_smtp_password = ?, mail_smtp_timeout = ?, mail_smtp_ehlo_host = ?, mail_smtp_verify_peer = ?, mail_smtp_verify_peer_name = ?, mail_smtp_allow_self_signed = ?,
                 reply_enabled = ?, reply_from_field_key = ?, reply_subject = ?, reply_template = ?,
@@ -127,6 +129,8 @@ class Form
                 $data['slug'],
                 $data['title'],
                 $data['meta_html'] ?? null,
+                $data['custom_css'] ?? null,
+                $data['custom_js'] ?? null,
                 $data['input_page_title'] ?? null,
                 !empty($data['show_input_page_title']) ? 1 : 0,
                 $data['description'] ?? null,

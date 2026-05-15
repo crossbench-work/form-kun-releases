@@ -236,6 +236,8 @@ HTML;
             'slug'                 => trim((string) ($_POST['slug'] ?? '')),
             'title'                => trim((string) ($_POST['title'] ?? '')),
             'meta_html'            => trim((string) ($_POST['meta_html'] ?? '')),
+            'custom_css'           => trim((string) ($_POST['custom_css'] ?? '')),
+            'custom_js'            => trim((string) ($_POST['custom_js'] ?? '')),
             'input_page_title'     => trim((string) ($_POST['input_page_title'] ?? '')),
             'show_input_page_title'=> !empty($_POST['show_input_page_title']) ? 1 : 0,
             'description'          => null,
@@ -406,6 +408,12 @@ HTML;
         }
         if (mb_strlen($form['meta_html']) > 65535) {
             $errors[] = 'meta情報HTMLは65535文字以内にしてください。';
+        }
+        if (mb_strlen($form['custom_css']) > 65535) {
+            $errors[] = 'CSSは65535文字以内にしてください。';
+        }
+        if (mb_strlen($form['custom_js']) > 65535) {
+            $errors[] = 'JavaScriptは65535文字以内にしてください。';
         }
         if (mb_strlen($form['input_page_title']) > 200) {
             $errors[] = '入力画面のタイトルは200文字以内にしてください。';
@@ -582,6 +590,8 @@ HTML;
             'slug' => FieldKey::generateUuidV4(),
             'title' => '',
             'meta_html' => self::DEFAULT_META_HTML,
+            'custom_css' => '',
+            'custom_js' => '',
             'input_page_title' => '',
             'show_input_page_title' => 1,
             'description' => '',
@@ -634,6 +644,8 @@ HTML;
             ? (string) $form['input_page_title']
             : trim((string) ($form['title'] ?? ''));
         $form['meta_html'] = trim((string) ($form['meta_html'] ?? ''));
+        $form['custom_css'] = trim((string) ($form['custom_css'] ?? ''));
+        $form['custom_js'] = trim((string) ($form['custom_js'] ?? ''));
         if ($form['meta_html'] === '') {
             $legacyMetaTitle = str_replace('"', "'", trim((string) ($form['meta_title'] ?? '')));
             $legacyMetaDescription = str_replace('"', "'", trim((string) ($form['meta_description'] ?? '')));
