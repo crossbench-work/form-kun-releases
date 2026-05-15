@@ -231,6 +231,22 @@ body.l-adminShell01 {
     min-height: 100px;
     resize: vertical;
   }
+
+  &.is-empty {
+    > input,
+    > select,
+    > textarea {
+      background: #faffff;
+    }
+  }
+
+  &.is-filled {
+    > input,
+    > select,
+    > textarea {
+      background: #fff;
+    }
+  }
 }
 
 .m-toolbar01 [data-module="m-input01"] {

@@ -303,6 +303,22 @@
         }
     }
 
+    function syncInputModuleState(module) {
+        if (!module) return;
+        var control = module.querySelector('input, textarea, select');
+        if (!control) return;
+        var value = typeof control.value === 'string' ? control.value.trim() : '';
+        var isEmpty = value === '';
+        module.classList.toggle('is-empty', isEmpty);
+        module.classList.toggle('is-filled', !isEmpty);
+    }
+
+    function syncInputModuleStates(root) {
+        (root || document).querySelectorAll('[data-module="m-input01"]').forEach(function (module) {
+            syncInputModuleState(module);
+        });
+    }
+
     function bindHtmlToggleEditor(editor) {
         if (!editor || editor.getAttribute('data-html-toggle-bound') === '1') return;
         var toggle = editor.querySelector('[data-target="c-htmlInputEditor01__toggle"]');
@@ -1112,6 +1128,7 @@
         }
         syncFormEditorItemPublicHidden(li);
         updateFieldSummary(li);
+        syncInputModuleStates(li);
     }
 
     function applyFieldPreset(li, preset) {
@@ -1227,6 +1244,7 @@
                     select.setAttribute('data-value', select.value);
                 }
                 reindexDescriptionBlocks(editor);
+                syncInputModuleStates(block);
                 refreshDescriptionSortable(editor);
                 var textarea = block.querySelector('[data-target="c-htmlInputEditor01__textarea"]');
                 if (textarea) textarea.focus();
@@ -1277,11 +1295,26 @@
         });
     }
 
+    document.addEventListener('input', function (event) {
+        var module = event.target.closest ? event.target.closest('[data-module="m-input01"]') : null;
+        if (module) {
+            syncInputModuleState(module);
+        }
+    });
+
+    document.addEventListener('change', function (event) {
+        var module = event.target.closest ? event.target.closest('[data-module="m-input01"]') : null;
+        if (module) {
+            syncInputModuleState(module);
+        }
+    });
+
     reindex();
     descriptionEditors.forEach(function (editor) {
         reindexDescriptionBlocks(editor);
         refreshDescriptionPositionOptions(editor);
     });
+    syncInputModuleStates(document);
 
     var titleInput = document.getElementById('title');
     var breadcrumbCurrent = document.querySelector('[data-target="p-formEdit01__breadcrumbCurrent"]');

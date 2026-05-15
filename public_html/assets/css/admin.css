@@ -348,6 +348,16 @@ body.l-adminShell01 a:hover {
   min-height: 100px;
   resize: vertical;
 }
+[data-module=m-input01].is-empty > input,
+[data-module=m-input01].is-empty > select,
+[data-module=m-input01].is-empty > textarea {
+  background: #faffff;
+}
+[data-module=m-input01].is-filled > input,
+[data-module=m-input01].is-filled > select,
+[data-module=m-input01].is-filled > textarea {
+  background: #fff;
+}
 
 .m-toolbar01 [data-module=m-input01] {
   display: inline-block;
