@@ -1331,17 +1331,25 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                                                 </div>
                                             </div>
                                             <div class="block is-field">
-                                                <label class="label" data-module="m-labelTitle01">備考</label>
-                                                <div data-module="c-htmlInputEditor01" data-html-toggle-editor>
+                                                <div class="c-formEditor__field">
                                                     <div class="wrapper">
-                                                        <div class="block is-editor">
-                                                            <div data-module="m-input01"><textarea data-name="help_text" rows="3" data-target="c-htmlInputEditor01__textarea"></textarea></div>
+                                                        <div class="area is-title">
+                                                            <label class="label" data-module="m-labelTitle01">説明文</label>
                                                         </div>
-                                                        <div class="block is-toolbar">
-                                                            <label class="label is-choice c-htmlInputEditor01__toggle">
-                                                                <input type="checkbox" data-name="help_text_is_html" data-target="c-htmlInputEditor01__toggle" value="1">
-                                                                HTMLで入力する
-                                                            </label>
+                                                        <div class="area is-field">
+                                                            <div data-module="c-htmlInputEditor01" data-html-toggle-editor>
+                                                                <div class="wrapper">
+                                                                    <div class="block is-editor">
+                                                                        <div data-module="m-input01"><textarea data-name="help_text" rows="3" data-target="c-htmlInputEditor01__textarea"></textarea></div>
+                                                                    </div>
+                                                                    <div class="block is-toolbar">
+                                                                        <label class="label is-choice c-htmlInputEditor01__toggle">
+                                                                            <input type="checkbox" data-name="help_text_is_html" data-target="c-htmlInputEditor01__toggle" value="1">
+                                                                            HTMLで入力する
+                                                                        </label>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
