@@ -1,3 +1,4 @@
+<?php require_once APP_COMPONENTS_DIR . '/m-table01/m-table01.php'; ?>
 <h1 class="title">ダッシュボード</h1>
 
 <div data-module="c-formBlock01">
@@ -10,8 +11,13 @@
                                 <?php if (empty($byForm)): ?>
                                     <p class="text is-muted">まだフォームがありません。<?php if (empty($at_form_limit)): ?> <a href="<?= e(base_path('/admin/forms/new')) ?>">新規作成</a><?php endif; ?></p>
                                 <?php else: ?>
-                                    <table data-module="m-table01">
-                                        <thead><tr><th>タイトル</th><th>状態</th><th class="num">受信</th><th>操作</th></tr></thead>
+                                    <?php admin_m_table01_open(); ?>
+                                    <?php admin_m_table01_thead([
+                                        ['label' => 'タイトル'],
+                                        ['label' => '状態'],
+                                        ['label' => '受信', 'class' => 'num'],
+                                        ['label' => '操作'],
+                                    ]); ?>
                                         <tbody>
                                         <?php foreach ($byForm as $r): ?>
                                             <tr>
@@ -26,7 +32,7 @@
                                             </tr>
                                         <?php endforeach; ?>
                                         </tbody>
-                                    </table>
+                                    <?php admin_m_table01_close(); ?>
                                 <?php endif; ?>
                             </div>
             </div>
@@ -43,8 +49,13 @@
                                 <?php if (empty($recent)): ?>
                                     <p class="text is-muted">まだ送信はありません。</p>
                                 <?php else: ?>
-                                    <table data-module="m-table01">
-                                        <thead><tr><th>受信日時</th><th>フォーム</th><th>IP</th><th>操作</th></tr></thead>
+                                    <?php admin_m_table01_open(); ?>
+                                    <?php admin_m_table01_thead([
+                                        ['label' => '受信日時'],
+                                        ['label' => 'フォーム'],
+                                        ['label' => 'IP'],
+                                        ['label' => '操作'],
+                                    ]); ?>
                                         <tbody>
                                         <?php foreach ($recent as $r): ?>
                                             <tr>
@@ -55,7 +66,7 @@
                                             </tr>
                                         <?php endforeach; ?>
                                         </tbody>
-                                    </table>
+                                    <?php admin_m_table01_close(); ?>
                                 <?php endif; ?>
                             </div>
             </div>

@@ -202,6 +202,7 @@ form-kun/
 - **m-**: **`.m-*` > `.wrapper`**。通常はモジュール内に **`.block` / `.area` / `.box` は使わない**。
 - **管理画面のパネル系コンポーネントは `data-module="c-formBlock01"` をルートに使い、内側は `.wrapper > .block.is-contents` 配下へ直接 `block is-title` / `block is-field` を置く。`componentWrapper` のような別名ラッパーや `c-panel01` の外枠は増やさない**。
 - **管理画面の `input` / `select` / `textarea` は `<div data-module="m-input01">...</div>` の内側に置き、見た目は入力要素ごとの直指定ではなくこのモジュールに集約する**。
+- **管理画面の一覧・KV 表は `data-module="m-table01"`。マークアップは `public_html/app/components/m-table01/m-table01.php` のヘルパー（`admin_m_table01_*`）、スタイルは同ディレクトリの `_m-table01.scss` を `_admin-app.scss` から `@use` して読み込む**。
 - **太字の小見出しや通常の入力ラベルは、`<p data-module="m-boldTitle01">...</p>` や `<label class="label" data-module="m-boldTitle01">...</label>` のように `m-boldTitle01` を使って作る。フォーム項目エディタ内の小さめラベルは `<label class="label" data-module="m-labelTitle01">...</label>` を使い、右側に区切り線を引く見出しは `m-borderTitle01` を使う**。
 - **「必須」バッジは `<span data-module="m-required01" data-type="required">必須</span>` を正とし、`.is-required` のような見た目用 class は増やさない**。
 

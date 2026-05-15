@@ -1,3 +1,4 @@
+<?php require_once APP_COMPONENTS_DIR . '/m-table01/m-table01.php'; ?>
 <div class="m-toolbar01">
     <h1 class="title" style="margin:0;">フォーム一覧</h1>
     <div class="spacer"></div>
@@ -19,16 +20,14 @@
                                 <?php if (empty($forms)): ?>
                                     <p class="text is-muted">まだフォームがありません。<?php if (empty($at_form_limit)): ?><a href="<?= e(base_path('/admin/forms/new')) ?>">新規作成</a><?php endif; ?></p>
                                 <?php else: ?>
-                                    <table data-module="m-table01">
-                                        <thead>
-                                            <tr>
-                                                <th>タイトル</th>
-                                                <th>スラッグ</th>
-                                                <th>状態</th>
-                                                <th>更新日時</th>
-                                                <th>操作</th>
-                                            </tr>
-                                        </thead>
+                                    <?php admin_m_table01_open(); ?>
+                                    <?php admin_m_table01_thead([
+                                        ['label' => 'タイトル'],
+                                        ['label' => 'スラッグ'],
+                                        ['label' => '状態'],
+                                        ['label' => '更新日時'],
+                                        ['label' => '操作'],
+                                    ]); ?>
                                         <tbody>
                                         <?php foreach ($forms as $f): ?>
                                             <tr>
@@ -50,7 +49,7 @@
                                             </tr>
                                         <?php endforeach; ?>
                                         </tbody>
-                                    </table>
+                                    <?php admin_m_table01_close(); ?>
                                 <?php endif; ?>
                             </div>
         </div>

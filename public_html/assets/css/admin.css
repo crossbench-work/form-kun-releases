@@ -147,6 +147,42 @@ body {
   }
 }
 
+[data-module=m-table01] {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 11px;
+}
+[data-module=m-table01] tr {
+  border-bottom: 1px solid #f7f7f7;
+}
+[data-module=m-table01] tr:last-child {
+  border-bottom: none;
+}
+[data-module=m-table01] th,
+[data-module=m-table01] td {
+  text-align: left;
+  padding: 6px 12px;
+  vertical-align: middle;
+}
+[data-module=m-table01] th {
+  background: #f9fafb;
+  color: #374151;
+  font-weight: 600;
+}
+[data-module=m-table01] td.num,
+[data-module=m-table01] th.num {
+  text-align: right;
+}
+[data-module=m-table01].is-kv th {
+  width: 200px;
+  text-align: left;
+  vertical-align: top;
+}
+[data-module=m-table01].is-kv td {
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
 body.l-adminShell01 {
   color: #1f2937;
   background: #f1f5f9;
@@ -1037,42 +1073,6 @@ form.is-inline {
   background: #fee2e2;
   color: #991b1b;
   border-color: #fecaca;
-}
-
-[data-module=m-table01] {
-  width: 100%;
-  border-collapse: collapse;
-  font-size: 11px;
-}
-[data-module=m-table01] tr {
-  border-bottom: 1px solid #f7f7f7;
-}
-[data-module=m-table01] tr:last-child {
-  border-bottom: none;
-}
-[data-module=m-table01] th,
-[data-module=m-table01] td {
-  text-align: left;
-  padding: 6px 12px;
-  vertical-align: middle;
-}
-[data-module=m-table01] th {
-  background: #f9fafb;
-  color: #374151;
-  font-weight: 600;
-}
-[data-module=m-table01] td.num,
-[data-module=m-table01] th.num {
-  text-align: right;
-}
-[data-module=m-table01].is-kv th {
-  width: 200px;
-  text-align: left;
-  vertical-align: top;
-}
-[data-module=m-table01].is-kv td {
-  white-space: pre-wrap;
-  word-break: break-word;
 }
 
 [data-module=c-formBlock01] > .wrapper > .block.is-contents .area.is-title .fb-panel-header,

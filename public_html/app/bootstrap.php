@@ -15,6 +15,7 @@ if (PHP_VERSION_ID < 80000) {
 
 // ベースディレクトリ
 define('APP_DIR', __DIR__);
+define('APP_COMPONENTS_DIR', APP_DIR . DIRECTORY_SEPARATOR . 'components');
 define('PUBLIC_DIR', dirname(__DIR__));
 define('UPLOADS_DIR', PUBLIC_DIR . DIRECTORY_SEPARATOR . 'uploads');
 

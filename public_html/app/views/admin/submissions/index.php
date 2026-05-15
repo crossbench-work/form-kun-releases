@@ -1,3 +1,4 @@
+<?php require_once APP_COMPONENTS_DIR . '/m-table01/m-table01.php'; ?>
 <div class="m-toolbar01">
     <h1 class="title" style="margin:0;">送信履歴: <?= e($form['title']) ?></h1>
     <div class="spacer"></div>
@@ -32,7 +33,7 @@
                                 <?php if (empty($rows)): ?>
                                     <p class="text is-muted">該当する送信がありません。</p>
                                 <?php else: ?>
-                                    <table data-module="m-table01">
+                                    <?php admin_m_table01_open(); ?>
                                         <thead>
                                             <tr>
                                                 <th>受信日時</th>
@@ -83,7 +84,7 @@
                                             </tr>
                                         <?php endforeach; ?>
                                         </tbody>
-                                    </table>
+                                    <?php admin_m_table01_close(); ?>
 
                                     <?php if ($totalPages > 1): ?>
                                     <div class="pagination">

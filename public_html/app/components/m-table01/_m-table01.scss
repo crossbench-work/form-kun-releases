@@ -1,0 +1,46 @@
+// m-table01 … 管理画面の一覧・KV 表（data-module="m-table01"）
+// ビューは app/components/m-table01/m-table01.php を参照
+
+[data-module="m-table01"] {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 11px;
+
+  tr {
+    border-bottom: 1px solid #f7f7f7;
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+
+  th,
+  td {
+    text-align: left;
+    padding: 6px 12px;
+    vertical-align: middle;
+  }
+
+  th {
+    background: #f9fafb;
+    color: #374151;
+    font-weight: 600;
+  }
+
+  td.num,
+  th.num {
+    text-align: right;
+  }
+
+  &.is-kv {
+    th {
+      width: 200px;
+      text-align: left;
+      vertical-align: top;
+    }
+
+    td {
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+  }
+}

@@ -1,3 +1,4 @@
+<?php require_once APP_COMPONENTS_DIR . '/m-table01/m-table01.php'; ?>
 <div class="m-toolbar01">
     <h1 class="title" style="margin:0;">送信詳細 #<?= (int) $sub['id'] ?></h1>
     <div class="spacer"></div>
@@ -14,12 +15,12 @@
     <div class="wrapper">
         <div class="block is-contents">
                             <div class="area is-field">
-                                <table data-module="m-table01" class="is-kv">
+                                <?php admin_m_table01_open('is-kv'); ?>
                                     <tr><th>フォーム</th><td><?= e($form['title']) ?>（<code><?= e($form['slug']) ?></code>）</td></tr>
                                     <tr><th>受信日時</th><td><?= e($sub['submitted_at']) ?></td></tr>
                                     <tr><th>IPアドレス</th><td><?= e($sub['ip']) ?></td></tr>
                                     <tr><th>User-Agent</th><td><?= e($sub['user_agent']) ?></td></tr>
-                                </table>
+                                <?php admin_m_table01_close(); ?>
                             </div>
         </div>
     </div>
@@ -32,7 +33,7 @@
                                 <h2 data-module="m-largeTitle01">入力内容</h2>
                             </div>
                             <div class="area is-field">
-                                <table data-module="m-table01" class="is-kv">
+                                <?php admin_m_table01_open('is-kv'); ?>
                                 <?php foreach ($fields as $f):
                                     $key = $f['field_key'];
                                 ?>
@@ -84,7 +85,7 @@
                                         <td><?= nl2br(e((string) $v)) ?></td>
                                     </tr>
                                 <?php endforeach; ?>
-                                </table>
+                                <?php admin_m_table01_close(); ?>
                             </div>
         </div>
     </div>

@@ -1,3 +1,4 @@
+<?php require_once APP_COMPONENTS_DIR . '/m-table01/m-table01.php'; ?>
 <div class="m-toolbar01">
     <h1 class="title" style="margin:0;">ユーザー管理</h1>
     <div class="spacer"></div>
@@ -13,17 +14,15 @@
                                 <?php if (empty($users)): ?>
                                     <p class="text is-muted">ユーザーがありません。</p>
                                 <?php else: ?>
-                                    <table data-module="m-table01">
-                                        <thead>
-                                            <tr>
-                                                <th>ユーザー名</th>
-                                                <th>表示名</th>
-                                                <th>メール</th>
-                                                <th>権限</th>
-                                                <th>最終ログイン</th>
-                                                <th>操作</th>
-                                            </tr>
-                                        </thead>
+                                    <?php admin_m_table01_open(); ?>
+                                    <?php admin_m_table01_thead([
+                                        ['label' => 'ユーザー名'],
+                                        ['label' => '表示名'],
+                                        ['label' => 'メール'],
+                                        ['label' => '権限'],
+                                        ['label' => '最終ログイン'],
+                                        ['label' => '操作'],
+                                    ]); ?>
                                         <tbody>
                                         <?php foreach ($users as $u): ?>
                                             <tr>
@@ -47,7 +46,7 @@
                                             </tr>
                                         <?php endforeach; ?>
                                         </tbody>
-                                    </table>
+                                    <?php admin_m_table01_close(); ?>
                                 <?php endif; ?>
                             </div>
         </div>
