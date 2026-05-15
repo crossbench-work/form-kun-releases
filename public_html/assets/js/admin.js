@@ -880,7 +880,7 @@
     function bindTextMultiEditor(li) {
         li.querySelectorAll('[data-text-multi-editor]').forEach(function (box) {
             var list = box.querySelector('.c-formEditor__textMultiList');
-            var add = box.querySelector('[data-target="m-formBuilder01__add"]');
+            var add = box.querySelector('[data-target="c-formEditor__textMultiAdd"]');
             if (!list || !add) return;
             list.querySelectorAll('[data-text-multi-item]').forEach(function (item) {
                 bindTextMultiItem(item, box);

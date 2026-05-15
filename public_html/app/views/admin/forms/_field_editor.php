@@ -319,7 +319,7 @@ if (empty($f['required']) || in_array($f['type'], ['radio', 'select'], true)) {
                                                     </div>
                                                     <div class="area is-actions">
                                                         <div data-module="m-btn01">
-                                                            <button type="button" data-target="m-formBuilder01__add" class="btn fb-description-add">＋ 項目を追加</button>
+                                                            <button type="button" data-target="c-formEditor__textMultiAdd" class="btn fb-description-add">＋ 文字を追加</button>
                                                         </div>
                                                     </div>
                                                     <textarea name="fields[<?= $idx ?>][multi_text_items]" data-target="c-formEditor__textMultiSource" hidden><?= e(json_encode($multiTextItems, JSON_UNESCAPED_UNICODE)) ?></textarea>
