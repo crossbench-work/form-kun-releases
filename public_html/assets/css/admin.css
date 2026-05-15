@@ -1558,6 +1558,12 @@ body.is-field-type-modal-open {
   display: flex;
   gap: 8px;
 }
+[data-module=m-formBuilder01] .c-formEditor__textMultiList > .wrapper {
+  background: #f3f3f4;
+  border-radius: 8px;
+  padding: 16px;
+  box-shadow: 0 0 20px inset rgba(0, 0, 0, 0.05);
+}
 [data-module=m-formBuilder01] .c-formEditor__textMultiList > .wrapper > .block.is-contents {
   display: flex;
   flex-direction: column;

@@ -1652,6 +1652,10 @@ body.is-field-type-modal-open {
 
   .c-formEditor__textMultiList {
     > .wrapper {
+      background: #f3f3f4;
+      border-radius: 8px;
+      padding: 16px;
+      box-shadow: 0 0 20px inset rgb(0 0 0 / 0.05);
       > .block.is-contents {
         display: flex;
         flex-direction: column;
