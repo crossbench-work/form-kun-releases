@@ -1602,6 +1602,10 @@ body.is-field-type-modal-open {
   gap: 12px;
   align-items: flex-start;
 }
+[data-module=m-formBuilder01] .c-formEditor__textMultiItem .c-formEditor__child__field > .wrapper > .block.is-contents {
+  flex: 1 1 0;
+  width: auto;
+}
 [data-module=m-formBuilder01] .c-formEditor__textMultiItem .c-formEditor__child__field .block.is-contents {
   display: flex;
   align-items: center;

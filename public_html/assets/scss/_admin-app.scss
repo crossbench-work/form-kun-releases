@@ -1708,6 +1708,11 @@ body.is-field-type-modal-open {
         display: flex;
         gap: 12px;
         align-items: flex-start;
+
+        > .block.is-contents {
+          flex: 1 1 0;
+          width: auto;
+        }
       }
 
       .block.is-contents {

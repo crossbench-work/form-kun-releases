@@ -216,15 +216,21 @@ if (empty($f['required']) || in_array($f['type'], ['radio', 'select'], true)) {
                                                                 <label class="label" data-module="m-labelTitle01">文字数制限（任意）</label>
                                                             </div>
                                                             <div class="area is-field">
-                                                                <div style="display: flex; gap: 12px;">
-                                                                    <div style="flex: 1;">
-                                                                        <div data-module="m-input01">
-                                                                            <input type="number" min="1" name="fields[<?= $idx ?>][min_length]" value="<?= e($f['min_length'] ?? '') ?>" placeholder="最小">
+                                                                <div class="c-formEditor__child__field">
+                                                                    <div class="wrapper">
+                                                                        <div class="block is-contents">
+                                                                            <div class="area is-field">
+                                                                                <div data-module="m-input01">
+                                                                                    <input type="number" min="1" name="fields[<?= $idx ?>][min_length]" value="<?= e($f['min_length'] ?? '') ?>" placeholder="最小">
+                                                                                </div>
+                                                                            </div>
                                                                         </div>
-                                                                    </div>
-                                                                    <div style="flex: 1;">
-                                                                        <div data-module="m-input01">
-                                                                            <input type="number" min="1" name="fields[<?= $idx ?>][max_length]" value="<?= e($f['max_length']) ?>" placeholder="最大">
+                                                                        <div class="block is-contents">
+                                                                            <div class="area is-field">
+                                                                                <div data-module="m-input01">
+                                                                                    <input type="number" min="1" name="fields[<?= $idx ?>][max_length]" value="<?= e($f['max_length']) ?>" placeholder="最大">
+                                                                                </div>
+                                                                            </div>
                                                                         </div>
                                                                     </div>
                                                                 </div>
