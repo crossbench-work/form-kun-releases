@@ -263,6 +263,13 @@ if (empty($f['required']) || in_array($f['type'], ['radio', 'select'], true)) {
                                                                                         <div class="c-formEditor__choiceItem" data-choice-item>
                                                                                             <div class="wrapper">
                                                                                                 <div class="block is-contents">
+                                                                                                    <div class="area is-move">
+                                                                                                        <div class="box is-handle ui-sortable-handle" title="ドラッグして並べ替え">
+                                                                                                            <p data-module="m-dragHandle01" data-target="c-formEditor__choiceDragHandle">
+                                                                                                                <svg width="14" height="18" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="currentColor"><circle cx="9" cy="6" r="2"/><circle cx="15" cy="6" r="2"/><circle cx="9" cy="12" r="2"/><circle cx="15" cy="12" r="2"/><circle cx="9" cy="18" r="2"/><circle cx="15" cy="18" r="2"/></svg>
+                                                                                                            </p>
+                                                                                                        </div>
+                                                                                                    </div>
                                                                                                     <div class="c-formEditor__child__field">
                                                                                                         <div class="wrapper">
                                                                                                             <div class="block is-contents">
@@ -274,11 +281,14 @@ if (empty($f['required']) || in_array($f['type'], ['radio', 'select'], true)) {
                                                                                                             </div>
                                                                                                         </div>
                                                                                                     </div>
-                                                                                                    <div class="c-formEditor__actions">
-                                                                                                        <button type="button" class="btn is-sm" data-target="c-formEditor__choiceUp">↑</button>
-                                                                                                        <button type="button" class="btn is-sm" data-target="c-formEditor__choiceDown">↓</button>
-                                                                                                        <button type="button" class="btn is-sm is-danger" data-target="c-formEditor__choiceRemove">削除</button>
-                                                                                                    </div>
+                                                                                                    <button type="button" data-module="m-deleteBtn01" data-target="c-formEditor__choiceRemove" aria-label="削除" title="削除">
+                                                                                                        <svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2">
+                                                                                                            <path stroke-linecap="round" stroke-linejoin="round" d="M3 6h18"/>
+                                                                                                            <path stroke-linecap="round" stroke-linejoin="round" d="M8 6V4h8v2"/>
+                                                                                                            <path stroke-linecap="round" stroke-linejoin="round" d="M19 6l-1 14H6L5 6"/>
+                                                                                                            <path stroke-linecap="round" stroke-linejoin="round" d="M10 11v6M14 11v6"/>
+                                                                                                        </svg>
+                                                                                                    </button>
                                                                                                 </div>
                                                                                             </div>
                                                                                         </div>

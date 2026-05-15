@@ -718,20 +718,41 @@
         source.value = values.join('\n');
     }
 
-    function moveChoiceItem(item, direction) {
-        var area = item.parentNode;
-        if (!area) return;
-        var sibling = direction === 'up' ? area.previousElementSibling : area.nextElementSibling;
-        if (sibling && sibling.getAttribute('data-target') === 'c-formEditor__choiceControls') {
-            sibling = null;
+    function refreshChoiceSortable(box) {
+        var list = box.querySelector('[data-target="c-formEditor__choiceListContents"]');
+        if (!list || list.dataset.fbSortable !== '1' || typeof jQuery === 'undefined') return;
+        try {
+            jQuery(list).sortable('refresh');
+        } catch (e1) {}
+    }
+
+    function initChoiceSortable(box) {
+        var list = box.querySelector('[data-target="c-formEditor__choiceListContents"]');
+        if (!list || typeof jQuery === 'undefined' || !jQuery.fn.sortable) return;
+        if (list.dataset.fbSortable === '1') {
+            refreshChoiceSortable(box);
+            return;
         }
-        if (!sibling) return;
-        var list = area.parentNode;
-        if (direction === 'up') {
-            list.insertBefore(area, sibling);
-        } else {
-            list.insertBefore(sibling, area);
-        }
+        jQuery(list).sortable({
+            handle: '[data-target="c-formEditor__choiceDragHandle"]',
+            axis: 'y',
+            items: '> .area.is-contents:not([data-target="c-formEditor__choiceControls"])',
+            placeholder: 'fb-sortable-placeholder',
+            tolerance: 'pointer',
+            cursor: 'grabbing',
+            opacity: 0.88,
+            scroll: true,
+            scrollSensitivity: 48,
+            scrollSpeed: 28,
+            forcePlaceholderSize: true,
+            delay: 0,
+            distance: 4,
+            zIndex: 9999,
+            update: function () {
+                syncChoiceEditor(box);
+            }
+        });
+        list.dataset.fbSortable = '1';
     }
 
     function createChoiceItem(value) {
@@ -743,6 +764,13 @@
         row.innerHTML =
             '<div class="wrapper">' +
                 '<div class="block is-contents">' +
+                    '<div class="area is-move">' +
+                        '<div class="box is-handle ui-sortable-handle" title="ドラッグして並べ替え">' +
+                            '<p data-module="m-dragHandle01" data-target="c-formEditor__choiceDragHandle">' +
+                                '<svg width="14" height="18" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="currentColor"><circle cx="9" cy="6" r="2"></circle><circle cx="15" cy="6" r="2"></circle><circle cx="9" cy="12" r="2"></circle><circle cx="15" cy="12" r="2"></circle><circle cx="9" cy="18" r="2"></circle><circle cx="15" cy="18" r="2"></circle></svg>' +
+                            '</p>' +
+                        '</div>' +
+                    '</div>' +
                     '<div class="c-formEditor__child__field">' +
                         '<div class="wrapper">' +
                             '<div class="block is-contents">' +
@@ -750,11 +778,9 @@
                             '</div>' +
                         '</div>' +
                     '</div>' +
-                    '<div class="c-formEditor__actions">' +
-                        '<button type="button" class="btn is-sm" data-target="c-formEditor__choiceUp">↑</button>' +
-                        '<button type="button" class="btn is-sm" data-target="c-formEditor__choiceDown">↓</button>' +
-                        '<button type="button" class="btn is-sm is-danger" data-target="c-formEditor__choiceRemove">削除</button>' +
-                    '</div>' +
+                    '<button type="button" data-module="m-deleteBtn01" data-target="c-formEditor__choiceRemove" aria-label="削除" title="削除">' +
+                        '<svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 6h18"></path><path stroke-linecap="round" stroke-linejoin="round" d="M8 6V4h8v2"></path><path stroke-linecap="round" stroke-linejoin="round" d="M19 6l-1 14H6L5 6"></path><path stroke-linecap="round" stroke-linejoin="round" d="M10 11v6M14 11v6"></path></svg>' +
+                    '</button>' +
                 '</div>' +
             '</div>';
         area.appendChild(row);
@@ -767,8 +793,6 @@
 
     function bindChoiceItem(item, box) {
         var input = item.querySelector('[data-target="c-formEditor__choiceInput"]');
-        var up = item.querySelector('[data-target="c-formEditor__choiceUp"]');
-        var down = item.querySelector('[data-target="c-formEditor__choiceDown"]');
         var remove = item.querySelector('[data-target="c-formEditor__choiceRemove"]');
         if (input) {
             input.addEventListener('input', function () {
@@ -778,24 +802,13 @@
                 syncChoiceEditor(box);
             });
         }
-        if (up) {
-            up.addEventListener('click', function () {
-                moveChoiceItem(item, 'up');
-                syncChoiceEditor(box);
-            });
-        }
-        if (down) {
-            down.addEventListener('click', function () {
-                moveChoiceItem(item, 'down');
-                syncChoiceEditor(box);
-            });
-        }
         if (remove) {
             remove.addEventListener('click', function () {
                 var area = item.parentNode;
                 if (!area || !area.parentNode) return;
                 area.parentNode.removeChild(area);
                 syncChoiceEditor(box);
+                refreshChoiceSortable(box);
             });
         }
     }
@@ -808,6 +821,7 @@
             list.querySelectorAll('[data-choice-item]').forEach(function (item) {
                 bindChoiceItem(item, box);
             });
+            initChoiceSortable(box);
             add.addEventListener('click', function () {
                 var item = createChoiceItem('');
                 var controls = box.querySelector('[data-target="c-formEditor__choiceControls"]');
@@ -818,6 +832,7 @@
                 }
                 bindChoiceItem(item.querySelector('[data-choice-item]'), box);
                 syncChoiceEditor(box);
+                refreshChoiceSortable(box);
                 var input = item.querySelector('[data-target="c-formEditor__choiceInput"]');
                 if (input) input.focus();
             });

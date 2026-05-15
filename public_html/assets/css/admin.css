@@ -1614,6 +1614,18 @@ body.is-field-type-modal-open {
 [data-module=m-formBuilder01] .c-formEditor__choiceList > .wrapper > .block.is-contents > .area.is-contents {
   width: 100%;
 }
+[data-module=m-formBuilder01] .c-formEditor__choiceList > .wrapper > .block.is-contents > .fb-sortable-placeholder {
+  visibility: visible !important;
+  border: 2px dashed #93c5fd !important;
+  background: #eff6ff !important;
+  min-height: 44px !important;
+  border-radius: 8px;
+  box-sizing: border-box;
+}
+[data-module=m-formBuilder01] .c-formEditor__choiceList > .wrapper > .block.is-contents > .ui-sortable-helper {
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
+  border-radius: 8px;
+}
 [data-module=m-formBuilder01] .c-formEditor__choiceItem > .wrapper {
   display: flex;
   flex-direction: column;
@@ -1628,8 +1640,17 @@ body.is-field-type-modal-open {
   padding: 8px 16px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.03);
 }
-[data-module=m-formBuilder01] .c-formEditor__choiceItem .c-formEditor__actions {
-  margin-top: 0;
+[data-module=m-formBuilder01] .c-formEditor__choiceItem > .wrapper > .block.is-contents > .area.is-move {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+[data-module=m-formBuilder01] .c-formEditor__choiceItem .c-formEditor__child__field {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+[data-module=m-formBuilder01] .c-formEditor__choiceItem [data-module=m-deleteBtn01] {
+  flex-shrink: 0;
 }
 [data-module=m-formBuilder01] .c-formEditor__textMultiItem > .wrapper {
   display: flex;

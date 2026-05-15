@@ -1732,6 +1732,20 @@ body.is-field-type-modal-open {
         }
       }
     }
+
+    > .wrapper > .block.is-contents > .fb-sortable-placeholder {
+      visibility: visible !important;
+      border: 2px dashed #93c5fd !important;
+      background: #eff6ff !important;
+      min-height: 44px !important;
+      border-radius: 8px;
+      box-sizing: border-box;
+    }
+
+    > .wrapper > .block.is-contents > .ui-sortable-helper {
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
+      border-radius: 8px;
+    }
   }
 
   .c-formEditor__choiceItem {
@@ -1751,8 +1765,19 @@ body.is-field-type-modal-open {
       }
     }
 
-    .c-formEditor__actions {
-      margin-top: 0;
+    > .wrapper > .block.is-contents > .area.is-move {
+      display: flex;
+      align-items: center;
+      flex-shrink: 0;
+    }
+
+    .c-formEditor__child__field {
+      flex: 1 1 auto;
+      min-width: 0;
+    }
+
+    [data-module="m-deleteBtn01"] {
+      flex-shrink: 0;
     }
   }
 
