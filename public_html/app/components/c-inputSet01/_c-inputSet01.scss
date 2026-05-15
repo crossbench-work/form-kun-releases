@@ -1,0 +1,22 @@
+// c-inputSet01 … ラベル行＋入力のセット（data-module="c-inputSet01"）
+// マークアップは app/components/c-inputSet01/c-inputSet01.php を参照
+
+[data-module="c-inputSet01"] {
+  > .wrapper {
+    > .block.is-contents {
+      > .area.is-title,
+      > .block.is-title {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        flex-wrap: wrap;
+        margin-bottom: 6px;
+
+        > .label.label.is-choice {
+          font-size: 10px;
+        }
+      }
+    }
+  }
+}

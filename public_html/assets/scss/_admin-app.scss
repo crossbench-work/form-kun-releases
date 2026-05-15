@@ -2,6 +2,7 @@
 @use "../../app/components/m-table01/m-table01" as *;
 @use "../../app/components/c-formBlock01/c-formBlock01" as *;
 @use "../../app/components/m-largeTitle01/m-largeTitle01" as *;
+@use "../../app/components/c-inputSet01/c-inputSet01" as *;
 
 body.l-adminShell01 {
   color: #1f2937;
@@ -1293,26 +1294,6 @@ body.is-field-type-modal-open {
       box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.16);
       outline: none;
       background: #eff6ff;
-    }
-  }
-}
-
-[data-module="c-inputSet01"] {
-  > .wrapper {
-    > .block.is-contents {
-      > .area.is-title,
-      > .block.is-title {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 12px;
-        flex-wrap: wrap;
-        margin-bottom: 6px;
-
-        >.label.label.is-choice {
-          font-size: 10px;
-        }
-      }
     }
   }
 }

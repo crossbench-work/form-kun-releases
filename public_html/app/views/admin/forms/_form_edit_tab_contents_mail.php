@@ -5,9 +5,7 @@
                 <?php admin_m_large_title01('通知設定'); ?>
             </div>
             <div class="block is-field">
-                <div data-module="c-inputSet01">
-                    <div class="wrapper">
-                        <div class="block is-contents">
+                <?php admin_c_input_set01_open(); ?>
                             <div class="block is-title">
                                 <label class="label" data-module="m-boldTitle01">送信方式</label>
                             </div>
@@ -24,9 +22,7 @@
                 </div>
             </div>
             <div class="block is-field">
-                <div data-module="c-inputSet01">
-                    <div class="wrapper">
-                        <div class="block is-contents">
+                <?php admin_c_input_set01_open(); ?>
                             <div class="block is-title">
                                 <label class="label" data-module="m-boldTitle01">差出人メールアドレス</label>
                             </div>
@@ -40,9 +36,7 @@
                 </div>
             </div>
             <div class="block is-field">
-                <div data-module="c-inputSet01">
-                    <div class="wrapper">
-                        <div class="block is-contents">
+                <?php admin_c_input_set01_open(); ?>
                             <div class="block is-title">
                                 <label class="label" data-module="m-boldTitle01">差出人名</label>
                             </div>
@@ -56,9 +50,7 @@
                 </div>
             </div>
             <div class="block is-field">
-                <div data-module="c-inputSet01">
-                    <div class="wrapper">
-                        <div class="block is-contents">
+                <?php admin_c_input_set01_open(); ?>
                             <div class="block is-title">
                                 <label class="label" data-module="m-boldTitle01">SMTPホスト</label>
                             </div>
@@ -72,9 +64,7 @@
                 </div>
             </div>
             <div class="block is-field">
-                <div data-module="c-inputSet01">
-                    <div class="wrapper">
-                        <div class="block is-contents">
+                <?php admin_c_input_set01_open(); ?>
                             <div class="block is-title">
                                 <label class="label" data-module="m-boldTitle01">SMTPポート</label>
                             </div>
@@ -88,9 +78,7 @@
                 </div>
             </div>
             <div class="block is-field">
-                <div data-module="c-inputSet01">
-                    <div class="wrapper">
-                        <div class="block is-contents">
+                <?php admin_c_input_set01_open(); ?>
                             <div class="block is-title">
                                 <label class="label" data-module="m-boldTitle01">暗号化方式</label>
                             </div>
@@ -108,9 +96,7 @@
                 </div>
             </div>
             <div class="block is-field">
-                <div data-module="c-inputSet01">
-                    <div class="wrapper">
-                        <div class="block is-contents">
+                <?php admin_c_input_set01_open(); ?>
                             <div class="block is-title">
                                 <label class="label" data-module="m-boldTitle01">SMTPユーザー名</label>
                             </div>
@@ -124,9 +110,7 @@
                 </div>
             </div>
             <div class="block is-field">
-                <div data-module="c-inputSet01">
-                    <div class="wrapper">
-                        <div class="block is-contents">
+                <?php admin_c_input_set01_open(); ?>
                             <div class="block is-title">
                                 <label class="label" data-module="m-boldTitle01">SMTPパスワード</label>
                             </div>
@@ -147,9 +131,7 @@
                 </div>
             </div>
             <div class="block is-field">
-                <div data-module="c-inputSet01">
-                    <div class="wrapper">
-                        <div class="block is-contents">
+                <?php admin_c_input_set01_open(); ?>
                             <div class="block is-title">
                                 <label class="label" data-module="m-boldTitle01">EHLO ホスト名</label>
                             </div>
@@ -163,9 +145,7 @@
                 </div>
             </div>
             <div class="block is-field">
-                <div data-module="c-inputSet01">
-                    <div class="wrapper">
-                        <div class="block is-contents">
+                <?php admin_c_input_set01_open(); ?>
                             <div class="block is-title">
                                 <label class="label" data-module="m-boldTitle01">タイムアウト（秒）</label>
                             </div>
@@ -206,9 +186,7 @@
                 <?php admin_m_large_title01('管理者通知メール'); ?>
             </div>
             <div class="block is-field">
-                <div data-module="c-inputSet01">
-                    <div class="wrapper">
-                        <div class="block is-contents">
+                <?php admin_c_input_set01_open(); ?>
                             <div class="block is-title">
                                 <label class="label" data-module="m-boldTitle01">送信先メールアドレス（カンマ区切りで複数可）</label>
                             </div>
@@ -222,9 +200,7 @@
                 </div>
             </div>
             <div class="block is-field">
-                <div data-module="c-inputSet01">
-                    <div class="wrapper">
-                        <div class="block is-contents">
+                <?php admin_c_input_set01_open(); ?>
                             <div class="block is-title">
                                 <label class="label" data-module="m-boldTitle01">件名</label>
                             </div>
@@ -238,9 +214,7 @@
                 </div>
             </div>
             <div class="block is-field">
-                <div data-module="c-inputSet01">
-                    <div class="wrapper">
-                        <div class="block is-contents">
+                <?php admin_c_input_set01_open(); ?>
                             <div class="block is-title">
                                 <label class="label" data-module="m-boldTitle01">表示設定</label>
                             </div>
@@ -254,9 +228,7 @@
                 </div>
             </div>
             <div class="block is-field">
-                <div data-module="c-inputSet01">
-                    <div class="wrapper">
-                        <div class="block is-contents">
+                <?php admin_c_input_set01_open(); ?>
                             <div class="block is-title">
                                 <label class="label" data-module="m-boldTitle01">使用可能な変数</label>
                             </div>
@@ -290,9 +262,7 @@
                 </label>
             </div>
             <div class="block is-field">
-                <div data-module="c-inputSet01">
-                    <div class="wrapper">
-                        <div class="block is-contents">
+                <?php admin_c_input_set01_open(); ?>
                             <div class="block is-title">
                                 <label class="label" data-module="m-boldTitle01">送信先のフィールドキー（メール型項目）</label>
                             </div>
@@ -306,9 +276,7 @@
                 </div>
             </div>
             <div class="block is-field">
-                <div data-module="c-inputSet01">
-                    <div class="wrapper">
-                        <div class="block is-contents">
+                <?php admin_c_input_set01_open(); ?>
                             <div class="block is-title">
                                 <label class="label" data-module="m-boldTitle01">件名</label>
                             </div>
@@ -322,9 +290,7 @@
                 </div>
             </div>
             <div class="block is-field">
-                <div data-module="c-inputSet01">
-                    <div class="wrapper">
-                        <div class="block is-contents">
+                <?php admin_c_input_set01_open(); ?>
                             <div class="block is-title">
                                 <label class="label" data-module="m-boldTitle01">表示設定</label>
                             </div>
@@ -338,9 +304,7 @@
                 </div>
             </div>
             <div class="block is-field">
-                <div data-module="c-inputSet01">
-                    <div class="wrapper">
-                        <div class="block is-contents">
+                <?php admin_c_input_set01_open(); ?>
                             <div class="block is-title">
                                 <label class="label" data-module="m-boldTitle01">使用可能な変数</label>
                             </div>

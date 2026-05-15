@@ -5,9 +5,7 @@
                 <?php admin_m_large_title01('基本設定'); ?>
             </div>
             <div class="block is-field">
-                <div data-module="c-inputSet01">
-                    <div class="wrapper">
-                        <div class="block is-contents">
+                <?php admin_c_input_set01_open(); ?>
                             <div class="block is-title">
                                 <label class="label" data-module="m-boldTitle01" for="title">タイトル <span data-module="m-required01" data-type="required">必須</span></label>
                             </div>
@@ -21,9 +19,7 @@
                 </div>
             </div>
             <div class="block is-field">
-                <div data-module="c-inputSet01">
-                    <div class="wrapper">
-                        <div class="block is-contents">
+                <?php admin_c_input_set01_open(); ?>
                             <div class="block is-title">
                                 <label class="label" data-module="m-boldTitle01" for="slug">スラッグ（URL用） <span data-module="m-required01" data-type="required">必須</span></label>
                             </div>
@@ -40,9 +36,7 @@
                 </div>
             </div>
             <div class="block is-field">
-                <div data-module="c-inputSet01">
-                    <div class="wrapper">
-                        <div class="block is-contents">
+                <?php admin_c_input_set01_open(); ?>
                             <div class="block is-title">
                                 <label class="label" data-module="m-boldTitle01" for="status">公開状態</label>
                             </div>
@@ -67,9 +61,7 @@
                 <?php admin_m_large_title01('共通設定'); ?>
             </div>
             <div class="block is-field">
-                <div data-module="c-inputSet01">
-                    <div class="wrapper">
-                        <div class="block is-contents">
+                <?php admin_c_input_set01_open(); ?>
                             <div class="block is-title">
                                 <label class="label" data-module="m-boldTitle01" for="meta_html">head</label>
                             </div>
@@ -86,9 +78,7 @@
                 </div>
             </div>
             <div class="block is-field">
-                <div data-module="c-inputSet01">
-                    <div class="wrapper">
-                        <div class="block is-contents">
+                <?php admin_c_input_set01_open(); ?>
                             <div class="block is-title">
                                 <label class="label" data-module="m-boldTitle01" for="custom_css">css</label>
                             </div>
@@ -105,9 +95,7 @@
                 </div>
             </div>
             <div class="block is-field">
-                <div data-module="c-inputSet01">
-                    <div class="wrapper">
-                        <div class="block is-contents">
+                <?php admin_c_input_set01_open(); ?>
                             <div class="block is-title">
                                 <label class="label" data-module="m-boldTitle01" for="custom_js">js</label>
                             </div>

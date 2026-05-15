@@ -15,9 +15,7 @@
                 </div>
             </div>
             <div class="block is-field">
-                <div data-module="c-inputSet01">
-                    <div class="wrapper">
-                        <div class="block is-contents">
+                <?php admin_c_input_set01_open(); ?>
                             <div class="block is-title">
                                 <label class="label" data-module="m-boldTitle01" for="input_page_title">タイトル</label>
                                 <label class="label is-choice">
@@ -68,9 +66,7 @@
                 <?php admin_m_large_title01('ボタン設定'); ?>
             </div>
             <div class="block is-field">
-                <div data-module="c-inputSet01">
-                    <div class="wrapper">
-                        <div class="block is-contents">
+                <?php admin_c_input_set01_open(); ?>
                             <div class="block is-title">
                                 <label class="label" data-module="m-boldTitle01" for="confirm_button_text">ボタンテキスト</label>
                             </div>

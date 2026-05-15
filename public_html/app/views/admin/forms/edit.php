@@ -1,5 +1,6 @@
 <?php
 require_once APP_COMPONENTS_DIR . '/c-formBlock01/c-formBlock01.php';
+require_once APP_COMPONENTS_DIR . '/c-inputSet01/c-inputSet01.php';
 require_once APP_COMPONENTS_DIR . '/m-largeTitle01/m-largeTitle01.php';
 $FB_REGEX_CUSTOM = '__custom__';
 $FB_REGEX_CHECKBOX_LIMIT = '__checkbox_limit__';
@@ -22,9 +23,7 @@ $thanksBlocks = $form['thanks_blocks'] ?? [['id' => 'thanks-0', 'label' => '', '
 $renderDescriptionEditor = static function (string $namePrefix, array $blocks, string $positionMode): void {
     ?>
     <div class="block is-field">
-        <div data-module="c-inputSet01">
-            <div class="wrapper">
-                <div class="block is-contents">
+        <?php admin_c_input_set01_open(); ?>
                     <div class="block is-title">
                         <label class="label" data-module="m-boldTitle01">説明文</label>
                     </div>
@@ -96,9 +95,7 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                                                                 <div class="wrapper">
                                                                     <div class="block is-contents">
                                                                         <div class="block is-field">
-                                                                            <div data-module="c-inputSet01">
-                                                                                <div class="wrapper">
-                                                                                    <div class="block is-contents">
+                                                                            <?php admin_c_input_set01_open(); ?>
                                                                                         <div class="block is-title">
                                                                                             <label class="label" data-module="m-boldTitle01" for="<?= e($labelInputId) ?>">ラベル</label>
                                                                                         </div>
@@ -112,9 +109,7 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                                                                             </div>
                                                                         </div>
                                                                         <div class="block is-field">
-                                                                            <div data-module="c-inputSet01">
-                                                                                <div class="wrapper">
-                                                                                    <div class="block is-contents">
+                                                                            <?php admin_c_input_set01_open(); ?>
                                                                                         <div class="block is-title">
                                                                                             <label class="label" data-module="m-boldTitle01" for="<?= e($positionInputId) ?>">表示位置</label>
                                                                                         </div>
@@ -128,9 +123,7 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                                                                             </div>
                                                                         </div>
                                                                         <div class="block is-field">
-                                                                            <div data-module="c-inputSet01">
-                                                                                <div class="wrapper">
-                                                                                    <div class="block is-contents">
+                                                                            <?php admin_c_input_set01_open(); ?>
                                                                                         <div class="block is-title">
                                                                                             <label class="label" data-module="m-boldTitle01" for="<?= e($htmlInputId) ?>">説明文</label>
                                                                                         </div>
@@ -327,9 +320,7 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                     <div class="wrapper">
                         <div class="block is-contents">
                             <div class="block is-field">
-                                <div data-module="c-inputSet01">
-                                    <div class="wrapper">
-                                        <div class="block is-contents">
+                                <?php admin_c_input_set01_open(); ?>
                                             <div class="block is-title">
                                                 <label class="label" data-module="m-boldTitle01">ラベル</label>
                                             </div>
@@ -343,9 +334,7 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                                 </div>
                             </div>
                             <div class="block is-field">
-                                <div data-module="c-inputSet01">
-                                    <div class="wrapper">
-                                        <div class="block is-contents">
+                                <?php admin_c_input_set01_open(); ?>
                                             <div class="block is-title">
                                                 <label class="label" data-module="m-boldTitle01">表示位置</label>
                                             </div>
@@ -359,9 +348,7 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                                 </div>
                             </div>
                             <div class="block is-field">
-                                <div data-module="c-inputSet01">
-                                    <div class="wrapper">
-                                        <div class="block is-contents">
+                                <?php admin_c_input_set01_open(); ?>
                                             <div class="block is-title">
                                                 <label class="label" data-module="m-boldTitle01">説明文</label>
                                             </div>
