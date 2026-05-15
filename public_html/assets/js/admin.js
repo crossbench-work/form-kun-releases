@@ -818,6 +818,8 @@
     }
 
     function createTextMultiItem(data) {
+        var area = document.createElement('div');
+        area.className = 'area is-contents';
         var item = document.createElement('div');
         item.className = 'c-formEditor__textMultiItem';
         item.setAttribute('data-text-multi-item', '');
@@ -841,6 +843,7 @@
                     '</button>' +
                 '</div>' +
             '</div>';
+        area.appendChild(item);
         var labelInput = item.querySelector('[data-target="c-formEditor__textMultiLabelInput"]');
         var placeholderInput = item.querySelector('[data-target="c-formEditor__textMultiPlaceholderInput"]');
         if (labelInput) {
@@ -849,22 +852,7 @@
         if (placeholderInput) {
             placeholderInput.value = data && typeof data.placeholder === 'string' ? data.placeholder : '';
         }
-        return item;
-    }
-
-    function moveTextMultiControls(box) {
-        var list = box.querySelector('[data-target="c-formEditor__textMultiListContents"]');
-        var controls = box.querySelector('[data-target="c-formEditor__textMultiControls"]');
-        if (!list || !controls) return;
-        var items = list.querySelectorAll('[data-text-multi-item]');
-        if (!items.length) {
-            list.appendChild(controls);
-            return;
-        }
-        var lastItem = items[items.length - 1];
-        var wrapper = lastItem.querySelector('.wrapper');
-        if (!wrapper) return;
-        wrapper.appendChild(controls);
+        return area;
     }
 
     function bindTextMultiItem(item, box) {
@@ -886,18 +874,15 @@
         }
         if (remove) {
             remove.addEventListener('click', function () {
-                var list = item.parentNode;
+                var area = item.parentNode;
+                if (!area) return;
+                var list = area.parentNode;
                 if (!list) return;
                 if (list.querySelectorAll('[data-text-multi-item]').length <= 1) {
                     alert('入力欄は1つ以上必要です。');
                     return;
                 }
-                var controls = item.querySelector('[data-target="c-formEditor__textMultiControls"]');
-                if (controls) {
-                    list.appendChild(controls);
-                }
-                list.removeChild(item);
-                moveTextMultiControls(box);
+                list.removeChild(area);
                 syncTextMultiEditor(box);
             });
         }
@@ -913,14 +898,17 @@
             });
             add.addEventListener('click', function () {
                 var item = createTextMultiItem();
-                list.appendChild(item);
-                bindTextMultiItem(item, box);
-                moveTextMultiControls(box);
+                var controls = box.querySelector('[data-target="c-formEditor__textMultiControls"]');
+                if (controls) {
+                    list.insertBefore(item, controls);
+                } else {
+                    list.appendChild(item);
+                }
+                bindTextMultiItem(item.querySelector('[data-text-multi-item]'), box);
                 syncTextMultiEditor(box);
                 var labelInput = item.querySelector('[data-target="c-formEditor__textMultiLabelInput"]');
                 if (labelInput) labelInput.focus();
             });
-            moveTextMultiControls(box);
             syncTextMultiEditor(box);
         });
     }

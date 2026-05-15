@@ -433,19 +433,9 @@ body.l-adminShell01 {
   label,
   .label,
   .label.is-choice {
-    display: inline-flex !important;
-    flex-direction: column !important;
-    align-items: center !important;
-    gap: 0px !important;
-    padding: 4px 10px;
     font-size: 11px;
-    background: #efefef;
-    border: 1px solid #ccc;
-    border-radius: 4px;
     cursor: pointer;
     margin: 0 !important;
-    margin-bottom: 0 !important;
-    font-weight: 400 !important;
     color: #374151 !important;
 
     input {
@@ -457,9 +447,6 @@ body.l-adminShell01 {
       line-height: 1;
     }
 
-    &:has(input:checked) {
-      background: #fee2e2;
-    }
   }
 }
 
@@ -1636,16 +1623,13 @@ body.is-field-type-modal-open {
 
       > .block.is-contents {
         flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        
         min-width: 180px;
-        gap: 12px;
       }
     }
-
-    > .wrapper > .block.is-contents > .area.is-title {
-      flex: 0 0 96px;
-      min-width: 96px;
-    }
-
     > .wrapper > .block.is-contents > .area.is-field {
       flex: 1 1 auto;
       min-width: 0;
@@ -1696,6 +1680,10 @@ body.is-field-type-modal-open {
         display: flex;
         flex-direction: column;
         gap: 12px;
+
+        > .area.is-contents {
+          width: 100%;
+        }
       }
     }
   }
