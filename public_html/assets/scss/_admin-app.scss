@@ -236,7 +236,7 @@ body.l-adminShell01 {
     > input,
     > select,
     > textarea {
-      background: #faffff;
+      background: #fafafa;
     }
   }
 
@@ -1322,6 +1322,7 @@ form.is-inline {
 
   .c-formEditor__item > .wrapper > .block.is-body {
     padding: 16px;
+    box-shadow: 0 0 10px inset rgba(0, 0, 0, 0.03);
   }
 
   .c-formEditor__itemBody > .wrapper > .block.is-contents + .block.is-contents {

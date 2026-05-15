@@ -351,7 +351,7 @@ body.l-adminShell01 a:hover {
 [data-module=m-input01].is-empty > input,
 [data-module=m-input01].is-empty > select,
 [data-module=m-input01].is-empty > textarea {
-  background: #faffff;
+  background: #fafafa;
 }
 [data-module=m-input01].is-filled > input,
 [data-module=m-input01].is-filled > select,
@@ -1284,6 +1284,7 @@ form.is-inline {
 }
 [data-module=c-formEditorList01] .c-formEditor__item > .wrapper > .block.is-body {
   padding: 16px;
+  box-shadow: 0 0 10px inset rgba(0, 0, 0, 0.03);
 }
 [data-module=c-formEditorList01] .c-formEditor__itemBody > .wrapper > .block.is-contents + .block.is-contents {
   margin-top: 20px;
