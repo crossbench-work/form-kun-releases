@@ -1032,8 +1032,6 @@ form.is-inline {
   gap: 12px;
   flex-wrap: wrap;
 }
-[data-module=c-formBlock01] > .wrapper > .block.is-contents .area.is-field label,
-[data-module=c-formBlock01] > .wrapper > .block.is-contents .block.is-field label,
 [data-module=c-formBlock01] > .wrapper > .block.is-contents .label {
   display: block;
   font-weight: 600;
@@ -1430,6 +1428,27 @@ body.is-field-type-modal-open {
 [data-module=m-formBuilder01] .c-formEditor.is-static {
   margin-top: 12px;
 }
+[data-module=m-formBuilder01] .c-formEditor__child__field {
+  flex: 1 1 auto;
+}
+[data-module=m-formBuilder01] .c-formEditor__child__field > .wrapper {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+[data-module=m-formBuilder01] .c-formEditor__child__field > .wrapper > .block.is-contents {
+  flex: 1 1 0;
+  width: auto;
+}
+[data-module=m-formBuilder01] .c-formEditor__child__field .block.is-contents {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  width: 100%;
+}
+[data-module=m-formBuilder01] .c-formEditor__child__field .area.is-field {
+  flex: 1 1 auto;
+}
 [data-module=m-formBuilder01] .c-formEditorSummary01 {
   min-width: 0;
 }
@@ -1539,7 +1558,6 @@ body.is-field-type-modal-open {
   min-width: 180px;
 }
 [data-module=m-formBuilder01] .c-formEditor__field > .wrapper > .block.is-contents > .area.is-field {
-  flex: 1 1 auto;
   min-width: 0;
 }
 [data-module=m-formBuilder01] .c-formEditor__checkboxLimit {
@@ -1573,7 +1591,7 @@ body.is-field-type-modal-open {
 [data-module=m-formBuilder01] .c-formEditor__textMultiList > .wrapper > .block.is-contents {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 8px;
 }
 [data-module=m-formBuilder01] .c-formEditor__textMultiList > .wrapper > .block.is-contents > .area.is-contents {
   width: 100%;
@@ -1593,27 +1611,6 @@ body.is-field-type-modal-open {
   display: flex;
   align-items: center;
   gap: 8px;
-}
-[data-module=m-formBuilder01] .c-formEditor__textMultiItem .c-formEditor__child__field {
-  flex: 1 1 auto;
-}
-[data-module=m-formBuilder01] .c-formEditor__textMultiItem .c-formEditor__child__field > .wrapper {
-  display: flex;
-  gap: 12px;
-  align-items: flex-start;
-}
-[data-module=m-formBuilder01] .c-formEditor__textMultiItem .c-formEditor__child__field > .wrapper > .block.is-contents {
-  flex: 1 1 0;
-  width: auto;
-}
-[data-module=m-formBuilder01] .c-formEditor__textMultiItem .c-formEditor__child__field .block.is-contents {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  width: 100%;
-}
-[data-module=m-formBuilder01] .c-formEditor__textMultiItem .c-formEditor__child__field .area.is-field {
-  flex: 1 1 auto;
 }
 [data-module=m-formBuilder01] .c-formEditor__fieldKey {
   display: flex;
@@ -1661,14 +1658,10 @@ body.is-field-type-modal-open {
   flex: 2 1 320px;
   min-width: 280px;
 }
-[data-module=m-formBuilder01] .c-formEditor__regexList {
-  margin-bottom: 8px;
-}
 [data-module=m-formBuilder01] .c-formEditor__regexRow {
   display: flex;
   align-items: flex-start;
   gap: 8px;
-  margin-bottom: 8px;
   flex-wrap: wrap;
 }
 [data-module=m-formBuilder01] [data-target=c-formEditor__regexKind] {

@@ -219,6 +219,9 @@ if (empty($f['required']) || in_array($f['type'], ['radio', 'select'], true)) {
                                                                 <div class="c-formEditor__child__field">
                                                                     <div class="wrapper">
                                                                         <div class="block is-contents">
+                                                                            <div class="area is-title">
+                                                                                <label data-module="m-labelSmallTitle01">最小</label>
+                                                                            </div>
                                                                             <div class="area is-field">
                                                                                 <div data-module="m-input01">
                                                                                     <input type="number" min="1" name="fields[<?= $idx ?>][min_length]" value="<?= e($f['min_length'] ?? '') ?>" placeholder="最小">
@@ -226,6 +229,9 @@ if (empty($f['required']) || in_array($f['type'], ['radio', 'select'], true)) {
                                                                             </div>
                                                                         </div>
                                                                         <div class="block is-contents">
+                                                                            <div class="area is-title">
+                                                                                <label data-module="m-labelSmallTitle01">最大</label>
+                                                                            </div>
                                                                             <div class="area is-field">
                                                                                 <div data-module="m-input01">
                                                                                     <input type="number" min="1" name="fields[<?= $idx ?>][max_length]" value="<?= e($f['max_length']) ?>" placeholder="最大">
