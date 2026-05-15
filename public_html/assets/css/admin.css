@@ -1558,6 +1558,9 @@ body.is-field-type-modal-open {
   gap: 6px;
   min-width: 180px;
 }
+[data-module=m-formBuilder01] .c-formEditor__field > .wrapper > .block.is-contents > .area.is-title {
+  width: 100%;
+}
 [data-module=m-formBuilder01] .c-formEditor__field > .wrapper > .block.is-contents > .area.is-field {
   min-width: 0;
 }
