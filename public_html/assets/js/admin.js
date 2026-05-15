@@ -223,6 +223,11 @@
     var typeModal = document.querySelector('[data-target="m-formBuilder01__typeModal"]');
     var descriptionTemplate = document.querySelector('[data-target="m-formBuilder01__descriptionTemplate"]');
     var descriptionEditors = document.querySelectorAll('[data-description-editor]');
+    var mainForm = list.closest('form');
+    var dirtyActions = mainForm ? mainForm.querySelector('[data-target="p-formEdit01__dirtyActions"]') : null;
+    var dirtyCancel = mainForm ? mainForm.querySelector('[data-target="p-formEdit01__dirtyCancel"]') : null;
+    var initialFormSnapshot = '';
+    var dirtyStateRaf = 0;
 
     function getFieldItems() {
         return builderRoot ? builderRoot.querySelectorAll('.c-formEditor__item[data-field-item="1"]') : list.querySelectorAll('.c-formEditor__item[data-field-item="1"]');
@@ -316,6 +321,30 @@
     function syncInputModuleStates(root) {
         (root || document).querySelectorAll('[data-module="m-input01"]').forEach(function (module) {
             syncInputModuleState(module);
+        });
+    }
+
+    function serializeFormSnapshot(form) {
+        if (!form) return '';
+        var pairs = [];
+        new FormData(form).forEach(function (value, key) {
+            pairs.push(encodeURIComponent(key) + '=' + encodeURIComponent(typeof value === 'string' ? value : String(value)));
+        });
+        return pairs.join('&');
+    }
+
+    function updateDirtyState() {
+        if (!mainForm || !dirtyActions) return;
+        var isDirty = serializeFormSnapshot(mainForm) !== initialFormSnapshot;
+        dirtyActions.hidden = !isDirty;
+        document.body.classList.toggle('is-form-edit-dirty', isDirty);
+    }
+
+    function queueDirtyState() {
+        if (!mainForm || !dirtyActions || dirtyStateRaf) return;
+        dirtyStateRaf = window.requestAnimationFrame(function () {
+            dirtyStateRaf = 0;
+            updateDirtyState();
         });
     }
 
@@ -694,6 +723,7 @@
         });
         syncAllRegexRows();
         refreshAllDescriptionPositionOptions();
+        queueDirtyState();
     }
 
     function bindRegexRow(row, li) {
@@ -1252,7 +1282,6 @@
         }
     });
 
-    var mainForm = list.closest('form');
     if (mainForm) {
         mainForm.addEventListener('submit', function () {
             syncAllRegexRows();
@@ -1261,6 +1290,10 @@
             descriptionEditors.forEach(function (editor) {
                 reindexDescriptionBlocks(editor);
             });
+            if (dirtyActions) {
+                dirtyActions.hidden = true;
+            }
+            document.body.classList.remove('is-form-edit-dirty');
         });
     }
 
@@ -1300,12 +1333,18 @@
         if (module) {
             syncInputModuleState(module);
         }
+        if (mainForm && mainForm.contains(event.target)) {
+            queueDirtyState();
+        }
     });
 
     document.addEventListener('change', function (event) {
         var module = event.target.closest ? event.target.closest('[data-module="m-input01"]') : null;
         if (module) {
             syncInputModuleState(module);
+        }
+        if (mainForm && mainForm.contains(event.target)) {
+            queueDirtyState();
         }
     });
 
@@ -1315,6 +1354,18 @@
         refreshDescriptionPositionOptions(editor);
     });
     syncInputModuleStates(document);
+    if (mainForm && dirtyActions) {
+        initialFormSnapshot = serializeFormSnapshot(mainForm);
+        updateDirtyState();
+        if (dirtyCancel) {
+            dirtyCancel.addEventListener('click', function () {
+                window.location.reload();
+            });
+        }
+        new MutationObserver(function () {
+            queueDirtyState();
+        }).observe(mainForm, { childList: true, subtree: true });
+    }
 
     var titleInput = document.getElementById('title');
     var breadcrumbCurrent = document.querySelector('[data-target="p-formEdit01__breadcrumbCurrent"]');

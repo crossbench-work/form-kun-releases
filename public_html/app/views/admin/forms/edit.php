@@ -195,8 +195,23 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
     </div>
 </div>
 
-<form method="post" action="<?= e($isNew ? base_path('/admin/forms') : base_path('/admin/forms/' . (int)$form['id'])) ?>" class="p-formEdit01">
+<form method="post" action="<?= e($isNew ? base_path('/admin/forms') : base_path('/admin/forms/' . (int)$form['id'])) ?>" class="p-formEdit01" id="form-edit-main">
     <?= \Core\Csrf::field() ?>
+    <div class="p-formEdit01__floatingActions" data-target="p-formEdit01__dirtyActions" hidden>
+        <div class="wrapper">
+            <div class="block is-status">
+                <p class="text">未保存の変更があります</p>
+            </div>
+            <div class="block is-actions">
+                <div data-module="m-btn01">
+                    <button type="submit" class="btn is-primary"><?= $isNew ? '作成する' : '保存する' ?></button>
+                </div>
+                <div data-module="m-btn01">
+                    <button type="button" class="btn" data-target="p-formEdit01__dirtyCancel">キャンセル</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="wrapper">
         <div class="block is-contents">
             <?php if (!empty($errors)): ?>
