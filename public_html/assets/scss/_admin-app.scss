@@ -1641,6 +1641,30 @@ body.is-field-type-modal-open {
         gap: 8px;
       }
     }
+
+    .c-formEditor__field {
+      flex: 1 1 auto;
+
+      > .wrapper {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .block.is-contents {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .area.is-title {
+        flex: 0 0 64px;
+      }
+
+      .area.is-field {
+        flex: 1 1 auto;
+      }
+    }
   }
 
   .c-formEditor__fieldKey {

@@ -291,20 +291,20 @@ if (empty($f['required']) || in_array($f['type'], ['radio', 'select'], true)) {
                                                                                 <div class="c-formEditor__field">
                                                                                     <div class="wrapper">
                                                                                         <div class="block is-contents">
-                                                                                            <div class="block is-title">
-                                                                                                <label class="label" data-module="m-labelTitle01">表示名</label>
+                                                                                            <div class="area is-title">
+                                                                                                <label class="label" data-module="m-labelTitle01">表示</label>
                                                                                             </div>
-                                                                                            <div class="block is-field">
+                                                                                            <div class="area is-field">
                                                                                                 <div data-module="m-input01">
                                                                                                     <input type="text" data-target="c-formEditor__textMultiLabelInput" value="<?= e($multiTextItem['label'] ?? '') ?>">
                                                                                                 </div>
                                                                                             </div>
                                                                                         </div>
                                                                                         <div class="block is-contents">
-                                                                                            <div class="block is-title">
-                                                                                                <label class="label" data-module="m-labelTitle01">プレースホルダ（任意）</label>
+                                                                                            <div class="area is-title">
+                                                                                                <label class="label" data-module="m-labelTitle01">入力例</label>
                                                                                             </div>
-                                                                                            <div class="block is-field">
+                                                                                            <div class="area is-field">
                                                                                                 <div data-module="m-input01">
                                                                                                     <input type="text" data-target="c-formEditor__textMultiPlaceholderInput" value="<?= e($multiTextItem['placeholder'] ?? '') ?>">
                                                                                                 </div>
