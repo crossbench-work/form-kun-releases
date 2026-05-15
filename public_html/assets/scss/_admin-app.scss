@@ -1,5 +1,6 @@
 @use "s_config" as config;
 @use "../../app/components/m-table01/m-table01" as *;
+@use "../../app/components/c-formBlock01/c-formBlock01" as *;
 
 body.l-adminShell01 {
   color: #1f2937;
@@ -467,26 +468,7 @@ body.l-adminShell01 {
   }
 }
 
-// --- パネル・ツールバー ---
-[data-module="c-formBlock01"] {
-  background: #fff;
-  border-radius: 16px;
-  margin-bottom: 16px;
-}
-
-[data-module="c-formBlock01"] > .wrapper > .block.is-contents {
-  padding: 20px 24px;
-
-  > .area.is-title,
-  > .block.is-title {
-    margin-bottom: 12px;
-  }
-
-  > .area.is-field + .area.is-field,
-  > .block.is-field + .block.is-field {
-    margin-top: 16px;
-  }
-}
+// --- パネル・ツールバー（c-formBlock01 の本体スタイルは app/components/c-formBlock01）---
 
 .m-toolbar01 {
   display: flex;
@@ -1017,140 +999,6 @@ form.is-inline {
     color: #991b1b;
     border-color: #fecaca;
   }
-}
-
-// --- 管理画面フォーム（パネル内）---
-[data-module="c-formBlock01"] > .wrapper > .block.is-contents {
-  .area.is-title .fb-panel-header,
-  .block.is-title .fb-panel-header {
-    margin-bottom: 0;
-  }
-
-  .block.is-title:has(> [data-module="m-btn01"]) {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 12px;
-    flex-wrap: wrap;
-  }
-
-  .label {
-    display: block;
-    font-weight: 600;
-    margin-bottom: 4px;
-    color: #374151;
-  }
-
-  .text.is-help {
-    font-size: 10px;
-    color: #6b7280;
-    margin: 4px 0 0;
-  }
-
-  .text.is-error {
-    color: #b91c1c;
-    font-size: 12px;
-    margin: 4px 0 0;
-  }
-
-  .area.is-actions {
-    margin-top: 16px;
-    display: flex;
-    gap: 10px;
-    flex-wrap: wrap;
-  }
-
-  // c-formBlock01 内の素の .btn（m-btn01 で包まない箇所用）。:where で詳細度を下げ、m-btn01 内のボタンを上書きしない
-  :where([data-module="c-formBlock01"] > .wrapper > .block.is-contents) .btn {
-    display: inline-block;
-    padding: 8px 16px;
-    border: 1px solid #cbd5e1;
-    background: #fff;
-    color: #111;
-    border-radius: 6px;
-    cursor: pointer;
-    font-size: 14px;
-    font-family: inherit;
-    text-decoration: none;
-    line-height: 1.4;
-
-    &:hover {
-      background: #f1f5f9;
-      text-decoration: none;
-    }
-
-    &.is-primary {
-      background: #3C8CFD;
-      border-color: #3C8CFD;
-      color: #fff;
-
-      &:hover {
-        background: #1d4ed8;
-      }
-    }
-
-    &.is-danger {
-      background: #dc2626;
-      border-color: #dc2626;
-      color: #fff;
-
-      &:hover {
-        background: #b91c1c;
-      }
-    }
-
-    &.is-sm {
-      padding: 4px 10px;
-      font-size: 13px;
-    }
-
-    &.is-icon {
-      flex-shrink: 0;
-      padding: 8px 10px;
-      line-height: 1;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-    }
-  }
-
-  [data-module="m-required01"][data-type="required"] {
-    display: inline-block;
-    background: #ef4444;
-    color: #fff;
-    font-size: 11px;
-    padding: 1px 6px;
-    border-radius: 3px;
-    margin-left: 4px;
-    font-weight: 400;
-  }
-
-  .label.is-choice {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    font-weight: 400;
-    margin-bottom: 0;
-  }
-
-  .fb-basic-display-toggle {
-    font-size: 13px;
-    color: #64748b;
-  }
-
-  .fb-panel-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 12px;
-    margin-bottom: 12px;
-    flex-wrap: wrap;
-
-    h2 {
-      margin-bottom: 0;
-    }
-  }
-
 }
 
 [data-module="c-descriptionEditor01"] {

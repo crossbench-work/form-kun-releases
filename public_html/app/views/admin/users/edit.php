@@ -9,9 +9,8 @@
 <form method="post" action="<?= e($isNew ? base_path('/admin/users') : base_path('/admin/users/' . (int)$user['id'])) ?>">
     <?= \Core\Csrf::field() ?>
 
-    <div data-module="c-formBlock01">
-        <div class="wrapper">
-            <div class="block is-contents">
+    <?php require_once APP_COMPONENTS_DIR . '/c-formBlock01/c-formBlock01.php'; ?>
+    <?php admin_c_form_block01_open(); ?>
                             <div class="area is-field">
                                 <label class="label" data-module="m-boldTitle01">ユーザー名</label>
                                 <?php if ($isNew): ?>
@@ -66,9 +65,7 @@
                                     <input type="password" name="password_confirm" autocomplete="new-password">
                                 </div>
                             </div>
-            </div>
-        </div>
-    </div>
+<?php admin_c_form_block01_close(); ?>
 
     <div class="area is-actions">
         <button type="submit" class="btn is-primary"><?= $isNew ? '作成する' : '保存する' ?></button>

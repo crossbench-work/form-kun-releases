@@ -1,4 +1,7 @@
-<?php require_once APP_COMPONENTS_DIR . '/m-table01/m-table01.php'; ?>
+<?php
+require_once APP_COMPONENTS_DIR . '/m-table01/m-table01.php';
+require_once APP_COMPONENTS_DIR . '/c-formBlock01/c-formBlock01.php';
+?>
 <div class="m-toolbar01">
     <h1 class="title" style="margin:0;">送信履歴: <?= e($form['title']) ?></h1>
     <div class="spacer"></div>
@@ -6,9 +9,7 @@
     <a class="btn" href="<?= e(base_path('/admin/forms')) ?>">フォーム一覧へ</a>
 </div>
 
-<div data-module="c-formBlock01">
-    <div class="wrapper">
-        <div class="block is-contents">
+<?php admin_c_form_block01_open(); ?>
                             <div class="area is-field">
                                 <form method="get" action="<?= e(base_path('/admin/forms/' . $form['id'] . '/submissions')) ?>" class="m-toolbar01">
                                     <div data-module="m-input01">
@@ -121,6 +122,4 @@
                                     <?php endif; ?>
                                 <?php endif; ?>
                             </div>
-        </div>
-    </div>
-</div>
+<?php admin_c_form_block01_close(); ?>

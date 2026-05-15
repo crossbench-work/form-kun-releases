@@ -1,4 +1,5 @@
 <?php
+require_once APP_COMPONENTS_DIR . '/c-formBlock01/c-formBlock01.php';
 $FB_REGEX_CUSTOM = '__custom__';
 $FB_REGEX_CHECKBOX_LIMIT = '__checkbox_limit__';
 $regexPresetChoices = [
@@ -232,9 +233,7 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
 
                     <div class="block is-contents">
         <div data-target="c-formEditTabs01__contents" data-tab-panel="basic" class="area is-contents" role="tabpanel" aria-label="基本">
-    <div data-module="c-formBlock01">
-                    <div class="wrapper">
-                        <div class="block is-contents">
+<?php admin_c_form_block01_open(); ?>
             <div class="block is-title">
                 <h2 data-module="m-largeTitle01">基本設定</h2>
             </div>
@@ -296,9 +295,7 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                         </div>
                     </div>
                 </div>
-    <div data-module="c-formBlock01">
-                    <div class="wrapper">
-                        <div class="block is-contents">
+<?php admin_c_form_block01_open(); ?>
             <div class="block is-title">
                 <h2 data-module="m-largeTitle01">共通設定</h2>
             </div>
@@ -365,9 +362,7 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
         </div>
 
         <div data-target="c-formEditTabs01__contents" data-tab-panel="fields" class="area is-contents" role="tabpanel" aria-label="入力画面" hidden>
-    <div data-module="c-formBlock01">
-                    <div class="wrapper">
-                        <div class="block is-contents">
+<?php admin_c_form_block01_open(); ?>
             <div class="block is-title">
                 <h2 data-module="m-largeTitle01">表示設定</h2>
                 <div data-module="m-btn01">
@@ -405,9 +400,7 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                         </div>
                     </div>
                 </div>
-    <div data-module="c-formBlock01">
-                    <div class="wrapper">
-                        <div class="block is-contents" data-module="m-formBuilder01">
+<?php admin_c_form_block01_open(['data-module' => 'm-formBuilder01']); ?>
             <div class="block is-title">
                 <h2 data-module="m-largeTitle01">項目設定</h2>
             </div>
@@ -432,9 +425,7 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                         </div>
                     </div>
                 </div>
-    <div data-module="c-formBlock01">
-                    <div class="wrapper">
-                        <div class="block is-contents">
+<?php admin_c_form_block01_open(); ?>
             <div class="block is-title">
                 <h2 data-module="m-largeTitle01">ボタン設定</h2>
             </div>
@@ -460,9 +451,7 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
         </div>
 
         <div data-target="c-formEditTabs01__contents" data-tab-panel="confirm" class="area is-contents" role="tabpanel" aria-label="確認画面" hidden>
-    <div data-module="c-formBlock01">
-                    <div class="wrapper">
-                        <div class="block is-contents">
+<?php admin_c_form_block01_open(); ?>
             <div class="block is-title">
                 <h2 data-module="m-largeTitle01">表示設定</h2>
                 <div data-module="m-btn01">
@@ -500,9 +489,7 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                         </div>
                     </div>
                 </div>
-    <div data-module="c-formBlock01">
-                    <div class="wrapper">
-                        <div class="block is-contents">
+<?php admin_c_form_block01_open(); ?>
             <div class="block is-title">
                 <h2 data-module="m-largeTitle01">ボタン設定</h2>
             </div>
@@ -544,9 +531,7 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
         </div>
 
         <div data-target="c-formEditTabs01__contents" data-tab-panel="thanks" class="area is-contents" role="tabpanel" aria-label="完了画面" hidden>
-    <div data-module="c-formBlock01">
-                    <div class="wrapper">
-                        <div class="block is-contents">
+<?php admin_c_form_block01_open(); ?>
             <div class="block is-title">
                 <h2 data-module="m-largeTitle01">表示設定</h2>
                 <div data-module="m-btn01">
@@ -584,9 +569,7 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                         </div>
                     </div>
                 </div>
-    <div data-module="c-formBlock01">
-                    <div class="wrapper">
-                        <div class="block is-contents">
+<?php admin_c_form_block01_open(); ?>
             <div class="block is-title">
                 <h2 data-module="m-largeTitle01">ボタン設定</h2>
             </div>
@@ -628,9 +611,7 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
         </div>
 
         <div data-target="c-formEditTabs01__contents" data-tab-panel="mail" class="area is-contents" role="tabpanel" aria-label="通知" hidden>
-    <div data-module="c-formBlock01">
-                    <div class="wrapper">
-                        <div class="block is-contents">
+<?php admin_c_form_block01_open(); ?>
             <div class="block is-title">
                 <h2 data-module="m-largeTitle01">通知設定</h2>
             </div>
@@ -831,9 +812,7 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                     </div>
                 </div>
 
-    <div data-module="c-formBlock01">
-                    <div class="wrapper">
-                        <div class="block is-contents">
+<?php admin_c_form_block01_open(); ?>
             <div class="block is-title">
                 <h2 data-module="m-largeTitle01">管理者通知メール</h2>
             </div>
@@ -911,9 +890,7 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                     </div>
                 </div>
 
-    <div data-module="c-formBlock01">
-                    <div class="wrapper">
-                        <div class="block is-contents">
+<?php admin_c_form_block01_open(); ?>
             <div class="block is-title">
                 <h2 data-module="m-largeTitle01">送信者への自動返信メール</h2>
             </div>

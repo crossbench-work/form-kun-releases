@@ -1,8 +1,7 @@
 <h1 class="title">設定</h1>
 
-<div data-module="c-formBlock01">
-    <div class="wrapper">
-        <div class="block is-contents">
+<?php require_once APP_COMPONENTS_DIR . '/c-formBlock01/c-formBlock01.php'; ?>
+<?php admin_c_form_block01_open(); ?>
             <div class="block is-title">
                 <h2 data-module="m-largeTitle01">サイト</h2>
             </div>
@@ -18,13 +17,9 @@
                     <dd><code><?= e((string) config('site.timezone', '')) ?></code></dd>
                 </dl>
             </div>
-        </div>
-    </div>
-</div>
+<?php admin_c_form_block01_close(); ?>
 
-<div data-module="c-formBlock01">
-    <div class="wrapper">
-        <div class="block is-contents">
+<?php admin_c_form_block01_open(); ?>
             <div class="block is-title">
                 <h2 data-module="m-largeTitle01">フォーム</h2>
             </div>
@@ -44,9 +39,7 @@
                     <p class="text is-muted">作成上限の変更は管理者のみ行えます。</p>
                 <?php endif; ?>
             </div>
-        </div>
-    </div>
-</div>
+<?php admin_c_form_block01_close(); ?>
 
 <?php if (\Core\Auth::role() === 'admin'): ?>
 <div data-module="c-settingsFormLimitModal01" hidden>

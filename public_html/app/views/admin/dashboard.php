@@ -1,9 +1,10 @@
-<?php require_once APP_COMPONENTS_DIR . '/m-table01/m-table01.php'; ?>
+<?php
+require_once APP_COMPONENTS_DIR . '/m-table01/m-table01.php';
+require_once APP_COMPONENTS_DIR . '/c-formBlock01/c-formBlock01.php';
+?>
 <h1 class="title">ダッシュボード</h1>
 
-<div data-module="c-formBlock01">
-        <div class="wrapper">
-            <div class="block is-contents">
+<?php admin_c_form_block01_open(); ?>
                             <div class="area is-title">
                                 <h2 data-module="m-largeTitle01">フォーム別 受信件数</h2>
                             </div>
@@ -35,13 +36,9 @@
                                     <?php admin_m_table01_close(); ?>
                                 <?php endif; ?>
                             </div>
-            </div>
-        </div>
-</div>
+<?php admin_c_form_block01_close(); ?>
 
-<div data-module="c-formBlock01">
-        <div class="wrapper">
-            <div class="block is-contents">
+<?php admin_c_form_block01_open(); ?>
                             <div class="area is-title">
                                 <h2 data-module="m-largeTitle01">最近の送信</h2>
                             </div>
@@ -69,6 +66,4 @@
                                     <?php admin_m_table01_close(); ?>
                                 <?php endif; ?>
                             </div>
-            </div>
-        </div>
-</div>
+<?php admin_c_form_block01_close(); ?>

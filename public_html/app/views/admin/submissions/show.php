@@ -1,4 +1,7 @@
-<?php require_once APP_COMPONENTS_DIR . '/m-table01/m-table01.php'; ?>
+<?php
+require_once APP_COMPONENTS_DIR . '/m-table01/m-table01.php';
+require_once APP_COMPONENTS_DIR . '/c-formBlock01/c-formBlock01.php';
+?>
 <div class="m-toolbar01">
     <h1 class="title" style="margin:0;">送信詳細 #<?= (int) $sub['id'] ?></h1>
     <div class="spacer"></div>
@@ -11,9 +14,7 @@
     </form>
 </div>
 
-<div data-module="c-formBlock01">
-    <div class="wrapper">
-        <div class="block is-contents">
+<?php admin_c_form_block01_open(); ?>
                             <div class="area is-field">
                                 <?php admin_m_table01_open('is-kv'); ?>
                                     <tr><th>フォーム</th><td><?= e($form['title']) ?>（<code><?= e($form['slug']) ?></code>）</td></tr>
@@ -22,13 +23,9 @@
                                     <tr><th>User-Agent</th><td><?= e($sub['user_agent']) ?></td></tr>
                                 <?php admin_m_table01_close(); ?>
                             </div>
-        </div>
-    </div>
-</div>
+<?php admin_c_form_block01_close(); ?>
 
-<div data-module="c-formBlock01">
-    <div class="wrapper">
-        <div class="block is-contents">
+<?php admin_c_form_block01_open(); ?>
                             <div class="area is-title">
                                 <h2 data-module="m-largeTitle01">入力内容</h2>
                             </div>
@@ -87,6 +84,4 @@
                                 <?php endforeach; ?>
                                 <?php admin_m_table01_close(); ?>
                             </div>
-        </div>
-    </div>
-</div>
+<?php admin_c_form_block01_close(); ?>

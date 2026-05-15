@@ -1,4 +1,7 @@
-<?php require_once APP_COMPONENTS_DIR . '/m-table01/m-table01.php'; ?>
+<?php
+require_once APP_COMPONENTS_DIR . '/m-table01/m-table01.php';
+require_once APP_COMPONENTS_DIR . '/c-formBlock01/c-formBlock01.php';
+?>
 <div class="m-toolbar01">
     <h1 class="title" style="margin:0;">ユーザー管理</h1>
     <div class="spacer"></div>
@@ -7,9 +10,7 @@
     </div>
 </div>
 
-<div data-module="c-formBlock01">
-    <div class="wrapper">
-        <div class="block is-contents">
+<?php admin_c_form_block01_open(); ?>
                             <div class="area is-field">
                                 <?php if (empty($users)): ?>
                                     <p class="text is-muted">ユーザーがありません。</p>
@@ -49,6 +50,4 @@
                                     <?php admin_m_table01_close(); ?>
                                 <?php endif; ?>
                             </div>
-        </div>
-    </div>
-</div>
+<?php admin_c_form_block01_close(); ?>
