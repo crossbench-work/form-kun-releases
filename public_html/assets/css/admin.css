@@ -1550,8 +1550,39 @@ body.is-field-type-modal-open {
   flex: 1;
   min-width: 180px;
   display: flex;
-  flex-direction: column;
-  gap: 6px;
+  align-items: center;
+  gap: 12px;
+}
+[data-module=m-formBuilder01] .c-formEditor__field > .wrapper > .block.is-contents > .area.is-title {
+  flex: 0 0 96px;
+  min-width: 96px;
+}
+[data-module=m-formBuilder01] .c-formEditor__field > .wrapper > .block.is-contents > .area.is-field {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+[data-module=m-formBuilder01] .c-formEditor__checkboxLimit {
+  margin-top: 8px;
+}
+[data-module=m-formBuilder01] .c-formEditor__checkboxLimit > .wrapper {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+[data-module=m-formBuilder01] .c-formEditor__checkboxLimit > .wrapper > .block.is-contents {
+  flex: 1;
+  min-width: 180px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+[data-module=m-formBuilder01] .c-formEditor__checkboxLimit > .wrapper > .block.is-contents > .area.is-title {
+  flex: 0 0 72px;
+  min-width: 72px;
+}
+[data-module=m-formBuilder01] .c-formEditor__checkboxLimit > .wrapper > .block.is-contents > .area.is-field {
+  flex: 1 1 auto;
+  min-width: 0;
 }
 [data-module=m-formBuilder01] .c-formEditor__actions {
   margin-top: 8px;
@@ -1621,21 +1652,6 @@ body.is-field-type-modal-open {
 }
 [data-module=m-formBuilder01] .c-formEditor__validationControls > [data-target=c-formEditor__regex]:has([data-target=c-formEditor__regexKind]:disabled) {
   opacity: 0.4;
-}
-[data-module=m-formBuilder01] .c-formEditor__checkboxLimit {
-  margin-top: 8px;
-}
-[data-module=m-formBuilder01] .c-formEditor__checkboxLimit > .wrapper {
-  display: flex;
-  gap: 12px;
-  flex-wrap: wrap;
-}
-[data-module=m-formBuilder01] .c-formEditor__checkboxLimit > .wrapper > .block.is-contents {
-  flex: 1;
-  min-width: 140px;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
 }
 [data-module=m-formBuilder01] [data-target=c-formEditor__fieldKeyInput] {
   flex: 1;

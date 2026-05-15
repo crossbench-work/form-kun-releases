@@ -1638,8 +1638,46 @@ body.is-field-type-modal-open {
         flex: 1;
         min-width: 180px;
         display: flex;
-        flex-direction: column;
-        gap: 6px;
+        align-items: center;
+        gap: 12px;
+      }
+    }
+
+    > .wrapper > .block.is-contents > .area.is-title {
+      flex: 0 0 96px;
+      min-width: 96px;
+    }
+
+    > .wrapper > .block.is-contents > .area.is-field {
+      flex: 1 1 auto;
+      min-width: 0;
+    }
+  }
+
+  .c-formEditor__checkboxLimit {
+    margin-top: 8px;
+
+    > .wrapper {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+
+      > .block.is-contents {
+        flex: 1;
+        min-width: 180px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+
+      > .block.is-contents > .area.is-title {
+        flex: 0 0 72px;
+        min-width: 72px;
+      }
+
+      > .block.is-contents > .area.is-field {
+        flex: 1 1 auto;
+        min-width: 0;
       }
     }
   }
@@ -1728,24 +1766,6 @@ body.is-field-type-modal-open {
 
     &:has([data-target="c-formEditor__regexKind"]:disabled) {
       opacity: 0.4;
-    }
-  }
-
-  .c-formEditor__checkboxLimit {
-    margin-top: 8px;
-
-    > .wrapper {
-      display: flex;
-      gap: 12px;
-      flex-wrap: wrap;
-
-      > .block.is-contents {
-        flex: 1;
-        min-width: 140px;
-        display: flex;
-        flex-direction: column;
-        gap: 6px;
-      }
     }
   }
 
