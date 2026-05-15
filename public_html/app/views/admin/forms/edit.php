@@ -1,5 +1,6 @@
 <?php
 require_once APP_COMPONENTS_DIR . '/c-formBlock01/c-formBlock01.php';
+require_once APP_COMPONENTS_DIR . '/c-breadcrumb01/c-breadcrumb01.php';
 require_once APP_COMPONENTS_DIR . '/c-inputSet01/c-inputSet01.php';
 require_once APP_COMPONENTS_DIR . '/m-largeTitle01/m-largeTitle01.php';
 $FB_REGEX_CUSTOM = '__custom__';
@@ -177,18 +178,10 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
 };
 ?>
 
-<div class="c-breadcrumb01">
-    <div class="wrapper">
-        <div class="block is-contents">
-            <nav aria-label="パンくず">
-                <ol>
-                    <li><a href="<?= e(base_path('/admin/forms')) ?>">フォーム</a></li>
-                    <li aria-current="page"><span data-target="p-formEdit01__breadcrumbCurrent"><?= e($breadcrumbTitle) ?></span></li>
-                </ol>
-            </nav>
-        </div>
-    </div>
-</div>
+<?php admin_c_breadcrumb01([
+    ['label' => 'フォーム', 'href' => base_path('/admin/forms')],
+    ['label' => $breadcrumbTitle, 'current' => true],
+]); ?>
 
 <form method="post" action="<?= e($isNew ? base_path('/admin/forms') : base_path('/admin/forms/' . (int)$form['id'])) ?>" class="p-formEdit01" id="form-edit-main">
     <?= \Core\Csrf::field() ?>

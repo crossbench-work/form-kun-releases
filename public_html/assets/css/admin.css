@@ -332,6 +332,37 @@ body {
   font-size: 10px;
 }
 
+[data-target=c-breadcrumb01] {
+  margin: 0 0 16px;
+}
+[data-target=c-breadcrumb01] > .wrapper > .block.is-contents > nav ol {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  color: #64748b;
+  font-size: 13px;
+}
+[data-target=c-breadcrumb01] > .wrapper > .block.is-contents > nav li {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+[data-target=c-breadcrumb01] > .wrapper > .block.is-contents > nav li:not(:last-child)::after {
+  content: "/";
+  color: #94a3b8;
+}
+[data-target=c-breadcrumb01] > .wrapper > .block.is-contents > nav a {
+  color: #3C8CFD;
+}
+[data-target=c-breadcrumb01] > .wrapper > .block.is-contents > nav [aria-current=page] {
+  color: #1f2937;
+  font-weight: 600;
+}
+
 body.l-adminShell01 {
   color: #1f2937;
   background: #f1f5f9;
@@ -875,37 +906,6 @@ body.is-settings-max-forms-modal-open {
   flex-wrap: wrap;
   gap: 10px;
   justify-content: flex-end;
-}
-
-.c-breadcrumb01 {
-  margin: 0 0 16px;
-}
-.c-breadcrumb01 > .wrapper > .block.is-contents > nav ol {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  flex-wrap: wrap;
-  color: #64748b;
-  font-size: 13px;
-}
-.c-breadcrumb01 > .wrapper > .block.is-contents > nav li {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-}
-.c-breadcrumb01 > .wrapper > .block.is-contents > nav li:not(:last-child)::after {
-  content: "/";
-  color: #94a3b8;
-}
-.c-breadcrumb01 > .wrapper > .block.is-contents > nav a {
-  color: #3C8CFD;
-}
-.c-breadcrumb01 > .wrapper > .block.is-contents > nav [aria-current=page] {
-  color: #1f2937;
-  font-weight: 600;
 }
 
 form.is-inline {

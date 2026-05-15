@@ -3,6 +3,7 @@
 @use "../../app/components/c-formBlock01/c-formBlock01" as *;
 @use "../../app/components/m-largeTitle01/m-largeTitle01" as *;
 @use "../../app/components/c-inputSet01/c-inputSet01" as *;
+@use "../../app/components/c-breadcrumb01/c-breadcrumb01" as *;
 
 body.l-adminShell01 {
   color: #1f2937;
@@ -623,48 +624,6 @@ body.is-settings-max-forms-modal-open {
     flex-wrap: wrap;
     gap: 10px;
     justify-content: flex-end;
-  }
-}
-
-.c-breadcrumb01 {
-  margin: 0 0 16px;
-
-  > .wrapper {
-    > .block.is-contents {
-      > nav {
-        ol {
-          list-style: none;
-          margin: 0;
-          padding: 0;
-          display: flex;
-          align-items: center;
-          gap: 8px;
-          flex-wrap: wrap;
-          color: #64748b;
-          font-size: 13px;
-        }
-
-        li {
-          display: inline-flex;
-          align-items: center;
-          gap: 8px;
-
-          &:not(:last-child)::after {
-            content: "/";
-            color: #94a3b8;
-          }
-        }
-
-        a {
-          color: #3C8CFD;
-        }
-
-        [aria-current="page"] {
-          color: #1f2937;
-          font-weight: 600;
-        }
-      }
-    }
   }
 }
 
