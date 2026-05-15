@@ -222,17 +222,7 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                 </div>
             <?php endif; ?>
 
-            <div data-module="c-formEditTabs01">
-                <div class="wrapper">
-                    <div class="block is-tabs" role="tablist" aria-label="フォーム設定のセクション">
-                        <div data-module="m-formEditTab01" data-target="c-formEditTabs01__tab" data-tab-panel="basic" role="tab" aria-selected="true" tabindex="0">基本</div>
-                        <div data-module="m-formEditTab01" data-target="c-formEditTabs01__tab" data-tab-panel="fields" role="tab" aria-selected="false" tabindex="-1">入力画面</div>
-                        <div data-module="m-formEditTab01" data-target="c-formEditTabs01__tab" data-tab-panel="confirm" role="tab" aria-selected="false" tabindex="-1">確認画面</div>
-                        <div data-module="m-formEditTab01" data-target="c-formEditTabs01__tab" data-tab-panel="thanks" role="tab" aria-selected="false" tabindex="-1">完了画面</div>
-                        <div data-module="m-formEditTab01" data-target="c-formEditTabs01__tab" data-tab-panel="mail" role="tab" aria-selected="false" tabindex="-1">通知</div>
-                    </div>
-
-                    <div class="block is-contents">
+            <?php require __DIR__ . '/_form_edit_tabs.php'; ?>
         <div data-target="c-formEditTabs01__contents" data-tab-panel="basic" class="area is-contents" role="tabpanel" aria-label="基本">
 <?php admin_c_form_block01_open(); ?>
             <div class="block is-title">
