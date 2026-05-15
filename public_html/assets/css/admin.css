@@ -311,6 +311,13 @@ body {
   margin-bottom: 0;
 }
 
+[data-module=m-largeTitle01] {
+  font-size: 15px;
+  font-weight: 700;
+  margin: 0;
+  color: #374151;
+}
+
 body.l-adminShell01 {
   color: #1f2937;
   background: #f1f5f9;
@@ -637,13 +644,6 @@ body.l-adminShell01 a:hover {
   font-size: 18px;
   font-weight: 700;
   margin: 0 0 16px;
-}
-
-[data-module=m-largeTitle01] {
-  font-size: 15px;
-  font-weight: 700;
-  margin: 0;
-  color: #374151;
 }
 
 [data-module=m-boldTitle01] {

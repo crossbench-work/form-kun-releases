@@ -1,12 +1,13 @@
 <?php
 require_once APP_COMPONENTS_DIR . '/m-table01/m-table01.php';
 require_once APP_COMPONENTS_DIR . '/c-formBlock01/c-formBlock01.php';
+require_once APP_COMPONENTS_DIR . '/m-largeTitle01/m-largeTitle01.php';
 ?>
 <h1 class="title">ダッシュボード</h1>
 
 <?php admin_c_form_block01_open(); ?>
                             <div class="area is-title">
-                                <h2 data-module="m-largeTitle01">フォーム別 受信件数</h2>
+                                <?php admin_m_large_title01('フォーム別 受信件数'); ?>
                             </div>
                             <div class="area is-field">
                                 <?php if (empty($byForm)): ?>
@@ -40,7 +41,7 @@ require_once APP_COMPONENTS_DIR . '/c-formBlock01/c-formBlock01.php';
 
 <?php admin_c_form_block01_open(); ?>
                             <div class="area is-title">
-                                <h2 data-module="m-largeTitle01">最近の送信</h2>
+                                <?php admin_m_large_title01('最近の送信'); ?>
                             </div>
                             <div class="area is-field">
                                 <?php if (empty($recent)): ?>

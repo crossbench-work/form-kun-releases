@@ -1,6 +1,7 @@
 <?php
 require_once APP_COMPONENTS_DIR . '/m-table01/m-table01.php';
 require_once APP_COMPONENTS_DIR . '/c-formBlock01/c-formBlock01.php';
+require_once APP_COMPONENTS_DIR . '/m-largeTitle01/m-largeTitle01.php';
 ?>
 <div class="m-toolbar01">
     <h1 class="title" style="margin:0;">送信詳細 #<?= (int) $sub['id'] ?></h1>
@@ -27,7 +28,7 @@ require_once APP_COMPONENTS_DIR . '/c-formBlock01/c-formBlock01.php';
 
 <?php admin_c_form_block01_open(); ?>
                             <div class="area is-title">
-                                <h2 data-module="m-largeTitle01">入力内容</h2>
+                                <?php admin_m_large_title01('入力内容'); ?>
                             </div>
                             <div class="area is-field">
                                 <?php admin_m_table01_open('is-kv'); ?>

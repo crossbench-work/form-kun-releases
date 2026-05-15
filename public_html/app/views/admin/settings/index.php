@@ -1,9 +1,10 @@
 <h1 class="title">設定</h1>
 
 <?php require_once APP_COMPONENTS_DIR . '/c-formBlock01/c-formBlock01.php'; ?>
+<?php require_once APP_COMPONENTS_DIR . '/m-largeTitle01/m-largeTitle01.php'; ?>
 <?php admin_c_form_block01_open(); ?>
             <div class="block is-title">
-                <h2 data-module="m-largeTitle01">サイト</h2>
+                <?php admin_m_large_title01('サイト'); ?>
             </div>
             <div class="block is-field">
                 <dl class="admin-settings-dl">
@@ -21,7 +22,7 @@
 
 <?php admin_c_form_block01_open(); ?>
             <div class="block is-title">
-                <h2 data-module="m-largeTitle01">フォーム</h2>
+                <?php admin_m_large_title01('フォーム'); ?>
             </div>
             <div class="block is-field">
                 <dl class="admin-settings-dl">

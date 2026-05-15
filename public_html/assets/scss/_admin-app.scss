@@ -1,6 +1,7 @@
 @use "s_config" as config;
 @use "../../app/components/m-table01/m-table01" as *;
 @use "../../app/components/c-formBlock01/c-formBlock01" as *;
+@use "../../app/components/m-largeTitle01/m-largeTitle01" as *;
 
 body.l-adminShell01 {
   color: #1f2937;
@@ -379,13 +380,6 @@ body.l-adminShell01 {
   font-size: 18px;
   font-weight: 700;
   margin: 0 0 16px;
-}
-
-[data-module="m-largeTitle01"] {
-  font-size: 15px;
-  font-weight: 700;
-  margin: 0;
-  color: #374151;
 }
 
 [data-module="m-boldTitle01"] {
