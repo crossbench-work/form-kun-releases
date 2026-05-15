@@ -1262,21 +1262,19 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                                             </div>
                                             <div class="block is-field">
                                                 <div class="c-formEditor__field" data-target="c-formEditor__textMultiSettings" style="display:none">
-                                                    <div class="c-formEditor__textMultiEditor" data-text-multi-editor>
-                                                        <div class="c-formEditor__textMultiList">
-                                                            <div class="wrapper">
-                                                                <div class="block is-contents" data-target="c-formEditor__textMultiListContents">
-                                                                    <div class="c-formEditor__textMultiItem" data-text-multi-item>
-                                                                        <div class="wrapper">
-                                                                            <div class="block is-contents">
-                                                                                <div class="c-formEditor__child__field">
-                                                                                    <div class="wrapper">
-                                                                                        <div class="block is-contents"><div class="area is-title"><label class="label" data-module="m-labelSmallTitle01">表示</label></div><div class="area is-field"><div data-module="m-input01"><input type="text" data-target="c-formEditor__textMultiLabelInput"></div></div></div>
-                                                                                        <div class="block is-contents"><div class="area is-title"><label class="label" data-module="m-labelSmallTitle01">入力例</label></div><div class="area is-field"><div data-module="m-input01"><input type="text" data-target="c-formEditor__textMultiPlaceholderInput"></div></div></div>
-                                                                                    </div>
+                                                    <div class="c-formEditor__textMultiList" data-text-multi-editor>
+                                                        <div class="wrapper">
+                                                            <div class="block is-contents" data-target="c-formEditor__textMultiListContents">
+                                                                <div class="c-formEditor__textMultiItem" data-text-multi-item>
+                                                                    <div class="wrapper">
+                                                                        <div class="block is-contents">
+                                                                            <div class="c-formEditor__child__field">
+                                                                                <div class="wrapper">
+                                                                                    <div class="block is-contents"><div class="area is-title"><label class="label" data-module="m-labelSmallTitle01">表示</label></div><div class="area is-field"><div data-module="m-input01"><input type="text" data-target="c-formEditor__textMultiLabelInput"></div></div></div>
+                                                                                    <div class="block is-contents"><div class="area is-title"><label class="label" data-module="m-labelSmallTitle01">入力例</label></div><div class="area is-field"><div data-module="m-input01"><input type="text" data-target="c-formEditor__textMultiPlaceholderInput"></div></div></div>
                                                                                 </div>
-                                                                                <button type="button" data-module="m-deleteBtn01" data-target="c-formEditor__textMultiRemove" aria-label="削除" title="削除"><svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 6h18"/><path stroke-linecap="round" stroke-linejoin="round" d="M8 6V4h8v2"/><path stroke-linecap="round" stroke-linejoin="round" d="M19 6l-1 14H6L5 6"/><path stroke-linecap="round" stroke-linejoin="round" d="M10 11v6M14 11v6"/></svg></button>
                                                                             </div>
+                                                                            <button type="button" data-module="m-deleteBtn01" data-target="c-formEditor__textMultiRemove" aria-label="削除" title="削除"><svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 6h18"/><path stroke-linecap="round" stroke-linejoin="round" d="M8 6V4h8v2"/><path stroke-linecap="round" stroke-linejoin="round" d="M19 6l-1 14H6L5 6"/><path stroke-linecap="round" stroke-linejoin="round" d="M10 11v6M14 11v6"/></svg></button>
                                                                         </div>
                                                                     </div>
                                                                 </div>
