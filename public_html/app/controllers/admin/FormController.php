@@ -10,6 +10,13 @@ use Models\FormField;
 
 class FormController
 {
+    private const DEFAULT_META_HTML = <<<'HTML'
+<meta name="description" content="フォームの概要を入力してください。">
+<meta property="og:title" content="フォームのタイトル">
+<meta property="og:description" content="フォームの概要を入力してください。">
+<meta property="og:type" content="website">
+HTML;
+
     public function __construct()
     {
         Auth::requireLogin();
@@ -230,8 +237,7 @@ class FormController
         $form = [
             'slug'                 => trim((string) ($_POST['slug'] ?? '')),
             'title'                => trim((string) ($_POST['title'] ?? '')),
-            'meta_title'           => trim((string) ($_POST['meta_title'] ?? '')),
-            'meta_description'     => trim((string) ($_POST['meta_description'] ?? '')),
+            'meta_html'            => trim((string) ($_POST['meta_html'] ?? '')),
             'input_page_title'     => trim((string) ($_POST['input_page_title'] ?? '')),
             'show_input_page_title'=> !empty($_POST['show_input_page_title']) ? 1 : 0,
             'description'          => null,
@@ -400,11 +406,8 @@ class FormController
         if ($form['title'] === '') {
             $errors[] = 'タイトルは必須です。';
         }
-        if (mb_strlen($form['meta_title']) > 255) {
-            $errors[] = 'metaタイトルは255文字以内にしてください。';
-        }
-        if (mb_strlen($form['meta_description']) > 500) {
-            $errors[] = 'meta説明文は500文字以内にしてください。';
+        if (mb_strlen($form['meta_html']) > 65535) {
+            $errors[] = 'meta情報HTMLは65535文字以内にしてください。';
         }
         if (mb_strlen($form['input_page_title']) > 200) {
             $errors[] = '入力画面のタイトルは200文字以内にしてください。';
@@ -580,8 +583,7 @@ class FormController
             'id' => null,
             'slug' => FieldKey::generateUuidV4(),
             'title' => '',
-            'meta_title' => '',
-            'meta_description' => '',
+            'meta_html' => self::DEFAULT_META_HTML,
             'input_page_title' => '',
             'show_input_page_title' => 1,
             'description' => '',
@@ -633,8 +635,25 @@ class FormController
         $form['input_page_title'] = trim((string) ($form['input_page_title'] ?? '')) !== ''
             ? (string) $form['input_page_title']
             : trim((string) ($form['title'] ?? ''));
-        $form['meta_title'] = trim((string) ($form['meta_title'] ?? ''));
-        $form['meta_description'] = trim((string) ($form['meta_description'] ?? ''));
+        $form['meta_html'] = trim((string) ($form['meta_html'] ?? ''));
+        if ($form['meta_html'] === '') {
+            $legacyMetaTitle = str_replace('"', "'", trim((string) ($form['meta_title'] ?? '')));
+            $legacyMetaDescription = str_replace('"', "'", trim((string) ($form['meta_description'] ?? '')));
+            if ($legacyMetaTitle !== '' || $legacyMetaDescription !== '') {
+                $legacyLines = [];
+                if ($legacyMetaDescription !== '') {
+                    $legacyLines[] = '<meta name="description" content="' . $legacyMetaDescription . '">';
+                }
+                if ($legacyMetaTitle !== '') {
+                    $legacyLines[] = '<meta property="og:title" content="' . $legacyMetaTitle . '">';
+                }
+                if ($legacyMetaDescription !== '') {
+                    $legacyLines[] = '<meta property="og:description" content="' . $legacyMetaDescription . '">';
+                }
+                $legacyLines[] = '<meta property="og:type" content="website">';
+                $form['meta_html'] = implode("\n", $legacyLines);
+            }
+        }
         $form['show_input_page_title'] = !array_key_exists('show_input_page_title', $form) || !empty($form['show_input_page_title']) ? 1 : 0;
         $form['confirm_page_title'] = trim((string) ($form['confirm_page_title'] ?? '')) !== ''
             ? (string) $form['confirm_page_title']

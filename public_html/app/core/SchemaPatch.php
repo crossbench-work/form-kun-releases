@@ -469,25 +469,14 @@ class SchemaPatch
                 return;
             }
 
-            $hasMetaTitle = Database::fetchOne(
+            $hasMetaHtml = Database::fetchOne(
                 'SELECT COUNT(*) AS c FROM information_schema.COLUMNS
                  WHERE TABLE_SCHEMA = ? AND TABLE_NAME = ? AND COLUMN_NAME = ?',
-                [$schema, 'forms', 'meta_title']
+                [$schema, 'forms', 'meta_html']
             );
-            if ((int) ($hasMetaTitle['c'] ?? 0) === 0) {
+            if ((int) ($hasMetaHtml['c'] ?? 0) === 0) {
                 Database::execute(
-                    'ALTER TABLE forms ADD COLUMN meta_title VARCHAR(255) DEFAULT NULL AFTER title'
-                );
-            }
-
-            $hasMetaDescription = Database::fetchOne(
-                'SELECT COUNT(*) AS c FROM information_schema.COLUMNS
-                 WHERE TABLE_SCHEMA = ? AND TABLE_NAME = ? AND COLUMN_NAME = ?',
-                [$schema, 'forms', 'meta_description']
-            );
-            if ((int) ($hasMetaDescription['c'] ?? 0) === 0) {
-                Database::execute(
-                    'ALTER TABLE forms ADD COLUMN meta_description VARCHAR(500) DEFAULT NULL AFTER meta_title'
+                    'ALTER TABLE forms ADD COLUMN meta_html TEXT DEFAULT NULL AFTER title'
                 );
             }
         } catch (\Throwable $e) {

@@ -292,28 +292,15 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                     <div class="wrapper">
                         <div class="block is-contents">
                             <div class="block is-title">
-                                <label class="label" data-module="m-boldTitle01" for="meta_title">metaタイトル</label>
+                                <label class="label" data-module="m-boldTitle01" for="meta_html">meta情報（HTML）</label>
                             </div>
                             <div class="block is-field">
                                 <div data-module="m-input01">
-                                    <input type="text" id="meta_title" name="meta_title" value="<?= e($form['meta_title'] ?? '') ?>" placeholder="空欄のときは各画面タイトルを使用します">
+                                    <textarea id="meta_html" name="meta_html" rows="8" placeholder="<meta name=&quot;description&quot; content=&quot;フォームの概要&quot;>"><?= e($form['meta_html'] ?? '') ?></textarea>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="block is-field">
-                <div data-module="c-inputSet01">
-                    <div class="wrapper">
-                        <div class="block is-contents">
-                            <div class="block is-title">
-                                <label class="label" data-module="m-boldTitle01" for="meta_description">meta説明文</label>
-                            </div>
-                            <div class="block is-field">
-                                <div data-module="m-input01">
-                                    <textarea id="meta_description" name="meta_description" rows="4" placeholder="公開フォームの説明を入力できます"><?= e($form['meta_description'] ?? '') ?></textarea>
-                                </div>
+                            <div class="area is-help">
+                                <p class="text is-help">`&lt;meta ...&gt;` など、head に出したいHTMLをそのまま入力できます。</p>
                             </div>
                         </div>
                     </div>
