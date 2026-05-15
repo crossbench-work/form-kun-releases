@@ -1421,8 +1421,6 @@ body.is-field-type-modal-open {
 
 [data-module=m-formBuilder01] label:not(.label.is-choice) {
   display: block;
-  font-weight: 600;
-  margin-bottom: 4px;
   color: #374151;
 }
 [data-module=m-formBuilder01] .c-formEditor.is-static {
