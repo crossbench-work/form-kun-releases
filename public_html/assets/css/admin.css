@@ -1545,8 +1545,8 @@ body.is-field-type-modal-open {
 }
 [data-module=m-formBuilder01] .c-formEditor__textMultiItem .c-formEditor__child__field > .wrapper {
   display: flex;
-  flex-direction: column;
   gap: 8px;
+  align-items: flex-start;
 }
 [data-module=m-formBuilder01] .c-formEditor__textMultiItem .c-formEditor__child__field .block.is-contents {
   display: flex;

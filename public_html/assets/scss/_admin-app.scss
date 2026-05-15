@@ -1647,8 +1647,8 @@ body.is-field-type-modal-open {
 
       > .wrapper {
         display: flex;
-        flex-direction: column;
         gap: 8px;
+        align-items: flex-start;
       }
 
       .block.is-contents {
