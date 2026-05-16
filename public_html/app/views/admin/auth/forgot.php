@@ -4,9 +4,9 @@
 <form method="post" action="<?= e(base_path('/admin/forgot-password')) ?>" class="m-authForm01">
     <?= \Core\Csrf::field() ?>
     <div class="box is-field">
-        <label class="label" data-module="m-boldTitle01" for="identifier">ユーザー名またはメールアドレス</label>
+        <?php admin_m_bold_title01(e('ユーザー名またはメールアドレス'), 'identifier'); ?>
         <div data-module="m-input01">
-            <input type="text" id="identifier" name="identifier" autocomplete="username" required>
+            <input type="text" id="identifier" name="identifier" autocomplete="username" required<?= admin_m_bold_title01_aria_labelledby_attr('identifier') ?>>
         </div>
     </div>
     <div class="area is-actions">

@@ -54,9 +54,9 @@
             <form method="post" action="<?= e(base_path('/admin/settings')) ?>">
                 <?= \Core\Csrf::field() ?>
                 <div class="area is-field">
-                    <label class="label" data-module="m-boldTitle01" for="max_forms_modal">フォームの作成上限</label>
+                    <?php admin_m_bold_title01(e('フォームの作成上限'), 'max_forms_modal'); ?>
                     <div data-module="m-input01">
-                        <input type="number" name="max_forms" id="max_forms_modal" min="1" max="999999" step="1" value="<?= (int) $max_forms ?>" required>
+                        <input type="number" name="max_forms" id="max_forms_modal" min="1" max="999999" step="1" value="<?= (int) $max_forms ?>" required<?= admin_m_bold_title01_aria_labelledby_attr('max_forms_modal') ?>>
                     </div>
                     <p class="text is-help">1 以上の整数を指定してください。保存後、一覧の新規作成やこの上限を超える作成はできません。</p>
                 </div>

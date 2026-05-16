@@ -17,7 +17,7 @@
             <div class="block is-field">
                 <?php admin_c_input_set01_open(); ?>
                             <div class="block is-title">
-                                <label class="label" data-module="m-boldTitle01" for="input_page_title">タイトル</label>
+                                <?php admin_m_bold_title01(e('タイトル'), 'input_page_title'); ?>
                                 <label class="label is-choice">
                                     <input type="checkbox" name="show_input_page_title" value="1" <?= !empty($form['show_input_page_title']) ? 'checked' : '' ?>>
                                     表示する
@@ -25,7 +25,7 @@
                             </div>
                             <div class="block is-field">
                                 <div data-module="m-input01">
-                                    <input type="text" id="input_page_title" name="input_page_title" value="<?= e($form['input_page_title'] ?? '') ?>">
+                                    <input type="text" id="input_page_title" name="input_page_title" value="<?= e($form['input_page_title'] ?? '') ?>"<?= admin_m_bold_title01_aria_labelledby_attr('input_page_title') ?>>
                                 </div>
                             </div>
                         </div>
@@ -68,11 +68,11 @@
             <div class="block is-field">
                 <?php admin_c_input_set01_open(); ?>
                             <div class="block is-title">
-                                <label class="label" data-module="m-boldTitle01" for="confirm_button_text">ボタンテキスト</label>
+                                <?php admin_m_bold_title01(e('ボタンテキスト'), 'confirm_button_text'); ?>
                             </div>
                             <div class="block is-field">
                                 <div data-module="m-input01">
-                                    <input type="text" id="confirm_button_text" name="confirm_button_text" value="<?= e($form['confirm_button_text'] ?? '入力内容を確認する') ?>">
+                                    <input type="text" id="confirm_button_text" name="confirm_button_text" value="<?= e($form['confirm_button_text'] ?? '入力内容を確認する') ?>"<?= admin_m_bold_title01_aria_labelledby_attr('confirm_button_text') ?>>
                                 </div>
                             </div>
                         </div>

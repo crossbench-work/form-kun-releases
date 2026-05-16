@@ -15,13 +15,13 @@ require_once APP_COMPONENTS_DIR . '/c-formBlock01/c-formBlock01.php';
                                     <div data-module="m-input01">
                                         <input type="text" name="q" value="<?= e($q) ?>" placeholder="キーワード検索（送信内容）" style="width:280px">
                                     </div>
-                                    <label class="label" data-module="m-boldTitle01" for="submissions-from">期間</label>
+                                    <?php admin_m_bold_title01(e('期間'), 'submissions-from'); ?>
                                     <div data-module="m-input01">
-                                        <input type="date" id="submissions-from" name="from" value="<?= e($from) ?>">
+                                        <input type="date" id="submissions-from" name="from" value="<?= e($from) ?>"<?= admin_m_bold_title01_aria_labelledby_attr('submissions-from') ?>>
                                     </div>
-                                    <label class="label" data-module="m-boldTitle01" for="submissions-to">〜</label>
+                                    <?php admin_m_bold_title01(e('〜'), 'submissions-to'); ?>
                                     <div data-module="m-input01">
-                                        <input type="date" id="submissions-to" name="to" value="<?= e($to) ?>">
+                                        <input type="date" id="submissions-to" name="to" value="<?= e($to) ?>"<?= admin_m_bold_title01_aria_labelledby_attr('submissions-to') ?>>
                                     </div>
                                     <button class="btn" type="submit">検索</button>
                                     <?php if ($q !== '' || $from !== '' || $to !== ''): ?>

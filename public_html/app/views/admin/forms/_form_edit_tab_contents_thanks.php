@@ -17,7 +17,7 @@
             <div class="block is-field">
                 <?php admin_c_input_set01_open(); ?>
                             <div class="block is-title">
-                                <label class="label" data-module="m-boldTitle01" for="thanks_page_title">タイトル</label>
+                                <?php admin_m_bold_title01(e('タイトル'), 'thanks_page_title'); ?>
                                 <label class="label is-choice">
                                     <input type="checkbox" name="show_thanks_page_title" value="1" <?= !empty($form['show_thanks_page_title']) ? 'checked' : '' ?>>
                                     表示する
@@ -25,7 +25,7 @@
                             </div>
                             <div class="block is-field">
                                 <div data-module="m-input01">
-                                    <input type="text" id="thanks_page_title" name="thanks_page_title" value="<?= e($form['thanks_page_title'] ?? '') ?>">
+                                    <input type="text" id="thanks_page_title" name="thanks_page_title" value="<?= e($form['thanks_page_title'] ?? '') ?>"<?= admin_m_bold_title01_aria_labelledby_attr('thanks_page_title') ?>>
                                 </div>
                             </div>
                         </div>
@@ -43,11 +43,11 @@
             <div class="block is-field">
                 <?php admin_c_input_set01_open(); ?>
                             <div class="block is-title">
-                                <label class="label" data-module="m-boldTitle01" for="thanks_button_text">ボタンテキスト</label>
+                                <?php admin_m_bold_title01(e('ボタンテキスト'), 'thanks_button_text'); ?>
                             </div>
                             <div class="block is-field">
                                 <div data-module="m-input01">
-                                    <input type="text" id="thanks_button_text" name="thanks_button_text" value="<?= e($form['thanks_button_text'] ?? 'トップへ戻る') ?>">
+                                    <input type="text" id="thanks_button_text" name="thanks_button_text" value="<?= e($form['thanks_button_text'] ?? 'トップへ戻る') ?>"<?= admin_m_bold_title01_aria_labelledby_attr('thanks_button_text') ?>>
                                 </div>
                             </div>
                         </div>
@@ -57,11 +57,11 @@
             <div class="block is-field">
                 <?php admin_c_input_set01_open(); ?>
                             <div class="block is-title">
-                                <label class="label" data-module="m-boldTitle01" for="thanks_button_url">ボタンURL</label>
+                                <?php admin_m_bold_title01(e('ボタンURL'), 'thanks_button_url'); ?>
                             </div>
                             <div class="block is-field">
                                 <div data-module="m-input01">
-                                    <input type="text" id="thanks_button_url" name="thanks_button_url" value="<?= e($form['thanks_button_url'] ?? '/') ?>" placeholder="/ または https://example.com/">
+                                    <input type="text" id="thanks_button_url" name="thanks_button_url" value="<?= e($form['thanks_button_url'] ?? '/') ?>" placeholder="/ または https://example.com/"<?= admin_m_bold_title01_aria_labelledby_attr('thanks_button_url') ?>>
                                 </div>
                             </div>
                         </div>

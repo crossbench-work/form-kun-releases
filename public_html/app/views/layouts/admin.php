@@ -14,6 +14,7 @@
 <body class="l-adminShell01">
 <?php
 require_once APP_COMPONENTS_DIR . '/m-btn01/m-btn01.php';
+require_once APP_COMPONENTS_DIR . '/m-boldTitle01/m-boldTitle01.php';
 $__nav = admin_relative_path();
 $__navDash = ($__nav === '/' || $__nav === '');
 $__navForms = str_starts_with($__nav, '/forms') || str_starts_with($__nav, '/submissions') || str_starts_with($__nav, '/files');

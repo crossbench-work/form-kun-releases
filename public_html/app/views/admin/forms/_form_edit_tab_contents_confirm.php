@@ -17,7 +17,7 @@
             <div class="block is-field">
                 <?php admin_c_input_set01_open(); ?>
                             <div class="block is-title">
-                                <label class="label" data-module="m-boldTitle01" for="confirm_page_title">タイトル</label>
+                                <?php admin_m_bold_title01(e('タイトル'), 'confirm_page_title'); ?>
                                 <label class="label is-choice">
                                     <input type="checkbox" name="show_confirm_page_title" value="1" <?= !empty($form['show_confirm_page_title']) ? 'checked' : '' ?>>
                                     表示する
@@ -25,7 +25,7 @@
                             </div>
                             <div class="block is-field">
                                 <div data-module="m-input01">
-                                    <input type="text" id="confirm_page_title" name="confirm_page_title" value="<?= e($form['confirm_page_title'] ?? '') ?>">
+                                    <input type="text" id="confirm_page_title" name="confirm_page_title" value="<?= e($form['confirm_page_title'] ?? '') ?>"<?= admin_m_bold_title01_aria_labelledby_attr('confirm_page_title') ?>>
                                 </div>
                             </div>
                         </div>
@@ -43,11 +43,11 @@
             <div class="block is-field">
                 <?php admin_c_input_set01_open(); ?>
                             <div class="block is-title">
-                                <label class="label" data-module="m-boldTitle01" for="submit_button_text">送信ボタンテキスト</label>
+                                <?php admin_m_bold_title01(e('送信ボタンテキスト'), 'submit_button_text'); ?>
                             </div>
                             <div class="block is-field">
                                 <div data-module="m-input01">
-                                    <input type="text" id="submit_button_text" name="submit_button_text" value="<?= e($form['submit_button_text'] ?? '送信する') ?>">
+                                    <input type="text" id="submit_button_text" name="submit_button_text" value="<?= e($form['submit_button_text'] ?? '送信する') ?>"<?= admin_m_bold_title01_aria_labelledby_attr('submit_button_text') ?>>
                                 </div>
                             </div>
                         </div>
@@ -57,11 +57,11 @@
             <div class="block is-field">
                 <?php admin_c_input_set01_open(); ?>
                             <div class="block is-title">
-                                <label class="label" data-module="m-boldTitle01" for="back_button_text">戻るボタンテキスト</label>
+                                <?php admin_m_bold_title01(e('戻るボタンテキスト'), 'back_button_text'); ?>
                             </div>
                             <div class="block is-field">
                                 <div data-module="m-input01">
-                                    <input type="text" id="back_button_text" name="back_button_text" value="<?= e($form['back_button_text'] ?? '入力に戻る') ?>">
+                                    <input type="text" id="back_button_text" name="back_button_text" value="<?= e($form['back_button_text'] ?? '入力に戻る') ?>"<?= admin_m_bold_title01_aria_labelledby_attr('back_button_text') ?>>
                                 </div>
                             </div>
                         </div>

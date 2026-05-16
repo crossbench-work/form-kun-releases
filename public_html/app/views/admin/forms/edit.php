@@ -26,7 +26,7 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
     <div class="block is-field">
         <?php admin_c_input_set01_open(); ?>
                     <div class="block is-title">
-                        <label class="label" data-module="m-boldTitle01">説明文</label>
+                        <?php admin_m_bold_title01(e('説明文')); ?>
                     </div>
                     <div class="block is-field">
                         <div data-module="c-descriptionEditor01" data-description-editor data-name-prefix="<?= e($namePrefix) ?>" data-position-mode="<?= e($positionMode) ?>">
@@ -98,11 +98,11 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                                                                         <div class="block is-field">
                                                                             <?php admin_c_input_set01_open(); ?>
                                                                                         <div class="block is-title">
-                                                                                            <label class="label" data-module="m-boldTitle01" for="<?= e($labelInputId) ?>">ラベル</label>
+                                                                                            <?php admin_m_bold_title01(e('ラベル'), $labelInputId); ?>
                                                                                         </div>
                                                                                         <div class="block is-field">
                                                                                             <div data-module="m-input01">
-                                                                                                <input type="text" id="<?= e($labelInputId) ?>" name="<?= e($namePrefix) ?>[<?= $i ?>][label]" value="<?= e($labelValue) ?>" data-name="label" data-target="c-descriptionEditor__labelInput">
+                                                                                                <input type="text" id="<?= e($labelInputId) ?>" name="<?= e($namePrefix) ?>[<?= $i ?>][label]" value="<?= e($labelValue) ?>" data-name="label" data-target="c-descriptionEditor__labelInput"<?= admin_m_bold_title01_aria_labelledby_attr($labelInputId) ?>>
                                                                                             </div>
                                                                                         </div>
                                                                                     </div>
@@ -112,11 +112,11 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                                                                         <div class="block is-field">
                                                                             <?php admin_c_input_set01_open(); ?>
                                                                                         <div class="block is-title">
-                                                                                            <label class="label" data-module="m-boldTitle01" for="<?= e($positionInputId) ?>">表示位置</label>
+                                                                                            <?php admin_m_bold_title01(e('表示位置'), $positionInputId); ?>
                                                                                         </div>
                                                                                         <div class="block is-field">
                                                                                             <div data-module="m-input01">
-                                                                                                <select id="<?= e($positionInputId) ?>" name="<?= e($namePrefix) ?>[<?= $i ?>][position]" class="fb-description-position" data-name="position" data-value="<?= e((string) ($block['position'] ?? 0)) ?>" aria-label="説明文の表示位置"></select>
+                                                                                                <select id="<?= e($positionInputId) ?>" name="<?= e($namePrefix) ?>[<?= $i ?>][position]" class="fb-description-position" data-name="position" data-value="<?= e((string) ($block['position'] ?? 0)) ?>"<?= admin_m_bold_title01_aria_labelledby_attr($positionInputId) ?>></select>
                                                                                             </div>
                                                                                         </div>
                                                                                     </div>
@@ -126,14 +126,14 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                                                                         <div class="block is-field">
                                                                             <?php admin_c_input_set01_open(); ?>
                                                                                         <div class="block is-title">
-                                                                                            <label class="label" data-module="m-boldTitle01" for="<?= e($htmlInputId) ?>">説明文</label>
+                                                                                            <?php admin_m_bold_title01(e('説明文'), $htmlInputId); ?>
                                                                                         </div>
                                                                                         <div class="block is-field">
                                                                                             <div data-module="c-htmlInputEditor01" data-html-toggle-editor>
                                                                                                 <div class="wrapper">
                                                                                                     <div class="block is-editor">
                                                                                                         <div data-module="m-input01">
-                                                                                                            <textarea id="<?= e($htmlInputId) ?>" name="<?= e($namePrefix) ?>[<?= $i ?>][html]" rows="6" data-name="html" data-target="c-htmlInputEditor01__textarea"><?= e((string) ($block['html'] ?? '')) ?></textarea>
+                                                                                                            <textarea id="<?= e($htmlInputId) ?>" name="<?= e($namePrefix) ?>[<?= $i ?>][html]" rows="6" data-name="html" data-target="c-htmlInputEditor01__textarea"<?= admin_m_bold_title01_aria_labelledby_attr($htmlInputId) ?>><?= e((string) ($block['html'] ?? '')) ?></textarea>
                                                                                                         </div>
                                                                                                     </div>
                                                                                                     <div class="block is-toolbar">
@@ -315,7 +315,7 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                             <div class="block is-field">
                                 <?php admin_c_input_set01_open(); ?>
                                             <div class="block is-title">
-                                                <label class="label" data-module="m-boldTitle01">ラベル</label>
+                                                <?php admin_m_bold_title01(e('ラベル')); ?>
                                             </div>
                                             <div class="block is-field">
                                                 <div data-module="m-input01">
@@ -329,7 +329,7 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                             <div class="block is-field">
                                 <?php admin_c_input_set01_open(); ?>
                                             <div class="block is-title">
-                                                <label class="label" data-module="m-boldTitle01">表示位置</label>
+                                                <?php admin_m_bold_title01(e('表示位置')); ?>
                                             </div>
                                             <div class="block is-field">
                                                 <div data-module="m-input01">
@@ -343,7 +343,7 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                             <div class="block is-field">
                                 <?php admin_c_input_set01_open(); ?>
                                             <div class="block is-title">
-                                                <label class="label" data-module="m-boldTitle01">説明文</label>
+                                                <?php admin_m_bold_title01(e('説明文')); ?>
                                             </div>
                                             <div class="block is-field">
                                                 <div data-module="c-htmlInputEditor01" data-html-toggle-editor>

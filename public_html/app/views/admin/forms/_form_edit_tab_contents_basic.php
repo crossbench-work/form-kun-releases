@@ -7,11 +7,11 @@
             <div class="block is-field">
                 <?php admin_c_input_set01_open(); ?>
                             <div class="block is-title">
-                                <label class="label" data-module="m-boldTitle01" for="title">タイトル <span data-module="m-required01" data-type="required">必須</span></label>
+                                <?php admin_m_bold_title01(e('タイトル') . ' <span data-module="m-required01" data-type="required">必須</span>', 'title'); ?>
                             </div>
                             <div class="block is-field">
                                 <div data-module="m-input01">
-                                    <input type="text" id="title" name="title" value="<?= e($form['title']) ?>" required>
+                                    <input type="text" id="title" name="title" value="<?= e($form['title']) ?>" required<?= admin_m_bold_title01_aria_labelledby_attr('title') ?>>
                                 </div>
                             </div>
                         </div>
@@ -21,11 +21,11 @@
             <div class="block is-field">
                 <?php admin_c_input_set01_open(); ?>
                             <div class="block is-title">
-                                <label class="label" data-module="m-boldTitle01" for="slug">スラッグ（URL用） <span data-module="m-required01" data-type="required">必須</span></label>
+                                <?php admin_m_bold_title01(e('スラッグ（URL用）') . ' <span data-module="m-required01" data-type="required">必須</span>', 'slug'); ?>
                             </div>
                             <div class="block is-field">
                                 <div data-module="m-input01">
-                                    <input type="text" id="slug" name="slug" value="<?= e($form['slug']) ?>" required>
+                                    <input type="text" id="slug" name="slug" value="<?= e($form['slug']) ?>" required<?= admin_m_bold_title01_aria_labelledby_attr('slug') ?>>
                                 </div>
                             </div>
                             <div class="area is-help">
@@ -38,11 +38,11 @@
             <div class="block is-field">
                 <?php admin_c_input_set01_open(); ?>
                             <div class="block is-title">
-                                <label class="label" data-module="m-boldTitle01" for="status">公開状態</label>
+                                <?php admin_m_bold_title01(e('公開状態'), 'status'); ?>
                             </div>
                             <div class="block is-field">
                                 <div data-module="m-input01">
-                                    <select id="status" name="status">
+                                    <select id="status" name="status"<?= admin_m_bold_title01_aria_labelledby_attr('status') ?>>
                                         <option value="draft"    <?= $form['status'] === 'draft' ? 'selected' : '' ?>>下書き</option>
                                         <option value="active"   <?= $form['status'] === 'active' ? 'selected' : '' ?>>公開中</option>
                                         <option value="archived" <?= $form['status'] === 'archived' ? 'selected' : '' ?>>停止</option>
@@ -63,11 +63,11 @@
             <div class="block is-field">
                 <?php admin_c_input_set01_open(); ?>
                             <div class="block is-title">
-                                <label class="label" data-module="m-boldTitle01" for="meta_html">head</label>
+                                <?php admin_m_bold_title01(e('head'), 'meta_html'); ?>
                             </div>
                             <div class="block is-field">
                                 <div data-module="m-input01">
-                                    <textarea id="meta_html" name="meta_html" rows="8" placeholder="<meta name=&quot;description&quot; content=&quot;フォームの概要&quot;>"><?= e($form['meta_html'] ?? '') ?></textarea>
+                                    <textarea id="meta_html" name="meta_html" rows="8" placeholder="<meta name=&quot;description&quot; content=&quot;フォームの概要&quot;>"<?= admin_m_bold_title01_aria_labelledby_attr('meta_html') ?>><?= e($form['meta_html'] ?? '') ?></textarea>
                                 </div>
                             </div>
                             <div class="area is-help">
@@ -80,11 +80,11 @@
             <div class="block is-field">
                 <?php admin_c_input_set01_open(); ?>
                             <div class="block is-title">
-                                <label class="label" data-module="m-boldTitle01" for="custom_css">css</label>
+                                <?php admin_m_bold_title01(e('css'), 'custom_css'); ?>
                             </div>
                             <div class="block is-field">
                                 <div data-module="m-input01">
-                                    <textarea id="custom_css" name="custom_css" rows="8" placeholder=".p-formShow01 {\n  background: #fff;\n}"><?= e($form['custom_css'] ?? '') ?></textarea>
+                                    <textarea id="custom_css" name="custom_css" rows="8" placeholder=".p-formShow01 {\n  background: #fff;\n}"<?= admin_m_bold_title01_aria_labelledby_attr('custom_css') ?>><?= e($form['custom_css'] ?? '') ?></textarea>
                                 </div>
                             </div>
                             <div class="area is-help">
@@ -97,11 +97,11 @@
             <div class="block is-field">
                 <?php admin_c_input_set01_open(); ?>
                             <div class="block is-title">
-                                <label class="label" data-module="m-boldTitle01" for="custom_js">js</label>
+                                <?php admin_m_bold_title01(e('js'), 'custom_js'); ?>
                             </div>
                             <div class="block is-field">
                                 <div data-module="m-input01">
-                                    <textarea id="custom_js" name="custom_js" rows="8" placeholder="document.addEventListener('DOMContentLoaded', function () {\n  console.log('form loaded');\n});"><?= e($form['custom_js'] ?? '') ?></textarea>
+                                    <textarea id="custom_js" name="custom_js" rows="8" placeholder="document.addEventListener('DOMContentLoaded', function () {\n  console.log('form loaded');\n});"<?= admin_m_bold_title01_aria_labelledby_attr('custom_js') ?>><?= e($form['custom_js'] ?? '') ?></textarea>
                                 </div>
                             </div>
                             <div class="area is-help">

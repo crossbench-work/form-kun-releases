@@ -5,6 +5,7 @@
 @use "../../app/components/c-inputSet01/c-inputSet01" as *;
 @use "../../app/components/c-breadcrumb01/c-breadcrumb01" as *;
 @use "../../app/components/m-btn01/m-btn01" as *;
+@use "../../app/components/m-boldTitle01/m-boldTitle01" as *;
 
 body.l-adminShell01 {
   color: #1f2937;
@@ -383,13 +384,6 @@ body.l-adminShell01 {
   font-size: 18px;
   font-weight: 700;
   margin: 0 0 16px;
-}
-
-[data-module="m-boldTitle01"] {
-  margin: 0;
-  font-size: 12px;
-  font-weight: 700;
-  color: #334155;
 }
 
 [data-module="m-labelTitle01"] {

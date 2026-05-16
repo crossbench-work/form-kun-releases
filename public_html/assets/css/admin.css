@@ -444,6 +444,13 @@ body {
   color: #fff;
 }
 
+[data-module=m-boldTitle01] {
+  margin: 0;
+  font-size: 12px;
+  font-weight: 700;
+  color: #334155;
+}
+
 body.l-adminShell01 {
   color: #1f2937;
   background: #f1f5f9;
@@ -770,13 +777,6 @@ body.l-adminShell01 a:hover {
   font-size: 18px;
   font-weight: 700;
   margin: 0 0 16px;
-}
-
-[data-module=m-boldTitle01] {
-  margin: 0;
-  font-size: 12px;
-  font-weight: 700;
-  color: #334155;
 }
 
 [data-module=m-labelTitle01] {
