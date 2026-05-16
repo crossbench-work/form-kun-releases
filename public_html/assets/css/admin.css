@@ -188,32 +188,37 @@ body {
   border-radius: 16px;
   margin-bottom: 16px;
 }
-
 [data-module=c-formBlock01] > .wrapper > .block.is-contents {
   padding: 20px 24px;
 }
 [data-module=c-formBlock01] > .wrapper > .block.is-contents > .area.is-title {
   margin-bottom: 12px;
 }
-[data-module=c-formBlock01] > .wrapper > .block.is-contents > .area.is-field + .area.is-field,
-[data-module=c-formBlock01] > .wrapper > .block.is-contents > .block.is-field + .block.is-field {
-  margin-top: 16px;
-}
-[data-module=c-formBlock01] > .wrapper > .block.is-contents .area.is-title .fb-panel-header {
-  margin-bottom: 0;
-}
-[data-module=c-formBlock01] > .wrapper > .block.is-contents .area.is-title:has(> [data-module=m-btn01]) {
+[data-module=c-formBlock01] > .wrapper > .block.is-contents > .area.is-title:has(> [data-module=m-btn01]) {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 12px;
   flex-wrap: wrap;
 }
+[data-module=c-formBlock01] > .wrapper > .block.is-contents > .area.is-field + .area.is-field {
+  margin-top: 16px;
+}
+[data-module=c-formBlock01] > .wrapper > .block.is-contents .area.is-title .fb-panel-header {
+  margin-bottom: 0;
+}
 [data-module=c-formBlock01] > .wrapper > .block.is-contents .label {
   display: block;
   font-weight: 600;
   margin-bottom: 4px;
   color: #374151;
+}
+[data-module=c-formBlock01] > .wrapper > .block.is-contents .label.is-choice {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 400;
+  margin-bottom: 0;
 }
 [data-module=c-formBlock01] > .wrapper > .block.is-contents .text.is-help {
   font-size: 10px;
@@ -231,7 +236,7 @@ body {
   gap: 10px;
   flex-wrap: wrap;
 }
-[data-module=c-formBlock01] > .wrapper > .block.is-contents :where([data-module=c-formBlock01] > .wrapper > .block.is-contents) .btn {
+:where([data-module=c-formBlock01] > .wrapper > .block.is-contents) .btn {
   display: inline-block;
   padding: 8px 16px;
   border: 1px solid #cbd5e1;
@@ -244,31 +249,31 @@ body {
   text-decoration: none;
   line-height: 1.4;
 }
-[data-module=c-formBlock01] > .wrapper > .block.is-contents :where([data-module=c-formBlock01] > .wrapper > .block.is-contents) .btn:hover {
+:where([data-module=c-formBlock01] > .wrapper > .block.is-contents) .btn:hover {
   background: #f1f5f9;
   text-decoration: none;
 }
-[data-module=c-formBlock01] > .wrapper > .block.is-contents :where([data-module=c-formBlock01] > .wrapper > .block.is-contents) .btn.is-primary {
-  background: #3C8CFD;
-  border-color: #3C8CFD;
+:where([data-module=c-formBlock01] > .wrapper > .block.is-contents) .btn.is-primary {
+  background: #3c8cfd;
+  border-color: #3c8cfd;
   color: #fff;
 }
-[data-module=c-formBlock01] > .wrapper > .block.is-contents :where([data-module=c-formBlock01] > .wrapper > .block.is-contents) .btn.is-primary:hover {
+:where([data-module=c-formBlock01] > .wrapper > .block.is-contents) .btn.is-primary:hover {
   background: #1d4ed8;
 }
-[data-module=c-formBlock01] > .wrapper > .block.is-contents :where([data-module=c-formBlock01] > .wrapper > .block.is-contents) .btn.is-danger {
+:where([data-module=c-formBlock01] > .wrapper > .block.is-contents) .btn.is-danger {
   background: #dc2626;
   border-color: #dc2626;
   color: #fff;
 }
-[data-module=c-formBlock01] > .wrapper > .block.is-contents :where([data-module=c-formBlock01] > .wrapper > .block.is-contents) .btn.is-danger:hover {
+:where([data-module=c-formBlock01] > .wrapper > .block.is-contents) .btn.is-danger:hover {
   background: #b91c1c;
 }
-[data-module=c-formBlock01] > .wrapper > .block.is-contents :where([data-module=c-formBlock01] > .wrapper > .block.is-contents) .btn.is-sm {
+:where([data-module=c-formBlock01] > .wrapper > .block.is-contents) .btn.is-sm {
   padding: 4px 10px;
   font-size: 13px;
 }
-[data-module=c-formBlock01] > .wrapper > .block.is-contents :where([data-module=c-formBlock01] > .wrapper > .block.is-contents) .btn.is-icon {
+:where([data-module=c-formBlock01] > .wrapper > .block.is-contents) .btn.is-icon {
   flex-shrink: 0;
   padding: 8px 10px;
   line-height: 1;
@@ -285,13 +290,6 @@ body {
   border-radius: 3px;
   margin-left: 4px;
   font-weight: 400;
-}
-[data-module=c-formBlock01] > .wrapper > .block.is-contents .label.is-choice {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  font-weight: 400;
-  margin-bottom: 0;
 }
 [data-module=c-formBlock01] > .wrapper > .block.is-contents .fb-basic-display-toggle {
   font-size: 13px;
