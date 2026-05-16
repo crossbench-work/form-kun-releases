@@ -9,6 +9,7 @@
 @use "../../app/components/m-inputSet01/m-inputSet01" as *;
 @use "../../app/components/m-input01/m-input01" as *;
 @use "../../app/components/c-breadcrumb01/c-breadcrumb01" as *;
+@use "../../app/components/c-fieldTypeModal01/c-fieldTypeModal01" as *;
 @use "../../app/components/m-btn01/m-btn01" as *;
 @use "../../app/components/m-deleteBtn01/m-deleteBtn01" as *;
 @use "../../app/components/m-dragHandle01/m-dragHandle01" as *;
@@ -866,82 +867,6 @@ form.is-inline {
       .c-htmlInputEditor01__toggle {
         font-size: 12px;
       }
-    }
-  }
-}
-
-body.is-field-type-modal-open {
-  overflow: hidden;
-}
-
-[data-module="c-fieldTypeModal01"] {
-  &[hidden] {
-    display: none;
-  }
-
-  position: fixed;
-  inset: 0;
-  z-index: 1200;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 24px;
-
-  .c-fieldTypeModal01__backdrop {
-    position: absolute;
-    inset: 0;
-    background: rgba(15, 23, 42, 0.56);
-  }
-
-  .c-fieldTypeModal01__dialog {
-    position: relative;
-    width: min(720px, 100%);
-    max-height: calc(100vh - 48px);
-    overflow: auto;
-    background: #fff;
-    border-radius: 16px;
-    box-shadow: 0 24px 48px rgba(15, 23, 42, 0.18);
-    padding: 24px;
-  }
-
-  .c-fieldTypeModal01__header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 12px;
-    margin-bottom: 20px;
-
-    h2 {
-      margin: 0;
-      font-size: 20px;
-    }
-  }
-
-  .c-fieldTypeModal01__grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    gap: 12px;
-  }
-
-  .c-fieldTypeModal01__option {
-    appearance: none;
-    border: 1px solid #d1d5db;
-    border-radius: 12px;
-    background: #fff;
-    padding: 16px;
-    text-align: left;
-    font-size: 14px;
-    font-weight: 600;
-    color: #1f2937;
-    cursor: pointer;
-    transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
-
-    &:hover,
-    &:focus-visible {
-      border-color: #3C8CFD;
-      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.16);
-      outline: none;
-      background: #eff6ff;
     }
   }
 }

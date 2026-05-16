@@ -8,6 +8,7 @@
  */
 require_once APP_COMPONENTS_DIR . '/c-formEditorItemHeader01/c-formEditorItemHeader01.php';
 require_once APP_COMPONENTS_DIR . '/c-formEditorItemBody01/c-formEditorItemBody01.php';
+require_once APP_COMPONENTS_DIR . '/c-fieldTypeModal01/c-fieldTypeModal01.php';
 require_once APP_COMPONENTS_DIR . '/m-formBuilder01/m-formBuilder01.php';
 require_once APP_COMPONENTS_DIR . '/m-btn01/m-btn01.php';
 require_once APP_COMPONENTS_DIR . '/m-deleteBtn01/m-deleteBtn01.php';

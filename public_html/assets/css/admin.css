@@ -844,6 +844,73 @@ body {
   font-weight: 600;
 }
 
+body.is-field-type-modal-open {
+  overflow: hidden;
+}
+
+[data-module=c-fieldTypeModal01][hidden] {
+  display: none;
+}
+[data-module=c-fieldTypeModal01] {
+  position: fixed;
+  inset: 0;
+  z-index: 1200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+[data-module=c-fieldTypeModal01] .c-fieldTypeModal01__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.56);
+}
+[data-module=c-fieldTypeModal01] .c-fieldTypeModal01__dialog {
+  position: relative;
+  width: min(720px, 100%);
+  max-height: calc(100vh - 48px);
+  overflow: auto;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 24px 48px rgba(15, 23, 42, 0.18);
+  padding: 24px;
+}
+[data-module=c-fieldTypeModal01] .c-fieldTypeModal01__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+[data-module=c-fieldTypeModal01] .c-fieldTypeModal01__header h2 {
+  margin: 0;
+  font-size: 20px;
+}
+[data-module=c-fieldTypeModal01] .c-fieldTypeModal01__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 12px;
+}
+[data-module=c-fieldTypeModal01] .c-fieldTypeModal01__option {
+  appearance: none;
+  border: 1px solid #d1d5db;
+  border-radius: 12px;
+  background: #fff;
+  padding: 16px;
+  text-align: left;
+  font-size: 14px;
+  font-weight: 600;
+  color: #1f2937;
+  cursor: pointer;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+}
+[data-module=c-fieldTypeModal01] .c-fieldTypeModal01__option:hover, [data-module=c-fieldTypeModal01] .c-fieldTypeModal01__option:focus-visible {
+  border-color: #3C8CFD;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.16);
+  outline: none;
+  background: #eff6ff;
+}
+
 [data-module=m-btn01] {
   width: fit-content;
 }
@@ -1706,73 +1773,6 @@ form.is-inline {
 }
 [data-module=c-htmlInputEditor01] > .wrapper > .block.is-toolbar .c-htmlInputEditor01__toggle {
   font-size: 12px;
-}
-
-body.is-field-type-modal-open {
-  overflow: hidden;
-}
-
-[data-module=c-fieldTypeModal01][hidden] {
-  display: none;
-}
-[data-module=c-fieldTypeModal01] {
-  position: fixed;
-  inset: 0;
-  z-index: 1200;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 24px;
-}
-[data-module=c-fieldTypeModal01] .c-fieldTypeModal01__backdrop {
-  position: absolute;
-  inset: 0;
-  background: rgba(15, 23, 42, 0.56);
-}
-[data-module=c-fieldTypeModal01] .c-fieldTypeModal01__dialog {
-  position: relative;
-  width: min(720px, 100%);
-  max-height: calc(100vh - 48px);
-  overflow: auto;
-  background: #fff;
-  border-radius: 16px;
-  box-shadow: 0 24px 48px rgba(15, 23, 42, 0.18);
-  padding: 24px;
-}
-[data-module=c-fieldTypeModal01] .c-fieldTypeModal01__header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  margin-bottom: 20px;
-}
-[data-module=c-fieldTypeModal01] .c-fieldTypeModal01__header h2 {
-  margin: 0;
-  font-size: 20px;
-}
-[data-module=c-fieldTypeModal01] .c-fieldTypeModal01__grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 12px;
-}
-[data-module=c-fieldTypeModal01] .c-fieldTypeModal01__option {
-  appearance: none;
-  border: 1px solid #d1d5db;
-  border-radius: 12px;
-  background: #fff;
-  padding: 16px;
-  text-align: left;
-  font-size: 14px;
-  font-weight: 600;
-  color: #1f2937;
-  cursor: pointer;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
-}
-[data-module=c-fieldTypeModal01] .c-fieldTypeModal01__option:hover, [data-module=c-fieldTypeModal01] .c-fieldTypeModal01__option:focus-visible {
-  border-color: #3C8CFD;
-  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.16);
-  outline: none;
-  background: #eff6ff;
 }
 
 .m-badge01 {
