@@ -10,22 +10,19 @@
 [data-module="c-formBlock01"] > .wrapper > .block.is-contents {
   padding: 20px 24px;
 
-  > .area.is-title,
-  > .block.is-title {
+  > .area.is-title {
     margin-bottom: 12px;
   }
 
-  > .area.is-field + .area.is-field,
-  > .block.is-field + .block.is-field {
+  > .area.is-field + .area.is-field {
     margin-top: 16px;
   }
 
-  .area.is-title .fb-panel-header,
-  .block.is-title .fb-panel-header {
+  .area.is-title .fb-panel-header {
     margin-bottom: 0;
   }
 
-  .block.is-title:has(> [data-module="m-btn01"]) {
+  .area.is-title:has(> [data-module="m-btn01"]) {
     display: flex;
     align-items: center;
     justify-content: space-between;

@@ -192,19 +192,17 @@ body {
 [data-module=c-formBlock01] > .wrapper > .block.is-contents {
   padding: 20px 24px;
 }
-[data-module=c-formBlock01] > .wrapper > .block.is-contents > .area.is-title,
-[data-module=c-formBlock01] > .wrapper > .block.is-contents > .block.is-title {
+[data-module=c-formBlock01] > .wrapper > .block.is-contents > .area.is-title {
   margin-bottom: 12px;
 }
 [data-module=c-formBlock01] > .wrapper > .block.is-contents > .area.is-field + .area.is-field,
 [data-module=c-formBlock01] > .wrapper > .block.is-contents > .block.is-field + .block.is-field {
   margin-top: 16px;
 }
-[data-module=c-formBlock01] > .wrapper > .block.is-contents .area.is-title .fb-panel-header,
-[data-module=c-formBlock01] > .wrapper > .block.is-contents .block.is-title .fb-panel-header {
+[data-module=c-formBlock01] > .wrapper > .block.is-contents .area.is-title .fb-panel-header {
   margin-bottom: 0;
 }
-[data-module=c-formBlock01] > .wrapper > .block.is-contents .block.is-title:has(> [data-module=m-btn01]) {
+[data-module=c-formBlock01] > .wrapper > .block.is-contents .area.is-title:has(> [data-module=m-btn01]) {
   display: flex;
   align-items: center;
   justify-content: space-between;

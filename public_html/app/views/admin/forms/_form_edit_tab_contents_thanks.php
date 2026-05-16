@@ -1,7 +1,7 @@
 <?php /** フォーム編集:「完了画面」タブパネル */ ?>
         <div data-target="c-formEditTabs01__contents" data-tab-panel="thanks" class="area is-contents" role="tabpanel" aria-label="完了画面" hidden>
 <?php admin_c_form_block01_open(); ?>
-            <div class="block is-title">
+            <div class="area is-title">
                 <?php admin_m_large_title01('表示設定'); ?>
                 <?php admin_m_btn01_open(); ?>
                     <button
@@ -14,7 +14,7 @@
                     >プレビュー</button>
                 </div>
             </div>
-            <div class="block is-field">
+            <div class="area is-field">
                 <?php admin_m_input_set01_open(); ?>
                             <div class="area is-title">
                                 <?php admin_m_bold_title01(e('タイトル'), 'thanks_page_title'); ?>
@@ -42,10 +42,10 @@
                     </div>
                 </div>
 <?php admin_c_form_block01_open(); ?>
-            <div class="block is-title">
+            <div class="area is-title">
                 <?php admin_m_large_title01('ボタン設定'); ?>
             </div>
-            <div class="block is-field">
+            <div class="area is-field">
                 <?php admin_m_input_set01_open(); ?>
                             <div class="area is-title">
                                 <?php admin_m_bold_title01(e('ボタンテキスト'), 'thanks_button_text'); ?>
@@ -64,7 +64,7 @@
                     </div>
                 </div>
             </div>
-            <div class="block is-field">
+            <div class="area is-field">
                 <?php admin_m_input_set01_open(); ?>
                             <div class="area is-title">
                                 <?php admin_m_bold_title01(e('ボタンURL'), 'thanks_button_url'); ?>

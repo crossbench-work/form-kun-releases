@@ -3,10 +3,10 @@
 <?php require_once APP_COMPONENTS_DIR . '/c-formBlock01/c-formBlock01.php'; ?>
 <?php require_once APP_COMPONENTS_DIR . '/m-largeTitle01/m-largeTitle01.php'; ?>
 <?php admin_c_form_block01_open(); ?>
-            <div class="block is-title">
+            <div class="area is-title">
                 <?php admin_m_large_title01('サイト'); ?>
             </div>
-            <div class="block is-field">
+            <div class="area is-field">
                 <dl class="admin-settings-dl">
                     <dt>管理画面の表示名</dt>
                     <dd><code><?= e((string) config('site.admin_name', '')) ?></code></dd>
@@ -21,10 +21,10 @@
 <?php admin_c_form_block01_close(); ?>
 
 <?php admin_c_form_block01_open(); ?>
-            <div class="block is-title">
+            <div class="area is-title">
                 <?php admin_m_large_title01('フォーム'); ?>
             </div>
-            <div class="block is-field">
+            <div class="area is-field">
                 <dl class="admin-settings-dl">
                     <dt>現在のフォーム数</dt>
                     <dd>

@@ -1,7 +1,7 @@
 <?php /** フォーム編集:「入力画面」タブパネル */ ?>
         <div data-target="c-formEditTabs01__contents" data-tab-panel="fields" class="area is-contents" role="tabpanel" aria-label="入力画面" hidden>
 <?php admin_c_form_block01_open(); ?>
-            <div class="block is-title">
+            <div class="area is-title">
                 <?php admin_m_large_title01('表示設定'); ?>
                 <?php admin_m_btn01_open(); ?>
                     <button
@@ -14,7 +14,7 @@
                     >プレビュー</button>
                 </div>
             </div>
-            <div class="block is-field">
+            <div class="area is-field">
                 <?php admin_m_input_set01_open(); ?>
                             <div class="area is-title">
                                 <?php admin_m_bold_title01(e('タイトル'), 'input_page_title'); ?>
@@ -42,10 +42,10 @@
                     </div>
                 </div>
 <?php admin_c_form_block01_open(['data-module' => 'm-formBuilder01']); ?>
-            <div class="block is-title">
+            <div class="area is-title">
                 <?php admin_m_large_title01('項目設定'); ?>
             </div>
-            <div class="block is-field">
+            <div class="area is-field">
             <div class="c-formEditor c-formEditorList01" data-module="c-formEditorList01">
                 <div class="wrapper">
                     <div class="block is-contents" data-target="m-formBuilder01__fields">
@@ -67,10 +67,10 @@
                     </div>
                 </div>
 <?php admin_c_form_block01_open(); ?>
-            <div class="block is-title">
+            <div class="area is-title">
                 <?php admin_m_large_title01('ボタン設定'); ?>
             </div>
-            <div class="block is-field">
+            <div class="area is-field">
                 <?php admin_m_input_set01_open(); ?>
                             <div class="area is-title">
                                 <?php admin_m_bold_title01(e('ボタンテキスト'), 'confirm_button_text'); ?>
