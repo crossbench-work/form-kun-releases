@@ -494,6 +494,29 @@ body {
   color: #fff;
 }
 
+[data-module=m-deleteBtn01] {
+  appearance: none;
+  border: 1px solid #fecaca;
+  background: #fff5f5;
+  color: #dc2626;
+  border-radius: 6px;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+[data-module=m-deleteBtn01]:hover {
+  background: #fee2e2;
+  border-color: #fca5a5;
+}
+
+[data-module=m-formBuilder01] .c-formEditor__choiceItem [data-module=m-deleteBtn01] {
+  flex-shrink: 0;
+}
+
 [data-module=m-boldTitle01] {
   margin: 0;
   font-size: 12px;
@@ -817,25 +840,6 @@ body.l-adminShell01 a:hover {
   flex: 1;
   height: 1px;
   background: #e2e8f0;
-}
-
-[data-module=m-deleteBtn01] {
-  appearance: none;
-  border: 1px solid #fecaca;
-  background: #fff5f5;
-  color: #dc2626;
-  border-radius: 6px;
-  width: 24px;
-  height: 24px;
-  padding: 0;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-}
-[data-module=m-deleteBtn01]:hover {
-  background: #fee2e2;
-  border-color: #fca5a5;
 }
 
 [data-module=m-requiredCheck01] label,
@@ -1711,9 +1715,6 @@ body.is-field-type-modal-open {
 [data-module=m-formBuilder01] .c-formEditor__choiceItem .c-formEditor__child__field {
   flex: 1 1 auto;
   min-width: 0;
-}
-[data-module=m-formBuilder01] .c-formEditor__choiceItem [data-module=m-deleteBtn01] {
-  flex-shrink: 0;
 }
 [data-module=m-formBuilder01] .c-formEditor__textMultiItem > .wrapper {
   display: flex;

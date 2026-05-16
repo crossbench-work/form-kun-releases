@@ -6,6 +6,7 @@
 @use "../../app/components/m-input01/m-input01" as *;
 @use "../../app/components/c-breadcrumb01/c-breadcrumb01" as *;
 @use "../../app/components/m-btn01/m-btn01" as *;
+@use "../../app/components/m-deleteBtn01/m-deleteBtn01" as *;
 @use "../../app/components/m-boldTitle01/m-boldTitle01" as *;
 
 body.l-adminShell01 {
@@ -366,26 +367,6 @@ body.l-adminShell01 {
     flex: 1;
     height: 1px;
     background: #e2e8f0;
-  }
-}
-
-[data-module="m-deleteBtn01"] {
-  appearance: none;
-  border: 1px solid #fecaca;
-  background: #fff5f5;
-  color: #dc2626;
-  border-radius: 6px;
-  width: 24px;
-  height: 24px;
-  padding: 0;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-
-  &:hover {
-    background: #fee2e2;
-    border-color: #fca5a5;
   }
 }
 
@@ -1452,10 +1433,6 @@ body.is-field-type-modal-open {
     .c-formEditor__child__field {
       flex: 1 1 auto;
       min-width: 0;
-    }
-
-    [data-module="m-deleteBtn01"] {
-      flex-shrink: 0;
     }
   }
 
