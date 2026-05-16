@@ -10,12 +10,12 @@
                                 <?php admin_m_bold_title01(e('送信方式'), 'mail_transport'); ?>
                             </div>
                             <div class="block is-field">
-                                <div data-module="m-input01">
+                                <?php admin_m_input01_open(); ?>
                                     <select id="mail_transport" name="mail_transport"<?= admin_m_bold_title01_aria_labelledby_attr('mail_transport') ?>>
                                         <option value="mail" <?= ($form['mail_transport'] ?? 'mail') === 'mail' ? 'selected' : '' ?>>PHP mail() / mb_send_mail()</option>
                                         <option value="smtp" <?= ($form['mail_transport'] ?? '') === 'smtp' ? 'selected' : '' ?>>SMTP</option>
                                     </select>
-                                </div>
+                                <?php admin_m_input01_close(); ?>
                             </div>
                         </div>
                     </div>
@@ -27,9 +27,9 @@
                                 <?php admin_m_bold_title01(e('差出人メールアドレス'), 'mail_from_email'); ?>
                             </div>
                             <div class="block is-field">
-                                <div data-module="m-input01">
+                                <?php admin_m_input01_open(); ?>
                                     <input type="email" id="mail_from_email" name="mail_from_email" value="<?= e($form['mail_from_email'] ?? '') ?>" placeholder="noreply@example.com"<?= admin_m_bold_title01_aria_labelledby_attr('mail_from_email') ?>>
-                                </div>
+                                <?php admin_m_input01_close(); ?>
                             </div>
                         </div>
                     </div>
@@ -41,9 +41,9 @@
                                 <?php admin_m_bold_title01(e('差出人名'), 'mail_from_name'); ?>
                             </div>
                             <div class="block is-field">
-                                <div data-module="m-input01">
+                                <?php admin_m_input01_open(); ?>
                                     <input type="text" id="mail_from_name" name="mail_from_name" value="<?= e($form['mail_from_name'] ?? '') ?>"<?= admin_m_bold_title01_aria_labelledby_attr('mail_from_name') ?>>
-                                </div>
+                                <?php admin_m_input01_close(); ?>
                             </div>
                         </div>
                     </div>
@@ -55,9 +55,9 @@
                                 <?php admin_m_bold_title01(e('SMTPホスト'), 'mail_smtp_host'); ?>
                             </div>
                             <div class="block is-field">
-                                <div data-module="m-input01">
+                                <?php admin_m_input01_open(); ?>
                                     <input type="text" id="mail_smtp_host" name="mail_smtp_host" value="<?= e($form['mail_smtp_host'] ?? '') ?>"<?= admin_m_bold_title01_aria_labelledby_attr('mail_smtp_host') ?>>
-                                </div>
+                                <?php admin_m_input01_close(); ?>
                             </div>
                         </div>
                     </div>
@@ -69,9 +69,9 @@
                                 <?php admin_m_bold_title01(e('SMTPポート'), 'mail_smtp_port'); ?>
                             </div>
                             <div class="block is-field">
-                                <div data-module="m-input01">
+                                <?php admin_m_input01_open(); ?>
                                     <input type="number" id="mail_smtp_port" name="mail_smtp_port" value="<?= e($form['mail_smtp_port'] ?? '25') ?>" min="1" max="65535"<?= admin_m_bold_title01_aria_labelledby_attr('mail_smtp_port') ?>>
-                                </div>
+                                <?php admin_m_input01_close(); ?>
                             </div>
                         </div>
                     </div>
@@ -83,13 +83,13 @@
                                 <?php admin_m_bold_title01(e('暗号化方式'), 'mail_smtp_secure'); ?>
                             </div>
                             <div class="block is-field">
-                                <div data-module="m-input01">
+                                <?php admin_m_input01_open(); ?>
                                     <select id="mail_smtp_secure" name="mail_smtp_secure"<?= admin_m_bold_title01_aria_labelledby_attr('mail_smtp_secure') ?>>
                                         <option value="" <?= ($form['mail_smtp_secure'] ?? '') === '' ? 'selected' : '' ?>>なし</option>
                                         <option value="ssl" <?= ($form['mail_smtp_secure'] ?? '') === 'ssl' ? 'selected' : '' ?>>SSL</option>
                                         <option value="tls" <?= ($form['mail_smtp_secure'] ?? '') === 'tls' ? 'selected' : '' ?>>STARTTLS</option>
                                     </select>
-                                </div>
+                                <?php admin_m_input01_close(); ?>
                             </div>
                         </div>
                     </div>
@@ -101,9 +101,9 @@
                                 <?php admin_m_bold_title01(e('SMTPユーザー名'), 'mail_smtp_username'); ?>
                             </div>
                             <div class="block is-field">
-                                <div data-module="m-input01">
+                                <?php admin_m_input01_open(); ?>
                                     <input type="text" id="mail_smtp_username" name="mail_smtp_username" value="<?= e($form['mail_smtp_username'] ?? '') ?>" autocomplete="off"<?= admin_m_bold_title01_aria_labelledby_attr('mail_smtp_username') ?>>
-                                </div>
+                                <?php admin_m_input01_close(); ?>
                             </div>
                         </div>
                     </div>
@@ -115,9 +115,9 @@
                                 <?php admin_m_bold_title01(e('SMTPパスワード'), 'mail_smtp_password'); ?>
                             </div>
                             <div class="block is-field">
-                                <div data-module="m-input01">
+                                <?php admin_m_input01_open(); ?>
                                     <input type="password" id="mail_smtp_password" name="mail_smtp_password" value="" autocomplete="new-password"<?= admin_m_bold_title01_aria_labelledby_attr('mail_smtp_password') ?>>
-                                </div>
+                                <?php admin_m_input01_close(); ?>
                                 <p class="text is-help">空欄のまま保存すると現在の値を保持します。<?= !empty($form['mail_smtp_password_configured']) ? '現在は設定済みです。' : '現在は未設定です。' ?></p>
                                 <?php if (!empty($form['mail_smtp_password_configured'])): ?>
                                     <label class="label is-choice">
@@ -136,9 +136,9 @@
                                 <?php admin_m_bold_title01(e('EHLO ホスト名'), 'mail_smtp_ehlo_host'); ?>
                             </div>
                             <div class="block is-field">
-                                <div data-module="m-input01">
+                                <?php admin_m_input01_open(); ?>
                                     <input type="text" id="mail_smtp_ehlo_host" name="mail_smtp_ehlo_host" value="<?= e($form['mail_smtp_ehlo_host'] ?? '') ?>" placeholder="localhost"<?= admin_m_bold_title01_aria_labelledby_attr('mail_smtp_ehlo_host') ?>>
-                                </div>
+                                <?php admin_m_input01_close(); ?>
                             </div>
                         </div>
                     </div>
@@ -150,9 +150,9 @@
                                 <?php admin_m_bold_title01(e('タイムアウト（秒）'), 'mail_smtp_timeout'); ?>
                             </div>
                             <div class="block is-field">
-                                <div data-module="m-input01">
+                                <?php admin_m_input01_open(); ?>
                                     <input type="number" id="mail_smtp_timeout" name="mail_smtp_timeout" value="<?= e($form['mail_smtp_timeout'] ?? '10') ?>" min="1" max="300"<?= admin_m_bold_title01_aria_labelledby_attr('mail_smtp_timeout') ?>>
-                                </div>
+                                <?php admin_m_input01_close(); ?>
                             </div>
                         </div>
                     </div>
@@ -191,9 +191,9 @@
                                 <?php admin_m_bold_title01(e('送信先メールアドレス（カンマ区切りで複数可）'), 'admin_emails'); ?>
                             </div>
                             <div class="block is-field">
-                                <div data-module="m-input01">
+                                <?php admin_m_input01_open(); ?>
                                     <input type="text" id="admin_emails" name="admin_emails" value="<?= e($form['admin_emails']) ?>" placeholder="admin@example.com, sub@example.com"<?= admin_m_bold_title01_aria_labelledby_attr('admin_emails') ?>>
-                                </div>
+                                <?php admin_m_input01_close(); ?>
                             </div>
                         </div>
                     </div>
@@ -205,9 +205,9 @@
                                 <?php admin_m_bold_title01(e('件名'), 'mail_subject_admin'); ?>
                             </div>
                             <div class="block is-field">
-                                <div data-module="m-input01">
+                                <?php admin_m_input01_open(); ?>
                                     <input type="text" id="mail_subject_admin" name="mail_subject_admin" value="<?= e($form['mail_subject_admin']) ?>" placeholder="[{{__form_title__}}] 新規送信"<?= admin_m_bold_title01_aria_labelledby_attr('mail_subject_admin') ?>>
-                                </div>
+                                <?php admin_m_input01_close(); ?>
                             </div>
                         </div>
                     </div>
@@ -219,9 +219,9 @@
                                 <?php admin_m_bold_title01(e('表示設定'), 'mail_template_admin'); ?>
                             </div>
                             <div class="block is-field">
-                                <div data-module="m-input01">
+                                <?php admin_m_input01_open(); ?>
                                     <textarea id="mail_template_admin" name="mail_template_admin" rows="6"<?= admin_m_bold_title01_aria_labelledby_attr('mail_template_admin') ?>><?= e($form['mail_template_admin']) ?></textarea>
-                                </div>
+                                <?php admin_m_input01_close(); ?>
                             </div>
                         </div>
                     </div>
@@ -267,9 +267,9 @@
                                 <?php admin_m_bold_title01(e('送信先のフィールドキー（メール型項目）'), 'reply_from_field_key'); ?>
                             </div>
                             <div class="block is-field">
-                                <div data-module="m-input01">
+                                <?php admin_m_input01_open(); ?>
                                     <input type="text" id="reply_from_field_key" name="reply_from_field_key" value="<?= e($form['reply_from_field_key']) ?>" placeholder="メールアドレス項目のフィールドキー（UUID または任意のキー）"<?= admin_m_bold_title01_aria_labelledby_attr('reply_from_field_key') ?>>
-                                </div>
+                                <?php admin_m_input01_close(); ?>
                             </div>
                         </div>
                     </div>
@@ -281,9 +281,9 @@
                                 <?php admin_m_bold_title01(e('件名'), 'reply_subject'); ?>
                             </div>
                             <div class="block is-field">
-                                <div data-module="m-input01">
+                                <?php admin_m_input01_open(); ?>
                                     <input type="text" id="reply_subject" name="reply_subject" value="<?= e($form['reply_subject']) ?>"<?= admin_m_bold_title01_aria_labelledby_attr('reply_subject') ?>>
-                                </div>
+                                <?php admin_m_input01_close(); ?>
                             </div>
                         </div>
                     </div>
@@ -295,9 +295,9 @@
                                 <?php admin_m_bold_title01(e('表示設定'), 'reply_template'); ?>
                             </div>
                             <div class="block is-field">
-                                <div data-module="m-input01">
+                                <?php admin_m_input01_open(); ?>
                                     <textarea id="reply_template" name="reply_template" rows="6"<?= admin_m_bold_title01_aria_labelledby_attr('reply_template') ?>><?= e($form['reply_template']) ?></textarea>
-                                </div>
+                                <?php admin_m_input01_close(); ?>
                             </div>
                         </div>
                     </div>

@@ -4,15 +4,15 @@
     <?= \Core\Csrf::field() ?>
     <div class="box is-field">
         <?php admin_m_bold_title01(e('ユーザー名'), 'username'); ?>
-        <div data-module="m-input01">
+        <?php admin_m_input01_open(); ?>
             <input type="text" id="username" name="username" autocomplete="username" required<?= admin_m_bold_title01_aria_labelledby_attr('username') ?>>
-        </div>
+        <?php admin_m_input01_close(); ?>
     </div>
     <div class="box is-field">
         <?php admin_m_bold_title01(e('パスワード'), 'password'); ?>
-        <div data-module="m-input01">
+        <?php admin_m_input01_open(); ?>
             <input type="password" id="password" name="password" autocomplete="current-password" required<?= admin_m_bold_title01_aria_labelledby_attr('password') ?>>
-        </div>
+        <?php admin_m_input01_close(); ?>
     </div>
     <div class="area is-actions">
         <button type="submit" class="btn is-primary">ログイン</button>

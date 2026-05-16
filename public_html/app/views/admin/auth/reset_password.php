@@ -11,16 +11,16 @@
     <input type="hidden" name="token" value="<?= e($token) ?>">
     <div class="box is-field">
         <?php admin_m_bold_title01(e('新しいパスワード'), 'password'); ?>
-        <div data-module="m-input01">
+        <?php admin_m_input01_open(); ?>
             <input type="password" id="password" name="password" autocomplete="new-password" required minlength="8"<?= admin_m_bold_title01_aria_labelledby_attr('password') ?>>
-        </div>
+        <?php admin_m_input01_close(); ?>
         <p class="text is-help">8文字以上</p>
     </div>
     <div class="box is-field">
         <?php admin_m_bold_title01(e('新しいパスワード（確認）'), 'password_confirm'); ?>
-        <div data-module="m-input01">
+        <?php admin_m_input01_open(); ?>
             <input type="password" id="password_confirm" name="password_confirm" autocomplete="new-password" required<?= admin_m_bold_title01_aria_labelledby_attr('password_confirm') ?>>
-        </div>
+        <?php admin_m_input01_close(); ?>
     </div>
     <div class="area is-actions">
         <button type="submit" class="btn is-primary">設定する</button>

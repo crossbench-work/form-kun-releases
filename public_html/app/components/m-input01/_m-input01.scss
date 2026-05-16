@@ -1,5 +1,5 @@
 // 管理画面の入力ラッパー m-input01（data-module="m-input01"）
-// マークアップは各ビューで `<div data-module="m-input01">` を直接記述
+// マークアップは app/components/m-input01/m-input01.php（admin_m_input01_open / close）を参照
 
 [data-module="m-input01"] {
   display: block;

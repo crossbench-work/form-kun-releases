@@ -24,9 +24,9 @@
                                 </label>
                             </div>
                             <div class="block is-field">
-                                <div data-module="m-input01">
+                                <?php admin_m_input01_open(); ?>
                                     <input type="text" id="confirm_page_title" name="confirm_page_title" value="<?= e($form['confirm_page_title'] ?? '') ?>"<?= admin_m_bold_title01_aria_labelledby_attr('confirm_page_title') ?>>
-                                </div>
+                                <?php admin_m_input01_close(); ?>
                             </div>
                         </div>
                     </div>
@@ -46,9 +46,9 @@
                                 <?php admin_m_bold_title01(e('送信ボタンテキスト'), 'submit_button_text'); ?>
                             </div>
                             <div class="block is-field">
-                                <div data-module="m-input01">
+                                <?php admin_m_input01_open(); ?>
                                     <input type="text" id="submit_button_text" name="submit_button_text" value="<?= e($form['submit_button_text'] ?? '送信する') ?>"<?= admin_m_bold_title01_aria_labelledby_attr('submit_button_text') ?>>
-                                </div>
+                                <?php admin_m_input01_close(); ?>
                             </div>
                         </div>
                     </div>
@@ -60,9 +60,9 @@
                                 <?php admin_m_bold_title01(e('戻るボタンテキスト'), 'back_button_text'); ?>
                             </div>
                             <div class="block is-field">
-                                <div data-module="m-input01">
+                                <?php admin_m_input01_open(); ?>
                                     <input type="text" id="back_button_text" name="back_button_text" value="<?= e($form['back_button_text'] ?? '入力に戻る') ?>"<?= admin_m_bold_title01_aria_labelledby_attr('back_button_text') ?>>
-                                </div>
+                                <?php admin_m_input01_close(); ?>
                             </div>
                         </div>
                     </div>

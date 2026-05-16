@@ -24,9 +24,9 @@
                                 </label>
                             </div>
                             <div class="block is-field">
-                                <div data-module="m-input01">
+                                <?php admin_m_input01_open(); ?>
                                     <input type="text" id="thanks_page_title" name="thanks_page_title" value="<?= e($form['thanks_page_title'] ?? '') ?>"<?= admin_m_bold_title01_aria_labelledby_attr('thanks_page_title') ?>>
-                                </div>
+                                <?php admin_m_input01_close(); ?>
                             </div>
                         </div>
                     </div>
@@ -46,9 +46,9 @@
                                 <?php admin_m_bold_title01(e('ボタンテキスト'), 'thanks_button_text'); ?>
                             </div>
                             <div class="block is-field">
-                                <div data-module="m-input01">
+                                <?php admin_m_input01_open(); ?>
                                     <input type="text" id="thanks_button_text" name="thanks_button_text" value="<?= e($form['thanks_button_text'] ?? 'トップへ戻る') ?>"<?= admin_m_bold_title01_aria_labelledby_attr('thanks_button_text') ?>>
-                                </div>
+                                <?php admin_m_input01_close(); ?>
                             </div>
                         </div>
                     </div>
@@ -60,9 +60,9 @@
                                 <?php admin_m_bold_title01(e('ボタンURL'), 'thanks_button_url'); ?>
                             </div>
                             <div class="block is-field">
-                                <div data-module="m-input01">
+                                <?php admin_m_input01_open(); ?>
                                     <input type="text" id="thanks_button_url" name="thanks_button_url" value="<?= e($form['thanks_button_url'] ?? '/') ?>" placeholder="/ または https://example.com/"<?= admin_m_bold_title01_aria_labelledby_attr('thanks_button_url') ?>>
-                                </div>
+                                <?php admin_m_input01_close(); ?>
                             </div>
                         </div>
                     </div>

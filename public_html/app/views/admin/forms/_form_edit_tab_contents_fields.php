@@ -24,9 +24,9 @@
                                 </label>
                             </div>
                             <div class="block is-field">
-                                <div data-module="m-input01">
+                                <?php admin_m_input01_open(); ?>
                                     <input type="text" id="input_page_title" name="input_page_title" value="<?= e($form['input_page_title'] ?? '') ?>"<?= admin_m_bold_title01_aria_labelledby_attr('input_page_title') ?>>
-                                </div>
+                                <?php admin_m_input01_close(); ?>
                             </div>
                         </div>
                     </div>
@@ -71,9 +71,9 @@
                                 <?php admin_m_bold_title01(e('ボタンテキスト'), 'confirm_button_text'); ?>
                             </div>
                             <div class="block is-field">
-                                <div data-module="m-input01">
+                                <?php admin_m_input01_open(); ?>
                                     <input type="text" id="confirm_button_text" name="confirm_button_text" value="<?= e($form['confirm_button_text'] ?? '入力内容を確認する') ?>"<?= admin_m_bold_title01_aria_labelledby_attr('confirm_button_text') ?>>
-                                </div>
+                                <?php admin_m_input01_close(); ?>
                             </div>
                         </div>
                     </div>

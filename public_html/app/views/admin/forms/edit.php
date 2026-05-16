@@ -101,9 +101,9 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                                                                                             <?php admin_m_bold_title01(e('ラベル'), $labelInputId); ?>
                                                                                         </div>
                                                                                         <div class="block is-field">
-                                                                                            <div data-module="m-input01">
+                                                                                            <?php admin_m_input01_open(); ?>
                                                                                                 <input type="text" id="<?= e($labelInputId) ?>" name="<?= e($namePrefix) ?>[<?= $i ?>][label]" value="<?= e($labelValue) ?>" data-name="label" data-target="c-descriptionEditor__labelInput"<?= admin_m_bold_title01_aria_labelledby_attr($labelInputId) ?>>
-                                                                                            </div>
+                                                                                            <?php admin_m_input01_close(); ?>
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
@@ -115,9 +115,9 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                                                                                             <?php admin_m_bold_title01(e('表示位置'), $positionInputId); ?>
                                                                                         </div>
                                                                                         <div class="block is-field">
-                                                                                            <div data-module="m-input01">
+                                                                                            <?php admin_m_input01_open(); ?>
                                                                                                 <select id="<?= e($positionInputId) ?>" name="<?= e($namePrefix) ?>[<?= $i ?>][position]" class="fb-description-position" data-name="position" data-value="<?= e((string) ($block['position'] ?? 0)) ?>"<?= admin_m_bold_title01_aria_labelledby_attr($positionInputId) ?>></select>
-                                                                                            </div>
+                                                                                            <?php admin_m_input01_close(); ?>
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
@@ -132,9 +132,9 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                                                                                             <div data-module="c-htmlInputEditor01" data-html-toggle-editor>
                                                                                                 <div class="wrapper">
                                                                                                     <div class="block is-editor">
-                                                                                                        <div data-module="m-input01">
+                                                                                                        <?php admin_m_input01_open(); ?>
                                                                                                             <textarea id="<?= e($htmlInputId) ?>" name="<?= e($namePrefix) ?>[<?= $i ?>][html]" rows="6" data-name="html" data-target="c-htmlInputEditor01__textarea"<?= admin_m_bold_title01_aria_labelledby_attr($htmlInputId) ?>><?= e((string) ($block['html'] ?? '')) ?></textarea>
-                                                                                                        </div>
+                                                                                                        <?php admin_m_input01_close(); ?>
                                                                                                     </div>
                                                                                                     <div class="block is-toolbar">
                                                                                                         <label class="label is-choice c-htmlInputEditor01__toggle">
@@ -318,9 +318,9 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                                                 <?php admin_m_bold_title01(e('ラベル')); ?>
                                             </div>
                                             <div class="block is-field">
-                                                <div data-module="m-input01">
+                                                <?php admin_m_input01_open(); ?>
                                                     <input type="text" data-name="label" data-target="c-descriptionEditor__labelInput">
-                                                </div>
+                                                <?php admin_m_input01_close(); ?>
                                             </div>
                                         </div>
                                     </div>
@@ -332,9 +332,9 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                                                 <?php admin_m_bold_title01(e('表示位置')); ?>
                                             </div>
                                             <div class="block is-field">
-                                                <div data-module="m-input01">
+                                                <?php admin_m_input01_open(); ?>
                                                     <select class="fb-description-position" data-name="position" data-value="0" aria-label="説明文の表示位置"></select>
-                                                </div>
+                                                <?php admin_m_input01_close(); ?>
                                             </div>
                                         </div>
                                     </div>
@@ -349,9 +349,9 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                                                 <div data-module="c-htmlInputEditor01" data-html-toggle-editor>
                                                     <div class="wrapper">
                                                         <div class="block is-editor">
-                                                            <div data-module="m-input01">
+                                                            <?php admin_m_input01_open(); ?>
                                                                 <textarea rows="6" data-name="html" data-target="c-htmlInputEditor01__textarea"></textarea>
-                                                            </div>
+                                                            <?php admin_m_input01_close(); ?>
                                                         </div>
                                                         <div class="block is-toolbar">
                                                             <label class="label is-choice c-htmlInputEditor01__toggle">
@@ -437,11 +437,11 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                                                     <div class="wrapper">
                                                         <div class="block is-contents">
                                                             <div class="area is-title"><label class="label" data-module="m-labelTitle01">ラベル</label></div>
-                                                            <div class="area is-field"><div data-module="m-input01"><input type="text" data-name="label" data-target="c-formEditor__labelInput"></div></div>
+                                                            <div class="area is-field"><?php admin_m_input01_open(); ?><input type="text" data-name="label" data-target="c-formEditor__labelInput"><?php admin_m_input01_close(); ?></div>
                                                         </div>
                                                         <div class="block is-contents">
                                                             <div class="area is-title"><div class="c-formEditor__fieldKeyColumn"><label class="label" data-module="m-labelTitle01">フィールドキー</label></div></div>
-                                                            <div class="area is-field"><div class="c-formEditor__fieldKey"><div data-module="m-input01"><input type="text" data-name="field_key" data-target="c-formEditor__fieldKeyInput" class="is-locked" readonly spellcheck="false"></div><button type="button" class="btn is-icon" data-target="c-formEditor__fieldKeyLock" aria-label="キーを編集" title="編集する" aria-pressed="true"><svg data-target="c-formEditor__fieldKeyLockedIcon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg><svg data-target="c-formEditor__fieldKeyOpenIcon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:none" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M8 11V7a4 4 0 118 0m-4 8v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2z"/></svg></button></div></div>
+                                                            <div class="area is-field"><div class="c-formEditor__fieldKey"><?php admin_m_input01_open(); ?><input type="text" data-name="field_key" data-target="c-formEditor__fieldKeyInput" class="is-locked" readonly spellcheck="false"><?php admin_m_input01_close(); ?><button type="button" class="btn is-icon" data-target="c-formEditor__fieldKeyLock" aria-label="キーを編集" title="編集する" aria-pressed="true"><svg data-target="c-formEditor__fieldKeyLockedIcon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg><svg data-target="c-formEditor__fieldKeyOpenIcon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:none" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M8 11V7a4 4 0 118 0m-4 8v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2z"/></svg></button></div></div>
                                                         </div>
                                                         <input type="hidden" data-name="type" data-target="c-formEditor__type" value="text_multi" data-type-label="<?= e(\Models\FormField::typeLabel('text_multi')) ?>">
                                                     </div>
@@ -470,13 +470,13 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                                                                     <div data-target="c-formEditor__regex">
                                                                         <div class="c-formEditor__regexList">
                                                                             <div class="c-formEditor__regexRow">
-                                                                                <div data-module="m-input01">
+                                                                                <?php admin_m_input01_open(); ?>
                                                                                     <select data-target="c-formEditor__regexKind" aria-label="入力チェックの種類"><?php foreach ($regexPresetChoices as $patVal => $patLabel): ?><option value="<?= e($patVal) ?>"><?= e($patLabel) ?></option><?php endforeach; ?><option value="<?= e($FB_REGEX_CHECKBOX_LIMIT) ?>">選択数を設定する</option></select>
-                                                                                </div>
+                                                                                <?php admin_m_input01_close(); ?>
                                                                                 <div class="c-formEditor__regexCustom" style="display:none">
-                                                                                    <div data-module="m-input01">
+                                                                                    <?php admin_m_input01_open(); ?>
                                                                                         <input type="text" data-target="c-formEditor__regexCustomInput" placeholder="正規表現" spellcheck="false" autocomplete="off">
-                                                                                    </div>
+                                                                                    <?php admin_m_input01_close(); ?>
                                                                                 </div>
                                                                                 <input type="hidden" data-target="c-formEditor__regexValue" value="">
                                                                             </div>
@@ -486,11 +486,11 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                                                                             <div class="wrapper">
                                                                                 <div class="block is-contents">
                                                                                     <div class="area is-title"><label class="label" data-module="m-labelTitle01">最小選択数</label></div>
-                                                                                    <div class="area is-field"><div data-module="m-input01"><input type="number" min="1" data-name="checkbox_min_selections"></div></div>
+                                                                                    <div class="area is-field"><?php admin_m_input01_open(); ?><input type="number" min="1" data-name="checkbox_min_selections"><?php admin_m_input01_close(); ?></div>
                                                                                 </div>
                                                                                 <div class="block is-contents">
                                                                                     <div class="area is-title"><label class="label" data-module="m-labelTitle01">最大選択数</label></div>
-                                                                                    <div class="area is-field"><div data-module="m-input01"><input type="number" min="1" data-name="checkbox_max_selections"></div></div>
+                                                                                    <div class="area is-field"><?php admin_m_input01_open(); ?><input type="number" min="1" data-name="checkbox_max_selections"><?php admin_m_input01_close(); ?></div>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
@@ -498,7 +498,7 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <div class="block is-contents" data-target="c-formEditor__minMaxLength"><div class="area is-title"><label class="label" data-module="m-labelTitle01">文字数制限（任意）</label></div><div class="area is-field"><div class="c-formEditor__child__field"><div class="wrapper"><div class="block is-contents"><div class="area is-title"><label data-module="m-labelSmallTitle01">最小</label></div><div class="area is-field"><div data-module="m-input01"><input type="number" min="1" data-name="min_length" placeholder="最小"></div></div></div><div class="block is-contents"><div class="area is-title"><label data-module="m-labelSmallTitle01">最大</label></div><div class="area is-field"><div data-module="m-input01"><input type="number" min="1" data-name="max_length" placeholder="最大"></div></div></div></div></div></div></div>
+                                                        <div class="block is-contents" data-target="c-formEditor__minMaxLength"><div class="area is-title"><label class="label" data-module="m-labelTitle01">文字数制限（任意）</label></div><div class="area is-field"><div class="c-formEditor__child__field"><div class="wrapper"><div class="block is-contents"><div class="area is-title"><label data-module="m-labelSmallTitle01">最小</label></div><div class="area is-field"><?php admin_m_input01_open(); ?><input type="number" min="1" data-name="min_length" placeholder="最小"><?php admin_m_input01_close(); ?></div></div><div class="block is-contents"><div class="area is-title"><label data-module="m-labelSmallTitle01">最大</label></div><div class="area is-field"><?php admin_m_input01_open(); ?><input type="number" min="1" data-name="max_length" placeholder="最大"><?php admin_m_input01_close(); ?></div></div></div></div></div></div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -529,7 +529,7 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                                                                                                     <div class="wrapper">
                                                                                                         <div class="block is-contents">
                                                                                                             <div class="area is-field">
-                                                                                                                <div data-module="m-input01"><input type="text" data-target="c-formEditor__choiceInput" placeholder="選択肢"></div>
+                                                                                                                <?php admin_m_input01_open(); ?><input type="text" data-target="c-formEditor__choiceInput" placeholder="選択肢"><?php admin_m_input01_close(); ?>
                                                                                                             </div>
                                                                                                         </div>
                                                                                                     </div>
@@ -564,7 +564,7 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                                             <div class="block is-field">
                                                 <div class="c-formEditor__field">
                                                     <div class="wrapper">
-                                                        <div class="block is-contents" data-target="c-formEditor__placeholder"><div class="area is-title"><label class="label" data-module="m-labelTitle01">プレースホルダ（任意）</label></div><div class="area is-field"><div data-module="m-input01"><input type="text" data-name="placeholder"></div></div></div>
+                                                        <div class="block is-contents" data-target="c-formEditor__placeholder"><div class="area is-title"><label class="label" data-module="m-labelTitle01">プレースホルダ（任意）</label></div><div class="area is-field"><?php admin_m_input01_open(); ?><input type="text" data-name="placeholder"><?php admin_m_input01_close(); ?></div></div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -579,8 +579,8 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                                                                             <div class="block is-contents">
                                                                                 <div class="c-formEditor__child__field">
                                                                                     <div class="wrapper">
-                                                                                        <div class="block is-contents"><div class="area is-title"><label data-module="m-labelSmallTitle01">表示</label></div><div class="area is-field"><div data-module="m-input01"><input type="text" data-target="c-formEditor__textMultiLabelInput"></div></div></div>
-                                                                                        <div class="block is-contents"><div class="area is-title"><label data-module="m-labelSmallTitle01">入力例</label></div><div class="area is-field"><div data-module="m-input01"><input type="text" data-target="c-formEditor__textMultiPlaceholderInput"></div></div></div>
+                                                                                        <div class="block is-contents"><div class="area is-title"><label data-module="m-labelSmallTitle01">表示</label></div><div class="area is-field"><?php admin_m_input01_open(); ?><input type="text" data-target="c-formEditor__textMultiLabelInput"><?php admin_m_input01_close(); ?></div></div>
+                                                                                        <div class="block is-contents"><div class="area is-title"><label data-module="m-labelSmallTitle01">入力例</label></div><div class="area is-field"><?php admin_m_input01_open(); ?><input type="text" data-target="c-formEditor__textMultiPlaceholderInput"><?php admin_m_input01_close(); ?></div></div>
                                                                                     </div>
                                                                                 </div>
                                                                                 <button type="button" data-module="m-deleteBtn01" data-target="c-formEditor__textMultiRemove" aria-label="削除" title="削除"><svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 6h18"/><path stroke-linecap="round" stroke-linejoin="round" d="M8 6V4h8v2"/><path stroke-linecap="round" stroke-linejoin="round" d="M19 6l-1 14H6L5 6"/><path stroke-linecap="round" stroke-linejoin="round" d="M10 11v6M14 11v6"/></svg></button>
@@ -610,7 +610,7 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                                                                 <div data-module="c-htmlInputEditor01" data-html-toggle-editor>
                                                                     <div class="wrapper">
                                                                         <div class="block is-editor">
-                                                                            <div data-module="m-input01"><textarea data-name="help_text" rows="3" data-target="c-htmlInputEditor01__textarea"></textarea></div>
+                                                                            <?php admin_m_input01_open(); ?><textarea data-name="help_text" rows="3" data-target="c-htmlInputEditor01__textarea"></textarea><?php admin_m_input01_close(); ?>
                                                                         </div>
                                                                         <div class="block is-toolbar">
                                                                             <label class="label is-choice c-htmlInputEditor01__toggle">
