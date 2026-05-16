@@ -12,13 +12,16 @@ $formEditTabsSpec = [
     ['panel' => 'mail', 'label' => '通知', 'selected' => false],
 ];
 ?>
-            <div data-module="c-formEditTabs01">
-                <div class="wrapper">
-                    <div class="block is-tabs" role="tablist" aria-label="フォーム設定のセクション">
-                        <?php foreach ($formEditTabsSpec as $tab): ?>
-                        <div data-module="m-formEditTab01" data-target="c-formEditTabs01__tab" data-tab-panel="<?= e($tab['panel']) ?>" role="tab" aria-selected="<?= !empty($tab['selected']) ? 'true' : 'false' ?>" tabindex="<?= !empty($tab['selected']) ? '0' : '-1' ?>"><?= e($tab['label']) ?></div>
-                        <?php endforeach; ?>
-                        <?php unset($formEditTabsSpec); ?>
-                    </div>
+<div data-module="c-formEditTabs01">
+    <div class="wrapper">
+        <div class="block is-tabs" role="tablist" aria-label="フォーム設定のセクション">
+            <?php foreach ($formEditTabsSpec as $tab): ?>
+                <div data-module="m-formEditTab01" data-target="c-formEditTabs01__tab"
+                    data-tab-panel="<?= e($tab['panel']) ?>" role="tab"
+                    aria-selected="<?= !empty($tab['selected']) ? 'true' : 'false' ?>"
+                    tabindex="<?= !empty($tab['selected']) ? '0' : '-1' ?>"><?= e($tab['label']) ?></div>
+            <?php endforeach; ?>
+            <?php unset($formEditTabsSpec); ?>
+        </div>
 
-                    <div class="block is-contents">
+        <div class="block is-contents">
