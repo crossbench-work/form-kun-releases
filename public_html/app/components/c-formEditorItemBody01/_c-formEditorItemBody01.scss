@@ -1,0 +1,35 @@
+// c-formEditor__itemBody … c-formEditorList01 / m-formBuilder01 内のカード本文シェル
+
+[data-module="c-formEditorList01"] {
+    .c-formEditor__itemBody > .wrapper > .block.is-contents + .block.is-contents {
+        margin-top: 20px;
+    }
+
+    .c-formEditor__itemBody > .wrapper > .block.is-contents {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .c-formEditor__itemBody > .wrapper > .block.is-contents > .block.is-field + .block.is-field {
+        margin-top: 4px;
+    }
+
+    // 公開非表示（項目・説明文共通）: カード全体を弱表示し本文は inert（admin.js）
+    .c-formEditor__item.is-editor-item-hidden {
+        opacity: 0.4;
+        filter: grayscale(0.06);
+
+        .c-formEditor__itemBody {
+            pointer-events: none;
+            user-select: none;
+        }
+    }
+}
+
+[data-module="m-formBuilder01"] {
+    .c-formEditor__itemBody > .wrapper > .block.is-contents > .block.is-title [data-module="m-borderTitle01"],
+    .c-formEditor__itemBody > .wrapper > .block.is-contents > [data-module="m-borderTitle01"] {
+        margin: 0;
+    }
+}

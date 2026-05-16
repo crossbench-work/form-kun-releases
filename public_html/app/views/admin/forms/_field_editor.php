@@ -61,8 +61,7 @@ if (empty($f['required']) || in_array($f['type'], ['radio', 'select'], true)) {
                 <?php admin_c_form_editor_item_header01_close(); ?>
         </div>
         <div class="block is-body">
-                <div class="c-formEditor__itemBody">
-                    <div class="wrapper">
+                <?php admin_c_form_editor_item_body01_open(); ?>
                             <div class="block is-contents">
                                         <div class="block is-title">
                                             <p data-module="m-borderTitle01">基本設定</p>
@@ -471,8 +470,7 @@ if (empty($f['required']) || in_array($f['type'], ['radio', 'select'], true)) {
                                             </div>
                                         </div>
                             <input type="hidden" name="fields[<?= $idx ?>][_remove]" value="0" data-target="c-formEditor__removeFlag">
-                    </div>
-                </div>
+                <?php admin_c_form_editor_item_body01_close(); ?>
             </div>
         </div>
     </div>

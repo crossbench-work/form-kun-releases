@@ -99,8 +99,7 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                                                     <?php admin_c_form_editor_item_header01_close(); ?>
                                                 </div>
                                                 <div class="block is-body">
-                                                    <div class="c-formEditor__itemBody">
-                                                        <div class="wrapper">
+                                                    <?php admin_c_form_editor_item_body01_open(); ?>
                                                             <div class="block is-contents">
                                                                 <div class="block is-field">
                                                                     <?php admin_m_input_set01_open(); ?>
@@ -121,8 +120,7 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                        </div>
-                                                    </div>
+                                                    <?php admin_c_form_editor_item_body01_close(); ?>
                                                     <div class="block is-field">
                                                         <?php admin_m_input_set01_open(); ?>
                                                         <div class="area is-title">
@@ -330,8 +328,7 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                 <?php admin_c_form_editor_item_header01_close(); ?>
             </div>
             <div class="block is-body">
-                <div class="c-formEditor__itemBody">
-                    <div class="wrapper">
+                <?php admin_c_form_editor_item_body01_open(); ?>
                         <div class="block is-contents">
                             <div class="block is-field">
                                 <?php admin_m_input_set01_open(); ?>
@@ -349,8 +346,7 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>
+                <?php admin_c_form_editor_item_body01_close(); ?>
                 <div class="block is-field">
                     <?php admin_m_input_set01_open(); ?>
                     <div class="area is-title">
@@ -460,8 +456,7 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                 <?php admin_c_form_editor_item_header01_close(); ?>
             </div>
             <div class="block is-body">
-                <div class="c-formEditor__itemBody">
-                    <div class="wrapper">
+                <?php admin_c_form_editor_item_body01_open(); ?>
                         <div class="block is-contents">
                             <div class="block is-title">
                                 <p data-module="m-borderTitle01">基本設定</p>
@@ -803,7 +798,7 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                         </div>
                     </div>
                     <input type="hidden" data-name="_remove" value="0" data-target="c-formEditor__removeFlag">
-                </div>
+                <?php admin_c_form_editor_item_body01_close(); ?>
             </div>
         </div>
     </div>

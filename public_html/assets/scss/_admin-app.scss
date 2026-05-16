@@ -2,6 +2,7 @@
 @use "../../app/components/m-table01/m-table01" as *;
 @use "../../app/components/c-formBlock01/c-formBlock01" as *;
 @use "../../app/components/c-formEditorItemHeader01/c-formEditorItemHeader01" as *;
+@use "../../app/components/c-formEditorItemBody01/c-formEditorItemBody01" as *;
 @use "../../app/components/m-largeTitle01/m-largeTitle01" as *;
 @use "../../app/components/m-inputSet01/m-inputSet01" as *;
 @use "../../app/components/m-input01/m-input01" as *;
@@ -927,34 +928,10 @@ form.is-inline {
     box-shadow: 0 0 10px inset rgba(0, 0, 0, 0.03);
   }
 
-  .c-formEditor__itemBody > .wrapper > .block.is-contents + .block.is-contents {
-    margin-top: 20px;
-  }
-
-  .c-formEditor__itemBody > .wrapper > .block.is-contents {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-
-  .c-formEditor__itemBody > .wrapper > .block.is-contents > .block.is-field + .block.is-field {
-    margin-top: 4px;
-  }
-
   .c-formEditor__item.is-collapsed > .wrapper > .block.is-body {
     display: none;
   }
 
-  // 公開非表示（項目・説明文共通）: c-formEditorList01 配下で同一クラス。カード全体を弱表示し本文は inert（admin.js）
-  .c-formEditor__item.is-editor-item-hidden {
-    opacity: 0.4;
-    filter: grayscale(0.06);
-
-    .c-formEditor__itemBody {
-      pointer-events: none;
-      user-select: none;
-    }
-  }
 }
 
 [data-module="c-htmlInputEditor01"] {
@@ -1229,11 +1206,6 @@ body.is-field-type-modal-open {
     input:not(:checked) + span .is-hiddenLine {
       opacity: 1;
     }
-  }
-
-  .c-formEditor__itemBody > .wrapper > .block.is-contents > .block.is-title [data-module="m-borderTitle01"],
-  .c-formEditor__itemBody > .wrapper > .block.is-contents > [data-module="m-borderTitle01"] {
-    margin: 0;
   }
 
   .c-formEditor__field {
