@@ -28,4 +28,16 @@ if (!function_exists('admin_m_bold_title01')) {
 
         return ' aria-labelledby="' . e($boundInputId) . '-mBoldTitle01"';
     }
+
+    /**
+     * admin_m_bold_title01(..., $boundInputId) が出力する p の id と同一の文字列（aria-labelledby 用）。
+     */
+    function admin_m_bold_title01_label_element_id(?string $boundInputId): ?string
+    {
+        if ($boundInputId === null || $boundInputId === '') {
+            return null;
+        }
+
+        return e($boundInputId) . '-mBoldTitle01';
+    }
 }

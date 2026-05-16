@@ -11,7 +11,13 @@
                             </div>
                             <div class="block is-field">
                                 <?php admin_m_input01_open(); ?>
-                                    <input type="text" id="title" name="title" value="<?= e($form['title']) ?>" required<?= admin_m_bold_title01_aria_labelledby_attr('title') ?>>
+                                    <?php admin_m_input01_input(admin_m_input01_attrs_with_bound_label('title', [
+                                        'type' => 'text',
+                                        'id' => 'title',
+                                        'name' => 'title',
+                                        'value' => (string) $form['title'],
+                                        'required' => true,
+                                    ])); ?>
                                 <?php admin_m_input01_close(); ?>
                             </div>
                         </div>
@@ -25,7 +31,13 @@
                             </div>
                             <div class="block is-field">
                                 <?php admin_m_input01_open(); ?>
-                                    <input type="text" id="slug" name="slug" value="<?= e($form['slug']) ?>" required<?= admin_m_bold_title01_aria_labelledby_attr('slug') ?>>
+                                    <?php admin_m_input01_input(admin_m_input01_attrs_with_bound_label('slug', [
+                                        'type' => 'text',
+                                        'id' => 'slug',
+                                        'name' => 'slug',
+                                        'value' => (string) $form['slug'],
+                                        'required' => true,
+                                    ])); ?>
                                 <?php admin_m_input01_close(); ?>
                             </div>
                             <div class="area is-help">
@@ -42,11 +54,14 @@
                             </div>
                             <div class="block is-field">
                                 <?php admin_m_input01_open(); ?>
-                                    <select id="status" name="status"<?= admin_m_bold_title01_aria_labelledby_attr('status') ?>>
-                                        <option value="draft"    <?= $form['status'] === 'draft' ? 'selected' : '' ?>>下書き</option>
-                                        <option value="active"   <?= $form['status'] === 'active' ? 'selected' : '' ?>>公開中</option>
-                                        <option value="archived" <?= $form['status'] === 'archived' ? 'selected' : '' ?>>停止</option>
-                                    </select>
+                                    <?php admin_m_input01_select_open(admin_m_input01_attrs_with_bound_label('status', [
+                                        'id' => 'status',
+                                        'name' => 'status',
+                                    ])); ?>
+                                    <?php admin_m_input01_option('draft', '下書き', $form['status'] === 'draft'); ?>
+                                    <?php admin_m_input01_option('active', '公開中', $form['status'] === 'active'); ?>
+                                    <?php admin_m_input01_option('archived', '停止', $form['status'] === 'archived'); ?>
+                                    <?php admin_m_input01_select_close(); ?>
                                 <?php admin_m_input01_close(); ?>
                             </div>
                         </div>
@@ -67,7 +82,12 @@
                             </div>
                             <div class="block is-field">
                                 <?php admin_m_input01_open(); ?>
-                                    <textarea id="meta_html" name="meta_html" rows="8" placeholder="<meta name=&quot;description&quot; content=&quot;フォームの概要&quot;>"<?= admin_m_bold_title01_aria_labelledby_attr('meta_html') ?>><?= e($form['meta_html'] ?? '') ?></textarea>
+                                    <?php admin_m_input01_textarea(admin_m_input01_attrs_with_bound_label('meta_html', [
+                                        'id' => 'meta_html',
+                                        'name' => 'meta_html',
+                                        'rows' => 8,
+                                        'placeholder' => '<meta name="description" content="フォームの概要">',
+                                    ]), (string) ($form['meta_html'] ?? '')); ?>
                                 <?php admin_m_input01_close(); ?>
                             </div>
                             <div class="area is-help">
@@ -84,7 +104,12 @@
                             </div>
                             <div class="block is-field">
                                 <?php admin_m_input01_open(); ?>
-                                    <textarea id="custom_css" name="custom_css" rows="8" placeholder=".p-formShow01 {\n  background: #fff;\n}"<?= admin_m_bold_title01_aria_labelledby_attr('custom_css') ?>><?= e($form['custom_css'] ?? '') ?></textarea>
+                                    <?php admin_m_input01_textarea(admin_m_input01_attrs_with_bound_label('custom_css', [
+                                        'id' => 'custom_css',
+                                        'name' => 'custom_css',
+                                        'rows' => 8,
+                                        'placeholder' => ".p-formShow01 {\n  background: #fff;\n}",
+                                    ]), (string) ($form['custom_css'] ?? '')); ?>
                                 <?php admin_m_input01_close(); ?>
                             </div>
                             <div class="area is-help">
@@ -101,7 +126,12 @@
                             </div>
                             <div class="block is-field">
                                 <?php admin_m_input01_open(); ?>
-                                    <textarea id="custom_js" name="custom_js" rows="8" placeholder="document.addEventListener('DOMContentLoaded', function () {\n  console.log('form loaded');\n});"<?= admin_m_bold_title01_aria_labelledby_attr('custom_js') ?>><?= e($form['custom_js'] ?? '') ?></textarea>
+                                    <?php admin_m_input01_textarea(admin_m_input01_attrs_with_bound_label('custom_js', [
+                                        'id' => 'custom_js',
+                                        'name' => 'custom_js',
+                                        'rows' => 8,
+                                        'placeholder' => "document.addEventListener('DOMContentLoaded', function () {\n  console.log('form loaded');\n});",
+                                    ]), (string) ($form['custom_js'] ?? '')); ?>
                                 <?php admin_m_input01_close(); ?>
                             </div>
                             <div class="area is-help">

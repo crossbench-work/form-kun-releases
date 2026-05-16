@@ -89,7 +89,12 @@ if (empty($f['required']) || in_array($f['type'], ['radio', 'select'], true)) {
                                                         </div>
                                                         <div class="area is-field">
                                                             <?php admin_m_input01_open(); ?>
-                                                                <input type="text" name="fields[<?= $idx ?>][label]" data-target="c-formEditor__labelInput" value="<?= e($f['label']) ?>">
+                                                                <?php admin_m_input01_input([
+                                                                    'type' => 'text',
+                                                                    'name' => 'fields[' . $idx . '][label]',
+                                                                    'data-target' => 'c-formEditor__labelInput',
+                                                                    'value' => (string) $f['label'],
+                                                                ]); ?>
                                                             <?php admin_m_input01_close(); ?>
                                                         </div>
                                                     </div>
@@ -102,7 +107,20 @@ if (empty($f['required']) || in_array($f['type'], ['radio', 'select'], true)) {
                                                         <div class="area is-field">
                                                             <div class="c-formEditor__fieldKey">
                                                                 <?php admin_m_input01_open(); ?>
-                                                                    <input type="text" name="fields[<?= $idx ?>][field_key]" value="<?= e($f['field_key']) ?>" data-target="c-formEditor__fieldKeyInput" class="<?= $fkLocked ? 'is-locked' : '' ?>" <?= $fkLocked ? 'readonly' : '' ?> spellcheck="false">
+                                                                    <?php
+                                                                    $fieldKeyAttrs = [
+                                                                        'type' => 'text',
+                                                                        'name' => 'fields[' . $idx . '][field_key]',
+                                                                        'value' => (string) $f['field_key'],
+                                                                        'data-target' => 'c-formEditor__fieldKeyInput',
+                                                                        'spellcheck' => 'false',
+                                                                    ];
+                                                                    if ($fkLocked) {
+                                                                        $fieldKeyAttrs['class'] = 'is-locked';
+                                                                        $fieldKeyAttrs['readonly'] = true;
+                                                                    }
+                                                                    admin_m_input01_input($fieldKeyAttrs);
+                                                                    ?>
                                                                 <?php admin_m_input01_close(); ?>
                                                                 <button type="button" class="btn is-icon" data-target="c-formEditor__fieldKeyLock" aria-label="<?= $fkLocked ? 'キーを編集' : 'キーをロック' ?>" title="<?= $fkLocked ? '編集する' : 'ロックする' ?>" aria-pressed="<?= $fkLocked ? 'true' : 'false' ?>">
                                                                     <svg data-target="c-formEditor__fieldKeyLockedIcon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" <?= $fkLocked ? '' : 'style="display:none"' ?> aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
@@ -159,24 +177,46 @@ if (empty($f['required']) || in_array($f['type'], ['radio', 'select'], true)) {
                                                                             ?>
                                                                             <div class="c-formEditor__regexRow">
                                                                                 <?php admin_m_input01_open(); ?>
-                                                                                    <select data-target="c-formEditor__regexKind" aria-label="入力チェックの種類" <?= empty($f['required']) ? 'disabled' : '' ?>>
-                                                                                        <?php foreach ($regexPresetChoices as $patVal => $patLabel): ?>
-                                                                                            <?php if ($f['type'] === 'checkbox' && !in_array($patVal, ['', $FB_REGEX_CUSTOM], true)): ?>
-                                                                                                <?php continue; ?>
-                                                                                            <?php endif; ?>
-                                                                                            <?php if (in_array($f['type'], ['radio', 'select'], true) && $patVal !== ''): ?>
-                                                                                                <?php continue; ?>
-                                                                                            <?php endif; ?>
-                                                                                            <option value="<?= e($patVal) ?>" <?= $selVal === $patVal ? 'selected' : '' ?>><?= e($patLabel) ?></option>
-                                                                                        <?php endforeach; ?>
-                                                                                        <?php if ($f['type'] === 'checkbox'): ?>
-                                                                                            <option value="<?= e($FB_REGEX_CHECKBOX_LIMIT) ?>" <?= $selVal === $FB_REGEX_CHECKBOX_LIMIT ? 'selected' : '' ?>>選択数を設定する</option>
-                                                                                        <?php endif; ?>
-                                                                                    </select>
+                                                                                    <?php
+                                                                                    $regexKindAttrs = [
+                                                                                        'data-target' => 'c-formEditor__regexKind',
+                                                                                        'aria-label' => '入力チェックの種類',
+                                                                                    ];
+                                                                                    if (empty($f['required'])) {
+                                                                                        $regexKindAttrs['disabled'] = true;
+                                                                                    }
+                                                                                    admin_m_input01_select_open($regexKindAttrs);
+                                                                                    foreach ($regexPresetChoices as $patVal => $patLabel) {
+                                                                                        if ($f['type'] === 'checkbox' && !in_array($patVal, ['', $FB_REGEX_CUSTOM], true)) {
+                                                                                            continue;
+                                                                                        }
+                                                                                        if (in_array($f['type'], ['radio', 'select'], true) && $patVal !== '') {
+                                                                                            continue;
+                                                                                        }
+                                                                                        admin_m_input01_option((string) $patVal, (string) $patLabel, $selVal === $patVal);
+                                                                                    }
+                                                                                    if ($f['type'] === 'checkbox') {
+                                                                                        admin_m_input01_option((string) $FB_REGEX_CHECKBOX_LIMIT, '選択数を設定する', $selVal === $FB_REGEX_CHECKBOX_LIMIT);
+                                                                                    }
+                                                                                    admin_m_input01_select_close();
+                                                                                    ?>
                                                                                 <?php admin_m_input01_close(); ?>
                                                                                 <div class="c-formEditor__regexCustom"<?= $showCustom ? '' : ' style="display:none"' ?>>
                                                                                     <?php admin_m_input01_open(); ?>
-                                                                                        <input type="text" data-target="c-formEditor__regexCustomInput" value="<?= e($customVal) ?>" placeholder="正規表現" spellcheck="false" autocomplete="off" <?= empty($f['required']) ? 'disabled' : '' ?>>
+                                                                                        <?php
+                                                                                        $regexCustomAttrs = [
+                                                                                            'type' => 'text',
+                                                                                            'data-target' => 'c-formEditor__regexCustomInput',
+                                                                                            'value' => (string) $customVal,
+                                                                                            'placeholder' => '正規表現',
+                                                                                            'spellcheck' => 'false',
+                                                                                            'autocomplete' => 'off',
+                                                                                        ];
+                                                                                        if (empty($f['required'])) {
+                                                                                            $regexCustomAttrs['disabled'] = true;
+                                                                                        }
+                                                                                        admin_m_input01_input($regexCustomAttrs);
+                                                                                        ?>
                                                                                     <?php admin_m_input01_close(); ?>
                                                                                 </div>
                                                                                 <input type="hidden" data-target="c-formEditor__regexValue" value="<?= e($hiddenVal) ?>" spellcheck="false">
@@ -191,7 +231,12 @@ if (empty($f['required']) || in_array($f['type'], ['radio', 'select'], true)) {
                                                                                     </div>
                                                                                     <div class="area is-field">
                                                                                         <?php admin_m_input01_open(); ?>
-                                                                                            <input type="number" min="1" name="fields[<?= $idx ?>][checkbox_min_selections]" value="<?= e($f['checkbox_min_selections'] ?? '') ?>">
+                                                                                            <?php admin_m_input01_input([
+                                                                                                'type' => 'number',
+                                                                                                'min' => 1,
+                                                                                                'name' => 'fields[' . $idx . '][checkbox_min_selections]',
+                                                                                                'value' => (string) ($f['checkbox_min_selections'] ?? ''),
+                                                                                            ]); ?>
                                                                                         <?php admin_m_input01_close(); ?>
                                                                                     </div>
                                                                                 </div>
@@ -201,7 +246,12 @@ if (empty($f['required']) || in_array($f['type'], ['radio', 'select'], true)) {
                                                                                     </div>
                                                                                     <div class="area is-field">
                                                                                         <?php admin_m_input01_open(); ?>
-                                                                                            <input type="number" min="1" name="fields[<?= $idx ?>][checkbox_max_selections]" value="<?= e($f['checkbox_max_selections'] ?? '') ?>">
+                                                                                            <?php admin_m_input01_input([
+                                                                                                'type' => 'number',
+                                                                                                'min' => 1,
+                                                                                                'name' => 'fields[' . $idx . '][checkbox_max_selections]',
+                                                                                                'value' => (string) ($f['checkbox_max_selections'] ?? ''),
+                                                                                            ]); ?>
                                                                                         <?php admin_m_input01_close(); ?>
                                                                                     </div>
                                                                                 </div>
@@ -224,7 +274,13 @@ if (empty($f['required']) || in_array($f['type'], ['radio', 'select'], true)) {
                                                                             </div>
                                                                             <div class="area is-field">
                                                                                 <?php admin_m_input01_open(); ?>
-                                                                                    <input type="number" min="1" name="fields[<?= $idx ?>][min_length]" value="<?= e($f['min_length'] ?? '') ?>" placeholder="最小">
+                                                                                    <?php admin_m_input01_input([
+                                                                                        'type' => 'number',
+                                                                                        'min' => 1,
+                                                                                        'name' => 'fields[' . $idx . '][min_length]',
+                                                                                        'value' => (string) ($f['min_length'] ?? ''),
+                                                                                        'placeholder' => '最小',
+                                                                                    ]); ?>
                                                                                 <?php admin_m_input01_close(); ?>
                                                                             </div>
                                                                         </div>
@@ -234,7 +290,13 @@ if (empty($f['required']) || in_array($f['type'], ['radio', 'select'], true)) {
                                                                             </div>
                                                                             <div class="area is-field">
                                                                                 <?php admin_m_input01_open(); ?>
-                                                                                    <input type="number" min="1" name="fields[<?= $idx ?>][max_length]" value="<?= e($f['max_length']) ?>" placeholder="最大">
+                                                                                    <?php admin_m_input01_input([
+                                                                                        'type' => 'number',
+                                                                                        'min' => 1,
+                                                                                        'name' => 'fields[' . $idx . '][max_length]',
+                                                                                        'value' => (string) ($f['max_length'] ?? ''),
+                                                                                        'placeholder' => '最大',
+                                                                                    ]); ?>
                                                                                 <?php admin_m_input01_close(); ?>
                                                                             </div>
                                                                         </div>
@@ -275,7 +337,12 @@ if (empty($f['required']) || in_array($f['type'], ['radio', 'select'], true)) {
                                                                                                             <div class="block is-contents">
                                                                                                                 <div class="area is-field">
                                                                                                                     <?php admin_m_input01_open(); ?>
-                                                                                                                        <input type="text" data-target="c-formEditor__choiceInput" value="<?= e($choiceOpt) ?>" placeholder="選択肢">
+                                                                                                                        <?php admin_m_input01_input([
+                                                                                                                            'type' => 'text',
+                                                                                                                            'data-target' => 'c-formEditor__choiceInput',
+                                                                                                                            'value' => (string) $choiceOpt,
+                                                                                                                            'placeholder' => '選択肢',
+                                                                                                                        ]); ?>
                                                                                                                     <?php admin_m_input01_close(); ?>
                                                                                                                 </div>
                                                                                                             </div>
@@ -323,7 +390,11 @@ if (empty($f['required']) || in_array($f['type'], ['radio', 'select'], true)) {
                                                         </div>
                                                         <div class="area is-field">
                                                             <?php admin_m_input01_open(); ?>
-                                                                <input type="text" name="fields[<?= $idx ?>][placeholder]" value="<?= e($f['placeholder']) ?>">
+                                                                <?php admin_m_input01_input([
+                                                                    'type' => 'text',
+                                                                    'name' => 'fields[' . $idx . '][placeholder]',
+                                                                    'value' => (string) ($f['placeholder'] ?? ''),
+                                                                ]); ?>
                                                             <?php admin_m_input01_close(); ?>
                                                         </div>
                                                     </div>
@@ -348,7 +419,11 @@ if (empty($f['required']) || in_array($f['type'], ['radio', 'select'], true)) {
                                                                                             </div>
                                                                                             <div class="area is-field">
                                                                                                 <?php admin_m_input01_open(); ?>
-                                                                                                    <input type="text" data-target="c-formEditor__textMultiLabelInput" value="<?= e($multiTextItem['label'] ?? '') ?>">
+                                                                                                    <?php admin_m_input01_input([
+                                                                                                        'type' => 'text',
+                                                                                                        'data-target' => 'c-formEditor__textMultiLabelInput',
+                                                                                                        'value' => (string) ($multiTextItem['label'] ?? ''),
+                                                                                                    ]); ?>
                                                                                                 <?php admin_m_input01_close(); ?>
                                                                                             </div>
                                                                                         </div>
@@ -358,7 +433,11 @@ if (empty($f['required']) || in_array($f['type'], ['radio', 'select'], true)) {
                                                                                             </div>
                                                                                             <div class="area is-field">
                                                                                                 <?php admin_m_input01_open(); ?>
-                                                                                                    <input type="text" data-target="c-formEditor__textMultiPlaceholderInput" value="<?= e($multiTextItem['placeholder'] ?? '') ?>">
+                                                                                                    <?php admin_m_input01_input([
+                                                                                                        'type' => 'text',
+                                                                                                        'data-target' => 'c-formEditor__textMultiPlaceholderInput',
+                                                                                                        'value' => (string) ($multiTextItem['placeholder'] ?? ''),
+                                                                                                    ]); ?>
                                                                                                 <?php admin_m_input01_close(); ?>
                                                                                             </div>
                                                                                         </div>
@@ -400,7 +479,11 @@ if (empty($f['required']) || in_array($f['type'], ['radio', 'select'], true)) {
                                                                 <div class="wrapper">
                                                                     <div class="block is-editor">
                                                                         <?php admin_m_input01_open(); ?>
-                                                                            <textarea name="fields[<?= $idx ?>][help_text]" rows="3" data-target="c-htmlInputEditor01__textarea"><?= e($f['help_text']) ?></textarea>
+                                                                            <?php admin_m_input01_textarea([
+                                                                                'name' => 'fields[' . $idx . '][help_text]',
+                                                                                'rows' => 3,
+                                                                                'data-target' => 'c-htmlInputEditor01__textarea',
+                                                                            ], (string) ($f['help_text'] ?? '')); ?>
                                                                         <?php admin_m_input01_close(); ?>
                                                                     </div>
                                                                     <div class="block is-toolbar">

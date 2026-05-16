@@ -56,7 +56,16 @@
                 <div class="area is-field">
                     <?php admin_m_bold_title01(e('フォームの作成上限'), 'max_forms_modal'); ?>
                     <?php admin_m_input01_open(); ?>
-                        <input type="number" name="max_forms" id="max_forms_modal" min="1" max="999999" step="1" value="<?= (int) $max_forms ?>" required<?= admin_m_bold_title01_aria_labelledby_attr('max_forms_modal') ?>>
+                        <?php admin_m_input01_input(admin_m_input01_attrs_with_bound_label('max_forms_modal', [
+                            'type' => 'number',
+                            'name' => 'max_forms',
+                            'id' => 'max_forms_modal',
+                            'min' => 1,
+                            'max' => 999999,
+                            'step' => 1,
+                            'value' => (string) (int) $max_forms,
+                            'required' => true,
+                        ])); ?>
                     <?php admin_m_input01_close(); ?>
                     <p class="text is-help">1 以上の整数を指定してください。保存後、一覧の新規作成やこの上限を超える作成はできません。</p>
                 </div>

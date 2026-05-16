@@ -25,7 +25,12 @@
                             </div>
                             <div class="block is-field">
                                 <?php admin_m_input01_open(); ?>
-                                    <input type="text" id="thanks_page_title" name="thanks_page_title" value="<?= e($form['thanks_page_title'] ?? '') ?>"<?= admin_m_bold_title01_aria_labelledby_attr('thanks_page_title') ?>>
+                                    <?php admin_m_input01_input(admin_m_input01_attrs_with_bound_label('thanks_page_title', [
+                                        'type' => 'text',
+                                        'id' => 'thanks_page_title',
+                                        'name' => 'thanks_page_title',
+                                        'value' => (string) ($form['thanks_page_title'] ?? ''),
+                                    ])); ?>
                                 <?php admin_m_input01_close(); ?>
                             </div>
                         </div>
@@ -47,7 +52,12 @@
                             </div>
                             <div class="block is-field">
                                 <?php admin_m_input01_open(); ?>
-                                    <input type="text" id="thanks_button_text" name="thanks_button_text" value="<?= e($form['thanks_button_text'] ?? 'トップへ戻る') ?>"<?= admin_m_bold_title01_aria_labelledby_attr('thanks_button_text') ?>>
+                                    <?php admin_m_input01_input(admin_m_input01_attrs_with_bound_label('thanks_button_text', [
+                                        'type' => 'text',
+                                        'id' => 'thanks_button_text',
+                                        'name' => 'thanks_button_text',
+                                        'value' => (string) ($form['thanks_button_text'] ?? 'トップへ戻る'),
+                                    ])); ?>
                                 <?php admin_m_input01_close(); ?>
                             </div>
                         </div>
@@ -61,7 +71,13 @@
                             </div>
                             <div class="block is-field">
                                 <?php admin_m_input01_open(); ?>
-                                    <input type="text" id="thanks_button_url" name="thanks_button_url" value="<?= e($form['thanks_button_url'] ?? '/') ?>" placeholder="/ または https://example.com/"<?= admin_m_bold_title01_aria_labelledby_attr('thanks_button_url') ?>>
+                                    <?php admin_m_input01_input(admin_m_input01_attrs_with_bound_label('thanks_button_url', [
+                                        'type' => 'text',
+                                        'id' => 'thanks_button_url',
+                                        'name' => 'thanks_button_url',
+                                        'value' => (string) ($form['thanks_button_url'] ?? '/'),
+                                        'placeholder' => '/ または https://example.com/',
+                                    ])); ?>
                                 <?php admin_m_input01_close(); ?>
                             </div>
                         </div>

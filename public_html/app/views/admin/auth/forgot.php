@@ -6,7 +6,13 @@
     <div class="box is-field">
         <?php admin_m_bold_title01(e('ユーザー名またはメールアドレス'), 'identifier'); ?>
         <?php admin_m_input01_open(); ?>
-            <input type="text" id="identifier" name="identifier" autocomplete="username" required<?= admin_m_bold_title01_aria_labelledby_attr('identifier') ?>>
+        <?php admin_m_input01_input(admin_m_input01_attrs_with_bound_label('identifier', [
+            'type' => 'text',
+            'id' => 'identifier',
+            'name' => 'identifier',
+            'autocomplete' => 'username',
+            'required' => true,
+        ])); ?>
         <?php admin_m_input01_close(); ?>
     </div>
     <div class="area is-actions">

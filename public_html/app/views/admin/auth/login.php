@@ -5,13 +5,25 @@
     <div class="box is-field">
         <?php admin_m_bold_title01(e('ユーザー名'), 'username'); ?>
         <?php admin_m_input01_open(); ?>
-            <input type="text" id="username" name="username" autocomplete="username" required<?= admin_m_bold_title01_aria_labelledby_attr('username') ?>>
+        <?php admin_m_input01_input(admin_m_input01_attrs_with_bound_label('username', [
+            'type' => 'text',
+            'id' => 'username',
+            'name' => 'username',
+            'autocomplete' => 'username',
+            'required' => true,
+        ])); ?>
         <?php admin_m_input01_close(); ?>
     </div>
     <div class="box is-field">
         <?php admin_m_bold_title01(e('パスワード'), 'password'); ?>
         <?php admin_m_input01_open(); ?>
-            <input type="password" id="password" name="password" autocomplete="current-password" required<?= admin_m_bold_title01_aria_labelledby_attr('password') ?>>
+        <?php admin_m_input01_input(admin_m_input01_attrs_with_bound_label('password', [
+            'type' => 'password',
+            'id' => 'password',
+            'name' => 'password',
+            'autocomplete' => 'current-password',
+            'required' => true,
+        ])); ?>
         <?php admin_m_input01_close(); ?>
     </div>
     <div class="area is-actions">

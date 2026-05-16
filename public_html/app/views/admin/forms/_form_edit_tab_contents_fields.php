@@ -25,7 +25,12 @@
                             </div>
                             <div class="block is-field">
                                 <?php admin_m_input01_open(); ?>
-                                    <input type="text" id="input_page_title" name="input_page_title" value="<?= e($form['input_page_title'] ?? '') ?>"<?= admin_m_bold_title01_aria_labelledby_attr('input_page_title') ?>>
+                                    <?php admin_m_input01_input(admin_m_input01_attrs_with_bound_label('input_page_title', [
+                                        'type' => 'text',
+                                        'id' => 'input_page_title',
+                                        'name' => 'input_page_title',
+                                        'value' => (string) ($form['input_page_title'] ?? ''),
+                                    ])); ?>
                                 <?php admin_m_input01_close(); ?>
                             </div>
                         </div>
@@ -72,7 +77,12 @@
                             </div>
                             <div class="block is-field">
                                 <?php admin_m_input01_open(); ?>
-                                    <input type="text" id="confirm_button_text" name="confirm_button_text" value="<?= e($form['confirm_button_text'] ?? '入力内容を確認する') ?>"<?= admin_m_bold_title01_aria_labelledby_attr('confirm_button_text') ?>>
+                                    <?php admin_m_input01_input(admin_m_input01_attrs_with_bound_label('confirm_button_text', [
+                                        'type' => 'text',
+                                        'id' => 'confirm_button_text',
+                                        'name' => 'confirm_button_text',
+                                        'value' => (string) ($form['confirm_button_text'] ?? '入力内容を確認する'),
+                                    ])); ?>
                                 <?php admin_m_input01_close(); ?>
                             </div>
                         </div>
