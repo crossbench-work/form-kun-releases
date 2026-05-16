@@ -406,11 +406,11 @@
             var idInput = block.querySelector('[data-name="id"]');
             var blockId = idInput ? (idInput.value || (prefix.replace(/_blocks$/, '') + '-' + i)) : (prefix.replace(/_blocks$/, '') + '-' + i);
             var labelInput = block.querySelector('[data-target="c-descriptionEditor__labelInput"]');
-            var labelLabel = labelInput ? labelInput.closest('[data-module="c-inputSet01"]').querySelector('.block.is-title label') : null;
+            var labelLabel = labelInput ? labelInput.closest('[data-module="m-inputSet01"]').querySelector('.block.is-title label') : null;
             var positionSelect = block.querySelector('.fb-description-position');
-            var positionLabel = positionSelect ? positionSelect.closest('[data-module="c-inputSet01"]').querySelector('.block.is-title label') : null;
+            var positionLabel = positionSelect ? positionSelect.closest('[data-module="m-inputSet01"]').querySelector('.block.is-title label') : null;
             var textarea = block.querySelector('[data-target="c-htmlInputEditor01__textarea"]');
-            var textareaLabel = textarea ? textarea.closest('[data-module="c-inputSet01"]').querySelector('.block.is-title label') : null;
+            var textareaLabel = textarea ? textarea.closest('[data-module="m-inputSet01"]').querySelector('.block.is-title label') : null;
             if (labelInput) {
                 labelInput.id = blockId + '-label';
                 if (labelLabel) labelLabel.setAttribute('for', labelInput.id);

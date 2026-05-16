@@ -6,7 +6,7 @@
 
 ## コンテキスト
 
-フォーム項目エディタ（`c-formEditor`）と、その周辺のパネル（`c-formBlock01` / `c-inputSet01`）で、`area` と `block` の使い分けが混在するとセレクタと意図が読み取りづらくなる。並べ替え対象のリストや静的ブロックのラッパーも、共通の `block.is-contents` 規則に揃えたい。
+フォーム項目エディタ（`c-formEditor`）と、その周辺のパネル（`c-formBlock01` / `m-inputSet01`）で、`area` と `block` の使い分けが混在するとセレクタと意図が読み取りづらくなる。並べ替え対象のリストや静的ブロックのラッパーも、共通の `block.is-contents` 規則に揃えたい。
 
 ## 決定
 
@@ -18,7 +18,7 @@
 
 ## 結果
 
-- `_admin-app.scss` では `[data-module="c-formBlock01"]` / `[data-module="c-inputSet01"]` の子として `.block.is-title` / `.block.is-field` を `.area` と並列に指定する。
+- `_admin-app.scss` では `[data-module="c-formBlock01"]` / `[data-module="m-inputSet01"]` の子として `.block.is-title` / `.block.is-field` を `.area` と並列に指定する（`m-inputSet01` は旧 `c-inputSet01` を `m-` 系に改称したもの）。
 - JS は主に `data-target` / `data-module` で参照するため、クラス変更の影響は限定的。
 
 ## 関連

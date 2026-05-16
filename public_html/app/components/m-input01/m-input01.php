@@ -1,7 +1,7 @@
 <?php
 /**
  * 管理画面の入力ラッパー m-input01 のマークアップヘルパー。
- * スタイルは同ディレクトリの _m-input01.scss（_admin-app.scss から @use）。
+ * スタイルは m-inputSet01 の _m-inputSet01.scss（[data-module="m-input01"] 含む）を参照。
  */
 if (!function_exists('admin_m_input01_open')) {
     function admin_m_input01_open(): void

@@ -9,3 +9,4 @@
 require_once APP_COMPONENTS_DIR . '/m-btn01/m-btn01.php';
 require_once APP_COMPONENTS_DIR . '/m-boldTitle01/m-boldTitle01.php';
 require_once APP_COMPONENTS_DIR . '/m-input01/m-input01.php';
+require_once APP_COMPONENTS_DIR . '/m-inputSet01/m-inputSet01.php';

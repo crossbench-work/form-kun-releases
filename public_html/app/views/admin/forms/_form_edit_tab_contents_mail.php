@@ -5,7 +5,7 @@
                 <?php admin_m_large_title01('通知設定'); ?>
             </div>
             <div class="block is-field">
-                <?php admin_c_input_set01_open(); ?>
+                <?php admin_m_input_set01_open(); ?>
                             <div class="block is-title">
                                 <?php admin_m_bold_title01(e('送信方式'), 'mail_transport'); ?>
                             </div>
@@ -22,7 +22,7 @@
                 </div>
             </div>
             <div class="block is-field">
-                <?php admin_c_input_set01_open(); ?>
+                <?php admin_m_input_set01_open(); ?>
                             <div class="block is-title">
                                 <?php admin_m_bold_title01(e('差出人メールアドレス'), 'mail_from_email'); ?>
                             </div>
@@ -36,7 +36,7 @@
                 </div>
             </div>
             <div class="block is-field">
-                <?php admin_c_input_set01_open(); ?>
+                <?php admin_m_input_set01_open(); ?>
                             <div class="block is-title">
                                 <?php admin_m_bold_title01(e('差出人名'), 'mail_from_name'); ?>
                             </div>
@@ -50,7 +50,7 @@
                 </div>
             </div>
             <div class="block is-field">
-                <?php admin_c_input_set01_open(); ?>
+                <?php admin_m_input_set01_open(); ?>
                             <div class="block is-title">
                                 <?php admin_m_bold_title01(e('SMTPホスト'), 'mail_smtp_host'); ?>
                             </div>
@@ -64,7 +64,7 @@
                 </div>
             </div>
             <div class="block is-field">
-                <?php admin_c_input_set01_open(); ?>
+                <?php admin_m_input_set01_open(); ?>
                             <div class="block is-title">
                                 <?php admin_m_bold_title01(e('SMTPポート'), 'mail_smtp_port'); ?>
                             </div>
@@ -78,7 +78,7 @@
                 </div>
             </div>
             <div class="block is-field">
-                <?php admin_c_input_set01_open(); ?>
+                <?php admin_m_input_set01_open(); ?>
                             <div class="block is-title">
                                 <?php admin_m_bold_title01(e('暗号化方式'), 'mail_smtp_secure'); ?>
                             </div>
@@ -96,7 +96,7 @@
                 </div>
             </div>
             <div class="block is-field">
-                <?php admin_c_input_set01_open(); ?>
+                <?php admin_m_input_set01_open(); ?>
                             <div class="block is-title">
                                 <?php admin_m_bold_title01(e('SMTPユーザー名'), 'mail_smtp_username'); ?>
                             </div>
@@ -110,7 +110,7 @@
                 </div>
             </div>
             <div class="block is-field">
-                <?php admin_c_input_set01_open(); ?>
+                <?php admin_m_input_set01_open(); ?>
                             <div class="block is-title">
                                 <?php admin_m_bold_title01(e('SMTPパスワード'), 'mail_smtp_password'); ?>
                             </div>
@@ -131,7 +131,7 @@
                 </div>
             </div>
             <div class="block is-field">
-                <?php admin_c_input_set01_open(); ?>
+                <?php admin_m_input_set01_open(); ?>
                             <div class="block is-title">
                                 <?php admin_m_bold_title01(e('EHLO ホスト名'), 'mail_smtp_ehlo_host'); ?>
                             </div>
@@ -145,7 +145,7 @@
                 </div>
             </div>
             <div class="block is-field">
-                <?php admin_c_input_set01_open(); ?>
+                <?php admin_m_input_set01_open(); ?>
                             <div class="block is-title">
                                 <?php admin_m_bold_title01(e('タイムアウト（秒）'), 'mail_smtp_timeout'); ?>
                             </div>
@@ -186,7 +186,7 @@
                 <?php admin_m_large_title01('管理者通知メール'); ?>
             </div>
             <div class="block is-field">
-                <?php admin_c_input_set01_open(); ?>
+                <?php admin_m_input_set01_open(); ?>
                             <div class="block is-title">
                                 <?php admin_m_bold_title01(e('送信先メールアドレス（カンマ区切りで複数可）'), 'admin_emails'); ?>
                             </div>
@@ -200,7 +200,7 @@
                 </div>
             </div>
             <div class="block is-field">
-                <?php admin_c_input_set01_open(); ?>
+                <?php admin_m_input_set01_open(); ?>
                             <div class="block is-title">
                                 <?php admin_m_bold_title01(e('件名'), 'mail_subject_admin'); ?>
                             </div>
@@ -214,7 +214,7 @@
                 </div>
             </div>
             <div class="block is-field">
-                <?php admin_c_input_set01_open(); ?>
+                <?php admin_m_input_set01_open(); ?>
                             <div class="block is-title">
                                 <?php admin_m_bold_title01(e('表示設定'), 'mail_template_admin'); ?>
                             </div>
@@ -228,7 +228,7 @@
                 </div>
             </div>
             <div class="block is-field">
-                <?php admin_c_input_set01_open(); ?>
+                <?php admin_m_input_set01_open(); ?>
                             <div class="block is-title">
                                 <?php admin_m_bold_title01(e('使用可能な変数')); ?>
                             </div>
@@ -262,7 +262,7 @@
                 </label>
             </div>
             <div class="block is-field">
-                <?php admin_c_input_set01_open(); ?>
+                <?php admin_m_input_set01_open(); ?>
                             <div class="block is-title">
                                 <?php admin_m_bold_title01(e('送信先のフィールドキー（メール型項目）'), 'reply_from_field_key'); ?>
                             </div>
@@ -276,7 +276,7 @@
                 </div>
             </div>
             <div class="block is-field">
-                <?php admin_c_input_set01_open(); ?>
+                <?php admin_m_input_set01_open(); ?>
                             <div class="block is-title">
                                 <?php admin_m_bold_title01(e('件名'), 'reply_subject'); ?>
                             </div>
@@ -290,7 +290,7 @@
                 </div>
             </div>
             <div class="block is-field">
-                <?php admin_c_input_set01_open(); ?>
+                <?php admin_m_input_set01_open(); ?>
                             <div class="block is-title">
                                 <?php admin_m_bold_title01(e('表示設定'), 'reply_template'); ?>
                             </div>
@@ -304,7 +304,7 @@
                 </div>
             </div>
             <div class="block is-field">
-                <?php admin_c_input_set01_open(); ?>
+                <?php admin_m_input_set01_open(); ?>
                             <div class="block is-title">
                                 <?php admin_m_bold_title01(e('使用可能な変数')); ?>
                             </div>

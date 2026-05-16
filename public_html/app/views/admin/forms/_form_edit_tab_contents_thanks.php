@@ -15,7 +15,7 @@
                 </div>
             </div>
             <div class="block is-field">
-                <?php admin_c_input_set01_open(); ?>
+                <?php admin_m_input_set01_open(); ?>
                             <div class="block is-title">
                                 <?php admin_m_bold_title01(e('タイトル'), 'thanks_page_title'); ?>
                                 <label class="label is-choice">
@@ -41,7 +41,7 @@
                 <?php admin_m_large_title01('ボタン設定'); ?>
             </div>
             <div class="block is-field">
-                <?php admin_c_input_set01_open(); ?>
+                <?php admin_m_input_set01_open(); ?>
                             <div class="block is-title">
                                 <?php admin_m_bold_title01(e('ボタンテキスト'), 'thanks_button_text'); ?>
                             </div>
@@ -55,7 +55,7 @@
                 </div>
             </div>
             <div class="block is-field">
-                <?php admin_c_input_set01_open(); ?>
+                <?php admin_m_input_set01_open(); ?>
                             <div class="block is-title">
                                 <?php admin_m_bold_title01(e('ボタンURL'), 'thanks_button_url'); ?>
                             </div>

@@ -1,7 +1,6 @@
 <?php
 require_once APP_COMPONENTS_DIR . '/c-formBlock01/c-formBlock01.php';
 require_once APP_COMPONENTS_DIR . '/c-breadcrumb01/c-breadcrumb01.php';
-require_once APP_COMPONENTS_DIR . '/c-inputSet01/c-inputSet01.php';
 require_once APP_COMPONENTS_DIR . '/m-largeTitle01/m-largeTitle01.php';
 $FB_REGEX_CUSTOM = '__custom__';
 $FB_REGEX_CHECKBOX_LIMIT = '__checkbox_limit__';
@@ -24,7 +23,7 @@ $thanksBlocks = $form['thanks_blocks'] ?? [['id' => 'thanks-0', 'label' => '', '
 $renderDescriptionEditor = static function (string $namePrefix, array $blocks, string $positionMode): void {
     ?>
     <div class="block is-field">
-        <?php admin_c_input_set01_open(); ?>
+        <?php admin_m_input_set01_open(); ?>
                     <div class="block is-title">
                         <?php admin_m_bold_title01(e('説明文')); ?>
                     </div>
@@ -96,7 +95,7 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                                                                 <div class="wrapper">
                                                                     <div class="block is-contents">
                                                                         <div class="block is-field">
-                                                                            <?php admin_c_input_set01_open(); ?>
+                                                                            <?php admin_m_input_set01_open(); ?>
                                                                                         <div class="block is-title">
                                                                                             <?php admin_m_bold_title01(e('ラベル'), $labelInputId); ?>
                                                                                         </div>
@@ -110,7 +109,7 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                                                                             </div>
                                                                         </div>
                                                                         <div class="block is-field">
-                                                                            <?php admin_c_input_set01_open(); ?>
+                                                                            <?php admin_m_input_set01_open(); ?>
                                                                                         <div class="block is-title">
                                                                                             <?php admin_m_bold_title01(e('表示位置'), $positionInputId); ?>
                                                                                         </div>
@@ -124,7 +123,7 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                                                                             </div>
                                                                         </div>
                                                                         <div class="block is-field">
-                                                                            <?php admin_c_input_set01_open(); ?>
+                                                                            <?php admin_m_input_set01_open(); ?>
                                                                                         <div class="block is-title">
                                                                                             <?php admin_m_bold_title01(e('説明文'), $htmlInputId); ?>
                                                                                         </div>
@@ -313,7 +312,7 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                     <div class="wrapper">
                         <div class="block is-contents">
                             <div class="block is-field">
-                                <?php admin_c_input_set01_open(); ?>
+                                <?php admin_m_input_set01_open(); ?>
                                             <div class="block is-title">
                                                 <?php admin_m_bold_title01(e('ラベル')); ?>
                                             </div>
@@ -327,7 +326,7 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                                 </div>
                             </div>
                             <div class="block is-field">
-                                <?php admin_c_input_set01_open(); ?>
+                                <?php admin_m_input_set01_open(); ?>
                                             <div class="block is-title">
                                                 <?php admin_m_bold_title01(e('表示位置')); ?>
                                             </div>
@@ -341,7 +340,7 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                                 </div>
                             </div>
                             <div class="block is-field">
-                                <?php admin_c_input_set01_open(); ?>
+                                <?php admin_m_input_set01_open(); ?>
                                             <div class="block is-title">
                                                 <?php admin_m_bold_title01(e('説明文')); ?>
                                             </div>
