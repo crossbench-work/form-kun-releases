@@ -1,0 +1,42 @@
+// c-formEditor__itemHeader … c-formEditorList01 内のカード見出しシェル
+
+[data-module="c-formEditorList01"] {
+    .c-formEditor__itemHeader {
+        background: #fafafb;
+        cursor: pointer;
+
+        > .wrapper {
+            > .block.is-contents {
+                display: flex;
+                align-items: center;
+                gap: 12px;
+                padding: 8px;
+            }
+        }
+    }
+
+    .c-formEditor__itemHeader > .wrapper > .block.is-contents > .area.is-move {
+        display: flex;
+        align-items: center;
+        flex-shrink: 0;
+    }
+
+    .c-formEditor__itemHeader > .wrapper > .block.is-contents > .area.is-move > .box {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+    }
+
+    .c-formEditor__itemHeader > .wrapper > .block.is-contents > .area.is-summary {
+        flex: 1;
+        min-width: 0;
+    }
+
+    .c-formEditor__itemHeader > .wrapper > .block.is-contents > .area.is-delete {
+        flex-shrink: 0;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+}

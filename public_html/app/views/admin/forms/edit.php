@@ -49,9 +49,7 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                                                 value="<?= e($blockId) ?>" data-name="id">
                                             <div class="wrapper">
                                                 <div class="block is-header">
-                                                    <div class="c-formEditor__itemHeader">
-                                                        <div class="wrapper">
-                                                            <div class="block is-contents">
+                                                    <?php admin_c_form_editor_item_header01_open(); ?>
                                                                 <div class="area is-move">
                                                                     <div class="box is-handle ui-sortable-handle"
                                                                         title="ドラッグして並べ替え">
@@ -98,9 +96,7 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                                                                     </label>
                                                                     <?php admin_m_delete_btn01('fb-description-remove'); ?>
                                                                 </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
+                                                    <?php admin_c_form_editor_item_header01_close(); ?>
                                                 </div>
                                                 <div class="block is-body">
                                                     <div class="c-formEditor__itemBody">
@@ -298,9 +294,7 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
         <input type="hidden" data-name="id" value="">
         <div class="wrapper">
             <div class="block is-header">
-                <div class="c-formEditor__itemHeader">
-                    <div class="wrapper">
-                        <div class="block is-contents">
+                <?php admin_c_form_editor_item_header01_open(); ?>
                             <div class="area is-move">
                                 <div class="box is-handle ui-sortable-handle" title="ドラッグして並べ替え">
                                     <?php admin_m_drag_handle01('c-descriptionEditor__dragHandle'); ?>
@@ -333,9 +327,7 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                                 </label>
                                 <?php admin_m_delete_btn01('fb-description-remove'); ?>
                             </div>
-                        </div>
-                    </div>
-                </div>
+                <?php admin_c_form_editor_item_header01_close(); ?>
             </div>
             <div class="block is-body">
                 <div class="c-formEditor__itemBody">
@@ -422,9 +414,7 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
     <div class="c-formEditor__item is-collapsed" data-field-item="1">
         <div class="wrapper">
             <div class="block is-header">
-                <div class="c-formEditor__itemHeader">
-                    <div class="wrapper">
-                        <div class="block is-contents">
+                <?php admin_c_form_editor_item_header01_open(); ?>
                             <div class="area is-move">
                                 <div class="box is-handle ui-sortable-handle" title="ドラッグして並べ替え">
                                     <?php admin_m_drag_handle01('c-formEditor__dragHandle'); ?>
@@ -467,9 +457,7 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                                 </label>
                                 <?php admin_m_delete_btn01('c-formEditor__remove'); ?>
                             </div>
-                        </div>
-                    </div>
-                </div>
+                <?php admin_c_form_editor_item_header01_close(); ?>
             </div>
             <div class="block is-body">
                 <div class="c-formEditor__itemBody">

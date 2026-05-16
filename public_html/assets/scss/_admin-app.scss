@@ -1,6 +1,7 @@
 @use "s_config" as config;
 @use "../../app/components/m-table01/m-table01" as *;
 @use "../../app/components/c-formBlock01/c-formBlock01" as *;
+@use "../../app/components/c-formEditorItemHeader01/c-formEditorItemHeader01" as *;
 @use "../../app/components/m-largeTitle01/m-largeTitle01" as *;
 @use "../../app/components/m-inputSet01/m-inputSet01" as *;
 @use "../../app/components/m-input01/m-input01" as *;
@@ -919,45 +920,6 @@ form.is-inline {
   > .wrapper > .block.is-contents > .ui-sortable-helper {
     box-shadow: 0 12px 32px rgba(0, 0, 0, 0.2);
     border-radius: 6px;
-  }
-
-  .c-formEditor__itemHeader {
-    background: #fafafb;
-    cursor: pointer;
-
-    > .wrapper {
-      > .block.is-contents {
-        display: flex;
-        align-items: center;
-        gap: 12px;
-        padding: 8px;
-      }
-    }
-  }
-
-  .c-formEditor__itemHeader > .wrapper > .block.is-contents > .area.is-move {
-    display: flex;
-    align-items: center;
-    flex-shrink: 0;
-  }
-
-  .c-formEditor__itemHeader > .wrapper > .block.is-contents > .area.is-move > .box {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
-  }
-
-  .c-formEditor__itemHeader > .wrapper > .block.is-contents > .area.is-summary {
-    flex: 1;
-    min-width: 0;
-  }
-
-  .c-formEditor__itemHeader > .wrapper > .block.is-contents > .area.is-delete {
-    flex-shrink: 0;
-    display: flex;
-    align-items: center;
-    gap: 10px;
   }
 
   .c-formEditor__item > .wrapper > .block.is-body {
