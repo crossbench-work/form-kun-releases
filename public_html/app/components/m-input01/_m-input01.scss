@@ -1,0 +1,70 @@
+// 管理画面の入力ラッパー m-input01（data-module="m-input01"）
+// マークアップは app/components/m-input01/m-input01.php を参照
+
+[data-module="m-input01"] {
+  display: block;
+  width: 100%;
+
+  > input:not([type="radio"]):not([type="checkbox"]),
+  > select,
+  > textarea {
+    width: 100%;
+    padding: 8px 10px;
+    border: 1px solid #eaeaea;
+    border-radius: 6px;
+    font-size: 12px;
+    font-family: inherit;
+    background: #fff;
+    color: #111;
+  }
+
+  > input[type="radio"],
+  > input[type="checkbox"] {
+    width: auto;
+    height: auto;
+    padding: 0;
+    border: none;
+    border-radius: 0;
+    background: transparent;
+    vertical-align: middle;
+    cursor: pointer;
+  }
+
+  > textarea {
+    min-height: 100px;
+    resize: vertical;
+  }
+
+  &.is-empty {
+    > input:not([type="radio"]):not([type="checkbox"]),
+    > select,
+    > textarea {
+      background: #fafafa;
+    }
+  }
+
+  &.is-filled {
+    > input:not([type="radio"]):not([type="checkbox"]),
+    > select,
+    > textarea {
+      background: #fff;
+    }
+  }
+}
+
+// 送信履歴ツールバー等、横並びフォーム内の m-input01
+.m-toolbar01 [data-module="m-input01"] {
+  display: inline-block;
+  width: auto;
+
+  > input:not([type="radio"]):not([type="checkbox"]),
+  > select,
+  > textarea {
+    width: auto;
+  }
+
+  > input[type="radio"],
+  > input[type="checkbox"] {
+    width: auto;
+  }
+}
