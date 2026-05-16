@@ -1,0 +1,52 @@
+// 管理画面の入力ラッパー m-input01（data-module="m-input01"）
+// マークアップは各ビューで `<div data-module="m-input01">` を直接記述
+
+[data-module="m-input01"] {
+  display: block;
+  width: 100%;
+
+  > input,
+  > select,
+  > textarea {
+    width: 100%;
+    padding: 8px 10px;
+    border: 1px solid #eaeaea;
+    border-radius: 6px;
+    font-size: 12px;
+    font-family: inherit;
+    background: #fff;
+    color: #111;
+  }
+
+  > textarea {
+    min-height: 100px;
+    resize: vertical;
+  }
+
+  &.is-empty {
+    > input,
+    > select,
+    > textarea {
+      background: #fafafa;
+    }
+  }
+
+  &.is-filled {
+    > input,
+    > select,
+    > textarea {
+      background: #fff;
+    }
+  }
+}
+
+.m-toolbar01 [data-module="m-input01"] {
+  display: inline-block;
+  width: auto;
+
+  > input,
+  > select,
+  > textarea {
+    width: auto;
+  }
+}
