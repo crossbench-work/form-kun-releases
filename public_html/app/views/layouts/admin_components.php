@@ -7,6 +7,7 @@
  * 本ファイルを require する必要がある（View::renderToString が layout が admin または admin_minimal のときに担当）。
  */
 require_once APP_COMPONENTS_DIR . '/m-btn01/m-btn01.php';
+require_once APP_COMPONENTS_DIR . '/m-deleteBtn01/m-deleteBtn01.php';
 require_once APP_COMPONENTS_DIR . '/m-boldTitle01/m-boldTitle01.php';
 require_once APP_COMPONENTS_DIR . '/m-input01/m-input01.php';
 require_once APP_COMPONENTS_DIR . '/m-inputSet01/m-inputSet01.php';

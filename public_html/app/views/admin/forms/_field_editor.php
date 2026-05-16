@@ -60,14 +60,7 @@ if (empty($f['required']) || in_array($f['type'], ['radio', 'select'], true)) {
                                         </svg>
                                     </span>
                                 </label>
-                                <button type="button" data-module="m-deleteBtn01" data-target="c-formEditor__remove" aria-label="削除" title="削除">
-                                    <svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M3 6h18"/>
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M8 6V4h8v2"/>
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M19 6l-1 14H6L5 6"/>
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M10 11v6M14 11v6"/>
-                                    </svg>
-                                </button>
+                                <?php admin_m_delete_btn01('c-formEditor__remove'); ?>
                             </div>
                         </div>
                     </div>
@@ -348,14 +341,7 @@ if (empty($f['required']) || in_array($f['type'], ['radio', 'select'], true)) {
                                                                                                             </div>
                                                                                                         </div>
                                                                                                     </div>
-                                                                                                    <button type="button" data-module="m-deleteBtn01" data-target="c-formEditor__choiceRemove" aria-label="削除" title="削除">
-                                                                                                        <svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2">
-                                                                                                            <path stroke-linecap="round" stroke-linejoin="round" d="M3 6h18"/>
-                                                                                                            <path stroke-linecap="round" stroke-linejoin="round" d="M8 6V4h8v2"/>
-                                                                                                            <path stroke-linecap="round" stroke-linejoin="round" d="M19 6l-1 14H6L5 6"/>
-                                                                                                            <path stroke-linecap="round" stroke-linejoin="round" d="M10 11v6M14 11v6"/>
-                                                                                                        </svg>
-                                                                                                    </button>
+                                                                                                    <?php admin_m_delete_btn01('c-formEditor__choiceRemove'); ?>
                                                                                                 </div>
                                                                                             </div>
                                                                                         </div>
@@ -443,14 +429,7 @@ if (empty($f['required']) || in_array($f['type'], ['radio', 'select'], true)) {
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
-                                                                                <button type="button" data-module="m-deleteBtn01" data-target="c-formEditor__textMultiRemove" aria-label="削除" title="削除">
-                                                                                    <svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2">
-                                                                                        <path stroke-linecap="round" stroke-linejoin="round" d="M3 6h18"/>
-                                                                                        <path stroke-linecap="round" stroke-linejoin="round" d="M8 6V4h8v2"/>
-                                                                                        <path stroke-linecap="round" stroke-linejoin="round" d="M19 6l-1 14H6L5 6"/>
-                                                                                        <path stroke-linecap="round" stroke-linejoin="round" d="M10 11v6M14 11v6"/>
-                                                                                    </svg>
-                                                                                </button>
+                                                                                <?php admin_m_delete_btn01('c-formEditor__textMultiRemove'); ?>
                                                                             </div>
                                                                         </div>
                                                                     </div>
