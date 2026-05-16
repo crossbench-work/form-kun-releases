@@ -364,6 +364,72 @@ body {
   margin: 0;
 }
 
+[data-module=c-descriptionEditor01] > .wrapper > .block.is-toolbar > .area.is-actions {
+  display: flex;
+  margin-top: 16px;
+  margin-bottom: 16px;
+}
+[data-module=c-descriptionEditor01] .c-descriptionEditorSummary01 {
+  min-width: 0;
+}
+[data-module=c-descriptionEditor01] .c-descriptionEditorSummary01 > .wrapper > .block.is-contents {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+  font-size: 11px;
+}
+[data-module=c-descriptionEditor01] .c-descriptionEditorSummary01__visibility {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  width: 20px;
+  height: 20px;
+  color: #94a3b8;
+  cursor: pointer;
+  margin-bottom: 0;
+}
+[data-module=c-descriptionEditor01] .c-descriptionEditorSummary01__visibility input {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  cursor: pointer;
+  margin: 0;
+}
+[data-module=c-descriptionEditor01] .c-descriptionEditorSummary01__visibility span {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+[data-module=c-descriptionEditor01] .c-descriptionEditorSummary01__visibility .is-hiddenLine {
+  opacity: 0;
+}
+[data-module=c-descriptionEditor01] .c-descriptionEditorSummary01__visibility input:not(:checked) + span {
+  color: #cbd5e1;
+}
+[data-module=c-descriptionEditor01] .c-descriptionEditorSummary01__visibility input:not(:checked) + span .is-hiddenLine {
+  opacity: 1;
+}
+[data-module=c-descriptionEditor01] .c-descriptionEditorSummary01 .label {
+  margin: 0;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: #334155;
+  font-weight: 700;
+}
+[data-module=c-descriptionEditor01] .c-descriptionEditorSummary01 .position {
+  margin: 0;
+  flex: 0 0 auto;
+  padding: 1px 6px;
+  border-radius: 999px;
+  background: #f1f5f9;
+  color: #475569;
+}
+
 [data-module=m-largeTitle01] {
   font-size: 15px;
   font-weight: 700;
@@ -1288,72 +1354,6 @@ form.is-inline {
   background: #fee2e2;
   color: #991b1b;
   border-color: #fecaca;
-}
-
-[data-module=c-descriptionEditor01] > .wrapper > .block.is-toolbar > .area.is-actions {
-  display: flex;
-  margin-top: 16px;
-  margin-bottom: 16px;
-}
-[data-module=c-descriptionEditor01] .c-descriptionEditorSummary01 {
-  min-width: 0;
-}
-[data-module=c-descriptionEditor01] .c-descriptionEditorSummary01 > .wrapper > .block.is-contents {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  min-width: 0;
-  font-size: 11px;
-}
-[data-module=c-descriptionEditor01] .c-descriptionEditorSummary01__visibility {
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  flex: 0 0 auto;
-  width: 20px;
-  height: 20px;
-  color: #94a3b8;
-  cursor: pointer;
-  margin-bottom: 0;
-}
-[data-module=c-descriptionEditor01] .c-descriptionEditorSummary01__visibility input {
-  position: absolute;
-  inset: 0;
-  opacity: 0;
-  cursor: pointer;
-  margin: 0;
-}
-[data-module=c-descriptionEditor01] .c-descriptionEditorSummary01__visibility span {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-}
-[data-module=c-descriptionEditor01] .c-descriptionEditorSummary01__visibility .is-hiddenLine {
-  opacity: 0;
-}
-[data-module=c-descriptionEditor01] .c-descriptionEditorSummary01__visibility input:not(:checked) + span {
-  color: #cbd5e1;
-}
-[data-module=c-descriptionEditor01] .c-descriptionEditorSummary01__visibility input:not(:checked) + span .is-hiddenLine {
-  opacity: 1;
-}
-[data-module=c-descriptionEditor01] .c-descriptionEditorSummary01 .label {
-  margin: 0;
-  min-width: 0;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  color: #334155;
-  font-weight: 700;
-}
-[data-module=c-descriptionEditor01] .c-descriptionEditorSummary01 .position {
-  margin: 0;
-  flex: 0 0 auto;
-  padding: 1px 6px;
-  border-radius: 999px;
-  background: #f1f5f9;
-  color: #475569;
 }
 
 [data-module=c-formEditorList01] > .wrapper > .block.is-contents {
