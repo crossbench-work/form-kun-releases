@@ -11,6 +11,7 @@ require_once APP_COMPONENTS_DIR . '/c-formEditorItemBody01/c-formEditorItemBody0
 require_once APP_COMPONENTS_DIR . '/c-fieldTypeModal01/c-fieldTypeModal01.php';
 require_once APP_COMPONENTS_DIR . '/m-formBuilder01/m-formBuilder01.php';
 require_once APP_COMPONENTS_DIR . '/m-btn01/m-btn01.php';
+require_once APP_COMPONENTS_DIR . '/p-formEdit01/p-formEdit01.php';
 require_once APP_COMPONENTS_DIR . '/m-deleteBtn01/m-deleteBtn01.php';
 require_once APP_COMPONENTS_DIR . '/m-dragHandle01/m-dragHandle01.php';
 require_once APP_COMPONENTS_DIR . '/m-boldTitle01/m-boldTitle01.php';

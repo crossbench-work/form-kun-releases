@@ -10,6 +10,7 @@
 @use "../../app/components/m-input01/m-input01" as *;
 @use "../../app/components/c-breadcrumb01/c-breadcrumb01" as *;
 @use "../../app/components/c-fieldTypeModal01/c-fieldTypeModal01" as *;
+@use "../../app/components/p-formEdit01/p-formEdit01__floatingActions" as *;
 @use "../../app/components/m-btn01/m-btn01" as *;
 @use "../../app/components/m-deleteBtn01/m-deleteBtn01" as *;
 @use "../../app/components/m-dragHandle01/m-dragHandle01" as *;
@@ -650,57 +651,6 @@ form.is-inline {
   > .wrapper {
     > .block.bottom {
       margin-top: 16px;
-    }
-  }
-
-  .p-formEdit01__floatingActions {
-    position: fixed;
-    top: 16px;
-    right: 24px;
-    z-index: 1100;
-    background: rgba(255, 255, 255, 0.96);
-    border: 1px solid rgba(203, 213, 225, 0.9);
-    border-radius: 12px;
-    box-shadow: 0 16px 40px rgba(15, 23, 42, 0.18);
-    backdrop-filter: blur(8px);
-    padding: 12px 14px;
-
-    &[hidden] {
-      display: none;
-    }
-
-    > .wrapper {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .block.is-status .text {
-      margin: 0;
-      font-size: 12px;
-      font-weight: 700;
-      color: #334155;
-      white-space: nowrap;
-    }
-
-    .block.is-actions {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-  }
-
-  @media (max-width: 767px) {
-    .p-formEdit01__floatingActions {
-      top: auto;
-      right: 12px;
-      left: 12px;
-      bottom: 12px;
-
-      > .wrapper {
-        justify-content: space-between;
-        flex-wrap: wrap;
-      }
     }
   }
 }
