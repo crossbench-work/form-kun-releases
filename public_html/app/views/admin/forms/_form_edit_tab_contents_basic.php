@@ -6,10 +6,10 @@
             </div>
             <div class="block is-field">
                 <?php admin_m_input_set01_open(); ?>
-                            <div class="block is-title">
+                            <div class="area is-title">
                                 <?php admin_m_bold_title01(e('タイトル') . ' <span data-module="m-required01" data-type="required">必須</span>', 'title'); ?>
                             </div>
-                            <div class="block is-field">
+                            <div class="area is-field">
                                 <?php admin_m_input01_open(); ?>
                                     <?php admin_m_input01_input(admin_m_input01_attrs_with_bound_label('title', [
                                         'type' => 'text',
@@ -26,10 +26,10 @@
             </div>
             <div class="block is-field">
                 <?php admin_m_input_set01_open(); ?>
-                            <div class="block is-title">
+                            <div class="area is-title">
                                 <?php admin_m_bold_title01(e('スラッグ（URL用）') . ' <span data-module="m-required01" data-type="required">必須</span>', 'slug'); ?>
                             </div>
-                            <div class="block is-field">
+                            <div class="area is-field">
                                 <?php admin_m_input01_open(); ?>
                                     <?php admin_m_input01_input(admin_m_input01_attrs_with_bound_label('slug', [
                                         'type' => 'text',
@@ -49,10 +49,10 @@
             </div>
             <div class="block is-field">
                 <?php admin_m_input_set01_open(); ?>
-                            <div class="block is-title">
+                            <div class="area is-title">
                                 <?php admin_m_bold_title01(e('公開状態'), 'status'); ?>
                             </div>
-                            <div class="block is-field">
+                            <div class="area is-field">
                                 <?php admin_m_input01_open(); ?>
                                     <?php admin_m_input01_select_open(admin_m_input01_attrs_with_bound_label('status', [
                                         'id' => 'status',
@@ -77,10 +77,10 @@
             </div>
             <div class="block is-field">
                 <?php admin_m_input_set01_open(); ?>
-                            <div class="block is-title">
+                            <div class="area is-title">
                                 <?php admin_m_bold_title01(e('head'), 'meta_html'); ?>
                             </div>
-                            <div class="block is-field">
+                            <div class="area is-field">
                                 <?php admin_m_input01_open(); ?>
                                     <?php admin_m_input01_textarea(admin_m_input01_attrs_with_bound_label('meta_html', [
                                         'id' => 'meta_html',
@@ -99,10 +99,10 @@
             </div>
             <div class="block is-field">
                 <?php admin_m_input_set01_open(); ?>
-                            <div class="block is-title">
+                            <div class="area is-title">
                                 <?php admin_m_bold_title01(e('css'), 'custom_css'); ?>
                             </div>
-                            <div class="block is-field">
+                            <div class="area is-field">
                                 <?php admin_m_input01_open(); ?>
                                     <?php admin_m_input01_textarea(admin_m_input01_attrs_with_bound_label('custom_css', [
                                         'id' => 'custom_css',
@@ -121,10 +121,10 @@
             </div>
             <div class="block is-field">
                 <?php admin_m_input_set01_open(); ?>
-                            <div class="block is-title">
+                            <div class="area is-title">
                                 <?php admin_m_bold_title01(e('js'), 'custom_js'); ?>
                             </div>
-                            <div class="block is-field">
+                            <div class="area is-field">
                                 <?php admin_m_input01_open(); ?>
                                     <?php admin_m_input01_textarea(admin_m_input01_attrs_with_bound_label('custom_js', [
                                         'id' => 'custom_js',

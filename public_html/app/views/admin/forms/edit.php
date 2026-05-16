@@ -24,10 +24,10 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
     ?>
     <div class="block is-field">
         <?php admin_m_input_set01_open(); ?>
-                    <div class="block is-title">
+                    <div class="area is-title">
                         <?php admin_m_bold_title01(e('説明文')); ?>
                     </div>
-                    <div class="block is-field">
+                    <div class="area is-field">
                         <div data-module="c-descriptionEditor01" data-description-editor data-name-prefix="<?= e($namePrefix) ?>" data-position-mode="<?= e($positionMode) ?>">
                             <div class="wrapper">
                                 <div class="block is-contents">
@@ -96,10 +96,10 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                                                                     <div class="block is-contents">
                                                                         <div class="block is-field">
                                                                             <?php admin_m_input_set01_open(); ?>
-                                                                                        <div class="block is-title">
+                                                                                        <div class="area is-title">
                                                                                             <?php admin_m_bold_title01(e('ラベル'), $labelInputId); ?>
                                                                                         </div>
-                                                                                        <div class="block is-field">
+                                                                                        <div class="area is-field">
                                                                                             <?php admin_m_input01_open(); ?>
                                                                                                 <?php admin_m_input01_input(admin_m_input01_attrs_with_bound_label($labelInputId, [
                                                                                                     'type' => 'text',
@@ -117,10 +117,10 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                                                                         </div>
                                                                         <div class="block is-field">
                                                                             <?php admin_m_input_set01_open(); ?>
-                                                                                        <div class="block is-title">
+                                                                                        <div class="area is-title">
                                                                                             <?php admin_m_bold_title01(e('表示位置'), $positionInputId); ?>
                                                                                         </div>
-                                                                                        <div class="block is-field">
+                                                                                        <div class="area is-field">
                                                                                             <?php admin_m_input01_open(); ?>
                                                                                                 <?php admin_m_input01_select_open(admin_m_input01_attrs_with_bound_label($positionInputId, [
                                                                                                     'id' => $positionInputId,
@@ -138,10 +138,10 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                                                                         </div>
                                                                         <div class="block is-field">
                                                                             <?php admin_m_input_set01_open(); ?>
-                                                                                        <div class="block is-title">
+                                                                                        <div class="area is-title">
                                                                                             <?php admin_m_bold_title01(e('説明文'), $htmlInputId); ?>
                                                                                         </div>
-                                                                                        <div class="block is-field">
+                                                                                        <div class="area is-field">
                                                                                             <div data-module="c-htmlInputEditor01" data-html-toggle-editor>
                                                                                                 <div class="wrapper">
                                                                                                     <div class="block is-editor">
@@ -333,10 +333,10 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                         <div class="block is-contents">
                             <div class="block is-field">
                                 <?php admin_m_input_set01_open(); ?>
-                                            <div class="block is-title">
+                                            <div class="area is-title">
                                                 <?php admin_m_bold_title01(e('ラベル')); ?>
                                             </div>
-                                            <div class="block is-field">
+                                            <div class="area is-field">
                                                 <?php admin_m_input01_open(); ?>
                                                     <?php admin_m_input01_input([
                                                         'type' => 'text',
@@ -351,10 +351,10 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                             </div>
                             <div class="block is-field">
                                 <?php admin_m_input_set01_open(); ?>
-                                            <div class="block is-title">
+                                            <div class="area is-title">
                                                 <?php admin_m_bold_title01(e('表示位置')); ?>
                                             </div>
-                                            <div class="block is-field">
+                                            <div class="area is-field">
                                                 <?php admin_m_input01_open(); ?>
                                                     <?php admin_m_input01_select_open([
                                                         'class' => 'fb-description-position',
@@ -371,10 +371,10 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                             </div>
                             <div class="block is-field">
                                 <?php admin_m_input_set01_open(); ?>
-                                            <div class="block is-title">
+                                            <div class="area is-title">
                                                 <?php admin_m_bold_title01(e('説明文')); ?>
                                             </div>
-                                            <div class="block is-field">
+                                            <div class="area is-field">
                                                 <div data-module="c-htmlInputEditor01" data-html-toggle-editor>
                                                     <div class="wrapper">
                                                         <div class="block is-editor">

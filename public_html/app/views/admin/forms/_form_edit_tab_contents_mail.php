@@ -6,10 +6,10 @@
             </div>
             <div class="block is-field">
                 <?php admin_m_input_set01_open(); ?>
-                            <div class="block is-title">
+                            <div class="area is-title">
                                 <?php admin_m_bold_title01(e('送信方式'), 'mail_transport'); ?>
                             </div>
-                            <div class="block is-field">
+                            <div class="area is-field">
                                 <?php admin_m_input01_open(); ?>
                                     <?php admin_m_input01_select_open(admin_m_input01_attrs_with_bound_label('mail_transport', [
                                         'id' => 'mail_transport',
@@ -26,10 +26,10 @@
             </div>
             <div class="block is-field">
                 <?php admin_m_input_set01_open(); ?>
-                            <div class="block is-title">
+                            <div class="area is-title">
                                 <?php admin_m_bold_title01(e('差出人メールアドレス'), 'mail_from_email'); ?>
                             </div>
-                            <div class="block is-field">
+                            <div class="area is-field">
                                 <?php admin_m_input01_open(); ?>
                                     <?php admin_m_input01_input(admin_m_input01_attrs_with_bound_label('mail_from_email', [
                                         'type' => 'email',
@@ -46,10 +46,10 @@
             </div>
             <div class="block is-field">
                 <?php admin_m_input_set01_open(); ?>
-                            <div class="block is-title">
+                            <div class="area is-title">
                                 <?php admin_m_bold_title01(e('差出人名'), 'mail_from_name'); ?>
                             </div>
-                            <div class="block is-field">
+                            <div class="area is-field">
                                 <?php admin_m_input01_open(); ?>
                                     <?php admin_m_input01_input(admin_m_input01_attrs_with_bound_label('mail_from_name', [
                                         'type' => 'text',
@@ -65,10 +65,10 @@
             </div>
             <div class="block is-field">
                 <?php admin_m_input_set01_open(); ?>
-                            <div class="block is-title">
+                            <div class="area is-title">
                                 <?php admin_m_bold_title01(e('SMTPホスト'), 'mail_smtp_host'); ?>
                             </div>
-                            <div class="block is-field">
+                            <div class="area is-field">
                                 <?php admin_m_input01_open(); ?>
                                     <?php admin_m_input01_input(admin_m_input01_attrs_with_bound_label('mail_smtp_host', [
                                         'type' => 'text',
@@ -84,10 +84,10 @@
             </div>
             <div class="block is-field">
                 <?php admin_m_input_set01_open(); ?>
-                            <div class="block is-title">
+                            <div class="area is-title">
                                 <?php admin_m_bold_title01(e('SMTPポート'), 'mail_smtp_port'); ?>
                             </div>
-                            <div class="block is-field">
+                            <div class="area is-field">
                                 <?php admin_m_input01_open(); ?>
                                     <?php admin_m_input01_input(admin_m_input01_attrs_with_bound_label('mail_smtp_port', [
                                         'type' => 'number',
@@ -105,10 +105,10 @@
             </div>
             <div class="block is-field">
                 <?php admin_m_input_set01_open(); ?>
-                            <div class="block is-title">
+                            <div class="area is-title">
                                 <?php admin_m_bold_title01(e('暗号化方式'), 'mail_smtp_secure'); ?>
                             </div>
-                            <div class="block is-field">
+                            <div class="area is-field">
                                 <?php admin_m_input01_open(); ?>
                                     <?php admin_m_input01_select_open(admin_m_input01_attrs_with_bound_label('mail_smtp_secure', [
                                         'id' => 'mail_smtp_secure',
@@ -126,10 +126,10 @@
             </div>
             <div class="block is-field">
                 <?php admin_m_input_set01_open(); ?>
-                            <div class="block is-title">
+                            <div class="area is-title">
                                 <?php admin_m_bold_title01(e('SMTPユーザー名'), 'mail_smtp_username'); ?>
                             </div>
-                            <div class="block is-field">
+                            <div class="area is-field">
                                 <?php admin_m_input01_open(); ?>
                                     <?php admin_m_input01_input(admin_m_input01_attrs_with_bound_label('mail_smtp_username', [
                                         'type' => 'text',
@@ -146,10 +146,10 @@
             </div>
             <div class="block is-field">
                 <?php admin_m_input_set01_open(); ?>
-                            <div class="block is-title">
+                            <div class="area is-title">
                                 <?php admin_m_bold_title01(e('SMTPパスワード'), 'mail_smtp_password'); ?>
                             </div>
-                            <div class="block is-field">
+                            <div class="area is-field">
                                 <?php admin_m_input01_open(); ?>
                                     <?php admin_m_input01_input(admin_m_input01_attrs_with_bound_label('mail_smtp_password', [
                                         'type' => 'password',
@@ -173,10 +173,10 @@
             </div>
             <div class="block is-field">
                 <?php admin_m_input_set01_open(); ?>
-                            <div class="block is-title">
+                            <div class="area is-title">
                                 <?php admin_m_bold_title01(e('EHLO ホスト名'), 'mail_smtp_ehlo_host'); ?>
                             </div>
-                            <div class="block is-field">
+                            <div class="area is-field">
                                 <?php admin_m_input01_open(); ?>
                                     <?php admin_m_input01_input(admin_m_input01_attrs_with_bound_label('mail_smtp_ehlo_host', [
                                         'type' => 'text',
@@ -193,10 +193,10 @@
             </div>
             <div class="block is-field">
                 <?php admin_m_input_set01_open(); ?>
-                            <div class="block is-title">
+                            <div class="area is-title">
                                 <?php admin_m_bold_title01(e('タイムアウト（秒）'), 'mail_smtp_timeout'); ?>
                             </div>
-                            <div class="block is-field">
+                            <div class="area is-field">
                                 <?php admin_m_input01_open(); ?>
                                     <?php admin_m_input01_input(admin_m_input01_attrs_with_bound_label('mail_smtp_timeout', [
                                         'type' => 'number',
@@ -241,10 +241,10 @@
             </div>
             <div class="block is-field">
                 <?php admin_m_input_set01_open(); ?>
-                            <div class="block is-title">
+                            <div class="area is-title">
                                 <?php admin_m_bold_title01(e('送信先メールアドレス（カンマ区切りで複数可）'), 'admin_emails'); ?>
                             </div>
-                            <div class="block is-field">
+                            <div class="area is-field">
                                 <?php admin_m_input01_open(); ?>
                                     <?php admin_m_input01_input(admin_m_input01_attrs_with_bound_label('admin_emails', [
                                         'type' => 'text',
@@ -261,10 +261,10 @@
             </div>
             <div class="block is-field">
                 <?php admin_m_input_set01_open(); ?>
-                            <div class="block is-title">
+                            <div class="area is-title">
                                 <?php admin_m_bold_title01(e('件名'), 'mail_subject_admin'); ?>
                             </div>
-                            <div class="block is-field">
+                            <div class="area is-field">
                                 <?php admin_m_input01_open(); ?>
                                     <?php admin_m_input01_input(admin_m_input01_attrs_with_bound_label('mail_subject_admin', [
                                         'type' => 'text',
@@ -281,10 +281,10 @@
             </div>
             <div class="block is-field">
                 <?php admin_m_input_set01_open(); ?>
-                            <div class="block is-title">
+                            <div class="area is-title">
                                 <?php admin_m_bold_title01(e('表示設定'), 'mail_template_admin'); ?>
                             </div>
-                            <div class="block is-field">
+                            <div class="area is-field">
                                 <?php admin_m_input01_open(); ?>
                                     <?php admin_m_input01_textarea(admin_m_input01_attrs_with_bound_label('mail_template_admin', [
                                         'id' => 'mail_template_admin',
@@ -299,10 +299,10 @@
             </div>
             <div class="block is-field">
                 <?php admin_m_input_set01_open(); ?>
-                            <div class="block is-title">
+                            <div class="area is-title">
                                 <?php admin_m_bold_title01(e('使用可能な変数')); ?>
                             </div>
-                            <div class="block is-field">
+                            <div class="area is-field">
                                 <div class="c-copyTagList01">
                                     <div class="c-copyTagList01__items">
                                         <button type="button" class="c-copyTagList01__tag" data-copy-text="{{field_key}}"><code>{{field_key}}</code></button>
@@ -333,10 +333,10 @@
             </div>
             <div class="block is-field">
                 <?php admin_m_input_set01_open(); ?>
-                            <div class="block is-title">
+                            <div class="area is-title">
                                 <?php admin_m_bold_title01(e('送信先のフィールドキー（メール型項目）'), 'reply_from_field_key'); ?>
                             </div>
-                            <div class="block is-field">
+                            <div class="area is-field">
                                 <?php admin_m_input01_open(); ?>
                                     <?php admin_m_input01_input(admin_m_input01_attrs_with_bound_label('reply_from_field_key', [
                                         'type' => 'text',
@@ -353,10 +353,10 @@
             </div>
             <div class="block is-field">
                 <?php admin_m_input_set01_open(); ?>
-                            <div class="block is-title">
+                            <div class="area is-title">
                                 <?php admin_m_bold_title01(e('件名'), 'reply_subject'); ?>
                             </div>
-                            <div class="block is-field">
+                            <div class="area is-field">
                                 <?php admin_m_input01_open(); ?>
                                     <?php admin_m_input01_input(admin_m_input01_attrs_with_bound_label('reply_subject', [
                                         'type' => 'text',
@@ -372,10 +372,10 @@
             </div>
             <div class="block is-field">
                 <?php admin_m_input_set01_open(); ?>
-                            <div class="block is-title">
+                            <div class="area is-title">
                                 <?php admin_m_bold_title01(e('表示設定'), 'reply_template'); ?>
                             </div>
-                            <div class="block is-field">
+                            <div class="area is-field">
                                 <?php admin_m_input01_open(); ?>
                                     <?php admin_m_input01_textarea(admin_m_input01_attrs_with_bound_label('reply_template', [
                                         'id' => 'reply_template',
@@ -390,10 +390,10 @@
             </div>
             <div class="block is-field">
                 <?php admin_m_input_set01_open(); ?>
-                            <div class="block is-title">
+                            <div class="area is-title">
                                 <?php admin_m_bold_title01(e('使用可能な変数')); ?>
                             </div>
-                            <div class="block is-field">
+                            <div class="area is-field">
                                 <div class="c-copyTagList01">
                                     <div class="c-copyTagList01__items">
                                         <button type="button" class="c-copyTagList01__tag" data-copy-text="{{field_key}}"><code>{{field_key}}</code></button>
