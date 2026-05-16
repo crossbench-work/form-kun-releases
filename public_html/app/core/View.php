@@ -20,6 +20,10 @@ class View
 
     public function renderToString(string $template, array $data = [], ?string $layout = null): string
     {
+        // レイアウトより先にテンプレートが include されるため、レイアウト内の require では遅い。
+        if ($layout === 'admin') {
+            require_once $this->viewsDir . '/layouts/admin_components.php';
+        }
         $content = $this->renderRaw($template, $data);
         if ($layout === null) {
             return $content;
