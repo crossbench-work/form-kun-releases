@@ -31,9 +31,7 @@ if (empty($f['required']) || in_array($f['type'], ['radio', 'select'], true)) {
                         <div class="block is-contents">
                             <div class="area is-move">
                                 <div class="box is-handle ui-sortable-handle" title="ドラッグして並べ替え">
-                                    <p data-module="m-dragHandle01" data-target="c-formEditor__dragHandle">
-                                        <svg width="14" height="18" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="currentColor"><circle cx="9" cy="6" r="2"/><circle cx="15" cy="6" r="2"/><circle cx="9" cy="12" r="2"/><circle cx="15" cy="12" r="2"/><circle cx="9" cy="18" r="2"/><circle cx="15" cy="18" r="2"/></svg>
-                                    </p>
+                                    <?php admin_m_drag_handle01('c-formEditor__dragHandle'); ?>
                                 </div>
                             </div>
                             <div class="area is-summary">
@@ -320,9 +318,7 @@ if (empty($f['required']) || in_array($f['type'], ['radio', 'select'], true)) {
                                                                                                 <div class="block is-contents">
                                                                                                     <div class="area is-move">
                                                                                                         <div class="box is-handle ui-sortable-handle" title="ドラッグして並べ替え">
-                                                                                                            <p data-module="m-dragHandle01" data-target="c-formEditor__choiceDragHandle">
-                                                                                                                <svg width="14" height="18" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="currentColor"><circle cx="9" cy="6" r="2"/><circle cx="15" cy="6" r="2"/><circle cx="9" cy="12" r="2"/><circle cx="15" cy="12" r="2"/><circle cx="9" cy="18" r="2"/><circle cx="15" cy="18" r="2"/></svg>
-                                                                                                            </p>
+                                                                                                            <?php admin_m_drag_handle01('c-formEditor__choiceDragHandle'); ?>
                                                                                                         </div>
                                                                                                     </div>
                                                                                                     <div class="c-formEditor__child__field">

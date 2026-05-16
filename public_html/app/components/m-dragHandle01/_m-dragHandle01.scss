@@ -1,0 +1,27 @@
+// m-dragHandle01 … c-formEditorList01 内のドラッグハンドル（data-module="m-dragHandle01"）
+// リストシェルとセットで使う（説明文ブロック・フォーム項目で共通の c-formEditorList01）
+
+[data-module="c-formEditorList01"] {
+    [data-module="m-dragHandle01"] {
+        margin: 0;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        cursor: grab;
+        color: #94a3b8;
+        padding: 2px 4px;
+        line-height: 1;
+        border-radius: 4px;
+        user-select: none;
+
+        &:active {
+            cursor: grabbing;
+        }
+
+        &:hover {
+            color: #64748b;
+            background: #f1f5f9;
+        }
+    }
+}

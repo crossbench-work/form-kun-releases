@@ -7,6 +7,7 @@
 @use "../../app/components/c-breadcrumb01/c-breadcrumb01" as *;
 @use "../../app/components/m-btn01/m-btn01" as *;
 @use "../../app/components/m-deleteBtn01/m-deleteBtn01" as *;
+@use "../../app/components/m-dragHandle01/m-dragHandle01" as *;
 @use "../../app/components/m-boldTitle01/m-boldTitle01" as *;
 
 body.l-adminShell01 {
@@ -931,29 +932,6 @@ form.is-inline {
         gap: 12px;
         padding: 8px;
       }
-    }
-  }
-
-  [data-module="m-dragHandle01"] {
-    margin: 0;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    cursor: grab;
-    color: #94a3b8;
-    padding: 2px 4px;
-    line-height: 1;
-    border-radius: 4px;
-    user-select: none;
-
-    &:active {
-      cursor: grabbing;
-    }
-
-    &:hover {
-      color: #64748b;
-      background: #f1f5f9;
     }
   }
 

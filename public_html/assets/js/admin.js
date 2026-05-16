@@ -813,7 +813,7 @@
                     '<div class="area is-move">' +
                         '<div class="box is-handle ui-sortable-handle" title="ドラッグして並べ替え">' +
                             '<p data-module="m-dragHandle01" data-target="c-formEditor__choiceDragHandle">' +
-                                '<svg width="14" height="18" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="currentColor"><circle cx="9" cy="6" r="2"></circle><circle cx="15" cy="6" r="2"></circle><circle cx="9" cy="12" r="2"></circle><circle cx="15" cy="12" r="2"></circle><circle cx="9" cy="18" r="2"></circle><circle cx="15" cy="18" r="2"></circle></svg>' +
+                        '<svg width="14" height="18" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="currentColor"><circle cx="9" cy="6" r="2"/><circle cx="15" cy="6" r="2"/><circle cx="9" cy="12" r="2"/><circle cx="15" cy="12" r="2"/><circle cx="9" cy="18" r="2"/><circle cx="15" cy="18" r="2"/></svg>' +
                             '</p>' +
                         '</div>' +
                     '</div>' +

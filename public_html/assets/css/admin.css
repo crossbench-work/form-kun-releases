@@ -517,6 +517,27 @@ body {
   flex-shrink: 0;
 }
 
+[data-module=c-formEditorList01] [data-module=m-dragHandle01] {
+  margin: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  cursor: grab;
+  color: #94a3b8;
+  padding: 2px 4px;
+  line-height: 1;
+  border-radius: 4px;
+  user-select: none;
+}
+[data-module=c-formEditorList01] [data-module=m-dragHandle01]:active {
+  cursor: grabbing;
+}
+[data-module=c-formEditorList01] [data-module=m-dragHandle01]:hover {
+  color: #64748b;
+  background: #f1f5f9;
+}
+
 [data-module=m-boldTitle01] {
   margin: 0;
   font-size: 12px;
@@ -1310,26 +1331,6 @@ form.is-inline {
   align-items: center;
   gap: 12px;
   padding: 8px;
-}
-[data-module=c-formEditorList01] [data-module=m-dragHandle01] {
-  margin: 0;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  cursor: grab;
-  color: #94a3b8;
-  padding: 2px 4px;
-  line-height: 1;
-  border-radius: 4px;
-  user-select: none;
-}
-[data-module=c-formEditorList01] [data-module=m-dragHandle01]:active {
-  cursor: grabbing;
-}
-[data-module=c-formEditorList01] [data-module=m-dragHandle01]:hover {
-  color: #64748b;
-  background: #f1f5f9;
 }
 [data-module=c-formEditorList01] .c-formEditor__itemHeader > .wrapper > .block.is-contents > .area.is-move {
   display: flex;
