@@ -395,6 +395,18 @@ body {
   display: none;
 }
 
+[data-module=c-alert01] > .wrapper > .block.is-contents {
+  padding: 10px 14px;
+  border-radius: 6px;
+  margin-bottom: 16px;
+  background: #fee2e2;
+  color: #991b1b;
+}
+[data-module=c-alert01] ul {
+  margin: 0;
+  padding-left: 20px;
+}
+
 [data-module=c-btnSet01] > .wrapper > .block.is-contents {
   display: flex;
   gap: 10px;

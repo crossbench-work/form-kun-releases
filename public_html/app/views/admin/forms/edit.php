@@ -35,11 +35,13 @@ $thanksBlocks = $form['thanks_blocks'] ?? [['id' => 'thanks-0', 'label' => '', '
     <div class="wrapper">
         <div class="block is-contents">
             <?php if (!empty($errors)): ?>
-                <div class="m-alert01 is-danger">
-                    <ul><?php foreach ($errors as $msg): ?>
-                            <li><?= e($msg) ?></li><?php endforeach; ?>
+                <?php admin_c_alert01_open(); ?>
+                    <ul>
+                        <?php foreach ($errors as $msg): ?>
+                            <li><?= e($msg) ?></li>
+                        <?php endforeach; ?>
                     </ul>
-                </div>
+                <?php admin_c_alert01_close(); ?>
             <?php endif; ?>
 
             <?php admin_c_form_edit_tabs01_open(); ?>
