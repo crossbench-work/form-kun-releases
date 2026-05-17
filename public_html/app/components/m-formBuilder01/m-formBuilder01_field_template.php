@@ -268,12 +268,15 @@
                                                                 <div class="area is-contents"
                                                                     data-target="c-formEditor__choiceControls">
                                                                     <?php admin_m_btn01_open('center'); ?>
-                                                                    <button type="button" class="btn is-add"
-                                                                        data-target="c-formEditor__choiceAdd">＋
-                                                                        選択肢を追加</button>
+                                                                    <?php admin_m_btn01_button('＋ 選択肢を追加', [
+                                                                        'type' => 'button',
+                                                                        'class' => 'is-add',
+                                                                        'data-target' => 'c-formEditor__choiceAdd',
+                                                                    ]); ?>
                                                                     <textarea data-name="options"
                                                                         data-target="c-formEditor__optionsSource"
                                                                         rows="4" hidden></textarea>
+                                                                    <?php admin_m_btn01_close(); ?>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -348,11 +351,15 @@
                                             </div>
                                             <div class="area is-contents" data-target="c-formEditor__textMultiControls">
                                                 <?php admin_m_btn01_open('center'); ?>
-                                                <button type="button" data-target="c-formEditor__textMultiAdd"
-                                                    class="btn is-add fb-description-add">＋ 入力エリアを追加</button>
+                                                <?php admin_m_btn01_button('＋ 入力エリアを追加', [
+                                                    'type' => 'button',
+                                                    'class' => 'is-add fb-description-add',
+                                                    'data-target' => 'c-formEditor__textMultiAdd',
+                                                ]); ?>
                                                 <textarea data-name="multi_text_items"
                                                     data-target="c-formEditor__textMultiSource"
                                                     hidden>[{"label":"","placeholder":""}]</textarea>
+                                                <?php admin_m_btn01_close(); ?>
                                             </div>
                                         </div>
                                     </div>

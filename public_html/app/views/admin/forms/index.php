@@ -7,12 +7,17 @@ require_once APP_COMPONENTS_DIR . '/c-formBlock01/c-formBlock01.php';
     <div class="spacer"></div>
     <?php if (!empty($at_form_limit)): ?>
         <?php admin_m_btn01_open(); ?>
-        <button type="button" class="btn is-primary" disabled aria-disabled="true">＋ 新規作成</button>
-    </div>
+        <?php admin_m_btn01_button('＋ 新規作成', [
+            'type' => 'button',
+            'class' => 'is-primary',
+            'disabled' => true,
+            'aria-disabled' => true,
+        ]); ?>
+    <?php admin_m_btn01_close(); ?>
 <?php else: ?>
     <?php admin_m_btn01_open(); ?>
-    <a class="btn is-primary" href="<?= e(base_path('/admin/forms/new')) ?>">＋ 新規作成</a>
-    </div>
+    <?php admin_m_btn01_link('＋ 新規作成', base_path('/admin/forms/new'), ['class' => 'is-primary']); ?>
+    <?php admin_m_btn01_close(); ?>
 <?php endif; ?>
 </div>
 

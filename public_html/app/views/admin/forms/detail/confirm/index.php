@@ -9,8 +9,7 @@
         <div class="area is-title">
             <?php admin_m_large_title01('表示設定'); ?>
             <?php admin_m_btn01_open(); ?>
-            <button type="submit" class="btn" formaction="<?= e(base_path('/admin/forms/preview-confirm')) ?>"
-                formmethod="post" formtarget="_blank" formnovalidate>プレビュー</button>
+            <?php admin_m_btn01_preview_submit(base_path('/admin/forms/preview-confirm')); ?>
             <?php admin_m_btn01_close(); ?>
         </div>
         <div class="area is-field">

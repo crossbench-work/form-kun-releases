@@ -343,9 +343,13 @@ if (empty($f['required']) || in_array($f['type'], ['radio', 'select'], true)) {
                                                                                 <?php endforeach; ?>
                                                                                 <div class="area is-contents" data-target="c-formEditor__choiceControls">
                                                                                     <?php admin_m_btn01_open('center'); ?>
-                                                                                        <button type="button" class="btn is-add" data-target="c-formEditor__choiceAdd">＋ 選択肢を追加</button>
+                                                                                        <?php admin_m_btn01_button('＋ 選択肢を追加', [
+                                                                                            'type' => 'button',
+                                                                                            'class' => 'is-add',
+                                                                                            'data-target' => 'c-formEditor__choiceAdd',
+                                                                                        ]); ?>
                                                                                         <textarea name="fields[<?= $idx ?>][options]" data-target="c-formEditor__optionsSource" rows="4" hidden><?= e($f['options'] ?? '') ?></textarea>
-                                                                                    </div>
+                                                                                    <?php admin_m_btn01_close(); ?>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
@@ -431,9 +435,13 @@ if (empty($f['required']) || in_array($f['type'], ['radio', 'select'], true)) {
                                                             <?php endforeach; ?>
                                                             <div class="area is-contents" data-target="c-formEditor__textMultiControls">
                                                                 <?php admin_m_btn01_open('center'); ?>
-                                                                    <button type="button" data-target="c-formEditor__textMultiAdd" class="btn is-add fb-description-add">＋ 入力エリアを追加</button>
+                                                                    <?php admin_m_btn01_button('＋ 入力エリアを追加', [
+                                                                        'type' => 'button',
+                                                                        'class' => 'is-add fb-description-add',
+                                                                        'data-target' => 'c-formEditor__textMultiAdd',
+                                                                    ]); ?>
                                                                     <textarea name="fields[<?= $idx ?>][multi_text_items]" data-target="c-formEditor__textMultiSource" hidden><?= e(json_encode($multiTextItems, JSON_UNESCAPED_UNICODE)) ?></textarea>
-                                                                </div>
+                                                                <?php admin_m_btn01_close(); ?>
                                                             </div>
                                                         </div>
                                                     </div>
