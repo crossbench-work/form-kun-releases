@@ -1,4 +1,8 @@
-<?php /** フォーム編集:「入力画面」タブパネル */ ?>
+<?php
+/** フォーム編集:「入力画面」タブパネル
+ * _content_*.php … c-formBlock01 直下 .area.is-field の内側。説明文エディタはコンポーネント呼び出しのまま本ファイルに残す。
+ */
+?>
 <div data-target="c-formEditTabs01__contents" data-tab-panel="fields" class="area is-contents" role="tabpanel"
     aria-label="入力画面" hidden>
     <?php admin_c_form_block01_open(); ?>
@@ -10,25 +14,7 @@
         <?php admin_m_btn01_close(); ?>
     </div>
     <div class="area is-field">
-        <?php admin_m_input_set01_open(); ?>
-        <div class="area is-title">
-            <?php admin_m_bold_title01(e('タイトル'), 'input_page_title'); ?>
-            <label class="label is-choice">
-                <input type="checkbox" name="show_input_page_title" value="1" <?= !empty($form['show_input_page_title']) ? 'checked' : '' ?>>
-                表示する
-            </label>
-        </div>
-        <div class="area is-field">
-            <?php admin_m_input01_open(); ?>
-            <?php admin_m_input01_input(admin_m_input01_attrs_with_bound_label('input_page_title', [
-                'type' => 'text',
-                'id' => 'input_page_title',
-                'name' => 'input_page_title',
-                'value' => (string) ($form['input_page_title'] ?? ''),
-            ])); ?>
-            <?php admin_m_input01_close(); ?>
-        </div>
-        <?php admin_m_input_set01_close(); ?>
+        <?php require __DIR__ . '/_content_input_page_title.php'; ?>
     </div>
     <?php admin_c_description_editor01('description_blocks', $descriptionBlocks, 'input'); ?>
     <?php admin_c_form_block01_close(); ?>
@@ -38,21 +24,7 @@
         <?php admin_m_large_title01('ボタン設定'); ?>
     </div>
     <div class="area is-field">
-        <?php admin_m_input_set01_open(); ?>
-        <div class="area is-title">
-            <?php admin_m_bold_title01(e('ボタンテキスト'), 'confirm_button_text'); ?>
-        </div>
-        <div class="area is-field">
-            <?php admin_m_input01_open(); ?>
-            <?php admin_m_input01_input(admin_m_input01_attrs_with_bound_label('confirm_button_text', [
-                'type' => 'text',
-                'id' => 'confirm_button_text',
-                'name' => 'confirm_button_text',
-                'value' => (string) ($form['confirm_button_text'] ?? '入力内容を確認する'),
-            ])); ?>
-            <?php admin_m_input01_close(); ?>
-        </div>
-        <?php admin_m_input_set01_close(); ?>
+        <?php require __DIR__ . '/_content_confirm_button_text.php'; ?>
     </div>
     <?php admin_c_form_block01_close(); ?>
 </div>
