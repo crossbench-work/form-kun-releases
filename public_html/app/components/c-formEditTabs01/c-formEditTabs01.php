@@ -8,6 +8,7 @@ if (!function_exists('admin_c_form_edit_tabs01_open')) {
     {
         $tabs = [
             ['panel' => 'basic', 'label' => '基本', 'selected' => true],
+            ['panel' => 'form', 'label' => 'フォーム', 'selected' => false],
             ['panel' => 'fields', 'label' => '入力画面', 'selected' => false],
             ['panel' => 'confirm', 'label' => '確認画面', 'selected' => false],
             ['panel' => 'thanks', 'label' => '完了画面', 'selected' => false],

@@ -46,6 +46,7 @@ $thanksBlocks = $form['thanks_blocks'] ?? [['id' => 'thanks-0', 'label' => '', '
 
             <?php admin_c_form_edit_tabs01_open(); ?>
             <?php require __DIR__ . '/basic/index.php'; ?>
+            <?php require __DIR__ . '/form/index.php'; ?>
             <?php require __DIR__ . '/fields/index.php'; ?>
             <?php require __DIR__ . '/confirm/index.php'; ?>
             <?php require __DIR__ . '/thanks/index.php'; ?>

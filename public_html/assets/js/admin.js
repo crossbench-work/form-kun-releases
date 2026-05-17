@@ -117,7 +117,7 @@
                 p.hidden = p.getAttribute('data-tab-panel') !== panelId;
             });
             writeStoredPanelId(panelId);
-            if (panelId === 'fields') {
+            if (panelId === 'form') {
                 window.setTimeout(function () {
                     if (typeof window.formkunInitFbSortable === 'function') {
                         window.formkunInitFbSortable();
