@@ -32,7 +32,7 @@
 </div>
 </div>
 </div>
-<?php admin_c_description_editor01('description_blocks', $descriptionBlocks, 'input'); ?>
+<?php $renderDescriptionEditor('description_blocks', $descriptionBlocks, 'input'); ?>
 </div>
 </div>
 </div>

@@ -32,7 +32,7 @@
 </div>
 </div>
 </div>
-<?php admin_c_description_editor01('confirm_blocks', $confirmBlocks, 'simple'); ?>
+<?php $renderDescriptionEditor('confirm_blocks', $confirmBlocks, 'simple'); ?>
 </div>
 </div>
 </div>
