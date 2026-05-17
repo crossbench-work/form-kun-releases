@@ -17,3 +17,5 @@ require_once APP_COMPONENTS_DIR . '/m-dragHandle01/m-dragHandle01.php';
 require_once APP_COMPONENTS_DIR . '/m-boldTitle01/m-boldTitle01.php';
 require_once APP_COMPONENTS_DIR . '/m-input01/m-input01.php';
 require_once APP_COMPONENTS_DIR . '/m-inputSet01/m-inputSet01.php';
+require_once APP_COMPONENTS_DIR . '/c-formEditTabs01/c-formEditTabs01.php';
+require_once APP_COMPONENTS_DIR . '/c-descriptionEditor01/c-descriptionEditor01.php';

@@ -3,7 +3,6 @@
 @use "../../app/components/c-formBlock01/c-formBlock01" as *;
 @use "../../app/components/c-formEditorItemHeader01/c-formEditorItemHeader01" as *;
 @use "../../app/components/c-formEditorItemBody01/c-formEditorItemBody01" as *;
-@use "../../app/components/m-formBuilder01/m-formBuilder01__descriptionTemplate" as *;
 @use "../../app/components/m-formBuilder01/m-formBuilder01__fieldTemplate" as *;
 @use "../../app/components/m-largeTitle01/m-largeTitle01" as *;
 @use "../../app/components/m-inputSet01/m-inputSet01" as *;
@@ -15,6 +14,8 @@
 @use "../../app/components/m-deleteBtn01/m-deleteBtn01" as *;
 @use "../../app/components/m-dragHandle01/m-dragHandle01" as *;
 @use "../../app/components/m-boldTitle01/m-boldTitle01" as *;
+@use "../../app/components/c-formEditTabs01/c-formEditTabs01" as *;
+@use "../../app/components/c-descriptionEditor01/c-descriptionEditor01" as *;
 
 body.l-adminShell01 {
   color: #1f2937;
@@ -598,52 +599,6 @@ form.is-inline {
         background: #1d4ed8;
       }
     }
-  }
-}
-
-// --- タブ（フォーム編集）---
-[data-module="c-formEditTabs01"] {
-  margin-bottom: 8px;
-
-  > .wrapper {
-    > .block.is-tabs {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-      margin-bottom: 20px;
-      padding: 8px 24px;
-      background-color: #e0e6eb;
-      border-radius: 12px;
-    }
-
-    > .block.is-contents {
-      .area.is-contents[role="tabpanel"][hidden] {
-        display: none !important;
-      }
-    }
-  }
-}
-
-[data-module="m-formEditTab01"] {
-  font-size: 11px;
-  font-weight: 700;
-  padding: 8px 18px;
-  line-height: 1.0;
-  background: transparent;
-  color: #64748b;
-  cursor: pointer;
-  border-radius: 100px;
-
-  &:hover {
-    color: #1f2937;
-    background: #f8fafc;
-  }
-
-  &[aria-selected="true"] {
-    color: #fff;
-    font-weight: 600;
-    background: #3C8CFD;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
   }
 }
 
