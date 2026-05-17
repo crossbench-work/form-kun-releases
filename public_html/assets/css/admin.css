@@ -401,6 +401,43 @@ body {
   flex-wrap: wrap;
 }
 
+[data-module=c-formEditTabs01] {
+  margin-bottom: 8px;
+}
+[data-module=c-formEditTabs01] > .wrapper > .block.is-tabs {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+  padding: 8px 24px;
+  background-color: #e0e6eb;
+  border-radius: 12px;
+}
+[data-module=c-formEditTabs01] > .wrapper > .block.is-contents .area.is-contents[role=tabpanel][hidden] {
+  display: none !important;
+}
+
+[data-module=m-formEditTab01] {
+  font-size: 11px;
+  font-weight: 700;
+  padding: 8px 18px;
+  line-height: 1;
+  background: transparent;
+  color: #64748b;
+  cursor: pointer;
+  border-radius: 100px;
+}
+[data-module=m-formEditTab01]:hover {
+  color: #1f2937;
+  background: #f8fafc;
+}
+[data-module=m-formEditTab01][aria-selected=true] {
+  color: #fff;
+  font-weight: 600;
+  background: #3C8CFD;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+}
+
 [data-module=c-descriptionEditor01] > .wrapper > .block.is-toolbar > .area.is-actions {
   display: flex;
   margin-top: 16px;
@@ -1637,43 +1674,6 @@ form.is-inline {
 }
 .l-adminBody01 form > .area.is-actions .btn.is-primary:hover {
   background: #1d4ed8;
-}
-
-[data-module=c-formEditTabs01] {
-  margin-bottom: 8px;
-}
-[data-module=c-formEditTabs01] > .wrapper > .block.is-tabs {
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
-  margin-bottom: 20px;
-  padding: 8px 24px;
-  background-color: #e0e6eb;
-  border-radius: 12px;
-}
-[data-module=c-formEditTabs01] > .wrapper > .block.is-contents .area.is-contents[role=tabpanel][hidden] {
-  display: none !important;
-}
-
-[data-module=m-formEditTab01] {
-  font-size: 11px;
-  font-weight: 700;
-  padding: 8px 18px;
-  line-height: 1;
-  background: transparent;
-  color: #64748b;
-  cursor: pointer;
-  border-radius: 100px;
-}
-[data-module=m-formEditTab01]:hover {
-  color: #1f2937;
-  background: #f8fafc;
-}
-[data-module=m-formEditTab01][aria-selected=true] {
-  color: #fff;
-  font-weight: 600;
-  background: #3C8CFD;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
 }
 
 .p-formEdit01 > .wrapper > .block.bottom {

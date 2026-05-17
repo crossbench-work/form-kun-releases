@@ -42,13 +42,13 @@ $thanksBlocks = $form['thanks_blocks'] ?? [['id' => 'thanks-0', 'label' => '', '
                 </div>
             <?php endif; ?>
 
-            <?php require __DIR__ . '/_form_edit_tabs.php'; ?>
+            <?php admin_c_form_edit_tabs01_open(); ?>
             <?php require __DIR__ . '/_form_edit_tab_contents_basic.php'; ?>
             <?php require __DIR__ . '/_form_edit_tab_contents_fields.php'; ?>
             <?php require __DIR__ . '/_form_edit_tab_contents_confirm.php'; ?>
             <?php require __DIR__ . '/_form_edit_tab_contents_thanks.php'; ?>
             <?php require __DIR__ . '/_form_edit_tab_contents_mail.php'; ?>
-            <?php require __DIR__ . '/_form_edit_tabs_close.php'; ?>
+            <?php admin_c_form_edit_tabs01_close(); ?>
 
             <div class="block bottom">
                 <?php admin_c_btn_set01_open(); ?>
