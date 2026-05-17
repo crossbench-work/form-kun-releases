@@ -10,7 +10,5 @@
             </div>
         </div>
         <div class="area is-actions">
-            <?php admin_m_btn01_open(); ?>
-            <?php admin_m_btn01_button('＋ 項目を追加', ['data-target' => 'm-formBuilder01__add']); ?>
-            <?php admin_m_btn01_close(); ?>
+            <?php admin_m_btn01_button_wrap('＋ 項目を追加', ['data-target' => 'm-formBuilder01__add']); ?>
         </div>

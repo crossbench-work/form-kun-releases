@@ -56,14 +56,10 @@ $thanksBlocks = $form['thanks_blocks'] ?? [['id' => 'thanks-0', 'label' => '', '
             <div class="block bottom">
                 <?php admin_c_btn_set01_open(); ?>
                     <div class="area is-contents">
-                        <?php admin_m_btn01_open(); ?>
-                            <?php admin_m_btn01_button($isNew ? '作成する' : '保存する', ['type' => 'submit', 'class' => 'is-primary']); ?>
-                        <?php admin_m_btn01_close(); ?>
+                        <?php admin_m_btn01_button_wrap($isNew ? '作成する' : '保存する', ['type' => 'submit', 'class' => 'is-primary']); ?>
                     </div>
                     <div class="area is-contents">
-                        <?php admin_m_btn01_open(); ?>
-                            <?php admin_m_btn01_link('キャンセル', base_path('/admin/forms')); ?>
-                        <?php admin_m_btn01_close(); ?>
+                        <?php admin_m_btn01_link_wrap('キャンセル', base_path('/admin/forms')); ?>
                     </div>
                 <?php admin_c_btn_set01_close(); ?>
             </div>

@@ -6,18 +6,14 @@ require_once APP_COMPONENTS_DIR . '/c-formBlock01/c-formBlock01.php';
     <h1 class="title" style="margin:0;">フォーム一覧</h1>
     <div class="spacer"></div>
     <?php if (!empty($at_form_limit)): ?>
-        <?php admin_m_btn01_open(); ?>
-        <?php admin_m_btn01_button('＋ 新規作成', [
+        <?php admin_m_btn01_button_wrap('＋ 新規作成', [
             'type' => 'button',
             'class' => 'is-primary',
             'disabled' => true,
             'aria-disabled' => true,
         ]); ?>
-    <?php admin_m_btn01_close(); ?>
 <?php else: ?>
-    <?php admin_m_btn01_open(); ?>
-    <?php admin_m_btn01_link('＋ 新規作成', base_path('/admin/forms/new'), ['class' => 'is-primary']); ?>
-    <?php admin_m_btn01_close(); ?>
+    <?php admin_m_btn01_link_wrap('＋ 新規作成', base_path('/admin/forms/new'), ['class' => 'is-primary']); ?>
 <?php endif; ?>
 </div>
 

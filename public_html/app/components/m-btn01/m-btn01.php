@@ -113,4 +113,38 @@ if (!function_exists('admin_m_btn01_open')) {
             'formnovalidate' => true,
         ]);
     }
+
+    /**
+     * m-btn01 ラッパー + &lt;button&gt; を一括出力（単一子のみのときに使用）。
+     *
+     * @param array<string, string|int|float|bool|null> $attrs
+     */
+    function admin_m_btn01_button_wrap(string $label, array $attrs = [], ?string $dataPosition = null): void
+    {
+        admin_m_btn01_open($dataPosition);
+        admin_m_btn01_button($label, $attrs);
+        admin_m_btn01_close();
+    }
+
+    /**
+     * m-btn01 ラッパー + &lt;a&gt; を一括出力（単一子のみのときに使用）。
+     *
+     * @param array<string, string|int|float|bool|null> $attrs
+     */
+    function admin_m_btn01_link_wrap(string $label, string $href, array $attrs = [], ?string $dataPosition = null): void
+    {
+        admin_m_btn01_open($dataPosition);
+        admin_m_btn01_link($label, $href, $attrs);
+        admin_m_btn01_close();
+    }
+
+    /**
+     * m-btn01 ラッパー + プレビュー submit を一括出力。
+     */
+    function admin_m_btn01_preview_wrap(string $formactionPath, string $label = 'プレビュー', ?string $dataPosition = null): void
+    {
+        admin_m_btn01_open($dataPosition);
+        admin_m_btn01_preview_submit($formactionPath, $label);
+        admin_m_btn01_close();
+    }
 }

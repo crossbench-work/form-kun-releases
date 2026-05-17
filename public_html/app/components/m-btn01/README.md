@@ -11,26 +11,23 @@
 |------|------|
 | `admin_m_btn01_open(?string $dataPosition = null)` | ラッパー開始。`'center'` で `data-position="center"` |
 | `admin_m_btn01_close()` | ラッパー終了 |
-| `admin_m_btn01_button(string $label, array $attrs = [])` | `<button>`（`class` に `btn` をマージ、`type` 未指定時は `button`） |
-| `admin_m_btn01_link(string $label, string $href, array $attrs = [])` | `<a href="...">`（`class` に `btn` をマージ） |
-| `admin_m_btn01_preview_submit(string $formactionPath, string $label = 'プレビュー')` | プレビュー用 submit（`formaction` 等）。`$formactionPath` は `base_path()` 済み URL |
+| `admin_m_btn01_button(string $label, array $attrs = [])` | `<button>` のみ（ラッパー内・複数子のとき） |
+| `admin_m_btn01_link(string $label, string $href, array $attrs = [])` | `<a>` のみ（同上） |
+| `admin_m_btn01_preview_submit(string $formactionPath, string $label = 'プレビュー')` | プレビュー用 submit のみ（同上） |
+| `admin_m_btn01_button_wrap(...)` | ラッパー + `<button>` を一括（単一子） |
+| `admin_m_btn01_link_wrap(...)` | ラッパー + `<a>` を一括（単一子） |
+| `admin_m_btn01_preview_wrap(string $formactionPath, ...)` | ラッパー + プレビュー submit を一括 |
 
-`admin_m_btn01_attrs` / `admin_m_btn01_normalize_attrs` は内部用だが、属性の組み立て規則は `m-input01` の `admin_m_input01_attrs` に合わせている（`true` は論理属性）。
+`admin_m_btn01_attrs` / `admin_m_btn01_normalize_attrs` は内部用。属性規則は `m-input01` の `admin_m_input01_attrs` に合わせる（`true` は論理属性）。
 
 ## 使用例
 
 ```php
-<?php admin_m_btn01_open(); ?>
-<?php admin_m_btn01_button('保存する', ['type' => 'submit', 'class' => 'is-primary']); ?>
-<?php admin_m_btn01_close(); ?>
+<?php admin_m_btn01_button_wrap('保存する', ['type' => 'submit', 'class' => 'is-primary']); ?>
 
-<?php admin_m_btn01_open(); ?>
-<?php admin_m_btn01_link('キャンセル', base_path('/admin/forms')); ?>
-<?php admin_m_btn01_close(); ?>
+<?php admin_m_btn01_link_wrap('キャンセル', base_path('/admin/forms')); ?>
 
-<?php admin_m_btn01_open(); ?>
-<?php admin_m_btn01_preview_submit(base_path('/admin/forms/preview-input')); ?>
-<?php admin_m_btn01_close(); ?>
+<?php admin_m_btn01_preview_wrap(base_path('/admin/forms/preview-input')); ?>
 ```
 
-ラッパー内に **button と textarea など複数子要素**がある場合（選択肢追加・複数入力エリア追加）は、`open` → `admin_m_btn01_button(...)` → 他要素 → `close` の形で閉じる。
+ラッパー内に **button と textarea など複数子要素**がある場合は `*_wrap` は使わず、`open` → `admin_m_btn01_button(...)` → 他要素 → `close` とする。

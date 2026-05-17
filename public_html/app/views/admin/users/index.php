@@ -5,9 +5,7 @@ require_once APP_COMPONENTS_DIR . '/c-formBlock01/c-formBlock01.php';
 <div class="m-toolbar01">
     <h1 class="title" style="margin:0;">ユーザー管理</h1>
     <div class="spacer"></div>
-    <?php admin_m_btn01_open(); ?>
-        <?php admin_m_btn01_link('＋ 新規作成', base_path('/admin/users/new'), ['class' => 'is-primary']); ?>
-    <?php admin_m_btn01_close(); ?>
+    <?php admin_m_btn01_link_wrap('＋ 新規作成', base_path('/admin/users/new'), ['class' => 'is-primary']); ?>
 </div>
 
 <?php admin_c_form_block01_open(); ?>
