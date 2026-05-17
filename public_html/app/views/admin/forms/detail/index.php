@@ -45,11 +45,11 @@ $thanksBlocks = $form['thanks_blocks'] ?? [['id' => 'thanks-0', 'label' => '', '
             <?php endif; ?>
 
             <?php admin_c_form_edit_tabs01_open(); ?>
-            <?php require __DIR__ . '/_form_edit_tab_contents_basic.php'; ?>
-            <?php require __DIR__ . '/_form_edit_tab_contents_fields.php'; ?>
-            <?php require __DIR__ . '/_form_edit_tab_contents_confirm.php'; ?>
-            <?php require __DIR__ . '/_form_edit_tab_contents_thanks.php'; ?>
-            <?php require __DIR__ . '/_form_edit_tab_contents_mail.php'; ?>
+            <?php require __DIR__ . '/basic/index.php'; ?>
+            <?php require __DIR__ . '/fields/index.php'; ?>
+            <?php require __DIR__ . '/confirm/index.php'; ?>
+            <?php require __DIR__ . '/thanks/index.php'; ?>
+            <?php require __DIR__ . '/mail/index.php'; ?>
             <?php admin_c_form_edit_tabs01_close(); ?>
 
             <div class="block bottom">
