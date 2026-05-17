@@ -57,9 +57,9 @@
                                     ]); ?>
                                     <?php admin_m_input01_close(); ?>
                                 </div>
+                                <?php admin_m_input_set01_close(); ?>
                             </div>
                         </div>
-                <?php admin_c_form_editor_item_body01_close(); ?>
                 <div class="block is-field">
                     <?php admin_m_input_set01_open(); ?>
                     <div class="area is-title">
@@ -76,44 +76,39 @@
                         <?php admin_m_input01_select_close(); ?>
                         <?php admin_m_input01_close(); ?>
                     </div>
+                    <?php admin_m_input_set01_close(); ?>
                 </div>
+                <div class="block is-field">
+                    <?php admin_m_input_set01_open(); ?>
+                    <div class="area is-title">
+                        <?php admin_m_bold_title01(e('説明文')); ?>
+                    </div>
+                    <div class="area is-field">
+                        <div data-module="c-htmlInputEditor01" data-html-toggle-editor>
+                            <div class="wrapper">
+                                <div class="block is-editor">
+                                    <?php admin_m_input01_open(); ?>
+                                    <?php admin_m_input01_textarea([
+                                        'rows' => 6,
+                                        'data-name' => 'html',
+                                        'data-target' => 'c-htmlInputEditor01__textarea',
+                                    ], ''); ?>
+                                    <?php admin_m_input01_close(); ?>
+                                </div>
+                                <div class="block is-toolbar">
+                                    <label class="label is-choice c-htmlInputEditor01__toggle">
+                                        <input type="checkbox" data-name="is_html" data-target="c-htmlInputEditor01__toggle"
+                                            value="1">
+                                        HTMLで入力する
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <?php admin_m_input_set01_close(); ?>
+                </div>
+                <?php admin_c_form_editor_item_body01_close(); ?>
             </div>
         </div>
     <?php admin_c_form_editor_item01_close(); ?>
-    <div class="block is-field">
-        <?php admin_m_input_set01_open(); ?>
-        <div class="area is-title">
-            <?php admin_m_bold_title01(e('説明文')); ?>
-        </div>
-        <div class="area is-field">
-            <div data-module="c-htmlInputEditor01" data-html-toggle-editor>
-                <div class="wrapper">
-                    <div class="block is-editor">
-                        <?php admin_m_input01_open(); ?>
-                        <?php admin_m_input01_textarea([
-                            'rows' => 6,
-                            'data-name' => 'html',
-                            'data-target' => 'c-htmlInputEditor01__textarea',
-                        ], ''); ?>
-                        <?php admin_m_input01_close(); ?>
-                    </div>
-                    <div class="block is-toolbar">
-                        <label class="label is-choice c-htmlInputEditor01__toggle">
-                            <input type="checkbox" data-name="is_html" data-target="c-htmlInputEditor01__toggle"
-                                value="1">
-                            HTMLで入力する
-                        </label>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    </div>
-    </div>
-    </div>
-    </div>
-    </div>
-    </div>
-    </div>
-    </div>
 </template>

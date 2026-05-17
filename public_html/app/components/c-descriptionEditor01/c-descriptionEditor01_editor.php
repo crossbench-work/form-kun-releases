@@ -102,7 +102,6 @@
                                                     <?php admin_m_input_set01_close(); ?>
                                                 </div>
                                             </div>
-                                            <?php admin_c_form_editor_item_body01_close(); ?>
                                             <div class="block is-field">
                                                 <?php admin_m_input_set01_open(); ?>
                                                 <div class="area is-title">
@@ -122,9 +121,7 @@
                                                 </div>
                                                 <?php admin_m_input_set01_close(); ?>
                                             </div>
-                                        </div>
-                                    </div>
-                                    <div class="block is-field">
+                                            <div class="block is-field">
                                         <?php admin_m_input_set01_open(); ?>
                                         <div class="area is-title">
                                             <?php admin_m_bold_title01(e('説明文'), $htmlInputId); ?>
@@ -157,6 +154,9 @@
                                             </div>
                                         </div>
                                         <?php admin_m_input_set01_close(); ?>
+                                            </div>
+                                            <?php admin_c_form_editor_item_body01_close(); ?>
+                                        </div>
                                     </div>
                                     <?php admin_c_form_editor_item01_close(); ?>
                                 <?php endforeach; ?>
