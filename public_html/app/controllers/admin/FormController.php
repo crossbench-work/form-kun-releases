@@ -41,7 +41,7 @@ HTML;
             redirect('/admin/forms');
         }
 
-        (new View())->render('admin/forms/edit', [
+        (new View())->render('admin/forms/detail/edit', [
             'title' => 'フォーム新規作成',
             'form'  => self::prepareFormForEdit(self::defaultForm()),
             'fields'=> [self::defaultField()],
@@ -63,7 +63,7 @@ HTML;
         $errors = $this->validate($data, null);
 
         if (!empty($errors)) {
-            (new View())->render('admin/forms/edit', [
+            (new View())->render('admin/forms/detail/edit', [
                 'title' => 'フォーム新規作成',
                 'form'  => self::prepareFormForEdit($data['form']),
                 'fields'=> $data['fields'],
@@ -128,7 +128,7 @@ HTML;
             $editFields = [self::defaultField()];
         }
 
-        (new View())->render('admin/forms/edit', [
+        (new View())->render('admin/forms/detail/edit', [
             'title' => 'フォーム編集',
             'form'  => $form,
             'fields'=> $editFields,
@@ -148,7 +148,7 @@ HTML;
         $errors = $this->validate($data, $id);
 
         if (!empty($errors)) {
-            (new View())->render('admin/forms/edit', [
+            (new View())->render('admin/forms/detail/edit', [
                 'title' => 'フォーム編集',
                 'form'  => self::prepareFormForEdit(array_merge($form, $data['form'])),
                 'fields'=> $data['fields'],
