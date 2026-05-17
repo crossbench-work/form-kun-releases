@@ -21,9 +21,7 @@
             <?php admin_m_input01_select_close(); ?>
             <?php admin_m_input01_close(); ?>
         </div>
-    </div>
-</div>
-</div>
+    <?php admin_m_input_set01_close(); ?>
 </div>
 <div class="area is-field">
     <?php admin_m_input_set01_open(); ?>
@@ -41,9 +39,7 @@
         ])); ?>
         <?php admin_m_input01_close(); ?>
     </div>
-</div>
-</div>
-</div>
+    <?php admin_m_input_set01_close(); ?>
 </div>
 <div class="area is-field">
     <?php admin_m_input_set01_open(); ?>
@@ -60,9 +56,7 @@
         ])); ?>
         <?php admin_m_input01_close(); ?>
     </div>
-</div>
-</div>
-</div>
+    <?php admin_m_input_set01_close(); ?>
 </div>
 <div class="area is-field">
     <?php admin_m_input_set01_open(); ?>
@@ -79,9 +73,7 @@
         ])); ?>
         <?php admin_m_input01_close(); ?>
     </div>
-</div>
-</div>
-</div>
+    <?php admin_m_input_set01_close(); ?>
 </div>
 <div class="area is-field">
     <?php admin_m_input_set01_open(); ?>
@@ -100,9 +92,7 @@
         ])); ?>
         <?php admin_m_input01_close(); ?>
     </div>
-</div>
-</div>
-</div>
+    <?php admin_m_input_set01_close(); ?>
 </div>
 <div class="area is-field">
     <?php admin_m_input_set01_open(); ?>
@@ -121,9 +111,7 @@
         <?php admin_m_input01_select_close(); ?>
         <?php admin_m_input01_close(); ?>
     </div>
-</div>
-</div>
-</div>
+    <?php admin_m_input_set01_close(); ?>
 </div>
 <div class="area is-field">
     <?php admin_m_input_set01_open(); ?>
@@ -141,9 +129,7 @@
         ])); ?>
         <?php admin_m_input01_close(); ?>
     </div>
-</div>
-</div>
-</div>
+    <?php admin_m_input_set01_close(); ?>
 </div>
 <div class="area is-field">
     <?php admin_m_input_set01_open(); ?>
@@ -170,9 +156,7 @@
             </label>
         <?php endif; ?>
     </div>
-</div>
-</div>
-</div>
+    <?php admin_m_input_set01_close(); ?>
 </div>
 <div class="area is-field">
     <?php admin_m_input_set01_open(); ?>
@@ -190,9 +174,7 @@
         ])); ?>
         <?php admin_m_input01_close(); ?>
     </div>
-</div>
-</div>
-</div>
+    <?php admin_m_input_set01_close(); ?>
 </div>
 <div class="area is-field">
     <?php admin_m_input_set01_open(); ?>
@@ -211,9 +193,7 @@
         ])); ?>
         <?php admin_m_input01_close(); ?>
     </div>
-</div>
-</div>
-</div>
+    <?php admin_m_input_set01_close(); ?>
 </div>
 <div class="area is-field">
     <label class="label is-choice">
@@ -236,9 +216,7 @@
     </label>
     <p class="text is-help">ローカル開発や検証用 SMTP のみで使ってください。</p>
 </div>
-</div>
-</div>
-</div>
+<?php admin_c_form_block01_close(); ?>
 
 <?php admin_c_form_block01_open(); ?>
 <div class="area is-title">
@@ -260,9 +238,7 @@
         ])); ?>
         <?php admin_m_input01_close(); ?>
     </div>
-</div>
-</div>
-</div>
+    <?php admin_m_input_set01_close(); ?>
 </div>
 <div class="area is-field">
     <?php admin_m_input_set01_open(); ?>
@@ -280,9 +256,7 @@
         ])); ?>
         <?php admin_m_input01_close(); ?>
     </div>
-</div>
-</div>
-</div>
+    <?php admin_m_input_set01_close(); ?>
 </div>
 <div class="area is-field">
     <?php admin_m_input_set01_open(); ?>
@@ -298,9 +272,7 @@
         ]), (string) $form['mail_template_admin']); ?>
         <?php admin_m_input01_close(); ?>
     </div>
-</div>
-</div>
-</div>
+    <?php admin_m_input_set01_close(); ?>
 </div>
 <div class="area is-field">
     <?php admin_m_input_set01_open(); ?>
@@ -323,13 +295,9 @@
             </div>
         </div>
     </div>
+    <?php admin_m_input_set01_close(); ?>
 </div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
+<?php admin_c_form_block01_close(); ?>
 
 <?php admin_c_form_block01_open(); ?>
 <div class="area is-title">
@@ -357,9 +325,7 @@
         ])); ?>
         <?php admin_m_input01_close(); ?>
     </div>
-</div>
-</div>
-</div>
+    <?php admin_m_input_set01_close(); ?>
 </div>
 <div class="area is-field">
     <?php admin_m_input_set01_open(); ?>
@@ -376,9 +342,7 @@
         ])); ?>
         <?php admin_m_input01_close(); ?>
     </div>
-</div>
-</div>
-</div>
+    <?php admin_m_input_set01_close(); ?>
 </div>
 <div class="area is-field">
     <?php admin_m_input_set01_open(); ?>
@@ -394,9 +358,7 @@
         ]), (string) $form['reply_template']); ?>
         <?php admin_m_input01_close(); ?>
     </div>
-</div>
-</div>
-</div>
+    <?php admin_m_input_set01_close(); ?>
 </div>
 <div class="area is-field">
     <?php admin_m_input_set01_open(); ?>
@@ -419,12 +381,7 @@
             </div>
         </div>
     </div>
+    <?php admin_m_input_set01_close(); ?>
 </div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
+<?php admin_c_form_block01_close(); ?>
 </div>
