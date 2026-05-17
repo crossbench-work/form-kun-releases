@@ -659,11 +659,9 @@ form.is-inline {
 [data-module="c-btnSet01"] {
   > .wrapper {
     > .block.is-contents {
-      > .area.is-contents {
-        display: flex;
-        gap: 10px;
-        flex-wrap: wrap;
-      }
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
     }
   }
 }

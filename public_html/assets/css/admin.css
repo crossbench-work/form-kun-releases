@@ -1674,7 +1674,7 @@ form.is-inline {
   margin-top: 16px;
 }
 
-[data-module=c-btnSet01] > .wrapper > .block.is-contents > .area.is-contents {
+[data-module=c-btnSet01] > .wrapper > .block.is-contents {
   display: flex;
   gap: 10px;
   flex-wrap: wrap;
