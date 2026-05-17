@@ -10,6 +10,7 @@ require_once APP_COMPONENTS_DIR . '/c-formEditorItemHeader01/c-formEditorItemHea
 require_once APP_COMPONENTS_DIR . '/c-formEditorItemBody01/c-formEditorItemBody01.php';
 require_once APP_COMPONENTS_DIR . '/c-descriptionEditor01/c-descriptionEditor01.php';
 require_once APP_COMPONENTS_DIR . '/c-formEditorItem01/c-formEditorItem01.php';
+require_once APP_COMPONENTS_DIR . '/c-btnSet01/c-btnSet01.php';
 require_once APP_COMPONENTS_DIR . '/c-fieldTypeModal01/c-fieldTypeModal01.php';
 require_once APP_COMPONENTS_DIR . '/m-formBuilder01/m-formBuilder01.php';
 require_once APP_COMPONENTS_DIR . '/m-btn01/m-btn01.php';

@@ -4,6 +4,7 @@
 @use "../../app/components/c-formEditorItemHeader01/c-formEditorItemHeader01" as *;
 @use "../../app/components/c-formEditorItemBody01/c-formEditorItemBody01" as *;
 @use "../../app/components/c-formEditorItem01/c-formEditorItem01" as *;
+@use "../../app/components/c-btnSet01/c-btnSet01" as *;
 @use "../../app/components/m-formBuilder01/m-formBuilder01__descriptionTemplate" as *;
 @use "../../app/components/m-formBuilder01/m-formBuilder01__fieldTemplate" as *;
 @use "../../app/components/m-largeTitle01/m-largeTitle01" as *;
@@ -652,16 +653,6 @@ form.is-inline {
   > .wrapper {
     > .block.bottom {
       margin-top: 16px;
-    }
-  }
-}
-
-[data-module="c-btnSet01"] {
-  > .wrapper {
-    > .block.is-contents {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
     }
   }
 }

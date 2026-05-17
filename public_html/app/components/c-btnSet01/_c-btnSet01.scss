@@ -1,0 +1,11 @@
+// c-btnSet01 … 複数ボタン横並びのセット
+
+[data-module="c-btnSet01"] {
+    > .wrapper {
+        > .block.is-contents {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+    }
+}

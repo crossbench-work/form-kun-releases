@@ -395,6 +395,12 @@ body {
   display: none;
 }
 
+[data-module=c-btnSet01] > .wrapper > .block.is-contents {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
 [data-module=c-descriptionEditor01] > .wrapper > .block.is-toolbar > .area.is-actions {
   display: flex;
   margin-top: 16px;
@@ -1672,12 +1678,6 @@ form.is-inline {
 
 .p-formEdit01 > .wrapper > .block.bottom {
   margin-top: 16px;
-}
-
-[data-module=c-btnSet01] > .wrapper > .block.is-contents {
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
 }
 
 .m-alert01 {
