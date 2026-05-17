@@ -1,5 +1,7 @@
 <template data-target="m-formBuilder01__descriptionTemplate">
-    <div class="c-formEditor__item is-collapsed" data-description-block>
+    <?php admin_c_form_editor_item01_open([
+        'data-description-block' => true,
+    ]); ?>
         <input type="hidden" data-name="id" value="">
         <div class="wrapper">
             <div class="block is-header">
@@ -77,7 +79,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    <?php admin_c_form_editor_item01_close(); ?>
     <div class="block is-field">
         <?php admin_m_input_set01_open(); ?>
         <div class="area is-title">

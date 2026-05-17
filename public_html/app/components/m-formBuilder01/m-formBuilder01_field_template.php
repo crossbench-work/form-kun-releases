@@ -1,5 +1,7 @@
 <template data-target="m-formBuilder01__fieldTemplate">
-    <div class="c-formEditor__item is-collapsed" data-field-item="1">
+    <?php admin_c_form_editor_item01_open([
+        'data-field-item' => '1',
+    ]); ?>
         <div class="wrapper">
             <div class="block is-header">
                 <?php admin_c_form_editor_item_header01_open(); ?>
@@ -393,7 +395,7 @@
                 <?php admin_c_form_editor_item_body01_close(); ?>
             </div>
         </div>
-    </div>
+    <?php admin_c_form_editor_item01_close(); ?>
     </div>
     </div>
 </template>

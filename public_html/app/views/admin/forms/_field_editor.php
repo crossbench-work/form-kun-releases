@@ -23,7 +23,10 @@ if (empty($f['required']) || in_array($f['type'], ['radio', 'select'], true)) {
     $summaryRegex = 'カスタム';
 }
 ?>
-<div class="c-formEditor__item is-collapsed<?= (array_key_exists('visible', $f) && empty($f['visible'])) ? ' is-editor-item-hidden' : '' ?>" data-index="<?= $idx ?>" data-field-item="1">
+<?php admin_c_form_editor_item01_open([
+    'data-index' => (string) $idx,
+    'data-field-item' => '1',
+], true, array_key_exists('visible', $f) && empty($f['visible'])); ?>
     <div class="wrapper">
         <div class="block is-header">
                 <?php admin_c_form_editor_item_header01_open(); ?>
@@ -473,5 +476,5 @@ if (empty($f['required']) || in_array($f['type'], ['radio', 'select'], true)) {
                 <?php admin_c_form_editor_item_body01_close(); ?>
             </div>
         </div>
-    </div>
+    <?php admin_c_form_editor_item01_close(); ?>
 </div>

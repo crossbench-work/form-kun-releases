@@ -43,8 +43,10 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                                         $positionInputId = $blockId . '-position';
                                         $htmlInputId = $blockId . '-html';
                                         ?>
-                                        <div class="c-formEditor__item is-collapsed<?= empty($block['visible']) ? ' is-editor-item-hidden' : '' ?>"
-                                            data-description-block data-index="<?= $i ?>">
+                                        <?php admin_c_form_editor_item01_open([
+                                            'data-description-block' => true,
+                                            'data-index' => (string) $i,
+                                        ], true, empty($block['visible'])); ?>
                                             <input type="hidden" name="<?= e($namePrefix) ?>[<?= $i ?>][id]"
                                                 value="<?= e($blockId) ?>" data-name="id">
                                             <div class="wrapper">
@@ -141,7 +143,7 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
+                                        <?php admin_c_form_editor_item01_close(); ?>
                                         <div class="block is-field">
                                             <?php admin_m_input_set01_open(); ?>
                                             <div class="area is-title">
@@ -260,4 +262,3 @@ $renderDescriptionEditor = static function (string $namePrefix, array $blocks, s
 <?php admin_m_form_builder01_description_template(); ?>
 
 <?php admin_m_form_builder01_field_template(); ?>
-

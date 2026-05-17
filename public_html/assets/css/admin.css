@@ -364,6 +364,37 @@ body {
   margin: 0;
 }
 
+[data-module=c-formEditorList01] > .wrapper > .block.is-contents {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+[data-module=c-formEditorList01] .c-formEditor__item {
+  background: #f5f4f4;
+  border-radius: 6px;
+  overflow: hidden;
+}
+[data-module=c-formEditorList01] > .wrapper > .block.is-contents > .fb-sortable-placeholder {
+  visibility: visible !important;
+  border: 2px dashed #93c5fd !important;
+  background: #eff6ff !important;
+  min-height: 56px !important;
+  margin-bottom: 12px;
+  border-radius: 6px;
+  box-sizing: border-box;
+}
+[data-module=c-formEditorList01] > .wrapper > .block.is-contents > .ui-sortable-helper {
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.2);
+  border-radius: 6px;
+}
+[data-module=c-formEditorList01] .c-formEditor__item > .wrapper > .block.is-body {
+  padding: 16px;
+  box-shadow: 0 0 10px inset rgba(0, 0, 0, 0.03);
+}
+[data-module=c-formEditorList01] .c-formEditor__item.is-collapsed > .wrapper > .block.is-body {
+  display: none;
+}
+
 [data-module=c-descriptionEditor01] > .wrapper > .block.is-toolbar > .area.is-actions {
   display: flex;
   margin-top: 16px;
@@ -1730,37 +1761,6 @@ form.is-inline {
   background: #fee2e2;
   color: #991b1b;
   border-color: #fecaca;
-}
-
-[data-module=c-formEditorList01] > .wrapper > .block.is-contents {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-[data-module=c-formEditorList01] .c-formEditor__item {
-  background: #f5f4f4;
-  border-radius: 6px;
-  overflow: hidden;
-}
-[data-module=c-formEditorList01] > .wrapper > .block.is-contents > .fb-sortable-placeholder {
-  visibility: visible !important;
-  border: 2px dashed #93c5fd !important;
-  background: #eff6ff !important;
-  min-height: 56px !important;
-  margin-bottom: 12px;
-  border-radius: 6px;
-  box-sizing: border-box;
-}
-[data-module=c-formEditorList01] > .wrapper > .block.is-contents > .ui-sortable-helper {
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.2);
-  border-radius: 6px;
-}
-[data-module=c-formEditorList01] .c-formEditor__item > .wrapper > .block.is-body {
-  padding: 16px;
-  box-shadow: 0 0 10px inset rgba(0, 0, 0, 0.03);
-}
-[data-module=c-formEditorList01] .c-formEditor__item.is-collapsed > .wrapper > .block.is-body {
-  display: none;
 }
 
 [data-module=c-htmlInputEditor01] > .wrapper {

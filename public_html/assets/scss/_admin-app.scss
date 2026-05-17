@@ -3,6 +3,7 @@
 @use "../../app/components/c-formBlock01/c-formBlock01" as *;
 @use "../../app/components/c-formEditorItemHeader01/c-formEditorItemHeader01" as *;
 @use "../../app/components/c-formEditorItemBody01/c-formEditorItemBody01" as *;
+@use "../../app/components/c-formEditorItem01/c-formEditorItem01" as *;
 @use "../../app/components/m-formBuilder01/m-formBuilder01__descriptionTemplate" as *;
 @use "../../app/components/m-formBuilder01/m-formBuilder01__fieldTemplate" as *;
 @use "../../app/components/m-largeTitle01/m-largeTitle01" as *;
@@ -762,46 +763,6 @@ form.is-inline {
     color: #991b1b;
     border-color: #fecaca;
   }
-}
-
-// --- c-formEditor リストシェル（項目設定・説明文で同一の data-module / クラス c-formEditorList01）---
-[data-module="c-formEditorList01"] {
-  > .wrapper > .block.is-contents {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-  }
-
-  .c-formEditor__item {
-    background: #f5f4f4;
-    border-radius: 6px;
-    overflow: hidden;
-  }
-
-  > .wrapper > .block.is-contents > .fb-sortable-placeholder {
-    visibility: visible !important;
-    border: 2px dashed #93c5fd !important;
-    background: #eff6ff !important;
-    min-height: 56px !important;
-    margin-bottom: 12px;
-    border-radius: 6px;
-    box-sizing: border-box;
-  }
-
-  > .wrapper > .block.is-contents > .ui-sortable-helper {
-    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.2);
-    border-radius: 6px;
-  }
-
-  .c-formEditor__item > .wrapper > .block.is-body {
-    padding: 16px;
-    box-shadow: 0 0 10px inset rgba(0, 0, 0, 0.03);
-  }
-
-  .c-formEditor__item.is-collapsed > .wrapper > .block.is-body {
-    display: none;
-  }
-
 }
 
 [data-module="c-htmlInputEditor01"] {
