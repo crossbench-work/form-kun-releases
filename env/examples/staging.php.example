@@ -1,0 +1,16 @@
+<?php
+/** STG 用 config.local.php の雛形。コピー: env/staging/config.local.php */
+return [
+    'debug' => false,
+    'db' => [
+        'host' => 'CHANGE_ME',
+        'port' => 3306,
+        'name' => 'CHANGE_ME',
+        'user' => 'CHANGE_ME',
+        'password' => 'CHANGE_ME',
+    ],
+    'site' => [
+        'base_url'  => 'https://stg.example.com',
+        'base_path' => '',
+    ],
+];

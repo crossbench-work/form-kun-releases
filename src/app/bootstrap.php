@@ -141,3 +141,13 @@ set_exception_handler(function (\Throwable $e) use ($debug) {
 
 // ヘルパ関数
 require APP_DIR . '/core/helpers.php';
+
+if (\Core\AppUpdater::maintenanceBlocksRequest()) {
+    if (!headers_sent()) {
+        http_response_code(503);
+        header('Content-Type: text/html; charset=UTF-8');
+    }
+    echo '<!doctype html><meta charset="utf-8"><title>メンテナンス</title>';
+    echo '<h1>メンテナンス中</h1><p>アプリを更新しています。しばらくお待ちください。</p>';
+    exit;
+}

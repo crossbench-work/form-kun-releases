@@ -21,8 +21,8 @@
 ## プロジェクト概要
 
 - **スタック**: PHP 8+（素の PHP）、MySQL / MariaDB、Apache（`mod_rewrite` 想定）。フロントは Bootstrap なし、**SCSS → CSS**（`npm run build:css`）。
-- **公開ルート**: `public_html/`（`index.php` / `admin/index.php` / `assets/` / `app/`）。
-- **設定**: `public_html/app/config.php`、ローカル上書きは `config.local.php`（Git 対象外）。
+- **公開ルート**: `src/`（ビルド後 `dist/`）（`index.php` / `admin/index.php` / `assets/` / `app/`）。
+- **設定**: `src/app/config.php`、ローカル上書きは `config.local.php`（Git 対象外）。
 
 ## 守ること
 
@@ -30,7 +30,7 @@
 2. **ユーザー向け文言は日本語**を既定とする（コードコメント・コミット説明もプロジェクトに合わせる）。
 3. **セキュリティ**: CSRF・認可・パスワードハッシュ・ファイルダウンロード経路を壊さない。秘密情報をコミットしない。
 4. **マークアップ / スタイル**: Cursor スキル [`.cursor/skills/html-markup/SKILL.md`](.cursor/skills/html-markup/SKILL.md)（`l-` / `p-` / `m-` / `c-`、`data-module`、SCSS エントリ順）に沿う。
-5. **CSS 編集**: ソースは `public_html/assets/scss/`。ビルド後の `assets/css/*.css` をコミットする運用なら、変更後に `npm run build:css` を実行する。
+5. **CSS 編集**: ソースは `src/assets/scss/`。ビルド後の `assets/css/*.css` をコミットする運用なら、変更後に `npm run build:css` を実行する。
 
 ## 参照パス
 

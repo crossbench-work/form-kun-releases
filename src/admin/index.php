@@ -32,6 +32,9 @@ $router->get('',   fn() => (new \Controllers\Admin\DashboardController())->index
 $router->get('/settings', fn() => (new \Controllers\Admin\SettingsController())->index());
 $router->post('/settings', fn() => (new \Controllers\Admin\SettingsController())->update());
 
+$router->get('/settings/update', fn() => (new \Controllers\Admin\SystemUpdateController())->index());
+$router->post('/settings/update', fn() => (new \Controllers\Admin\SystemUpdateController())->run());
+
 // フォーム管理
 $router->get('/forms',                  fn() => (new \Controllers\Admin\FormController())->index());
 $router->get('/forms/new',              fn() => (new \Controllers\Admin\FormController())->createForm());

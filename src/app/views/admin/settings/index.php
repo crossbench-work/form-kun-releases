@@ -78,3 +78,7 @@
     </div>
 </div>
 <?php endif; ?>
+
+<?php if (\Core\Auth::role() === 'admin' && \Core\AppUpdater::isEnabled()): ?>
+<p style="margin-top:1.5rem;"><a href="<?= e(base_path('/admin/settings/update')) ?>" class="btn">アプリ更新</a></p>
+<?php endif; ?>

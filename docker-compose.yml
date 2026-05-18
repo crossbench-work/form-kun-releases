@@ -1,7 +1,8 @@
-# form-kun を Docker で動かす（Local Sites に置かなくてよい）
+# form-kun を Docker で動かす
 #
 # 初回:
-#   cp public_html/app/config.docker.example.php public_html/app/config.local.php
+#   npm run build
+#   npm run env:local   # env/local/config.local.php → dist/app/
 #   docker compose up -d --build
 #   ブラウザ: http://localhost:8080/admin/
 #
@@ -19,7 +20,7 @@ services:
       - "${MYSQL_PORT:-33066}:3306"
     volumes:
       - formkun_mysql_data:/var/lib/mysql
-      - ./public_html/sql/schema.sql:/docker-entrypoint-initdb.d/01-schema.sql:ro
+      - ./src/sql/schema.sql:/docker-entrypoint-initdb.d/01-schema.sql:ro
     healthcheck:
       test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
       interval: 5s
@@ -36,7 +37,7 @@ services:
     ports:
       - "${HOST_WEB_PORT:-8080}:80"
     volumes:
-      - ./public_html:/var/www/html
+      - ./dist:/var/www/html
     depends_on:
       db:
         condition: service_healthy

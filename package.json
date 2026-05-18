@@ -2,10 +2,15 @@
   "name": "form-kun",
   "private": true,
   "scripts": {
-    "build:css": "sass public_html/assets/scss/public.scss:public_html/assets/css/public.css public_html/assets/scss/admin.scss:public_html/assets/css/admin.css --style=expanded --no-source-map",
-    "watch:css": "sass --watch public_html/assets/scss:public_html/assets/css --no-source-map"
+    "build:css": "sass src/assets/scss/public.scss:dist/assets/css/public.css src/assets/scss/admin.scss:dist/assets/css/admin.css --style=expanded --no-source-map",
+    "build": "node scripts/build-dist.mjs",
+    "env:local": "node scripts/deploy-env.mjs local",
+    "release": "npm run build && node scripts/build-release.mjs",
+    "publish:update": "node scripts/publish-update.mjs",
+    "watch:css": "sass --watch src/assets/scss:dist/assets/css --no-source-map"
   },
   "devDependencies": {
     "sass": "^1.80.0"
-  }
+  },
+  "version": "1.0.0"
 }

@@ -6,6 +6,7 @@
  *   cp config.local.example.php config.local.php
  *   （MySQL のユーザー・パスワードやポートを自分の環境に合わせる）
  *
+ * 推奨: リポジトリルートの env/local/config.local.php を編集し npm run env:local で dist へ反映。
  * config.local.php は .gitignore 済みです。
  *
  * このファイルを読み込むには WEB から bootstrap が読み込むだけなので、

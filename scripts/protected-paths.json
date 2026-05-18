@@ -1,0 +1,11 @@
+{
+  "exclude_from_dist_copy": [
+    "app/config.local.php",
+    "app/_stg",
+    "uploads"
+  ],
+  "never_overwrite_on_update": [
+    "app/config.local.php",
+    "uploads"
+  ]
+}

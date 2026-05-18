@@ -91,6 +91,13 @@ $config = [
         'trust_forwarded_proto' => false,
     ],
 
+    // アプリ自己更新（本番の値は config.local.php のみ。ZIP には含めない）
+    'update' => [
+        'enabled' => false,
+        'manifest_url' => '',
+        'allowed_hosts' => ['raw.githubusercontent.com'],
+    ],
+
     // セキュリティ
     'security' => [
         // 管理画面ログインの連続失敗ロック（同IPからの試行）
@@ -104,7 +111,7 @@ $config = [
 ];
 
 // ローカル用上書き（Git に含めない）：このファイルを複製して編集
-// public_html/app/config.local.example.php を参照
+// env/local/config.local.php または config.local.example.php を参照
 $localPath = __DIR__ . '/config.local.php';
 if (is_file($localPath)) {
     $local = require $localPath;
