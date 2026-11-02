@@ -1,7 +1,14 @@
 {
-  "latest": "0.8.4",
+  "latest": "0.8.5",
   "channel": "update",
   "releases": [
+    {
+      "version": "0.8.5",
+      "zip_url": "https://raw.githubusercontent.com/crossbench-work/form-kun/update/releases/form-kun-0.8.5.zip",
+      "sha256": "d6fdb4ea4030b5837bbce7bd7712d2bf87500fa17df75f5524c42b285d00eda2",
+      "released_at": "2026-11-02",
+      "notes": "LINE credential削除修正"
+    },
     {
       "version": "0.8.4",
       "zip_url": "https://raw.githubusercontent.com/crossbench-work/form-kun/update/releases/form-kun-0.8.4.zip",
