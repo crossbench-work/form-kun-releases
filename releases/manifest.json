@@ -1,7 +1,14 @@
 {
-  "latest": "0.8.3",
+  "latest": "0.8.4",
   "channel": "update",
   "releases": [
+    {
+      "version": "0.8.4",
+      "zip_url": "https://raw.githubusercontent.com/crossbench-work/form-kun/update/releases/form-kun-0.8.4.zip",
+      "sha256": "f112f78bfbc8fec7ea7508750b8e9d8f99365c4e9ed990c0cc785b8c5cdb800d",
+      "released_at": "2026-11-02",
+      "notes": "サイト共通LINE・送信先ID設定集約"
+    },
     {
       "version": "0.8.3",
       "zip_url": "https://raw.githubusercontent.com/crossbench-work/form-kun/update/releases/form-kun-0.8.3.zip",
