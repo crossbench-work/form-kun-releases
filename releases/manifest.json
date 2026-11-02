@@ -5,9 +5,9 @@
     {
       "version": "0.8.3",
       "zip_url": "https://raw.githubusercontent.com/crossbench-work/form-kun/update/releases/form-kun-0.8.3.zip",
-      "sha256": "e9952fe91490a3185c3012b8bd40b6b11709706202738c8cf38e33ae8eb39cb9",
+      "sha256": "aaa56e74bf4879cba30e15da6ee96aea15dfb7582d8b1e65f2d152f192f5a2db",
       "released_at": "2026-11-02",
-      "notes": "LINE通知保存整合・メッセージテスト・連携解除等"
+      "notes": "第10項目判定・LINE表示設定保存修正"
     },
     {
       "version": "0.8.2",
