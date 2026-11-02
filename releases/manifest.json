@@ -1,20 +1,13 @@
 {
-  "latest": "0.8.5",
+  "latest": "0.8.4",
   "channel": "update",
   "releases": [
     {
-      "version": "0.8.5",
-      "zip_url": "https://raw.githubusercontent.com/crossbench-work/form-kun/update/releases/form-kun-0.8.5.zip",
-      "sha256": "d6fdb4ea4030b5837bbce7bd7712d2bf87500fa17df75f5524c42b285d00eda2",
-      "released_at": "2026-11-02",
-      "notes": "LINE credential削除修正"
-    },
-    {
       "version": "0.8.4",
       "zip_url": "https://raw.githubusercontent.com/crossbench-work/form-kun/update/releases/form-kun-0.8.4.zip",
-      "sha256": "f112f78bfbc8fec7ea7508750b8e9d8f99365c4e9ed990c0cc785b8c5cdb800d",
+      "sha256": "2b4a81ddeda59659238fd229b417d89662d4aec0150b95e22063950309486ac0",
       "released_at": "2026-11-02",
-      "notes": "サイト共通LINE・送信先ID設定集約"
+      "notes": "サイト共通LINE・credential削除修正"
     },
     {
       "version": "0.8.3",
