@@ -5,9 +5,9 @@
     {
       "version": "0.8.6",
       "zip_url": "https://raw.githubusercontent.com/crossbench-work/form-kun/update/releases/form-kun-0.8.6.zip",
-      "sha256": "492c39a9669e931381fb667a725d5f091d120ae8630b6e883595563deb845aea",
+      "sha256": "6924783c860b79af15c4a83e8b062939141f966276a3d38a26b6b6cb3563ef0f",
       "released_at": "2026-11-05",
-      "notes": "コンパクト区切り線削除込み再配布"
+      "notes": "コンパクトトークUI整理・gap12px込み再配布"
     },
     {
       "version": "0.8.5",
