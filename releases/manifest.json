@@ -1,7 +1,14 @@
 {
-  "latest": "0.8.6",
+  "latest": "0.9.0",
   "channel": "update",
   "releases": [
+    {
+      "version": "0.9.0",
+      "zip_url": "https://raw.githubusercontent.com/crossbench-work/form-kun/update/releases/form-kun-0.9.0.zip",
+      "sha256": "82982b4f726823862fded4431e75d4f66f03942c56b1b24228f4199cc59b45c7",
+      "released_at": "2026-11-05",
+      "notes": "項目設定SP縦組み・文字数制限プルダウン幅等"
+    },
     {
       "version": "0.8.6",
       "zip_url": "https://raw.githubusercontent.com/crossbench-work/form-kun/update/releases/form-kun-0.8.6.zip",
