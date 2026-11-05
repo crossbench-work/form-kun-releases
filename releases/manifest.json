@@ -1,7 +1,21 @@
 {
-  "latest": "0.9.0",
+  "latest": "0.9.2",
   "channel": "update",
   "releases": [
+    {
+      "version": "0.9.2",
+      "zip_url": "https://raw.githubusercontent.com/crossbench-work/form-kun/update/releases/form-kun-0.9.2.zip",
+      "sha256": "faf463ef3bbb6b19e4377638981b2885053b4f5802b582cbf374036c5a70f394",
+      "released_at": "2026-11-05",
+      "notes": "サイト全体のバックアップ（エクスポート／インポート）を追加し、設定のフォーム設定入出力を削除。復元後のログイン画面の無限リダイレクトを修正し、添付ファイル入替の権限不足時は DB を変更せず中止するようにしました。"
+    },
+    {
+      "version": "0.9.1",
+      "zip_url": "https://raw.githubusercontent.com/crossbench-work/form-kun/update/releases/form-kun-0.9.1.zip",
+      "sha256": "ed77a2574c847210ea4303a2d92142dd32293a7eb49efd1834cd4050f643cd4a",
+      "released_at": "2026-11-05",
+      "notes": "フォームバンドル・暗号化同梱パスワード必須・インポート画像サムネ修正込み"
+    },
     {
       "version": "0.9.0",
       "zip_url": "https://raw.githubusercontent.com/crossbench-work/form-kun/update/releases/form-kun-0.9.0.zip",
