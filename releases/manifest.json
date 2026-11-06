@@ -1,7 +1,14 @@
 {
-  "latest": "0.10.12.7",
+  "latest": "0.10.12.8",
   "channel": "update",
   "releases": [
+    {
+      "version": "0.10.12.8",
+      "zip_url": "https://crossbench-work.github.io/form-kun-releases/releases/form-kun-0.10.12.8.zip",
+      "sha256": "1ff598d6244912ac06ac91d6b79e3a31722148d7c8c668a718ea5690c5f55e13",
+      "released_at": "2026-11-06",
+      "notes": "LINE通知に送信詳細URL変数と既定文UIマージンを追加"
+    },
     {
       "version": "0.10.12.7",
       "zip_url": "https://crossbench-work.github.io/form-kun-releases/releases/form-kun-0.10.12.7.zip",
