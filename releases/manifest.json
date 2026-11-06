@@ -1,7 +1,14 @@
 {
-  "latest": "0.10.12.1",
+  "latest": "0.10.12.2",
   "channel": "update",
   "releases": [
+    {
+      "version": "0.10.12.2",
+      "zip_url": "https://crossbench-work.github.io/form-kun-releases/releases/form-kun-0.10.12.2.zip",
+      "sha256": "0a96ecd40d7096169b1c5c2fa41e97f592b186943a22048b2a764518690d9bee",
+      "released_at": "2026-11-06",
+      "notes": "LINE通知のメイン保存でONOFFが反映されるよう修正し通知タブの保存UIとCSRFJSON対応を含む"
+    },
     {
       "version": "0.10.12.1",
       "zip_url": "https://crossbench-work.github.io/form-kun-releases/releases/form-kun-0.10.12.1.zip",
