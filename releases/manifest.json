@@ -1,7 +1,14 @@
 {
-  "latest": "0.10.8",
+  "latest": "0.10.9",
   "channel": "update",
   "releases": [
+    {
+      "version": "0.10.9",
+      "zip_url": "https://crossbench-work.github.io/form-kun-releases/releases/form-kun-0.10.9.zip",
+      "sha256": "c83518795ac43016bb90a58236f74bc7c6ba823937f06f539a400bf9677eb6ca",
+      "released_at": "2026-11-06",
+      "notes": "Release 0.10.9"
+    },
     {
       "version": "0.10.8",
       "zip_url": "https://crossbench-work.github.io/form-kun-releases/releases/form-kun-0.10.8.zip",
