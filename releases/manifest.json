@@ -1,7 +1,14 @@
 {
-  "latest": "0.10.12.8",
+  "latest": "0.10.12.9",
   "channel": "update",
   "releases": [
+    {
+      "version": "0.10.12.9",
+      "zip_url": "https://crossbench-work.github.io/form-kun-releases/releases/form-kun-0.10.12.9.zip",
+      "sha256": "d1adfa521f9f374b4e77d11286811cac11f0095432fe2b26720791c7594db59f",
+      "released_at": "2026-11-06",
+      "notes": "個別LINE表示設定保存でチェックリスト判定にline_configuredフラグを補完"
+    },
     {
       "version": "0.10.12.8",
       "zip_url": "https://crossbench-work.github.io/form-kun-releases/releases/form-kun-0.10.12.8.zip",
