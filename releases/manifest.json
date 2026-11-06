@@ -1,164 +1,171 @@
 {
-  "latest": "0.10.2",
+  "latest": "0.10.3",
   "channel": "update",
   "releases": [
     {
+      "version": "0.10.3",
+      "zip_url": "https://crossbench-work.github.io/form-kun-releases/releases/form-kun-0.10.3.zip",
+      "sha256": "616cd7a63c294bf45e966cdf5a4cefeebd1ef8a1359dae058de7da068a06231a",
+      "released_at": "2026-11-06",
+      "notes": "Public ミラー form-kun-releases 向け URL"
+    },
+    {
       "version": "0.10.2",
-      "zip_url": "https://crossbench-work.github.io/form-kun/releases/form-kun-0.10.2.zip",
+      "zip_url": "https://crossbench-work.github.io/form-kun-releases/releases/form-kun-0.10.2.zip",
       "sha256": "920c5c5776ec9ec8c464ac5cc31d718ee08da3055374dde549d9dfea23c1de9d",
       "released_at": "2026-11-06",
       "notes": "Private向け GitHub Pages 配布URL"
     },
     {
       "version": "0.10.1",
-      "zip_url": "https://crossbench-work.github.io/form-kun/releases/form-kun-0.10.1.zip",
+      "zip_url": "https://crossbench-work.github.io/form-kun-releases/releases/form-kun-0.10.1.zip",
       "sha256": "35e04b6fbbcfb2109dfe089192e3c5656f47a9f3358a319e140bd287ca7d92bc",
       "released_at": "2026-11-06",
       "notes": "サーバーからの自己更新 UI 再有効化"
     },
     {
       "version": "0.10.0",
-      "zip_url": "https://crossbench-work.github.io/form-kun/releases/form-kun-0.10.0.zip",
+      "zip_url": "https://crossbench-work.github.io/form-kun-releases/releases/form-kun-0.10.0.zip",
       "sha256": "38bc9faf62351e3bda867657615a86ea740dc7475086c1b317c31b675b3dd386",
       "released_at": "2026-11-05",
       "notes": "外部連携UI刷新（埋め込みコード・国外送信対策・公開状態hidden）とフォーム別IPinfoトークン"
     },
     {
       "version": "0.9.2",
-      "zip_url": "https://crossbench-work.github.io/form-kun/releases/form-kun-0.9.2.zip",
+      "zip_url": "https://crossbench-work.github.io/form-kun-releases/releases/form-kun-0.9.2.zip",
       "sha256": "faf463ef3bbb6b19e4377638981b2885053b4f5802b582cbf374036c5a70f394",
       "released_at": "2026-11-05",
       "notes": "サイト全体のバックアップ（エクスポート／インポート）を追加し、設定のフォーム設定入出力を削除。復元後のログイン画面の無限リダイレクトを修正し、添付ファイル入替の権限不足時は DB を変更せず中止するようにしました。"
     },
     {
       "version": "0.9.1",
-      "zip_url": "https://crossbench-work.github.io/form-kun/releases/form-kun-0.9.1.zip",
+      "zip_url": "https://crossbench-work.github.io/form-kun-releases/releases/form-kun-0.9.1.zip",
       "sha256": "ed77a2574c847210ea4303a2d92142dd32293a7eb49efd1834cd4050f643cd4a",
       "released_at": "2026-11-05",
       "notes": "フォームバンドル・暗号化同梱パスワード必須・インポート画像サムネ修正込み"
     },
     {
       "version": "0.9.0",
-      "zip_url": "https://crossbench-work.github.io/form-kun/releases/form-kun-0.9.0.zip",
+      "zip_url": "https://crossbench-work.github.io/form-kun-releases/releases/form-kun-0.9.0.zip",
       "sha256": "82982b4f726823862fded4431e75d4f66f03942c56b1b24228f4199cc59b45c7",
       "released_at": "2026-11-05",
       "notes": "項目設定SP縦組み・文字数制限プルダウン幅等"
     },
     {
       "version": "0.8.6",
-      "zip_url": "https://crossbench-work.github.io/form-kun/releases/form-kun-0.8.6.zip",
+      "zip_url": "https://crossbench-work.github.io/form-kun-releases/releases/form-kun-0.8.6.zip",
       "sha256": "9987c6cfc09d9e2e8d9f2b4a338a7c2b91778d0dfaa66545f505407811e5b906",
       "released_at": "2026-11-05",
       "notes": "省略時トークタブpill詳細度修正込み再配布"
     },
     {
       "version": "0.8.5",
-      "zip_url": "https://crossbench-work.github.io/form-kun/releases/form-kun-0.8.5.zip",
+      "zip_url": "https://crossbench-work.github.io/form-kun-releases/releases/form-kun-0.8.5.zip",
       "sha256": "03e00c64e8157bfd759dc83348ec26f132e28370ffc450c05a8572c7e88bff13",
       "released_at": "2026-11-05",
       "notes": "LINE画像診断UI"
     },
     {
       "version": "0.8.4",
-      "zip_url": "https://crossbench-work.github.io/form-kun/releases/form-kun-0.8.4.zip",
+      "zip_url": "https://crossbench-work.github.io/form-kun-releases/releases/form-kun-0.8.4.zip",
       "sha256": "2b4a81ddeda59659238fd229b417d89662d4aec0150b95e22063950309486ac0",
       "released_at": "2026-11-02",
       "notes": "サイト共通LINE・credential削除修正"
     },
     {
       "version": "0.8.3",
-      "zip_url": "https://crossbench-work.github.io/form-kun/releases/form-kun-0.8.3.zip",
+      "zip_url": "https://crossbench-work.github.io/form-kun-releases/releases/form-kun-0.8.3.zip",
       "sha256": "aaa56e74bf4879cba30e15da6ee96aea15dfb7582d8b1e65f2d152f192f5a2db",
       "released_at": "2026-11-02",
       "notes": "第10項目判定・LINE表示設定保存修正"
     },
     {
       "version": "0.8.2",
-      "zip_url": "https://crossbench-work.github.io/form-kun/releases/form-kun-0.8.2.zip",
+      "zip_url": "https://crossbench-work.github.io/form-kun-releases/releases/form-kun-0.8.2.zip",
       "sha256": "a380da64df1a0ca772201f9c2cf09cd44b9ce68be87271fcf4ca2fddd0c054a8",
       "released_at": "2026-11-02",
       "notes": "LINE 受信通知"
     },
     {
       "version": "0.8.1",
-      "zip_url": "https://crossbench-work.github.io/form-kun/releases/form-kun-0.8.1.zip",
+      "zip_url": "https://crossbench-work.github.io/form-kun-releases/releases/form-kun-0.8.1.zip",
       "sha256": "5a6e9ca33060f4ec1fff4e5d588abe917ce362debe33357f5cbb95179b2387a3",
       "released_at": "2026-11-02",
       "notes": "一覧三点メニューの z-index 重なり修正"
     },
     {
       "version": "0.8.0",
-      "zip_url": "https://crossbench-work.github.io/form-kun/releases/form-kun-0.8.0.zip",
+      "zip_url": "https://crossbench-work.github.io/form-kun-releases/releases/form-kun-0.8.0.zip",
       "sha256": "4dd1090f9861d834d3eaf023350486150547fcd468b619939b5a1eaba9c0d9c6",
       "released_at": "2026-10-30",
       "notes": "管理画面WebAuthnパスキー、/admin/account、ログインUI、ヘッダーアカウントリンク"
     },
     {
       "version": "0.7.6",
-      "zip_url": "https://crossbench-work.github.io/form-kun/releases/form-kun-0.7.6.zip",
+      "zip_url": "https://crossbench-work.github.io/form-kun-releases/releases/form-kun-0.7.6.zip",
       "sha256": "7eeba52afd8682946a522a90100a4657fe216b69c02303e360589d6935cd4a24",
       "released_at": "2026-10-30",
       "notes": "表示件数セレクト高さ揃え・SP一覧13px・ツールバーSP調整"
     },
     {
       "version": "0.7.5",
-      "zip_url": "https://crossbench-work.github.io/form-kun/releases/form-kun-0.7.5.zip",
+      "zip_url": "https://crossbench-work.github.io/form-kun-releases/releases/form-kun-0.7.5.zip",
       "sha256": "0c1506e760b6e0d9d3479f39506186aacbeea618331b572bb4ddc451eeb99d39",
       "released_at": "2026-10-30",
       "notes": "0.7.5: 管理画面 picker・Tom Select・SP 表布局"
     },
     {
       "version": "0.7.4",
-      "zip_url": "https://crossbench-work.github.io/form-kun/releases/form-kun-0.7.4.zip",
+      "zip_url": "https://crossbench-work.github.io/form-kun-releases/releases/form-kun-0.7.4.zip",
       "sha256": "5dd549e25aabd95f07e7b61a3ac97d06227deaeab44e75a9c2578805d5efe910",
       "released_at": "2026-10-30",
       "notes": "受信履歴・エクスポートUX、検索ハーフモーダル、iOS date横幅修正（appearance none）"
     },
     {
       "version": "0.7.3",
-      "zip_url": "https://crossbench-work.github.io/form-kun/releases/form-kun-0.7.3.zip",
+      "zip_url": "https://crossbench-work.github.io/form-kun-releases/releases/form-kun-0.7.3.zip",
       "sha256": "3d2c419676b6fe6376cf86473978502fe25c93727cfad188162ad4ae3ea0b9da",
       "released_at": "2026-10-30",
       "notes": "0.7.3同梱: viewer権限・検索UI・sticky・SP入力・ピンチ縮小対策"
     },
     {
       "version": "0.7.2",
-      "zip_url": "https://crossbench-work.github.io/form-kun/releases/form-kun-0.7.2.zip",
+      "zip_url": "https://crossbench-work.github.io/form-kun-releases/releases/form-kun-0.7.2.zip",
       "sha256": "e7101e9d57c9830247d2a3cdb637df754196addb454a04a983af5372b78f2b25",
       "released_at": "2026-10-30",
       "notes": "送信履歴詳細KV表SP微調整"
     },
     {
       "version": "0.7.1",
-      "zip_url": "https://crossbench-work.github.io/form-kun/releases/form-kun-0.7.1.zip",
+      "zip_url": "https://crossbench-work.github.io/form-kun-releases/releases/form-kun-0.7.1.zip",
       "sha256": "97e19289fd322ab3def61fd2947988866328fee1d29b28e18640dc240ca05762",
       "released_at": "2026-10-29",
       "notes": "管理画面SP・一覧表UI・三点メニュー・列幅固定"
     },
     {
       "version": "0.7.0",
-      "zip_url": "https://crossbench-work.github.io/form-kun/releases/form-kun-0.7.0.zip",
+      "zip_url": "https://crossbench-work.github.io/form-kun-releases/releases/form-kun-0.7.0.zip",
       "sha256": "4fb4a6a888119b7c833a0f128b3f167bc89187b4d8ad7b46c88558ffad1db452",
       "released_at": "2026-10-29",
       "notes": "viewerロール（フォーム単位の閲覧権限）と関連修正"
     },
     {
       "version": "0.6.2",
-      "zip_url": "https://crossbench-work.github.io/form-kun/releases/form-kun-0.6.2.zip",
+      "zip_url": "https://crossbench-work.github.io/form-kun-releases/releases/form-kun-0.6.2.zip",
       "sha256": "b98fb4de9fb95446b97570cc4e867feae2e80435760dbc597cdb3d224906d47d",
       "released_at": "2026-10-29",
       "notes": "インポートプレビュー詳細のサムネ画像表示を修正"
     },
     {
       "version": "0.6.1",
-      "zip_url": "https://crossbench-work.github.io/form-kun/releases/form-kun-0.6.1.zip",
+      "zip_url": "https://crossbench-work.github.io/form-kun-releases/releases/form-kun-0.6.1.zip",
       "sha256": "6b1cdd29d7a88f02e6321516e1f7f8d8514cd933d94acaeb6f20fc48dc80c320",
       "released_at": "2026-10-29",
       "notes": "警告マークCSS・三点メニュー外クリックで閉じる"
     },
     {
       "version": "0.6.0",
-      "zip_url": "https://crossbench-work.github.io/form-kun/releases/form-kun-0.6.0.zip",
+      "zip_url": "https://crossbench-work.github.io/form-kun-releases/releases/form-kun-0.6.0.zip",
       "sha256": "9a999152f66f3e3c2ea109b9cb8220df8621cc1ae141855c59e555aa7fd00643",
       "released_at": "2026-10-29",
       "notes": "受信履歴の保存期間・purge・インポートプレビュー詳細など"
