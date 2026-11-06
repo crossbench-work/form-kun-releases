@@ -1,7 +1,14 @@
 {
-  "latest": "0.10.12.2",
+  "latest": "0.10.12.3",
   "channel": "update",
   "releases": [
+    {
+      "version": "0.10.12.3",
+      "zip_url": "https://crossbench-work.github.io/form-kun-releases/releases/form-kun-0.10.12.3.zip",
+      "sha256": "32547e7331d8d18721457a12b50e9eab522d8cf673c9e0c1c056c517a37ee50d",
+      "released_at": "2026-11-06",
+      "notes": "個別LINE連携時のLINEトーク通知テストでテスト送信が押せるよう修正"
+    },
     {
       "version": "0.10.12.2",
       "zip_url": "https://crossbench-work.github.io/form-kun-releases/releases/form-kun-0.10.12.2.zip",
