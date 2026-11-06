@@ -7,42 +7,42 @@
       "zip_url": "https://crossbench-work.github.io/form-kun-releases/releases/form-kun-0.10.12.zip",
       "sha256": "6f31142740a47a2764fdb659f21742130f1e6bacd37408c70afb7472d10a51b9",
       "released_at": "2026-11-06",
-      "notes": "Release 0.10.12"
+      "notes": "LINE個別チャネル・Webhook分離; 通知に画像含めるオプション; jQuery同梱; 通知JSON保存修正ほか"
     },
     {
       "version": "0.10.11",
       "zip_url": "https://crossbench-work.github.io/form-kun-releases/releases/form-kun-0.10.11.zip",
       "sha256": "6284242735fc7dcd8a60869648f0d862767834002dad7cb5f00097e22493a3af",
       "released_at": "2026-11-06",
-      "notes": "Release 0.10.11"
+      "notes": "埋め込みコード: 読込/埋込切替・head CDN風配信; 説明削除・注記整理・タブ上余白"
     },
     {
       "version": "0.10.10",
       "zip_url": "https://crossbench-work.github.io/form-kun-releases/releases/form-kun-0.10.10.zip",
       "sha256": "37ce4056c9dc2f8cf16eaa6a202c50460990c2f3cd8c54e1c21af04f1228c969",
       "released_at": "2026-11-06",
-      "notes": "Release 0.10.10"
+      "notes": "外部連携の埋め込みコードを複数入力・確認・条件分岐に対応（EmbedCodeSample）"
     },
     {
       "version": "0.10.9",
       "zip_url": "https://crossbench-work.github.io/form-kun-releases/releases/form-kun-0.10.9.zip",
       "sha256": "c83518795ac43016bb90a58236f74bc7c6ba823937f06f539a400bf9677eb6ca",
       "released_at": "2026-11-06",
-      "notes": "Release 0.10.9"
+      "notes": "非表示/下書きの公開URLを非リンクに; embed貼付テストページ; npm run test:embed（別ポート）"
     },
     {
       "version": "0.10.8",
       "zip_url": "https://crossbench-work.github.io/form-kun-releases/releases/form-kun-0.10.8.zip",
       "sha256": "75eb8b11400ea9230c15ad0c86f8c98cf9b7b488a9fa9fd8336bb4a78b506916",
       "released_at": "2026-11-06",
-      "notes": "Release 0.10.8"
+      "notes": "基本情報: 管理画面表示名・TZをモーダル編集; ロゴマークアップロードとヘッダー/ログイン反映"
     },
     {
       "version": "0.10.7",
       "zip_url": "https://crossbench-work.github.io/form-kun-releases/releases/form-kun-0.10.7.zip",
       "sha256": "373ae49281d535149c64afe3cbe6b6138fd68c139780f274ade7b8389be79444",
       "released_at": "2026-11-06",
-      "notes": "Release 0.10.7"
+      "notes": "アップデート進捗モーダル（疑似ゲージ・完了/失敗）とシステム更新のJSON応答"
     },
     {
       "version": "0.10.6",
