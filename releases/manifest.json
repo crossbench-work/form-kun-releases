@@ -1,7 +1,14 @@
 {
-  "latest": "0.10.12.4",
+  "latest": "0.10.12.5",
   "channel": "update",
   "releases": [
+    {
+      "version": "0.10.12.5",
+      "zip_url": "https://crossbench-work.github.io/form-kun-releases/releases/form-kun-0.10.12.5.zip",
+      "sha256": "80b50cd9756c1784b884aa935838c7afff09441ea02adad3e0f6a22f853c452e",
+      "released_at": "2026-11-06",
+      "notes": "LINE個別連携のチェックリストAPIでInvalidArgumentExceptionを内容別に返し永続JSONとアサートを整合表示はline_setup_checklist_displayに分離"
+    },
     {
       "version": "0.10.12.4",
       "zip_url": "https://crossbench-work.github.io/form-kun-releases/releases/form-kun-0.10.12.4.zip",
