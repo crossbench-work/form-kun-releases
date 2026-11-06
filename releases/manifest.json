@@ -1,7 +1,14 @@
 {
-  "latest": "0.10.12",
+  "latest": "0.10.12.1",
   "channel": "update",
   "releases": [
+    {
+      "version": "0.10.12.1",
+      "zip_url": "https://crossbench-work.github.io/form-kun-releases/releases/form-kun-0.10.12.1.zip",
+      "sha256": "93f4239f751f1c77f1054cad1d19461b6108d68c0e99f7932265341479410bee",
+      "released_at": "2026-11-06",
+      "notes": "LINE通知タブ: 個別連携ブロック表示修正（getElementById）"
+    },
     {
       "version": "0.10.12",
       "zip_url": "https://crossbench-work.github.io/form-kun-releases/releases/form-kun-0.10.12.zip",
