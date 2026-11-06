@@ -1,7 +1,14 @@
 {
-  "latest": "0.10.3.1",
+  "latest": "0.10.3.2",
   "channel": "update",
   "releases": [
+    {
+      "version": "0.10.3.2",
+      "zip_url": "https://crossbench-work.github.io/form-kun-releases/releases/form-kun-0.10.3.2.zip",
+      "sha256": "31449f34bbeb7a2dda962d910c03e72f5feb34870a95e65356fc644434e61096",
+      "released_at": "2026-11-06",
+      "notes": "アプリ更新の2段階UI"
+    },
     {
       "version": "0.10.3.1",
       "zip_url": "https://crossbench-work.github.io/form-kun-releases/releases/form-kun-0.10.3.1.zip",
