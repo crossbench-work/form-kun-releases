@@ -1,7 +1,14 @@
 {
-  "latest": "0.10.12.6",
+  "latest": "0.10.12.7",
   "channel": "update",
   "releases": [
+    {
+      "version": "0.10.12.7",
+      "zip_url": "https://crossbench-work.github.io/form-kun-releases/releases/form-kun-0.10.12.7.zip",
+      "sha256": "0123774b984690e897eb474562e308fa3aead98248f88e58d719b5acd1d64c98",
+      "released_at": "2026-11-06",
+      "notes": "LINE通知タブで表示設定を個別通知の直下へ移動しメッセージテスト送信を個別連携条件で有効化help削除とtestLineMessageのCSRFをverifyRequestに"
+    },
     {
       "version": "0.10.12.6",
       "zip_url": "https://crossbench-work.github.io/form-kun-releases/releases/form-kun-0.10.12.6.zip",
