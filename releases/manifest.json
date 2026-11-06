@@ -1,7 +1,14 @@
 {
-  "latest": "0.10.5",
+  "latest": "0.10.6",
   "channel": "update",
   "releases": [
+    {
+      "version": "0.10.6",
+      "zip_url": "https://crossbench-work.github.io/form-kun-releases/releases/form-kun-0.10.6.zip",
+      "sha256": "2c735359da41a3fa005627b1dcdadeb39010c2a297406a8099d41b7cadf176ef",
+      "released_at": "2026-11-06",
+      "notes": "設定: バックアップタブ改修"
+    },
     {
       "version": "0.10.5",
       "zip_url": "https://crossbench-work.github.io/form-kun-releases/releases/form-kun-0.10.5.zip",
