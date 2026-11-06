@@ -1,7 +1,14 @@
 {
-  "latest": "0.10.3.2",
+  "latest": "0.10.4",
   "channel": "update",
   "releases": [
+    {
+      "version": "0.10.4",
+      "zip_url": "https://crossbench-work.github.io/form-kun-releases/releases/form-kun-0.10.4.zip",
+      "sha256": "777b3e7a7c19ebaed1d3710794a1754b1b34774cb37ad76a5c9e3a403b6c6954",
+      "released_at": "2026-11-06",
+      "notes": "設定基本情報UI整備（左線見出し・罫線・モーダル統一）"
+    },
     {
       "version": "0.10.3.2",
       "zip_url": "https://crossbench-work.github.io/form-kun-releases/releases/form-kun-0.10.3.2.zip",
