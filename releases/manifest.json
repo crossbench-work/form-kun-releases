@@ -1,7 +1,14 @@
 {
-  "latest": "0.10.4",
+  "latest": "0.10.5",
   "channel": "update",
   "releases": [
+    {
+      "version": "0.10.5",
+      "zip_url": "https://crossbench-work.github.io/form-kun-releases/releases/form-kun-0.10.5.zip",
+      "sha256": "eb3685237b24133671aafcf9b45c6b49f4fcc9eed20e3faecaaea87a80c631b8",
+      "released_at": "2026-11-06",
+      "notes": "設定詳細UI整備: モーダル保存回数横並び + 詳細情報タブを基本情報同型に再構成"
+    },
     {
       "version": "0.10.4",
       "zip_url": "https://crossbench-work.github.io/form-kun-releases/releases/form-kun-0.10.4.zip",
