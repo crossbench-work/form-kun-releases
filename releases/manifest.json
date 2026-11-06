@@ -1,7 +1,14 @@
 {
-  "latest": "0.10.12.5",
+  "latest": "0.10.12.6",
   "channel": "update",
   "releases": [
+    {
+      "version": "0.10.12.6",
+      "zip_url": "https://crossbench-work.github.io/form-kun-releases/releases/form-kun-0.10.12.6.zip",
+      "sha256": "4c982501442db9be1006ac9ed871d876805217d1bc3323acd5190bd06d08b916",
+      "released_at": "2026-11-06",
+      "notes": "個別LINEで送信先ID先保存時も通知テストの手動チェックが通るようline_talk_send_setup判定を修正"
+    },
     {
       "version": "0.10.12.5",
       "zip_url": "https://crossbench-work.github.io/form-kun-releases/releases/form-kun-0.10.12.5.zip",
