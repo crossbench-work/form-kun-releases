@@ -1,7 +1,14 @@
 {
-  "latest": "0.10.0",
+  "latest": "0.10.1",
   "channel": "update",
   "releases": [
+    {
+      "version": "0.10.1",
+      "zip_url": "https://raw.githubusercontent.com/crossbench-work/form-kun/update/releases/form-kun-0.10.1.zip",
+      "sha256": "35e04b6fbbcfb2109dfe089192e3c5656f47a9f3358a319e140bd287ca7d92bc",
+      "released_at": "2026-11-06",
+      "notes": "サーバーからの自己更新 UI 再有効化"
+    },
     {
       "version": "0.10.0",
       "zip_url": "https://raw.githubusercontent.com/crossbench-work/form-kun/update/releases/form-kun-0.10.0.zip",
