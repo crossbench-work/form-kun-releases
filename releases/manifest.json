@@ -1,7 +1,14 @@
 {
-  "latest": "0.9.2",
+  "latest": "0.10.0",
   "channel": "update",
   "releases": [
+    {
+      "version": "0.10.0",
+      "zip_url": "https://raw.githubusercontent.com/crossbench-work/form-kun/update/releases/form-kun-0.10.0.zip",
+      "sha256": "38bc9faf62351e3bda867657615a86ea740dc7475086c1b317c31b675b3dd386",
+      "released_at": "2026-11-05",
+      "notes": "外部連携UI刷新（埋め込みコード・国外送信対策・公開状態hidden）とフォーム別IPinfoトークン"
+    },
     {
       "version": "0.9.2",
       "zip_url": "https://raw.githubusercontent.com/crossbench-work/form-kun/update/releases/form-kun-0.9.2.zip",
