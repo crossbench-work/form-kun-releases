@@ -1,7 +1,14 @@
 {
-  "latest": "0.10.12.3",
+  "latest": "0.10.12.4",
   "channel": "update",
   "releases": [
+    {
+      "version": "0.10.12.4",
+      "zip_url": "https://crossbench-work.github.io/form-kun-releases/releases/form-kun-0.10.12.4.zip",
+      "sha256": "508b7edbeab07b4432bd05a935773321907102e823ad723bb73342bfaa52f015",
+      "released_at": "2026-11-06",
+      "notes": "LINEチェックリストの手動完了でCSRFをverifyRequestにしfetchのJSON整合とadminjs防御を追加"
+    },
     {
       "version": "0.10.12.3",
       "zip_url": "https://crossbench-work.github.io/form-kun-releases/releases/form-kun-0.10.12.3.zip",
