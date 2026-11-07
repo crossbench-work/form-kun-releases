@@ -18,195 +18,27 @@
 </head>
 <body>
   <h1>form-kun リリース</h1>
-  <p class="meta">最新: <strong>0.10.12.9</strong></p>
+  <p class="meta">最新: <strong>0.11.1</strong></p>
   <table>
     <thead><tr><th>版</th><th>日付</th><th>メモ</th><th></th></tr></thead>
     <tbody>
 <tr>
-  <td><code>0.10.12.9</code> <span class="badge">latest</span></td>
-  <td>2026-11-06</td>
-  <td>個別LINE表示設定保存でチェックリスト判定にline_configuredフラグを補完</td>
-  <td><a class="btn" href="form-kun-0.10.12.9.zip" download>ダウンロード</a></td>
-</tr>
-<tr>
-  <td><code>0.10.12.8</code></td>
-  <td>2026-11-06</td>
-  <td>LINE通知に送信詳細URL変数と既定文UIマージンを追加</td>
-  <td><a class="btn" href="form-kun-0.10.12.8.zip" download>ダウンロード</a></td>
-</tr>
-<tr>
-  <td><code>0.10.12.7</code></td>
-  <td>2026-11-06</td>
-  <td>LINE通知タブで表示設定を個別通知の直下へ移動しメッセージテスト送信を個別連携条件で有効化help削除とtestLineMessageのCSRFをverifyRequestに</td>
-  <td><a class="btn" href="form-kun-0.10.12.7.zip" download>ダウンロード</a></td>
-</tr>
-<tr>
-  <td><code>0.10.12.6</code></td>
-  <td>2026-11-06</td>
-  <td>個別LINEで送信先ID先保存時も通知テストの手動チェックが通るようline_talk_send_setup判定を修正</td>
-  <td><a class="btn" href="form-kun-0.10.12.6.zip" download>ダウンロード</a></td>
-</tr>
-<tr>
-  <td><code>0.10.12.5</code></td>
-  <td>2026-11-06</td>
-  <td>LINE個別連携のチェックリストAPIでInvalidArgumentExceptionを内容別に返し永続JSONとアサートを整合表示はline_setup_checklist_displayに分離</td>
-  <td><a class="btn" href="form-kun-0.10.12.5.zip" download>ダウンロード</a></td>
-</tr>
-<tr>
-  <td><code>0.10.12.4</code></td>
-  <td>2026-11-06</td>
-  <td>LINEチェックリストの手動完了でCSRFをverifyRequestにしfetchのJSON整合とadminjs防御を追加</td>
-  <td><a class="btn" href="form-kun-0.10.12.4.zip" download>ダウンロード</a></td>
-</tr>
-<tr>
-  <td><code>0.10.12.3</code></td>
-  <td>2026-11-06</td>
-  <td>個別LINE連携時のLINEトーク通知テストでテスト送信が押せるよう修正</td>
-  <td><a class="btn" href="form-kun-0.10.12.3.zip" download>ダウンロード</a></td>
-</tr>
-<tr>
-  <td><code>0.10.12.2</code></td>
-  <td>2026-11-06</td>
-  <td>LINE通知のメイン保存でONOFFが反映されるよう修正し通知タブの保存UIとCSRFJSON対応を含む</td>
-  <td><a class="btn" href="form-kun-0.10.12.2.zip" download>ダウンロード</a></td>
-</tr>
-<tr>
-  <td><code>0.10.12.1</code></td>
-  <td>2026-11-06</td>
-  <td>LINE通知タブ: 個別連携ブロック表示修正（getElementById）</td>
-  <td><a class="btn" href="form-kun-0.10.12.1.zip" download>ダウンロード</a></td>
-</tr>
-<tr>
-  <td><code>0.10.12</code></td>
-  <td>2026-11-06</td>
-  <td>LINE個別チャネル・Webhook分離; 通知に画像含めるオプション; jQuery同梱; 通知JSON保存修正ほか</td>
-  <td><a class="btn" href="form-kun-0.10.12.zip" download>ダウンロード</a></td>
-</tr>
-<tr>
-  <td><code>0.10.11</code></td>
-  <td>2026-11-06</td>
-  <td>埋め込みコード: 読込/埋込切替・head CDN風配信; 説明削除・注記整理・タブ上余白</td>
-  <td><a class="btn" href="form-kun-0.10.11.zip" download>ダウンロード</a></td>
-</tr>
-<tr>
-  <td><code>0.10.10</code></td>
-  <td>2026-11-06</td>
-  <td>外部連携の埋め込みコードを複数入力・確認・条件分岐に対応（EmbedCodeSample）</td>
-  <td><a class="btn" href="form-kun-0.10.10.zip" download>ダウンロード</a></td>
-</tr>
-<tr>
-  <td><code>0.10.9</code></td>
-  <td>2026-11-06</td>
-  <td>非表示/下書きの公開URLを非リンクに; embed貼付テストページ; npm run test:embed（別ポート）</td>
-  <td><a class="btn" href="form-kun-0.10.9.zip" download>ダウンロード</a></td>
-</tr>
-<tr>
-  <td><code>0.10.8</code></td>
-  <td>2026-11-06</td>
-  <td>基本情報: 管理画面表示名・TZをモーダル編集; ロゴマークアップロードとヘッダー/ログイン反映</td>
-  <td><a class="btn" href="form-kun-0.10.8.zip" download>ダウンロード</a></td>
-</tr>
-<tr>
-  <td><code>0.10.7</code></td>
-  <td>2026-11-06</td>
-  <td>アップデート進捗モーダル（疑似ゲージ・完了/失敗）とシステム更新のJSON応答</td>
-  <td><a class="btn" href="form-kun-0.10.7.zip" download>ダウンロード</a></td>
-</tr>
-<tr>
-  <td><code>0.10.6</code></td>
-  <td>2026-11-06</td>
-  <td>設定: バックアップタブ改修</td>
-  <td><a class="btn" href="form-kun-0.10.6.zip" download>ダウンロード</a></td>
-</tr>
-<tr>
-  <td><code>0.10.5</code></td>
-  <td>2026-11-06</td>
-  <td>設定詳細UI整備: モーダル保存回数横並び + 詳細情報タブを基本情報同型に再構成</td>
-  <td><a class="btn" href="form-kun-0.10.5.zip" download>ダウンロード</a></td>
-</tr>
-<tr>
-  <td><code>0.10.4</code></td>
-  <td>2026-11-06</td>
-  <td>設定基本情報UI整備（左線見出し・罫線・モーダル統一）</td>
-  <td><a class="btn" href="form-kun-0.10.4.zip" download>ダウンロード</a></td>
-</tr>
-<tr>
-  <td><code>0.10.3.2</code></td>
-  <td>2026-11-06</td>
-  <td>アプリ更新の2段階UI</td>
-  <td><a class="btn" href="form-kun-0.10.3.2.zip" download>ダウンロード</a></td>
-</tr>
-<tr>
-  <td><code>0.10.3.1</code></td>
-  <td>2026-11-06</td>
-  <td>パッチリリース</td>
-  <td><a class="btn" href="form-kun-0.10.3.1.zip" download>ダウンロード</a></td>
-</tr>
-<tr>
-  <td><code>0.10.3</code></td>
-  <td>2026-11-06</td>
-  <td>Public ミラー form-kun-releases 向け URL</td>
-  <td><a class="btn" href="form-kun-0.10.3.zip" download>ダウンロード</a></td>
-</tr>
-<tr>
-  <td><code>0.10.2</code></td>
-  <td>2026-11-06</td>
-  <td>Private向け GitHub Pages 配布URL</td>
-  <td><a class="btn" href="form-kun-0.10.2.zip" download>ダウンロード</a></td>
-</tr>
-<tr>
-  <td><code>0.10.1</code></td>
-  <td>2026-11-06</td>
-  <td>サーバーからの自己更新 UI 再有効化</td>
-  <td><a class="btn" href="form-kun-0.10.1.zip" download>ダウンロード</a></td>
-</tr>
-<tr>
-  <td><code>0.10.0</code></td>
-  <td>2026-11-05</td>
-  <td>外部連携UI刷新（埋め込みコード・国外送信対策・公開状態hidden）とフォーム別IPinfoトークン</td>
-  <td><a class="btn" href="form-kun-0.10.0.zip" download>ダウンロード</a></td>
-</tr>
-<tr>
-  <td><code>0.9.2</code></td>
-  <td>2026-11-05</td>
-  <td>サイト全体のバックアップ（エクスポート／インポート）を追加し、設定のフォーム設定入出力を削除。復元後のログイン画面の無限リダイレクトを修正し、添付ファイル入替の権限不足時は DB を変更せず中止するようにしました。</td>
-  <td><a class="btn" href="form-kun-0.9.2.zip" download>ダウンロード</a></td>
-</tr>
-<tr>
-  <td><code>0.9.1</code></td>
-  <td>2026-11-05</td>
-  <td>フォームバンドル・暗号化同梱パスワード必須・インポート画像サムネ修正込み</td>
-  <td><a class="btn" href="form-kun-0.9.1.zip" download>ダウンロード</a></td>
-</tr>
-<tr>
-  <td><code>0.9.0</code></td>
-  <td>2026-11-05</td>
-  <td>項目設定SP縦組み・文字数制限プルダウン幅等</td>
-  <td><a class="btn" href="form-kun-0.9.0.zip" download>ダウンロード</a></td>
-</tr>
-<tr>
-  <td><code>0.8.6</code></td>
-  <td>2026-11-05</td>
-  <td>省略時トークタブpill詳細度修正込み再配布</td>
-  <td><a class="btn" href="form-kun-0.8.6.zip" download>ダウンロード</a></td>
-</tr>
-<tr>
-  <td><code>0.8.5</code></td>
-  <td>2026-11-05</td>
-  <td>LINE画像診断UI</td>
-  <td><a class="btn" href="form-kun-0.8.5.zip" download>ダウンロード</a></td>
-</tr>
-<tr>
-  <td><code>0.8.4</code></td>
-  <td>2026-11-02</td>
-  <td>サイト共通LINE・credential削除修正</td>
-  <td><a class="btn" href="form-kun-0.8.4.zip" download>ダウンロード</a></td>
+  <td><code>0.11.1</code> <span class="badge">latest</span></td>
+  <td>2026-11-07</td>
+  <td>説明文テキスト/画像、SMTP送信方式・メール設定UI、smtp_local対応</td>
+  <td><a class="btn" href="form-kun-0.11.1.zip" download>ダウンロード</a></td>
 </tr>
 <tr>
   <td><code>0.8.3</code></td>
   <td>2026-11-02</td>
-  <td>第10項目判定・LINE表示設定保存修正</td>
+  <td>LINE Webhook で Push 先 ID 取得</td>
   <td><a class="btn" href="form-kun-0.8.3.zip" download>ダウンロード</a></td>
+</tr>
+<tr>
+  <td><code>0.8.4</code></td>
+  <td>2026-11-02</td>
+  <td>Release 0.8.4</td>
+  <td><a class="btn" href="form-kun-0.8.4.zip" download>ダウンロード</a></td>
 </tr>
 <tr>
   <td><code>0.8.2</code></td>

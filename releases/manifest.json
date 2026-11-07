@@ -1,223 +1,27 @@
 {
-  "latest": "0.10.12.9",
+  "latest": "0.11.1",
   "channel": "update",
   "releases": [
     {
-      "version": "0.10.12.9",
-      "zip_url": "https://crossbench-work.github.io/form-kun-releases/releases/form-kun-0.10.12.9.zip",
-      "sha256": "d1adfa521f9f374b4e77d11286811cac11f0095432fe2b26720791c7594db59f",
-      "released_at": "2026-11-06",
-      "notes": "個別LINE表示設定保存でチェックリスト判定にline_configuredフラグを補完"
-    },
-    {
-      "version": "0.10.12.8",
-      "zip_url": "https://crossbench-work.github.io/form-kun-releases/releases/form-kun-0.10.12.8.zip",
-      "sha256": "1ff598d6244912ac06ac91d6b79e3a31722148d7c8c668a718ea5690c5f55e13",
-      "released_at": "2026-11-06",
-      "notes": "LINE通知に送信詳細URL変数と既定文UIマージンを追加"
-    },
-    {
-      "version": "0.10.12.7",
-      "zip_url": "https://crossbench-work.github.io/form-kun-releases/releases/form-kun-0.10.12.7.zip",
-      "sha256": "0123774b984690e897eb474562e308fa3aead98248f88e58d719b5acd1d64c98",
-      "released_at": "2026-11-06",
-      "notes": "LINE通知タブで表示設定を個別通知の直下へ移動しメッセージテスト送信を個別連携条件で有効化help削除とtestLineMessageのCSRFをverifyRequestに"
-    },
-    {
-      "version": "0.10.12.6",
-      "zip_url": "https://crossbench-work.github.io/form-kun-releases/releases/form-kun-0.10.12.6.zip",
-      "sha256": "4c982501442db9be1006ac9ed871d876805217d1bc3323acd5190bd06d08b916",
-      "released_at": "2026-11-06",
-      "notes": "個別LINEで送信先ID先保存時も通知テストの手動チェックが通るようline_talk_send_setup判定を修正"
-    },
-    {
-      "version": "0.10.12.5",
-      "zip_url": "https://crossbench-work.github.io/form-kun-releases/releases/form-kun-0.10.12.5.zip",
-      "sha256": "80b50cd9756c1784b884aa935838c7afff09441ea02adad3e0f6a22f853c452e",
-      "released_at": "2026-11-06",
-      "notes": "LINE個別連携のチェックリストAPIでInvalidArgumentExceptionを内容別に返し永続JSONとアサートを整合表示はline_setup_checklist_displayに分離"
-    },
-    {
-      "version": "0.10.12.4",
-      "zip_url": "https://crossbench-work.github.io/form-kun-releases/releases/form-kun-0.10.12.4.zip",
-      "sha256": "508b7edbeab07b4432bd05a935773321907102e823ad723bb73342bfaa52f015",
-      "released_at": "2026-11-06",
-      "notes": "LINEチェックリストの手動完了でCSRFをverifyRequestにしfetchのJSON整合とadminjs防御を追加"
-    },
-    {
-      "version": "0.10.12.3",
-      "zip_url": "https://crossbench-work.github.io/form-kun-releases/releases/form-kun-0.10.12.3.zip",
-      "sha256": "32547e7331d8d18721457a12b50e9eab522d8cf673c9e0c1c056c517a37ee50d",
-      "released_at": "2026-11-06",
-      "notes": "個別LINE連携時のLINEトーク通知テストでテスト送信が押せるよう修正"
-    },
-    {
-      "version": "0.10.12.2",
-      "zip_url": "https://crossbench-work.github.io/form-kun-releases/releases/form-kun-0.10.12.2.zip",
-      "sha256": "0a96ecd40d7096169b1c5c2fa41e97f592b186943a22048b2a764518690d9bee",
-      "released_at": "2026-11-06",
-      "notes": "LINE通知のメイン保存でONOFFが反映されるよう修正し通知タブの保存UIとCSRFJSON対応を含む"
-    },
-    {
-      "version": "0.10.12.1",
-      "zip_url": "https://crossbench-work.github.io/form-kun-releases/releases/form-kun-0.10.12.1.zip",
-      "sha256": "93f4239f751f1c77f1054cad1d19461b6108d68c0e99f7932265341479410bee",
-      "released_at": "2026-11-06",
-      "notes": "LINE通知タブ: 個別連携ブロック表示修正（getElementById）"
-    },
-    {
-      "version": "0.10.12",
-      "zip_url": "https://crossbench-work.github.io/form-kun-releases/releases/form-kun-0.10.12.zip",
-      "sha256": "6f31142740a47a2764fdb659f21742130f1e6bacd37408c70afb7472d10a51b9",
-      "released_at": "2026-11-06",
-      "notes": "LINE個別チャネル・Webhook分離; 通知に画像含めるオプション; jQuery同梱; 通知JSON保存修正ほか"
-    },
-    {
-      "version": "0.10.11",
-      "zip_url": "https://crossbench-work.github.io/form-kun-releases/releases/form-kun-0.10.11.zip",
-      "sha256": "6284242735fc7dcd8a60869648f0d862767834002dad7cb5f00097e22493a3af",
-      "released_at": "2026-11-06",
-      "notes": "埋め込みコード: 読込/埋込切替・head CDN風配信; 説明削除・注記整理・タブ上余白"
-    },
-    {
-      "version": "0.10.10",
-      "zip_url": "https://crossbench-work.github.io/form-kun-releases/releases/form-kun-0.10.10.zip",
-      "sha256": "37ce4056c9dc2f8cf16eaa6a202c50460990c2f3cd8c54e1c21af04f1228c969",
-      "released_at": "2026-11-06",
-      "notes": "外部連携の埋め込みコードを複数入力・確認・条件分岐に対応（EmbedCodeSample）"
-    },
-    {
-      "version": "0.10.9",
-      "zip_url": "https://crossbench-work.github.io/form-kun-releases/releases/form-kun-0.10.9.zip",
-      "sha256": "c83518795ac43016bb90a58236f74bc7c6ba823937f06f539a400bf9677eb6ca",
-      "released_at": "2026-11-06",
-      "notes": "非表示/下書きの公開URLを非リンクに; embed貼付テストページ; npm run test:embed（別ポート）"
-    },
-    {
-      "version": "0.10.8",
-      "zip_url": "https://crossbench-work.github.io/form-kun-releases/releases/form-kun-0.10.8.zip",
-      "sha256": "75eb8b11400ea9230c15ad0c86f8c98cf9b7b488a9fa9fd8336bb4a78b506916",
-      "released_at": "2026-11-06",
-      "notes": "基本情報: 管理画面表示名・TZをモーダル編集; ロゴマークアップロードとヘッダー/ログイン反映"
-    },
-    {
-      "version": "0.10.7",
-      "zip_url": "https://crossbench-work.github.io/form-kun-releases/releases/form-kun-0.10.7.zip",
-      "sha256": "373ae49281d535149c64afe3cbe6b6138fd68c139780f274ade7b8389be79444",
-      "released_at": "2026-11-06",
-      "notes": "アップデート進捗モーダル（疑似ゲージ・完了/失敗）とシステム更新のJSON応答"
-    },
-    {
-      "version": "0.10.6",
-      "zip_url": "https://crossbench-work.github.io/form-kun-releases/releases/form-kun-0.10.6.zip",
-      "sha256": "2c735359da41a3fa005627b1dcdadeb39010c2a297406a8099d41b7cadf176ef",
-      "released_at": "2026-11-06",
-      "notes": "設定: バックアップタブ改修"
-    },
-    {
-      "version": "0.10.5",
-      "zip_url": "https://crossbench-work.github.io/form-kun-releases/releases/form-kun-0.10.5.zip",
-      "sha256": "eb3685237b24133671aafcf9b45c6b49f4fcc9eed20e3faecaaea87a80c631b8",
-      "released_at": "2026-11-06",
-      "notes": "設定詳細UI整備: モーダル保存回数横並び + 詳細情報タブを基本情報同型に再構成"
-    },
-    {
-      "version": "0.10.4",
-      "zip_url": "https://crossbench-work.github.io/form-kun-releases/releases/form-kun-0.10.4.zip",
-      "sha256": "777b3e7a7c19ebaed1d3710794a1754b1b34774cb37ad76a5c9e3a403b6c6954",
-      "released_at": "2026-11-06",
-      "notes": "設定基本情報UI整備（左線見出し・罫線・モーダル統一）"
-    },
-    {
-      "version": "0.10.3.2",
-      "zip_url": "https://crossbench-work.github.io/form-kun-releases/releases/form-kun-0.10.3.2.zip",
-      "sha256": "31449f34bbeb7a2dda962d910c03e72f5feb34870a95e65356fc644434e61096",
-      "released_at": "2026-11-06",
-      "notes": "アプリ更新の2段階UI"
-    },
-    {
-      "version": "0.10.3.1",
-      "zip_url": "https://crossbench-work.github.io/form-kun-releases/releases/form-kun-0.10.3.1.zip",
-      "sha256": "76973186962e68c94188fa25f7c1c7c8ed731958bf57f823f4bfb2567218b552",
-      "released_at": "2026-11-06",
-      "notes": "パッチリリース"
-    },
-    {
-      "version": "0.10.3",
-      "zip_url": "https://crossbench-work.github.io/form-kun-releases/releases/form-kun-0.10.3.zip",
-      "sha256": "616cd7a63c294bf45e966cdf5a4cefeebd1ef8a1359dae058de7da068a06231a",
-      "released_at": "2026-11-06",
-      "notes": "Public ミラー form-kun-releases 向け URL"
-    },
-    {
-      "version": "0.10.2",
-      "zip_url": "https://crossbench-work.github.io/form-kun-releases/releases/form-kun-0.10.2.zip",
-      "sha256": "920c5c5776ec9ec8c464ac5cc31d718ee08da3055374dde549d9dfea23c1de9d",
-      "released_at": "2026-11-06",
-      "notes": "Private向け GitHub Pages 配布URL"
-    },
-    {
-      "version": "0.10.1",
-      "zip_url": "https://crossbench-work.github.io/form-kun-releases/releases/form-kun-0.10.1.zip",
-      "sha256": "35e04b6fbbcfb2109dfe089192e3c5656f47a9f3358a319e140bd287ca7d92bc",
-      "released_at": "2026-11-06",
-      "notes": "サーバーからの自己更新 UI 再有効化"
-    },
-    {
-      "version": "0.10.0",
-      "zip_url": "https://crossbench-work.github.io/form-kun-releases/releases/form-kun-0.10.0.zip",
-      "sha256": "38bc9faf62351e3bda867657615a86ea740dc7475086c1b317c31b675b3dd386",
-      "released_at": "2026-11-05",
-      "notes": "外部連携UI刷新（埋め込みコード・国外送信対策・公開状態hidden）とフォーム別IPinfoトークン"
-    },
-    {
-      "version": "0.9.2",
-      "zip_url": "https://crossbench-work.github.io/form-kun-releases/releases/form-kun-0.9.2.zip",
-      "sha256": "faf463ef3bbb6b19e4377638981b2885053b4f5802b582cbf374036c5a70f394",
-      "released_at": "2026-11-05",
-      "notes": "サイト全体のバックアップ（エクスポート／インポート）を追加し、設定のフォーム設定入出力を削除。復元後のログイン画面の無限リダイレクトを修正し、添付ファイル入替の権限不足時は DB を変更せず中止するようにしました。"
-    },
-    {
-      "version": "0.9.1",
-      "zip_url": "https://crossbench-work.github.io/form-kun-releases/releases/form-kun-0.9.1.zip",
-      "sha256": "ed77a2574c847210ea4303a2d92142dd32293a7eb49efd1834cd4050f643cd4a",
-      "released_at": "2026-11-05",
-      "notes": "フォームバンドル・暗号化同梱パスワード必須・インポート画像サムネ修正込み"
-    },
-    {
-      "version": "0.9.0",
-      "zip_url": "https://crossbench-work.github.io/form-kun-releases/releases/form-kun-0.9.0.zip",
-      "sha256": "82982b4f726823862fded4431e75d4f66f03942c56b1b24228f4199cc59b45c7",
-      "released_at": "2026-11-05",
-      "notes": "項目設定SP縦組み・文字数制限プルダウン幅等"
-    },
-    {
-      "version": "0.8.6",
-      "zip_url": "https://crossbench-work.github.io/form-kun-releases/releases/form-kun-0.8.6.zip",
-      "sha256": "9987c6cfc09d9e2e8d9f2b4a338a7c2b91778d0dfaa66545f505407811e5b906",
-      "released_at": "2026-11-05",
-      "notes": "省略時トークタブpill詳細度修正込み再配布"
-    },
-    {
-      "version": "0.8.5",
-      "zip_url": "https://crossbench-work.github.io/form-kun-releases/releases/form-kun-0.8.5.zip",
-      "sha256": "03e00c64e8157bfd759dc83348ec26f132e28370ffc450c05a8572c7e88bff13",
-      "released_at": "2026-11-05",
-      "notes": "LINE画像診断UI"
-    },
-    {
-      "version": "0.8.4",
-      "zip_url": "https://crossbench-work.github.io/form-kun-releases/releases/form-kun-0.8.4.zip",
-      "sha256": "2b4a81ddeda59659238fd229b417d89662d4aec0150b95e22063950309486ac0",
-      "released_at": "2026-11-02",
-      "notes": "サイト共通LINE・credential削除修正"
+      "version": "0.11.1",
+      "zip_url": "https://crossbench-work.github.io/form-kun-releases/releases/form-kun-0.11.1.zip",
+      "sha256": "d0e60593cb9efdd5368ab0b05a54a45c44538255933d815b82501cedc5abbd0c",
+      "released_at": "2026-11-07",
+      "notes": "説明文テキスト/画像、SMTP送信方式・メール設定UI、smtp_local対応"
     },
     {
       "version": "0.8.3",
       "zip_url": "https://crossbench-work.github.io/form-kun-releases/releases/form-kun-0.8.3.zip",
-      "sha256": "aaa56e74bf4879cba30e15da6ee96aea15dfb7582d8b1e65f2d152f192f5a2db",
+      "sha256": "126a6d27ab603d2102bb1526262aab0b5d76db337a0cf193caa1aea115196778",
       "released_at": "2026-11-02",
-      "notes": "第10項目判定・LINE表示設定保存修正"
+      "notes": "LINE Webhook で Push 先 ID 取得"
+    },
+    {
+      "version": "0.8.4",
+      "zip_url": "https://crossbench-work.github.io/form-kun-releases/releases/form-kun-0.8.4.zip",
+      "sha256": "649340cfb403498ec43d7391aed86394beb1eeaea97ed16c73b2d10fa100c33f",
+      "released_at": "2026-11-02",
+      "notes": "Release 0.8.4"
     },
     {
       "version": "0.8.2",
