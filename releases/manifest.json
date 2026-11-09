@@ -1,7 +1,14 @@
 {
-  "latest": "0.11.1",
+  "latest": "0.11.2",
   "channel": "update",
   "releases": [
+    {
+      "version": "0.11.2",
+      "zip_url": "https://crossbench-work.github.io/form-kun-releases/releases/form-kun-0.11.2.zip",
+      "sha256": "7e31ba4a236aab57ccb7e6b68551aa525c6fa5790c67a5a288fe3f641db91eff",
+      "released_at": "2026-11-09",
+      "notes": "説明文の先頭/末尾分割と追加モーダル、公開ページ見出し統一、説明文画像の配信修正、未保存バー誤表示の修正"
+    },
     {
       "version": "0.11.1",
       "zip_url": "https://crossbench-work.github.io/form-kun-releases/releases/form-kun-0.11.1.zip",
