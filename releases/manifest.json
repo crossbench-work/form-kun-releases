@@ -1,7 +1,14 @@
 {
-  "latest": "0.11.2",
+  "latest": "0.11.3",
   "channel": "update",
   "releases": [
+    {
+      "version": "0.11.3",
+      "zip_url": "https://crossbench-work.github.io/form-kun-releases/releases/form-kun-0.11.3.zip",
+      "sha256": "2a58ce7deeb6a08a250cf16283f6241921c03fb8e33b00199f5dcbee2ea695e6",
+      "released_at": "2026-11-11",
+      "notes": "説明文エディタの罫線ブロック追加、基本設定の履歴の保存期間の文言変更"
+    },
     {
       "version": "0.11.2",
       "zip_url": "https://crossbench-work.github.io/form-kun-releases/releases/form-kun-0.11.2.zip",
