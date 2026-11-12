@@ -1,7 +1,14 @@
 {
-  "latest": "0.11.4",
+  "latest": "0.11.5",
   "channel": "update",
   "releases": [
+    {
+      "version": "0.11.5",
+      "zip_url": "https://crossbench-work.github.io/form-kun-releases/releases/form-kun-0.11.5.zip",
+      "sha256": "a2e283b016d49fc0a9554576dbf69888ed2f4896d3919b8d17913b339955dd66",
+      "released_at": "2026-11-12",
+      "notes": "説明文エディタの画像パネルでサムネイル表示を修正し、登録有無による表示切替と削除ボタンを追加"
+    },
     {
       "version": "0.11.4",
       "zip_url": "https://crossbench-work.github.io/form-kun-releases/releases/form-kun-0.11.4.zip",
