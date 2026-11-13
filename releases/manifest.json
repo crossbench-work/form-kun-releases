@@ -1,7 +1,14 @@
 {
-  "latest": "0.11.5",
+  "latest": "0.11.6",
   "channel": "update",
   "releases": [
+    {
+      "version": "0.11.6",
+      "zip_url": "https://crossbench-work.github.io/form-kun-releases/releases/form-kun-0.11.6.zip",
+      "sha256": "5e8fc248ee399e78320e5de43525bf86aadad9bdd5db44e1676ed97487e30716",
+      "released_at": "2026-11-13",
+      "notes": "操作ログ機能を追加、定期削除スケジュールに分指定を追加"
+    },
     {
       "version": "0.11.5",
       "zip_url": "https://crossbench-work.github.io/form-kun-releases/releases/form-kun-0.11.5.zip",
