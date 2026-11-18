@@ -1,7 +1,14 @@
 {
-  "latest": "0.11.6",
+  "latest": "0.11.7",
   "channel": "update",
   "releases": [
+    {
+      "version": "0.11.7",
+      "zip_url": "https://crossbench-work.github.io/form-kun-releases/releases/form-kun-0.11.7.zip",
+      "sha256": "4e8ced99bf9cc5403e3f57fbeaf29eae85c0293e6e6b4433c5b833d3877148f0",
+      "released_at": "2026-11-18",
+      "notes": "定期削除cronで実行しない場合にログ出力しないよう変更"
+    },
     {
       "version": "0.11.6",
       "zip_url": "https://crossbench-work.github.io/form-kun-releases/releases/form-kun-0.11.6.zip",
