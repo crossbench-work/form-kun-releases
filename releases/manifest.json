@@ -1,7 +1,14 @@
 {
-  "latest": "0.11.7",
+  "latest": "0.11.8",
   "channel": "update",
   "releases": [
+    {
+      "version": "0.11.8",
+      "zip_url": "https://crossbench-work.github.io/form-kun-releases/releases/form-kun-0.11.8.zip",
+      "sha256": "7f6055c7930f92fc052ea0215edee8bfab7ce60354aa65cdff6c15426de9a21b",
+      "released_at": "2026-11-18",
+      "notes": "履歴の保存期間に『保存しない』を追加、フォーム一覧とダッシュボードに削除設定マーカーを表示"
+    },
     {
       "version": "0.11.7",
       "zip_url": "https://crossbench-work.github.io/form-kun-releases/releases/form-kun-0.11.7.zip",
