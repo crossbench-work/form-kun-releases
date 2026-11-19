@@ -1,7 +1,14 @@
 {
-  "latest": "0.11.8",
+  "latest": "0.11.9",
   "channel": "update",
   "releases": [
+    {
+      "version": "0.11.9",
+      "zip_url": "https://crossbench-work.github.io/form-kun-releases/releases/form-kun-0.11.9.zip",
+      "sha256": "07203351ff0cb0f35df5ec46c1b546297af73ccb91fd12039f872fb3096c5e2c",
+      "released_at": "2026-11-19",
+      "notes": "操作ログを設定配下に移動"
+    },
     {
       "version": "0.11.8",
       "zip_url": "https://crossbench-work.github.io/form-kun-releases/releases/form-kun-0.11.8.zip",
