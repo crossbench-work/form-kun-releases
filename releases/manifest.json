@@ -1,7 +1,14 @@
 {
-  "latest": "0.11.10",
+  "latest": "0.11.11",
   "channel": "update",
   "releases": [
+    {
+      "version": "0.11.11",
+      "zip_url": "https://crossbench-work.github.io/form-kun-releases/releases/form-kun-0.11.11.zip",
+      "sha256": "0a81e439fb0bd0132d785b91729fd0fc2bbe7f20b252cd06a06a94296cde3772",
+      "released_at": "2026-11-20",
+      "notes": "ユーザー詳細ページを追加し、編集を項目ごとのモーダル方式に変更"
+    },
     {
       "version": "0.11.10",
       "zip_url": "https://crossbench-work.github.io/form-kun-releases/releases/form-kun-0.11.10.zip",
