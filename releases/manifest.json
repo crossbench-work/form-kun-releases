@@ -1,7 +1,14 @@
 {
-  "latest": "0.11.9",
+  "latest": "0.11.10",
   "channel": "update",
   "releases": [
+    {
+      "version": "0.11.10",
+      "zip_url": "https://crossbench-work.github.io/form-kun-releases/releases/form-kun-0.11.10.zip",
+      "sha256": "880cc9428ae06696858f61301cb2b46ab2939ee5127c52f1d50f11d87451ba87",
+      "released_at": "2026-11-20",
+      "notes": "メール認証番号による2要素認証を追加"
+    },
     {
       "version": "0.11.9",
       "zip_url": "https://crossbench-work.github.io/form-kun-releases/releases/form-kun-0.11.9.zip",
